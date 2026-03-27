@@ -1,0 +1,403 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg:           #030508;
+  --surface:      #0a0d10;
+  --green:        #00ff87;
+  --green-dim:    #00cc6a;
+  --green-dark:   #004d28;
+  --violet:       #a020f0;
+  --violet-light: #cc44ff;
+  --violet-glow:  #e040fb;
+  --cream:        #f0f4f0;
+  --muted:        #8fa89a;
+  --glow-green:   rgba(0, 255, 135, 0.28);
+  --glow-violet:  rgba(160, 32, 240, 0.30);
+}
+
+* { box-sizing: border-box; padding: 0; margin: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--cream);
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Hide default cursor on desktop */
+@media (hover: hover) and (pointer: fine) {
+  * { cursor: none !important; }
+  input, textarea { cursor: text !important; }
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--green), var(--violet));
+  border-radius: 2px;
+}
+::selection { background: rgba(0,255,135,0.25); color: #fff; }
+
+/* ─────────────────────────────────────────────
+   HOLOGRAPHIC TEXT  — green → purple shimmer
+───────────────────────────────────────────── */
+.text-holo {
+  background: linear-gradient(
+    90deg,
+    #00ff87 0%,
+    #00e676 18%,
+    #cc44ff 45%,
+    #e040fb 60%,
+    #00ff87 80%,
+    #00e676 100%
+  );
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: holoShimmer 4s linear infinite;
+}
+@keyframes holoShimmer {
+  0%   { background-position: 0%   center; }
+  100% { background-position: 300% center; }
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #cc44ff 0%, #a020f0 50%, #e040fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-green {
+  background: linear-gradient(90deg, #00ff87 0%, #00cc6a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-cyber {
+  background: linear-gradient(90deg, #00ff87 0%, #cc44ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─────────────────────────────────────────────
+   BUTTONS
+───────────────────────────────────────────── */
+
+/* PRIMARY — neon green */
+.btn-glow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2.2rem;
+  border-radius: 9999px;
+  font-family: var(--font-barlow);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #000;
+  background: linear-gradient(135deg, #00ff87 0%, #00cc6a 50%, #00ff87 100%);
+  background-size: 200% auto;
+  border: 1px solid rgba(0, 255, 135, 0.4);
+  transition: background-position 0.5s ease, box-shadow 0.35s ease, transform 0.2s ease;
+  overflow: hidden;
+}
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btn-glow:hover::before { transform: translateX(100%); }
+.btn-glow:hover {
+  background-position: right center;
+  box-shadow:
+    0 0 22px rgba(0,255,135,0.85),
+    0 0 50px rgba(0,204,106,0.45),
+    0 0 90px rgba(0,255,135,0.18),
+    inset 0 0 12px rgba(0,255,135,0.15);
+  transform: translateY(-3px);
+  border-color: rgba(0,255,135,0.8);
+}
+.btn-glow:active { transform: translateY(-1px); }
+
+/* SECONDARY — neon purple outline */
+.btn-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2.2rem;
+  border-radius: 9999px;
+  font-family: var(--font-barlow);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #cc44ff;
+  background: transparent;
+  border: 1px solid rgba(160,32,240,0.45);
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(160,32,240,0.18), rgba(204,68,255,0.08));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.btn-outline:hover::before { opacity: 1; }
+.btn-outline:hover {
+  border-color: rgba(204,68,255,0.75);
+  color: #e040fb;
+  box-shadow:
+    0 0 16px rgba(160,32,240,0.55),
+    0 0 35px rgba(204,68,255,0.22),
+    inset 0 0 10px rgba(160,32,240,0.08);
+  transform: translateY(-3px);
+}
+
+/* ─────────────────────────────────────────────
+   HOLOGRAPHIC CARD BORDERS
+───────────────────────────────────────────── */
+.holo-border {
+  position: relative;
+  border-radius: 1.25rem;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    rgba(0,255,135,0.25) 0%,
+    rgba(160,32,240,0.15) 40%,
+    rgba(204,68,255,0.25) 100%);
+  transition: background 0.4s ease, filter 0.4s ease;
+}
+.holo-border > * { border-radius: calc(1.25rem - 1px); }
+
+.holo-border-hover:hover {
+  background: linear-gradient(135deg,
+    rgba(0,255,135,0.55) 0%,
+    rgba(160,32,240,0.30) 50%,
+    rgba(204,68,255,0.55) 100%);
+  filter: drop-shadow(0 0 16px rgba(0,255,135,0.35))
+          drop-shadow(0 0 24px rgba(160,32,240,0.25));
+}
+
+/* ─────────────────────────────────────────────
+   CARD STYLES
+───────────────────────────────────────────── */
+.card-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.card-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(105deg,
+    transparent 0%,
+    rgba(0,255,135,0.05) 40%,
+    rgba(0,255,135,0.09) 50%,
+    rgba(0,255,135,0.05) 60%,
+    transparent 100%);
+  transform: skewX(-10deg);
+  transition: left 0s;
+  pointer-events: none;
+}
+.card-shimmer:hover::after {
+  left: 125%;
+  transition: left 0.65s ease;
+}
+
+.card-interactive {
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  border-radius: 1.25rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.card-interactive:hover {
+  border-color: rgba(0,255,135,0.28);
+  background: rgba(0,255,135,0.04);
+  box-shadow:
+    0 0 20px rgba(0,255,135,0.10),
+    0 0 1px rgba(0,255,135,0.3) inset;
+}
+
+/* Purple variant for alternating cards */
+.card-interactive-violet:hover {
+  border-color: rgba(160,32,240,0.35);
+  background: rgba(160,32,240,0.05);
+  box-shadow:
+    0 0 20px rgba(160,32,240,0.15),
+    0 0 1px rgba(204,68,255,0.3) inset;
+}
+
+/* ─────────────────────────────────────────────
+   AURORA BACKGROUND  — green + purple
+───────────────────────────────────────────── */
+.aurora-bg::before,
+.aurora-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  animation: aurora 9s ease-in-out infinite alternate;
+}
+.aurora-bg::before {
+  width: 600px; height: 500px;
+  top: -100px; right: -60px;
+  background: radial-gradient(ellipse, rgba(160,32,240,0.22) 0%, transparent 70%);
+}
+.aurora-bg::after {
+  width: 500px; height: 420px;
+  bottom: -100px; left: -60px;
+  background: radial-gradient(ellipse, rgba(0,255,135,0.16) 0%, transparent 70%);
+  animation-delay: 4s;
+}
+@keyframes aurora {
+  0%   { transform: translate(0,0)      scale(1);    }
+  50%  { transform: translate(30px,-20px) scale(1.1); }
+  100% { transform: translate(-15px,12px) scale(0.95); }
+}
+
+/* ─────────────────────────────────────────────
+   SCANLINES + GRID
+───────────────────────────────────────────── */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.018) 3px,
+    rgba(0,0,0,0.018) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(0,255,135,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,135,0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ─────────────────────────────────────────────
+   SLOT PULSE  — green
+───────────────────────────────────────────── */
+@keyframes slotPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(0,255,135,0.7), 0 0 16px rgba(0,204,106,0.4); }
+  50%       { box-shadow: 0 0 16px rgba(0,255,135,1),   0 0 32px rgba(0,204,106,0.7); }
+}
+.slot-available { animation: slotPulse 2s ease-in-out infinite; }
+
+/* ─────────────────────────────────────────────
+   HUD CORNERS
+───────────────────────────────────────────── */
+.hud-corners::before,
+.hud-corners::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-style: solid;
+  transition: border-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+.hud-corners::before {
+  top: 8px; left: 8px;
+  border-width: 1.5px 0 0 1.5px;
+  border-color: rgba(0,255,135,0.35);
+  border-radius: 2px 0 0 0;
+}
+.hud-corners::after {
+  bottom: 8px; right: 8px;
+  border-width: 0 1.5px 1.5px 0;
+  border-color: rgba(204,68,255,0.35);
+  border-radius: 0 0 2px 0;
+}
+.hud-corners:hover::before {
+  border-color: rgba(0,255,135,0.85);
+  width: 18px; height: 18px;
+}
+.hud-corners:hover::after {
+  border-color: rgba(204,68,255,0.85);
+  width: 18px; height: 18px;
+}
+
+/* ─────────────────────────────────────────────
+   HOVER UNDERLINE
+───────────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   SCAN SWEEP ANIMATION
+───────────────────────────────────────────── */
+@keyframes scanSweep {
+  0%   { top: -2px; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.hover-underline { position: relative; }
+.hover-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: linear-gradient(90deg, var(--green), var(--violet-light));
+  transition: width 0.3s ease;
+}
+.hover-underline:hover::after { width: 100%; }
+
+/* ─────────────────────────────────────────────
+   SECTION DIVIDER  — green/purple gradient line
+───────────────────────────────────────────── */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0,255,135,0.3) 30%,
+    rgba(160,32,240,0.3) 70%,
+    transparent 100%);
+}
+
+/* ─────────────────────────────────────────────
+   NEON TEXT GLOW
+───────────────────────────────────────────── */
+.neon-green {
+  color: #00ff87;
+  text-shadow: 0 0 10px rgba(0,255,135,0.8), 0 0 20px rgba(0,255,135,0.4);
+}
+.neon-purple {
+  color: #cc44ff;
+  text-shadow: 0 0 10px rgba(204,68,255,0.8), 0 0 20px rgba(160,32,240,0.4);
+}
+
+@layer utilities {
+  .section-padding  { @apply py-24 lg:py-32; }
+  .container-base   { @apply max-w-7xl mx-auto px-6 lg:px-8; }
+  .card-base        { @apply card-interactive card-shimmer; }
+}
