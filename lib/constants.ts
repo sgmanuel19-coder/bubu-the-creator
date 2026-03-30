@@ -7,8 +7,8 @@ export const SITE = {
   // ── Identidad ──────────────────────────────────────────────
   brandName: "RESUELTO",
   visibleName: "Manuel Severo",
-  professionalTitle: "Estratega de Contenido y Sistemas Comerciales",
-  title: "Estratega de Contenido y Sistemas Comerciales",
+  professionalTitle: "Content Agency para Empresas Técnicas",
+  title: "Content Agency para Empresas Técnicas",
   city: "Lima, Perú",
   email: "[EMAIL_CONTACTO]",                 // Ej: "hola@resuelto.pe"
   year: "2025",
@@ -30,37 +30,33 @@ export const SITE = {
 
   // ── Hero ───────────────────────────────────────────────────
   hero: {
-    eyebrow: "Comunicación Comercial Premium",
-    headline: ["Tu negocio tiene valor.", "El problema es cómo lo comunica."],
+    eyebrow: "Sistema Audiovisual de Autoridad",
+    headline: ["Tu empresa puede hacer cosas grandes.", "La pregunta es si se percibe así."],
     subheadline:
-      "Diseño sistemas de autoridad, presencia digital y conversión para negocios donde la confianza es el factor que decide la venta.",
-    ctaPrimary: "¿Aplico para trabajar contigo?",
+      "60 días para elevar la percepción de tu empresa, explicar mejor lo que haces y convertir tu comunicación en un activo comercial.",
+    ctaPrimary: "Quiero implementar el sistema",
     ctaSecondary: "o escríbeme directo",
-    anchor: "Trabajé dentro de las agencias y marcas más exigentes del Perú. Hoy lo aplico a tu negocio.",
+    anchor: "Diseñado para empresas B2B, técnicas e industriales que tienen algo valioso que comunicar.",
   },
 
   // ── Problema ───────────────────────────────────────────────
   problem: {
-    title: "El problema no es tu producto.",
+    title: "El problema no es tu operación.",
     items: [
       {
-        label: "Presencia sin autoridad",
-        text: "Tienes una oferta sólida. Pero tu web no la comunica a la altura de lo que vale.",
+        label: "Percepción por debajo del nivel real",
+        text: "Tu empresa hace cosas grandes. Pero el mercado no siempre lo percibe así. La comunicación no está a la altura de lo que realmente vale la empresa.",
       },
       {
-        label: "Contenido sin sistema",
-        text: "Generas contenido. Pero no genera autoridad, no filtra y no convierte.",
+        label: "Lo técnico es difícil de entender",
+        text: "Tienes capacidad, experiencia y una solución valiosa. Pero explicarlo de forma que un cliente no técnico confíe y entienda es otro desafío.",
       },
       {
-        label: "Ventas sin estructura",
-        text: "Tu proceso comercial depende de ti personalmente. Si tú paras, todo para.",
-      },
-      {
-        label: "Leads sin seguimiento",
-        text: "Los prospectos llegan, preguntan y desaparecen. No hay sistema. Se van a la competencia.",
+        label: "Sin continuidad comunicacional",
+        text: "Solo aparecen cuando hay proyecto, feria, lanzamiento o campaña. No construyen autoridad de forma sostenida. No convierten contenido en oportunidades.",
       },
     ],
-    closing: "Ese es el problema que resuelvo.",
+    closing: "Muchas empresas no tienen un problema de operación. Tienen un problema de percepción, claridad y continuidad comunicacional.",
   },
 
   // ── Sobre mí ───────────────────────────────────────────────
@@ -152,144 +148,160 @@ export const SITE = {
 
   // ── Transición ─────────────────────────────────────────────
   transition: {
-    title: "De ejecutar piezas a diseñar sistemas",
+    title: "De contenido suelto a sistema de autoridad",
     paragraphs: [
-      "Durante años, mi trabajo fue ejecutar: crear el contenido, producir las piezas, entregar el material. Era bueno en eso. Pero entendí algo que cambió la dirección de todo.",
-      "Una pieza sola no resuelve nada. Un reel sin sistema no genera ventas. Una landing sin seguimiento no convierte. Un negocio sin estructura comercial pierde oportunidades todos los días, sin darse cuenta.",
-      "Hoy no vendo piezas. Diseño sistemas. La diferencia es simple: un sistema trabaja cuando tú no estás.",
+      "La mayoría de empresas técnicas comunican de forma dispersa: un post cuando hay proyecto, un video cuando hay feria, un PDF cuando hay reunión. Todo por separado. Nada sostenido.",
+      "El resultado es una marca que no se percibe al nivel real de lo que hace. Clientes que no entienden bien lo que ofrece. Contenido que no genera el tipo de confianza que abre oportunidades comerciales.",
+      "Un sistema audiovisual cambia eso. No se trata de publicar más. Se trata de tener una base estratégica y visual que trabaja para posicionar la marca, explicar lo técnico y sostener autoridad — sin depender de improvisación.",
     ],
     before: [
-      "Producción de contenido",
-      "Piezas sueltas",
-      "Entrego y desaparezco",
-      "Foco en el formato",
-      "Para cualquier negocio",
+      "Mensajes sueltos sin dirección",
+      "Contenido sin sistema",
+      "Percepción baja o poco diferenciada",
+      "Comunicación técnica difícil de entender",
+      "Presencia digital sin fuerza comercial",
     ],
     after: [
-      "Arquitectura de comunicación",
-      "Sistemas completos",
-      "Implemento y acompaño",
-      "Foco en el resultado",
-      "Para negocios de alto valor",
+      "Narrativa clara y coherente",
+      "Marca mejor percibida",
+      "Contenido técnico entendible",
+      "Activos audiovisuales reutilizables",
+      "Base de comunicación útil para ventas y posicionamiento",
     ],
   },
 
   // ── Servicios ──────────────────────────────────────────────
   services: {
-    title: "Lo que construyo",
-    subtitle: "Dos niveles de trabajo. Distintos en alcance, mismos en criterio.",
+    title: "La implementación",
+    subtitle: "Un sistema audiovisual de 60 días. Claro en alcance, serio en criterio.",
     core: {
-      badge: "Oferta Principal",
-      name: "Sistema Comercial Digital",
-      tagline: "La infraestructura digital que necesita cualquier negocio que quiere vender con sistema.",
-      target: "Para negocios que necesitan estructura digital para capturar, calificar y convertir mejor.",
+      badge: "Implementación Audiovisual · 60 días",
+      name: "Sistema Audiovisual de Autoridad",
+      tagline: "Una implementación estratégica con 15 piezas diseñadas para mover tu marca con más claridad, más autoridad y mejor percepción frente al mercado.",
+      target: "Para empresas B2B, técnicas e industriales que necesitan elevar cómo se ve y comunica su marca. USD 3,200.",
       items: [
-        "Landing pages y webs comerciales de alto impacto",
-        "Automatización de mensajes y seguimiento de leads",
-        "Sistemas de calificación y filtrado de prospectos",
-        "Agendamiento automatizado",
-        "Flujos de conversión integrados",
+        "1 Cerebro Creativo IA — sistema IA entrenado con la lógica comunicacional de tu marca",
+        "1 Video Horizontal tipo Video Caso — pieza de autoridad para mostrar empresa, solución o caso de éxito",
+        "8 Videos Reels Verticales — experto a cámara con tomas de apoyo para explicar y generar confianza",
+        "2 Videos con Locución + IA — para explicar conceptos, reforzar mensajes o presentar soluciones",
+        "4 Carruseles Generados con IA — activos visuales para autoridad, claridad y comunicación comercial",
       ],
-      cta: "Cuéntame tu proyecto",
+      cta: "Quiero implementar el sistema",
     },
     premium: {
-      badge: "Oferta Premium — Selectiva",
-      name: "Sistema de Autoridad y Comunicación Estratégica",
-      tagline: "Tu marca se ve a la altura de lo que realmente vale — y el cliente correcto lo reconoce antes de que abras la boca.",
-      target: "Para empresas, expertos o marcas que necesitan comunicar algo complejo de forma que genere confianza real.",
+      badge: "Post-Implementación",
+      name: "Opciones de Continuidad",
+      tagline: "Al terminar la implementación inicial, la empresa puede seguir creciendo sobre la base ya construida.",
+      target: "Para empresas que quieren sostener y ampliar el sistema con nuevas piezas, nuevas campañas y consistencia sostenida.",
       items: [
-        "Estrategia de comunicación de autoridad",
-        "Producción de activos de alto valor: videocasos, formatos experto, contenido técnico",
-        "Contenido para sectores de alta confianza: ingeniería, energía, inmobiliario, consultoría",
-        "Sistema editorial de largo plazo",
-        "Comunicación institucional premium",
+        "Continuidad mensual — nuevas piezas, nuevas campañas, mantenimiento de consistencia",
+        "Continuidad trimestral — bloques más grandes con más previsibilidad y menos fricción operativa",
+        "Uso interno con base creada — equipo propio utiliza los activos y el Cerebro Creativo IA para futuras acciones",
       ],
-      note: "Este nivel no está abierto para todos. Si sientes que aplica a tu caso, cuéntamelo.",
-      cta: "Aplicar a este nivel",
+      note: "La continuidad parte desde la base construida en la implementación inicial. No desde cero.",
+      cta: "Hablar sobre continuidad",
     },
   },
 
   // ── Para quién es ─────────────────────────────────────────
   forWho: {
-    title: "Trabajo con un perfil específico de negocio",
+    title: "Diseñado para un perfil específico de empresa",
     intro:
-      "No trabajo con todo el mundo — sino porque el tipo de trabajo que hago da sus mejores resultados con un perfil concreto de cliente.",
+      "Este sistema da sus mejores resultados con empresas que ya tienen algo valioso, pero todavía no lo comunican con la claridad y el nivel que deberían.",
     profiles: [
       {
         icon: "⚙️",
-        title: "Empresas técnicas o industriales",
+        title: "Empresas técnicas e industriales",
         description:
-          "Que necesitan comunicar lo que hacen de forma que un cliente no técnico entienda y confíe.",
+          "Que necesitan comunicar lo que hacen de forma que un cliente no técnico entienda, confíe y vea el valor real.",
       },
       {
-        icon: "🏗️",
-        title: "Inmobiliarias y desarrolladores",
+        icon: "📡",
+        title: "Telecomunicaciones y tecnología",
         description:
-          "Donde la venta requiere proceso, confianza y una presencia que inspire seguridad.",
+          "Empresas con soluciones complejas que no saben cómo explicarse sin perder al cliente en lo técnico.",
       },
       {
         icon: "⚡",
         title: "Energía e ingeniería",
         description:
-          "Empresas del sector que no saben cómo comunicar autoridad técnica de forma comercial.",
+          "Empresas del sector que no comunican autoridad técnica de forma comercial. Tienen capacidad — no la traducen bien hacia afuera.",
       },
       {
-        icon: "🎯",
-        title: "Expertos y consultores",
+        icon: "🌾",
+        title: "Agroindustria y manufactura",
         description:
-          "Con una metodología valiosa que no se ve a la altura en digital. El conocimiento está, la comunicación no.",
+          "Marcas con procesos sólidos y experiencia real que no tienen activos visuales que apoyen su crecimiento ni presencia a la altura.",
       },
       {
-        icon: "💎",
-        title: "Negocios de alto ticket",
+        icon: "🏗️",
+        title: "Infraestructura y construcción",
         description:
-          "Donde el cierre depende de cómo te perciben antes de la llamada. La presencia mueve la decisión.",
+          "Empresas que participan en ferias, licitaciones y procesos B2B donde la percepción de marca importa antes de que empiece la conversación.",
       },
       {
-        icon: "👤",
-        title: "Marcas personales serias",
+        icon: "💡",
+        title: "B2B con capacidad técnica no comunicada",
         description:
-          "Que quieren posicionarse con criterio y construir autoridad real — no solo seguidores.",
+          "Para cualquier empresa que ya hace cosas grandes pero todavía no se percibe así. El problema no es el valor. Es cómo se ve ese valor.",
       },
     ],
     closing:
-      "El criterio no es el rubro. Es si tienes algo valioso que vender y necesitas una comunicación y un sistema comercial que estén a esa altura.",
+      "No trabajamos con empresas sin vocero, equipos sin capacidad de aprobar rápido, ni marcas que buscan publicar por publicar. El criterio es claro: si tienes algo valioso y necesitas comunicarlo a la altura — esto es para ti.",
   },
 
   // ── Cómo trabajo ──────────────────────────────────────────
   howIWork: {
-    title: "Mi proceso",
-    subtitle: "No hay sorpresas. Hay orden.",
+    title: "Los 60 días",
+    subtitle: "Ocho semanas con rol claro en cada etapa.",
     steps: [
       {
-        number: "01",
-        title: "Diagnóstico",
+        number: "S1",
+        title: "Diagnóstico y enfoque",
         description:
-          "Antes de proponer cualquier cosa, entiendo tu negocio, tu oferta, tu proceso de ventas y dónde está el problema real. No asumo — pregunto y escucho.",
+          "Sesión de arranque, levantamiento de información del negocio, lectura del servicio o solución principal, identificación del problema comunicacional real. Se define qué debe comunicar la empresa y para qué.",
       },
       {
-        number: "02",
-        title: "Estrategia",
+        number: "S2",
+        title: "Mensaje central y arquitectura",
         description:
-          "Con ese contexto, diseño el sistema o activo específico que resuelve ese problema. No soluciones genéricas — soluciones para tu situación concreta.",
+          "Construcción del mensaje central, ordenamiento de ejes de contenido, postura comunicacional y bajada de propuesta de valor a lenguaje entendible. La empresa deja de sonar dispersa.",
       },
       {
-        number: "03",
-        title: "Producción",
+        number: "S3",
+        title: "Cerebro Creativo IA",
         description:
-          "Ejecuto con criterio de agencia y velocidad de independiente. Sin burocracia, sin capas de aprobación innecesarias, sin excusas.",
+          "Creación del sistema IA, carga de documentación estratégica, prompts maestros y estructura base de comunicación. Se instala la base comunicacional más clara.",
       },
       {
-        number: "04",
-        title: "Activación",
+        number: "S4",
+        title: "Guiones y plan de rodaje",
         description:
-          "Implementamos, conectamos y ponemos en marcha. No entrego archivos — entrego funcionamiento.",
+          "Definición de piezas, desarrollo de guiones, planificación de jornadas de grabación y orden de producción. Todo queda listo para producir con intención.",
       },
       {
-        number: "05",
-        title: "Seguimiento",
+        number: "S5",
+        title: "Grabación principal",
         description:
-          "No desaparezco después del lanzamiento. Reviso que funcione, ajusto lo que haga falta y estoy disponible cuando el sistema lo necesite.",
+          "Grabación del video caso horizontal, grabación de expertos o voceros, captura de tomas de apoyo con dirección en campo. Se obtiene la pieza madre del sistema.",
+      },
+      {
+        number: "S6",
+        title: "Grabación complementaria",
+        description:
+          "Refuerzo de material para reels, cobertura estratégica de jornada, oficina, feria o espacio clave. Se completa el banco visual del proyecto.",
+      },
+      {
+        number: "S7",
+        title: "Edición y construcción",
+        description:
+          "Edición del video caso, reels verticales y videos con locución. Integración de tomas de apoyo y coherencia visual general. El material bruto se convierte en piezas con forma y nivel.",
+      },
+      {
+        number: "S8",
+        title: "IA visual, ajustes y entrega",
+        description:
+          "Generación de recursos con IA, desarrollo de carruseles, ajustes finales y entrega del sistema completo: 15 piezas estratégicas organizadas y listas para usar.",
       },
     ],
   },
@@ -394,11 +406,11 @@ export const SITE = {
 
   // ── CTA Final ─────────────────────────────────────────────
   cta: {
-    title: ["Si lo que leíste tiene", "sentido para tu negocio", "— hablemos."],
-    body: "No trabajo con todo el mundo. Pero si tienes algo valioso que vender y sientes que tu comunicación no está a la altura de eso — esto es para ti.",
+    title: ["Si tu empresa tiene valor", "pero todavía no se percibe así", "— hablemos."],
+    body: "No prometemos resultados mágicos. Prometemos una base estratégica y audiovisual que eleva cómo se percibe tu empresa y mejora cómo comunica frente al mercado.",
     disclaimer: "Sin compromiso. Solo una conversación para entender si tiene sentido trabajar juntos.",
-    ctaPrimary: "¿Aplico para trabajar contigo?",
+    ctaPrimary: "Quiero implementar el sistema",
     ctaSecondary: "Escríbeme directo",
-    riskReversal: "Primera conversación sin compromiso. Si no es el momento correcto, te lo digo directamente.",
+    riskReversal: "Primera conversación sin compromiso. Si no aplica a tu caso, te lo digo directo.",
   },
 };

@@ -4,8 +4,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { SITE } from "@/lib/constants";
 
-const TOTAL_SLOTS = 5;
-const TAKEN = 3;
+const TOTAL_SLOTS = 3;
+const TAKEN = 2;
 const AVAILABLE = TOTAL_SLOTS - TAKEN;
 
 // ─── Set to "" or remove to use gradient background instead of video ───
@@ -126,7 +126,7 @@ export default function Availability() {
                     <div className="absolute top-1.5 right-1.5 w-3 h-3 border-t border-r border-neon-green/70 rounded-tr" />
                     <div className="absolute bottom-1.5 left-1.5 w-3 h-3 border-b border-l border-neon-green/70 rounded-bl" />
                     <div className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b border-r border-neon-green/70 rounded-br" />
-                    <div className="w-3 h-3 rounded-full bg-neon-green shadow-[0_0_8px_rgba(0,255,135,1)]" />
+                    <div className="w-3 h-3 rounded-full bg-neon-green shadow-[0_0_8px_rgba(0,212,255,1)]" />
                     <span className="text-[9px] font-display text-neon-green font-bold tracking-widest uppercase">Libre</span>
                   </div>
                 )}
@@ -150,7 +150,7 @@ export default function Availability() {
             <div className="h-1.5 bg-white/[0.07] rounded-full overflow-hidden">
               <motion.div
                 className="h-full rounded-full"
-                style={{ background: "linear-gradient(90deg, #00ff87, #cc44ff)" }}
+                style={{ background: "linear-gradient(90deg, #00d4ff, #cc44ff)" }}
                 initial={{ width: "0%" }}
                 animate={isInView ? { width: `${(TAKEN / TOTAL_SLOTS) * 100}%` } : {}}
                 transition={{ duration: 1.2, delay: 1, ease: "easeOut" }}

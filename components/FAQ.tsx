@@ -6,28 +6,28 @@ import AnimatedSection from "./AnimatedSection";
 
 const faqs = [
   {
-    q: "¿Cuánto cuesta trabajar contigo?",
-    a: "No publico tarifas fijas porque cada proyecto es diferente en alcance, urgencia y complejidad. Lo que sí puedo decirte: trabajo en proyectos donde el retorno sobre la inversión tiene sentido para el cliente — no busco el presupuesto más bajo ni el más alto. La primera conversación es para entender tu situación; si tiene sentido avanzar, te presento una propuesta concreta.",
+    q: "¿Cuánto cuesta la implementación?",
+    a: "La implementación completa de 60 días tiene un valor de USD 3,200. Incluye dirección estratégica, Cerebro Creativo IA, guiones, dos jornadas de grabación, edición integral y entrega de 15 piezas: 1 video caso horizontal, 8 reels verticales con experto, 2 videos con locución e IA, y 4 carruseles generados con IA. La cobertura está incluida dentro de Lima Metropolitana.",
   },
   {
-    q: "¿Cuánto tiempo tarda ver resultados?",
-    a: "Depende del tipo de trabajo. Un Sistema Comercial Digital (landing, automatización, flujos) entra en funcionamiento en 3 a 6 semanas. Los primeros resultados medibles — leads calificados, mejora en percepción de marca — se suelen notar en las primeras 4 semanas de activación. La autoridad digital tarda más: 2 a 4 meses para que el sistema de comunicación empiece a trabajar solo. Soy directo en los tiempos desde el diagnóstico inicial.",
+    q: "¿Qué recibe exactamente mi empresa?",
+    a: "Al terminar los 60 días recibes: 1 Cerebro Creativo IA entrenado con la lógica de tu marca, 1 Video Caso horizontal de autoridad, 8 Reels Verticales con experto y tomas de apoyo, 2 Videos con Locución e integración de IA, y 4 Carruseles generados con IA. Total: 15 piezas estratégicas no pensadas para publicar por publicar — pensadas para elevar percepción, explicar lo técnico y apoyar ventas.",
   },
   {
-    q: "¿Por qué tú y no una agencia grande?",
-    a: "Porque trabajé en las agencias grandes. Sé exactamente cómo funciona ese modelo: pagas por estructura, no solo por trabajo. Tu cuenta la maneja un ejecutivo junior mientras el senior aparece en la reunión de cierre. En RESUELTO, yo trabajo directamente en tu proyecto — sin intermediarios, sin capas, sin burocracia. Y vengo con el criterio de esas agencias, aplicado con la velocidad de quien no tiene que aprobar 5 niveles antes de ejecutar.",
+    q: "¿Cuánto tiempo toma ver resultados?",
+    a: "La implementación dura 60 días con un cronograma claro semana a semana. Al llegar al día 60, tu empresa tiene activos audiovisuales reutilizables, una narrativa más clara y una base comunicacional que puede usarse en redes, presentaciones, ventas, prospección y futuras campañas. No prometemos viralidad ni leads mágicos — prometemos una infraestructura más sólida.",
   },
   {
-    q: "¿Trabajas con cualquier tipo de negocio?",
-    a: "No. Trabajo con un perfil específico: negocios que venden algo de valor real, donde la confianza es parte del proceso de compra. Inmobiliarias, empresas técnicas, consultoras, negocios de alto ticket, marcas personales serias. Si buscas 'contenido para crecer en Instagram' sin una estrategia comercial detrás, probablemente no soy lo que necesitas. Si buscas que tu comunicación trabaje para cerrar ventas — hablemos.",
+    q: "¿Para qué tipo de empresa está diseñado?",
+    a: "Para empresas B2B, técnicas e industriales: telecomunicaciones, energía, ingeniería, agro, manufactura, infraestructura, tecnología. Empresas que ya tienen algo valioso pero no lo comunican con la claridad y el nivel que deberían. Es requisito contar con un vocero disponible para las jornadas de grabación y un responsable interno para feedback y aprobaciones.",
   },
   {
-    q: "¿Cómo sé si mi negocio está listo para esto?",
-    a: "Si ya tienes una oferta que vende (aunque sea poco o lento), un proceso de atención aunque sea manual, y la sensación de que tu comunicación no está a la altura de lo que realmente ofreces — estás listo. No necesitas tener todo perfecto. La primera conversación sirve exactamente para eso: ver dónde estás, dónde deberías estar y qué tiene más sentido construir primero.",
+    q: "¿Por qué Resuelto y no hacerlo internamente?",
+    a: "Porque producir contenido técnico con nivel requiere tres cosas juntas: dirección estratégica (qué decir y cómo), criterio narrativo (cómo se estructura cada pieza) y producción audiovisual (cómo se graba, dirige y edita). La mayoría de equipos internos tienen una o dos. Resuelto opera con las tres. Y lo hace en 60 días con un cronograma claro, sin burocracia.",
   },
   {
-    q: "¿Puedo ver más de tu trabajo antes de decidir?",
-    a: "Sí. En la sección de Casos de Éxito encontrarás proyectos reales con contexto, proceso y resultados — no solo logos. También tengo testimonios de clientes actuales. Si después de eso quieres una conversación sin compromiso, el primer paso es agendar 30 minutos para ver si tiene sentido trabajar juntos.",
+    q: "¿Qué pasa después de los 60 días?",
+    a: "Al terminar la implementación, la empresa puede seguir por tres caminos: continuidad mensual (nuevas piezas y campañas de forma sostenida), continuidad trimestral (bloques de trabajo más grandes con más previsibilidad), o uso interno (el equipo aprovecha los activos y el Cerebro Creativo IA para futuras acciones). La base ya está construida — la decisión es cómo aprovecharla.",
   },
 ];
 
