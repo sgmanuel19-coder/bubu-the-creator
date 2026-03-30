@@ -313,18 +313,18 @@ export const SITE = {
     milestones: [
       {
         label: "HOY",
-        title: "[VISION_HOY_TITULO]",           // Ej: "Sistemas y presencia premium"
-        description: "[VISION_HOY_DESCRIPCION]", // Ej: "Sistemas de conversión y presencia premium para el mercado peruano. Dos clientes enterprise activos."
+        title: "Implementaciones B2B en Lima",
+        description: "Sistemas audiovisuales de autoridad para empresas técnicas e industriales en Lima. Clientes activos: WIN Internet, Livoltek.",
       },
       {
-        label: "[AÑO+1]",                        // Ej: "2026"
-        title: "[VISION_1_AÑO_TITULO]",
-        description: "[VISION_1_AÑO_DESCRIPCION]",
+        label: "2026",
+        title: "Expansión regional",
+        description: "Escalar el modelo a empresas B2B en otros mercados de Latinoamérica. Primeras implementaciones fuera de Perú.",
       },
       {
         label: "FUTURO",
-        title: "[VISION_FUTURO_TITULO]",
-        description: "[VISION_FUTURO_DESCRIPCION]", // Ej: "Firma boutique de referencia en comunicación comercial de alto valor para Latinoamérica."
+        title: "Firma boutique de referencia",
+        description: "Firma boutique de referencia en contenido audiovisual B2B para Latinoamérica. El estándar para empresas técnicas que quieren comunicar con nivel.",
       },
     ],
     closing:

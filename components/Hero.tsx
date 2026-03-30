@@ -1,14 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import { SITE } from "@/lib/constants";
 import GridBackground from "@/components/ui/grid-background";
-
-const HeroScene = dynamic(() => import("./HeroScene").catch(() => ({ default: () => null })), {
-  ssr: false,
-  loading: () => null,
-});
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -25,11 +19,6 @@ export default function Hero() {
         <GridBackground />
         <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-bg to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-br from-neon-green/4 via-transparent to-neon-purple/6" />
-      </div>
-
-      {/* ── 3D SCENE — floating wireframe geometry ── */}
-      <div className="absolute inset-0 z-[1] pointer-events-none">
-        <HeroScene />
       </div>
 
       {/* Scanlines + grid */}
@@ -91,93 +80,37 @@ export default function Hero() {
           </motion.p>
         </div>
 
-        {/* ── BOTTOM: VSL Video — grande y centrado ── */}
+        {/* ── BOTTOM: Stats del servicio ── */}
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="relative max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="relative max-w-3xl mx-auto mt-2"
         >
-          {/* Glow under video */}
-          <div className="absolute -inset-6 rounded-3xl pointer-events-none">
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-neon-green/10 via-transparent to-neon-purple/10 blur-3xl" />
+          <div className="grid grid-cols-3 gap-4">
+            {[
+              { value: "60", unit: "días", label: "de implementación" },
+              { value: "15", unit: "piezas", label: "estratégicas entregadas" },
+              { value: "USD", unit: "3,200", label: "inversión total" },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 + i * 0.1 }}
+                className="relative rounded-2xl p-5 text-center border border-white/[0.07] bg-white/[0.02] backdrop-blur-sm hover:border-neon-green/25 transition-all duration-300"
+              >
+                <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-neon-green/40 rounded-tl-2xl" />
+                <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-neon-green/40 rounded-tr-2xl" />
+                <p className="font-display font-extrabold text-cream leading-none mb-0.5" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
+                  <span className="text-neon-green text-xl mr-0.5 align-top mt-2 inline-block">{stat.value === "USD" ? "USD" : ""}</span>
+                  {stat.value === "USD" ? stat.unit : stat.value}
+                  {stat.value !== "USD" && <span className="text-neon-green text-xl ml-1">{stat.unit}</span>}
+                </p>
+                <p className="font-body text-muted/70 text-xs tracking-wide mt-1">{stat.label}</p>
+              </motion.div>
+            ))}
           </div>
-
-          {/* Video border */}
-          <div className="holo-border holo-border-hover">
-            <div className="relative rounded-[calc(1.25rem-1px)] overflow-hidden bg-[#060810] aspect-video">
-
-              {/* ── VSL PLACEHOLDER ──
-                  Para activar reemplaza este bloque por:
-                  <video autoPlay muted loop playsInline src="/vsl.mp4"
-                         className="absolute inset-0 w-full h-full object-cover" />
-              ── */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-6">
-                {/* Play button */}
-                <div className="relative">
-                  <div className="absolute -inset-4 rounded-full bg-neon-green/15 blur-xl animate-pulse" />
-                  <motion.div
-                    animate={{ scale: [1, 1.08, 1] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="relative w-24 h-24 rounded-full border-2 border-neon-green/60
-                                bg-neon-green/10 backdrop-blur-sm flex items-center justify-center
-                                hover:bg-neon-green/20 transition-all duration-300"
-                  >
-                    <div className="w-0 h-0 ml-2
-                                    border-t-[12px] border-t-transparent
-                                    border-l-[22px] border-l-neon-green
-                                    border-b-[12px] border-b-transparent
-                                    drop-shadow-[0_0_10px_rgba(0,255,135,0.9)]" />
-                  </motion.div>
-                </div>
-                <div className="text-center">
-                  <p className="text-neon-green font-display font-bold text-base tracking-[0.2em] uppercase mb-1">
-                    VIDEO VSL
-                  </p>
-                  <p className="text-muted text-sm">
-                    Placeholder — sube tu video como{" "}
-                    <code className="text-neon-green/70 text-xs">/public/vsl.mp4</code>
-                  </p>
-                </div>
-              </div>
-
-              {/* Scan line */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-green/20 to-transparent"
-                  style={{ animation: "scanSweep 6s linear infinite" }} />
-              </div>
-
-              {/* Grid overlay */}
-              <div className="absolute inset-0 grid-pattern opacity-15 pointer-events-none" />
-
-              {/* HUD corners */}
-              <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-neon-green/60 rounded-tl" />
-              <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-neon-green/40 rounded-tr" />
-              <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-neon-purple/40 rounded-bl" />
-              <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-neon-purple/60 rounded-br" />
-
-              {/* Duration badge */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-                <span className="px-4 py-1.5 rounded-full bg-bg/85 backdrop-blur-sm border border-neon-green/20
-                                 text-[11px] font-display text-neon-green/70 tracking-widest uppercase">
-                  VSL · DURACIÓN
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Floating badge — clients */}
-          <motion.div
-            animate={{ y: [0, -7, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -bottom-5 -right-4 hidden lg:block"
-          >
-            <div className="rounded-xl bg-bg/95 px-5 py-3 backdrop-blur-xl
-                            border border-neon-green/20 shadow-lg shadow-neon-green/10">
-              <p className="text-[10px] text-muted font-body mb-0.5 tracking-wider uppercase">Actualmente con</p>
-              <p className="text-sm font-display font-bold text-neon-green tracking-wide">WIN · LIVOLTEK</p>
-            </div>
-          </motion.div>
         </motion.div>
 
         {/* ── CTAs + Availability — debajo del video ── */}
@@ -209,31 +142,32 @@ export default function Hero() {
             <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-neon-green/8 border border-neon-green/25 backdrop-blur-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-neon-green slot-available" />
               <span className="text-[11px] font-display font-bold tracking-[0.2em] uppercase text-neon-green/90">
-                ⚡ Solo 2 cupos disponibles este mes
+                ⚡ Solo 1 cupo disponible este mes
               </span>
             </div>
             {/* Slots */}
             <div className="flex items-center gap-2">
-              {[...Array(5)].map((_, i) => (
+              {[...Array(3)].map((_, i) => (
                 <div key={i} className="flex flex-col items-center gap-1.5">
                   <div className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300
-                    ${i < 3
+                    ${i < 2
                       ? "bg-white/[0.04] border-white/10"
                       : "slot-available bg-neon-green/10 border-neon-green/50"
                     }`}>
-                    <div className={`w-2.5 h-2.5 rounded-full ${i < 3 ? "bg-white/20" : "bg-neon-green shadow-[0_0_8px_rgba(0,255,135,1)]"}`} />
+                    <div className={`w-2.5 h-2.5 rounded-full ${i < 2 ? "bg-white/20" : "bg-neon-green shadow-[0_0_8px_rgba(0,212,255,1)]"}`} />
                   </div>
                   <span className={`text-[9px] font-display tracking-widest uppercase
-                    ${i < 3 ? "text-white/25" : "text-neon-green/70"}`}>
-                    {i < 3 ? "Tomado" : "Libre"}
+                    ${i < 2 ? "text-white/25" : "text-neon-green/70"}`}>
+                    {i < 2 ? "Tomado" : "Libre"}
                   </span>
                 </div>
               ))}
             </div>
             {/* Text */}
             <p className="text-xs font-body text-muted/60 tracking-wide">
-              Marzo 2026 — Cierra en{" "}
-              <span className="text-neon-green/80 font-semibold">días</span>
+              Solo{" "}
+              <span className="text-neon-green/80 font-semibold">1 cupo disponible</span>
+              {" "}este mes
             </p>
           </div>
         </motion.div>
