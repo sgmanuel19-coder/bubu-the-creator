@@ -12,6 +12,9 @@ const stepColors = [
   { bg: "bg-neon-green/20", border: "border-neon-green/45", text: "text-neon-green", shadow: "shadow-neon-green/25" },
   { bg: "bg-neon-purple/20", border: "border-neon-purple/45", text: "text-neon-purple", shadow: "shadow-neon-purple/25" },
   { bg: "bg-neon-green/20", border: "border-neon-green/45", text: "text-neon-green", shadow: "shadow-neon-green/25" },
+  { bg: "bg-neon-purple/20", border: "border-neon-purple/45", text: "text-neon-purple", shadow: "shadow-neon-purple/25" },
+  { bg: "bg-neon-green/20", border: "border-neon-green/45", text: "text-neon-green", shadow: "shadow-neon-green/25" },
+  { bg: "bg-neon-purple/20", border: "border-neon-purple/45", text: "text-neon-purple", shadow: "shadow-neon-purple/25" },
 ];
 
 export default function HowIWork() {
@@ -50,14 +53,14 @@ export default function HowIWork() {
             <motion.div
               className="absolute top-8 left-[10%] h-px"
               style={{
-                background: "linear-gradient(90deg, #00ff87 0%, #cc44ff 100%)",
+                background: "linear-gradient(90deg, #00d4ff 0%, #cc44ff 100%)",
               }}
               initial={{ width: "0%" }}
               animate={lineInView ? { width: "80%" } : { width: "0%" }}
               transition={{ duration: 2.2, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.4 }}
             />
 
-            <div className="grid grid-cols-5 gap-4">
+            <div className="grid grid-cols-4 gap-4">
               {SITE.howIWork.steps.map((step, i) => {
                 const c = stepColors[i];
                 return (
@@ -93,7 +96,7 @@ export default function HowIWork() {
               <div className="absolute left-4 top-0 bottom-0 w-px bg-white/5" />
               <motion.div
                 className="absolute left-4 top-0 w-px"
-                style={{ background: "linear-gradient(to bottom, #00ff87, #cc44ff)" }}
+                style={{ background: "linear-gradient(to bottom, #00d4ff, #cc44ff)" }}
                 initial={{ height: "0%" }}
                 animate={lineInView ? { height: "100%" } : { height: "0%" }}
                 transition={{ duration: 2.5, ease: "easeOut", delay: 0.2 }}
