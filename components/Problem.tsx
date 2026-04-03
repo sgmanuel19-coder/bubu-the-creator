@@ -2,51 +2,37 @@
 
 import { useRef } from "react";
 import { SITE } from "@/lib/constants";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const PROBLEM_VIDEO = "/videos/problem-section-bg.mp4";
 
 export default function Problem() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Scroll progress over the full 300vh section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
 
-  // Scroll drives the video currentTime (scrubbing)
-  useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    const video = videoRef.current;
-    if (!video || !video.duration) return;
-    video.currentTime = video.duration * progress;
-  });
+  // Title: appears at 0–8%
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
+  const titleY       = useTransform(scrollYProgress, [0, 0.08], [30, 0]);
 
-  // Title: visible from the start
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
-  const titleY       = useTransform(scrollYProgress, [0, 0.06], [24, 0]);
+  // Problem 1: 12–25%
+  const p1Opacity = useTransform(scrollYProgress, [0.12, 0.25], [0, 1]);
+  const p1Y       = useTransform(scrollYProgress, [0.12, 0.25], [40, 0]);
 
-  // Problem 1: appears at 15%
-  const p1Opacity = useTransform(scrollYProgress, [0.15, 0.28], [0, 1]);
-  const p1Y       = useTransform(scrollYProgress, [0.15, 0.28], [36, 0]);
+  // Problem 2: 38–51%
+  const p2Opacity = useTransform(scrollYProgress, [0.38, 0.51], [0, 1]);
+  const p2Y       = useTransform(scrollYProgress, [0.38, 0.51], [40, 0]);
 
-  // Problem 2: appears at 40%
-  const p2Opacity = useTransform(scrollYProgress, [0.40, 0.53], [0, 1]);
-  const p2Y       = useTransform(scrollYProgress, [0.40, 0.53], [36, 0]);
+  // Problem 3: 62–75%
+  const p3Opacity = useTransform(scrollYProgress, [0.62, 0.75], [0, 1]);
+  const p3Y       = useTransform(scrollYProgress, [0.62, 0.75], [40, 0]);
 
-  // Problem 3: appears at 65%
-  const p3Opacity = useTransform(scrollYProgress, [0.65, 0.78], [0, 1]);
-  const p3Y       = useTransform(scrollYProgress, [0.65, 0.78], [36, 0]);
-
-  // Closing: appears at 85%
-  const closingOpacity = useTransform(scrollYProgress, [0.85, 0.96], [0, 1]);
-  const closingY       = useTransform(scrollYProgress, [0.85, 0.96], [16, 0]);
+  // Closing: 82–93%
+  const closingOpacity = useTransform(scrollYProgress, [0.82, 0.93], [0, 1]);
+  const closingY       = useTransform(scrollYProgress, [0.82, 0.93], [20, 0]);
 
   const items = SITE.problem.items;
   const anims = [
@@ -56,69 +42,143 @@ export default function Problem() {
   ];
 
   return (
-    /* 300vh outer — provides the scroll distance */
+    // Outer 300vh gives scroll room
     <div ref={sectionRef} style={{ height: "300vh", position: "relative" }}>
 
-      {/* Sticky inner — stays locked to viewport while user scrolls through 300vh */}
-      <div className="sticky top-0 h-screen overflow-hidden">
-
-        {/* Video — paused, currentTime driven by scroll */}
+      {/* Sticky viewport — locks to screen while user scrolls through 300vh */}
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          overflow: "hidden",
+        }}
+      >
+        {/* ── Video background ── */}
         <video
-          ref={videoRef}
-          preload="auto"
+          autoPlay
           muted
+          loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          preload="auto"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center center",
+          }}
         >
           <source src={PROBLEM_VIDEO} type="video/mp4" />
         </video>
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/65 to-black/55 pointer-events-none" />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.65), rgba(0,0,0,0.55))",
+          }}
+        />
 
         {/* Border lines */}
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent z-10" />
-        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent z-10" />
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(139,92,246,0.4), transparent)", zIndex: 2 }} />
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(139,92,246,0.4), transparent)", zIndex: 2 }} />
 
-        {/* Content */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-center px-6">
-          <div className="w-full max-w-4xl">
+        {/* ── Content ── */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0 24px",
+          }}
+        >
+          <div style={{ width: "100%", maxWidth: 640 }}>
 
             {/* Title */}
             <motion.div
-              style={{ opacity: titleOpacity, y: titleY }}
-              className="text-center mb-12"
+              style={{ opacity: titleOpacity, y: titleY, textAlign: "center", marginBottom: 48 }}
             >
-              <h2 className="font-display font-bold text-3xl lg:text-5xl tracking-tight text-white mb-4">
+              <h2
+                style={{
+                  fontFamily: "var(--font-orbitron, sans-serif)",
+                  fontWeight: 700,
+                  fontSize: "clamp(1.5rem, 4vw, 2.75rem)",
+                  color: "#f8f8f2",
+                  marginBottom: 16,
+                  lineHeight: 1.15,
+                  letterSpacing: "-0.02em",
+                }}
+              >
                 {SITE.problem.title}
               </h2>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 mx-auto" />
+              <div style={{ width: 64, height: 2, background: "linear-gradient(to right, #7c3aed, #4f46e5)", margin: "0 auto" }} />
             </motion.div>
 
             {/* Problem cards */}
-            <div className="flex flex-col gap-4 max-w-2xl mx-auto mb-10">
+            <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 40 }}>
               {items.map((item, i) => (
                 <motion.div
                   key={i}
-                  style={{ opacity: anims[i].opacity, y: anims[i].y }}
-                  className="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm"
+                  style={{
+                    opacity: anims[i].opacity,
+                    y: anims[i].y,
+                    position: "relative",
+                    padding: "20px 24px",
+                    borderRadius: 12,
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    background: "rgba(255,255,255,0.06)",
+                    backdropFilter: "blur(8px)",
+                  }}
                 >
-                  {/* HUD corners */}
-                  <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-violet-400/50 rounded-tl pointer-events-none" />
-                  <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-violet-400/50 rounded-tr pointer-events-none" />
-                  <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-violet-400/50 rounded-bl pointer-events-none" />
-                  <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-violet-400/50 rounded-br pointer-events-none" />
-
-                  <div className="flex items-start gap-4">
-                    <span className="shrink-0 w-8 h-8 rounded-full bg-violet-500/20 border border-violet-400/30
-                                     flex items-center justify-center text-xs font-display font-bold text-violet-300">
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
+                    <span
+                      style={{
+                        flexShrink: 0,
+                        width: 32,
+                        height: 32,
+                        borderRadius: "50%",
+                        background: "rgba(124,58,237,0.2)",
+                        border: "1px solid rgba(167,139,250,0.35)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 11,
+                        fontWeight: 700,
+                        color: "#c4b5fd",
+                        fontFamily: "var(--font-orbitron, sans-serif)",
+                      }}
+                    >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div>
-                      <p className="font-display font-semibold text-sm text-violet-300 mb-1 tracking-wide">
+                      <p
+                        style={{
+                          fontFamily: "var(--font-orbitron, sans-serif)",
+                          fontWeight: 600,
+                          fontSize: 12,
+                          color: "#c4b5fd",
+                          marginBottom: 6,
+                          letterSpacing: "0.05em",
+                          textTransform: "uppercase",
+                        }}
+                      >
                         {item.label}
                       </p>
-                      <p className="font-body text-white/60 text-sm leading-relaxed">
+                      <p
+                        style={{
+                          fontFamily: "var(--font-inter, sans-serif)",
+                          fontSize: 14,
+                          color: "rgba(255,255,255,0.6)",
+                          lineHeight: 1.6,
+                        }}
+                      >
                         {item.text}
                       </p>
                     </div>
@@ -129,15 +189,24 @@ export default function Problem() {
 
             {/* Closing */}
             <motion.p
-              style={{ opacity: closingOpacity, y: closingY }}
-              className="font-display font-semibold text-lg lg:text-xl text-center bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent"
+              style={{
+                opacity: closingOpacity,
+                y: closingY,
+                textAlign: "center",
+                fontFamily: "var(--font-orbitron, sans-serif)",
+                fontWeight: 600,
+                fontSize: "clamp(0.9rem, 2vw, 1.15rem)",
+                background: "linear-gradient(to right, #a78bfa, #818cf8)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                lineHeight: 1.5,
+              }}
             >
               {SITE.problem.closing}
             </motion.p>
 
           </div>
         </div>
-
       </div>
     </div>
   );
