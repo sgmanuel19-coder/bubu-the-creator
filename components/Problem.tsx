@@ -57,7 +57,7 @@ export default function Problem() {
 
   return (
     /* 300vh outer — provides the scroll distance */
-    <div ref={sectionRef} style={{ height: "300vh" }}>
+    <div ref={sectionRef} style={{ height: "300vh", position: "relative" }}>
 
       {/* Sticky inner — stays locked to viewport while user scrolls through 300vh */}
       <div className="sticky top-0 h-screen overflow-hidden">

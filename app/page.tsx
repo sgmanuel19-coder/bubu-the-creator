@@ -12,10 +12,13 @@ export default function Home() {
   const previewCases = SITE.proof.cases.slice(0, 3);
 
   return (
-    <main className="relative overflow-x-hidden">
+    <>
+    <main className="relative overflow-hidden">
       <Navbar />
       <Hero />
-      <Problem />
+    </main>
+    <Problem />
+    <main className="relative overflow-hidden">
       <Authority />
 
       {/* ── Cases Preview ─────────────────────────────────────── */}
@@ -119,5 +122,6 @@ export default function Home() {
       <FinalCTA />
       <Footer />
     </main>
+    </>
   );
 }
