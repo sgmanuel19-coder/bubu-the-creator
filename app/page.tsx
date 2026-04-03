@@ -12,7 +12,7 @@ export default function Home() {
   const previewCases = SITE.proof.cases.slice(0, 3);
 
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative overflow-x-hidden">
       <Navbar />
       <Hero />
       <Problem />
@@ -55,8 +55,8 @@ export default function Home() {
                   className="absolute inset-0 rounded-2xl"
                   style={{
                     background: i % 2 === 0
-                      ? "linear-gradient(135deg, rgba(0,255,135,0.12) 0%, rgba(204,68,255,0.06) 100%)"
-                      : "linear-gradient(135deg, rgba(204,68,255,0.12) 0%, rgba(0,255,135,0.06) 100%)",
+                      ? "linear-gradient(135deg, rgba(0,212,255,0.12) 0%, rgba(204,68,255,0.06) 100%)"
+                      : "linear-gradient(135deg, rgba(204,68,255,0.12) 0%, rgba(0,212,255,0.06) 100%)",
                     padding: "1px",
                   }}
                 />
