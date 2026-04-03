@@ -40,7 +40,7 @@ export default function CasoDetailPage({ params }: Props) {
   const color = sectorColors[params.slug] ?? "green";
   const isGreen = color === "green";
 
-  const accentColor = isGreen ? "#00ff87" : "#cc44ff";
+  const accentColor = isGreen ? "#00d4ff" : "#cc44ff";
   const accentClass = isGreen ? "text-neon-green" : "text-neon-purple";
   const borderClass = isGreen ? "border-neon-green/25" : "border-neon-purple/25";
   const bgClass = isGreen ? "bg-neon-green/5" : "bg-neon-purple/5";
@@ -57,7 +57,7 @@ export default function CasoDetailPage({ params }: Props) {
       <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full pointer-events-none blur-[120px]"
-          style={{ background: isGreen ? "rgba(0,255,135,0.07)" : "rgba(204,68,255,0.07)" }} />
+          style={{ background: isGreen ? "rgba(0,212,255,0.07)" : "rgba(204,68,255,0.07)" }} />
 
         <div className="container-base relative z-10 max-w-5xl">
           {/* Breadcrumb */}
@@ -124,7 +124,7 @@ export default function CasoDetailPage({ params }: Props) {
           <div className="rounded-2xl border p-8 lg:p-12 relative overflow-hidden mb-16"
             style={{
               background: "rgba(8,10,13,0.98)",
-              borderColor: isGreen ? "rgba(0,255,135,0.2)" : "rgba(204,68,255,0.2)",
+              borderColor: isGreen ? "rgba(0,212,255,0.2)" : "rgba(204,68,255,0.2)",
             }}>
             <div className={`absolute inset-0 rounded-2xl pointer-events-none ${glowClass}`} />
             <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 rounded-tl pointer-events-none"

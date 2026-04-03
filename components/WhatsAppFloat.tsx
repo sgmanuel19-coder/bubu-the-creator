@@ -55,11 +55,12 @@ export default function WhatsAppFloat() {
             aria-label="Contactar por WhatsApp"
             className="relative flex items-center justify-center w-14 h-14 rounded-full shadow-2xl"
             style={{
-              background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
+              background: "linear-gradient(135deg, #cc44ff 0%, #060608 100%)",
+              boxShadow: "0 0 18px rgba(204,68,255,0.6), 0 0 40px rgba(204,68,255,0.25), inset 0 0 0 1.5px rgba(204,68,255,0.5)",
             }}
           >
             {/* Pulse ring */}
-            <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping opacity-60" />
+            <span className="absolute inset-0 rounded-full bg-neon-purple/40 animate-ping opacity-60" />
 
             {/* WhatsApp icon */}
             <svg

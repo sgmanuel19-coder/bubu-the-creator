@@ -2,7 +2,6 @@ import Navbar from "@/components/Navbar";
 import About from "@/components/About";
 import GridBackground from "@/components/ui/grid-background";
 import HowIWork from "@/components/HowIWork";
-import FutureVision from "@/components/FutureVision";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import { SITE } from "@/lib/constants";
@@ -43,7 +42,6 @@ export default function SobreMiPage() {
 
       <About />
       <HowIWork />
-      <FutureVision />
       <FinalCTA />
       <Footer />
     </main>

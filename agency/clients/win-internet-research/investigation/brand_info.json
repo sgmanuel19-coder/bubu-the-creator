@@ -1,0 +1,66 @@
+{
+  "marca": "WIN INTERNET",
+  "razon_social": "WI-Net Telecom S.A.C.",
+  "sitio_web": "win.pe",
+  "descripcion": "Proveedor de internet (ISP) peruano especializado en fibra óptica 100% FTTH/GPON. Opera desde Lima y se ha expandido a ciudades del norte del país. Referenciado como el ISP con mayor velocidad e índice de satisfacción del mercado peruano.",
+  "servicios": [
+    "Internet hogar 100% fibra óptica (FTTH/GPON) — planes de 200 a 1000 Mbps",
+    "Planes dúo: internet + TV o internet + telefonía",
+    "Planes trío: internet + TV + telefonía",
+    "WINTV: plataforma propia de TV digital/streaming",
+    "Fonowin: telefonía fija con 100 minutos libres + app móvil",
+    "WIN Negocios: internet para PyMEs desde 300 Mbps con firewall en la nube",
+    "WIN Empresas: enlace dedicado 1:1, Cloud Privada, Telefonía IP, anti-DDoS"
+  ],
+  "cobertura": {
+    "lima_metropolitana": "Más de 40 distritos",
+    "provincias_lima": "4 provincias",
+    "ciudades_nacionales": ["Trujillo", "Chimbote", "Chiclayo", "Piura"]
+  },
+  "propuesta_de_valor": "El internet de los Winners — Red 100% fibra óptica con la mayor velocidad, menor latencia y mejor satisfacción al cliente del mercado peruano.",
+  "slogan_oficial": "WIN, el internet de los winners",
+  "datos_tecnicos": {
+    "velocidad_media_descarga_mbps": 134.1,
+    "latencia_ms": 2,
+    "consistencia_pct": 90.2,
+    "tecnologia": "FTTH/GPON — 100% fibra óptica hasta el hogar, sin cobre ni coaxial",
+    "fuente": "Speedtest by Ookla / OSIPTEL"
+  },
+  "reconocimientos": [
+    "#1 en satisfacción al cliente según OSIPTEL (83% vs 53% Movistar y 44% Claro)",
+    "ISP con Mayor Índice de Velocidad del Perú según Netflix",
+    "ISP más rápido según Speedtest by Ookla",
+    "Effie Awards Perú 2023 — campaña más premiada",
+    "IAB Mixx Perú 2023 — Oro en Performance, Plata en Branding"
+  ],
+  "redes_sociales": {
+    "instagram": "@win_internet — aprox. 69,000 seguidores, 1,175 publicaciones",
+    "tiktok": "@win_internet — activo",
+    "facebook": "WinInternetpe — aprox. 199,105 seguidores",
+    "twitter_x": "@win_internetpe",
+    "linkedin": "WIN Perú"
+  },
+  "tono_de_comunicacion": "Challenger, irreverente, humor peruano, confrontacional contra la competencia. Tono de 'el que dice la verdad'. Lenguaje directo y popular.",
+  "segmento_objetivo": "Hogares residenciales (segmentos B y C), gamers, trabajadores remotos, PyMEs. No compite en precio bajo — compite en calidad técnica real.",
+  "participacion_mercado": {
+    "lima_fibra_optica": "44% (lidera Lima/Callao, fuente OSIPTEL)",
+    "nacional_fibra": "21.17% (3er lugar nacional)"
+  },
+  "debilidades_conocidas": [
+    "Cobertura limitada — no llega a todas las zonas de Lima ni del país",
+    "Multa INDECOPI diciembre 2025 por publicidad engañosa (S/474,812.50)",
+    "Reportes de demoras en instalación y soporte en zonas de expansión"
+  ],
+  "fecha_investigacion": "2026-03-16",
+  "fuentes": [
+    "win.pe",
+    "selectra.com.pe",
+    "elcomercio.pe",
+    "rpp.pe",
+    "infobae.com/peru",
+    "larepublica.pe",
+    "insiderlatam.com",
+    "comparaiso.com.pe",
+    "forosperu.net"
+  ]
+}

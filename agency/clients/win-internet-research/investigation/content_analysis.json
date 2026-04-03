@@ -1,0 +1,101 @@
+{
+  "formatos_virales_del_sector": [
+    {
+      "formato": "Speed test en vivo / comparativa de velocidades",
+      "descripcion": "Video mostrando speedtest en tiempo real. Los mejores muestran comparativa antes/después o vs competencia.",
+      "ejemplo_viral": "Video 'Cómo se altera tu test de velocidad' — 207,000 likes, 3,179 comentarios en TikTok",
+      "por_que_funciona": "Genera indignación + identificación inmediata. El usuario se ve reflejado. Fácil de compartir.",
+      "ventaja_win": "WIN tiene los mejores números del mercado (134 Mbps, 2ms latencia, 90.2% consistencia). Este formato es un asset sin explotar.",
+      "hashtags_activos": ["#speedtest", "#velocidad", "#fibraoptica", "#engano", "#internet"]
+    },
+    {
+      "formato": "Antes/después de cambiarte de proveedor",
+      "descripcion": "Testimonial editado mostrando sufrimiento con el proveedor anterior y alivio con el nuevo.",
+      "por_que_funciona": "Estructura narrativa clásica de problema-solución. Alta identificación con usuarios que sufren mal internet.",
+      "ventaja_win": "WIN tiene 80% satisfacción de clientes — base de usuarios felices disponibles para testimonios reales.",
+      "hashtags_activos": ["#CambiatAWin", "#ElInternetDeLosWinners", "#SomosWinners"]
+    },
+    {
+      "formato": "Denuncia/exposición con humor ('te están engañando')",
+      "descripcion": "Video que revela la brecha entre lo que prometen las operadoras y la realidad.",
+      "ejemplo_viral": "La campaña de las ratas de WIN (Effie Awards 2023). El formato 'engaño de las operadoras' genera alta viralidad.",
+      "por_que_funciona": "Combina indignación + humor peruano. La audiencia siente que 'alguien dice lo que todos piensan'.",
+      "ventaja_win": "Ya tienen el ADN de marca para este formato — es coherente con su historia y campaña actual.",
+      "hashtags_activos": ["#InternetLento", "#MalInternet", "#NosMetieronLaRata"]
+    },
+    {
+      "formato": "Gaming y latencia / lag en partidas online",
+      "descripcion": "Videos mostrando partidas fluidas vs lagueadas, o comparativa de ping en juegos.",
+      "por_que_funciona": "Nicho muy activo en Perú (18-35 años). El lag es un dolor físico y emocional para el gamer.",
+      "ventaja_win": "Latencia de 2ms vs 10ms (Claro) y 12ms (Movistar). Diferencia objetiva enorme. Entel ya trabaja este eje.",
+      "hashtags_activos": ["#Gaming", "#GamerPeru", "#Ping", "#Latencia", "#Valorant", "#FreeFirePeru"]
+    },
+    {
+      "formato": "Humor con referencias culturales peruanas",
+      "descripcion": "Sketches cortos, parodias o situaciones cotidianas con lenguaje y contexto peruano.",
+      "por_que_funciona": "Videos grabados con celular y lenguaje cotidiano peruano superan a producción pulida en alcance orgánico.",
+      "ventaja_win": "Su ADN de campaña ya usa lenguaje peruano popular ('nos metieron la rata'). Coherente ampliar esto a contenido nativo de redes.",
+      "hashtags_activos": ["#PeruanosPrimero", "#Humorperuano", "#Peruanisimos"]
+    },
+    {
+      "formato": "Tutorial / contenido educativo breve",
+      "descripcion": "Cómo hacer un speedtest, qué significa el ping, diferencia entre fibra y coaxial, cómo pagar el recibo.",
+      "por_que_funciona": "Alta discoverability por búsquedas. Bajo costo de producción. Posiciona a la marca como experta.",
+      "ventaja_win": "Tienen contenido técnico real que los diferencia. Ya hacen tutoriales básicos — pueden profundizar.",
+      "hashtags_activos": ["#TipsInternet", "#FibraOptica", "#TechPeru", "#InternetHogar"]
+    },
+    {
+      "formato": "UGC / testimonial de cliente real",
+      "descripcion": "Clientes reales contando su experiencia de cambio a WIN.",
+      "por_que_funciona": "Alta credibilidad y bajo costo. Bitel lo usa con éxito con concursos de embajadores.",
+      "ventaja_win": "80% satisfacción = base de Winners felices. El hashtag #LoDicenLosWinners ya existe — hay que activarlo.",
+      "hashtags_activos": ["#LoDicenLosWinners", "#SomosWin", "#SomosWinners"]
+    }
+  ],
+  "hooks_que_funcionan": [
+    "Así te están robando con tu internet (y no lo sabes)",
+    "Haz este test AHORA y me cuentas cuánto te dan vs cuánto pagas",
+    "Lo que Movistar y Claro no quieren que compares",
+    "Por qué me cambié de [Movistar/Claro] a WIN y no volvería atrás",
+    "¿Cuánto es 100 Mbps en la vida real? Esto te van a cobrar vs esto te van a dar",
+    "Probamos el internet de todos los proveedores de Lima — los resultados son incómodos",
+    "El único número que importa cuando contratas internet (y nadie te dice cuál es)",
+    "POV: Tu ping cuando juegas con WIN vs cuando juegas con los demás",
+    "Esto le pasaba a mi internet antes. Ahora mira.",
+    "¿Cuántas personas pueden ver Netflix al mismo tiempo con tu internet actual?"
+  ],
+  "emociones_dominantes": [
+    "Indignación — 'me están robando, no me están dando lo que pagué'",
+    "Identificación — 'esto mismo me pasa a mí'",
+    "Alivio — 'por fin alguien que funciona'",
+    "Orgullo de pertenencia — 'soy Winner, elegí bien'",
+    "Frustración activada — para convertirla en decisión de cambio",
+    "FOMO — 'todo el mundo ya se cambió y yo no'"
+  ],
+  "tendencias_actuales_2025": [
+    "TikTok domina el descubrimiento en Perú — contenido nativo (sin producción pulida) supera a spots",
+    "Videos educativos cortos con datos reales tienen alta tracción orgánica",
+    "El humor que nombra problemas reales sin rodeos funciona mejor que el humor genérico",
+    "UGC y testimoniales reales superan en credibilidad a publicidad producida",
+    "La audiencia Gen Z reacciona a transparencia — marcas que dicen la verdad sobre números y limitaciones",
+    "Duetos y respuestas (TikTok) con quejas de usuarios o de competencia generan alto engagement"
+  ],
+  "lenguaje_de_la_audiencia": [
+    "'El internet se cayó otra vez'",
+    "'Me prometieron X Mbps y me dan Y'",
+    "'El técnico no vino'",
+    "'¿Por qué me cobran tanto por esto?'",
+    "'Con WIN es diferente'",
+    "'Ya me harté de Movistar'",
+    "'El ping de WIN está roto (de bueno)'",
+    "'¿WIN llega a mi zona?'",
+    "'La fibra de verdad vs la fibra de mentiras'"
+  ],
+  "mejores_horarios_publicacion_peru": {
+    "tiktok": "Martes a jueves 7-9pm y 12-2pm",
+    "instagram_reels": "Lunes, miércoles y viernes 6-9pm",
+    "stories": "Mañana 8-10am y noche 8-10pm",
+    "fuente": "Metricool + Hootsuite tendencias Perú 2025"
+  },
+  "fecha_investigacion": "2026-03-16"
+}

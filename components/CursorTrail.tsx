@@ -39,13 +39,13 @@ export default function CursorTrail() {
       const opacity = 0.5 + Math.random() * 0.5;
 
       const color = isGreen
-        ? `rgba(0,255,135,${opacity})`
+        ? `rgba(0,212,255,${opacity})`
         : `rgba(204,68,255,${opacity})`;
       const glow1 = isGreen
-        ? `rgba(0,255,135,0.9)`
+        ? `rgba(0,212,255,0.9)`
         : `rgba(160,32,240,0.9)`;
       const glow2 = isGreen
-        ? `rgba(0,204,106,0.4)`
+        ? `rgba(0,168,204,0.4)`
         : `rgba(204,68,255,0.4)`;
 
       p.style.cssText = `
@@ -142,8 +142,8 @@ export default function CursorTrail() {
           width: 6,
           height: 6,
           borderRadius: "50%",
-          background: "#00ff87",
-          boxShadow: "0 0 8px rgba(0,255,135,1), 0 0 16px rgba(0,255,135,0.6)",
+          background: "#00d4ff",
+          boxShadow: "0 0 8px rgba(0,212,255,1), 0 0 16px rgba(0,212,255,0.6)",
           willChange: "transform",
           transition: "opacity 0.2s ease, transform 0.05s ease",
         }}
@@ -156,8 +156,8 @@ export default function CursorTrail() {
           width: 28,
           height: 28,
           borderRadius: "50%",
-          border: "1px solid rgba(0,255,135,0.55)",
-          boxShadow: "0 0 10px rgba(0,255,135,0.4)",
+          border: "1px solid rgba(0,212,255,0.55)",
+          boxShadow: "0 0 10px rgba(0,212,255,0.4)",
           willChange: "transform",
           transition: "opacity 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease",
         }}
@@ -171,7 +171,7 @@ export default function CursorTrail() {
           height: 90,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(160,32,240,0.22) 0%, rgba(0,255,135,0.08) 50%, transparent 70%)",
+            "radial-gradient(circle, rgba(160,32,240,0.22) 0%, rgba(0,212,255,0.08) 50%, transparent 70%)",
           filter: "blur(10px)",
           willChange: "transform",
           transition: "opacity 0.3s ease",

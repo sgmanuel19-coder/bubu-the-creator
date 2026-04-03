@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "obsidian": {
+      "command": "npx",
+      "args": ["-y", "mcp-obsidian"],
+      "env": {
+        "OBSIDIAN_API_KEY": "1204db3f283108f84853820ded6007c1ec03d0c93a4b90362239e5870ff13f70",
+        "OBSIDIAN_HOST": "http://localhost:27123"
+      }
+    },
+    "gsuite": {
+      "command": "cmd",
+      "args": ["/c", "C:\\mcp\\run-mcp.bat"],
+      "env": {
+        "GOOGLE_WORKSPACE_CLIENT_ID": "375739972919-mivrhdb8ugt949fd6pgm8r7jojk21lae.apps.googleusercontent.com",
+        "GOOGLE_WORKSPACE_CLIENT_SECRET": "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",
+        "GOOGLE_WORKSPACE_REFRESH_TOKEN": "1//052OIutg1XFECCgYIARAAGAUSNwF-L9IrU9V76V5yx81pUd85t4aYpw3Qjo7x026Fh5cpOfc48c1lSBKgZXkszYH6j6f-yl3tnBY"
+      }
+    }
+  }
+}

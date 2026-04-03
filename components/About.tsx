@@ -1,45 +1,10 @@
 "use client";
 
 import { SITE } from "@/lib/constants";
-import AnimatedSection, { StaggerContainer, StaggerItem } from "./AnimatedSection";
+import AnimatedSection from "./AnimatedSection";
+import { motion } from "framer-motion";
 
-// ─── Cambia a "" para usar foto en lugar de video ───────────────────────────
 const ABOUT_VIDEO = "/about-bg.mp4";
-
-const credentials = [
-  {
-    eyebrow: "Agencias de referencia",
-    title: "TBWA + Fahrenheit DDB",
-    description: "Dos de las agencias más exigentes del mercado peruano. Donde los errores se pagan caro y el estándar no negocia.",
-    stat: "2",
-    statLabel: "agencias top",
-    color: "green" as const,
-  },
-  {
-    eyebrow: "Marcas de primer nivel",
-    title: "BCP · BBVA · Cencosud · Interbank",
-    description: "Banca, retail masivo, marcas de consumo. Criterio construido trabajando para los estándares más altos del Perú.",
-    stat: "+20",
-    statLabel: "marcas",
-    color: "purple" as const,
-  },
-  {
-    eyebrow: "Experiencia real",
-    title: "6+ años sin margen para el error",
-    description: "No en cursos. En proyectos reales, con entregas reales, para clientes que no aceptan mediocridad.",
-    stat: "6+",
-    statLabel: "años",
-    color: "green" as const,
-  },
-  {
-    eyebrow: "Hoy en operación",
-    title: "WIN Internet · Livoltek",
-    description: "Clientes actuales en sectores de alto valor. La transición ya está en curso — no es un plan, es el presente.",
-    stat: "2",
-    statLabel: "activos",
-    color: "purple" as const,
-  },
-];
 
 export default function About() {
   return (
@@ -60,69 +25,37 @@ export default function About() {
           </h2>
         </AnimatedSection>
 
-        {/* Video / Photo + Bio */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-20">
+        {/* Main grid: video (left) + bio + timeline (right) */}
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
 
-          {/* ── Left: Video or Photo ── */}
-          <AnimatedSection direction="left">
+          {/* ── Left: Video ── 2/5 */}
+          <AnimatedSection direction="left" className="lg:col-span-2">
             <div className="relative">
-              {/* Glow halo */}
               <div className="absolute -inset-3 rounded-2xl pointer-events-none">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-neon-green/12 via-transparent to-neon-purple/12 blur-2xl" />
               </div>
-
-              {/* Border wrapper — green→purple gradient */}
               <div className="holo-border holo-border-hover">
-                <div className="relative rounded-[calc(1.25rem-1px)] overflow-hidden aspect-[3/4] max-w-sm bg-[#080a0d]">
-
+                <div className="relative rounded-[calc(1.25rem-1px)] overflow-hidden aspect-[3/4] bg-[#080a0d]">
                   {ABOUT_VIDEO ? (
-                    /* ── VIDEO MODE ── */
                     <>
-                      <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="auto"
+                      <video autoPlay muted loop playsInline preload="auto"
                         className="absolute inset-0 w-full h-full object-cover"
-                        style={{ objectPosition: "center top" }}
-                      >
+                        style={{ objectPosition: "center top" }}>
                         <source src={ABOUT_VIDEO} type="video/mp4" />
                       </video>
-                      {/* Subtle bottom fade */}
                       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#080a0d]/80 to-transparent pointer-events-none" />
-                      {/* Subtle tint */}
                       <div className="absolute inset-0 bg-gradient-to-br from-neon-green/6 via-transparent to-neon-purple/8 pointer-events-none" />
                     </>
-                  ) : SITE.photos.secondary !== "[FOTO_SECUNDARIA]" ? (
-                    /* ── PHOTO MODE ── */
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={SITE.photos.secondary}
-                      alt={SITE.visibleName}
-                      className="w-full h-full object-cover"
-                    />
                   ) : (
-                    /* ── PLACEHOLDER ── */
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-3 p-8 text-center">
-                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-neon-green/20 to-neon-purple/20
-                                      border border-neon-green/30 flex items-center justify-center">
-                        <span className="text-4xl">👤</span>
-                      </div>
-                      <p className="text-neon-green font-display font-semibold text-xs tracking-widest uppercase">
-                        FOTO_SECUNDARIA
-                      </p>
-                      <p className="text-muted text-xs">Reemplaza en lib/constants.ts</p>
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-6xl">👤</span>
                     </div>
                   )}
-
-                  {/* HUD corners — green top, purple bottom */}
+                  {/* HUD corners */}
                   <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-neon-green/55 rounded-tl pointer-events-none" />
                   <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-neon-green/40 rounded-tr pointer-events-none" />
                   <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-neon-purple/40 rounded-bl pointer-events-none" />
                   <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-neon-purple/55 rounded-br pointer-events-none" />
-
-                  {/* Scan line sweep animation */}
                   <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[calc(1.25rem-1px)]">
                     <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-green/25 to-transparent"
                       style={{ animation: "scanSweep 6s linear infinite" }} />
@@ -132,65 +65,80 @@ export default function About() {
             </div>
           </AnimatedSection>
 
-          {/* ── Right: Bio ── */}
-          <div className="space-y-6">
-            {SITE.about.bio.map((para, i) => (
-              <AnimatedSection key={i} delay={i * 0.12}>
-                <p className="font-body text-muted text-base lg:text-lg leading-relaxed">{para}</p>
-              </AnimatedSection>
-            ))}
+          {/* ── Right: Bio + Timeline ── 3/5 */}
+          <div className="lg:col-span-3 flex flex-col gap-10">
+
+            {/* Bio */}
+            <div className="space-y-5">
+              {SITE.about.bio.map((para, i) => (
+                <AnimatedSection key={i} delay={i * 0.1}>
+                  <p className="font-body text-muted text-base lg:text-lg leading-relaxed">{para}</p>
+                </AnimatedSection>
+              ))}
+            </div>
+
+            {/* Timeline — vertical, connected */}
+            <AnimatedSection delay={0.3}>
+              <p className="text-xs font-display font-semibold tracking-[0.3em] uppercase text-neon-green/50 mb-8">
+                {SITE.about.timelineLabel}
+              </p>
+              <div className="relative">
+                {/* Vertical line */}
+                <div className="absolute left-[11px] top-0 bottom-0 w-px bg-gradient-to-b from-neon-green/40 via-neon-purple/30 to-transparent" />
+
+                <div className="space-y-0">
+                  {SITE.about.timeline.map((entry, i) => {
+                    const isLast = i === SITE.about.timeline.length - 1;
+                    const isActive = entry.year === "HOY";
+                    return (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, x: -12 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-30px" }}
+                        transition={{ duration: 0.5, delay: i * 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
+                        className="relative flex gap-5 pb-7 last:pb-0"
+                      >
+                        {/* Dot */}
+                        <div className={`relative z-10 shrink-0 mt-1 w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center
+                          ${isActive
+                            ? "bg-neon-green border-neon-green shadow-[0_0_10px_rgba(0,255,135,0.5)]"
+                            : "bg-bg border-neon-green/30"
+                          }`}>
+                          {isActive && <span className="w-2 h-2 rounded-full bg-black" />}
+                        </div>
+
+                        {/* Content */}
+                        <div className="flex-1 pt-0.5">
+                          <div className="flex items-center gap-3 mb-1">
+                            <span className={`font-display font-bold text-xs tracking-widest
+                              ${isActive ? "text-neon-green" : "text-neon-green/50"}`}>
+                              {entry.year}
+                            </span>
+                            <span className="text-muted/30 text-xs">·</span>
+                            <span className="font-display font-semibold text-xs text-cream/60">
+                              {entry.company}
+                            </span>
+                          </div>
+                          <h4 className={`font-display font-bold text-sm mb-1
+                            ${isActive ? "text-neon-green" : "text-cream"}`}>
+                            {entry.title}
+                          </h4>
+                          <p className="font-body text-muted/70 text-xs leading-relaxed">
+                            {entry.description}
+                          </p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+            </AnimatedSection>
+
           </div>
         </div>
 
-        {/* Credential cards */}
-        <AnimatedSection className="mb-5">
-          <p className="text-xs font-display font-semibold tracking-[0.3em] uppercase text-neon-green/50 text-center">
-            Credenciales
-          </p>
-        </AnimatedSection>
-
-        <StaggerContainer className="grid sm:grid-cols-2 gap-4">
-          {credentials.map((cred, i) => (
-            <StaggerItem key={i}>
-              <div className="group holo-border holo-border-hover">
-                <div className="relative rounded-[calc(1.25rem-1px)] p-7 h-full overflow-hidden"
-                  style={{ background: "rgba(8,10,13,0.97)" }}>
-                  {/* Hover tint */}
-                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500
-                    ${cred.color === "green"
-                      ? "bg-gradient-to-br from-neon-green/8 to-transparent"
-                      : "bg-gradient-to-br from-neon-purple/8 to-transparent"
-                    }`} />
-
-                  <div className="relative z-10 flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <p className={`text-[10px] font-display font-bold tracking-[0.25em] uppercase mb-2
-                        ${cred.color === "green" ? "text-neon-green/60" : "text-neon-purple/60"}`}>
-                        {cred.eyebrow}
-                      </p>
-                      <h3 className="font-display font-bold text-base text-cream mb-3 leading-tight">
-                        {cred.title}
-                      </h3>
-                      <p className="font-body text-muted text-sm leading-relaxed">
-                        {cred.description}
-                      </p>
-                    </div>
-                    {/* Big stat */}
-                    <div className="shrink-0 text-right">
-                      <p className={`font-brand font-bold text-2xl leading-none
-                        ${cred.color === "green" ? "text-gradient-green" : "text-gradient"}`}>
-                        {cred.stat}
-                      </p>
-                      <p className="text-[9px] font-display text-muted/60 tracking-widest uppercase mt-1">{cred.statLabel}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
       </div>
-
     </section>
   );
 }

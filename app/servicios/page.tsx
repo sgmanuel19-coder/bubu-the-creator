@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Services from "@/components/Services";
 import GridBackground from "@/components/ui/grid-background";
-import Transition from "@/components/Transition";
 import ForWho from "@/components/ForWho";
 import Availability from "@/components/Availability";
 import FAQ from "@/components/FAQ";
@@ -44,7 +43,6 @@ export default function ServiciosPage() {
       </section>
 
       <Services />
-      <Transition />
       <ForWho />
       <Availability />
       <FAQ />

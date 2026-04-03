@@ -83,7 +83,7 @@ export default function ContactForm() {
               className="absolute inset-0 rounded-2xl"
               style={{
                 background:
-                  "linear-gradient(135deg, rgba(0,255,135,0.18) 0%, rgba(160,32,240,0.10) 50%, rgba(204,68,255,0.18) 100%)",
+                  "linear-gradient(135deg, rgba(0,212,255,0.18) 0%, rgba(160,32,240,0.10) 50%, rgba(204,68,255,0.18) 100%)",
                 padding: "1px",
               }}
             />

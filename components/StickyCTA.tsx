@@ -30,9 +30,9 @@ export default function StickyCTA() {
           className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-3 px-4 md:px-8 py-2.5"
           style={{
             background:
-              "linear-gradient(90deg, rgba(0,255,135,0.08) 0%, rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.92) 60%, rgba(204,68,255,0.08) 100%)",
+              "linear-gradient(90deg, rgba(0,212,255,0.08) 0%, rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.92) 60%, rgba(204,68,255,0.08) 100%)",
             backdropFilter: "blur(16px)",
-            borderBottom: "1px solid rgba(0,255,135,0.15)",
+            borderBottom: "1px solid rgba(0,212,255,0.15)",
           }}
         >
           {/* Availability indicator */}

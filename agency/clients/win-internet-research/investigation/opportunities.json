@@ -1,0 +1,56 @@
+{
+  "gaps_de_competencia": [
+    {
+      "gap": "Nadie hace contenido técnico comparativo real en redes",
+      "descripcion": "Movistar, Claro y Bitel no usan sus datos técnicos en contenido de redes. Entel lo hace con gaming pero no con datos objetivos.",
+      "accion_win": "Publicar comparativas reales de speedtest cada semana — datos de Ookla/OSIPTEL con diseño simple y hook fuerte."
+    },
+    {
+      "gap": "Entel tiene 1.2M en TikTok — WIN no tiene presencia dominante",
+      "descripcion": "Entel lideró TikTok con su personaje Powercito. WIN tiene el ADN para ser el challenger irreverente en esa plataforma.",
+      "accion_win": "Desarrollar presencia TikTok nativa con contenido de humor, datos reales y lenguaje peruano. Prioridad en 2026."
+    },
+    {
+      "gap": "Movistar en crisis = ventana abierta de captación",
+      "descripcion": "Movistar está en proceso concursal desde feb 2025. Sus 41% de clientes insatisfechos están activamente buscando alternativas.",
+      "accion_win": "Contenido directo apuntando a usuarios de Movistar frustrados. 'Si eres de Movistar y ya te hartaste...' como gancho de campaña."
+    },
+    {
+      "gap": "Nadie habla del segmento gamer con datos objetivos de latencia",
+      "descripcion": "Entel apela al gaming pero con tono de entretenimiento. Nadie muestra datos reales de latencia/ping para gamers.",
+      "accion_win": "WIN tiene 2ms de latencia vs 10-12ms de competencia. Eso es determinante en gaming competitivo. Este dato puede ser viral entre gamers."
+    },
+    {
+      "gap": "El #LoDicenLosWinners no está siendo activado a escala",
+      "descripcion": "WIN tiene un hashtag de testimoniales que no se explota suficientemente como estrategia de contenido UGC.",
+      "accion_win": "Campaña mensual de reposteo de testimoniales reales con el hashtag. Activar concurso de 'Winners del mes'."
+    }
+  ],
+  "formatos_sin_explotar": [
+    "Duetos en TikTok respondiendo a quejas de usuarios de otras operadoras",
+    "Speed test en zonas específicas de Lima (geotargeteo de audiencia)",
+    "Day-in-the-life con un gamer mostrando lo que hace posible el internet de WIN",
+    "Comparativa en vivo: dos laptops lado a lado — WIN vs competencia haciendo la misma tarea",
+    "Formato 'datos incómodos' — estadísticas reales del mercado con diseño llamativo"
+  ],
+  "angulos_sin_usar": [
+    "WIN como elección inteligente (no solo el más rápido, sino el que 'no te engaña')",
+    "La historia de cómo WIN construyó su red desde cero sin infraestructura legada",
+    "El ángulo PyMEs — negocios que dejaron de perder dinero por mal internet",
+    "El ángulo home office — cuánto dinero/tiempo pierden los trabajadores remotos con mal internet",
+    "Contenido de cultura interna — el equipo detrás de WIN, los técnicos, la fibra"
+  ],
+  "campana_actual_oportunidades": [
+    "El concepto 'winners' permite evolucionar hacia comunidad — de 'cámbiate' a 'ya eres Winner'",
+    "Post-multa INDECOPI: el tono puede ser más sutil en claims pero igual de challenger en datos verificables",
+    "La narrativa de las ratas puede tener nuevas versiones en 2026 — el concepto sigue vigente",
+    "Tie-in con eventos: semana gaming, torneos de esports, trabajo remoto"
+  ],
+  "oportunidades_de_calendario_abril_2026": [
+    "Semana Santa (1-5 abril) — internet sin cortes cuando la familia está en casa = ángulo familia",
+    "Inicio de clases segundo trimestre — internet para estudiar, tareas, streaming educativo",
+    "Fin de mes = cierre de facturación — oportunidad para comparativa precio/velocidad",
+    "Mes sin fecha especial fuerte = más libertad creativa para el contenido evergreen"
+  ],
+  "fecha_investigacion": "2026-03-16"
+}

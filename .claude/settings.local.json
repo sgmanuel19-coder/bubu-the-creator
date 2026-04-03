@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.tiktok.com)",
+      "Bash(curl -s \"https://win.pe/blog/\" --max-time 30 -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\")",
+      "WebFetch(domain:win.pe)",
+      "mcp__gsuite__docs_create_document",
+      "mcp__gsuite__docs_append_text",
+      "mcp__gsuite__drive_search_files",
+      "mcp__gsuite__sheets_write_range",
+      "Bash(curl -s -k \"https://127.0.0.1:27124/vault/\" -H \"Authorization: Bearer 1204db3f283108f84853820ded6007c1ec03d0c93a4b90362239e5870ff13f70\")",
+      "Bash(curl -s \"http://127.0.0.1:27123/vault/\" -H \"Authorization: Bearer 1204db3f283108f84853820ded6007c1ec03d0c93a4b90362239e5870ff13f70\")",
+      "Bash(curl:*)",
+      "Bash(python -c \"import sys,json; p=json.load\\(sys.stdin\\); print\\(''''NAME:'''', p.get\\(''''name'''',''''''''\\)\\); print\\(''''DESC:'''', p.get\\(''''description'''',''''''''\\)\\); deps=list\\(p.get\\(''''dependencies'''',{}\\).keys\\(\\)\\); print\\(''''DEPS:'''', deps\\)\")",
+      "Bash(cat \"C:/Users/BUBU THE CREATOR/resuelto/agency/dashboard/\"*)",
+      "mcp__gsuite__gmail_send_email",
+      "WebFetch(domain:127.0.0.1)",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "gsuite"
+  ]
+}

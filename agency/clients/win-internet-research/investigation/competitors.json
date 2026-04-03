@@ -1,0 +1,85 @@
+{
+  "competidores": [
+    {
+      "nombre": "Movistar Perú",
+      "estado_actual": "CRISIS — En proceso concursal (PCO) desde febrero 2025. Telefónica Hispanoamérica vendida a Integra Tec (empresa argentina). Inversión en comunicación reducida.",
+      "instagram": "@movistarperu — aprox. 264,000 seguidores",
+      "tiktok": "@movistarperu_oficial — activo, datos exactos no disponibles",
+      "tipo_contenido": "Lifestyle centrado en conectividad, storytelling nostálgico/emocional, mix con micro y macro influencers",
+      "formatos_frecuentes": ["Reels", "Stories de urgencia/ofertas", "Videos cortos TikTok"],
+      "tono": "Cercano y familiar, apela a la emoción. Más institucional que provocador. En proceso de modernización.",
+      "hashtags": "no encontrados con precisión",
+      "campana_activa": "No se identificó campaña conceptual activa en 2025. Crisis financiera limita inversión.",
+      "datos_tecnicos_vs_win": {
+        "velocidad_media_mbps": 94.57,
+        "latencia_ms": 13,
+        "consistencia_pct": 68.8,
+        "tecnologia": "Mix — fibra óptica + infraestructura ADSL/cobre en zonas"
+      },
+      "satisfaccion_clientes_pct": 53,
+      "insatisfaccion_2024": "41% de sus clientes insatisfechos — mayor insatisfacción del mercado, subida del 141% vs 2023",
+      "lo_que_funciona": "Base de clientes histórica grande, marca reconocida, alcance nacional",
+      "lo_que_no_hacen": "Contenido técnico comparativo, humor irreverente, datos objetivos de velocidad",
+      "oportunidad_para_win": "Movistar pierde clientes activamente. Sus usuarios insatisfechos son el target principal de WIN. Contenido comparativo directo tiene alto impacto ahora."
+    },
+    {
+      "nombre": "Entel Perú",
+      "estado_actual": "COMPETIDOR FUERTE en redes sociales — el más avanzado digitalmente del sector",
+      "instagram": "@entel_peru — aprox. 247,000-280,000 seguidores",
+      "tiktok": "@entel_peru — 1,200,000 seguidores / 10,400,000 likes (LÍDER DEL SECTOR EN TIKTOK)",
+      "tipo_contenido": "Gaming y tecnología, humor con mascota 'Powercito', lifestyle tecnológico para jóvenes, alianza Starlink, contenido de fechas especiales",
+      "formatos_frecuentes": ["TikTok (canal principal)", "Reels Instagram", "Contenido de personaje/mascota"],
+      "tono": "Fresco, joven, humor Gen Z, irreverente. Posicionamiento: 'Señal Power que llega donde otros no llegan'",
+      "hashtags": ["#Powercito"],
+      "campana_activa": "Alianza Starlink activa en 2025 — primer ISP en Perú con esta tecnología. Posicionamiento extremo de cobertura.",
+      "datos_tecnicos_vs_win": {
+        "nota": "Entel es principalmente operador móvil — comparación en internet fijo no aplica directamente",
+        "diferencial": "Starlink + cobertura extrema en zonas rurales"
+      },
+      "lo_que_funciona": "TikTok con 1.2M seguidores es el benchmark del sector. Personaje Powercito humaniza la marca. Gaming como eje narrativo.",
+      "lo_que_no_hacen": "Datos técnicos objetivos de velocidad de fibra fija, comparativas directas, humor basado en realidad del mercado",
+      "oportunidad_para_win": "WIN puede competir en TikTok activando su diferencial técnico (latencia 2ms, velocidad 134 Mbps) con el mismo tono provocador que ya demostró funcionar. La audiencia gamer es el punto de cruce."
+    },
+    {
+      "nombre": "Claro Perú",
+      "estado_actual": "Competidor directo. Presentó denuncia ante INDECOPI que resultó en multa a WIN (diciembre 2025). Única operadora que aumentó satisfacción en 2024.",
+      "instagram": "datos exactos no encontrados",
+      "tiktok": "Activo — tiene alianza comercial con TikTok para paquetes de datos exclusivos",
+      "tipo_contenido": "Paquetes de datos, beneficios para redes sociales (paquetes TikTok de S/3-5), contenido de producto con tono promocional",
+      "formatos_frecuentes": ["Reels", "Videos de producto", "Posts de oferta en feed"],
+      "tono": "Comercial y orientado a oferta. Más funcional que emocional.",
+      "hashtags": "no encontrados con precisión",
+      "campana_activa": "Alianza con TikTok para paquetes de datos móviles. No se identificó campaña de marca conceptual.",
+      "datos_tecnicos_vs_win": {
+        "velocidad_media_mbps": 90.73,
+        "latencia_ms": 10,
+        "consistencia_pct": 78.4,
+        "tecnologia": "Mix — fibra óptica + HFC (coaxial) en varias zonas"
+      },
+      "satisfaccion_clientes_pct": 44,
+      "lo_que_funciona": "Lidera en internet móvil (velocidad). Alianza TikTok les da presencia relevante en la plataforma.",
+      "lo_que_no_hacen": "Contenido educativo sobre diferencias técnicas, humor sobre el sector, comparativas honestas",
+      "oportunidad_para_win": "Claro aún usa tecnología HFC en zonas donde WIN tiene 100% fibra — este diferencial técnico puede comunicarse visualmente."
+    },
+    {
+      "nombre": "Bitel Perú",
+      "estado_actual": "Competidor de precio, apunta a segmento masivo",
+      "instagram": "@bitel_peru — aprox. 98,000 seguidores / 3,305 publicaciones",
+      "tiktok": "Activo — usa dinámicas de concurso (#BITELBUSCA: 5 ganadores a S/2,500 como embajadores)",
+      "tipo_contenido": "Concursos con influencers, UGC generado por usuarios, aniversarios de marca, paquetes de datos TikTok (30GB exclusivos)",
+      "formatos_frecuentes": ["Stories para concursos", "Reels Instagram", "TikTok activaciones"],
+      "tono": "Popular y cercano — 'la comunidad más chevere del internet'. Orientado a sectores masivos y jóvenes.",
+      "hashtags": ["#BITELBUSCA", "#FELIZ7AÑOSBITEL"],
+      "campana_activa": "No se identificó campaña conceptual activa. Eje habitual: concursos y alianzas con TikTok.",
+      "lo_que_funciona": "Estrategia de bajo costo activando su propia comunidad como creadores (UGC). Alto potencial viral.",
+      "lo_que_no_hacen": "Datos técnicos, comparativas de calidad, contenido premium",
+      "oportunidad_para_win": "Bitel y WIN apelan a audiencias parcialmente distintas. Win puede hacer contenido que muestre la diferencia de calidad entre 'internet barato' y 'internet que sí funciona'."
+    }
+  ],
+  "resumen_benchmarks_tiktok": {
+    "lider": "Entel — 1.2M seguidores",
+    "segundo": "Movistar — activo pero sin datos exactos",
+    "win_oportunidad": "Si WIN replica su ADN challenger en TikTok con formato nativo (humor, datos reales, latencia gaming), puede ser el canal con mayor diferenciación del sector"
+  },
+  "fecha_investigacion": "2026-03-16"
+}

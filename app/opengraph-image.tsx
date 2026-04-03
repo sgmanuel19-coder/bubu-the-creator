@@ -29,7 +29,7 @@ export default function Image() {
             width: 500,
             height: 500,
             borderRadius: "50%",
-            background: "rgba(0, 255, 135, 0.12)",
+            background: "rgba(0, 212, 255, 0.12)",
             filter: "blur(90px)",
             display: "flex",
           }}
@@ -59,7 +59,7 @@ export default function Image() {
             right: 0,
             height: 2,
             background:
-              "linear-gradient(90deg, transparent, #00ff87, #cc44ff, transparent)",
+              "linear-gradient(90deg, transparent, #00d4ff, #cc44ff, transparent)",
             display: "flex",
           }}
         />
@@ -73,7 +73,7 @@ export default function Image() {
             right: 0,
             height: 2,
             background:
-              "linear-gradient(90deg, transparent, #cc44ff, #00ff87, transparent)",
+              "linear-gradient(90deg, transparent, #cc44ff, #00d4ff, transparent)",
             display: "flex",
           }}
         />
@@ -123,13 +123,13 @@ export default function Image() {
               style={{
                 width: 40,
                 height: 1,
-                background: "rgba(0,255,135,0.5)",
+                background: "rgba(0,212,255,0.5)",
                 display: "flex",
               }}
             />
             <span
               style={{
-                color: "#00ff87",
+                color: "#00d4ff",
                 fontSize: 13,
                 fontWeight: 700,
                 letterSpacing: "0.3em",
@@ -142,7 +142,7 @@ export default function Image() {
               style={{
                 width: 40,
                 height: 1,
-                background: "rgba(0,255,135,0.5)",
+                background: "rgba(0,212,255,0.5)",
                 display: "flex",
               }}
             />
@@ -155,9 +155,9 @@ export default function Image() {
               fontSize: 108,
               fontWeight: 900,
               letterSpacing: "0.18em",
-              color: "#00ff87",
+              color: "#00d4ff",
               textShadow:
-                "0 0 40px rgba(0,255,135,0.5), 0 0 80px rgba(0,255,135,0.2)",
+                "0 0 40px rgba(0,212,255,0.5), 0 0 80px rgba(0,212,255,0.2)",
               marginBottom: 36,
               lineHeight: 1,
             }}
@@ -198,9 +198,9 @@ export default function Image() {
                   display: "flex",
                   padding: "8px 20px",
                   borderRadius: 9999,
-                  border: "1px solid rgba(0,255,135,0.2)",
-                  background: "rgba(0,255,135,0.06)",
-                  color: "rgba(0,255,135,0.7)",
+                  border: "1px solid rgba(0,212,255,0.2)",
+                  background: "rgba(0,212,255,0.06)",
+                  color: "rgba(0,212,255,0.7)",
                   fontSize: 13,
                   letterSpacing: "0.1em",
                 }}

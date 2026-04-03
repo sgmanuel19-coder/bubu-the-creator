@@ -44,4 +44,40 @@ Web de marca personal de **Manuel Severo**, estratega de contenido y sistemas co
 npm run dev          # desarrollo
 npm run build        # build local
 npx vercel --prod    # deploy producción
+git add . && git commit -m "mensaje" && git push  # auto-deploy vía GitHub→Vercel
 ```
+
+---
+
+## Agencia BUBU The Creator — Hub central
+
+Este proyecto también es el **hub de la agencia**. Dentro de `agency/` vive la memoria de todos los clientes y proyectos.
+
+### Clientes activos
+| Cliente | Tipo | Archivo de briefing |
+|---|---|---|
+| WIN Internet | Fijo | `agency/clients/win-internet.md` |
+| BUBU The Creator | Marca personal | `agency/clients/bubu-the-creator.md` |
+| LIVOLTEK | Recurrente | `agency/clients/livoltek.md` |
+| Felina Glam | Activo | `agency/clients/felina-glam.md` |
+
+### Agentes disponibles (en `.claude/agents/`)
+| Agente | Rol |
+|---|---|
+| `director-general` | Orquesta todo el equipo |
+| `personal-assistant` | Briefing diario proactivo |
+| `account-executive` | Gestión de clientes |
+| `project-manager` | Timelines y tareas |
+| `growth-coach` | Meta 50k/mes |
+| `finance-manager` | Ingresos y facturas |
+| `prospector` | Nuevos clientes |
+| `strategist` | Estrategia de campañas |
+| `copywriter` | Guiones y copy |
+| `content-planner` | Calendarios de contenido |
+| `analyst` | Métricas y auditorías |
+| `web-developer` | Desarrollo web |
+
+### Otros proyectos vinculados
+- `C:\Users\BUBU THE CREATOR\Documents\DISEÑO WEB\lashista-services\`
+- `C:\Users\BUBU THE CREATOR\Documents\DISEÑO WEB\lashista-academy\`
+- `C:\Users\BUBU THE CREATOR\Documents\WIN INTERNET ABRIL\` (Remotion videos)
