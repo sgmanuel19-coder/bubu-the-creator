@@ -612,13 +612,7 @@ function BotScreenshotsSection() {
                 </div>
                 {/* Screenshot area */}
                 <div style={{ position: 'relative', flex: 1, background: '#0d1117', minHeight: 260 }}>
-                  <img
-                    src={s.img}
-                    alt={`Screenshot bot - ${s.label}`}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
-                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-                  />
-                  {/* Fallback placeholder */}
+                  {/* Placeholder — reemplazar con <Image> cuando tengas los screenshots en /public/images/ */}
                   <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, padding: 12 }}>
                     <div style={{ width: 32, height: 32, borderRadius: '50%', background: `rgba(${s.accent},0.15)`, border: `1px solid rgba(${s.accent},0.4)`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <Bot style={{ width: 14, height: 14, color: `rgb(${s.accent})` }} />
