@@ -1,0 +1,745 @@
+"use client";
+
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { SITE } from "@/lib/constants";
+
+const core = SITE.services.core as any;
+const forWho = SITE.forWho;
+
+// ── FAQ específico del servicio ───────────────────────────────
+const faqs = [
+  {
+    q: "¿Cuánto es la inversión?",
+    a: `${core.price} ${core.priceNote}. Incluye dirección estratégica completa, cerebro IA, producciones en campo, edición integral y recursos IA. No es un gasto de marketing — es un activo de comunicación comercial que la empresa reutiliza.`,
+  },
+  {
+    q: "¿Cómo se organiza el trabajo en los 60 días?",
+    a: "4 fases de 2 semanas cada una: Estrategia (diagnóstico y mensaje central), Base Creativa (Cerebro IA + guiones), Producción (grabaciones en campo) y Edición y Entrega (montaje final + recursos IA). Con comunicación continua y plan semana a semana.",
+  },
+  {
+    q: "¿Cuánto tiempo toma ver resultados?",
+    a: "Al día 60 la empresa tiene un sistema de comunicación instalado y listo para usar. No prometemos viralidad ni leads mágicos — prometemos un sistema instalado y funcional. Los activos son reutilizables en redes, presentaciones, ventas, prospección y futuras campañas.",
+  },
+  {
+    q: "¿Para qué tipo de empresa está diseñado?",
+    a: "Para empresas B2B, técnicas e industriales: telecomunicaciones, energía, ingeniería, agro, manufactura, infraestructura, tecnología. Empresas que ya tienen algo valioso pero no lo comunican con la claridad y el nivel que deberían. Requisito: vocero disponible y responsable interno para feedback.",
+  },
+  {
+    q: "¿Por qué Resuelto y no hacerlo internamente?",
+    a: "Porque instalar un sistema de comunicación que genera clientes requiere cuatro disciplinas actuando juntas: estrategia publicitaria, producción audiovisual, IA generativa aplicada al contenido y diseño de sistema comercial. La mayoría de equipos internos tiene una o dos. Resuelto opera con las cuatro — con criterio de agencia global y ejecución directa, sin capas.",
+  },
+  {
+    q: "¿Qué pasa después de los 60 días?",
+    a: "La empresa puede continuar por continuidad mensual (nuevas piezas sostenidas), continuidad trimestral (bloques más grandes) o uso interno aprovechando los activos y el Cerebro Creativo IA. La base ya está construida — la decisión es cómo aprovecharla.",
+  },
+];
+
+// ── Proceso (phases) ─────────────────────────────────────────
+const phases = [
+  { icon: "🎯", label: "Fase 1", name: "Estrategia", weeks: "Sem. 1–2",
+    steps: ["Diagnóstico y enfoque estratégico", "Mensaje central y arquitectura de comunicación"] },
+  { icon: "🎨", label: "Fase 2", name: "Base Creativa", weeks: "Sem. 3–4",
+    steps: ["Cerebro Creativo IA + documentación estratégica", "Guiones, storyboards y preproducción"] },
+  { icon: "🎬", label: "Fase 3", name: "Producción", weeks: "Sem. 5–6",
+    steps: ["Grabación de video caso y cobertura", "Grabación de expertos y voceros"] },
+  { icon: "✨", label: "Fase 4", name: "Edición y Entrega", weeks: "Sem. 7–8",
+    steps: ["Edición integral y recursos IA", "Entrega final + revisiones"] },
+];
+
+// ── Sub-components ───────────────────────────────────────────
+
+function SectionLabel({ text }: { text: string }) {
+  return (
+    <div className="inline-flex items-center gap-2 text-[10px] font-display font-bold tracking-[0.25em] uppercase text-neon-green mb-6">
+      <span className="w-5 h-px bg-neon-green/50" />
+      {text}
+    </div>
+  );
+}
+
+function PillarAccordion() {
+  const [open, setOpen] = useState<number | null>(null);
+  const pillars = core.pillars as any[];
+
+  return (
+    <div className="space-y-2">
+      {pillars.map((p, i) => {
+        const isOpen = open === i;
+        return (
+          <div
+            key={i}
+            className={`rounded-xl border overflow-hidden transition-all duration-200
+              ${isOpen ? "border-neon-green/30 bg-neon-green/[0.03]" : "border-white/7 bg-white/[0.02] hover:border-white/12"}`}
+          >
+            {isOpen && <div className="h-0.5 bg-gradient-to-r from-neon-green/70 to-transparent" />}
+            <button
+              onClick={() => setOpen(isOpen ? null : i)}
+              className="w-full flex items-center gap-4 px-5 py-4 text-left"
+            >
+              <span className="shrink-0 w-7 h-7 rounded-lg bg-neon-green/10 border border-neon-green/25 flex items-center justify-center
+                font-display font-bold text-[10px] text-neon-green">
+                {String(p.num).padStart(2, "0")}
+              </span>
+              <div className="flex-1 min-w-0">
+                <p className="font-display font-bold text-sm text-cream leading-snug">{p.title}</p>
+                {!isOpen && <p className="font-body text-muted/50 text-xs mt-0.5 leading-snug line-clamp-1">{p.summary}</p>}
+              </div>
+              <motion.div
+                animate={{ rotate: isOpen ? 45 : 0 }}
+                transition={{ duration: 0.18 }}
+                className={`shrink-0 w-7 h-7 rounded-full border flex items-center justify-center text-sm font-bold transition-colors
+                  ${isOpen ? "border-neon-green/50 text-neon-green bg-neon-green/10" : "border-white/12 text-muted/50"}`}
+              >
+                +
+              </motion.div>
+            </button>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.22, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-5 pb-5">
+                    <p className="font-body text-muted/70 text-sm leading-relaxed mb-4">{p.summary}</p>
+                    <ul className="space-y-2 mb-4">
+                      {p.detail.map((d: string, j: number) => (
+                        <li key={j} className="flex items-start gap-2.5">
+                          <span className="shrink-0 w-4 h-4 rounded-full bg-neon-green/12 border border-neon-green/30 flex items-center justify-center mt-0.5 text-[9px] font-bold text-neon-green">✓</span>
+                          <span className="font-body text-cream/70 text-sm leading-snug">{d}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex items-start gap-2 pt-3 border-t border-white/5">
+                      <span className="text-neon-green text-xs mt-0.5">→</span>
+                      <p className="font-body text-neon-green/80 text-xs italic leading-relaxed">
+                        <span className="font-semibold not-italic text-neon-green/60 mr-1">Lo que recibe:</span>
+                        {p.receives}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function FAQSection() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="space-y-2">
+      {faqs.map((faq, i) => {
+        const isOpen = open === i;
+        const isGreen = i % 2 === 0;
+        return (
+          <div
+            key={i}
+            className={`rounded-xl border overflow-hidden transition-all duration-200
+              ${isOpen
+                ? isGreen ? "border-neon-green/25 bg-neon-green/[0.03]" : "border-neon-purple/25 bg-neon-purple/[0.03]"
+                : "border-white/7 bg-white/[0.02] hover:border-white/12"}`}
+          >
+            <button
+              onClick={() => setOpen(isOpen ? null : i)}
+              className="w-full flex items-center gap-3 px-5 py-4 text-left"
+            >
+              <span className={`shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-display font-bold transition-colors
+                ${isOpen
+                  ? isGreen ? "bg-neon-green/15 text-neon-green" : "bg-neon-purple/15 text-neon-purple"
+                  : "bg-white/5 text-muted/40"}`}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="flex-1 font-display font-semibold text-sm text-cream leading-snug">{faq.q}</span>
+              <motion.div
+                animate={{ rotate: isOpen ? 45 : 0 }}
+                transition={{ duration: 0.18 }}
+                className={`shrink-0 w-6 h-6 rounded-full border flex items-center justify-center text-sm font-bold transition-colors
+                  ${isOpen
+                    ? isGreen ? "border-neon-green/40 text-neon-green" : "border-neon-purple/40 text-neon-purple"
+                    : "border-white/12 text-muted/50"}`}
+              >
+                +
+              </motion.div>
+            </button>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.22, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <div className={`mx-5 mb-4 p-3.5 rounded-lg border-l-2 bg-white/[0.02]
+                    ${isGreen ? "border-neon-green/35" : "border-neon-purple/35"}`}>
+                    <p className="font-body text-muted text-sm leading-relaxed">{faq.a}</p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── Video examples ────────────────────────────────────────────
+//
+// Para activar un video: reemplaza null por el ID del reel de Instagram.
+// Ej: reelId="ABC123xyz" → https://www.instagram.com/reel/ABC123xyz/
+//
+// IDs a reemplazar cuando tengas los links:
+const VIDEO_VSL_ID:        string | null = null; // → Video Caso VSL
+const VIDEO_COBERTURA_ID:  string | null = null; // → Cobertura de evento/feria
+const VIDEO_IA_1_ID:       string | null = null; // → Vertical con IA generativa #1
+const VIDEO_IA_2_ID:       string | null = null; // → Vertical con IA generativa #2
+const VIDEO_IA_3_ID:       string | null = null; // → Vertical con IA generativa #3
+
+function ReelSlot({
+  reelId,
+  label,
+  description,
+  color = "green",
+}: {
+  reelId: string | null;
+  label: string;
+  description: string;
+  color?: "green" | "purple";
+}) {
+  const isGreen = color === "green";
+  const borderColor = isGreen ? "border-neon-green/20" : "border-neon-purple/20";
+  const accentColor = isGreen ? "text-neon-green" : "text-neon-purple";
+  const cornerColor = isGreen ? "rgba(0,255,135,0.5)" : "rgba(204,68,255,0.5)";
+  const glowColor   = isGreen ? "rgba(0,255,135,0.12)" : "rgba(204,68,255,0.12)";
+
+  return (
+    <div className="flex flex-col gap-3">
+      {/* Slot */}
+      <div
+        className={`relative w-full rounded-xl border overflow-hidden ${borderColor}`}
+        style={{ aspectRatio: "9/16", background: "rgba(5,7,9,0.9)" }}
+      >
+        {/* HUD corners */}
+        <div className="absolute top-2 left-2 w-4 h-4 pointer-events-none z-10"
+          style={{ borderTop: `1.5px solid ${cornerColor}`, borderLeft: `1.5px solid ${cornerColor}`, borderTopLeftRadius: 3 }} />
+        <div className="absolute top-2 right-2 w-4 h-4 pointer-events-none z-10"
+          style={{ borderTop: `1.5px solid ${cornerColor}`, borderRight: `1.5px solid ${cornerColor}`, borderTopRightRadius: 3 }} />
+        <div className="absolute bottom-2 left-2 w-4 h-4 pointer-events-none z-10"
+          style={{ borderBottom: `1.5px solid ${cornerColor}`, borderLeft: `1.5px solid ${cornerColor}`, borderBottomLeftRadius: 3 }} />
+        <div className="absolute bottom-2 right-2 w-4 h-4 pointer-events-none z-10"
+          style={{ borderBottom: `1.5px solid ${cornerColor}`, borderRight: `1.5px solid ${cornerColor}`, borderBottomRightRadius: 3 }} />
+
+        {reelId ? (
+          /* ── EMBED ACTIVO ── */
+          <iframe
+            src={`https://www.instagram.com/reel/${reelId}/embed/`}
+            className="absolute inset-0 w-full h-full"
+            frameBorder="0"
+            scrolling="no"
+            allowTransparency
+            allowFullScreen
+          />
+        ) : (
+          /* ── PLACEHOLDER ── */
+          <>
+            {/* Scanlines */}
+            <div className="absolute inset-0 pointer-events-none opacity-40"
+              style={{ background: "repeating-linear-gradient(0deg,rgba(0,0,0,0.08) 0px,rgba(0,0,0,0.08) 1px,transparent 1px,transparent 4px)" }} />
+            {/* Inner glow */}
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ background: `radial-gradient(ellipse at 50% 40%, ${glowColor} 0%, transparent 70%)` }} />
+            {/* Play button */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+              <motion.div
+                className={`w-12 h-12 rounded-full border flex items-center justify-center ${borderColor}`}
+                style={{ background: isGreen ? "rgba(0,255,135,0.08)" : "rgba(204,68,255,0.08)" }}
+                animate={{ scale: [1, 1.06, 1] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor"
+                  className={`w-5 h-5 ml-0.5 ${accentColor}`}>
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </motion.div>
+              <p className={`text-[9px] font-display font-bold tracking-[0.2em] uppercase text-center px-4 ${accentColor} opacity-50`}>
+                Ejemplo próximamente
+              </p>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Label below */}
+      <div>
+        <p className={`font-display font-bold text-xs ${accentColor} mb-0.5`}>{label}</p>
+        <p className="font-body text-muted/50 text-[11px] leading-snug">{description}</p>
+      </div>
+    </div>
+  );
+}
+
+function ProfileCard({
+  profile,
+  index,
+}: {
+  profile: { icon: string; title: string; description: string };
+  index: number;
+}) {
+  const [hovered, setHovered] = useState(false);
+  const colors = [
+    "0,255,135",   // green
+    "204,68,255",  // purple
+    "0,255,135",
+    "204,68,255",
+    "0,255,135",
+    "204,68,255",
+  ];
+  const rgb = colors[index % colors.length];
+
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        borderRadius: 16,
+        padding: "20px 18px",
+        border: `1px solid ${hovered ? `rgba(${rgb},0.45)` : `rgba(${rgb},0.1)`}`,
+        background: hovered ? `rgba(${rgb},0.06)` : `rgba(${rgb},0.02)`,
+        boxShadow: hovered
+          ? `0 0 0 1px rgba(${rgb},0.15), 0 0 32px rgba(${rgb},0.1), inset 0 0 24px rgba(${rgb},0.03)`
+          : "none",
+        transform: hovered ? "translateY(-3px)" : "translateY(0)",
+        transition: "all 0.28s cubic-bezier(0.21,0.47,0.32,0.98)",
+        position: "relative",
+        overflow: "hidden",
+        cursor: "default",
+      }}
+    >
+      {/* Top shimmer */}
+      <div
+        style={{
+          position: "absolute", top: 0, left: 0, right: 0, height: 1,
+          background: `linear-gradient(90deg, transparent, rgba(${rgb},0.7), transparent)`,
+          opacity: hovered ? 1 : 0.2,
+          transition: "opacity 0.28s ease",
+        }}
+      />
+      {/* Icon */}
+      <div
+        className="mb-3 flex items-center justify-center"
+        style={{
+          width: 44, height: 44,
+          borderRadius: 12,
+          background: `rgba(${rgb},0.1)`,
+          border: `1px solid rgba(${rgb},0.25)`,
+          fontSize: "1.3rem",
+          boxShadow: hovered ? `0 0 20px rgba(${rgb},0.25)` : "none",
+          transition: "box-shadow 0.28s ease",
+        }}
+      >
+        {profile.icon}
+      </div>
+      <p className="font-display font-bold text-sm text-cream mb-1.5 leading-tight">
+        {profile.title}
+      </p>
+      <p className="font-body text-xs leading-relaxed" style={{ color: "rgba(176,200,184,0.65)" }}>
+        {profile.description}
+      </p>
+    </div>
+  );
+}
+
+function VideoExamples() {
+  return (
+    <div className="py-14 px-6 lg:px-10">
+      <SectionLabel text="Ve el sistema en acción" />
+      <p className="font-body text-muted/70 text-sm mb-10 max-w-xl">
+        Ejemplos reales de cada tipo de pieza que forma parte de la implementación — para que tengas una idea clara de lo que tu empresa recibirá.
+      </p>
+
+      {/* ── Row 1: VSL + Cobertura ── */}
+      <div className="mb-12">
+        <p className="font-display font-semibold text-xs tracking-[0.2em] uppercase text-muted/40 mb-6">
+          Piezas principales
+        </p>
+        <div className="grid grid-cols-2 lg:grid-cols-2 gap-6 max-w-sm lg:max-w-md">
+          <ReelSlot
+            reelId={VIDEO_VSL_ID}
+            label="Video Caso VSL"
+            description="Pieza de autoridad: storytelling real del proyecto o empresa"
+            color="green"
+          />
+          <ReelSlot
+            reelId={VIDEO_COBERTURA_ID}
+            label="Cobertura"
+            description="Feria, evento u oficina convertida en contenido"
+            color="green"
+          />
+        </div>
+      </div>
+
+      {/* ── Row 2: Verticales con IA ── */}
+      <div>
+        <p className="font-display font-semibold text-xs tracking-[0.2em] uppercase text-muted/40 mb-6">
+          Contenido vertical con IA generativa
+        </p>
+        <div className="grid grid-cols-3 gap-4 max-w-lg">
+          <ReelSlot
+            reelId={VIDEO_IA_1_ID}
+            label="Vertical IA #1"
+            description="Experto a cámara + tomas IA"
+            color="purple"
+          />
+          <ReelSlot
+            reelId={VIDEO_IA_2_ID}
+            label="Vertical IA #2"
+            description="Concepto técnico visualizado"
+            color="purple"
+          />
+          <ReelSlot
+            reelId={VIDEO_IA_3_ID}
+            label="Vertical IA #3"
+            description="Motion + IA generativa"
+            color="purple"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Main export ───────────────────────────────────────────────
+export default function ServiceDetailAudiovisual() {
+  const TAKEN = 2;
+  const TOTAL = 3;
+  const AVAILABLE = TOTAL - TAKEN;
+
+  return (
+    <div className="space-y-0">
+
+      {/* ── DIVIDER ── */}
+      <div className="h-px bg-gradient-to-r from-transparent via-neon-green/30 to-transparent" />
+
+      {/* ── 1. PROBLEMA ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <SectionLabel text="El problema que resuelve" />
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          <div>
+            <h3 className="font-display font-bold text-xl lg:text-2xl text-cream leading-tight mb-4">
+              Muchas empresas operan bien.<br />
+              <span className="text-neon-green">Pero hacia afuera ocurre otra cosa.</span>
+            </h3>
+            <p className="font-body text-muted text-sm leading-relaxed mb-5">
+              {core.pitch}
+            </p>
+          </div>
+          {/* Before / After */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-xl border border-white/8 bg-white/[0.02] p-4">
+              <p className="text-[10px] font-display font-bold tracking-widest uppercase text-muted/40 mb-3">Antes</p>
+              <ul className="space-y-2">
+                {["Comunicación dispersa", "Piezas sueltas", "Mensajes poco claros", "Contenido sin sistema", "Baja consistencia"].map((t, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-muted/30 text-xs mt-0.5">✕</span>
+                    <span className="font-body text-muted/55 text-xs leading-snug">{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-xl border border-neon-green/20 bg-neon-green/[0.03] p-4">
+              <p className="text-[10px] font-display font-bold tracking-widest uppercase text-neon-green/50 mb-3">Después</p>
+              <ul className="space-y-2">
+                {["Narrativa clara", "Marca bien percibida", "Contenido técnico entendible", "Activos reutilizables", "Presencia sólida"].map((t, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-neon-green text-xs mt-0.5">✓</span>
+                    <span className="font-body text-cream/70 text-xs leading-snug">{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 2. QUÉ ES ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <SectionLabel text="Qué es este sistema" />
+        <p className="font-body text-muted text-sm lg:text-base leading-relaxed max-w-2xl">
+          {core.whatItIs}
+        </p>
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 3. QUÉ INCLUYE (10 pilares) ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <SectionLabel text="Qué incluye la implementación" />
+        <p className="font-body text-muted/70 text-sm mb-6">
+          10 pilares de trabajo. Despliega cada uno para ver qué contempla y qué entrega.
+        </p>
+        <PillarAccordion />
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 4. EJEMPLOS REALES ── */}
+      <VideoExamples />
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 6. QUÉ RECIBE AL FINAL ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <SectionLabel text="Qué recibe la empresa al final" />
+        <p className="font-body text-muted/70 text-sm mb-6">
+          Al terminar los 60 días, tu empresa no solo recibe "videos".
+        </p>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {(core.finalDeliverables as string[]).map((item, i) => (
+            <div key={i} className="flex items-start gap-3 rounded-xl border border-neon-green/12 bg-neon-green/[0.02] px-4 py-3">
+              <span className="shrink-0 w-5 h-5 rounded-full bg-neon-green/12 border border-neon-green/30 flex items-center justify-center text-[9px] font-bold text-neon-green mt-0.5">✓</span>
+              <span className="font-body text-cream/75 text-sm leading-snug">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 7. PARA QUIÉN ES / NO ES ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <SectionLabel text="Para quién es" />
+        <p className="font-body text-muted/70 text-sm mb-8 max-w-xl leading-relaxed">{forWho.intro}</p>
+
+        {/* Profile cards grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+          {forWho.profiles.map((p, i) => (
+            <ProfileCard key={i} profile={p} index={i} />
+          ))}
+        </div>
+
+        {/* Not for section */}
+        <div className="grid lg:grid-cols-2 gap-6">
+          <div>
+            <p className="inline-flex items-center gap-2 text-[10px] font-display font-bold tracking-[0.2em] uppercase text-muted/50 mb-4">
+              <span className="w-4 h-px bg-muted/30" />
+              Para quién NO es
+            </p>
+            <div className="space-y-2">
+              {(forWho as any).notFor.map((item: string, i: number) => (
+                <div key={i} className="flex items-start gap-3 rounded-lg border border-white/5 bg-white/[0.015] px-3 py-2.5">
+                  <span className="text-muted/30 text-xs mt-0.5 shrink-0 font-bold">✕</span>
+                  <span className="font-body text-muted/55 text-sm leading-snug">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-end">
+            <div
+              className="w-full rounded-xl p-5"
+              style={{
+                background: "rgba(0,255,135,0.03)",
+                border: "1px solid rgba(0,255,135,0.15)",
+                borderLeft: "3px solid rgba(0,255,135,0.5)",
+              }}
+            >
+              <p className="text-[10px] font-display font-bold tracking-widest uppercase text-neon-green/60 mb-2">
+                El criterio
+              </p>
+              <p className="font-body text-muted/80 text-sm leading-relaxed">
+                {forWho.closing}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 6. PROCESO 60 DÍAS ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <SectionLabel text="El proceso — 60 días" />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {phases.map((phase, i) => (
+            <div key={i} className={`rounded-xl border p-4
+              ${i % 2 === 0 ? "border-neon-green/15 bg-neon-green/[0.02]" : "border-neon-purple/15 bg-neon-purple/[0.02]"}`}>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-lg">{phase.icon}</span>
+                <div>
+                  <p className={`text-[9px] font-display font-bold tracking-widest uppercase ${i % 2 === 0 ? "text-neon-green/60" : "text-neon-purple/60"}`}>
+                    {phase.label}
+                  </p>
+                  <p className={`font-display font-bold text-sm ${i % 2 === 0 ? "text-neon-green" : "text-neon-purple"}`}>
+                    {phase.name}
+                  </p>
+                </div>
+              </div>
+              <span className={`inline-block text-[10px] font-display font-semibold px-2 py-0.5 rounded-full border mb-3
+                ${i % 2 === 0 ? "border-neon-green/20 text-neon-green/60" : "border-neon-purple/20 text-neon-purple/60"}`}>
+                {phase.weeks}
+              </span>
+              <ul className="space-y-1.5">
+                {phase.steps.map((s, j) => (
+                  <li key={j} className="flex items-start gap-2">
+                    <span className={`shrink-0 text-[10px] mt-0.5 ${i % 2 === 0 ? "text-neon-green/60" : "text-neon-purple/60"}`}>→</span>
+                    <span className="font-body text-cream/60 text-xs leading-snug">{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 7. QUÉ NO INCLUYE + POLÍTICA + CONDICIONES ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* No incluye */}
+          <div>
+            <SectionLabel text="Qué no incluye" />
+            <ul className="space-y-2">
+              {(core.notIncluded as string[]).map((item, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-muted/30 text-xs mt-0.5 shrink-0">✕</span>
+                  <span className="font-body text-muted/55 text-sm leading-snug">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Política de ajustes */}
+          <div>
+            <SectionLabel text="Política de ajustes" />
+            <div className="space-y-3">
+              <div className="rounded-lg border border-white/7 bg-white/[0.02] p-3">
+                <p className="font-display font-semibold text-xs text-neon-green/70 mb-1">Estrategia</p>
+                <p className="font-body text-muted/60 text-xs leading-relaxed">{core.revisionPolicy.strategy}</p>
+              </div>
+              <div className="rounded-lg border border-white/7 bg-white/[0.02] p-3">
+                <p className="font-display font-semibold text-xs text-neon-green/70 mb-1">Videos</p>
+                <p className="font-body text-muted/60 text-xs leading-relaxed">{core.revisionPolicy.videos}</p>
+              </div>
+            </div>
+          </div>
+          {/* Condiciones operativas */}
+          <div>
+            <SectionLabel text="Condiciones operativas" />
+            <ul className="space-y-2">
+              {(core.conditions as string[]).map((item, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-neon-green/40 text-xs mt-0.5 shrink-0">·</span>
+                  <span className="font-body text-muted/55 text-sm leading-snug">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 8. GARANTÍA ── */}
+      <div className="py-10 px-6 lg:px-10">
+        <div className="flex items-start gap-4 rounded-xl border border-neon-green/15 bg-neon-green/[0.03] p-5">
+          <span className="text-2xl shrink-0">🛡️</span>
+          <div>
+            <p className="font-display font-bold text-sm text-neon-green mb-2">Garantía de la implementación</p>
+            <p className="font-body text-muted/70 text-sm leading-relaxed">{core.guarantee}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 9. DISPONIBILIDAD ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <SectionLabel text="Disponibilidad actual" />
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
+          {/* Slot visualizer */}
+          <div className="flex items-center gap-3">
+            {[...Array(TOTAL)].map((_, i) => (
+              <div key={i} className={`relative w-14 h-20 rounded-xl flex flex-col items-center justify-center gap-1.5 border
+                ${i < TAKEN
+                  ? "bg-white/[0.03] border-white/8"
+                  : "bg-neon-green/10 border-neon-green/40 slot-available"}`}>
+                {i >= TAKEN && (
+                  <>
+                    <div className="absolute top-1.5 left-1.5 w-2.5 h-2.5 border-t border-l border-neon-green/60 rounded-tl" />
+                    <div className="absolute top-1.5 right-1.5 w-2.5 h-2.5 border-t border-r border-neon-green/60 rounded-tr" />
+                    <div className="absolute bottom-1.5 left-1.5 w-2.5 h-2.5 border-b border-l border-neon-green/60 rounded-bl" />
+                    <div className="absolute bottom-1.5 right-1.5 w-2.5 h-2.5 border-b border-r border-neon-green/60 rounded-br" />
+                  </>
+                )}
+                <div className={`w-2.5 h-2.5 rounded-full ${i < TAKEN ? "bg-white/15" : "bg-neon-green shadow-[0_0_8px_rgba(0,255,135,0.7)]"}`} />
+                <span className={`text-[9px] font-display tracking-widest uppercase ${i < TAKEN ? "text-muted/40" : "text-neon-green font-bold"}`}>
+                  {i < TAKEN ? "Tomado" : "Libre"}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div>
+            <p className="font-display font-bold text-xl text-cream mb-1">
+              Solo <span className="text-neon-green">{AVAILABLE} cupo disponible</span> este mes.
+            </p>
+            <p className="font-body text-muted text-sm leading-relaxed max-w-md">
+              Para mantener el criterio y la calidad en cada proyecto, limito mi carga mensual. Si estás listo, tiene sentido moverse ahora.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 10. FAQ ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <SectionLabel text="Preguntas frecuentes" />
+        <FAQSection />
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
+      {/* ── 11. PRECIO + CTA ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <div>
+            <SectionLabel text="Inversión" />
+            <div className="flex items-baseline gap-3 mb-2">
+              <span className="font-display font-extrabold text-4xl lg:text-5xl text-neon-green tracking-tight">
+                {core.price}
+              </span>
+              <span className="font-body text-muted/60 text-sm leading-snug">{core.priceNote}</span>
+            </div>
+            <p className="font-body text-muted/50 text-sm">
+              No prometemos viralidad. Prometemos un sistema instalado y funcional al día 60.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href={SITE.links.calendly.startsWith("[") ? "/contacto" : SITE.links.calendly}
+              className="btn-glow text-sm py-3.5 px-8"
+            >
+              {core.cta} →
+            </a>
+            <a
+              href={SITE.links.whatsapp.startsWith("[") ? "/contacto" : SITE.links.whatsapp}
+              className="btn-outline text-sm py-3.5 px-8"
+            >
+              WhatsApp →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}

@@ -192,39 +192,90 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Availability */}
-          <div className="flex flex-col items-center gap-3">
-            {/* Urgency badge */}
-            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-neon-green/8 border border-neon-green/25 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-neon-green slot-available" />
-              <span className="text-[11px] font-display font-bold tracking-[0.2em] uppercase text-neon-green/90">
-                ⚡ Solo 1 cupo disponible este mes
-              </span>
+          {/* Availability — 2 service cards */}
+          <div className="flex flex-col sm:flex-row items-stretch justify-center gap-4 w-full max-w-lg mx-auto">
+
+            {/* Sistema Audiovisual */}
+            <div className="flex-1 relative rounded-2xl border border-neon-green/35 px-5 py-5 flex flex-col gap-3 overflow-hidden"
+              style={{
+                background: "rgba(10, 18, 14, 0.72)",
+                backdropFilter: "blur(18px) saturate(160%)",
+                WebkitBackdropFilter: "blur(18px) saturate(160%)",
+                boxShadow: "0 4px 32px rgba(0,0,0,0.5), 0 0 24px rgba(0,255,135,0.08), inset 0 1px 0 rgba(0,255,135,0.12)",
+              }}>
+              {/* Top accent line */}
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-neon-green/80 via-neon-green/40 to-transparent" />
+              {/* HUD corner */}
+              <div className="absolute top-2.5 left-2.5 w-3 h-3 border-t border-l border-neon-green/50 rounded-tl" />
+              <div className="absolute top-2.5 right-2.5 w-3 h-3 border-t border-r border-neon-green/50 rounded-tr" />
+
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-display font-bold tracking-[0.2em] uppercase text-neon-green/80">
+                  Sistema Audiovisual
+                </span>
+                <span className="w-2 h-2 rounded-full bg-neon-green slot-available"
+                  style={{ boxShadow: "0 0 8px rgba(0,255,135,0.9)" }} />
+              </div>
+
+              {/* Slot dots */}
+              <div className="flex items-center gap-2">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className={`w-3 h-3 rounded-full transition-all ${
+                    i < 2
+                      ? "bg-white/12 border border-white/10"
+                      : "bg-neon-green border border-neon-green/60"
+                  }`}
+                    style={i >= 2 ? { boxShadow: "0 0 10px rgba(0,255,135,0.8)" } : {}} />
+                ))}
+                <span className="text-[10px] font-body text-white/55 ml-1">cupos</span>
+              </div>
+
+              <div>
+                <p className="text-base font-display font-bold text-neon-green leading-none">
+                  1 cupo disponible
+                </p>
+                <p className="text-[11px] font-body text-white/65 mt-1">este mes · Lima</p>
+              </div>
             </div>
-            {/* Slots */}
-            <div className="flex items-center gap-2">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="flex flex-col items-center gap-1.5">
-                  <div className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300
-                    ${i < 2
-                      ? "bg-white/[0.04] border-white/10"
-                      : "slot-available bg-neon-green/10 border-neon-green/50"
-                    }`}>
-                    <div className={`w-2.5 h-2.5 rounded-full ${i < 2 ? "bg-white/20" : "bg-neon-green shadow-[0_0_8px_rgba(0,212,255,1)]"}`} />
-                  </div>
-                  <span className={`text-[9px] font-display tracking-widest uppercase
-                    ${i < 2 ? "text-white/25" : "text-neon-green/70"}`}>
-                    {i < 2 ? "Tomado" : "Libre"}
-                  </span>
-                </div>
-              ))}
+
+            {/* Bot IA Comercial */}
+            <div className="flex-1 relative rounded-2xl border border-neon-purple/35 px-5 py-5 flex flex-col gap-3 overflow-hidden"
+              style={{
+                background: "rgba(16, 10, 20, 0.72)",
+                backdropFilter: "blur(18px) saturate(160%)",
+                WebkitBackdropFilter: "blur(18px) saturate(160%)",
+                boxShadow: "0 4px 32px rgba(0,0,0,0.5), 0 0 24px rgba(204,68,255,0.08), inset 0 1px 0 rgba(204,68,255,0.12)",
+              }}>
+              {/* Top accent line */}
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-neon-purple/80 via-neon-purple/40 to-transparent" />
+              {/* HUD corner */}
+              <div className="absolute top-2.5 left-2.5 w-3 h-3 border-t border-l border-neon-purple/50 rounded-tl" />
+              <div className="absolute top-2.5 right-2.5 w-3 h-3 border-t border-r border-neon-purple/50 rounded-tr" />
+
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-display font-bold tracking-[0.2em] uppercase text-neon-purple/80">
+                  Bot IA Comercial
+                </span>
+                <span className="w-2 h-2 rounded-full bg-neon-purple animate-pulse"
+                  style={{ boxShadow: "0 0 8px rgba(204,68,255,0.9)" }} />
+              </div>
+
+              {/* Slot dots */}
+              <div className="flex items-center gap-2">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="w-3 h-3 rounded-full bg-neon-purple/35 border border-neon-purple/30" />
+                ))}
+                <span className="text-[10px] font-body text-white/55 ml-1">plazas</span>
+              </div>
+
+              <div>
+                <p className="text-base font-display font-bold text-neon-purple leading-none">
+                  Plazas abiertas
+                </p>
+                <p className="text-[11px] font-body text-white/65 mt-1">sin límite · próximamente</p>
+              </div>
             </div>
-            {/* Text */}
-            <p className="text-xs font-body text-muted/60 tracking-wide">
-              Solo{" "}
-              <span className="text-neon-green/80 font-semibold">1 cupo disponible</span>
-              {" "}este mes
-            </p>
+
           </div>
         </motion.div>
 
@@ -237,7 +288,7 @@ export default function Hero() {
           <motion.div animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
             className="flex flex-col items-center gap-2">
-            <span className="text-[10px] font-display tracking-[0.3em] uppercase text-muted/40">scroll</span>
+            <span className="text-[10px] font-display tracking-[0.3em] uppercase text-muted/70">scroll</span>
             <div className="w-px h-10 bg-gradient-to-b from-neon-green/50 via-neon-purple/30 to-transparent" />
           </motion.div>
         </motion.div>

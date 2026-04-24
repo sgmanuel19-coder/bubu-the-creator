@@ -2,12 +2,15 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { SITE } from "@/lib/constants";
 
 export default function StickyCTA() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (pathname === "/sistemas-ia") return;
     const handleScroll = () => {
       setVisible(window.scrollY > 600);
     };
@@ -18,6 +21,8 @@ export default function StickyCTA() {
   const ctaHref = SITE.links.calendly.startsWith("[")
     ? "/contacto"
     : SITE.links.calendly;
+
+  if (pathname === "/sistemas-ia") return null;
 
   return (
     <AnimatePresence>
@@ -49,7 +54,7 @@ export default function StickyCTA() {
             href={ctaHref}
             target={ctaHref.startsWith("http") ? "_blank" : "_self"}
             rel="noopener noreferrer"
-            className="flex-shrink-0 font-display font-semibold text-xs tracking-wide text-[#060608] bg-neon-green hover:bg-neon-green/90 transition-colors rounded-full px-4 py-1.5 whitespace-nowrap"
+            className="flex-shrink-0 font-display font-semibold text-xs tracking-wide text-[#040406] bg-neon-green hover:bg-neon-green/90 transition-colors rounded-full px-4 py-1.5 whitespace-nowrap"
           >
             ¿Aplico para trabajar contigo? →
           </a>

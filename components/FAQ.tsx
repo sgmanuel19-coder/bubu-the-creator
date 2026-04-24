@@ -6,24 +6,24 @@ import AnimatedSection from "./AnimatedSection";
 
 const faqs = [
   {
-    q: "¿Cuánto cuesta la implementación?",
-    a: "La implementación completa de 60 días tiene un valor de USD 3,200. Incluye dirección estratégica, Cerebro Creativo IA, guiones, dos jornadas de grabación, edición integral y entrega de 15 piezas: 1 video caso horizontal, 8 reels verticales con experto, 2 videos con locución e IA, y 4 carruseles generados con IA. La cobertura está incluida dentro de Lima Metropolitana.",
+    q: "¿Cuánto es la inversión?",
+    a: "El Sistema Audiovisual de Autoridad tiene una inversión de USD 2,800 + IGV por los 2 meses de implementación y entrega. Incluye dirección estratégica, producción audiovisual, integración de IA generativa y el sistema completo listo para usar. No es un gasto de marketing — es un activo de comunicación comercial que tu empresa reutiliza.",
   },
   {
-    q: "¿Qué recibe exactamente mi empresa?",
-    a: "Al terminar los 60 días recibes: 1 Cerebro Creativo IA entrenado con la lógica de tu marca, 1 Video Caso horizontal de autoridad, 8 Reels Verticales con experto y tomas de apoyo, 2 Videos con Locución e integración de IA, y 4 Carruseles generados con IA. Total: 15 piezas estratégicas no pensadas para publicar por publicar — pensadas para elevar percepción, explicar lo técnico y apoyar ventas.",
+    q: "¿Cómo se organiza el trabajo en los 60 días?",
+    a: "El proceso está dividido en 4 fases de 2 semanas cada una: Estrategia (diagnóstico y mensaje central), Base Creativa (Cerebro IA + guiones), Producción (grabaciones en campo) y Edición y entrega (montaje final + IA visual). Trabajamos con comunicación continua y un plan de acción semana a semana para cumplir los tiempos.",
   },
   {
     q: "¿Cuánto tiempo toma ver resultados?",
-    a: "La implementación dura 60 días con un cronograma claro semana a semana. Al llegar al día 60, tu empresa tiene activos audiovisuales reutilizables, una narrativa más clara y una base comunicacional que puede usarse en redes, presentaciones, ventas, prospección y futuras campañas. No prometemos viralidad ni leads mágicos — prometemos una infraestructura más sólida.",
+    a: "Al día 60 tu empresa tiene un sistema de comunicación instalado y listo para usar — no prometemos viralidad ni leads mágicos, prometemos un sistema instalado y funcional. Los activos son reutilizables en redes, presentaciones, ventas, prospección y futuras campañas.",
   },
   {
     q: "¿Para qué tipo de empresa está diseñado?",
-    a: "Para empresas B2B, técnicas e industriales: telecomunicaciones, energía, ingeniería, agro, manufactura, infraestructura, tecnología. Empresas que ya tienen algo valioso pero no lo comunican con la claridad y el nivel que deberían. Es requisito contar con un vocero disponible para las jornadas de grabación y un responsable interno para feedback y aprobaciones.",
+    a: "Para empresas B2B, técnicas e industriales: telecomunicaciones, energía, ingeniería, agro, manufactura, infraestructura, tecnología. Empresas que ya tienen algo valioso pero no lo comunican con la claridad y el nivel que deberían. Requisito: contar con un vocero disponible para las grabaciones y un responsable interno para feedback y aprobaciones.",
   },
   {
     q: "¿Por qué Resuelto y no hacerlo internamente?",
-    a: "Porque producir contenido técnico con nivel requiere tres cosas juntas: dirección estratégica (qué decir y cómo), criterio narrativo (cómo se estructura cada pieza) y producción audiovisual (cómo se graba, dirige y edita). La mayoría de equipos internos tienen una o dos. Resuelto opera con las tres. Y lo hace en 60 días con un cronograma claro, sin burocracia.",
+    a: "Porque instalar un sistema de comunicación que genera clientes requiere cuatro disciplinas actuando juntas: estrategia publicitaria (qué decir y para quién), producción audiovisual (cómo se filma, dirige y edita), IA generativa aplicada al contenido (cómo se escala sin perder criterio) y diseño de sistema comercial (cómo todo trabaja en conjunto para vender). La mayoría de equipos internos tiene una o dos. Resuelto opera con las cuatro — con criterio de agencia global y ejecución directa, sin capas.",
   },
   {
     q: "¿Qué pasa después de los 60 días?",
@@ -57,50 +57,75 @@ export default function FAQ() {
         </AnimatedSection>
 
         <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <AnimatedSection key={i} delay={i * 0.05}>
-              <div
-                className="border border-white/10 rounded-lg overflow-hidden bg-white/[0.02] hover:border-neon-green/20 transition-colors duration-300"
-              >
-                <button
-                  onClick={() => setOpen(open === i ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+          {faqs.map((faq, i) => {
+            const isOpen = open === i;
+            const isGreen = i % 2 === 0;
+            return (
+              <AnimatedSection key={i} delay={i * 0.05}>
+                <div
+                  className={`rounded-xl overflow-hidden transition-all duration-300 border
+                    ${isOpen
+                      ? isGreen
+                        ? "border-neon-green/30 bg-neon-green/[0.03]"
+                        : "border-neon-purple/30 bg-neon-purple/[0.03]"
+                      : "border-white/8 bg-white/[0.02] hover:border-white/15"
+                    }`}
                 >
-                  <span className="font-display font-semibold text-sm md:text-base text-cream leading-snug">
-                    {faq.q}
-                  </span>
-                  <motion.span
-                    animate={{ rotate: open === i ? 45 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="flex-shrink-0 w-6 h-6 rounded-full border border-neon-green/40 flex items-center justify-center text-neon-green text-sm"
+                  <button
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    className="w-full flex items-center gap-4 px-5 py-5 text-left"
                   >
-                    +
-                  </motion.span>
-                </button>
+                    <span className={`shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-display font-bold
+                      transition-all duration-300
+                      ${isOpen
+                        ? isGreen ? "bg-neon-green/20 text-neon-green" : "bg-neon-purple/20 text-neon-purple"
+                        : "bg-white/5 text-muted/90"
+                      }`}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
 
-                <AnimatePresence initial={false}>
-                  {open === i && (
+                    <span className="flex-1 font-display font-semibold text-sm md:text-base text-cream leading-snug">
+                      {faq.q}
+                    </span>
+
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      animate={{ rotate: isOpen ? 45 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className={`shrink-0 w-7 h-7 rounded-full border flex items-center justify-center text-sm font-bold transition-colors duration-300
+                        ${isOpen
+                          ? isGreen ? "border-neon-green/50 text-neon-green bg-neon-green/10" : "border-neon-purple/50 text-neon-purple bg-neon-purple/10"
+                          : "border-white/15 text-muted"
+                        }`}
                     >
-                      <div className="px-6 pb-5 border-t border-white/5">
-                        <p className="font-body text-muted text-sm md:text-base leading-relaxed pt-4">
-                          {faq.a}
-                        </p>
-                      </div>
+                      +
                     </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </AnimatedSection>
-          ))}
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                      >
+                        <div className={`mx-5 mb-5 p-4 rounded-lg border-l-2 bg-white/[0.02]
+                          ${isGreen ? "border-neon-green/40" : "border-neon-purple/40"}`}>
+                          <p className="font-body text-muted text-sm md:text-base leading-relaxed">
+                            {faq.a}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </AnimatedSection>
+            );
+          })}
         </div>
 
         <AnimatedSection delay={0.3} className="mt-10 text-center">
-          <p className="font-body text-muted/60 text-sm">
+          <p className="font-body text-muted/90 text-sm">
             ¿Tienes una pregunta que no está aquí?{" "}
             <a
               href="/contacto"

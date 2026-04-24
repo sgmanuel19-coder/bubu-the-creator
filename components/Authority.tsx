@@ -7,17 +7,38 @@ import TiltCard from "./TiltCard";
 
 export default function Authority() {
   return (
-    <section className="relative section-padding bg-surface overflow-hidden">
-      {/* Top divider — green→purple */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-green/40 to-neon-purple/40" />
+    <section className="relative section-padding overflow-hidden">
+      {/* ── VIDEO BACKGROUND ── */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
+      >
+        <source src="/trayectoria-bg.mp4" type="video/mp4" />
+      </video>
 
-      {/* Background glows */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[400px] h-[300px] rounded-full bg-neon-green/5 blur-[80px]" />
-        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[300px] rounded-full bg-neon-purple/6 blur-[80px]" />
+      {/* Dark overlay — preserves legibility */}
+      <div className="absolute inset-0 bg-bg/80" style={{ zIndex: 1 }} />
+
+      {/* Gradient overlay — top & bottom blend with page */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-bg to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg to-transparent" />
       </div>
 
-      <div className="container-base relative z-10">
+      {/* Neon color tint */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[400px] h-[300px] rounded-full bg-neon-green/8 blur-[100px]" />
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[300px] rounded-full bg-neon-purple/10 blur-[100px]" />
+      </div>
+
+      {/* Top divider — green→purple */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-green/40 to-neon-purple/40" style={{ zIndex: 2 }} />
+
+      <div className="container-base relative z-10" style={{ zIndex: 10 }}>
         {/* Header */}
         <AnimatedSection className="text-center mb-16">
           <span className="inline-flex items-center gap-2 text-xs font-display font-semibold tracking-[0.2em] uppercase text-neon-green mb-4">
@@ -47,7 +68,7 @@ export default function Authority() {
                     className={i % 2 === 0 ? "text-gradient-green" : "text-gradient"}
                   />
                 </p>
-                <p className="text-xs font-body text-muted leading-snug">{metric.label}</p>
+                <p className="text-sm font-body text-muted leading-snug">{metric.label}</p>
               </div>
               </TiltCard>
             </StaggerItem>
@@ -56,7 +77,7 @@ export default function Authority() {
 
         {/* Logos */}
         <AnimatedSection className="text-center">
-          <p className="text-xs font-body text-muted/60 tracking-widest uppercase mb-8">
+          <p className="text-xs font-body text-muted/85 tracking-widest uppercase mb-8">
             {SITE.authority.logosLabel}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 lg:gap-6">
@@ -80,8 +101,8 @@ export default function Authority() {
                 ) : (
                   <span className={`font-display font-semibold text-sm tracking-wide transition-colors duration-300
                     ${i % 2 === 0
-                      ? "text-white/30 group-hover:text-neon-green/80"
-                      : "text-white/30 group-hover:text-neon-purple/80"
+                      ? "text-white/60 group-hover:text-neon-green"
+                      : "text-white/60 group-hover:text-neon-purple"
                     }`}>
                     {logo.name}
                   </span>
@@ -93,7 +114,7 @@ export default function Authority() {
       </div>
 
       {/* Bottom divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-purple/40 to-neon-green/40" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-purple/40 to-neon-green/40" style={{ zIndex: 2 }} />
     </section>
   );
 }

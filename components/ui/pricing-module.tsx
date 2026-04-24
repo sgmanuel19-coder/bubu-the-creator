@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Zap } from 'lucide-react';
+import { CheckCircle, Zap, Shield } from 'lucide-react';
 
 interface PricingPlan {
   name: string;
@@ -82,7 +82,7 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
                 className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1 rounded-full text-xs font-semibold"
                 style={{
                   background: '#00ff87',
-                  color: '#060608',
+                  color: '#040406',
                   fontFamily: 'Space Grotesk, sans-serif',
                 }}
               >
@@ -150,7 +150,7 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
               style={{
                 fontFamily: 'Space Grotesk, sans-serif',
                 background: plan.recommended ? '#00ff87' : 'rgba(255,255,255,0.06)',
-                color: plan.recommended ? '#060608' : '#f8f8f2',
+                color: plan.recommended ? '#040406' : '#f8f8f2',
                 border: plan.recommended ? 'none' : '1px solid rgba(255,255,255,0.12)',
               }}
             >
@@ -168,6 +168,26 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
           {footnote}
         </p>
       )}
+
+      {/* Guarantee block */}
+      <div
+        className="flex items-start gap-4 mt-8 mx-auto px-6 py-5 rounded-2xl"
+        style={{
+          maxWidth: 560,
+          border: '1px solid rgba(0,255,135,0.2)',
+          background: 'rgba(0,255,135,0.03)',
+        }}
+      >
+        <Shield className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#00ff87' }} />
+        <div>
+          <p className="font-semibold text-sm mb-1" style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}>
+            Garantía de entrega
+          </p>
+          <p className="text-xs leading-relaxed" style={{ color: 'rgba(248,248,242,0.55)', fontFamily: 'Inter, sans-serif' }}>
+            30 días de soporte incluido · Entrega en plazo garantizada · Si no entregamos el sistema activo, devolvemos el 100%
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

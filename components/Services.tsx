@@ -8,16 +8,12 @@ export default function Services() {
   const { core, premium } = SITE.services;
 
   return (
-    <section id="servicios" className="relative section-padding overflow-hidden" style={{ background: "#07090c" }}>
-      {/* Top divider */}
+    <section id="servicios" className="relative section-padding overflow-hidden" style={{ background: "#050608" }}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-green/40 to-transparent" />
-
-      {/* Glow blobs */}
       <div className="absolute top-0 right-0 w-[450px] h-[350px] rounded-full bg-neon-purple/8 blur-[90px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[450px] h-[350px] rounded-full bg-neon-green/6 blur-[90px] pointer-events-none" />
 
       <div className="container-base relative z-10">
-        {/* Header */}
         <AnimatedSection className="text-center mb-16">
           <span className="inline-flex items-center gap-2 text-xs font-display font-semibold tracking-[0.2em] uppercase text-neon-green mb-4">
             <span className="w-6 h-px bg-neon-green/50" />
@@ -34,101 +30,123 @@ export default function Services() {
 
         <div className="grid lg:grid-cols-2 gap-6">
 
-          {/* CORE — green theme */}
+          {/* ── CORE — Sistema Audiovisual ── */}
           <AnimatedSection delay={0.1}>
             <TiltCard intensity={6} className="h-full">
-            <div className="group h-full relative rounded-2xl p-8 lg:p-10 flex flex-col overflow-hidden
-                            border border-neon-green/15 hover:border-neon-green/40
-                            bg-neon-green/[0.03] hover:bg-neon-green/[0.06]
-                            transition-all duration-500 hover:shadow-xl hover:shadow-neon-green/10
-                            card-shimmer">
-              {/* Shimmer overlay */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-neon-green/8 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="group h-full relative rounded-2xl p-8 lg:p-10 flex flex-col overflow-hidden
+                              border border-neon-green/15 hover:border-neon-green/40
+                              bg-neon-green/[0.03] hover:bg-neon-green/[0.06]
+                              transition-all duration-500 hover:shadow-xl hover:shadow-neon-green/10
+                              card-shimmer">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-neon-green/8 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-              {/* Badge */}
-              <span className="relative z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full
-                               bg-neon-green/12 border border-neon-green/25
-                               text-xs font-display font-semibold text-neon-green mb-6 self-start">
-                <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
-                {core.badge}
-              </span>
+                {/* Badge */}
+                <span className="relative z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full
+                                 bg-neon-green/12 border border-neon-green/25
+                                 text-xs font-display font-semibold text-neon-green mb-6 self-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
+                  {core.badge}
+                </span>
 
-              <h3 className="relative z-10 font-display font-bold text-2xl lg:text-3xl text-cream mb-3 tracking-tight">
-                {core.name}
-              </h3>
-              <p className="relative z-10 font-body text-muted text-sm mb-2 leading-relaxed">{core.target}</p>
+                <h3 className="relative z-10 font-display font-bold text-2xl lg:text-3xl text-cream mb-2 tracking-tight">
+                  {core.name}
+                </h3>
+                <p className="relative z-10 font-body text-muted text-sm mb-4 leading-relaxed">{core.target}</p>
 
-              {/* Divider */}
-              <div className="relative z-10 w-12 h-px bg-gradient-to-r from-neon-green/60 to-transparent my-6" />
+                {/* Price highlight */}
+                <div className="relative z-10 flex items-baseline gap-3 mb-2">
+                  <span className="font-display font-extrabold text-4xl text-neon-green tracking-tight">
+                    {(core as any).price}
+                  </span>
+                  <span className="font-body text-muted/70 text-xs leading-snug">
+                    {(core as any).priceNote}
+                  </span>
+                </div>
 
-              <ul className="relative z-10 space-y-3 mb-8 flex-1">
-                {core.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 w-5 h-5 rounded-full bg-neon-green/12 border border-neon-green/30 flex items-center justify-center mt-0.5">
-                      <span className="text-neon-green text-[10px] font-bold">✓</span>
-                    </span>
-                    <span className="font-body text-sm text-cream/80 leading-snug">{item}</span>
-                  </li>
-                ))}
-              </ul>
+                <div className="relative z-10 w-12 h-px bg-gradient-to-r from-neon-green/60 to-transparent my-5" />
 
-              <p className="relative z-10 font-body text-muted/70 text-xs italic mb-6 leading-relaxed border-l-2 border-neon-green/25 pl-3">
-                {core.tagline}
-              </p>
+                <ul className="relative z-10 space-y-3 mb-6 flex-1">
+                  {core.items.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="shrink-0 w-5 h-5 rounded-full bg-neon-green/12 border border-neon-green/30 flex items-center justify-center mt-0.5">
+                        <span className="text-neon-green text-[10px] font-bold">✓</span>
+                      </span>
+                      <span className="font-body text-sm text-cream/80 leading-snug">{item}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              <a href={SITE.links.calendly} className="btn-glow relative z-10 self-start text-sm py-3 px-6">
-                {core.cta} →
-              </a>
-            </div>
+                <p className="relative z-10 font-body text-muted/70 text-xs italic mb-6 leading-relaxed border-l-2 border-neon-green/25 pl-3">
+                  {core.tagline}
+                </p>
+
+                <a href={SITE.links.calendly} className="btn-glow relative z-10 self-start text-sm py-3 px-6">
+                  {core.cta} →
+                </a>
+              </div>
             </TiltCard>
           </AnimatedSection>
 
-          {/* PREMIUM — purple theme */}
+          {/* ── PREMIUM — Bot IA Comercial ── */}
           <AnimatedSection delay={0.2}>
             <TiltCard intensity={6} className="h-full">
-            <div className="group h-full relative rounded-2xl p-8 lg:p-10 flex flex-col overflow-hidden
-                            border border-neon-purple/20 hover:border-neon-purple/50
-                            bg-neon-purple/[0.04] hover:bg-neon-purple/[0.08]
-                            hover:shadow-2xl hover:shadow-neon-purple/15 transition-all duration-500
-                            card-shimmer">
-              {/* Shimmer overlay */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-neon-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="group h-full relative rounded-2xl p-8 lg:p-10 flex flex-col overflow-hidden
+                              border border-neon-purple/20 hover:border-neon-purple/50
+                              bg-neon-purple/[0.04] hover:bg-neon-purple/[0.08]
+                              hover:shadow-2xl hover:shadow-neon-purple/15 transition-all duration-500
+                              card-shimmer">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-neon-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-              {/* Badge */}
-              <span className="relative z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full
-                               bg-neon-purple/15 border border-neon-purple/30
-                               text-xs font-display font-semibold text-neon-purple mb-6 self-start">
-                <span className="w-1.5 h-1.5 rounded-full bg-neon-purple animate-pulse" />
-                {premium.badge}
-              </span>
+                {/* Badge */}
+                <span className="relative z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full
+                                 bg-neon-purple/15 border border-neon-purple/30
+                                 text-xs font-display font-semibold text-neon-purple mb-6 self-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-neon-purple animate-pulse" />
+                  {premium.badge}
+                </span>
 
-              <h3 className="relative z-10 font-display font-bold text-2xl lg:text-3xl text-cream mb-3 tracking-tight">
-                {premium.name}
-              </h3>
-              <p className="relative z-10 font-body text-muted text-sm mb-2 leading-relaxed">{premium.target}</p>
+                <h3 className="relative z-10 font-display font-bold text-2xl lg:text-3xl text-cream mb-2 tracking-tight">
+                  {premium.name}
+                </h3>
+                <p className="relative z-10 font-body text-muted text-sm mb-4 leading-relaxed">{premium.tagline}</p>
 
-              {/* Divider */}
-              <div className="relative z-10 w-12 h-px bg-gradient-to-r from-neon-purple/60 to-transparent my-6" />
+                {/* Coming soon badge */}
+                <div className="relative z-10 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neon-purple/25 bg-neon-purple/10 self-start mb-5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-neon-purple/60 animate-pulse" />
+                  <span className="text-xs font-display font-semibold text-neon-purple/70 tracking-wider uppercase">
+                    Próximamente
+                  </span>
+                </div>
 
-              <ul className="relative z-10 space-y-3 mb-8 flex-1">
-                {premium.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 w-5 h-5 rounded-full bg-neon-purple/15 border border-neon-purple/30 flex items-center justify-center mt-0.5">
-                      <span className="text-neon-purple text-[10px]">✦</span>
-                    </span>
-                    <span className="font-body text-sm text-cream/80 leading-snug">{item}</span>
-                  </li>
-                ))}
-              </ul>
+                <div className="relative z-10 w-12 h-px bg-gradient-to-r from-neon-purple/60 to-transparent mb-5" />
 
-              <p className="relative z-10 font-body text-muted/70 text-xs italic mb-6 leading-relaxed border-l-2 border-neon-purple/30 pl-3">
-                {premium.note}
-              </p>
+                {/* Two plans side by side */}
+                <div className="relative z-10 grid grid-cols-2 gap-3 flex-1 mb-6">
+                  {(premium as any).plans?.map((plan: any, i: number) => (
+                    <div key={i} className={`rounded-xl p-4 border ${
+                      i === 0
+                        ? "border-neon-purple/15 bg-neon-purple/[0.04]"
+                        : "border-neon-purple/25 bg-neon-purple/[0.08]"
+                    }`}>
+                      <p className="font-display font-bold text-sm text-cream mb-1">{plan.name}</p>
+                      <p className="font-display font-semibold text-xs text-neon-purple/70 mb-3">{plan.price}</p>
+                      <ul className="space-y-2">
+                        {plan.items.map((item: string, j: number) => (
+                          <li key={j} className="flex items-start gap-2">
+                            <span className="text-neon-purple/50 text-[10px] mt-0.5">✦</span>
+                            <span className="font-body text-xs text-cream/60 leading-snug">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
 
-              <a href={SITE.links.calendly} className="btn-outline relative z-10 self-start text-sm py-3 px-6">
-                {premium.cta} →
-              </a>
-            </div>
+
+                <a href={SITE.links.calendly} className="btn-outline relative z-10 self-start text-sm py-3 px-6">
+                  {premium.cta} →
+                </a>
+              </div>
             </TiltCard>
           </AnimatedSection>
         </div>

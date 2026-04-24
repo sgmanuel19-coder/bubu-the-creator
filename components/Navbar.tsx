@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE } from "@/lib/constants";
+import { LogoMark } from "@/components/ui/logo";
 
 const navLinks = [
   { label: "Inicio", href: "/" },
@@ -16,11 +17,23 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const lastY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      // Hide on scroll-down, show on scroll-up or near top
+      if (y < 80) {
+        setNavVisible(true);
+      } else {
+        setNavVisible(y < lastY.current);
+      }
+      lastY.current = y;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -38,19 +51,34 @@ export default function Navbar() {
           ? "bg-bg/88 backdrop-blur-xl border-b border-neon-green/10"
           : "bg-transparent"
       }`}
+      style={{
+        transform: navVisible ? "translateY(0)" : "translateY(-100%)",
+        transition: "transform 0.35s cubic-bezier(0.21,0.47,0.32,0.98), background-color 0.5s, border-color 0.5s, backdrop-filter 0.5s",
+      }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
 
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3">
-            <div className="relative w-8 h-8">
-              <div className="absolute inset-0 rounded-full bg-neon-green/20 blur-sm group-hover:bg-neon-green/40 transition-all duration-300" />
-              <div className="relative w-8 h-8 rounded-full border border-neon-green/40 group-hover:border-neon-green/70 flex items-center justify-center transition-all duration-300">
-                <span className="text-neon-green text-[10px] font-brand font-bold">R</span>
-              </div>
+            <div className="relative transition-all duration-300 group-hover:opacity-80">
+              <div
+                className="absolute inset-0 blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-300"
+                style={{ background: "rgba(26,128,255,0.6)", borderRadius: 4 }}
+              />
+              <LogoMark size={30} color="#EEEBD4" />
             </div>
-            <span className="font-brand font-bold text-sm tracking-[0.2em] uppercase text-gradient-cyber">
+            <span
+              style={{
+                fontFamily: "var(--font-poppins), sans-serif",
+                fontWeight: 500,
+                letterSpacing: "0.5em",
+                fontSize: "0.75rem",
+                color: "#EEEBD4",
+                textTransform: "uppercase",
+                lineHeight: 1,
+              }}
+            >
               {SITE.brandName}
             </span>
           </Link>

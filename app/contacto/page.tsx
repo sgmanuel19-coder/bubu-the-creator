@@ -41,25 +41,48 @@ export default function ContactoPage() {
 
       {/* Contact options */}
       <div className="container-base max-w-3xl mx-auto pt-6 pb-2 relative z-10">
-        <div className="flex flex-wrap justify-center gap-4 mb-4">
-          {SITE.links.whatsapp !== "[LINK_WHATSAPP]" && (
-            <a href={SITE.links.whatsapp} target="_blank" rel="noopener noreferrer"
-              className="btn-glow text-sm py-2.5 px-6">
-              WhatsApp →
-            </a>
-          )}
+        <div className="flex flex-wrap justify-center gap-6 mb-4">
+
+          {/* Calendly — PRIMARY */}
           {SITE.links.calendly !== "[LINK_FORMULARIO_O_CALENDLY]" && (
-            <a href={SITE.links.calendly} target="_blank" rel="noopener noreferrer"
-              className="btn-outline text-sm py-2.5 px-6">
-              Agenda una llamada →
-            </a>
+            <div className="flex flex-col items-center gap-1.5">
+              <a href={SITE.links.calendly} target="_blank" rel="noopener noreferrer"
+                className="btn-glow text-sm py-2.5 px-6">
+                Agenda una llamada →
+              </a>
+              <p className="text-[10px] font-body text-muted/75 text-center">
+                Elige el horario que te convenga · Respuesta inmediata
+              </p>
+            </div>
           )}
-          <a href={`mailto:${SITE.email}`}
-            className="btn-outline text-sm py-2.5 px-6">
-            Email directo →
-          </a>
+
+          {/* WhatsApp — SECONDARY */}
+          {SITE.links.whatsapp !== "[LINK_WHATSAPP]" && (
+            <div className="flex flex-col items-center gap-1.5">
+              <a href={SITE.links.whatsapp} target="_blank" rel="noopener noreferrer"
+                className="btn-outline text-sm py-2.5 px-6">
+                WhatsApp →
+              </a>
+              <p className="text-[10px] font-body text-muted/75 text-center">
+                Mensaje directo · Respondo en menos de 24h
+              </p>
+            </div>
+          )}
+
+          {/* Email — TERTIARY */}
+          {SITE.email && !SITE.email.startsWith("[") && (
+            <div className="flex flex-col items-center gap-1.5">
+              <a href={`mailto:${SITE.email}`}
+                className="btn-outline text-sm py-2.5 px-6">
+                Email directo →
+              </a>
+              <p className="text-[10px] font-body text-muted/75 text-center">
+                Para propuestas formales
+              </p>
+            </div>
+          )}
         </div>
-        <p className="text-center text-xs font-body text-muted/40 mb-2">o usa el formulario</p>
+        <p className="text-center text-xs font-body text-muted/75 mb-2">o déjame tu mensaje en el formulario</p>
       </div>
 
       <div className="flex-1">

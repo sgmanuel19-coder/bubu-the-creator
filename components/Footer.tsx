@@ -16,7 +16,7 @@ export default function Footer() {
             <p className="font-display font-bold text-lg tracking-widest text-gradient-brand mb-1">
               {SITE.brandName}
             </p>
-            <p className="text-xs font-body text-muted/60">
+            <p className="text-xs font-body text-muted/90">
               {SITE.city} · {SITE.email}
             </p>
           </div>
@@ -41,7 +41,7 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <p className="text-xs font-body text-muted/40 text-center md:text-right">
+          <p className="text-xs font-body text-muted/75 text-center md:text-right">
             © {SITE.year} {SITE.brandName}. Todos los derechos reservados.
           </p>
         </div>

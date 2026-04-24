@@ -5,7 +5,7 @@ import { Plus, Minus } from 'lucide-react';
 
 interface FAQItem {
   question: string;
-  answer: string;
+  answer: string | React.ReactNode;
 }
 
 interface FAQAccordionProps {

@@ -60,21 +60,6 @@ export default function ContactForm() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-green/25 to-neon-purple/25" />
 
       <div className="container-base relative z-10 max-w-3xl mx-auto">
-        {/* Header */}
-        <AnimatedSection className="text-center mb-14">
-          <span className="inline-flex items-center gap-2 text-xs font-display font-semibold tracking-[0.2em] uppercase text-neon-green mb-4">
-            <span className="w-6 h-px bg-neon-green/50" />
-            Contacto directo
-            <span className="w-6 h-px bg-neon-green/50" />
-          </span>
-          <h2 className="font-display font-bold text-3xl lg:text-4xl tracking-tight mb-4">
-            ¿Tienes un proyecto en mente?
-          </h2>
-          <p className="font-body text-muted text-base lg:text-lg leading-relaxed max-w-xl mx-auto">
-            Cuéntame en qué estás trabajando. Sin compromiso — solo una conversación para ver si tiene sentido colaborar.
-          </p>
-        </AnimatedSection>
-
         {/* Form card */}
         <AnimatedSection delay={0.1}>
           <div className="relative rounded-2xl overflow-hidden">
@@ -89,7 +74,7 @@ export default function ContactForm() {
             />
             <div
               className="relative rounded-2xl p-8 lg:p-12"
-              style={{ background: "rgba(8,10,13,0.98)" }}
+              style={{ background: "rgba(5,7,9,0.98)" }}
             >
               {/* Grid overlay */}
               <div className="absolute inset-0 grid-pattern opacity-15 rounded-2xl" />

@@ -3,6 +3,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Zap } from 'lucide-react';
+import { SplineScene } from '@/components/ui/splite';
+import { Spotlight } from '@/components/ui/spotlight';
+import { Typewriter } from '@/components/ui/typewriter';
 
 const AetherFlowHero = () => {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
@@ -66,10 +69,10 @@ const AetherFlowHero = () => {
       particles = [];
       const n = (canvas!.height * canvas!.width) / 9000;
       const colors = [
-        'rgba(0, 255, 135, 0.6)',
-        'rgba(204, 68, 255, 0.6)',
-        'rgba(0, 255, 135, 0.4)',
-        'rgba(204, 68, 255, 0.4)',
+        'rgba(0, 255, 135, 0.5)',
+        'rgba(204, 68, 255, 0.5)',
+        'rgba(0, 255, 135, 0.3)',
+        'rgba(204, 68, 255, 0.3)',
       ];
       for (let i = 0; i < n; i++) {
         const size = Math.random() * 2 + 1;
@@ -99,7 +102,7 @@ const AetherFlowHero = () => {
             (particles[a].y - particles[b].y) ** 2;
           if (distance < (canvas!.width / 7) * (canvas!.height / 7)) {
             const opacity = 1 - distance / 20000;
-            ctx!.strokeStyle = `rgba(0, 255, 135, ${opacity * 0.3})`;
+            ctx!.strokeStyle = `rgba(0, 255, 135, ${opacity * 0.25})`;
             ctx!.lineWidth = 0.5;
             ctx!.beginPath();
             ctx!.moveTo(particles[a].x, particles[a].y);
@@ -112,7 +115,7 @@ const AetherFlowHero = () => {
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      ctx!.fillStyle = 'rgba(6, 6, 8, 0.95)';
+      ctx!.fillStyle = 'rgba(4, 4, 6, 0.96)';
       ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
       particles.forEach((p) => p.update());
       connect();
@@ -144,95 +147,202 @@ const AetherFlowHero = () => {
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.2 + 0.5, duration: 0.8, ease: 'easeInOut' },
+      transition: { delay: i * 0.18 + 0.4, duration: 0.75, ease: 'easeOut' },
     }),
   };
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen w-full flex items-center overflow-hidden">
+      {/* Particle canvas */}
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+
+      {/* Spotlight */}
+      <Spotlight
+        className="-top-40 left-0 md:left-40 md:-top-20"
+        fill="rgba(0,255,135,0.5)"
+      />
+
+      {/* Content: left text + right Spline */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-0 pt-28 pb-16 lg:pt-0 lg:pb-0 lg:min-h-screen">
+
+        {/* ── Left: text content ── */}
+        <div className="flex-1 flex flex-col items-start justify-center lg:pr-8 w-full max-w-2xl lg:max-w-none">
+          <motion.div
+            custom={0}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border mb-7"
+            style={{ background: 'rgba(0,255,135,0.08)', borderColor: 'rgba(0,255,135,0.25)' }}
+          >
+            <Zap className="h-4 w-4" style={{ color: '#00ff87' }} />
+            <span className="text-sm font-medium" style={{ color: '#00ff87', fontFamily: 'Space Grotesk, sans-serif' }}>
+              Automatizacion Comercial con IA
+            </span>
+          </motion.div>
+
+          <motion.h1
+            custom={1}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="font-bold tracking-tighter mb-5 leading-[1.05]"
+            style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(2.25rem, 5vw, 4.5rem)' }}
+          >
+            <span
+              className="glitch-text"
+              data-text="Tu negocio responde,"
+              style={{ color: '#f8f8f2' }}
+            >
+              Tu negocio responde,
+            </span>
+            <br />
+            <Typewriter
+              text="filtra y agenda solo."
+              delay={950}
+              speed={52}
+              style={{
+                background: 'linear-gradient(90deg, #00ff87, #cc44ff)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            />
+          </motion.h1>
+
+          <motion.p
+            custom={2}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="text-base md:text-lg mb-9 max-w-lg leading-relaxed"
+            style={{ color: 'rgba(248,248,242,0.6)', fontFamily: 'Inter, sans-serif' }}
+          >
+            Instalo un sistema que convierte mensajes de WhatsApp e Instagram en citas
+            calificadas. Sin bots genéricos. Sin leads botados.
+          </motion.p>
+
+          <motion.div
+            custom={3}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
+          >
+            <motion.a
+              href="https://wa.me/51999999999?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20Express%20de%20IA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base w-full sm:w-auto"
+              style={{
+                background: '#00ff87',
+                color: '#040406',
+                fontFamily: 'Space Grotesk, sans-serif',
+              }}
+              animate={{
+                boxShadow: [
+                  '0 0 20px rgba(0,255,135,0.3)',
+                  '0 0 52px rgba(0,255,135,0.6), 0 0 100px rgba(0,255,135,0.15)',
+                  '0 0 20px rgba(0,255,135,0.3)',
+                ],
+              }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Quiero mi sistema <ArrowRight className="h-5 w-5" />
+            </motion.a>
+            <a
+              href="#paquetes"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300 hover:scale-105 border w-full sm:w-auto"
+              style={{
+                borderColor: 'rgba(204,68,255,0.4)',
+                color: '#cc44ff',
+                background: 'rgba(204,68,255,0.08)',
+                fontFamily: 'Space Grotesk, sans-serif',
+              }}
+            >
+              Ver paquetes
+            </a>
+          </motion.div>
+
+          {/* Availability indicator */}
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="mt-8 flex items-center gap-3"
+          >
+            <span
+              className="flex items-center gap-2 text-xs"
+              style={{ color: 'rgba(248,248,242,0.4)', fontFamily: 'Inter, sans-serif' }}
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: '#00ff87' }} />
+                <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: '#00ff87' }} />
+              </span>
+              2 cupos disponibles — proyectos Q2 2026
+            </span>
+          </motion.div>
+        </div>
+
+        {/* ── Right: Spline 3D robot in circular frame — hidden on mobile ── */}
         <motion.div
-          custom={0}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border mb-8"
-          style={{ background: 'rgba(0,255,135,0.08)', borderColor: 'rgba(0,255,135,0.25)' }}
+          className="flex flex-1 items-center justify-center"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
-          <Zap className="h-4 w-4" style={{ color: '#00ff87' }} />
-          <span className="text-sm font-medium" style={{ color: '#00ff87', fontFamily: 'Space Grotesk, sans-serif' }}>
-            Automatizacion Comercial con IA
-          </span>
-        </motion.div>
-
-        <motion.h1
-          custom={1}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6"
-          style={{ fontFamily: 'Space Grotesk, sans-serif' }}
-        >
-          <span style={{ color: '#f8f8f2' }}>Tu negocio responde,</span>
-          <br />
-          <span
-            style={{
-              background: 'linear-gradient(90deg, #00ff87, #cc44ff)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            filtra y agenda solo.
-          </span>
-        </motion.h1>
-
-        <motion.p
-          custom={2}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="max-w-2xl mx-auto text-lg md:text-xl mb-10"
-          style={{ color: 'rgba(248,248,242,0.65)', fontFamily: 'Inter, sans-serif' }}
-        >
-          Instalo un sistema que convierte mensajes de WhatsApp e Instagram en citas calificadas.
-          Sin bots genericos. Sin leads botados.
-        </motion.p>
-
-        <motion.div
-          custom={3}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-        >
-          <a
-            href="https://wa.me/51999999999?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20Express%20de%20IA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold text-base transition-all duration-300 hover:scale-105"
-            style={{
-              background: '#00ff87',
-              color: '#060608',
-              fontFamily: 'Space Grotesk, sans-serif',
-            }}
-          >
-            Quiero mi sistema <ArrowRight className="h-5 w-5" />
-          </a>
-          <a
-            href="#paquetes"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold text-base transition-all duration-300 hover:scale-105 border"
-            style={{
-              borderColor: 'rgba(204,68,255,0.4)',
-              color: '#cc44ff',
-              background: 'rgba(204,68,255,0.08)',
-              fontFamily: 'Space Grotesk, sans-serif',
-            }}
-          >
-            Ver paquetes
-          </a>
+          <div className="relative" style={{ width: 'clamp(220px, 70vw, 560px)', height: 'clamp(220px, 70vw, 560px)' }}>
+            {/* Outer glow ring */}
+            <div
+              className="absolute inset-0 rounded-full pointer-events-none"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(204,68,255,0.1) 0%, rgba(0,255,135,0.06) 50%, transparent 75%)',
+                transform: 'scale(1.15)',
+              }}
+            />
+            {/* Spinning gradient border */}
+            <motion.div
+              className="absolute inset-0 rounded-full pointer-events-none"
+              style={{
+                background: 'conic-gradient(from 0deg, rgba(0,255,135,0.8) 0%, rgba(204,68,255,0.8) 40%, rgba(0,255,135,0.1) 60%, rgba(204,68,255,0.8) 80%, rgba(0,255,135,0.8) 100%)',
+                padding: 1.5,
+                borderRadius: '50%',
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+            >
+              <div className="w-full h-full rounded-full" style={{ background: '#040406' }} />
+            </motion.div>
+            {/* Static inner border for contrast */}
+            <div
+              className="absolute inset-0 rounded-full pointer-events-none"
+              style={{
+                border: '1px solid rgba(0,255,135,0.12)',
+                boxShadow: '0 0 40px rgba(0,255,135,0.08), inset 0 0 40px rgba(204,68,255,0.06)',
+              }}
+            />
+            {/* Clipped robot */}
+            <div
+              className="absolute inset-0 rounded-full overflow-hidden"
+              style={{ background: 'rgba(4,4,6,0.6)' }}
+            >
+              <SplineScene
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="w-full h-full"
+              />
+            </div>
+          </div>
         </motion.div>
       </div>
+
+      {/* Bottom fade */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, transparent, #040406)' }}
+      />
     </div>
   );
 };

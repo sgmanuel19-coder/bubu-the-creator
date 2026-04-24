@@ -43,7 +43,7 @@ export default function FinalCTA() {
               {/* Outer ring — green→purple gradient */}
               <div className="relative w-44 h-44 rounded-full p-[2.5px]"
                 style={{ background: "linear-gradient(135deg, #00d4ff 0%, #cc44ff 100%)" }}>
-                <div className="w-full h-full rounded-full overflow-hidden bg-[#080a0d] flex items-center justify-center relative">
+                <div className="w-full h-full rounded-full overflow-hidden bg-[#060709] flex items-center justify-center relative">
 
                   {CTA_PHOTO !== "[FOTO_CTA_CIRCULAR]" ? (
                     <Image src={CTA_PHOTO} alt={SITE.visibleName}
@@ -52,7 +52,7 @@ export default function FinalCTA() {
                     /* Placeholder */
                     <div className="w-full h-full flex flex-col items-center justify-center gap-1">
                       <span className="text-3xl">👤</span>
-                      <p className="text-[8px] font-display text-neon-green/60 tracking-wider text-center px-1">
+                      <p className="text-[8px] font-display text-neon-green/85 tracking-wider text-center px-1">
                         FOTO
                       </p>
                     </div>
@@ -115,10 +115,10 @@ export default function FinalCTA() {
           </AnimatedSection>
 
           <AnimatedSection delay={0.35} className="space-y-2">
-            <p className="text-xs font-body text-muted/50 tracking-wide">
+            <p className="text-xs font-body text-muted/80 tracking-wide">
               {SITE.cta.disclaimer}
             </p>
-            <p className="text-xs font-body text-neon-green/60 tracking-wide">
+            <p className="text-xs font-body text-neon-green/85 tracking-wide">
               ✓ {SITE.cta.riskReversal}
             </p>
           </AnimatedSection>

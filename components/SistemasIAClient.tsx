@@ -1,8 +1,11 @@
 "use client";
 
 import dynamic from 'next/dynamic';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Calendar, Clock, Users, TrendingUp, Star, MessageCircle, Shield, CheckCircle } from 'lucide-react';
 import type { Testimonial } from '@/components/ui/glass-testimonial-swiper';
+import CountUp from '@/components/CountUp';
 
 const AetherFlowHero = dynamic(
   () => import('@/components/ui/aether-flow-hero'),
@@ -34,62 +37,62 @@ const AnimatedText = dynamic(
 );
 
 const WA_LINK =
-  'https://wa.me/51999999999?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20Express%20de%20IA';
+  'https://wa.me/51907462070?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20de%20Automatizacion%20IA';
 
 const pricingPlans = [
   {
     name: 'Base',
     price: 'S/1,500',
-    monthlyPrice: 'S/800',
-    description: 'Para negocios que necesitan orden basico en su atencion.',
+    monthlyPrice: 'S/600',
+    description: 'Para negocios que necesitan atender leads 24/7 y dejar de perderlos por demora.',
     recommended: false,
     ctaText: 'Empezar con Base',
     ctaHref: WA_LINK,
     features: [
-      'Diagnostico del flujo comercial',
-      'Mapa de preguntas frecuentes',
-      'Respuestas automaticas configuradas',
-      'Calificacion basica de leads',
-      'Derivacion a humano',
-      'Enlace de agenda automatica',
-      'Mensajes de confirmacion',
-      'Video Loom de entrega',
+      'Chatbot WhatsApp IA entrenado con tu negocio',
+      'Respuestas automáticas 24/7',
+      'Calificación básica de leads',
+      'Agendamiento directo en Google Calendar / Calendly',
+      'Derivación inteligente a humano',
+      'Mensajes de confirmación y recordatorio',
+      'Video de entrega explicando el sistema',
+      '30 días de soporte incluido',
     ],
   },
   {
     name: 'Plus',
-    price: 'S/2,800',
-    monthlyPrice: 'S/1,200',
-    description: 'Para equipos que quieren cerrar mas sin trabajar mas horas.',
+    price: 'S/3,200',
+    monthlyPrice: 'S/1,000',
+    description: 'Para equipos que quieren cerrar más y llegar a nuevos prospectos de forma automática.',
     recommended: true,
     ctaText: 'Quiero el Plus',
     ctaHref: WA_LINK,
     features: [
       'Todo lo del plan Base',
-      'Secuencia de seguimiento automatico',
-      'Etiquetas leads calientes / frios',
-      'Recuperacion de leads que no cerraron',
-      'Integracion Google Sheets o CRM basico',
-      'Dashboard simple de conversaciones',
+      'Secuencias de seguimiento automatizado (nurturing)',
+      'Recuperación de leads fríos que no respondieron',
+      'Integración Google Sheets o CRM básico',
+      'Sistema de Cold Email (hasta 1,000 prospectos/mes)',
+      'Scraping básico de base de datos de prospectos',
+      'Dashboard de leads y tasa de conversión',
     ],
   },
   {
     name: 'Pro',
-    price: 'S/5,500',
-    monthlyPrice: 'S/2,000',
-    description: 'Para operaciones comerciales que necesitan IA real.',
+    price: 'S/5,800',
+    monthlyPrice: 'S/1,800',
+    description: 'Sistema comercial completo para operaciones que necesitan escalar sin contratar.',
     recommended: false,
     ctaText: 'Ver plan Pro',
     ctaHref: WA_LINK,
     features: [
       'Todo lo del plan Plus',
-      'IA con contexto de tu negocio',
-      'Rutas por tipo de servicio',
-      'Flujos por interes y presupuesto',
-      'Automatizacion post-reunion',
-      'Nurturing de leads',
-      'Remarketing de leads no cerrados',
-      'Reporte mensual de conversion',
+      'IA conversacional avanzada (Claude + GPT-4)',
+      'Cold Email a escala (hasta 5,000 prospectos/mes)',
+      'Landing page de alta conversión incluida',
+      'Flujos multi-canal (WhatsApp + Email + Instagram DM)',
+      'Rutas por tipo de servicio, interés y presupuesto',
+      'Reportes mensuales de KPIs y optimización',
     ],
   },
 ];
@@ -173,7 +176,7 @@ export function PricingClient() {
   return (
     <PricingModule
       plans={pricingPlans}
-      footnote="Todos los planes incluyen soporte por 30 dias + fee mensual de optimizacion opcional desde S/800/mes"
+      footnote="Precio de implementación (one-time) + fee mensual de mantenimiento, monitoreo y optimización. Garantía de devolución 30 días."
     />
   );
 }
@@ -184,4 +187,71 @@ export function TestimonialsClient() {
 
 export function AnimatedTextClient({ text, textClassName }: { text: string; textClassName?: string }) {
   return <AnimatedText text={text} textClassName={textClassName} />;
+}
+
+// ── Animated Metrics Strip ────────────────────────────────────
+const metrics = [
+  { end: 3,       suffix: '',    label: 'servicios de automatización',     isStatic: false },
+  { end: 30,      suffix: '+',   label: 'días de soporte incluido en cada plan', isStatic: false },
+  { value: '5–10 días', label: 'promedio de activación del sistema', isStatic: true  },
+];
+
+export function AnimatedMetricsStrip() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+
+  return (
+    <div
+      ref={ref}
+      className="w-full py-8 px-4"
+      style={{
+        background: 'rgba(0,255,135,0.04)',
+        borderTop: '1px solid rgba(0,255,135,0.1)',
+        borderBottom: '1px solid rgba(0,255,135,0.1)',
+      }}
+    >
+      <div className="max-w-3xl mx-auto grid grid-cols-3 items-center justify-center">
+        {metrics.map((m, i) => (
+          <div key={i} className="flex items-center">
+            {/* Divider */}
+            {i > 0 && (
+              <div
+                className="w-px h-8 sm:h-10 mx-3 sm:mx-8 shrink-0"
+                style={{ background: 'rgba(0,255,135,0.2)' }}
+              />
+            )}
+            <motion.div
+              className="text-center"
+              initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
+              animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+              transition={{ duration: 0.55, delay: 0.1 * i }}
+            >
+              <div
+                className="text-xl sm:text-3xl font-bold mb-1"
+                style={{
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  background: 'linear-gradient(135deg, #00ff87, #00d4ff)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                {m.isStatic ? (
+                  m.value
+                ) : (
+                  <CountUp end={m.end!} suffix={m.suffix} duration={2} />
+                )}
+              </div>
+              <p
+                className="text-xs font-medium tracking-wide"
+                style={{ color: 'rgba(248,248,242,0.5)', fontFamily: 'Inter, sans-serif' }}
+              >
+                {m.label}
+              </p>
+            </motion.div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

@@ -7,19 +7,19 @@ export const SITE = {
   // ── Identidad ──────────────────────────────────────────────
   brandName: "RESUELTO",
   visibleName: "Manuel Severo",
-  professionalTitle: "Content Agency para Empresas Técnicas",
-  title: "Content Agency para Empresas Técnicas",
+  professionalTitle: "Estratega de Comunicación Comercial · RESUELTO",
+  title: "Estratega de Comunicación Comercial",
   city: "Lima, Perú",
-  email: "[EMAIL_CONTACTO]",                 // Ej: "hola@resuelto.pe"
-  year: "2025",
+  email: "resueltoagency@gmail.com",
+  year: "2026",
 
   // ── Links ──────────────────────────────────────────────────
   links: {
     linkedin: "https://www.linkedin.com/in/manuel-severo",
     instagram: "https://www.instagram.com/bubu_thecreator",
     tiktok: "https://www.tiktok.com/@bubuthecreator",
-    whatsapp: "[LINK_WHATSAPP]",             // Ej: "https://wa.me/51932844074"
-    calendly: "[LINK_FORMULARIO_O_CALENDLY]",
+    whatsapp: "https://wa.me/51907462070",
+    calendly: "https://calendly.com/sgmanuel19/30min",
   },
 
   // ── Imágenes ───────────────────────────────────────────────
@@ -30,13 +30,13 @@ export const SITE = {
 
   // ── Hero ───────────────────────────────────────────────────
   hero: {
-    eyebrow: "Sistema Audiovisual de Autoridad",
-    headline: ["Tu empresa puede hacer cosas grandes.", "La pregunta es si se percibe así."],
+    eyebrow: "Estrategia · Producción · Resultados",
+    headline: ["Elevo la percepción de tu marca", "con sistemas de comunicación comercial."],
     subheadline:
-      "60 días para elevar la percepción de tu empresa, explicar mejor lo que haces y convertir tu comunicación en un activo comercial.",
+      "60 días para instalar el sistema de comunicación que convierte la complejidad técnica de tu empresa en su principal argumento de venta.",
     ctaPrimary: "Quiero implementar el sistema",
     ctaSecondary: "o escríbeme directo",
-    anchor: "Diseñado para empresas B2B, técnicas e industriales que tienen algo valioso que comunicar.",
+    anchor: "Diseñado para empresas B2B, técnicas e industriales que necesitan convertir su comunicación en una herramienta de ventas.",
   },
 
   // ── Problema ───────────────────────────────────────────────
@@ -65,7 +65,7 @@ export const SITE = {
     bio: [
       "Pasé años dentro de las agencias donde los estándares no tienen margen para el error. Trabajé con las marcas más grandes del Perú — desde banca hasta retail — y vi de primera mano cómo la comunicación puede cambiar la percepción de un negocio por completo.",
       "Con el tiempo entendí que el problema real no es 'hacer contenido'. Es que la mayoría de negocios con ofertas valiosas comunican muy por debajo de lo que valen. Y cuando eso cambia, todo cambia: se ven mejor, atraen mejor cliente, convierten con menos fricción.",
-      "Hoy trabajo bajo RESUELTO con negocios, expertos y empresas que venden algo de alto valor — y los ayudo a construir la comunicación y el sistema comercial que les falta.",
+      "Hoy opero bajo RESUELTO en la intersección de cuatro disciplinas: pensamiento estratégico publicitario, producción audiovisual, IA generativa aplicada al negocio y sistemas de comunicación comercial. Una combinación poco frecuente — y la que convierte tu marca en la opción obvia.",
     ],
     timelineLabel: "Mi evolución — de ejecutar piezas a diseñar sistemas",
     timeline: [
@@ -121,9 +121,9 @@ export const SITE = {
       "No aprendí esto en cursos. Lo aprendí ejecutando en proyectos reales, para marcas reales, con estándares que no perdonan.",
     metrics: [
       { value: 5, suffix: "+", label: "años en comunicación estratégica real" },
-      { value: 300, suffix: "+", label: "piezas de contenido producidas" },
+      { value: 2000, suffix: "+", label: "piezas de contenido producidas" },
       { value: 20, suffix: "+", label: "marcas y proyectos trabajados" },
-      { value: 2, suffix: "", label: "agencias top-tier donde forjé el criterio" },
+      { value: 2, suffix: "", label: "agencias globales top-tier — agencia global de disrupción y creatividad" },
     ],
     logos: [
       { name: "WIN Internet", src: null },
@@ -173,12 +173,14 @@ export const SITE = {
   // ── Servicios ──────────────────────────────────────────────
   services: {
     title: "La implementación",
-    subtitle: "Un sistema audiovisual de 60 días. Claro en alcance, serio en criterio.",
+    subtitle: "Un sistema de comunicación de 60 días. No contenido por publicar — piezas diseñadas para vender.",
     core: {
       badge: "Implementación Audiovisual · 60 días",
       name: "Sistema Audiovisual de Autoridad",
-      tagline: "Una implementación estratégica con 15 piezas diseñadas para mover tu marca con más claridad, más autoridad y mejor percepción frente al mercado.",
-      target: "Para empresas B2B, técnicas e industriales que necesitan elevar cómo se ve y comunica su marca. USD 3,200.",
+      tagline: "Un sistema de 60 días que convierte la complejidad técnica de tu empresa en comunicación que genera clientes.",
+      target: "Para empresas B2B, técnicas e industriales que necesitan elevar cómo se ve y comunica su marca.",
+      price: "USD 2,800",
+      priceNote: "+ IGV · 2 meses de implementación y entrega",
       items: [
         "1 Cerebro Creativo IA — sistema IA entrenado con la lógica comunicacional de tu marca",
         "1 Video Horizontal tipo Video Caso — pieza de autoridad para mostrar empresa, solución o caso de éxito",
@@ -187,19 +189,189 @@ export const SITE = {
         "4 Carruseles Generados con IA — activos visuales para autoridad, claridad y comunicación comercial",
       ],
       cta: "Quiero implementar el sistema",
+
+      // ─── Contenido detallado del servicio ───────────────────
+      pitch:
+        "Muchas empresas técnicas, industriales y B2B operan bien, venden bien cuando aparece la oportunidad y tienen una propuesta potente. Pero hacia afuera ocurre otra cosa: su comunicación no refleja el nivel real de la empresa, lo que hacen es difícil de entender para el mercado, y el contenido no construye autoridad sostenida. El mercado no siempre compra al mejor. Muchas veces compra al que entiende más rápido, al que genera más confianza y al que se percibe más sólido. Ahí es donde entra Resuelto.",
+      whatItIs:
+        "Una implementación audiovisual y estratégica diseñada para que tu empresa se vea al nivel que realmente opera, explique mejor lo complejo, fortalezca autoridad en su categoría y tenga activos de comunicación reutilizables. No hacemos contenido por hacer. Construimos un sistema visual y narrativo para que tu empresa deje de verse improvisada y empiece a comunicar con más claridad, más criterio y más peso comercial.",
+      pillars: [
+        {
+          num: 1,
+          title: "Dirección estratégica y creativa",
+          summary: "El proyecto no empieza grabando. Empieza ordenando la lógica de comunicación.",
+          detail: [
+            "Definición del enfoque general del proyecto",
+            "Lectura del negocio desde la comunicación",
+            "Alineación entre autoridad, claridad y adquisición",
+            "Criterio narrativo para que las piezas no se sientan sueltas",
+            "Supervisión integral de todo el sistema",
+          ],
+          receives: "Una implementación dirigida, no un proveedor que solo ejecuta tareas.",
+        },
+        {
+          num: 2,
+          title: "Cerebro Creativo IA con documentación estratégica",
+          summary: "Un sistema IA entrenado con la lógica estratégica de la marca.",
+          detail: [
+            "Brief y contrabrief de marca",
+            "Buyer persona y customer journey",
+            "Benchmark nacional e internacional",
+            "Mensaje central y lineamientos de comunicación",
+            "Prompts maestros de escritura",
+            "Base documental para guiones y comunicación futura",
+          ],
+          receives: "No solo contenido. También inteligencia instalada.",
+        },
+        {
+          num: 3,
+          title: "Preproducción estratégica",
+          summary: "Antes de grabar, el proyecto se aterriza. Sin improvisación.",
+          detail: [
+            "Desarrollo de guiones y estructura narrativa por pieza",
+            "Storyboards o bosquejos cuando aplique",
+            "Planificación de los días de rodajes",
+            "Orden de grabaciones",
+            "Enfoque de cada contenido según su rol: autoridad, claridad, venta o pauta",
+          ],
+          receives: "Una producción pensada antes de ejecutarse.",
+        },
+        {
+          num: 4,
+          title: "Video caso / pieza principal de autoridad",
+          summary: "Una jornada dedicada a capturar la pieza central de la empresa.",
+          detail: [
+            "Puede tomar forma de video caso, documental corto o pieza institucional",
+            "Agendamiento y bloqueo de jornada completa",
+            "Dirección durante la grabación",
+            "Cobertura en entorno real: oficinas, planta, campo o feria",
+            "Captura de material útil, no solo decorativo",
+          ],
+          receives: "Una pieza central capaz de elevar percepción y generar confianza antes de la primera reunión.",
+        },
+        {
+          num: 5,
+          title: "Grabación de expertos y voceros",
+          summary: "El vocero correcto, bien dirigido, se convierte en un activo comercial enorme.",
+          detail: [
+            "Grabación en oficina, showroom, planta o entorno real",
+            "Dirección para mejorar presencia frente a cámara",
+            "Apoyo para bajar lo técnico a un lenguaje más entendible",
+            "Generación de múltiples piezas en crudo desde una sola jornada",
+            "Captura alineada con el estándar visual del proyecto",
+          ],
+          receives: "Autoridad encarnada en personas reales de la empresa.",
+        },
+        {
+          num: 6,
+          title: "Cobertura estratégica de feria, evento u oficina",
+          summary: "Los momentos de movimiento real se convierten en activos reutilizables.",
+          detail: [
+            "Cobertura de una jornada estratégica",
+            "Captura de momentos relevantes con criterio en tiempo real",
+            "Material en crudo + base para pieza resumen",
+            "Contenido derivado: clips cortos, momentos clave",
+            "Ideal para ferias, lanzamientos, visitas importantes o recorridos",
+          ],
+          receives: "Actividad real convertida en material de comunicación con valor.",
+        },
+        {
+          num: 7,
+          title: "Producción de contenidos verticales y comerciales",
+          summary: "Piezas con roles distintos: autoridad, claridad, venta, pauta.",
+          detail: [
+            "Reels técnicos con experto a cámara",
+            "Clips educativos y piezas de autoridad",
+            "Reels comerciales orientados a mover interés",
+            "Videos con enfoque publicitario para pauta",
+            "Los ads se desarrollan con criterio comercial, no técnico duro",
+          ],
+          receives: "Una mezcla de piezas que empujan percepción y acción, no solo publican.",
+        },
+        {
+          num: 8,
+          title: "Edición integral del sistema audiovisual",
+          summary: "El material bruto se convierte en comunicación con criterio. No para decorar — para vender.",
+          detail: [
+            "Selección de material y estructura de cada pieza",
+            "Ritmo, consistencia visual y adaptación al objetivo de cada video",
+            "Integración de recursos complementarios",
+            "Armado de piezas finales listas para uso",
+            "Carruseles integrados al lenguaje visual general",
+          ],
+          receives: "Contenido terminado que se siente más sólido, claro y profesional.",
+        },
+        {
+          num: 9,
+          title: "Recursos visuales y sonoros generados con IA",
+          summary: "Eleva mucho la percepción, especialmente en categorías técnicas donde es difícil mostrar lo que se hace.",
+          detail: [
+            "Imágenes generadas con IA bajo criterio de marca",
+            "Clips o recursos visuales IA para reforzar mensaje",
+            "Piezas cinematográficas generadas para elevar percepción",
+            "Recursos explicativos para conceptos abstractos o técnicos",
+            "Apoyo de audio IA cuando aplique",
+          ],
+          receives: "Una comunicación más sofisticada, más actual y más entendible.",
+        },
+        {
+          num: 10,
+          title: "Coordinación e implementación Done-For-You",
+          summary: "Todo conectado bajo una sola dirección. Sin rompecabezas mal armados.",
+          detail: [
+            "Coordinación del flujo completo y seguimiento del proyecto",
+            "Control de calidad en cada fase",
+            "Toma de decisiones creativas y operativas",
+            "Integración entre todas las fases",
+            "Supervisión de la implementación hasta la entrega",
+          ],
+          receives: "Un proyecto resuelto de punta a punta, no una suma de proveedores dispersos.",
+        },
+      ],
+      finalDeliverables: [
+        "Una base estratégica más clara — brief, mensaje central, lineamientos de comunicación",
+        "Sistema IA entrenado con la lógica de la marca",
+        "Pieza principal de autoridad (video caso / documental / institucional)",
+        "Contenidos verticales de autoridad y venta listos para redes",
+        "Recursos visuales generados con IA",
+        "Activos audiovisuales reutilizables en redes, ventas, presentaciones y ferias",
+        "Una presencia mejor alineada al nivel real del negocio",
+      ],
+      notIncluded: [
+        "Community management o respuestas a mensajes",
+        "Diseño diario o pauta gestionada",
+        "Grabaciones ilimitadas o cambios infinitos",
+        "Nuevos enfoques estratégicos después de aprobaciones previas",
+        "Inclusión tardía de nuevos voceros o líneas de producto no contemplados",
+      ],
+      revisionPolicy: {
+        strategy: "1 ronda de ajustes al inicio sobre estrategia, enfoque y bocetos.",
+        videos: "Hasta 2 ajustes por pieza en etapa de edición sobre lo ya aprobado — no cambios completos de dirección.",
+      },
+      conditions: [
+        "Cobertura incluida solo en Lima Metropolitana (fuera de Lima se cotizan viáticos aparte)",
+        "El cliente debe designar un responsable de feedback y aprobación",
+        "Retrasos en feedback o aprobación mueven el cronograma",
+        "El cliente debe contar con un vocero disponible y apto para participar",
+        "Nuevos requerimientos fuera del alcance se cotizan aparte",
+      ],
+      guarantee:
+        "No prometemos viralidad ni ventas garantizadas. Sí prometemos una implementación seria y estratégica. Si algún entregable principal no cumple con el alcance aprobado al inicio, realizaremos una ronda adicional de corrección sin costo adicional.",
     },
     premium: {
-      badge: "Post-Implementación",
-      name: "Opciones de Continuidad",
-      tagline: "Al terminar la implementación inicial, la empresa puede seguir creciendo sobre la base ya construida.",
-      target: "Para empresas que quieren sostener y ampliar el sistema con nuevas piezas, nuevas campañas y consistencia sostenida.",
+      badge: "Automatización Inteligente · n8n + IA",
+      name: "RESUELTO Automation",
+      tagline: "Sistemas inteligentes que escalan tu negocio: chatbot IA 24/7, prospección automatizada y webs de alta conversión.",
+      target: "Empresas, startups y consultoras que quieren dejar de perder tiempo en tareas manuales y generar oportunidades de forma automática.",
+      landingUrl: "/sistemas-ia",
       items: [
-        "Continuidad mensual — nuevas piezas, nuevas campañas, mantenimiento de consistencia",
-        "Continuidad trimestral — bloques más grandes con más previsibilidad y menos fricción operativa",
-        "Uso interno con base creada — equipo propio utiliza los activos y el Cerebro Creativo IA para futuras acciones",
+        "Chatbot WhatsApp IA — atiende, califica y agenda leads 24/7",
+        "Cold Email automatizado — prospecta cientos de clientes a escala",
+        "Sitios web de alta conversión — landing pages, corporativos y e-commerce",
+        "Workflows personalizados con n8n y Claude Code",
+        "Soporte técnico, monitoreo 24/7 y optimización continua",
       ],
-      note: "La continuidad parte desde la base construida en la implementación inicial. No desde cero.",
-      cta: "Hablar sobre continuidad",
+      cta: "Ver soluciones →",
     },
   },
 
@@ -247,7 +419,15 @@ export const SITE = {
       },
     ],
     closing:
-      "No trabajamos con empresas sin vocero, equipos sin capacidad de aprobar rápido, ni marcas que buscan publicar por publicar. El criterio es claro: si tienes algo valioso y necesitas comunicarlo a la altura — esto es para ti.",
+      "No trabajamos con empresas sin vocero, equipos sin capacidad de aprobar rápido, ni marcas que buscan publicar por publicar. El criterio es claro: si tienes algo valioso que el mercado todavía no percibe bien — esto es para ti.",
+    notFor: [
+      "Empresas sin vocero disponible",
+      "Equipos que no pueden aprobar rápido",
+      "Negocios sin presupuesto real para comunicación",
+      "Marcas que solo quieren 'verse activas' sin criterio",
+      "Equipos que buscan cambios ilimitados",
+      "Empresas que quieren delegar sin involucrarse lo mínimo necesario",
+    ],
   },
 
   // ── Cómo trabajo ──────────────────────────────────────────
@@ -334,7 +514,7 @@ export const SITE = {
   // ── Casos y prueba ────────────────────────────────────────
   proof: {
     title: "Evidencia, no promesas",
-    subtitle: "Proyectos reales. Marcas reales. Resultados que se pueden medir.",
+    subtitle: "Un sistema. Cinco industrias. Resultados medibles en cada una.",
     cases: [
       {
         slug: "win-internet",
@@ -407,7 +587,7 @@ export const SITE = {
   // ── CTA Final ─────────────────────────────────────────────
   cta: {
     title: ["Si tu empresa tiene valor", "pero todavía no se percibe así", "— hablemos."],
-    body: "No prometemos resultados mágicos. Prometemos una base estratégica y audiovisual que eleva cómo se percibe tu empresa y mejora cómo comunica frente al mercado.",
+    body: "No prometemos viralidad. Prometemos un sistema de comunicación instalado que convierte la complejidad de tu empresa en claridad, autoridad y oportunidades de negocio reales.",
     disclaimer: "Sin compromiso. Solo una conversación para entender si tiene sentido trabajar juntos.",
     ctaPrimary: "Quiero implementar el sistema",
     ctaSecondary: "Escríbeme directo",

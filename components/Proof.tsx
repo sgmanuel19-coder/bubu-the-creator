@@ -41,7 +41,7 @@ export default function Proof() {
               <Link href={`/casos/${caso.slug}`}
                 className="group flex items-start gap-6 lg:gap-10 p-6 lg:p-8 rounded-2xl border border-white/6
                            hover:border-white/15 transition-all duration-300 block"
-                style={{ background: "rgba(8,10,13,0.7)" }}
+                style={{ background: "rgba(5,7,9,0.7)" }}
               >
                 {/* Number */}
                 <div className="shrink-0 font-display font-bold text-4xl lg:text-5xl leading-none
@@ -104,7 +104,7 @@ export default function Proof() {
                 viewport={{ once: true, margin: "-20px" }}
                 transition={{ duration: 0.55, delay: i * 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
                 className="relative rounded-2xl border border-white/8 p-7 flex flex-col gap-5"
-                style={{ background: "rgba(8,10,13,0.8)" }}
+                style={{ background: "rgba(5,7,9,0.8)" }}
               >
                 {/* Quote mark */}
                 <div className="text-4xl font-display leading-none text-neon-green/20 select-none">"</div>

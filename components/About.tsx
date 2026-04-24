@@ -35,7 +35,7 @@ export default function About() {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-neon-green/12 via-transparent to-neon-purple/12 blur-2xl" />
               </div>
               <div className="holo-border holo-border-hover">
-                <div className="relative rounded-[calc(1.25rem-1px)] overflow-hidden aspect-[3/4] bg-[#080a0d]">
+                <div className="relative rounded-[calc(1.25rem-1px)] overflow-hidden aspect-[3/4] bg-[#060709]">
                   {ABOUT_VIDEO ? (
                     <>
                       <video autoPlay muted loop playsInline preload="auto"
@@ -43,7 +43,7 @@ export default function About() {
                         style={{ objectPosition: "center top" }}>
                         <source src={ABOUT_VIDEO} type="video/mp4" />
                       </video>
-                      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#080a0d]/80 to-transparent pointer-events-none" />
+                      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#060709]/80 to-transparent pointer-events-none" />
                       <div className="absolute inset-0 bg-gradient-to-br from-neon-green/6 via-transparent to-neon-purple/8 pointer-events-none" />
                     </>
                   ) : (
@@ -83,29 +83,50 @@ export default function About() {
                 {SITE.about.timelineLabel}
               </p>
               <div className="relative">
-                {/* Vertical line */}
-                <div className="absolute left-[11px] top-0 bottom-0 w-px bg-gradient-to-b from-neon-green/40 via-neon-purple/30 to-transparent" />
+                {/* Animated growing vertical line */}
+                <motion.div
+                  className="absolute left-[11px] top-0 w-px origin-top"
+                  style={{ background: "linear-gradient(to bottom, rgba(0,255,135,0.5), rgba(160,32,240,0.25), transparent)" }}
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.2 }}
+                >
+                  <div className="h-full w-full" style={{ minHeight: `${SITE.about.timeline.length * 88}px` }} />
+                </motion.div>
 
                 <div className="space-y-0">
                   {SITE.about.timeline.map((entry, i) => {
-                    const isLast = i === SITE.about.timeline.length - 1;
                     const isActive = entry.year === "HOY";
                     return (
                       <motion.div
                         key={i}
-                        initial={{ opacity: 0, x: -12 }}
+                        initial={{ opacity: 0, x: -16 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-30px" }}
-                        transition={{ duration: 0.5, delay: i * 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
+                        viewport={{ once: true, margin: "-20px" }}
+                        transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.09 }}
                         className="relative flex gap-5 pb-7 last:pb-0"
                       >
+                        {/* Big year ghost number */}
+                        <div className="absolute -left-2 top-0 font-display font-extrabold select-none pointer-events-none"
+                          style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: isActive ? "rgba(0,255,135,0.06)" : "rgba(255,255,255,0.03)", lineHeight: 1 }}>
+                          {entry.year}
+                        </div>
+
                         {/* Dot */}
                         <div className={`relative z-10 shrink-0 mt-1 w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center
                           ${isActive
-                            ? "bg-neon-green border-neon-green shadow-[0_0_10px_rgba(0,255,135,0.5)]"
+                            ? "bg-neon-green border-neon-green"
                             : "bg-bg border-neon-green/30"
-                          }`}>
-                          {isActive && <span className="w-2 h-2 rounded-full bg-black" />}
+                          }`}
+                          style={isActive ? { boxShadow: "0 0 0 4px rgba(0,255,135,0.15), 0 0 12px rgba(0,255,135,0.5)" } : {}}>
+                          {isActive ? (
+                            <motion.span
+                              className="w-2 h-2 rounded-full bg-black"
+                              animate={{ scale: [1, 1.3, 1] }}
+                              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                            />
+                          ) : null}
                         </div>
 
                         {/* Content */}

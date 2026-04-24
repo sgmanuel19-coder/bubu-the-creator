@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
-import { Orbitron, Barlow_Condensed, Inter } from "next/font/google";
+import { Poppins, Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/constants";
 import CursorTrail from "@/components/CursorTrail";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import StickyCTA from "@/components/StickyCTA";
+import ScrollProgress from "@/components/ScrollProgress";
 import { Analytics } from "@vercel/analytics/react";
 
-const orbitron = Orbitron({
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-orbitron",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
-const barlowCondensed = Barlow_Condensed({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-barlow",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
@@ -91,8 +92,9 @@ export default function RootLayout({
   return (
     <html lang="es" className="dark">
       <body
-        className={`${orbitron.variable} ${barlowCondensed.variable} ${inter.variable} bg-bg text-cream antialiased`}
+        className={`${poppins.variable} ${montserrat.variable} ${inter.variable} bg-bg text-cream antialiased`}
       >
+        <ScrollProgress />
         <StickyCTA />
         <CursorTrail />
         {children}

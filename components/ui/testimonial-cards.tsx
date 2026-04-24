@@ -47,7 +47,7 @@ export function TestimonialCard({
       style={{
         zIndex: position === "front" ? 2 : position === "middle" ? 1 : 0,
         borderColor,
-        background: `rgba(8,10,13,0.97)`,
+        background: `rgba(5,7,9,0.97)`,
       }}
       animate={{
         rotate: position === "front" ? "-5deg" : position === "middle" ? "0deg" : "5deg",
