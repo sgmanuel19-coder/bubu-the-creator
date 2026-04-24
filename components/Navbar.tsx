@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { SITE } from "@/lib/constants";
-import { LogoMark } from "@/components/ui/logo";
 
 const navLinks = [
   { label: "Inicio", href: "/" },
@@ -64,9 +64,15 @@ export default function Navbar() {
             <div className="relative transition-all duration-300 group-hover:opacity-80">
               <div
                 className="absolute inset-0 blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-300"
-                style={{ background: "rgba(26,128,255,0.6)", borderRadius: 4 }}
+                style={{ background: "rgba(26,128,255,0.5)", borderRadius: 4 }}
               />
-              <LogoMark size={30} color="#EEEBD4" />
+              <Image
+                src="/images/logo-mark.png"
+                alt="RESUELTO logo"
+                width={32}
+                height={32}
+                className="relative object-contain"
+              />
             </div>
             <span
               style={{
