@@ -24,6 +24,7 @@ const REELS: { id: string | null; platform: "instagram" | "tiktok" | "youtube"; 
   { id: "DQ3JTsEjLxh", platform: "instagram", label: "Promo película",   client: "Mañana Me Caso",       color: "green"  },
   { id: "DRsIJlOj7Kt", platform: "instagram", label: "Promo película",   client: "Mañana Me Caso",       color: "purple" },
   { id: "NMNUST1s1d8", platform: "youtube",   label: "Lanzamiento Asu Olla", client: "San Fernando",       color: "green",  wide: true },
+  { id: "pKEcI6peLSA", platform: "youtube",   label: "Automatizaciones IA",  client: "Resuelto",           color: "purple", wide: true },
 ];
 
 function embedSrc(reel: typeof REELS[0]): string {
