@@ -105,7 +105,7 @@ const testimonialData: Testimonial[] = [
     role: 'Directora — Centro Estetico Aura, Lima',
     quote:
       'Antes perdiamos leads todos los fines de semana porque nadie respondia a tiempo. Ahora el sistema califica, agenda y confirma solo. Duplicamos las citas sin contratar a nadie.',
-    avatarGradient: 'linear-gradient(135deg, #00ff87, #00cc6a)',
+    avatarGradient: 'linear-gradient(135deg, #1A80FF, #0A4DAA)',
     tags: [
       { text: 'Clinica estetica', type: 'featured' },
       { text: 'Plan Plus', type: 'default' },
@@ -122,7 +122,7 @@ const testimonialData: Testimonial[] = [
     role: 'Gerente Comercial — Grupo Paredes Inmobiliaria',
     quote:
       'Teniamos a tres personas respondiendo WhatsApp todo el dia y aun asi se nos escapaban prospectos. Hoy el sistema filtra los interesados reales y los pasa a mi equipo listos para cerrar.',
-    avatarGradient: 'linear-gradient(135deg, #cc44ff, #a020f0)',
+    avatarGradient: 'linear-gradient(135deg, #4D9FFF, #0A4DAA)',
     tags: [
       { text: 'Inmobiliaria', type: 'featured' },
       { text: 'Plan Pro', type: 'default' },
@@ -139,7 +139,7 @@ const testimonialData: Testimonial[] = [
     role: 'Directora Academica — Instituto Superior Nexo',
     quote:
       'En temporada de admision nos llegaban 200 mensajes diarios. El equipo no daba abasto. Con el sistema de Manuel respondemos al instante, calificamos por carrera y agendamos la orientacion sin esfuerzo humano.',
-    avatarGradient: 'linear-gradient(135deg, #00d4ff, #0099cc)',
+    avatarGradient: 'linear-gradient(135deg, #1A80FF, #0A4DAA)',
     tags: [
       { text: 'Instituto educativo', type: 'featured' },
       { text: 'Plan Plus', type: 'default' },
@@ -205,9 +205,9 @@ export function AnimatedMetricsStrip() {
       ref={ref}
       className="w-full py-8 px-4"
       style={{
-        background: 'rgba(0,255,135,0.04)',
-        borderTop: '1px solid rgba(0,255,135,0.1)',
-        borderBottom: '1px solid rgba(0,255,135,0.1)',
+        background: 'rgba(26,128,255,0.04)',
+        borderTop: '1px solid rgba(26,128,255,0.1)',
+        borderBottom: '1px solid rgba(26,128,255,0.1)',
       }}
     >
       <div className="max-w-3xl mx-auto grid grid-cols-3 items-center justify-center">
@@ -217,7 +217,7 @@ export function AnimatedMetricsStrip() {
             {i > 0 && (
               <div
                 className="w-px h-8 sm:h-10 mx-3 sm:mx-8 shrink-0"
-                style={{ background: 'rgba(0,255,135,0.2)' }}
+                style={{ background: 'rgba(26,128,255,0.2)' }}
               />
             )}
             <motion.div
@@ -229,8 +229,8 @@ export function AnimatedMetricsStrip() {
               <div
                 className="text-xl sm:text-3xl font-bold mb-1"
                 style={{
-                  fontFamily: 'Space Grotesk, sans-serif',
-                  background: 'linear-gradient(135deg, #00ff87, #00d4ff)',
+                  fontFamily: 'Poppins, sans-serif',
+                  background: 'linear-gradient(135deg, #1A80FF, #1A80FF)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',

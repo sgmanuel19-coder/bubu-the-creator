@@ -55,8 +55,8 @@ export default function WhatsAppFloat() {
             aria-label="Contactar por WhatsApp"
             className="relative flex items-center justify-center w-14 h-14 rounded-full shadow-2xl"
             style={{
-              background: "linear-gradient(135deg, #cc44ff 0%, #040406 100%)",
-              boxShadow: "0 0 18px rgba(204,68,255,0.6), 0 0 40px rgba(204,68,255,0.25), inset 0 0 0 1.5px rgba(204,68,255,0.5)",
+              background: "linear-gradient(135deg, #4D9FFF 0%, #040406 100%)",
+              boxShadow: "0 0 18px rgba(77,159,255,0.6), 0 0 40px rgba(77,159,255,0.25), inset 0 0 0 1.5px rgba(77,159,255,0.5)",
             }}
           >
             {/* Pulse ring */}

@@ -28,8 +28,8 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
             key={i}
             className="rounded-xl border overflow-hidden transition-all duration-200"
             style={{
-              borderColor: isOpen ? 'rgba(0,255,135,0.35)' : 'rgba(255,255,255,0.08)',
-              background: isOpen ? 'rgba(0,255,135,0.04)' : 'rgba(255,255,255,0.025)',
+              borderColor: isOpen ? 'rgba(26,128,255,0.35)' : 'rgba(255,255,255,0.08)',
+              background: isOpen ? 'rgba(26,128,255,0.04)' : 'rgba(255,255,255,0.025)',
             }}
           >
             <button
@@ -38,15 +38,15 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
             >
               <span
                 className="font-semibold text-base"
-                style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+                style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
               >
                 {item.question}
               </span>
               <span
                 className="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center transition-all duration-200"
                 style={{
-                  background: isOpen ? 'rgba(0,255,135,0.15)' : 'rgba(255,255,255,0.06)',
-                  color: isOpen ? '#00ff87' : 'rgba(248,248,242,0.4)',
+                  background: isOpen ? 'rgba(26,128,255,0.15)' : 'rgba(255,255,255,0.06)',
+                  color: isOpen ? '#1A80FF' : 'rgba(248,248,242,0.4)',
                 }}
               >
                 {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}

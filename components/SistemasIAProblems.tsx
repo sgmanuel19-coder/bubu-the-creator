@@ -21,7 +21,7 @@ export function SistemasIAProblems() {
   return (
     <section ref={ref} className="py-20 px-4 relative" style={{ background: '#040406' }}>
       <div className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(204,68,255,0.3), transparent)' }} />
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(77,159,255,0.3), transparent)' }} />
 
       <div className="max-w-6xl mx-auto">
         <motion.div
@@ -30,14 +30,14 @@ export function SistemasIAProblems() {
           animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#cc44ff', marginBottom: 12 }}>
-            <span style={{ width: 20, height: 1, background: 'rgba(204,68,255,0.5)', display: 'inline-block' }} />
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#4D9FFF', marginBottom: 12 }}>
+            <span style={{ width: 20, height: 1, background: 'rgba(77,159,255,0.5)', display: 'inline-block' }} />
             El problema real
-            <span style={{ width: 20, height: 1, background: 'rgba(204,68,255,0.5)', display: 'inline-block' }} />
+            <span style={{ width: 20, height: 1, background: 'rgba(77,159,255,0.5)', display: 'inline-block' }} />
           </span>
-          <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
             Tu equipo pierde leads<br />
-            <span style={{ color: '#cc44ff' }}>todos los dias</span>
+            <span style={{ color: '#4D9FFF' }}>todos los dias</span>
           </h2>
           <p style={{ marginTop: 16, maxWidth: 480, margin: '16px auto 0', fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.55)', fontSize: '1rem' }}>
             No porque sean malos vendedores. Sino porque no tienen un sistema que trabaje cuando ellos no pueden.
@@ -61,9 +61,9 @@ export function SistemasIAProblems() {
                     className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
                     style={{ background: `rgba(${rgb},0.1)`, border: `1px solid rgba(${rgb},0.25)` }}
                   >
-                    <Icon className="w-5 h-5" style={{ color: isGreen ? '#00ff87' : '#cc44ff' }} />
+                    <Icon className="w-5 h-5" style={{ color: isGreen ? '#1A80FF' : '#4D9FFF' }} />
                   </div>
-                  <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: '1rem', color: '#f8f8f2', marginBottom: 8 }}>
+                  <h3 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '1rem', color: '#f8f8f2', marginBottom: 8 }}>
                     {p.title}
                   </h3>
                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.875rem', lineHeight: 1.6, color: 'rgba(248,248,242,0.55)' }}>

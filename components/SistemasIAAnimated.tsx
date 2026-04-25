@@ -18,7 +18,7 @@ function VSLPlayer() {
     return (
       <div
         className="relative rounded-2xl overflow-hidden"
-        style={{ aspectRatio: "16/9", border: "1px solid rgba(0,255,135,0.25)" }}
+        style={{ aspectRatio: "16/9", border: "1px solid rgba(26,128,255,0.25)" }}
       >
         <iframe
           src={`https://www.youtube.com/embed/${VSL_EMBED_ID}?rel=0`}
@@ -36,9 +36,9 @@ function VSLPlayer() {
       style={{
         aspectRatio: "16/9",
         background: "rgba(4,4,6,0.98)",
-        border: `1px solid ${hovered ? "rgba(0,255,135,0.5)" : "rgba(0,255,135,0.12)"}`,
+        border: `1px solid ${hovered ? "rgba(26,128,255,0.5)" : "rgba(26,128,255,0.12)"}`,
         boxShadow: hovered
-          ? "0 0 0 1px rgba(0,255,135,0.2), 0 0 80px rgba(0,255,135,0.12), inset 0 0 60px rgba(0,255,135,0.03)"
+          ? "0 0 0 1px rgba(26,128,255,0.2), 0 0 80px rgba(26,128,255,0.12), inset 0 0 60px rgba(26,128,255,0.03)"
           : "none",
         transition: "border-color 0.35s ease, box-shadow 0.35s ease",
         cursor: "default",
@@ -51,7 +51,7 @@ function VSLPlayer() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(0,255,135,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,135,0.04) 1px, transparent 1px)",
+            "linear-gradient(rgba(26,128,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(26,128,255,0.04) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
           opacity: hovered ? 1 : 0.5,
           transition: "opacity 0.35s ease",
@@ -68,28 +68,28 @@ function VSLPlayer() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse at 50% 50%, rgba(0,255,135,0.07) 0%, transparent 65%)",
+          background: "radial-gradient(ellipse at 50% 50%, rgba(26,128,255,0.07) 0%, transparent 65%)",
           opacity: hovered ? 1 : 0.4,
           transition: "opacity 0.35s ease",
         }}
       />
       {/* HUD corners */}
-      <div className="absolute top-5 left-5 w-7 h-7" style={{ borderTop: "1.5px solid rgba(0,255,135,0.55)", borderLeft: "1.5px solid rgba(0,255,135,0.55)", borderRadius: "5px 0 0 0" }} />
-      <div className="absolute top-5 right-5 w-7 h-7" style={{ borderTop: "1.5px solid rgba(0,255,135,0.55)", borderRight: "1.5px solid rgba(0,255,135,0.55)", borderRadius: "0 5px 0 0" }} />
-      <div className="absolute bottom-5 left-5 w-7 h-7" style={{ borderBottom: "1.5px solid rgba(0,255,135,0.55)", borderLeft: "1.5px solid rgba(0,255,135,0.55)", borderRadius: "0 0 0 5px" }} />
-      <div className="absolute bottom-5 right-5 w-7 h-7" style={{ borderBottom: "1.5px solid rgba(0,255,135,0.55)", borderRight: "1.5px solid rgba(0,255,135,0.55)", borderRadius: "0 0 5px 0" }} />
+      <div className="absolute top-5 left-5 w-7 h-7" style={{ borderTop: "1.5px solid rgba(26,128,255,0.55)", borderLeft: "1.5px solid rgba(26,128,255,0.55)", borderRadius: "5px 0 0 0" }} />
+      <div className="absolute top-5 right-5 w-7 h-7" style={{ borderTop: "1.5px solid rgba(26,128,255,0.55)", borderRight: "1.5px solid rgba(26,128,255,0.55)", borderRadius: "0 5px 0 0" }} />
+      <div className="absolute bottom-5 left-5 w-7 h-7" style={{ borderBottom: "1.5px solid rgba(26,128,255,0.55)", borderLeft: "1.5px solid rgba(26,128,255,0.55)", borderRadius: "0 0 0 5px" }} />
+      <div className="absolute bottom-5 right-5 w-7 h-7" style={{ borderBottom: "1.5px solid rgba(26,128,255,0.55)", borderRight: "1.5px solid rgba(26,128,255,0.55)", borderRadius: "0 0 5px 0" }} />
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-6">
         <div className="relative">
           <motion.div
             className="absolute inset-0 rounded-full"
-            style={{ background: "rgba(0,255,135,0.06)" }}
+            style={{ background: "rgba(26,128,255,0.06)" }}
             animate={{ scale: [1, 1.8, 1], opacity: [0.6, 0, 0.6] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
             className="absolute inset-0 rounded-full"
-            style={{ background: "rgba(0,255,135,0.04)" }}
+            style={{ background: "rgba(26,128,255,0.04)" }}
             animate={{ scale: [1, 2.5, 1], opacity: [0.4, 0, 0.4] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
           />
@@ -97,21 +97,21 @@ function VSLPlayer() {
             className="relative flex items-center justify-center"
             style={{
               width: 80, height: 80, borderRadius: "50%",
-              background: "rgba(0,255,135,0.1)",
-              border: "1.5px solid rgba(0,255,135,0.5)",
-              boxShadow: hovered ? "0 0 40px rgba(0,255,135,0.3)" : "0 0 20px rgba(0,255,135,0.12)",
+              background: "rgba(26,128,255,0.1)",
+              border: "1.5px solid rgba(26,128,255,0.5)",
+              boxShadow: hovered ? "0 0 40px rgba(26,128,255,0.3)" : "0 0 20px rgba(26,128,255,0.12)",
               transition: "box-shadow 0.35s ease",
             }}
             animate={{ scale: [1, 1.04, 1] }}
             transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <svg viewBox="0 0 24 24" fill="#00ff87" style={{ width: 32, height: 32, marginLeft: 4 }}>
+            <svg viewBox="0 0 24 24" fill="#1A80FF" style={{ width: 32, height: 32, marginLeft: 4 }}>
               <path d="M8 5v14l11-7z" />
             </svg>
           </motion.div>
         </div>
         <div style={{ textAlign: "center", padding: "0 24px" }}>
-          <p style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 700, color: "#f8f8f2", fontSize: "1rem", marginBottom: 6 }}>
+          <p style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, color: "#f8f8f2", fontSize: "1rem", marginBottom: 6 }}>
             Video de presentación — próximamente
           </p>
           <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(248,248,242,0.45)", fontSize: "0.875rem" }}>
@@ -123,18 +123,18 @@ function VSLPlayer() {
           style={{
             position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)",
             padding: "6px 16px", borderRadius: 999,
-            background: "rgba(0,255,135,0.08)", border: "1px solid rgba(0,255,135,0.2)",
+            background: "rgba(26,128,255,0.08)", border: "1px solid rgba(26,128,255,0.2)",
             whiteSpace: "nowrap",
           }}
         >
-          <span style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, fontSize: "0.625rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(0,255,135,0.7)" }}>
+          <span style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "0.625rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(26,128,255,0.7)" }}>
             Sistema Express de Atención IA · 3 min
           </span>
         </div>
       </div>
       {/* Top accent */}
       <div className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(0,255,135,0.7), transparent)" }} />
+        style={{ background: "linear-gradient(90deg, transparent, rgba(26,128,255,0.7), transparent)" }} />
     </div>
   );
 }
@@ -147,7 +147,7 @@ export function VSLSectionIA() {
     <section ref={ref} className="py-16 px-4 relative overflow-hidden" style={{ background: "#040406" }}>
       <div className="absolute top-0 left-0 right-0 h-px beam-divider" />
       <div className="absolute right-0 top-0 w-96 h-64 rounded-full pointer-events-none"
-        style={{ background: "rgba(0,255,135,0.04)", filter: "blur(80px)" }} />
+        style={{ background: "rgba(26,128,255,0.04)", filter: "blur(80px)" }} />
 
       <div className="max-w-4xl mx-auto">
         <motion.div
@@ -156,12 +156,12 @@ export function VSLSectionIA() {
           animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#00ff87", marginBottom: 12 }}>
-            <span style={{ width: 20, height: 1, background: "rgba(0,255,135,0.5)", display: "inline-block" }} />
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#1A80FF", marginBottom: 12 }}>
+            <span style={{ width: 20, height: 1, background: "rgba(26,128,255,0.5)", display: "inline-block" }} />
             Ve el sistema antes de decidir
-            <span style={{ width: 20, height: 1, background: "rgba(0,255,135,0.5)", display: "inline-block" }} />
+            <span style={{ width: 20, height: 1, background: "rgba(26,128,255,0.5)", display: "inline-block" }} />
           </span>
-          <h2 style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 700, fontSize: "clamp(1.5rem, 4vw, 2.5rem)", color: "#f8f8f2", lineHeight: 1.15 }}>
+          <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "clamp(1.5rem, 4vw, 2.5rem)", color: "#f8f8f2", lineHeight: 1.15 }}>
             ¿Cómo funciona el sistema por dentro?
           </h2>
         </motion.div>
@@ -225,7 +225,7 @@ function StepCardAnimated({ step, index, inView }: { step: Step; index: number; 
       {/* Number */}
       <div style={{ marginBottom: 20 }}>
         <span style={{
-          fontFamily: "Space Grotesk, sans-serif",
+          fontFamily: "Poppins, sans-serif",
           fontWeight: 800,
           fontSize: "4rem",
           lineHeight: 1,
@@ -251,7 +251,7 @@ function StepCardAnimated({ step, index, inView }: { step: Step; index: number; 
       }} />
 
       <h3 style={{
-        fontFamily: "Space Grotesk, sans-serif",
+        fontFamily: "Poppins, sans-serif",
         fontWeight: 700,
         fontSize: "1.125rem",
         color: "#f8f8f2",
@@ -278,10 +278,10 @@ export function HowItWorksAnimated({ steps }: { steps: Step[] }) {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="py-20 px-4 relative overflow-hidden" style={{ background: "rgba(0,255,135,0.015)" }}>
+    <section ref={ref} className="py-20 px-4 relative overflow-hidden" style={{ background: "rgba(26,128,255,0.015)" }}>
       <div className="absolute top-0 left-0 right-0 h-px beam-divider" style={{ animationDelay: "0.8s" }} />
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(204,68,255,0.04) 0%, transparent 60%)" }} />
+        style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(77,159,255,0.04) 0%, transparent 60%)" }} />
 
       <div className="max-w-4xl mx-auto">
         <motion.div
@@ -290,12 +290,12 @@ export function HowItWorksAnimated({ steps }: { steps: Step[] }) {
           animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#00ff87", marginBottom: 12 }}>
-            <span style={{ width: 20, height: 1, background: "rgba(0,255,135,0.5)", display: "inline-block" }} />
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#1A80FF", marginBottom: 12 }}>
+            <span style={{ width: 20, height: 1, background: "rgba(26,128,255,0.5)", display: "inline-block" }} />
             Como funciona
-            <span style={{ width: 20, height: 1, background: "rgba(0,255,135,0.5)", display: "inline-block" }} />
+            <span style={{ width: 20, height: 1, background: "rgba(26,128,255,0.5)", display: "inline-block" }} />
           </span>
-          <h2 style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 700, fontSize: "clamp(1.75rem, 5vw, 3rem)", color: "#f8f8f2", lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "clamp(1.75rem, 5vw, 3rem)", color: "#f8f8f2", lineHeight: 1.1 }}>
             3 pasos. Sin complicaciones.
           </h2>
           <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(248,248,242,0.5)", fontSize: "0.95rem", marginTop: 12 }}>
@@ -313,7 +313,7 @@ export function HowItWorksAnimated({ steps }: { steps: Step[] }) {
               left: "calc(16.67% + 14px)",
               right: "calc(16.67% + 14px)",
               height: 1,
-              background: "linear-gradient(90deg, rgba(0,255,135,0.35) 0%, rgba(204,68,255,0.5) 50%, rgba(0,255,135,0.35) 100%)",
+              background: "linear-gradient(90deg, rgba(26,128,255,0.35) 0%, rgba(77,159,255,0.5) 50%, rgba(26,128,255,0.35) 100%)",
               pointerEvents: "none",
             }}
             className="md:!block"
@@ -394,10 +394,10 @@ function IndustryCardAnimated({ item, index, inView }: { item: Industry; index: 
           transition: "box-shadow 0.28s ease",
         }}
       >
-        <Icon style={{ width: 24, height: 24, color: useGreen ? "#00ff87" : "#cc44ff" }} />
+        <Icon style={{ width: 24, height: 24, color: useGreen ? "#1A80FF" : "#4D9FFF" }} />
       </div>
       <p style={{
-        fontFamily: "Space Grotesk, sans-serif",
+        fontFamily: "Poppins, sans-serif",
         fontWeight: 600,
         fontSize: "0.875rem",
         color: hovered ? "#f8f8f2" : "rgba(248,248,242,0.8)",
@@ -424,11 +424,11 @@ export function IndustriesSectionAnimated() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="py-20 px-4 relative overflow-hidden" style={{ background: "rgba(204,68,255,0.02)" }}>
+    <section ref={ref} className="py-20 px-4 relative overflow-hidden" style={{ background: "rgba(77,159,255,0.02)" }}>
       <div className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(204,68,255,0.2), transparent)" }} />
+        style={{ background: "linear-gradient(90deg, transparent, rgba(77,159,255,0.2), transparent)" }} />
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(204,68,255,0.05) 0%, transparent 65%)" }} />
+        style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(77,159,255,0.05) 0%, transparent 65%)" }} />
 
       <div className="max-w-5xl mx-auto">
         <motion.div
@@ -437,14 +437,14 @@ export function IndustriesSectionAnimated() {
           animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#cc44ff", marginBottom: 12 }}>
-            <span style={{ width: 20, height: 1, background: "rgba(204,68,255,0.5)", display: "inline-block" }} />
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4D9FFF", marginBottom: 12 }}>
+            <span style={{ width: 20, height: 1, background: "rgba(77,159,255,0.5)", display: "inline-block" }} />
             Para quien es
-            <span style={{ width: 20, height: 1, background: "rgba(204,68,255,0.5)", display: "inline-block" }} />
+            <span style={{ width: 20, height: 1, background: "rgba(77,159,255,0.5)", display: "inline-block" }} />
           </span>
-          <h2 style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 700, fontSize: "clamp(1.75rem, 5vw, 3rem)", color: "#f8f8f2", lineHeight: 1.15 }}>
+          <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "clamp(1.75rem, 5vw, 3rem)", color: "#f8f8f2", lineHeight: 1.15 }}>
             Si recibes mensajes
-            <span style={{ color: "#cc44ff" }}> y los pierdes</span>,<br />
+            <span style={{ color: "#4D9FFF" }}> y los pierdes</span>,<br />
             esto es para ti.
           </h2>
           <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(248,248,242,0.5)", fontSize: "0.95rem", marginTop: 12 }}>
@@ -465,7 +465,7 @@ export function IndustriesSectionAnimated() {
           transition={{ duration: 0.5, delay: 0.5 }}
           style={{ marginTop: 40, textAlign: "center", maxWidth: 560, margin: "40px auto 0" }}
         >
-          <p style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(248,248,242,0.3)", marginBottom: 10 }}>
+          <p style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(248,248,242,0.3)", marginBottom: 10 }}>
             Para quién NO es
           </p>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.875rem", color: "rgba(248,248,242,0.4)", lineHeight: 1.65 }}>
@@ -475,7 +475,7 @@ export function IndustriesSectionAnimated() {
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(204,68,255,0.15), transparent)" }} />
+        style={{ background: "linear-gradient(90deg, transparent, rgba(77,159,255,0.15), transparent)" }} />
     </section>
   );
 }
@@ -511,12 +511,12 @@ export function IntegrationsStrip() {
           animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.55 }}
         >
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#00ff87", marginBottom: 10 }}>
-            <span style={{ width: 16, height: 1, background: "rgba(0,255,135,0.5)", display: "inline-block" }} />
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#1A80FF", marginBottom: 10 }}>
+            <span style={{ width: 16, height: 1, background: "rgba(26,128,255,0.5)", display: "inline-block" }} />
             Integraciones
-            <span style={{ width: 16, height: 1, background: "rgba(0,255,135,0.5)", display: "inline-block" }} />
+            <span style={{ width: 16, height: 1, background: "rgba(26,128,255,0.5)", display: "inline-block" }} />
           </span>
-          <h2 style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 700, fontSize: "clamp(1.25rem, 3vw, 2rem)", color: "#f8f8f2" }}>
+          <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "clamp(1.25rem, 3vw, 2rem)", color: "#f8f8f2" }}>
             Se conecta con las herramientas que ya usas
           </h2>
         </motion.div>
@@ -575,7 +575,7 @@ function IntegrationBadge({
       }}
     >
       <span style={{
-        fontFamily: "Space Grotesk, sans-serif",
+        fontFamily: "Poppins, sans-serif",
         fontWeight: 600,
         fontSize: "0.8rem",
         color: hovered ? "#f8f8f2" : "rgba(248,248,242,0.65)",

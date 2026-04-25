@@ -127,7 +127,7 @@ export const TestimonialStack = ({
                 className="rounded-2xl p-6 border"
                 style={{
                   background: 'rgba(255,255,255,0.03)',
-                  borderColor: 'rgba(0,255,135,0.15)',
+                  borderColor: 'rgba(26,128,255,0.15)',
                   backdropFilter: 'blur(16px)',
                 }}
               >
@@ -141,7 +141,7 @@ export const TestimonialStack = ({
                   <div>
                     <h3
                       className="font-semibold text-base"
-                      style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+                      style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
                     >
                       {testimonial.name}
                     </h3>
@@ -173,9 +173,9 @@ export const TestimonialStack = ({
                         style={
                           tag.type === 'featured'
                             ? {
-                                background: 'rgba(0,255,135,0.12)',
-                                color: '#00ff87',
-                                border: '1px solid rgba(0,255,135,0.25)',
+                                background: 'rgba(26,128,255,0.12)',
+                                color: '#1A80FF',
+                                border: '1px solid rgba(26,128,255,0.25)',
                               }
                             : {
                                 background: 'rgba(255,255,255,0.06)',
@@ -216,7 +216,7 @@ export const TestimonialStack = ({
             aria-label={`Ir al testimonio ${index + 1}`}
             className="w-2 h-2 rounded-full transition-all duration-300"
             style={{
-              background: activeIndex === index ? '#00ff87' : 'rgba(248,248,242,0.2)',
+              background: activeIndex === index ? '#1A80FF' : 'rgba(248,248,242,0.2)',
               transform: activeIndex === index ? 'scale(1.4)' : 'scale(1)',
             }}
           />

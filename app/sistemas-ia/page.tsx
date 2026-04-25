@@ -130,7 +130,7 @@ const industries = [
 ];
 
 const G = ({ children }: { children: React.ReactNode }) => (
-  <span style={{ color: '#00ff87', fontWeight: 600 }}>{children}</span>
+  <span style={{ color: '#1A80FF', fontWeight: 600 }}>{children}</span>
 );
 
 const faqItems: { question: string; answer: React.ReactNode }[] = [
@@ -176,14 +176,14 @@ function SocialProofBar() {
     <div
       className="w-full py-6 px-4"
       style={{
-        background: 'rgba(0,255,135,0.04)',
-        borderTop: '1px solid rgba(0,255,135,0.1)',
-        borderBottom: '1px solid rgba(0,255,135,0.1)',
+        background: 'rgba(26,128,255,0.04)',
+        borderTop: '1px solid rgba(26,128,255,0.1)',
+        borderBottom: '1px solid rgba(26,128,255,0.1)',
       }}
     >
       <p
         className="text-center text-xs font-semibold tracking-widest uppercase mb-4"
-        style={{ color: 'rgba(248,248,242,0.35)', fontFamily: 'Space Grotesk, sans-serif' }}
+        style={{ color: 'rgba(248,248,242,0.35)', fontFamily: 'Poppins, sans-serif' }}
       >
         Sectores que ya tienen su sistema activo
       </p>
@@ -209,24 +209,24 @@ function ProblemsSection() {
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background:
-            'linear-gradient(90deg, transparent, rgba(204,68,255,0.3), transparent)',
+            'linear-gradient(90deg, transparent, rgba(77,159,255,0.3), transparent)',
         }}
       />
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <span
             className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ color: '#cc44ff', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#4D9FFF', fontFamily: 'Poppins, sans-serif' }}
           >
             El problema real
           </span>
           <h2
             className="text-3xl md:text-5xl font-bold tracking-tight"
-            style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
           >
             Tu equipo pierde leads
             <br />
-            <span style={{ color: '#cc44ff' }}>todos los dias</span>
+            <span style={{ color: '#4D9FFF' }}>todos los dias</span>
           </h2>
           <p
             className="mt-4 max-w-xl mx-auto text-base"
@@ -246,18 +246,18 @@ function ProblemsSection() {
                 className="rounded-2xl p-6 border"
                 style={{
                   background: 'rgba(255,255,255,0.025)',
-                  borderColor: 'rgba(204,68,255,0.15)',
+                  borderColor: 'rgba(77,159,255,0.15)',
                 }}
               >
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-                  style={{ background: 'rgba(204,68,255,0.12)' }}
+                  style={{ background: 'rgba(77,159,255,0.12)' }}
                 >
-                  <Icon className="w-5 h-5" style={{ color: '#cc44ff' }} />
+                  <Icon className="w-5 h-5" style={{ color: '#4D9FFF' }} />
                 </div>
                 <h3
                   className="font-semibold text-base mb-2"
-                  style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+                  style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
                 >
                   {problem.title}
                 </h3>
@@ -280,26 +280,26 @@ function HowItWorksSection() {
   return (
     <section
       className="py-20 px-4 relative"
-      style={{ background: 'rgba(0,255,135,0.02)' }}
+      style={{ background: 'rgba(26,128,255,0.02)' }}
     >
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background:
-            'linear-gradient(90deg, transparent, rgba(0,255,135,0.2), transparent)',
+            'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)',
         }}
       />
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-14">
           <span
             className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ color: '#00ff87', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#1A80FF', fontFamily: 'Poppins, sans-serif' }}
           >
             Como funciona
           </span>
           <h2
             className="text-3xl md:text-5xl font-bold tracking-tight"
-            style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
           >
             3 pasos. Sin complicaciones.
           </h2>
@@ -311,20 +311,20 @@ function HowItWorksSection() {
               <div
                 className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
                 style={{
-                  background: 'rgba(0,255,135,0.1)',
-                  border: '1px solid rgba(0,255,135,0.25)',
+                  background: 'rgba(26,128,255,0.1)',
+                  border: '1px solid rgba(26,128,255,0.25)',
                 }}
               >
                 <span
                   className="text-2xl font-bold"
-                  style={{ color: '#00ff87', fontFamily: 'Space Grotesk, sans-serif' }}
+                  style={{ color: '#1A80FF', fontFamily: 'Poppins, sans-serif' }}
                 >
                   {step.number}
                 </span>
               </div>
               <h3
                 className="font-bold text-lg mb-2"
-                style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+                style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
               >
                 {step.title}
               </h3>
@@ -337,7 +337,7 @@ function HowItWorksSection() {
               {i < steps.length - 1 && (
                 <div
                   className="md:hidden flex justify-center mt-6 mb-2"
-                  style={{ color: 'rgba(0,255,135,0.4)' }}
+                  style={{ color: 'rgba(26,128,255,0.4)' }}
                 >
                   <ArrowRight className="w-5 h-5 rotate-90" />
                 </div>
@@ -357,20 +357,20 @@ function PricingSection() {
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background:
-            'linear-gradient(90deg, transparent, rgba(0,255,135,0.15), transparent)',
+            'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)',
         }}
       />
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <span
             className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ color: '#00ff87', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#1A80FF', fontFamily: 'Poppins, sans-serif' }}
           >
             Planes
           </span>
           <h2
             className="text-3xl md:text-5xl font-bold tracking-tight mb-4"
-            style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
           >
             Elige el nivel
             <br />
@@ -395,29 +395,29 @@ function IndustriesSection() {
   return (
     <section
       className="py-20 px-4 relative"
-      style={{ background: 'rgba(204,68,255,0.03)' }}
+      style={{ background: 'rgba(77,159,255,0.03)' }}
     >
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background:
-            'linear-gradient(90deg, transparent, rgba(204,68,255,0.2), transparent)',
+            'linear-gradient(90deg, transparent, rgba(77,159,255,0.2), transparent)',
         }}
       />
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
           <span
             className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ color: '#cc44ff', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#4D9FFF', fontFamily: 'Poppins, sans-serif' }}
           >
             Para quien es
           </span>
           <h2
             className="text-3xl md:text-5xl font-bold tracking-tight"
-            style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
           >
             Si recibes mensajes
-            <span style={{ color: '#cc44ff' }}> y los pierdes</span>,
+            <span style={{ color: '#4D9FFF' }}> y los pierdes</span>,
             <br />
             esto es para ti.
           </h2>
@@ -436,13 +436,13 @@ function IndustriesSection() {
             >
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3"
-                style={{ background: 'rgba(0,255,135,0.08)' }}
+                style={{ background: 'rgba(26,128,255,0.08)' }}
               >
-                <Icon className="w-6 h-6" style={{ color: '#00ff87' }} />
+                <Icon className="w-6 h-6" style={{ color: '#1A80FF' }} />
               </div>
               <p
                 className="text-sm font-semibold"
-                style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+                style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
               >
                 {label}
               </p>
@@ -460,7 +460,7 @@ function TestimonialsSection() {
       className="py-20 px-4 relative overflow-hidden"
       style={{
         background:
-          'linear-gradient(180deg, rgba(204,68,255,0.05) 0%, rgba(6,6,8,1) 100%)',
+          'linear-gradient(180deg, rgba(77,159,255,0.05) 0%, rgba(6,6,8,1) 100%)',
       }}
     >
       <DottedSurface />
@@ -468,17 +468,17 @@ function TestimonialsSection() {
         <div className="text-center mb-14">
           <span
             className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ color: '#cc44ff', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#4D9FFF', fontFamily: 'Poppins, sans-serif' }}
           >
             Clientes
           </span>
           <h2
             className="text-3xl md:text-5xl font-bold tracking-tight"
-            style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
           >
             Lo que dicen quienes
             <br />
-            <span style={{ color: '#cc44ff' }}>ya tienen su sistema</span>
+            <span style={{ color: '#4D9FFF' }}>ya tienen su sistema</span>
           </h2>
           <p
             className="mt-3 text-sm"
@@ -501,20 +501,20 @@ function FAQSection() {
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background:
-            'linear-gradient(90deg, transparent, rgba(0,255,135,0.15), transparent)',
+            'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)',
         }}
       />
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-14">
           <span
             className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ color: '#00ff87', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#1A80FF', fontFamily: 'Poppins, sans-serif' }}
           >
             Preguntas frecuentes
           </span>
           <h2
             className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
           >
             Lo que suelen preguntar
           </h2>
@@ -529,9 +529,9 @@ function FAQSection() {
             rel="noopener noreferrer"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
-              fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600,
-              fontSize: '0.875rem', color: '#00ff87',
-              borderBottom: '1px solid rgba(0,255,135,0.35)',
+              fontFamily: 'Poppins, sans-serif', fontWeight: 600,
+              fontSize: '0.875rem', color: '#1A80FF',
+              borderBottom: '1px solid rgba(26,128,255,0.35)',
               paddingBottom: 2, textDecoration: 'none',
             }}
           >
@@ -572,19 +572,19 @@ function BotScreenshotsSection() {
 
   return (
     <section className="py-20 px-4 relative overflow-hidden" style={{ background: '#040406' }}>
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0,255,135,0.2), transparent)' }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(0,255,135,0.04) 0%, transparent 65%)' }} />
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(26,128,255,0.04) 0%, transparent 65%)' }} />
 
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#00ff87', fontFamily: 'Space Grotesk, sans-serif' }}>
-            <span style={{ width: 20, height: 1, background: 'rgba(0,255,135,0.5)', display: 'inline-block' }} />
+          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#1A80FF', fontFamily: 'Poppins, sans-serif' }}>
+            <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
             El sistema en acción
-            <span style={{ width: 20, height: 1, background: 'rgba(0,255,135,0.5)', display: 'inline-block' }} />
+            <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
           </span>
-          <h2 className="font-bold tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
+          <h2 className="font-bold tracking-tight" style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
             Así lo ve tu cliente.<br />
-            <span style={{ color: '#00ff87' }}>Así lo ve tu equipo.</span>
+            <span style={{ color: '#1A80FF' }}>Así lo ve tu equipo.</span>
           </h2>
           <p className="mt-4 max-w-lg mx-auto text-sm" style={{ color: 'rgba(248,248,242,0.5)', fontFamily: 'Inter, sans-serif' }}>
             Capturas del sistema funcionando: calificación, agendamiento y seguimiento automático.
@@ -624,8 +624,8 @@ function BotScreenshotsSection() {
               </div>
               {/* Caption */}
               <div className="p-5 mt-2">
-                <span style={{ display: 'inline-block', fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: `rgba(${s.accent},0.8)`, marginBottom: 6 }}>{s.tag}</span>
-                <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: '1rem', color: '#f8f8f2', marginBottom: 6, lineHeight: 1.25 }}>{s.label}</h3>
+                <span style={{ display: 'inline-block', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: `rgba(${s.accent},0.8)`, marginBottom: 6 }}>{s.tag}</span>
+                <h3 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '1rem', color: '#f8f8f2', marginBottom: 6, lineHeight: 1.25 }}>{s.label}</h3>
                 <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: 'rgba(248,248,242,0.5)', lineHeight: 1.6 }}>{s.body}</p>
               </div>
             </div>
@@ -633,7 +633,7 @@ function BotScreenshotsSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0,255,135,0.15), transparent)' }} />
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)' }} />
     </section>
   );
 }
@@ -653,19 +653,19 @@ const vsRows = [
 
 function VsSimpleBotSection() {
   return (
-    <section className="py-20 px-4 relative overflow-hidden" style={{ background: 'rgba(0,255,135,0.015)' }}>
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0,255,135,0.2), transparent)' }} />
+    <section className="py-20 px-4 relative overflow-hidden" style={{ background: 'rgba(26,128,255,0.015)' }}>
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
 
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#00ff87', fontFamily: 'Space Grotesk, sans-serif' }}>
-            <span style={{ width: 20, height: 1, background: 'rgba(0,255,135,0.5)', display: 'inline-block' }} />
+          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#1A80FF', fontFamily: 'Poppins, sans-serif' }}>
+            <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
             El diferencial
-            <span style={{ width: 20, height: 1, background: 'rgba(0,255,135,0.5)', display: 'inline-block' }} />
+            <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
           </span>
-          <h2 className="font-bold tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
+          <h2 className="font-bold tracking-tight" style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
             No es un chatbot genérico.<br />
-            <span style={{ color: '#00ff87' }}>Es un sistema comercial.</span>
+            <span style={{ color: '#1A80FF' }}>Es un sistema comercial.</span>
           </h2>
           <p className="mt-4 max-w-lg mx-auto text-sm" style={{ color: 'rgba(248,248,242,0.5)', fontFamily: 'Inter, sans-serif' }}>
             Un bot simple responde mensajes. Este sistema califica, agenda, hace seguimiento y prospecta — sin intervención humana.
@@ -676,13 +676,13 @@ function VsSimpleBotSection() {
           {/* Header */}
           <div className="grid grid-cols-3" style={{ background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
             <div className="py-4 px-4">
-              <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 600, fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(248,248,242,0.35)' }}>Función</span>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(248,248,242,0.35)' }}>Función</span>
             </div>
             <div className="py-4 px-4 flex items-center justify-center" style={{ borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
-              <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: 'rgba(248,248,242,0.4)' }}>Bot genérico</span>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: 'rgba(248,248,242,0.4)' }}>Bot genérico</span>
             </div>
-            <div className="py-4 px-4 flex items-center justify-center" style={{ borderLeft: '1px solid rgba(0,255,135,0.2)', background: 'rgba(0,255,135,0.06)' }}>
-              <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: '#00ff87' }}>RESUELTO Sistema IA</span>
+            <div className="py-4 px-4 flex items-center justify-center" style={{ borderLeft: '1px solid rgba(26,128,255,0.2)', background: 'rgba(26,128,255,0.06)' }}>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: '#1A80FF' }}>RESUELTO Sistema IA</span>
             </div>
           </div>
           {vsRows.map((row, i) => (
@@ -690,12 +690,12 @@ function VsSimpleBotSection() {
               <div className="py-3 px-4 flex items-center" style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}>
                 <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: 'rgba(248,248,242,0.7)', fontWeight: 500 }}>{row.feature}</span>
               </div>
-              <div className="py-3 px-4 flex items-start gap-2" style={{ borderRight: '1px solid rgba(0,255,135,0.1)' }}>
+              <div className="py-3 px-4 flex items-start gap-2" style={{ borderRight: '1px solid rgba(26,128,255,0.1)' }}>
                 <X style={{ width: 13, height: 13, color: 'rgba(255,80,80,0.7)', flexShrink: 0, marginTop: 2 }} />
                 <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'rgba(248,248,242,0.38)' }}>{row.simple}</span>
               </div>
-              <div className="py-3 px-4 flex items-start gap-2" style={{ background: 'rgba(0,255,135,0.03)' }}>
-                <CheckCircle2 style={{ width: 13, height: 13, color: '#00ff87', flexShrink: 0, marginTop: 2 }} />
+              <div className="py-3 px-4 flex items-start gap-2" style={{ background: 'rgba(26,128,255,0.03)' }}>
+                <CheckCircle2 style={{ width: 13, height: 13, color: '#1A80FF', flexShrink: 0, marginTop: 2 }} />
                 <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'rgba(248,248,242,0.75)' }}>{row.resuelto}</span>
               </div>
             </div>
@@ -703,7 +703,7 @@ function VsSimpleBotSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0,255,135,0.15), transparent)' }} />
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)' }} />
     </section>
   );
 }
@@ -713,18 +713,18 @@ function VsSimpleBotSection() {
 function GuaranteeSection() {
   return (
     <section className="py-20 px-4 relative overflow-hidden" style={{ background: '#040406' }}>
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0,255,135,0.2), transparent)' }} />
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
 
       <div className="max-w-3xl mx-auto">
-        <div className="rounded-3xl p-8 md:p-12 text-center relative overflow-hidden" style={{ background: 'rgba(0,255,135,0.04)', border: '1px solid rgba(0,255,135,0.18)' }}>
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(0,255,135,0.1) 0%, transparent 60%)' }} />
-          <div className="relative z-10 w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl" style={{ background: 'rgba(0,255,135,0.1)', border: '1px solid rgba(0,255,135,0.3)', boxShadow: '0 0 40px rgba(0,255,135,0.15)' }}>
-            <ShieldCheck style={{ width: 32, height: 32, color: '#00ff87' }} />
+        <div className="rounded-3xl p-8 md:p-12 text-center relative overflow-hidden" style={{ background: 'rgba(26,128,255,0.04)', border: '1px solid rgba(26,128,255,0.18)' }}>
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(26,128,255,0.1) 0%, transparent 60%)' }} />
+          <div className="relative z-10 w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl" style={{ background: 'rgba(26,128,255,0.1)', border: '1px solid rgba(26,128,255,0.3)', boxShadow: '0 0 40px rgba(26,128,255,0.15)' }}>
+            <ShieldCheck style={{ width: 32, height: 32, color: '#1A80FF' }} />
           </div>
-          <span className="relative z-10 inline-block text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#00ff87', fontFamily: 'Space Grotesk, sans-serif' }}>
+          <span className="relative z-10 inline-block text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#1A80FF', fontFamily: 'Poppins, sans-serif' }}>
             Garantía total
           </span>
-          <h2 className="relative z-10 font-bold mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', color: '#f8f8f2', lineHeight: 1.2 }}>
+          <h2 className="relative z-10 font-bold mb-4" style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', color: '#f8f8f2', lineHeight: 1.2 }}>
             Si en 30 días el sistema no funciona como acordamos — te devolvemos el 100%.
           </h2>
           <p className="relative z-10 mb-8 max-w-xl mx-auto" style={{ fontFamily: 'Inter, sans-serif', fontSize: '1rem', color: 'rgba(248,248,242,0.6)', lineHeight: 1.65 }}>
@@ -737,7 +737,7 @@ function GuaranteeSection() {
               'Sin contratos de permanencia ni cláusulas ocultas',
             ].map((item) => (
               <div key={item} className="flex items-start gap-2 flex-1">
-                <CheckCircle2 style={{ width: 15, height: 15, color: '#00ff87', flexShrink: 0, marginTop: 2 }} />
+                <CheckCircle2 style={{ width: 15, height: 15, color: '#1A80FF', flexShrink: 0, marginTop: 2 }} />
                 <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: 'rgba(248,248,242,0.65)' }}>{item}</span>
               </div>
             ))}
@@ -745,7 +745,7 @@ function GuaranteeSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0,255,135,0.15), transparent)' }} />
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)' }} />
     </section>
   );
 }
@@ -758,7 +758,7 @@ function FinalCTASection() {
       className="py-24 px-4 relative overflow-hidden"
       style={{
         background:
-          'linear-gradient(135deg, rgba(0,255,135,0.06) 0%, rgba(6,6,8,1) 40%, rgba(204,68,255,0.06) 100%)',
+          'linear-gradient(135deg, rgba(26,128,255,0.06) 0%, rgba(6,6,8,1) 40%, rgba(77,159,255,0.06) 100%)',
       }}
     >
       <CelestialOrrery />
@@ -766,18 +766,18 @@ function FinalCTASection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 60% 50% at 20% 50%, rgba(0,255,135,0.07) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 50%, rgba(204,68,255,0.07) 0%, transparent 70%)',
+            'radial-gradient(ellipse 60% 50% at 20% 50%, rgba(26,128,255,0.07) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 50%, rgba(77,159,255,0.07) 0%, transparent 70%)',
         }}
       />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <h2
           className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
-          style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+          style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
         >
           Sistema instalado en 5 días.
           <br />
-          <span style={{ color: '#00ff87' }}>Leads respondidos solos.</span>
+          <span style={{ color: '#1A80FF' }}>Leads respondidos solos.</span>
         </h2>
 
         <p
@@ -795,7 +795,7 @@ function FinalCTASection() {
             'Sin contratos ni mensualidades forzadas',
           ].map((item) => (
             <li key={item} className="flex items-center gap-3">
-              <span style={{ color: '#00ff87', fontSize: '1rem', flexShrink: 0 }}>✓</span>
+              <span style={{ color: '#1A80FF', fontSize: '1rem', flexShrink: 0 }}>✓</span>
               <span style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.8)', fontSize: '0.9rem' }}>
                 {item}
               </span>
@@ -815,10 +815,10 @@ function FinalCTASection() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl font-bold text-base transition-all duration-300 hover:scale-105"
             style={{
-              background: '#00ff87',
+              background: '#1A80FF',
               color: '#040406',
-              fontFamily: 'Space Grotesk, sans-serif',
-              boxShadow: '0 0 30px rgba(0,255,135,0.3)',
+              fontFamily: 'Poppins, sans-serif',
+              boxShadow: '0 0 30px rgba(26,128,255,0.3)',
             }}
           >
             <Phone className="w-5 h-5" />

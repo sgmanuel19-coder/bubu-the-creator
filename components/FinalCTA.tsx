@@ -42,7 +42,7 @@ export default function FinalCTA() {
 
               {/* Outer ring — green→purple gradient */}
               <div className="relative w-44 h-44 rounded-full p-[2.5px]"
-                style={{ background: "linear-gradient(135deg, #00d4ff 0%, #cc44ff 100%)" }}>
+                style={{ background: "linear-gradient(135deg, #1A80FF 0%, #4D9FFF 100%)" }}>
                 <div className="w-full h-full rounded-full overflow-hidden bg-[#060709] flex items-center justify-center relative">
 
                   {CTA_PHOTO !== "[FOTO_CTA_CIRCULAR]" ? (

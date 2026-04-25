@@ -35,10 +35,10 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
             onClick={() => setIsMonthly(false)}
             className="px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200"
             style={{
-              fontFamily: 'Space Grotesk, sans-serif',
-              background: !isMonthly ? 'rgba(0,255,135,0.15)' : 'transparent',
-              color: !isMonthly ? '#00ff87' : 'rgba(248,248,242,0.5)',
-              border: !isMonthly ? '1px solid rgba(0,255,135,0.3)' : '1px solid transparent',
+              fontFamily: 'Poppins, sans-serif',
+              background: !isMonthly ? 'rgba(26,128,255,0.15)' : 'transparent',
+              color: !isMonthly ? '#1A80FF' : 'rgba(248,248,242,0.5)',
+              border: !isMonthly ? '1px solid rgba(26,128,255,0.3)' : '1px solid transparent',
             }}
           >
             Setup unico
@@ -47,10 +47,10 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
             onClick={() => setIsMonthly(true)}
             className="px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200"
             style={{
-              fontFamily: 'Space Grotesk, sans-serif',
-              background: isMonthly ? 'rgba(0,255,135,0.15)' : 'transparent',
-              color: isMonthly ? '#00ff87' : 'rgba(248,248,242,0.5)',
-              border: isMonthly ? '1px solid rgba(0,255,135,0.3)' : '1px solid transparent',
+              fontFamily: 'Poppins, sans-serif',
+              background: isMonthly ? 'rgba(26,128,255,0.15)' : 'transparent',
+              color: isMonthly ? '#1A80FF' : 'rgba(248,248,242,0.5)',
+              border: isMonthly ? '1px solid rgba(26,128,255,0.3)' : '1px solid transparent',
             }}
           >
             Setup + Mensualidad
@@ -70,10 +70,10 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
             className="relative rounded-2xl p-6 flex flex-col"
             style={{
               background: plan.recommended
-                ? 'rgba(0,255,135,0.05)'
+                ? 'rgba(26,128,255,0.05)'
                 : 'rgba(255,255,255,0.03)',
               border: plan.recommended
-                ? '1px solid rgba(0,255,135,0.35)'
+                ? '1px solid rgba(26,128,255,0.35)'
                 : '1px solid rgba(255,255,255,0.08)',
             }}
           >
@@ -81,9 +81,9 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
               <div
                 className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1 rounded-full text-xs font-semibold"
                 style={{
-                  background: '#00ff87',
+                  background: '#1A80FF',
                   color: '#040406',
-                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                 }}
               >
                 <Zap className="w-3 h-3" />
@@ -95,8 +95,8 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
               <p
                 className="text-xs font-semibold tracking-widest uppercase mb-2"
                 style={{
-                  color: plan.recommended ? '#00ff87' : 'rgba(248,248,242,0.4)',
-                  fontFamily: 'Space Grotesk, sans-serif',
+                  color: plan.recommended ? '#1A80FF' : 'rgba(248,248,242,0.4)',
+                  fontFamily: 'Poppins, sans-serif',
                 }}
               >
                 {plan.name}
@@ -104,7 +104,7 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
               <div className="flex items-end gap-1 mb-2">
                 <span
                   className="text-4xl font-bold"
-                  style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}
+                  style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
                 >
                   {isMonthly && plan.monthlyPrice ? plan.monthlyPrice : plan.price}
                 </span>
@@ -130,7 +130,7 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
                 <li key={fi} className="flex items-start gap-2.5">
                   <CheckCircle
                     className="w-4 h-4 mt-0.5 flex-shrink-0"
-                    style={{ color: plan.recommended ? '#00ff87' : 'rgba(0,255,135,0.5)' }}
+                    style={{ color: plan.recommended ? '#1A80FF' : 'rgba(26,128,255,0.5)' }}
                   />
                   <span
                     className="text-sm leading-snug"
@@ -148,8 +148,8 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
               rel="noopener noreferrer"
               className="block text-center py-3 px-6 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-105"
               style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                background: plan.recommended ? '#00ff87' : 'rgba(255,255,255,0.06)',
+                fontFamily: 'Poppins, sans-serif',
+                background: plan.recommended ? '#1A80FF' : 'rgba(255,255,255,0.06)',
                 color: plan.recommended ? '#040406' : '#f8f8f2',
                 border: plan.recommended ? 'none' : '1px solid rgba(255,255,255,0.12)',
               }}
@@ -174,13 +174,13 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
         className="flex items-start gap-4 mt-8 mx-auto px-6 py-5 rounded-2xl"
         style={{
           maxWidth: 560,
-          border: '1px solid rgba(0,255,135,0.2)',
-          background: 'rgba(0,255,135,0.03)',
+          border: '1px solid rgba(26,128,255,0.2)',
+          background: 'rgba(26,128,255,0.03)',
         }}
       >
-        <Shield className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#00ff87' }} />
+        <Shield className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#1A80FF' }} />
         <div>
-          <p className="font-semibold text-sm mb-1" style={{ color: '#f8f8f2', fontFamily: 'Space Grotesk, sans-serif' }}>
+          <p className="font-semibold text-sm mb-1" style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}>
             Garantía de entrega
           </p>
           <p className="text-xs leading-relaxed" style={{ color: 'rgba(248,248,242,0.55)', fontFamily: 'Inter, sans-serif' }}>

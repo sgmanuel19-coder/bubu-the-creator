@@ -30,9 +30,9 @@ export function TestimonialCard({
   const isFront = position === "front";
 
   const isGreen = color === "green";
-  const accentColor = isGreen ? "#00d4ff" : "#cc44ff";
-  const borderColor = isGreen ? "rgba(0,212,255,0.25)" : "rgba(204,68,255,0.25)";
-  const bgGlow     = isGreen ? "rgba(0,212,255,0.04)" : "rgba(204,68,255,0.04)";
+  const accentColor = isGreen ? "#1A80FF" : "#4D9FFF";
+  const borderColor = isGreen ? "rgba(26,128,255,0.25)" : "rgba(77,159,255,0.25)";
+  const bgGlow     = isGreen ? "rgba(26,128,255,0.04)" : "rgba(77,159,255,0.04)";
 
   // Initials from author name
   const initials = author

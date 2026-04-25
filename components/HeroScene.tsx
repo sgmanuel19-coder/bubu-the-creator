@@ -77,18 +77,18 @@ export default function HeroScene() {
       <CameraRig />
 
       {/* Green shapes */}
-      <Shape position={[-5,  1.5, -2]} type="torus" color="#00d4ff" speed={0.4} phase={0}   rx={0.003} ry={0.005} />
-      <Shape position={[ 4,  2.0, -3]} type="icosa" color="#00d4ff" speed={0.35} phase={1.2} rx={0.005} ry={0.003} />
-      <Shape position={[-3, -2.0, -1]} type="octa"  color="#00d4ff" speed={0.5} phase={2.5}  rx={0.004} ry={0.006} />
+      <Shape position={[-5,  1.5, -2]} type="torus" color="#1A80FF" speed={0.4} phase={0}   rx={0.003} ry={0.005} />
+      <Shape position={[ 4,  2.0, -3]} type="icosa" color="#1A80FF" speed={0.35} phase={1.2} rx={0.005} ry={0.003} />
+      <Shape position={[-3, -2.0, -1]} type="octa"  color="#1A80FF" speed={0.5} phase={2.5}  rx={0.004} ry={0.006} />
 
       {/* Purple shapes */}
-      <Shape position={[ 5, -1.5, -2]} type="torus" color="#cc44ff" speed={0.38} phase={0.8} rx={0.004} ry={0.004} />
-      <Shape position={[-4,  0.5, -3]} type="icosa" color="#cc44ff" speed={0.32} phase={1.8} rx={0.003} ry={0.007} />
-      <Shape position={[ 3,  2.5, -1]} type="octa"  color="#cc44ff" speed={0.45} phase={3.1} rx={0.006} ry={0.003} />
+      <Shape position={[ 5, -1.5, -2]} type="torus" color="#4D9FFF" speed={0.38} phase={0.8} rx={0.004} ry={0.004} />
+      <Shape position={[-4,  0.5, -3]} type="icosa" color="#4D9FFF" speed={0.32} phase={1.8} rx={0.003} ry={0.007} />
+      <Shape position={[ 3,  2.5, -1]} type="octa"  color="#4D9FFF" speed={0.45} phase={3.1} rx={0.006} ry={0.003} />
 
       {/* Small accents */}
-      <Shape position={[ 1.5, -1, -1]} type="icosa" color="#00d4ff" speed={0.55} phase={0.5} rx={0.007} ry={0.005} />
-      <Shape position={[-2,   2, -2]}  type="octa"  color="#cc44ff" speed={0.5}  phase={2.0} rx={0.005} ry={0.008} />
+      <Shape position={[ 1.5, -1, -1]} type="icosa" color="#1A80FF" speed={0.55} phase={0.5} rx={0.007} ry={0.005} />
+      <Shape position={[-2,   2, -2]}  type="octa"  color="#4D9FFF" speed={0.5}  phase={2.0} rx={0.005} ry={0.008} />
     </Canvas>
   );
 }

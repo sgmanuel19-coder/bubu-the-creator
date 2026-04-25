@@ -16,7 +16,7 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
         <div className="w-full h-full flex items-center justify-center">
           <div
             className="w-12 h-12 rounded-full border-2 animate-spin"
-            style={{ borderColor: 'rgba(0,255,135,0.2)', borderTopColor: '#00ff87' }}
+            style={{ borderColor: 'rgba(26,128,255,0.2)', borderTopColor: '#1A80FF' }}
           />
         </div>
       }

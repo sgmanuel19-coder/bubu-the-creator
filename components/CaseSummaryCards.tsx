@@ -103,8 +103,8 @@ function StatBar({
           className="h-full rounded-full"
           style={{
             background: isGreen
-              ? "linear-gradient(90deg, #00d4ff 0%, #00ff87 100%)"
-              : "linear-gradient(90deg, #a020f0 0%, #cc44ff 100%)",
+              ? "linear-gradient(90deg, #1A80FF 0%, #4D9FFF 100%)"
+              : "linear-gradient(90deg, #0A4DAA 0%, #4D9FFF 100%)",
           }}
           initial={{ width: "0%" }}
           animate={{ width: trigger ? `${value}%` : "0%" }}
@@ -157,8 +157,8 @@ function AnimCounter({
       style={{
         fontSize: "clamp(3rem, 5vw, 4.5rem)",
         background: isGreen
-          ? "linear-gradient(135deg, #00d4ff 0%, #00ff87 60%)"
-          : "linear-gradient(135deg, #cc44ff 0%, #a020f0 60%)",
+          ? "linear-gradient(135deg, #1A80FF 0%, #4D9FFF 60%)"
+          : "linear-gradient(135deg, #4D9FFF 0%, #0A4DAA 60%)",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
         backgroundClip: "text",
@@ -192,14 +192,14 @@ function RadialRing({
         <motion.circle
           cx="36" cy="36" r={r}
           fill="none"
-          stroke={isGreen ? "#00d4ff" : "#cc44ff"}
+          stroke={isGreen ? "#1A80FF" : "#4D9FFF"}
           strokeWidth="4"
           strokeLinecap="round"
           strokeDasharray={circ}
           initial={{ strokeDashoffset: circ }}
           animate={{ strokeDashoffset: trigger ? circ - dash : circ }}
           transition={{ duration: 1.3, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.2 }}
-          style={{ filter: `drop-shadow(0 0 4px ${isGreen ? "#00d4ff88" : "#cc44ff88"})` }}
+          style={{ filter: `drop-shadow(0 0 4px ${isGreen ? "#1A80FF88" : "#4D9FFF88"})` }}
         />
       </svg>
       {/* Center value */}
@@ -225,7 +225,7 @@ function CaseCard({ caso, index }: { caso: typeof SITE.proof.cases[0]; index: nu
 
   if (!vis) return null;
 
-  const accentRgb = isGreen ? "0,212,255" : "204,68,255";
+  const accentRgb = isGreen ? "26,128,255" : "77,159,255";
   const accentClass = isGreen ? "text-neon-green" : "text-neon-purple";
   const borderIdle = `rgba(${accentRgb},0.12)`;
   const borderHover = `rgba(${accentRgb},0.55)`;
@@ -258,8 +258,8 @@ function CaseCard({ caso, index }: { caso: typeof SITE.proof.cases[0]; index: nu
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background: isGreen
-            ? "linear-gradient(90deg, rgba(0,212,255,0.9) 0%, rgba(0,255,135,0.5) 50%, transparent 100%)"
-            : "linear-gradient(90deg, rgba(204,68,255,0.9) 0%, rgba(160,32,240,0.5) 50%, transparent 100%)",
+            ? "linear-gradient(90deg, rgba(26,128,255,0.9) 0%, rgba(77,159,255,0.5) 50%, transparent 100%)"
+            : "linear-gradient(90deg, rgba(77,159,255,0.9) 0%, rgba(10,77,170,0.5) 50%, transparent 100%)",
         }}
         animate={{ opacity: hovered ? 1 : 0.35 }}
         transition={{ duration: 0.25 }}
@@ -433,8 +433,8 @@ export default function CaseSummaryCards() {
                 transition={{ duration: 0.5, delay: i * 0.06 }}
                 className="rounded-xl border px-4 py-3 text-center"
                 style={{
-                  border: `1px solid rgba(${isG ? "0,212,255" : "204,68,255"},0.12)`,
-                  background: `rgba(${isG ? "0,212,255" : "204,68,255"},0.03)`,
+                  border: `1px solid rgba(${isG ? "26,128,255" : "77,159,255"},0.12)`,
+                  background: `rgba(${isG ? "26,128,255" : "77,159,255"},0.03)`,
                 }}
               >
                 <p className={`font-display font-black text-xl ${isG ? "text-neon-green" : "text-neon-purple"}`}>

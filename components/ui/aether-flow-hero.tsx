@@ -159,7 +159,7 @@ const AetherFlowHero = () => {
       {/* Spotlight */}
       <Spotlight
         className="-top-40 left-0 md:left-40 md:-top-20"
-        fill="rgba(0,255,135,0.5)"
+        fill="rgba(26,128,255,0.5)"
       />
 
       {/* Content: left text + right Spline */}
@@ -173,10 +173,10 @@ const AetherFlowHero = () => {
             initial="hidden"
             animate="visible"
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border mb-7"
-            style={{ background: 'rgba(0,255,135,0.08)', borderColor: 'rgba(0,255,135,0.25)' }}
+            style={{ background: 'rgba(26,128,255,0.08)', borderColor: 'rgba(26,128,255,0.25)' }}
           >
-            <Zap className="h-4 w-4" style={{ color: '#00ff87' }} />
-            <span className="text-sm font-medium" style={{ color: '#00ff87', fontFamily: 'Space Grotesk, sans-serif' }}>
+            <Zap className="h-4 w-4" style={{ color: '#1A80FF' }} />
+            <span className="text-sm font-medium" style={{ color: '#1A80FF', fontFamily: 'Poppins, sans-serif' }}>
               Automatizacion Comercial con IA
             </span>
           </motion.div>
@@ -187,7 +187,7 @@ const AetherFlowHero = () => {
             initial="hidden"
             animate="visible"
             className="font-bold tracking-tighter mb-5 leading-[1.05]"
-            style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(2.25rem, 5vw, 4.5rem)' }}
+            style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2.25rem, 5vw, 4.5rem)' }}
           >
             <span
               className="glitch-text"
@@ -202,7 +202,7 @@ const AetherFlowHero = () => {
               delay={950}
               speed={52}
               style={{
-                background: 'linear-gradient(90deg, #00ff87, #cc44ff)',
+                background: 'linear-gradient(90deg, #1A80FF, #4D9FFF)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -235,15 +235,15 @@ const AetherFlowHero = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base w-full sm:w-auto"
               style={{
-                background: '#00ff87',
+                background: '#1A80FF',
                 color: '#040406',
-                fontFamily: 'Space Grotesk, sans-serif',
+                fontFamily: 'Poppins, sans-serif',
               }}
               animate={{
                 boxShadow: [
-                  '0 0 20px rgba(0,255,135,0.3)',
-                  '0 0 52px rgba(0,255,135,0.6), 0 0 100px rgba(0,255,135,0.15)',
-                  '0 0 20px rgba(0,255,135,0.3)',
+                  '0 0 20px rgba(26,128,255,0.3)',
+                  '0 0 52px rgba(26,128,255,0.6), 0 0 100px rgba(26,128,255,0.15)',
+                  '0 0 20px rgba(26,128,255,0.3)',
                 ],
               }}
               transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
@@ -256,10 +256,10 @@ const AetherFlowHero = () => {
               href="#paquetes"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300 hover:scale-105 border w-full sm:w-auto"
               style={{
-                borderColor: 'rgba(204,68,255,0.4)',
-                color: '#cc44ff',
-                background: 'rgba(204,68,255,0.08)',
-                fontFamily: 'Space Grotesk, sans-serif',
+                borderColor: 'rgba(77,159,255,0.4)',
+                color: '#4D9FFF',
+                background: 'rgba(77,159,255,0.08)',
+                fontFamily: 'Poppins, sans-serif',
               }}
             >
               Ver paquetes
@@ -279,8 +279,8 @@ const AetherFlowHero = () => {
               style={{ color: 'rgba(248,248,242,0.4)', fontFamily: 'Inter, sans-serif' }}
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: '#00ff87' }} />
-                <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: '#00ff87' }} />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: '#1A80FF' }} />
+                <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: '#1A80FF' }} />
               </span>
               2 cupos disponibles — proyectos Q2 2026
             </span>
@@ -299,7 +299,7 @@ const AetherFlowHero = () => {
             <div
               className="absolute inset-0 rounded-full pointer-events-none"
               style={{
-                background: 'radial-gradient(ellipse at center, rgba(204,68,255,0.1) 0%, rgba(0,255,135,0.06) 50%, transparent 75%)',
+                background: 'radial-gradient(ellipse at center, rgba(77,159,255,0.1) 0%, rgba(26,128,255,0.06) 50%, transparent 75%)',
                 transform: 'scale(1.15)',
               }}
             />
@@ -307,7 +307,7 @@ const AetherFlowHero = () => {
             <motion.div
               className="absolute inset-0 rounded-full pointer-events-none"
               style={{
-                background: 'conic-gradient(from 0deg, rgba(0,255,135,0.8) 0%, rgba(204,68,255,0.8) 40%, rgba(0,255,135,0.1) 60%, rgba(204,68,255,0.8) 80%, rgba(0,255,135,0.8) 100%)',
+                background: 'conic-gradient(from 0deg, rgba(26,128,255,0.8) 0%, rgba(77,159,255,0.8) 40%, rgba(26,128,255,0.1) 60%, rgba(77,159,255,0.8) 80%, rgba(26,128,255,0.8) 100%)',
                 padding: 1.5,
                 borderRadius: '50%',
               }}
@@ -320,8 +320,8 @@ const AetherFlowHero = () => {
             <div
               className="absolute inset-0 rounded-full pointer-events-none"
               style={{
-                border: '1px solid rgba(0,255,135,0.12)',
-                boxShadow: '0 0 40px rgba(0,255,135,0.08), inset 0 0 40px rgba(204,68,255,0.06)',
+                border: '1px solid rgba(26,128,255,0.12)',
+                boxShadow: '0 0 40px rgba(26,128,255,0.08), inset 0 0 40px rgba(77,159,255,0.06)',
               }}
             />
             {/* Clipped robot */}
