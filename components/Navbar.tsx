@@ -69,17 +69,17 @@ export default function Navbar() {
               <Image
                 src="/images/logo-mark.png"
                 alt="RESUELTO logo"
-                width={32}
-                height={32}
+                width={44}
+                height={44}
                 className="relative object-contain"
               />
             </div>
             <span
               style={{
                 fontFamily: "var(--font-poppins), sans-serif",
-                fontWeight: 500,
-                letterSpacing: "0.5em",
-                fontSize: "0.75rem",
+                fontWeight: 600,
+                letterSpacing: "0.45em",
+                fontSize: "0.85rem",
                 color: "#EEEBD4",
                 textTransform: "uppercase",
                 lineHeight: 1,
