@@ -73,8 +73,9 @@ export const metadata: Metadata = {
     images: ["/opengraph-image"],
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/images/logo-mark.png",
+    shortcut: "/images/logo-mark.png",
+    apple: "/images/logo-mark.png",
   },
   robots: {
     index: true,
