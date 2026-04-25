@@ -12,7 +12,6 @@ const navLinks = [
   { label: "Sobre mí", href: "/sobre-mi" },
   { label: "Casos", href: "/casos" },
   { label: "Servicios", href: "/servicios" },
-  { label: "Contacto", href: "/contacto" },
 ];
 
 export default function Navbar({ minimal = false }: { minimal?: boolean }) {
@@ -111,9 +110,9 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
           {/* CTA — oculto en modo minimal */}
           {!minimal && (
             <div className="hidden md:flex">
-              <Link href="/contacto" className="btn-glow text-sm py-2.5 px-6">
+              <a href={SITE.links.whatsapp} className="btn-glow text-sm py-2.5 px-6" target="_blank" rel="noopener noreferrer">
                 Hablemos <span className="ml-1">→</span>
-              </Link>
+              </a>
             </div>
           )}
 
@@ -150,13 +149,15 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/contacto"
+            <a
+              href={SITE.links.whatsapp}
               onClick={() => setMenuOpen(false)}
               className="btn-glow mt-2 justify-center text-sm py-3 px-6"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Hablemos →
-            </Link>
+            </a>
           </motion.div>
         )}
       </div>
