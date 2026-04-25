@@ -96,39 +96,13 @@ export default function Hero() {
           <div className="holo-border holo-border-hover">
             <div className="relative rounded-[calc(1.25rem-1px)] overflow-hidden bg-[#060810] aspect-video">
 
-              {/* ── VSL PLACEHOLDER ──
-                  Para activar reemplaza este bloque por:
-                  <video autoPlay muted loop playsInline src="/vsl.mp4"
-                         className="absolute inset-0 w-full h-full object-cover" />
-              ── */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-6">
-                {/* Play button */}
-                <div className="relative">
-                  <div className="absolute -inset-4 rounded-full bg-neon-green/15 blur-xl animate-pulse" />
-                  <motion.div
-                    animate={{ scale: [1, 1.08, 1] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="relative w-24 h-24 rounded-full border-2 border-neon-green/60
-                                bg-neon-green/10 backdrop-blur-sm flex items-center justify-center
-                                hover:bg-neon-green/20 transition-all duration-300"
-                  >
-                    <div className="w-0 h-0 ml-2
-                                    border-t-[12px] border-t-transparent
-                                    border-l-[22px] border-l-neon-green
-                                    border-b-[12px] border-b-transparent
-                                    drop-shadow-[0_0_10px_rgba(0,212,255,0.9)]" />
-                  </motion.div>
-                </div>
-                <div className="text-center">
-                  <p className="text-neon-green font-display font-bold text-base tracking-[0.2em] uppercase mb-1">
-                    VIDEO VSL
-                  </p>
-                  <p className="text-muted text-sm">
-                    Placeholder — sube tu video como{" "}
-                    <code className="text-neon-green/70 text-xs">/public/vsl.mp4</code>
-                  </p>
-                </div>
-              </div>
+              <iframe
+                src="https://www.youtube.com/embed/WLtnDdsYFqc"
+                title="Video Sales Letter - Resuelto Agency"
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
 
               {/* Scan line */}
               <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -145,13 +119,6 @@ export default function Hero() {
               <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-neon-purple/40 rounded-bl" />
               <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-neon-purple/60 rounded-br" />
 
-              {/* Duration badge */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-                <span className="px-4 py-1.5 rounded-full bg-bg/85 backdrop-blur-sm border border-neon-green/20
-                                 text-[11px] font-display text-neon-green/70 tracking-widest uppercase">
-                  VSL · DURACIÓN
-                </span>
-              </div>
             </div>
           </div>
 

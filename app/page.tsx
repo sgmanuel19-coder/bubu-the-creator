@@ -4,7 +4,6 @@ import Problem from "@/components/Problem";
 import Authority from "@/components/Authority";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
-import VSLSection from "@/components/VSLSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -18,7 +17,6 @@ export default function Home() {
     <main className="relative overflow-hidden">
       <Authority />
       <FAQ />
-      <VSLSection />
       <FinalCTA />
       <Footer />
     </main>
