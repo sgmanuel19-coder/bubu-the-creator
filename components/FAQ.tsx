@@ -7,28 +7,28 @@ import { SITE } from "@/lib/constants";
 
 const faqs = [
   {
-    q: "¿Cuánto es la inversión?",
-    a: "Hay tres planes: Señal ($500 +IGV, pago único) para probar con un servicio específico; Presencia ($1,000/mes +IGV, mín. 3 meses) para presencia activa sostenida; Autoridad ($3,000 +IGV, pago único) para el sistema completo con ~23 piezas. No es un gasto de marketing — es un activo de comunicación comercial que tu empresa reutiliza.",
+    q: "¿Qué hace exactamente RESUELTO?",
+    a: "RESUELTO opera en dos líneas: sistemas audiovisuales de autoridad para empresas B2B (estrategia + producción + IA) y sistemas de automatización inteligente (chatbots IA, prospección automatizada, webs de conversión). Ambos tienen el mismo objetivo: que tu empresa se vea y opere al nivel que realmente merece.",
   },
   {
-    q: "¿Cómo se organiza el trabajo?",
-    a: "Señal: servicio elegido ejecutado en 1–2 semanas. Presencia: jornada mensual + dirección + ~10 piezas entregadas. Autoridad (2 meses): Estrategia → Preproducción → Grabaciones → Edición, IA y entrega final.",
+    q: "¿Con qué tipo de empresas trabajas?",
+    a: "Con empresas B2B, técnicas e industriales — telecomunicaciones, energía, ingeniería, agro, manufactura, tecnología — que ya tienen algo valioso pero todavía no lo comunican con claridad ni con el nivel que deberían. También con startups y consultoras que quieren escalar sin depender de procesos manuales.",
   },
   {
-    q: "¿Cuánto tiempo toma ver resultados?",
-    a: "Señal: primera pieza en 1–2 semanas. Presencia: ~10 piezas activas el primer mes. Autoridad: al día 60, ~23 activos listos para redes, ventas y ferias. No prometemos viralidad — prometemos un sistema instalado y funcional.",
+    q: "¿De dónde viene tu experiencia?",
+    a: "Más de 5 años ejecutando en proyectos reales. Pasé por Fahrenheit DDB y TBWA Perú — dos de las agencias creativas globales más exigentes. Trabajé con Wong, BCP, Interbank, San Fernando, Cencosud y más de 20 marcas. Hoy aplico todo eso directamente a empresas que quieren comunicar con criterio de primer nivel.",
   },
   {
-    q: "¿Para qué tipo de empresa está diseñado?",
-    a: "Para empresas B2B, técnicas e industriales: telecomunicaciones, energía, ingeniería, agro, manufactura, infraestructura, tecnología. Requisito: vocero disponible y responsable interno para feedback.",
+    q: "¿Cómo es tu metodología de trabajo?",
+    a: "Todo empieza con estrategia: entender el negocio, el mensaje y el objetivo antes de producir cualquier pieza. Después viene ejecución dirigida — sin improvisar. Y termina con activos listos para usar, no carpetas de archivos sin contexto. La lógica es siempre la misma: pensar primero, producir después.",
   },
   {
-    q: "¿Por qué Resuelto y no hacerlo internamente?",
-    a: "Instalar un sistema de comunicación requiere cuatro disciplinas a la vez: estrategia publicitaria, producción audiovisual, IA aplicada y diseño comercial. La mayoría de equipos internos tiene una o dos. Resuelto opera con las cuatro — criterio de agencia global, ejecución directa.",
+    q: "¿Trabajas solo o con un equipo?",
+    a: "RESUELTO es una operación boutique: yo dirijo cada proyecto de punta a punta. No hay capas de intermediarios ni ejecutivos de cuenta. Trabajo con colaboradores especializados según el proyecto, pero la dirección estratégica y creativa es siempre mía. Eso garantiza criterio consistente en todo lo que se entrega.",
   },
   {
-    q: "¿Qué pasa después del primer plan?",
-    a: "Clientes del Plan Señal tienen acceso preferencial a Presencia o Autoridad. Clientes del Plan Autoridad tienen precio preferencial en Presencia para mantener la base activa.",
+    q: "¿Por dónde se empieza?",
+    a: "Con una conversación. Sin formularios largos ni propuestas genéricas. Me cuentas qué está pasando en tu empresa, yo evalúo si tiene sentido trabajar juntos y qué tiene más impacto primero. Si hay fit, avanzamos. Si no aplica tu caso, te lo digo directo.",
   },
 ];
 
