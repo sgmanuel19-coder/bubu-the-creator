@@ -5,7 +5,7 @@ import AnimatedSection from "./AnimatedSection";
 const clips = [
   { label: "Detrás del contenido", note: "Wong · Retail premium", embedId: "DR-4eXJjpkU", platform: "instagram" },
   { label: "Cobertura de evento", note: "WIN Internet", embedId: "DR-6GSWDi2c", platform: "instagram" },
-  { label: "Dirección en set", note: "Guiando al vocero" },
+  { label: "Detrás del contenido", note: "Livoltek · Energía solar", embedId: "DScu52KjhO4", platform: "instagram" },
   { label: "Edición y entrega", note: "El sistema terminado" },
 ];
 
