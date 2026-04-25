@@ -38,8 +38,8 @@ export default function About() {
                 <div className="relative rounded-[calc(1.25rem-1px)] overflow-hidden aspect-[3/4] bg-[#060709]">
                   {ABOUT_VIDEO ? (
                     <>
-                      <video autoPlay muted loop playsInline preload="auto"
-                        className="absolute inset-0 w-full h-full object-cover"
+                      <video autoPlay muted loop playsInline preload="none"
+                        className="absolute inset-0 w-full h-full object-cover hidden sm:block"
                         style={{ objectPosition: "center top" }}>
                         <source src={ABOUT_VIDEO} type="video/mp4" />
                       </video>

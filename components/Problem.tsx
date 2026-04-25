@@ -37,8 +37,8 @@ export default function Problem() {
     <section className="relative py-28 overflow-hidden">
       {/* Video background */}
       <video
-        autoPlay muted loop playsInline preload="auto"
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        autoPlay muted loop playsInline preload="none"
+        className="absolute inset-0 w-full h-full object-cover object-center hidden sm:block"
       >
         <source src={PROBLEM_VIDEO} type="video/mp4" />
       </video>

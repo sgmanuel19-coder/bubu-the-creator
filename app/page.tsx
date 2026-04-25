@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Problem from "@/components/Problem";
-import Authority from "@/components/Authority";
-import FAQ from "@/components/FAQ";
-import FinalCTA from "@/components/FinalCTA";
-import Footer from "@/components/Footer";
+
+const Problem   = dynamic(() => import("@/components/Problem"));
+const Authority = dynamic(() => import("@/components/Authority"));
+const FAQ       = dynamic(() => import("@/components/FAQ"));
+const FinalCTA  = dynamic(() => import("@/components/FinalCTA"));
+const Footer    = dynamic(() => import("@/components/Footer"));
 
 export const metadata: Metadata = {
   title: "RESUELTO — Comunicación Comercial para Empresas B2B",
@@ -19,18 +21,14 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
     <main className="relative overflow-hidden">
       <Navbar />
       <Hero />
-    </main>
-    <Problem />
-    <main className="relative overflow-hidden">
+      <Problem />
       <Authority />
       <FAQ />
       <FinalCTA />
       <Footer />
     </main>
-    </>
   );
 }

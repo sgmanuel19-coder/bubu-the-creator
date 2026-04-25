@@ -18,6 +18,7 @@ const AetherFlowHero = () => {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
+    let isMobile = false;
     const mouse = { x: null as number | null, y: null as number | null, radius: 200 };
 
     class Particle {
@@ -67,7 +68,7 @@ const AetherFlowHero = () => {
 
     function init() {
       particles = [];
-      const n = (canvas!.height * canvas!.width) / 9000;
+      const n = (canvas!.height * canvas!.width) / (isMobile ? 18000 : 9000);
       const colors = [
         'rgba(0, 255, 135, 0.5)',
         'rgba(204, 68, 255, 0.5)',
@@ -86,6 +87,7 @@ const AetherFlowHero = () => {
     }
 
     const resizeCanvas = () => {
+      isMobile = window.innerWidth < 640;
       canvas!.width = window.innerWidth;
       canvas!.height = window.innerHeight;
       init();
@@ -118,7 +120,7 @@ const AetherFlowHero = () => {
       ctx!.fillStyle = 'rgba(4, 4, 6, 0.96)';
       ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
       particles.forEach((p) => p.update());
-      connect();
+      if (!isMobile) connect();
     };
 
     const handleMouseMove = (e: MouseEvent) => {

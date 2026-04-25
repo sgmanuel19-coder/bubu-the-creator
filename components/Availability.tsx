@@ -22,8 +22,8 @@ export default function Availability() {
       {BG_VIDEO ? (
         <>
           <video
-            autoPlay muted loop playsInline preload="auto"
-            className="absolute inset-0 w-full h-full object-cover z-0"
+            autoPlay muted loop playsInline preload="none"
+            className="absolute inset-0 w-full h-full object-cover z-0 hidden sm:block"
             style={{ objectPosition: "center center" }}
           >
             <source src={BG_VIDEO} type="video/mp4" />
