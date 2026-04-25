@@ -35,7 +35,7 @@ export default function BehindTheScenes() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 items-start">
           {clips.map((clip, i) => (
             <AnimatedSection key={i} delay={i * 0.07}>
-              <div className={i % 2 === 1 ? "lg:mt-10" : ""}>
+              <div>
                 {/* Placeholder vertical 9:16 */}
                 <div
                   className="relative w-full rounded-2xl overflow-hidden border border-white/8 bg-white/[0.02] group"
