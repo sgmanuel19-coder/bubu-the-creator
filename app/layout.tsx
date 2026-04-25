@@ -72,6 +72,10 @@ export const metadata: Metadata = {
     description: "Tu negocio tiene valor. El problema es cómo lo comunica.",
     images: ["/opengraph-image"],
   },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
   robots: {
     index: true,
     follow: true,
