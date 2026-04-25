@@ -15,7 +15,7 @@ const navLinks = [
   { label: "Contacto", href: "/contacto" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ minimal = false }: { minimal?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -89,42 +89,48 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-display font-medium tracking-wider uppercase transition-colors hover-underline ${
-                  isActive(link.href)
-                    ? "text-neon-green"
-                    : "text-muted hover:text-cream"
-                }`}
-              >
-                {link.label}
+          {/* Desktop nav — oculto en modo minimal */}
+          {!minimal && (
+            <nav className="hidden md:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-display font-medium tracking-wider uppercase transition-colors hover-underline ${
+                    isActive(link.href)
+                      ? "text-neon-green"
+                      : "text-muted hover:text-cream"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          )}
+
+          {/* CTA — oculto en modo minimal */}
+          {!minimal && (
+            <div className="hidden md:flex">
+              <Link href="/contacto" className="btn-glow text-sm py-2.5 px-6">
+                Hablemos <span className="ml-1">→</span>
               </Link>
-            ))}
-          </nav>
+            </div>
+          )}
 
-          {/* CTA */}
-          <div className="hidden md:flex">
-            <Link href="/contacto" className="btn-glow text-sm py-2.5 px-6">
-              Hablemos <span className="ml-1">→</span>
-            </Link>
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden flex flex-col gap-1.5 p-2"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <span className={`block w-6 h-0.5 bg-neon-green transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block w-6 h-0.5 bg-cream transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-6 h-0.5 bg-neon-purple transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-          </button>
+          {/* Mobile hamburger — oculto en modo minimal */}
+          {!minimal && (
+            <button
+              className="md:hidden flex flex-col gap-1.5 p-2"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span className={`block w-6 h-0.5 bg-neon-green transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+              <span className={`block w-6 h-0.5 bg-cream transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+              <span className={`block w-6 h-0.5 bg-neon-purple transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            </button>
+          )}
         </div>
 
-        {menuOpen && (
+        {!minimal && menuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}

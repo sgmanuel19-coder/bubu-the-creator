@@ -843,7 +843,7 @@ function FinalCTASection() {
 export default function SistemasIAPage() {
   return (
     <main style={{ background: '#040406', minHeight: '100vh', color: '#f8f8f2' }}>
-      <Navbar />
+      <Navbar minimal />
       <HeroClient />
       <AnimatedMetricsStrip />
       <VSLSectionIA />

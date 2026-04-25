@@ -163,7 +163,7 @@ const AetherFlowHero = () => {
       />
 
       {/* Content: left text + right Spline */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-0 pt-28 pb-16 lg:pt-0 lg:pb-0 lg:min-h-screen">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-0 pt-28 pb-16 lg:pt-24 lg:pb-0 lg:min-h-screen">
 
         {/* ── Left: text content ── */}
         <div className="flex-1 flex flex-col items-start justify-center lg:pr-8 w-full max-w-2xl lg:max-w-none">
