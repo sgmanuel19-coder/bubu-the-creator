@@ -8,8 +8,9 @@ import Link from "next/link";
 // Para activar un video agrega el ID y la plataforma:
 // Instagram: id: "ABC123xyz"  → https://www.instagram.com/reel/ABC123xyz/
 // TikTok:    id: "12345678"   → https://www.tiktok.com/@user/video/12345678
+// YouTube:   id: "abc123"     → https://www.youtube.com/watch?v=abc123  (wide: true para 16:9)
 // ─────────────────────────────────────────────────────────────────────────────
-const REELS: { id: string | null; platform: "instagram" | "tiktok"; label: string; client: string; color: "green" | "purple" }[] = [
+const REELS: { id: string | null; platform: "instagram" | "tiktok" | "youtube"; label: string; client: string; color: "green" | "purple"; wide?: true }[] = [
   { id: "DNG9SA4RGyf", platform: "instagram", label: "Colaboración", client: "WIN Internet · Mario Hart", color: "green"  },
   { id: "DOGsMRhDGKJ", platform: "instagram", label: "Experto a cámara", client: "WIN Internet",         color: "purple" },
   { id: "DSXaFmajAYQ", platform: "instagram", label: "Experto · IA",    client: "Livoltek",             color: "green"  },
@@ -22,13 +23,14 @@ const REELS: { id: string | null; platform: "instagram" | "tiktok"; label: strin
   { id: "C36HUoupJvd", platform: "instagram", label: "Video producto",   client: "Wong",                 color: "purple" },
   { id: "DQ3JTsEjLxh", platform: "instagram", label: "Promo película",   client: "Mañana Me Caso",       color: "green"  },
   { id: "DRsIJlOj7Kt", platform: "instagram", label: "Promo película",   client: "Mañana Me Caso",       color: "purple" },
+  { id: "NMNUST1s1d8", platform: "youtube",   label: "Lanzamiento Asu Olla", client: "San Fernando",       color: "green",  wide: true },
 ];
 
 function embedSrc(reel: typeof REELS[0]): string {
   if (!reel.id) return "";
-  return reel.platform === "tiktok"
-    ? `https://www.tiktok.com/embed/v2/${reel.id}`
-    : `https://www.instagram.com/reel/${reel.id}/embed/`;
+  if (reel.platform === "youtube") return `https://www.youtube.com/embed/${reel.id}`;
+  if (reel.platform === "tiktok") return `https://www.tiktok.com/embed/v2/${reel.id}`;
+  return `https://www.instagram.com/reel/${reel.id}/embed/`;
 }
 
 function ReelCard({ reel, index }: { reel: typeof REELS[0]; index: number }) {
@@ -43,9 +45,9 @@ function ReelCard({ reel, index }: { reel: typeof REELS[0]; index: number }) {
 
   return (
     <motion.div
-      className="relative rounded-2xl overflow-hidden"
+      className={`relative rounded-2xl overflow-hidden${reel.wide ? " col-span-2" : ""}`}
       style={{
-        aspectRatio: "9/16",
+        aspectRatio: reel.wide ? "16/9" : "9/16",
         background: "rgba(5,7,9,0.95)",
         border: `1px solid ${borderColor}`,
       }}
