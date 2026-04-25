@@ -19,6 +19,7 @@ const REELS: { id: string | null; platform: "instagram" | "tiktok"; label: strin
   { id: "C59LnoZJLS_", platform: "instagram", label: "Video en tienda",  client: "Wong",                 color: "green"  },
   { id: "C4OuLFppAta", platform: "instagram", label: "Día de la Mujer",  client: "Wong",                 color: "purple" },
   { id: "C1IIcQppn64", platform: "instagram", label: "Cobertura",        client: "Wong",                 color: "green"  },
+  { id: "C36HUoupJvd", platform: "instagram", label: "Video producto",   client: "Wong",                 color: "purple" },
 ];
 
 function embedSrc(reel: typeof REELS[0]): string {
