@@ -3,31 +3,32 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
+import { SITE } from "@/lib/constants";
 
 const faqs = [
   {
     q: "¿Cuánto es la inversión?",
-    a: "El Sistema Audiovisual de Autoridad tiene una inversión de USD 2,800 + IGV por los 2 meses de implementación y entrega. Incluye dirección estratégica, producción audiovisual, integración de IA generativa y el sistema completo listo para usar. No es un gasto de marketing — es un activo de comunicación comercial que tu empresa reutiliza.",
+    a: "Hay tres planes: Señal ($500 +IGV, pago único) para probar con un servicio específico; Presencia ($1,000/mes +IGV, mín. 3 meses) para presencia activa sostenida; Autoridad ($3,000 +IGV, pago único) para el sistema completo con ~23 piezas. No es un gasto de marketing — es un activo de comunicación comercial que tu empresa reutiliza.",
   },
   {
-    q: "¿Cómo se organiza el trabajo en los 60 días?",
-    a: "El proceso está dividido en 4 fases de 2 semanas cada una: Estrategia (diagnóstico y mensaje central), Base Creativa (Cerebro IA + guiones), Producción (grabaciones en campo) y Edición y entrega (montaje final + IA visual). Trabajamos con comunicación continua y un plan de acción semana a semana para cumplir los tiempos.",
+    q: "¿Cómo se organiza el trabajo?",
+    a: "Señal: servicio elegido ejecutado en 1–2 semanas. Presencia: jornada mensual + dirección + ~10 piezas entregadas. Autoridad (2 meses): Estrategia → Preproducción → Grabaciones → Edición, IA y entrega final.",
   },
   {
     q: "¿Cuánto tiempo toma ver resultados?",
-    a: "Al día 60 tu empresa tiene un sistema de comunicación instalado y listo para usar — no prometemos viralidad ni leads mágicos, prometemos un sistema instalado y funcional. Los activos son reutilizables en redes, presentaciones, ventas, prospección y futuras campañas.",
+    a: "Señal: primera pieza en 1–2 semanas. Presencia: ~10 piezas activas el primer mes. Autoridad: al día 60, ~23 activos listos para redes, ventas y ferias. No prometemos viralidad — prometemos un sistema instalado y funcional.",
   },
   {
     q: "¿Para qué tipo de empresa está diseñado?",
-    a: "Para empresas B2B, técnicas e industriales: telecomunicaciones, energía, ingeniería, agro, manufactura, infraestructura, tecnología. Empresas que ya tienen algo valioso pero no lo comunican con la claridad y el nivel que deberían. Requisito: contar con un vocero disponible para las grabaciones y un responsable interno para feedback y aprobaciones.",
+    a: "Para empresas B2B, técnicas e industriales: telecomunicaciones, energía, ingeniería, agro, manufactura, infraestructura, tecnología. Requisito: vocero disponible y responsable interno para feedback.",
   },
   {
     q: "¿Por qué Resuelto y no hacerlo internamente?",
-    a: "Porque instalar un sistema de comunicación que genera clientes requiere cuatro disciplinas actuando juntas: estrategia publicitaria (qué decir y para quién), producción audiovisual (cómo se filma, dirige y edita), IA generativa aplicada al contenido (cómo se escala sin perder criterio) y diseño de sistema comercial (cómo todo trabaja en conjunto para vender). La mayoría de equipos internos tiene una o dos. Resuelto opera con las cuatro — con criterio de agencia global y ejecución directa, sin capas.",
+    a: "Instalar un sistema de comunicación requiere cuatro disciplinas a la vez: estrategia publicitaria, producción audiovisual, IA aplicada y diseño comercial. La mayoría de equipos internos tiene una o dos. Resuelto opera con las cuatro — criterio de agencia global, ejecución directa.",
   },
   {
-    q: "¿Qué pasa después de los 60 días?",
-    a: "Al terminar la implementación, la empresa puede seguir por tres caminos: continuidad mensual (nuevas piezas y campañas de forma sostenida), continuidad trimestral (bloques de trabajo más grandes con más previsibilidad), o uso interno (el equipo aprovecha los activos y el Cerebro Creativo IA para futuras acciones). La base ya está construida — la decisión es cómo aprovecharla.",
+    q: "¿Qué pasa después del primer plan?",
+    a: "Clientes del Plan Señal tienen acceso preferencial a Presencia o Autoridad. Clientes del Plan Autoridad tienen precio preferencial en Presencia para mantener la base activa.",
   },
 ];
 
@@ -128,7 +129,9 @@ export default function FAQ() {
           <p className="font-body text-muted/90 text-sm">
             ¿Tienes una pregunta que no está aquí?{" "}
             <a
-              href="/contacto"
+              href={SITE.links.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-neon-green underline underline-offset-2 hover:text-neon-green/80 transition-colors"
             >
               Escríbeme directo →
