@@ -12,7 +12,7 @@
   --violet-light: #F5F2E4;
   --violet-glow:  #D4CFA8;
   --cream:        #F5F2E4;
-  --muted:        #94A3B8;
+  --muted:        #BBC8D4;
   --glow-green:   rgba(26, 128, 255, 0.28);
   --glow-violet:  rgba(238, 235, 212, 0.20);
 }
@@ -519,6 +519,24 @@ body {
 .orbit-3 { width: 460px; height: 460px; border-color: rgba(26,128,255,0.12); animation: orbit-rotate 24s linear infinite; }
 .orbit-4 { width: 640px; height: 640px; border-color: rgba(77,159,255,0.07);animation: orbit-rotate 38s linear infinite reverse; }
 .planet { border-radius: 50%; flex-shrink: 0; }
+
+/* ─────────────────────────────────────────────
+   MOBILE READABILITY
+───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Base font size bump for legibility */
+  body { font-size: 15px; line-height: 1.65; }
+
+  /* text-xs → 13px (was 12px), text-sm → 15px (was 14px) */
+  .text-xs  { font-size: 0.8125rem; line-height: 1.55; }
+  .text-sm  { font-size: 0.9375rem; line-height: 1.6;  }
+
+  /* Reduce section vertical padding on small screens */
+  .section-padding { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+
+  /* Horizontal padding más cómodo */
+  .container-base { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
 .orbit-1 .planet { width:8px;height:8px;margin-top:-4px;  background:#1A80FF; box-shadow:0 0 10px rgba(26,128,255,.9),0 0 24px rgba(26,128,255,.4); }
 .orbit-2 .planet { width:6px;height:6px;margin-top:-3px;  background:#4D9FFF; box-shadow:0 0 10px rgba(77,159,255,.9),0 0 24px rgba(77,159,255,.4); }
 .orbit-3 .planet { width:5px;height:5px;margin-top:-2.5px;background:rgba(26,128,255,.75); box-shadow:0 0 8px rgba(26,128,255,.6); }

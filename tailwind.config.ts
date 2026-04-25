@@ -34,7 +34,7 @@ const config: Config = {
           light: "#4D9FFF",
         },
         cream: "#F5F2E4",
-        muted: "#94A3B8",
+        muted: "#BBC8D4",
         "border-glow": "rgba(26, 128, 255, 0.12)",
       },
       fontFamily: {
