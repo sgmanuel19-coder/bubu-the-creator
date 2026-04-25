@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef, useState } from "react";
+import { useInView } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
 const clips = [
@@ -8,6 +10,35 @@ const clips = [
   { label: "Detrás del contenido", note: "Livoltek · Energía solar", embedId: "DScu52KjhO4", platform: "instagram" },
   { label: "Video caso de éxito", note: "Livoltek · Corporativo", embedId: "DR-65z-jgSs", platform: "instagram" },
 ];
+
+function LazyIframe({ src, title }: { src: string; title: string }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "200px" });
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div ref={ref} className="absolute inset-0">
+      {!loaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/[0.02]">
+          <div className="w-6 h-6 rounded-full border-2 border-neon-green/30 border-t-neon-green animate-spin" />
+        </div>
+      )}
+      {isInView && (
+        <iframe
+          src={src}
+          className="absolute inset-0 w-full h-full"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+          allowFullScreen
+          scrolling="no"
+          frameBorder="0"
+          title={title}
+          loading="lazy"
+          onLoad={() => setLoaded(true)}
+        />
+      )}
+    </div>
+  );
+}
 
 function embedSrc(clip: typeof clips[0]) {
   if (!clip.embedId) return null;
@@ -50,15 +81,7 @@ export default function BehindTheScenes() {
                     style={{ aspectRatio: "9/16" }}
                   >
                     {src ? (
-                      <iframe
-                        src={src}
-                        className="absolute inset-0 w-full h-full"
-                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-                        allowFullScreen
-                        scrolling="no"
-                        frameBorder="0"
-                        title={clip.label}
-                      />
+                      <LazyIframe src={src} title={clip.label} />
                     ) : (
                       <>
                         <div className="absolute inset-0 bg-gradient-to-b from-neon-green/[0.04] to-neon-purple/[0.04]" />
