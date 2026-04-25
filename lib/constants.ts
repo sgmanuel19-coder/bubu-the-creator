@@ -192,9 +192,9 @@ export const SITE = {
 
       // ─── Contenido detallado del servicio ───────────────────
       pitch:
-        "Muchas empresas técnicas, industriales y B2B operan bien, venden bien cuando aparece la oportunidad y tienen una propuesta potente. Pero hacia afuera ocurre otra cosa: su comunicación no refleja el nivel real de la empresa, lo que hacen es difícil de entender para el mercado, y el contenido no construye autoridad sostenida. El mercado no siempre compra al mejor. Muchas veces compra al que entiende más rápido, al que genera más confianza y al que se percibe más sólido. Ahí es donde entra Resuelto.",
+        "Tu empresa opera bien y tiene algo real que ofrecer. Pero la comunicación no refleja ese nivel: lo técnico es difícil de entender y el contenido no construye autoridad sostenida. El mercado compra al que genera más confianza, no siempre al mejor. Ahí entra Resuelto.",
       whatItIs:
-        "Una implementación audiovisual y estratégica diseñada para que tu empresa se vea al nivel que realmente opera, explique mejor lo complejo, fortalezca autoridad en su categoría y tenga activos de comunicación reutilizables. No hacemos contenido por hacer. Construimos un sistema visual y narrativo para que tu empresa deje de verse improvisada y empiece a comunicar con más claridad, más criterio y más peso comercial.",
+        "Una implementación audiovisual y estratégica para que tu empresa se vea al nivel que opera, explique mejor lo complejo y tenga activos de comunicación reutilizables. No hacemos contenido por hacer — construimos un sistema con claridad, criterio y peso comercial.",
       pillars: [
         {
           num: 1,
@@ -329,13 +329,13 @@ export const SITE = {
         },
       ],
       finalDeliverables: [
-        "Una base estratégica más clara — brief, mensaje central, lineamientos de comunicación",
+        "Base estratégica: brief, mensaje central y lineamientos de comunicación",
         "Sistema IA entrenado con la lógica de la marca",
-        "Pieza principal de autoridad (video caso / documental / institucional)",
-        "Contenidos verticales de autoridad y venta listos para redes",
-        "Recursos visuales generados con IA",
-        "Activos audiovisuales reutilizables en redes, ventas, presentaciones y ferias",
-        "Una presencia mejor alineada al nivel real del negocio",
+        "Pieza principal de autoridad (video caso / documental)",
+        "Contenidos verticales listos para redes",
+        "Recursos visuales con IA generativa",
+        "Activos reutilizables para redes, ventas y ferias",
+        "Presencia alineada al nivel real del negocio",
       ],
       notIncluded: [
         "Community management o respuestas a mensajes",
@@ -379,47 +379,47 @@ export const SITE = {
   forWho: {
     title: "Diseñado para un perfil específico de empresa",
     intro:
-      "Este sistema da sus mejores resultados con empresas que ya tienen algo valioso, pero todavía no lo comunican con la claridad y el nivel que deberían.",
+      "Para empresas que ya tienen algo valioso pero no lo comunican al nivel que deberían.",
     profiles: [
       {
         icon: "⚙️",
         title: "Empresas técnicas e industriales",
         description:
-          "Que necesitan comunicar lo que hacen de forma que un cliente no técnico entienda, confíe y vea el valor real.",
+          "Que necesitan que un cliente no técnico entienda y confíe en lo que ofrecen.",
       },
       {
         icon: "📡",
         title: "Telecomunicaciones y tecnología",
         description:
-          "Empresas con soluciones complejas que no saben cómo explicarse sin perder al cliente en lo técnico.",
+          "Con soluciones complejas que necesitan explicarse sin perder al cliente en lo técnico.",
       },
       {
         icon: "⚡",
         title: "Energía e ingeniería",
         description:
-          "Empresas del sector que no comunican autoridad técnica de forma comercial. Tienen capacidad — no la traducen bien hacia afuera.",
+          "Con capacidad técnica real que no se traduce en comunicación comercial.",
       },
       {
         icon: "🌾",
         title: "Agroindustria y manufactura",
         description:
-          "Marcas con procesos sólidos y experiencia real que no tienen activos visuales que apoyen su crecimiento ni presencia a la altura.",
+          "Con procesos sólidos pero sin activos visuales a la altura de lo que hacen.",
       },
       {
         icon: "🏗️",
         title: "Infraestructura y construcción",
         description:
-          "Empresas que participan en ferias, licitaciones y procesos B2B donde la percepción de marca importa antes de que empiece la conversación.",
+          "Donde la percepción de marca importa antes de que empiece la conversación.",
       },
       {
         icon: "💡",
-        title: "B2B con capacidad técnica no comunicada",
+        title: "B2B con capacidad no comunicada",
         description:
-          "Para cualquier empresa que ya hace cosas grandes pero todavía no se percibe así. El problema no es el valor. Es cómo se ve ese valor.",
+          "Que hace cosas grandes pero todavía no se percibe así. El problema no es el valor — es cómo se ve.",
       },
     ],
     closing:
-      "No trabajamos con empresas sin vocero, equipos sin capacidad de aprobar rápido, ni marcas que buscan publicar por publicar. El criterio es claro: si tienes algo valioso que el mercado todavía no percibe bien — esto es para ti.",
+      "No trabajamos con empresas sin vocero, sin capacidad de aprobar rápido ni sin presupuesto real para comunicación. Si tienes algo valioso que el mercado todavía no percibe bien — esto es para ti.",
     notFor: [
       "Empresas sin vocero disponible",
       "Equipos que no pueden aprobar rápido",

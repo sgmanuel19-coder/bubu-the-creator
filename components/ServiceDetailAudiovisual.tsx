@@ -11,27 +11,27 @@ const forWho = SITE.forWho;
 const faqs = [
   {
     q: "¿Cuánto es la inversión y qué plan me conviene?",
-    a: "Hay tres planes: Plan Señal ($500 +IGV, pago único) para empresas que quieren probar con un servicio específico; Plan Presencia ($1,000/mes +IGV, mínimo 3 meses) para presencia activa sostenida con ~10 piezas mensuales; y Plan Autoridad ($3,000 +IGV, pago único) para el sistema completo con ~23 piezas. La elección depende del momento de la empresa — si hay urgencia de activar rápido, Señal. Si hay compromiso de largo plazo, Presencia. Si quieren el sistema completo de golpe, Autoridad.",
+    a: "Tres planes: Señal ($500 +IGV, pago único) para probar con un servicio específico; Presencia ($1,000/mes +IGV, mín. 3 meses) para presencia activa sostenida; Autoridad ($3,000 +IGV, pago único) para el sistema completo. Si quieres activar rápido → Señal. Si hay compromiso de largo plazo → Presencia. Si quieres el sistema de golpe → Autoridad.",
   },
   {
-    q: "¿Cómo se organiza el trabajo según el plan?",
-    a: "En el Plan Señal se define el servicio elegido y se ejecuta en 1–2 semanas. En el Plan Presencia, cada mes tiene una jornada de grabación, dirección estratégica y entrega de ~10 piezas. En el Plan Autoridad (2 meses): Fase 1 — Estrategia y Cerebro IA; Fase 2 — Preproducción y guiones; Fase 3 — Grabaciones en campo; Fase 4 — Edición, IA y entrega final.",
+    q: "¿Cómo se organiza el trabajo?",
+    a: "Señal: servicio elegido ejecutado en 1–2 semanas. Presencia: jornada mensual + dirección + ~10 piezas entregadas. Autoridad (2 meses): Estrategia → Preproducción → Grabaciones → Edición, IA y entrega final.",
   },
   {
     q: "¿Cuánto tiempo toma ver resultados?",
-    a: "Con el Plan Señal tienes la primera pieza entregada en 1–2 semanas. Con Presencia, el primer mes ya tienes ~10 piezas activas. Con Autoridad, al día 60 la empresa tiene ~23 activos de comunicación instalados y listos para usar en redes, ventas, presentaciones y ferias. No prometemos viralidad — prometemos un sistema instalado y funcional.",
+    a: "Señal: primera pieza en 1–2 semanas. Presencia: ~10 piezas activas el primer mes. Autoridad: al día 60, ~23 activos listos para redes, ventas y ferias. No prometemos viralidad — prometemos un sistema instalado y funcional.",
   },
   {
     q: "¿Para qué tipo de empresa está diseñado?",
-    a: "Para empresas B2B, técnicas e industriales: telecomunicaciones, energía, ingeniería, agro, manufactura, infraestructura, tecnología. Empresas que ya tienen algo valioso pero no lo comunican con la claridad y el nivel que deberían. Requisito: vocero disponible y responsable interno para feedback.",
+    a: "Para empresas B2B, técnicas e industriales: telecomunicaciones, energía, ingeniería, agro, manufactura, infraestructura, tecnología. Requisito: vocero disponible y responsable interno para feedback.",
   },
   {
     q: "¿Por qué Resuelto y no hacerlo internamente?",
-    a: "Porque instalar un sistema de comunicación que genera clientes requiere cuatro disciplinas actuando juntas: estrategia publicitaria, producción audiovisual, IA generativa aplicada al contenido y diseño de sistema comercial. La mayoría de equipos internos tiene una o dos. Resuelto opera con las cuatro — con criterio de agencia global y ejecución directa, sin capas.",
+    a: "Instalar un sistema de comunicación requiere cuatro disciplinas a la vez: estrategia publicitaria, producción audiovisual, IA aplicada y diseño comercial. La mayoría de equipos internos tiene una o dos. Resuelto opera con las cuatro — criterio de agencia global, ejecución directa.",
   },
   {
     q: "¿Qué pasa después del primer plan?",
-    a: "Los clientes del Plan Señal tienen acceso preferencial al Plan Presencia o Autoridad. Los clientes del Plan Autoridad tienen precio preferencial en el Plan Presencia para mantener presencia activa. La base ya está construida — la decisión es cómo seguir aprovechándola.",
+    a: "Clientes del Plan Señal tienen acceso preferencial a Presencia o Autoridad. Clientes del Plan Autoridad tienen precio preferencial en Presencia para mantener la base activa.",
   },
 ];
 
@@ -280,8 +280,8 @@ export default function ServiceDetailAudiovisual() {
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           <div>
             <h3 className="font-display font-bold text-xl lg:text-2xl text-cream leading-tight mb-4">
-              Muchas empresas operan bien.<br />
-              <span className="text-neon-green">Pero hacia afuera ocurre otra cosa.</span>
+              La operación está bien.<br />
+              <span className="text-neon-green">La comunicación, no siempre.</span>
             </h3>
             <p className="font-body text-muted text-sm leading-relaxed mb-5">
               {core.pitch}
@@ -342,7 +342,7 @@ export default function ServiceDetailAudiovisual() {
       <div className="py-14 px-6 lg:px-10">
         <SectionLabel text="Qué recibe la empresa al final" />
         <p className="font-body text-muted/70 text-sm mb-6">
-          Al terminar los 60 días, tu empresa no solo recibe "videos".
+          No solo "videos". Un sistema instalado y listo para usar.
         </p>
         <div className="grid sm:grid-cols-2 gap-3">
           {(core.finalDeliverables as string[]).map((item, i) => (
@@ -359,7 +359,7 @@ export default function ServiceDetailAudiovisual() {
       {/* ── 7. PARA QUIÉN ES / NO ES ── */}
       <div className="py-14 px-6 lg:px-10">
         <SectionLabel text="Para quién es" />
-        <p className="font-body text-muted/70 text-sm mb-8 max-w-xl leading-relaxed">{forWho.intro}</p>
+        <p className="font-body text-muted/70 text-sm mb-6 leading-relaxed">{forWho.intro}</p>
 
         {/* Profile cards grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
