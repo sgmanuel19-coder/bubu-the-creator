@@ -10,16 +10,16 @@ const forWho = SITE.forWho;
 // ── FAQ específico del servicio ───────────────────────────────
 const faqs = [
   {
-    q: "¿Cuánto es la inversión?",
-    a: `${core.price} ${core.priceNote}. Incluye dirección estratégica completa, cerebro IA, producciones en campo, edición integral y recursos IA. No es un gasto de marketing — es un activo de comunicación comercial que la empresa reutiliza.`,
+    q: "¿Cuánto es la inversión y qué plan me conviene?",
+    a: "Hay tres planes: Plan Señal ($500 +IGV, pago único) para empresas que quieren probar con un servicio específico; Plan Presencia ($1,000/mes +IGV, mínimo 3 meses) para presencia activa sostenida con ~10 piezas mensuales; y Plan Autoridad ($3,000 +IGV, pago único) para el sistema completo con ~23 piezas. La elección depende del momento de la empresa — si hay urgencia de activar rápido, Señal. Si hay compromiso de largo plazo, Presencia. Si quieren el sistema completo de golpe, Autoridad.",
   },
   {
-    q: "¿Cómo se organiza el trabajo en los 60 días?",
-    a: "4 fases de 2 semanas cada una: Estrategia (diagnóstico y mensaje central), Base Creativa (Cerebro IA + guiones), Producción (grabaciones en campo) y Edición y Entrega (montaje final + recursos IA). Con comunicación continua y plan semana a semana.",
+    q: "¿Cómo se organiza el trabajo según el plan?",
+    a: "En el Plan Señal se define el servicio elegido y se ejecuta en 1–2 semanas. En el Plan Presencia, cada mes tiene una jornada de grabación, dirección estratégica y entrega de ~10 piezas. En el Plan Autoridad (2 meses): Fase 1 — Estrategia y Cerebro IA; Fase 2 — Preproducción y guiones; Fase 3 — Grabaciones en campo; Fase 4 — Edición, IA y entrega final.",
   },
   {
     q: "¿Cuánto tiempo toma ver resultados?",
-    a: "Al día 60 la empresa tiene un sistema de comunicación instalado y listo para usar. No prometemos viralidad ni leads mágicos — prometemos un sistema instalado y funcional. Los activos son reutilizables en redes, presentaciones, ventas, prospección y futuras campañas.",
+    a: "Con el Plan Señal tienes la primera pieza entregada en 1–2 semanas. Con Presencia, el primer mes ya tienes ~10 piezas activas. Con Autoridad, al día 60 la empresa tiene ~23 activos de comunicación instalados y listos para usar en redes, ventas, presentaciones y ferias. No prometemos viralidad — prometemos un sistema instalado y funcional.",
   },
   {
     q: "¿Para qué tipo de empresa está diseñado?",
@@ -30,8 +30,8 @@ const faqs = [
     a: "Porque instalar un sistema de comunicación que genera clientes requiere cuatro disciplinas actuando juntas: estrategia publicitaria, producción audiovisual, IA generativa aplicada al contenido y diseño de sistema comercial. La mayoría de equipos internos tiene una o dos. Resuelto opera con las cuatro — con criterio de agencia global y ejecución directa, sin capas.",
   },
   {
-    q: "¿Qué pasa después de los 60 días?",
-    a: "La empresa puede continuar por continuidad mensual (nuevas piezas sostenidas), continuidad trimestral (bloques más grandes) o uso interno aprovechando los activos y el Cerebro Creativo IA. La base ya está construida — la decisión es cómo aprovecharla.",
+    q: "¿Qué pasa después del primer plan?",
+    a: "Los clientes del Plan Señal tienen acceso preferencial al Plan Presencia o Autoridad. Los clientes del Plan Autoridad tienen precio preferencial en el Plan Presencia para mantener presencia activa. La base ya está construida — la decisión es cómo seguir aprovechándola.",
   },
 ];
 

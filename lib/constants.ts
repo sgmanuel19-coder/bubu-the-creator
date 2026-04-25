@@ -173,20 +173,20 @@ export const SITE = {
   // ── Servicios ──────────────────────────────────────────────
   services: {
     title: "La implementación",
-    subtitle: "Un sistema de comunicación de 60 días. No contenido por publicar — piezas diseñadas para vender.",
+    subtitle: "No hacemos contenido por hacer. Construimos un sistema audiovisual y estratégico para que tu empresa comunique con claridad, nivel y peso comercial.",
     core: {
-      badge: "Implementación Audiovisual · 60 días",
+      badge: "Audiovisual + Estrategia + IA · Done-For-You",
       name: "Sistema Audiovisual de Autoridad",
-      tagline: "Un sistema de 60 días que convierte la complejidad técnica de tu empresa en comunicación que genera clientes.",
+      tagline: "Tres formas de entrar. Un solo sistema para que tu empresa comunique con la claridad, el nivel y el peso comercial que realmente merece.",
       target: "Para empresas B2B, técnicas e industriales que necesitan elevar cómo se ve y comunica su marca.",
-      price: "USD 2,800",
-      priceNote: "+ IGV · 2 meses de implementación y entrega",
+      price: "Desde $500",
+      priceNote: "+ IGV · Plan Señal, Presencia o Autoridad",
       items: [
-        "1 Cerebro Creativo IA — sistema IA entrenado con la lógica comunicacional de tu marca",
-        "1 Video Horizontal tipo Video Caso — pieza de autoridad para mostrar empresa, solución o caso de éxito",
-        "8 Videos Reels Verticales — experto a cámara con tomas de apoyo para explicar y generar confianza",
-        "2 Videos con Locución + IA — para explicar conceptos, reforzar mensajes o presentar soluciones",
-        "4 Carruseles Generados con IA — activos visuales para autoridad, claridad y comunicación comercial",
+        "Plan Señal ($500) — elige uno de 5 servicios individuales de alto valor: video caso, cobertura, grabación, Cerebro IA o piezas IA",
+        "Plan Presencia ($1,000/mes) — presencia activa sostenida: dirección estratégica + grabación + ~10 piezas mensuales",
+        "Plan Autoridad ($3,000) — el sistema completo: hasta 3 jornadas de grabación, ~23 piezas, VSL, Cerebro IA completo y coordinación total",
+        "IA integrada como herramienta — recursos visuales, locuciones y contenido generativo de nivel cinematográfico",
+        "Done-For-You de punta a punta — estrategia, producción, edición e IA bajo una sola dirección",
       ],
       cta: "Quiero implementar el sistema",
 
