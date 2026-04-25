@@ -16,7 +16,7 @@ const REELS: { id: string | null; platform: "instagram" | "tiktok"; label: strin
   { id: "DW6m1y9E6hy", platform: "instagram", label: "Contenido IA",     client: "WIN Internet",        color: "purple" },
   { id: "DWR-phYj6dR", platform: "instagram", label: "Cobertura",        client: "Livoltek",             color: "green"  },
   { id: "DRNGaxTjWuf", platform: "instagram", label: "Cobertura evento", client: "Livoltek",          color: "purple" },
-  { id: null, platform: "instagram", label: "Autoridad",        client: "Marca técnica",        color: "green"  },
+  { id: "C59LnoZJLS_", platform: "instagram", label: "Video en tienda",  client: "Wong",                 color: "green"  },
   { id: null, platform: "tiktok",    label: "Comercial",        client: "Video de venta",       color: "purple" },
   { id: null, platform: "instagram", label: "Contenido IA",     client: "Motion + IA",          color: "green"  },
 ];
