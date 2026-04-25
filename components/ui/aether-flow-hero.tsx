@@ -287,6 +287,26 @@ const AetherFlowHero = () => {
               2 cupos disponibles — proyectos Q2 2026
             </span>
           </motion.div>
+
+          {/* Trust strip */}
+          <motion.div
+            custom={5}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="mt-3 flex items-center gap-1 flex-wrap"
+          >
+            {['Sistema listo en 5 días', 'Garantía 30 días', 'Sin contrato'].map((item, i, arr) => (
+              <React.Fragment key={item}>
+                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.7rem', color: 'rgba(248,248,242,0.32)' }}>
+                  ✓ {item}
+                </span>
+                {i < arr.length - 1 && (
+                  <span style={{ color: 'rgba(248,248,242,0.15)', fontSize: '0.7rem', margin: '0 4px' }}>·</span>
+                )}
+              </React.Fragment>
+            ))}
+          </motion.div>
         </div>
 
         {/* ── Right: Spline 3D robot in circular frame — hidden on mobile ── */}

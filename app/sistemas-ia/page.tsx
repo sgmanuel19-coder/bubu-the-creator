@@ -155,48 +155,55 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
     question: '¿Puedo cambiar los mensajes después?',
     answer: <>Sí. Tienes <G>acceso completo a la plataforma</G> y puedes editar textos cuando quieras. Además, en los <G>30 días de soporte incluido</G> te ayudo con cualquier ajuste que necesites.</>,
   },
+  {
+    question: '¿Cuánto me ahorro vs. contratar un asistente?',
+    answer: <>Un asistente cuesta entre <G>S/1,500 y S/2,500 al mes</G> más beneficios, vacaciones y tiempo de capacitación. El sistema es un <G>pago único</G> — sin planilla, sin rotación, sin días libres. En menos de 2 meses ya recuperaste la inversión.</>,
+  },
+  {
+    question: '¿Por qué un chatbot genérico no es suficiente?',
+    answer: <>Un bot genérico responde con opciones fijas ("presiona 1, presiona 2") y el lead se va. El sistema de RESUELTO <G>entiende lenguaje natural</G>, califica por presupuesto e interés, agenda directo al calendario y hace seguimiento automático. La diferencia está en la tabla de comparación más arriba.</>,
+  },
+  {
+    question: '¿Puedo cancelar el servicio en cualquier momento?',
+    answer: <>Sí. <G>No hay contrato de permanencia</G>. El sistema queda instalado en tu número — no dependes de mí para que funcione. El soporte de 30 días está incluido en el precio y no genera cobros adicionales.</>,
+  },
 ];
 
 // ─── SECTIONS ─────────────────────────────────────────────────────────────────
 
 function SocialProofBar() {
-  const industryNames = [
-    'Empresas Técnicas B2B',
-    'Telecomunicaciones',
-    'Energía e Ingeniería',
-    'Consultoras y Startups',
-    'Clínicas Estéticas',
-    'Inmobiliarias',
-    'Estudios Legales',
-    'Institutos Educativos',
-    'Agencias con Pauta',
-    'Odontología y Salud',
+  const stats = [
+    { value: '< 2 min', label: 'respuesta promedio' },
+    { value: '5–10 días', label: 'instalación completa' },
+    { value: '30 días', label: 'garantía total' },
+    { value: '24/7', label: 'operación continua' },
   ];
 
   return (
     <div
-      className="w-full py-6 px-4"
+      className="w-full py-7 px-4"
       style={{
         background: 'rgba(26,128,255,0.04)',
         borderTop: '1px solid rgba(26,128,255,0.1)',
         borderBottom: '1px solid rgba(26,128,255,0.1)',
       }}
     >
-      <p
-        className="text-center text-xs font-semibold tracking-widest uppercase mb-4"
-        style={{ color: 'rgba(248,248,242,0.35)', fontFamily: 'Poppins, sans-serif' }}
-      >
-        Sectores que ya tienen su sistema activo
-      </p>
-      <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
-        {industryNames.map((name) => (
-          <span
-            key={name}
-            className="text-sm"
-            style={{ color: 'rgba(248,248,242,0.45)', fontFamily: 'Inter, sans-serif' }}
-          >
-            {name}
-          </span>
+      <div className="max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6">
+        {stats.map((s, i) => (
+          <div key={i} className="text-center">
+            <p
+              className="font-bold mb-1"
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1rem, 3vw, 1.5rem)', color: '#1A80FF' }}
+            >
+              {s.value}
+            </p>
+            <p
+              className="text-xs"
+              style={{ color: 'rgba(248,248,242,0.4)', fontFamily: 'Inter, sans-serif', lineHeight: 1.4 }}
+            >
+              {s.label}
+            </p>
+          </div>
         ))}
       </div>
     </div>
@@ -544,33 +551,52 @@ function FAQSection() {
   );
 }
 
-// ─── Bot Screenshots ──────────────────────────────────────────────────────────
+// ─── Chat Demo ────────────────────────────────────────────────────────────────
 
-function BotScreenshotsSection() {
-  const screens = [
-    {
-      label: 'Calificación inteligente',
-      tag: 'Paso 01',
-      body: 'El bot pregunta, entiende el contexto y clasifica al lead antes de que tu equipo intervenga.',
-      img: '/images/bot-screenshot-calificacion.png',
-      accent: '0,255,135',
-    },
-    {
-      label: 'Agendamiento automático',
-      tag: 'Paso 02',
-      body: 'El prospecto elige horario, el sistema confirma y bloquea la agenda. Cero coordinación manual.',
-      img: '/images/bot-screenshot-agenda.png',
-      accent: '204,68,255',
-    },
-    {
-      label: 'Seguimiento sin esfuerzo',
-      tag: 'Paso 03',
-      body: 'Leads silenciosos reciben follow-up en el momento justo. El sistema trabaja cuando tú no puedes.',
-      img: '/images/bot-screenshot-seguimiento.png',
-      accent: '0,212,255',
-    },
-  ];
+type ChatMsg = { from: 'bot' | 'lead'; text: string; time: string };
 
+const chatScenarios: { label: string; tag: string; accent: string; desc: string; messages: ChatMsg[] }[] = [
+  {
+    label: 'Calificación inteligente',
+    tag: 'Paso 01',
+    accent: '0,255,135',
+    desc: 'El bot pregunta, entiende el contexto y clasifica al lead antes de que tu equipo intervenga.',
+    messages: [
+      { from: 'bot', text: '¡Hola! 👋 Soy el asistente de ACME. ¿En qué te puedo ayudar?', time: '10:02' },
+      { from: 'lead', text: 'Quiero info de sus servicios', time: '10:03' },
+      { from: 'bot', text: 'Para orientarte mejor — ¿cuál es el presupuesto mensual de tu empresa?', time: '10:03' },
+      { from: 'lead', text: 'Entre 5 y 10 mil soles', time: '10:04' },
+      { from: 'bot', text: '✅ Perfil calificado. ¿Tienes 15 min esta semana para una llamada rápida?', time: '10:04' },
+    ],
+  },
+  {
+    label: 'Agendamiento automático',
+    tag: 'Paso 02',
+    accent: '204,68,255',
+    desc: 'El prospecto elige horario, el sistema confirma y bloquea la agenda. Cero coordinación manual.',
+    messages: [
+      { from: 'bot', text: 'Tenemos disponibilidad esta semana 📅', time: '11:15' },
+      { from: 'bot', text: '• Martes 3pm\n• Miércoles 10am\n• Jueves 4pm\n\n¿Cuál te viene mejor?', time: '11:15' },
+      { from: 'lead', text: 'Miércoles a las 10', time: '11:17' },
+      { from: 'bot', text: '✅ ¡Confirmado! Te envié la invitación. Nos vemos el miércoles a las 10am.', time: '11:17' },
+    ],
+  },
+  {
+    label: 'Seguimiento sin esfuerzo',
+    tag: 'Paso 03',
+    accent: '0,212,255',
+    desc: 'Leads silenciosos reciben follow-up en el momento justo. El sistema trabaja cuando tú no puedes.',
+    messages: [
+      { from: 'bot', text: 'Hola 👋 Te escribí hace 2 días. ¿Sigues interesado?', time: '9:30' },
+      { from: 'lead', text: 'Sí, perdón, estuve ocupado', time: '9:45' },
+      { from: 'bot', text: '¡Sin problema! ¿Prefieres los detalles ahora o agendamos una llamada?', time: '9:45' },
+      { from: 'lead', text: 'Mándame los detalles', time: '9:46' },
+      { from: 'bot', text: 'Perfecto, aquí va 👇', time: '9:46' },
+    ],
+  },
+];
+
+function ChatDemoSection() {
   return (
     <section className="py-20 px-4 relative overflow-hidden" style={{ background: '#040406' }}>
       <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
@@ -588,12 +614,12 @@ function BotScreenshotsSection() {
             <span style={{ color: '#1A80FF' }}>Así lo ve tu equipo.</span>
           </h2>
           <p className="mt-4 max-w-lg mx-auto text-sm" style={{ color: 'rgba(248,248,242,0.5)', fontFamily: 'Inter, sans-serif' }}>
-            Capturas del sistema funcionando: calificación, agendamiento y seguimiento automático.
+            Conversaciones reales: calificación, agendamiento y seguimiento — sin intervención humana.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {screens.map((s, i) => (
+          {chatScenarios.map((s, i) => (
             <div key={i} className="flex flex-col rounded-2xl overflow-hidden" style={{ border: `1px solid rgba(${s.accent},0.18)`, background: `rgba(${s.accent},0.025)` }}>
               {/* Phone mockup */}
               <div className="relative mx-auto mt-6" style={{ width: 190, height: 340, borderRadius: 24, background: '#111', border: `2px solid rgba(${s.accent},0.3)`, overflow: 'hidden', boxShadow: `0 0 40px rgba(${s.accent},0.12)` }}>
@@ -611,23 +637,33 @@ function BotScreenshotsSection() {
                     <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.5rem', color: 'rgba(248,248,242,0.6)' }}>en línea</p>
                   </div>
                 </div>
-                {/* Screenshot area */}
-                <div style={{ position: 'relative', flex: 1, background: '#0d1117', minHeight: 260 }}>
-                  {/* Placeholder — reemplazar con <Image> cuando tengas los screenshots en /public/images/ */}
-                  <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, padding: 12 }}>
-                    <div style={{ width: 32, height: 32, borderRadius: '50%', background: `rgba(${s.accent},0.15)`, border: `1px solid rgba(${s.accent},0.4)`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Bot style={{ width: 14, height: 14, color: `rgb(${s.accent})` }} />
+                {/* Chat bubbles */}
+                <div style={{ background: '#0b141a', height: 263, padding: '6px', display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'hidden' }}>
+                  {s.messages.map((msg, j) => (
+                    <div key={j} style={{ display: 'flex', justifyContent: msg.from === 'lead' ? 'flex-end' : 'flex-start' }}>
+                      <div style={{
+                        maxWidth: '82%',
+                        background: msg.from === 'bot' ? '#1F2C34' : '#005C4B',
+                        borderRadius: msg.from === 'bot' ? '0 6px 6px 6px' : '6px 0 6px 6px',
+                        padding: '3px 6px 2px',
+                        fontSize: '0.5rem',
+                        color: '#f8f8f2',
+                        fontFamily: 'Inter, sans-serif',
+                        lineHeight: 1.45,
+                        whiteSpace: 'pre-line',
+                      }}>
+                        {msg.text}
+                        <span style={{ display: 'block', textAlign: 'right', fontSize: '0.42rem', color: 'rgba(248,248,242,0.4)', marginTop: 1 }}>{msg.time}</span>
+                      </div>
                     </div>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.5rem', color: `rgba(${s.accent},0.7)`, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center' }}>PENDIENTE</p>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.48rem', color: 'rgba(248,248,242,0.3)', lineHeight: 1.4, textAlign: 'center' }}>Subir screenshot<br />del bot en acción</p>
-                  </div>
+                  ))}
                 </div>
               </div>
               {/* Caption */}
               <div className="p-5 mt-2">
                 <span style={{ display: 'inline-block', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: `rgba(${s.accent},0.8)`, marginBottom: 6 }}>{s.tag}</span>
                 <h3 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '1rem', color: '#f8f8f2', marginBottom: 6, lineHeight: 1.25 }}>{s.label}</h3>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: 'rgba(248,248,242,0.5)', lineHeight: 1.6 }}>{s.body}</p>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: 'rgba(248,248,242,0.5)', lineHeight: 1.6 }}>{s.desc}</p>
               </div>
             </div>
           ))}
@@ -847,12 +883,12 @@ export default function SistemasIAPage() {
       <HeroClient />
       <AnimatedMetricsStrip />
       <VSLSectionIA />
-      <BotScreenshotsSection />
       <SistemasIAProblems />
       <HowItWorksAnimated steps={steps} />
+      <ChatDemoSection />
+      <VsSimpleBotSection />
       <IntegrationsStrip />
       <PricingSection />
-      <VsSimpleBotSection />
       <IndustriesSectionAnimated />
       <TestimonialsSection />
       <GuaranteeSection />
