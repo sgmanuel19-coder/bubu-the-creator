@@ -191,101 +191,6 @@ function FAQSection() {
   );
 }
 
-// ── Video examples ────────────────────────────────────────────
-//
-// Para activar un video: reemplaza null por el ID del reel de Instagram.
-// Ej: reelId="ABC123xyz" → https://www.instagram.com/reel/ABC123xyz/
-//
-// IDs a reemplazar cuando tengas los links:
-const VIDEO_VSL_ID:        string | null = null; // → Video Caso VSL
-const VIDEO_COBERTURA_ID:  string | null = null; // → Cobertura de evento/feria
-const VIDEO_IA_1_ID:       string | null = null; // → Vertical con IA generativa #1
-const VIDEO_IA_2_ID:       string | null = null; // → Vertical con IA generativa #2
-const VIDEO_IA_3_ID:       string | null = null; // → Vertical con IA generativa #3
-
-function ReelSlot({
-  reelId,
-  label,
-  description,
-  color = "green",
-}: {
-  reelId: string | null;
-  label: string;
-  description: string;
-  color?: "green" | "purple";
-}) {
-  const isGreen = color === "green";
-  const borderColor = isGreen ? "border-neon-green/20" : "border-neon-purple/20";
-  const accentColor = isGreen ? "text-neon-green" : "text-neon-purple";
-  const cornerColor = isGreen ? "rgba(0,255,135,0.5)" : "rgba(204,68,255,0.5)";
-  const glowColor   = isGreen ? "rgba(0,255,135,0.12)" : "rgba(204,68,255,0.12)";
-
-  return (
-    <div className="flex flex-col gap-3">
-      {/* Slot */}
-      <div
-        className={`relative w-full rounded-xl border overflow-hidden ${borderColor}`}
-        style={{ aspectRatio: "9/16", background: "rgba(5,7,9,0.9)" }}
-      >
-        {/* HUD corners */}
-        <div className="absolute top-2 left-2 w-4 h-4 pointer-events-none z-10"
-          style={{ borderTop: `1.5px solid ${cornerColor}`, borderLeft: `1.5px solid ${cornerColor}`, borderTopLeftRadius: 3 }} />
-        <div className="absolute top-2 right-2 w-4 h-4 pointer-events-none z-10"
-          style={{ borderTop: `1.5px solid ${cornerColor}`, borderRight: `1.5px solid ${cornerColor}`, borderTopRightRadius: 3 }} />
-        <div className="absolute bottom-2 left-2 w-4 h-4 pointer-events-none z-10"
-          style={{ borderBottom: `1.5px solid ${cornerColor}`, borderLeft: `1.5px solid ${cornerColor}`, borderBottomLeftRadius: 3 }} />
-        <div className="absolute bottom-2 right-2 w-4 h-4 pointer-events-none z-10"
-          style={{ borderBottom: `1.5px solid ${cornerColor}`, borderRight: `1.5px solid ${cornerColor}`, borderBottomRightRadius: 3 }} />
-
-        {reelId ? (
-          /* ── EMBED ACTIVO ── */
-          <iframe
-            src={`https://www.instagram.com/reel/${reelId}/embed/`}
-            className="absolute inset-0 w-full h-full"
-            frameBorder="0"
-            scrolling="no"
-            allowTransparency
-            allowFullScreen
-          />
-        ) : (
-          /* ── PLACEHOLDER ── */
-          <>
-            {/* Scanlines */}
-            <div className="absolute inset-0 pointer-events-none opacity-40"
-              style={{ background: "repeating-linear-gradient(0deg,rgba(0,0,0,0.08) 0px,rgba(0,0,0,0.08) 1px,transparent 1px,transparent 4px)" }} />
-            {/* Inner glow */}
-            <div className="absolute inset-0 pointer-events-none"
-              style={{ background: `radial-gradient(ellipse at 50% 40%, ${glowColor} 0%, transparent 70%)` }} />
-            {/* Play button */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <motion.div
-                className={`w-12 h-12 rounded-full border flex items-center justify-center ${borderColor}`}
-                style={{ background: isGreen ? "rgba(0,255,135,0.08)" : "rgba(204,68,255,0.08)" }}
-                animate={{ scale: [1, 1.06, 1] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor"
-                  className={`w-5 h-5 ml-0.5 ${accentColor}`}>
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </motion.div>
-              <p className={`text-[9px] font-display font-bold tracking-[0.2em] uppercase text-center px-4 ${accentColor} opacity-50`}>
-                Ejemplo próximamente
-              </p>
-            </div>
-          </>
-        )}
-      </div>
-
-      {/* Label below */}
-      <div>
-        <p className={`font-display font-bold text-xs ${accentColor} mb-0.5`}>{label}</p>
-        <p className="font-body text-muted/50 text-[11px] leading-snug">{description}</p>
-      </div>
-    </div>
-  );
-}
-
 function ProfileCard({
   profile,
   index,
@@ -353,65 +258,6 @@ function ProfileCard({
       <p className="font-body text-xs leading-relaxed" style={{ color: "rgba(176,200,184,0.65)" }}>
         {profile.description}
       </p>
-    </div>
-  );
-}
-
-function VideoExamples() {
-  return (
-    <div className="py-14 px-6 lg:px-10">
-      <SectionLabel text="Ve el sistema en acción" />
-      <p className="font-body text-muted/70 text-sm mb-10 max-w-xl">
-        Ejemplos reales de cada tipo de pieza que forma parte de la implementación — para que tengas una idea clara de lo que tu empresa recibirá.
-      </p>
-
-      {/* ── Row 1: VSL + Cobertura ── */}
-      <div className="mb-12">
-        <p className="font-display font-semibold text-xs tracking-[0.2em] uppercase text-muted/40 mb-6">
-          Piezas principales
-        </p>
-        <div className="grid grid-cols-2 lg:grid-cols-2 gap-6 max-w-sm lg:max-w-md">
-          <ReelSlot
-            reelId={VIDEO_VSL_ID}
-            label="Video Caso VSL"
-            description="Pieza de autoridad: storytelling real del proyecto o empresa"
-            color="green"
-          />
-          <ReelSlot
-            reelId={VIDEO_COBERTURA_ID}
-            label="Cobertura"
-            description="Feria, evento u oficina convertida en contenido"
-            color="green"
-          />
-        </div>
-      </div>
-
-      {/* ── Row 2: Verticales con IA ── */}
-      <div>
-        <p className="font-display font-semibold text-xs tracking-[0.2em] uppercase text-muted/40 mb-6">
-          Contenido vertical con IA generativa
-        </p>
-        <div className="grid grid-cols-3 gap-4 max-w-lg">
-          <ReelSlot
-            reelId={VIDEO_IA_1_ID}
-            label="Vertical IA #1"
-            description="Experto a cámara + tomas IA"
-            color="purple"
-          />
-          <ReelSlot
-            reelId={VIDEO_IA_2_ID}
-            label="Vertical IA #2"
-            description="Concepto técnico visualizado"
-            color="purple"
-          />
-          <ReelSlot
-            reelId={VIDEO_IA_3_ID}
-            label="Vertical IA #3"
-            description="Motion + IA generativa"
-            color="purple"
-          />
-        </div>
-      </div>
     </div>
   );
 }
@@ -492,12 +338,7 @@ export default function ServiceDetailAudiovisual() {
 
       <div className="h-px bg-white/5 mx-6 lg:mx-10" />
 
-      {/* ── 4. EJEMPLOS REALES ── */}
-      <VideoExamples />
-
-      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
-
-      {/* ── 6. QUÉ RECIBE AL FINAL ── */}
+      {/* ── 4. QUÉ RECIBE AL FINAL ── */}
       <div className="py-14 px-6 lg:px-10">
         <SectionLabel text="Qué recibe la empresa al final" />
         <p className="font-body text-muted/70 text-sm mb-6">
