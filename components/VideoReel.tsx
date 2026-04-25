@@ -13,7 +13,7 @@ const REELS: { id: string | null; platform: "instagram" | "tiktok"; label: strin
   { id: "DNG9SA4RGyf", platform: "instagram", label: "Colaboración", client: "WIN Internet · Mario Hart", color: "green"  },
   { id: "DOGsMRhDGKJ", platform: "instagram", label: "Experto a cámara", client: "WIN Internet",         color: "purple" },
   { id: null, platform: "instagram", label: "Video VSL",        client: "Caso de éxito",        color: "green"  },
-  { id: null, platform: "tiktok",    label: "Contenido IA",     client: "IA generativa",        color: "purple" },
+  { id: "DW6m1y9E6hy", platform: "instagram", label: "Contenido IA",     client: "WIN Internet",        color: "purple" },
   { id: null, platform: "instagram", label: "Cobertura",        client: "Feria industrial",     color: "green"  },
   { id: null, platform: "tiktok",    label: "Experto",          client: "Vocero B2B",           color: "purple" },
   { id: null, platform: "instagram", label: "Autoridad",        client: "Marca técnica",        color: "green"  },
