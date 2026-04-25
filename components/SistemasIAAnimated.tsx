@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Stethoscope, Home, Scale, GraduationCap, Heart, TrendingUp, Building2, Wifi, Zap, Briefcase } from "lucide-react";
+import { Stethoscope, Home, Scale, GraduationCap, Heart, TrendingUp, Building2, Wifi, Zap, Briefcase, X, CheckCircle2 } from "lucide-react";
 
 // ── Types ─────────────────────────────────────────────────────
 type Step = { number: string; title: string; description: string };
@@ -542,6 +542,238 @@ export function IntegrationsStrip() {
 
       {/* Beam scan bottom divider */}
       <div className="absolute bottom-0 left-0 right-0 h-px beam-divider" style={{ animationDelay: "1.5s" }} />
+    </section>
+  );
+}
+
+// ── Vs Simple Bot — Animated ──────────────────────────────────
+
+const vsRows = [
+  { feature: 'Responde preguntas',     simple: 'Respuestas fijas predefinidas',         resuelto: 'Entiende contexto y adapta la respuesta con IA' },
+  { feature: 'Calificación de leads',  simple: 'No filtra — todo parece un lead',        resuelto: 'Identifica interés, presupuesto y urgencia real' },
+  { feature: 'Integración de agenda',  simple: 'Sin integración',                        resuelto: 'Agenda directo en Google Calendar o Calendly' },
+  { feature: 'Seguimiento automático', simple: 'Se detiene si no responden',             resuelto: 'Secuencias hasta el cierre sin intervención humana' },
+  { feature: 'Entrenamiento',          simple: 'Genérico, igual para todos',             resuelto: 'Entrenado con la lógica y el lenguaje de tu negocio' },
+  { feature: 'Implementación',         simple: 'Tú lo configuras solo',                  resuelto: 'Done-For-You + soporte 30 días incluido' },
+  { feature: 'Registro de leads',      simple: 'Sin historial ni memoria',               resuelto: 'Integración a Sheets, CRM o Notion en tiempo real' },
+  { feature: 'Prospección outbound',   simple: 'No incluye',                             resuelto: 'Cold Email disponible desde el plan Plus' },
+];
+
+export function VsSimpleBotSectionAnimated() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  return (
+    <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: 'rgba(26,128,255,0.015)' }}>
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
+
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+          animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#1A80FF', marginBottom: 12 }}>
+            <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
+            El diferencial
+            <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
+          </span>
+          <h2 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
+            No es un chatbot genérico.<br />
+            <span style={{ color: '#1A80FF' }}>Es un sistema comercial.</span>
+          </h2>
+          <p style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.5)', fontSize: '0.9rem', marginTop: 14, maxWidth: 520, margin: '14px auto 0' }}>
+            Un bot simple responde mensajes. Este sistema califica, agenda, hace seguimiento y prospecta — sin intervención humana.
+          </p>
+        </motion.div>
+
+        <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
+          {/* Header */}
+          <motion.div
+            className="grid grid-cols-3"
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            style={{ background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+          >
+            <div className="py-4 px-4">
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(248,248,242,0.35)' }}>Función</span>
+            </div>
+            <div className="py-4 px-4 flex items-center justify-center" style={{ borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: 'rgba(248,248,242,0.4)' }}>Bot genérico</span>
+            </div>
+            <div className="py-4 px-4 flex items-center justify-center" style={{ borderLeft: '1px solid rgba(26,128,255,0.2)', background: 'rgba(26,128,255,0.06)' }}>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: '#1A80FF' }}>RESUELTO Sistema IA</span>
+            </div>
+          </motion.div>
+
+          {/* Rows */}
+          {vsRows.map((row, i) => (
+            <motion.div
+              key={i}
+              className="grid grid-cols-3"
+              initial={{ opacity: 0, x: -16 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.45, delay: 0.15 + i * 0.06, ease: [0.21, 0.47, 0.32, 0.98] }}
+              style={{ borderBottom: i < vsRows.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none', background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.01)' }}
+            >
+              <div className="py-3 px-4 flex items-center" style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: 'rgba(248,248,242,0.7)', fontWeight: 500 }}>{row.feature}</span>
+              </div>
+              <div className="py-3 px-4 flex items-start gap-2" style={{ borderRight: '1px solid rgba(26,128,255,0.1)' }}>
+                <X style={{ width: 13, height: 13, color: 'rgba(255,80,80,0.7)', flexShrink: 0, marginTop: 2 }} />
+                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'rgba(248,248,242,0.38)' }}>{row.simple}</span>
+              </div>
+              <div className="py-3 px-4 flex items-start gap-2" style={{ background: 'rgba(26,128,255,0.03)' }}>
+                <CheckCircle2 style={{ width: 13, height: 13, color: '#1A80FF', flexShrink: 0, marginTop: 2 }} />
+                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'rgba(248,248,242,0.75)' }}>{row.resuelto}</span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)' }} />
+    </section>
+  );
+}
+
+// ── Chat Demo — Animated ───────────────────────────────────────
+
+type ChatMsg = { from: 'bot' | 'lead'; text: string; time: string };
+
+const chatScenarios: { label: string; tag: string; accent: string; desc: string; messages: ChatMsg[] }[] = [
+  {
+    label: 'Calificación inteligente',
+    tag: 'Paso 01',
+    accent: '0,255,135',
+    desc: 'El bot pregunta, entiende el contexto y clasifica al lead antes de que tu equipo intervenga.',
+    messages: [
+      { from: 'bot',  text: '¡Hola! 👋 Soy el asistente de ACME. ¿En qué te puedo ayudar?', time: '10:02' },
+      { from: 'lead', text: 'Quiero info de sus servicios', time: '10:03' },
+      { from: 'bot',  text: 'Para orientarte mejor — ¿cuál es el presupuesto mensual de tu empresa?', time: '10:03' },
+      { from: 'lead', text: 'Entre 5 y 10 mil soles', time: '10:04' },
+      { from: 'bot',  text: '✅ Perfil calificado. ¿Tienes 15 min esta semana para una llamada rápida?', time: '10:04' },
+    ],
+  },
+  {
+    label: 'Agendamiento automático',
+    tag: 'Paso 02',
+    accent: '204,68,255',
+    desc: 'El prospecto elige horario, el sistema confirma y bloquea la agenda. Cero coordinación manual.',
+    messages: [
+      { from: 'bot',  text: 'Tenemos disponibilidad esta semana 📅', time: '11:15' },
+      { from: 'bot',  text: '• Martes 3pm\n• Miércoles 10am\n• Jueves 4pm\n\n¿Cuál te viene mejor?', time: '11:15' },
+      { from: 'lead', text: 'Miércoles a las 10', time: '11:17' },
+      { from: 'bot',  text: '✅ ¡Confirmado! Te envié la invitación. Nos vemos el miércoles a las 10am.', time: '11:17' },
+    ],
+  },
+  {
+    label: 'Seguimiento sin esfuerzo',
+    tag: 'Paso 03',
+    accent: '0,212,255',
+    desc: 'Leads silenciosos reciben follow-up en el momento justo. El sistema trabaja cuando tú no puedes.',
+    messages: [
+      { from: 'bot',  text: 'Hola 👋 Te escribí hace 2 días. ¿Sigues interesado?', time: '9:30' },
+      { from: 'lead', text: 'Sí, perdón, estuve ocupado', time: '9:45' },
+      { from: 'bot',  text: '¡Sin problema! ¿Prefieres los detalles ahora o agendamos una llamada?', time: '9:45' },
+      { from: 'lead', text: 'Mándame los detalles', time: '9:46' },
+      { from: 'bot',  text: 'Perfecto, aquí va 👇', time: '9:46' },
+    ],
+  },
+];
+
+export function ChatDemoSectionAnimated() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  return (
+    <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: '#040406' }}>
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(26,128,255,0.04) 0%, transparent 65%)' }} />
+
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+          animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#1A80FF', marginBottom: 12 }}>
+            <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
+            El sistema en acción
+            <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
+          </span>
+          <h2 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
+            Así lo ve tu cliente.<br />
+            <span style={{ color: '#1A80FF' }}>Así lo ve tu equipo.</span>
+          </h2>
+          <p style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.5)', fontSize: '0.9rem', marginTop: 14, maxWidth: 520, margin: '14px auto 0' }}>
+            Conversaciones reales: calificación, agendamiento y seguimiento — sin intervención humana.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {chatScenarios.map((s, i) => (
+            <motion.div
+              key={i}
+              className="flex flex-col rounded-2xl overflow-hidden"
+              initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+              animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
+              style={{ border: `1px solid rgba(${s.accent},0.18)`, background: `rgba(${s.accent},0.025)` }}
+            >
+              {/* Phone mockup */}
+              <div className="relative mx-auto mt-6" style={{ width: 190, height: 340, borderRadius: 24, background: '#111', border: `2px solid rgba(${s.accent},0.3)`, overflow: 'hidden', boxShadow: `0 0 40px rgba(${s.accent},0.12)` }}>
+                {/* Status bar */}
+                <div className="flex items-center justify-between px-3 pt-2 pb-1" style={{ background: '#1a1a1a', fontSize: '0.55rem', color: 'rgba(248,248,242,0.4)', fontFamily: 'Inter, sans-serif' }}>
+                  <span>9:41</span>
+                  <span style={{ width: 40, height: 3, background: `rgba(${s.accent},0.6)`, borderRadius: 999, display: 'inline-block' }} />
+                  <span>●●●</span>
+                </div>
+                {/* WA header */}
+                <div className="flex items-center gap-2 px-3 py-2" style={{ background: '#075E54' }}>
+                  <div style={{ width: 22, height: 22, borderRadius: '50%', background: `rgba(${s.accent},0.3)`, border: `1px solid rgba(${s.accent},0.5)` }} />
+                  <div>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.6rem', color: '#f8f8f2' }}>Bot Comercial IA</p>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.5rem', color: 'rgba(248,248,242,0.6)' }}>en línea</p>
+                  </div>
+                </div>
+                {/* Chat bubbles */}
+                <div style={{ background: '#0b141a', height: 263, padding: '6px', display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'hidden' }}>
+                  {s.messages.map((msg, j) => (
+                    <div key={j} style={{ display: 'flex', justifyContent: msg.from === 'lead' ? 'flex-end' : 'flex-start' }}>
+                      <div style={{
+                        maxWidth: '82%',
+                        background: msg.from === 'bot' ? '#1F2C34' : '#005C4B',
+                        borderRadius: msg.from === 'bot' ? '0 6px 6px 6px' : '6px 0 6px 6px',
+                        padding: '3px 6px 2px',
+                        fontSize: '0.5rem',
+                        color: '#f8f8f2',
+                        fontFamily: 'Inter, sans-serif',
+                        lineHeight: 1.45,
+                        whiteSpace: 'pre-line',
+                      }}>
+                        {msg.text}
+                        <span style={{ display: 'block', textAlign: 'right', fontSize: '0.42rem', color: 'rgba(248,248,242,0.4)', marginTop: 1 }}>{msg.time}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Caption */}
+              <div className="p-5 mt-2">
+                <span style={{ display: 'inline-block', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: `rgba(${s.accent},0.8)`, marginBottom: 6 }}>{s.tag}</span>
+                <h3 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '1rem', color: '#f8f8f2', marginBottom: 6, lineHeight: 1.25 }}>{s.label}</h3>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: 'rgba(248,248,242,0.5)', lineHeight: 1.6 }}>{s.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)' }} />
     </section>
   );
 }

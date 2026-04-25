@@ -189,6 +189,58 @@ export function AnimatedTextClient({ text, textClassName }: { text: string; text
   return <AnimatedText text={text} textClassName={textClassName} />;
 }
 
+// ── Social Proof Bar ────────────────────────────
+const proofStats = [
+  { end: 2,     suffix: ' min',   label: 'respuesta promedio', prefix: '<' },
+  { end: 10,    suffix: ' días',  label: 'instalación completa', prefix: '≤' },
+  { end: 30,    suffix: ' días',  label: 'garantía total', prefix: '' },
+  { value: '24/7', label: 'operación continua', prefix: '' },
+];
+
+export function SocialProofBarAnimated() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <div
+      ref={ref}
+      className="w-full py-7 px-4"
+      style={{
+        background: 'rgba(26,128,255,0.04)',
+        borderTop: '1px solid rgba(26,128,255,0.1)',
+        borderBottom: '1px solid rgba(26,128,255,0.1)',
+      }}
+    >
+      <div className="max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6">
+        {proofStats.map((s, i) => (
+          <motion.div
+            key={i}
+            className="text-center"
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: i * 0.08 }}
+          >
+            <p
+              className="font-bold mb-1"
+              style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1rem, 3vw, 1.5rem)', color: '#1A80FF' }}
+            >
+              {s.prefix}{'value' in s ? s.value : (
+                inView ? <CountUp end={s.end} suffix={s.suffix} duration={1.4} /> : `${s.end}${s.suffix}`
+              )}
+            </p>
+            <p
+              className="text-xs"
+              style={{ color: 'rgba(248,248,242,0.4)', fontFamily: 'Inter, sans-serif', lineHeight: 1.4 }}
+            >
+              {s.label}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Animated Metrics Strip ────────────────────────────────────
 const metrics = [
   { end: 3,       suffix: '',    label: 'servicios de automatización',     isStatic: false },
