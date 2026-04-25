@@ -11,7 +11,7 @@ import Link from "next/link";
 // ─────────────────────────────────────────────────────────────────────────────
 const REELS: { id: string | null; platform: "instagram" | "tiktok"; label: string; client: string; color: "green" | "purple" }[] = [
   { id: null, platform: "instagram", label: "Cobertura",       client: "Livoltek · ExpoSolar", color: "green"  },
-  { id: null, platform: "instagram", label: "Experto a cámara", client: "WIN Internet",         color: "purple" },
+  { id: "DOGsMRhDGKJ", platform: "instagram", label: "Experto a cámara", client: "WIN Internet",         color: "purple" },
   { id: null, platform: "instagram", label: "Video VSL",        client: "Caso de éxito",        color: "green"  },
   { id: null, platform: "tiktok",    label: "Contenido IA",     client: "IA generativa",        color: "purple" },
   { id: null, platform: "instagram", label: "Cobertura",        client: "Feria industrial",     color: "green"  },
