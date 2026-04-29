@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
+import FacebookPixel from '@/components/FacebookPixel';
 import {
   Bot,
   Clock,
@@ -646,6 +647,7 @@ function FinalCTASection() {
 export default function SistemasIAPage() {
   return (
     <main style={{ background: '#040406', minHeight: '100vh', color: '#f8f8f2' }}>
+      <FacebookPixel />
       <Navbar minimal />
       <HeroClient />
       <SocialProofBarAnimated />

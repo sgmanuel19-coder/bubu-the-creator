@@ -1,83 +1,65 @@
-# RESUELTO — Guía del Proyecto
+# SISTEMA IA — Plataforma de Atención al Cliente con IA
 
 ## ¿Qué es este proyecto?
-Web de marca personal de **Manuel Severo**, estratega de contenido y sistemas comerciales, Lima, Perú. Marca: **RESUELTO**. Deployed en Vercel: `project-yvdip.vercel.app`.
+Landing page independiente para **Sistema IA**, plataforma de atención al cliente automatizada con inteligencia artificial. Desarrollado para **RESUELTO** (Manuel Severo). Deployed en Vercel como proyecto separado.
 
 ## Stack
 - Next.js 16 (App Router, `output: "export"` para deploy estático)
-- Tailwind CSS con tokens neon personalizados
-- Framer Motion — animaciones scroll-triggered, drag, spring
-- React Three Fiber + Three.js — Hero 3D y CyberneticGridShader
-- shadcn/ui en `components/ui/`
+- Tailwind CSS con diseño profesional azul y blanco
+- Framer Motion — animaciones scroll-triggered
+- Facebook Pixel — tracking de conversiones
+- Vercel Analytics
 
 ## Identidad visual
 | Token | Valor |
 |---|---|
-| Neon verde | `#00ff87` |
-| Neon morado | `#cc44ff` |
-| Fondo | `#060608` |
-| Texto | `#f8f8f2` |
-| Font display | Space Grotesk |
+| Azul primario | `#1A80FF` |
+| Azul secundario | `#4D9FFF` |
+| Fondo | `#FFFFFF` |
+| Texto | `#000000` / `#666666` |
+| Font display | Inter / Space Grotesk |
 | Font body | Inter |
 
 ## Reglas críticas
 
-1. **`lib/constants.ts` es la fuente de verdad** — todos los textos, links, casos y testimonios viven ahí.
-2. **Leer antes de editar** — nunca modificar sin haber leído el archivo.
-3. **Server vs Client**: Las páginas `app/*/page.tsx` son Server Components. Hooks, drag, `dynamic({ssr:false})` → componentes con `"use client"`.
-4. **Static export**: `generateStaticParams` obligatorio en `app/casos/[slug]/page.tsx`.
-5. **Mobile-first**: Tailwind `base → sm → md → lg`.
-6. **Sin over-engineering**: No crear archivos innecesarios. No añadir features no pedidas.
+1. **Sistema IA es proyecto independiente** — completamente separado de Resuelto. Vercel dashboard muestra como proyecto distinto.
+2. **`app/sistemas-ia/page.tsx` es la única página** — todas las secciones viven en este archivo o sus imports.
+3. **Server vs Client**: La página `app/sistemas-ia/page.tsx` es Server Component. Componentes con interactividad usan `"use client"`.
+4. **Static export**: El sitio se exporta estáticamente para máxima velocidad.
+5. **Facebook Pixel tracking** — implementado vía componente `FacebookPixel.tsx`. Se dispara en cada pageview y eventos de conversión.
+6. **Mobile-first**: Tailwind responsive design `base → sm → md → lg`.
 
 ## Páginas
-| Ruta | Archivo |
-|---|---|
-| `/` | `app/page.tsx` |
-| `/sobre-mi` | `app/sobre-mi/page.tsx` |
-| `/casos` | `app/casos/page.tsx` |
-| `/casos/[slug]` | `app/casos/[slug]/page.tsx` |
-| `/servicios` | `app/servicios/page.tsx` |
-| `/contacto` | `app/contacto/page.tsx` |
+| Ruta | Archivo | Nota |
+|---|---|---|
+| `/` | `app/page.tsx` | Home temporal (redirige a Sistema IA) |
+| `/app` | `app/sistemas-ia/page.tsx` | Landing principal |
 
 ## Deploy
 ```bash
 npm run dev          # desarrollo
 npm run build        # build local
 npx vercel --prod    # deploy producción
-git add . && git commit -m "mensaje" && git push  # auto-deploy vía GitHub→Vercel
+git push             # auto-deploy vía GitHub→Vercel
 ```
 
----
+## Variables de Entorno
+```
+NEXT_PUBLIC_FACEBOOK_PIXEL_ID=1298724568307272
+```
 
-## Agencia BUBU The Creator — Hub central
+## Componentes Clave
+- **FacebookPixel.tsx** — Inicializa Facebook Pixel para tracking de conversiones
+- **Secciones en `sistemas-ia/page.tsx`**:
+  - Problems — Pain points del cliente
+  - HowItWorks — Explicación de cómo funciona
+  - Pricing — Planes de pago
+  - Industries — Industrias objetivo
+  - Testimonials — Casos de éxito
+  - FAQ — Preguntas frecuentes
+  - Guarantee — Garantía de satisfacción
+  - FinalCTA — Llamada a acción final con WhatsApp
 
-Este proyecto también es el **hub de la agencia**. Dentro de `agency/` vive la memoria de todos los clientes y proyectos.
-
-### Clientes activos
-| Cliente | Tipo | Archivo de briefing |
-|---|---|---|
-| WIN Internet | Fijo | `agency/clients/win-internet.md` |
-| BUBU The Creator | Marca personal | `agency/clients/bubu-the-creator.md` |
-| LIVOLTEK | Recurrente | `agency/clients/livoltek.md` |
-| Felina Glam | Activo | `agency/clients/felina-glam.md` |
-
-### Agentes disponibles (en `.claude/agents/`)
-| Agente | Rol |
-|---|---|
-| `director-general` | Orquesta todo el equipo |
-| `personal-assistant` | Briefing diario proactivo |
-| `account-executive` | Gestión de clientes |
-| `project-manager` | Timelines y tareas |
-| `growth-coach` | Meta 50k/mes |
-| `finance-manager` | Ingresos y facturas |
-| `prospector` | Nuevos clientes |
-| `strategist` | Estrategia de campañas |
-| `copywriter` | Guiones y copy |
-| `content-planner` | Calendarios de contenido |
-| `analyst` | Métricas y auditorías |
-| `web-developer` | Desarrollo web |
-
-### Otros proyectos vinculados
-- `C:\Users\BUBU THE CREATOR\Documents\DISEÑO WEB\lashista-services\`
-- `C:\Users\BUBU THE CREATOR\Documents\DISEÑO WEB\lashista-academy\`
-- `C:\Users\BUBU THE CREATOR\Documents\WIN INTERNET ABRIL\` (Remotion videos)
+## Contacto
+- **WhatsApp**: Botones CTA enlazan directamente a conversación WhatsApp
+- **Píxel de conversión**: Track automático de view_content, add_to_cart, purchase events
