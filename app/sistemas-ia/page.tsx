@@ -398,8 +398,7 @@ function FinalCTASection() {
               boxShadow: '0 0 30px rgba(26,128,255,0.3)',
             }}
           >
-            <Phone className="w-5 h-5" />
-            Quiero mi sistema ahora
+            Quiero mi sistema ahora →
           </a>
         </div>
 
