@@ -3,7 +3,6 @@ import { Poppins, Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/constants";
 import CursorTrail from "@/components/CursorTrail";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import StickyCTA from "@/components/StickyCTA";
 import ScrollProgress from "@/components/ScrollProgress";
 import { Analytics } from "@vercel/analytics/react";
@@ -103,7 +102,6 @@ export default function RootLayout({
         <StickyCTA />
         <CursorTrail />
         {children}
-        <WhatsAppFloat />
         <Analytics />
       </body>
     </html>

@@ -24,9 +24,19 @@ export function FloatingCTA() {
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          animate={{ opacity: 1, scale: 1, y: [0, -6, 0, -3, 0] }}
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+          transition={{
+            opacity: { duration: 0.3 },
+            scale: { type: 'spring', stiffness: 260, damping: 20 },
+            y: {
+              duration: 1.8,
+              repeat: Infinity,
+              repeatDelay: 2.5,
+              ease: 'easeInOut',
+              times: [0, 0.3, 0.6, 0.8, 1],
+            },
+          }}
           className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-full"
           style={{
             background: 'linear-gradient(135deg, #25D366, #128C7E)',
