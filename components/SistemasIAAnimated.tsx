@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Stethoscope, Home, Scale, GraduationCap, Heart, TrendingUp, Building2, Wifi, Zap, Briefcase, X, CheckCircle2 } from "lucide-react";
 
 // ── Types ─────────────────────────────────────────────────────
@@ -158,7 +158,7 @@ export function VSLSectionIA() {
         >
           <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#1A80FF", marginBottom: 12 }}>
             <span style={{ width: 20, height: 1, background: "rgba(26,128,255,0.5)", display: "inline-block" }} />
-            Ve el sistema antes de decidir
+            Conoce nuestro sistema RESUELTO IA SYSTEM
             <span style={{ width: 20, height: 1, background: "rgba(26,128,255,0.5)", display: "inline-block" }} />
           </span>
           <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "clamp(1.5rem, 4vw, 2.5rem)", color: "#f8f8f2", lineHeight: 1.15 }}>
@@ -180,95 +180,61 @@ export function VSLSectionIA() {
 
 // ── How It Works Animated ─────────────────────────────────────
 
-function StepCardAnimated({ step, index, inView }: { step: Step; index: number; inView: boolean }) {
-  const [hovered, setHovered] = useState(false);
-  const isGreen = index !== 1;
-  const rgb = isGreen ? "0,255,135" : "204,68,255";
-
+function StepCardAnimated({ step, index, inView, isLast }: { step: Step; index: number; inView: boolean; isLast: boolean }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 36, filter: "blur(8px)" }}
-      animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-      transition={{ duration: 0.6, delay: 0.1 + index * 0.13, ease: [0.21, 0.47, 0.32, 0.98] }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        borderRadius: 20,
-        padding: "32px 28px",
-        border: `1px solid ${hovered ? `rgba(${rgb},0.55)` : `rgba(${rgb},0.12)`}`,
-        background: hovered ? `rgba(${rgb},0.07)` : `rgba(${rgb},0.025)`,
-        boxShadow: hovered
-          ? `0 0 0 1px rgba(${rgb},0.2), 0 0 50px rgba(${rgb},0.12), inset 0 0 40px rgba(${rgb},0.05)`
-          : "none",
-        transform: hovered ? "translateY(-6px)" : "translateY(0)",
-        transition: "border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
-        position: "relative",
-        overflow: "hidden",
-        cursor: "default",
-      }}
+      initial={{ opacity: 0, x: -40, filter: "blur(8px)" }}
+      animate={inView ? { opacity: 1, x: 0, filter: "blur(0px)" } : {}}
+      transition={{ duration: 0.6, delay: 0.12 + index * 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
+      style={{ display: "flex", gap: 24, alignItems: "flex-start" }}
     >
-      {/* Top shimmer */}
-      <div style={{
-        position: "absolute", top: 0, left: 0, right: 0, height: 2,
-        background: `linear-gradient(90deg, transparent, rgba(${rgb},0.9), transparent)`,
-        opacity: hovered ? 1 : 0.15,
-        transition: "opacity 0.3s ease",
-      }} />
-      {/* Inner bloom */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        background: `radial-gradient(ellipse at 30% 0%, rgba(${rgb},0.1) 0%, transparent 70%)`,
-        opacity: hovered ? 1 : 0,
-        transition: "opacity 0.3s ease",
-      }} />
-
-      {/* Number */}
-      <div style={{ marginBottom: 20 }}>
-        <span style={{
-          fontFamily: "Poppins, sans-serif",
-          fontWeight: 800,
-          fontSize: "4rem",
-          lineHeight: 1,
-          background: `linear-gradient(135deg, rgba(${rgb},0.95) 0%, rgba(${rgb},0.2) 100%)`,
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          display: "block",
-          opacity: hovered ? 1 : 0.8,
-          transition: "opacity 0.3s ease",
-        }}>
+      {/* Left: circle + vertical line */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={inView ? { scale: 1, opacity: 1 } : {}}
+          transition={{ duration: 0.4, delay: 0.18 + index * 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
+          style={{
+            width: 52, height: 52, borderRadius: "50%",
+            background: "rgba(26,128,255,0.1)",
+            border: "1.5px solid rgba(26,128,255,0.45)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.15rem",
+            color: "#1A80FF",
+            boxShadow: "0 0 24px rgba(26,128,255,0.15)",
+          }}
+        >
           {step.number}
-        </span>
+        </motion.div>
+        {!isLast && (
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={inView ? { scaleY: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.35 + index * 0.2, ease: "easeOut" }}
+            style={{
+              width: 1, height: 56, marginTop: 8,
+              background: "linear-gradient(180deg, rgba(26,128,255,0.45) 0%, rgba(26,128,255,0.05) 100%)",
+              transformOrigin: "top",
+            }}
+          />
+        )}
       </div>
 
-      {/* Divider */}
-      <div style={{
-        height: 1, marginBottom: 16,
-        background: `linear-gradient(90deg, rgba(${rgb},0.6) 0%, transparent 100%)`,
-        transform: hovered ? "scaleX(1)" : "scaleX(0.45)",
-        transformOrigin: "left",
-        transition: "transform 0.35s ease",
-      }} />
-
-      <h3 style={{
-        fontFamily: "Poppins, sans-serif",
-        fontWeight: 700,
-        fontSize: "1.125rem",
-        color: "#f8f8f2",
-        marginBottom: 10,
-        lineHeight: 1.25,
-      }}>
-        {step.title}
-      </h3>
-      <p style={{
-        fontFamily: "Inter, sans-serif",
-        fontSize: "0.875rem",
-        lineHeight: 1.65,
-        color: `rgba(248,248,242,${hovered ? 0.7 : 0.5})`,
-        transition: "color 0.3s ease",
-      }}>
-        {step.description}
-      </p>
+      {/* Right: content */}
+      <div style={{ paddingBottom: isLast ? 0 : 40, paddingTop: 12, flex: 1 }}>
+        <h3 style={{
+          fontFamily: "Poppins, sans-serif", fontWeight: 700,
+          fontSize: "1.125rem", color: "#f8f8f2", marginBottom: 8, lineHeight: 1.25,
+        }}>
+          {step.title}
+        </h3>
+        <p style={{
+          fontFamily: "Inter, sans-serif", fontSize: "0.875rem",
+          lineHeight: 1.65, color: "rgba(248,248,242,0.55)",
+        }}>
+          {step.description}
+        </p>
+      </div>
     </motion.div>
   );
 }
@@ -299,30 +265,13 @@ export function HowItWorksAnimated({ steps }: { steps: Step[] }) {
             3 pasos. Sin complicaciones.
           </h2>
           <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(248,248,242,0.5)", fontSize: "0.95rem", marginTop: 12 }}>
-            Sin burocracia. Sin capas. Desde el diagnóstico hasta el sistema encendido.
+            Te creamos y configuramos un super agente IA para tu negocio
           </p>
         </motion.div>
 
-        <div className="relative" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
-          {/* Connector line */}
-          <motion.div
-            style={{
-              display: "none",
-              position: "absolute",
-              top: 40,
-              left: "calc(16.67% + 14px)",
-              right: "calc(16.67% + 14px)",
-              height: 1,
-              background: "linear-gradient(90deg, rgba(26,128,255,0.35) 0%, rgba(77,159,255,0.5) 50%, rgba(26,128,255,0.35) 100%)",
-              pointerEvents: "none",
-            }}
-            className="md:!block"
-            initial={{ scaleX: 0 }}
-            animate={inView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-          />
+        <div className="max-w-xl mx-auto flex flex-col">
           {steps.map((step, i) => (
-            <StepCardAnimated key={step.number} step={step} index={i} inView={inView} />
+            <StepCardAnimated key={step.number} step={step} index={i} inView={inView} isLast={i === steps.length - 1} />
           ))}
         </div>
       </div>
@@ -334,105 +283,80 @@ export function HowItWorksAnimated({ steps }: { steps: Step[] }) {
 
 // ── Industries / Para quién es — Animated ────────────────────
 
-const industries: Industry[] = [
-  { icon: Building2,    label: "Empresas técnicas e industriales", description: "Prospectos B2B que necesitan respuesta rápida y calificada antes de la primera reunión" },
-  { icon: Wifi,         label: "Telecomunicaciones y tecnología",  description: "Ciclos de venta largos donde el seguimiento automático marca la diferencia" },
-  { icon: Zap,          label: "Energía e ingeniería",             description: "Leads de alta calidad que se pierden por falta de atención inmediata y cualificada" },
-  { icon: Briefcase,    label: "Consultoras y startups B2B",       description: "Equipos pequeños que necesitan escalar sin contratar más personal de atención" },
-  { icon: Stethoscope,  label: "Clínicas estéticas y salud",       description: "Pierden citas por respuestas lentas en fines de semana y fuera de horario" },
-  { icon: Home,         label: "Inmobiliarias",                    description: "Prospectos calientes que se enfrían esperando respuesta manual" },
-  { icon: Scale,        label: "Estudios legales",                 description: "Consultas urgentes sin un primer filtro profesional" },
-  { icon: GraduationCap, label: "Institutos y educación",         description: "200+ consultas en temporada sin equipo para atenderlas todas" },
-  { icon: TrendingUp,   label: "Empresas con pauta Meta",          description: "Leads de madrugada que nadie responde hasta el día siguiente" },
-  { icon: Heart,        label: "Odontología y salud",              description: "Agendas manuales que generan baches y cancelaciones innecesarias" },
+const industryPills = [
+  { emoji: '🍽️', label: 'Restaurantes' },
+  { emoji: '🏥', label: 'Clínicas estéticas' },
+  { emoji: '🏠', label: 'Inmobiliarias' },
+  { emoji: '🏨', label: 'Hoteles & hospedajes' },
+  { emoji: '🦷', label: 'Odontología' },
+  { emoji: '🎓', label: 'Institutos & academias' },
+  { emoji: '💪', label: 'Gimnasios & spas' },
+  { emoji: '💅', label: 'Salones de belleza' },
+  { emoji: '🌿', label: 'Nutricionistas' },
+  { emoji: '💼', label: 'Consultoras B2B' },
+  { emoji: '✈️', label: 'Agencias de viajes' },
+  { emoji: '👗', label: 'Tiendas online' },
+  { emoji: '⚖️', label: 'Estudios legales' },
+  { emoji: '🚗', label: 'Concesionarios' },
+  { emoji: '🏗️', label: 'Constructoras' },
+  { emoji: '🧠', label: 'Psicólogos & terapeutas' },
+  { emoji: '🏋️', label: 'Entrenadores personales' },
+  { emoji: '📱', label: 'Startups tech' },
+  { emoji: '📡', label: 'Telecomunicaciones' },
+  { emoji: '🎉', label: 'Organizadores de eventos' },
+  { emoji: '🔧', label: 'Servicios técnicos' },
+  { emoji: '🚚', label: 'Logística & delivery' },
+  { emoji: '🎨', label: 'Agencias creativas' },
+  { emoji: '📊', label: 'Empresas con pauta Meta' },
 ];
 
-function IndustryCardAnimated({ item, index, inView }: { item: Industry; index: number; inView: boolean }) {
-  const [hovered, setHovered] = useState(false);
-  const Icon = item.icon;
-  const useGreen = index % 2 === 0;
-  const rgb = useGreen ? "0,255,135" : "204,68,255";
+const pillRow1 = industryPills.slice(0, 12);
+const pillRow2 = industryPills.slice(12);
 
+function IndustryPill({ item, blue }: { item: typeof industryPills[0]; blue: boolean }) {
+  const [hovered, setHovered] = useState(false);
+  const accent = blue ? '26,128,255' : '77,159,255';
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 28, filter: "blur(6px)" }}
-      animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-      transition={{ duration: 0.55, delay: 0.06 * index, ease: [0.21, 0.47, 0.32, 0.98] }}
+    <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        borderRadius: 16,
-        padding: "24px 20px",
-        textAlign: "center",
-        border: `1px solid ${hovered ? `rgba(${rgb},0.5)` : `rgba(${rgb},0.1)`}`,
-        background: hovered ? `rgba(${rgb},0.07)` : "rgba(255,255,255,0.025)",
-        boxShadow: hovered
-          ? `0 0 0 1px rgba(${rgb},0.15), 0 0 40px rgba(${rgb},0.12)`
-          : "none",
-        transform: hovered ? "translateY(-4px) scale(1.02)" : "translateY(0) scale(1)",
-        transition: "all 0.28s cubic-bezier(0.21,0.47,0.32,0.98)",
-        cursor: "default",
-        position: "relative",
-        overflow: "hidden",
+        display: 'inline-flex', alignItems: 'center', gap: 8,
+        padding: '9px 18px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
+        border: `1px solid rgba(${accent},${hovered ? 0.55 : 0.18})`,
+        background: hovered ? `rgba(${accent},0.1)` : 'rgba(255,255,255,0.03)',
+        boxShadow: hovered ? `0 0 20px rgba(${accent},0.15)` : 'none',
+        transition: 'all 0.22s ease',
+        cursor: 'default',
       }}
     >
-      {/* Top shimmer */}
-      <div style={{
-        position: "absolute", top: 0, left: 0, right: 0, height: 1,
-        background: `linear-gradient(90deg, transparent, rgba(${rgb},0.8), transparent)`,
-        opacity: hovered ? 1 : 0,
-        transition: "opacity 0.28s ease",
-      }} />
-      {/* Icon */}
-      <div
-        style={{
-          width: 52, height: 52, borderRadius: 14, margin: "0 auto 12px",
-          background: `rgba(${rgb},0.1)`,
-          border: `1px solid rgba(${rgb},0.25)`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          boxShadow: hovered ? `0 0 24px rgba(${rgb},0.3)` : "none",
-          transition: "box-shadow 0.28s ease",
-        }}
-      >
-        <Icon style={{ width: 24, height: 24, color: useGreen ? "#1A80FF" : "#4D9FFF" }} />
-      </div>
-      <p style={{
-        fontFamily: "Poppins, sans-serif",
-        fontWeight: 600,
-        fontSize: "0.875rem",
-        color: hovered ? "#f8f8f2" : "rgba(248,248,242,0.8)",
-        transition: "color 0.28s ease",
-        marginBottom: 6,
-      }}>
-        {item.label}
-      </p>
-      <p style={{
-        fontFamily: "Inter, sans-serif",
-        fontSize: "0.7rem",
-        lineHeight: 1.5,
-        color: `rgba(248,248,242,${hovered ? 0.55 : 0.35})`,
-        transition: "color 0.28s ease",
-      }}>
-        {item.description}
-      </p>
-    </motion.div>
+      <span style={{ fontSize: '1rem' }}>{item.emoji}</span>
+      <span style={{
+        fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.8rem',
+        color: hovered ? '#f8f8f2' : 'rgba(248,248,242,0.6)',
+        transition: 'color 0.22s ease',
+      }}>{item.label}</span>
+    </div>
   );
 }
 
 export function IndustriesSectionAnimated() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const d1 = [...pillRow1, ...pillRow1];
+  const d2 = [...pillRow2, ...pillRow2];
 
   return (
-    <section ref={ref} className="py-20 px-4 relative overflow-hidden" style={{ background: "rgba(77,159,255,0.02)" }}>
+    <section ref={ref} className="py-20 relative overflow-hidden" style={{ background: "rgba(77,159,255,0.02)" }}>
       <div className="absolute top-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(90deg, transparent, rgba(77,159,255,0.2), transparent)" }} />
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(77,159,255,0.05) 0%, transparent 65%)" }} />
+        style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(77,159,255,0.04) 0%, transparent 65%)" }} />
 
-      <div className="max-w-5xl mx-auto">
+      {/* Header */}
+      <div className="px-4">
         <motion.div
-          className="text-center mb-14"
+          className="text-center mb-14 max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
           animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.6 }}
@@ -443,36 +367,75 @@ export function IndustriesSectionAnimated() {
             <span style={{ width: 20, height: 1, background: "rgba(77,159,255,0.5)", display: "inline-block" }} />
           </span>
           <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "clamp(1.75rem, 5vw, 3rem)", color: "#f8f8f2", lineHeight: 1.15 }}>
-            Si recibes mensajes
-            <span style={{ color: "#4D9FFF" }}> y los pierdes</span>,<br />
-            esto es para ti.
+            Si recibes clientes por WhatsApp<br />
+            <span style={{ color: "#4D9FFF" }}>el agente trabaja por ti.</span>
           </h2>
           <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(248,248,242,0.5)", fontSize: "0.95rem", marginTop: 12 }}>
-            Empresas con volumen de mensajes que no pueden atender a tiempo.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-          {industries.map((item, i) => (
-            <IndustryCardAnimated key={item.label} item={item} index={i} inView={inView} />
-          ))}
-        </div>
-
-        {/* Para quién NO es */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          style={{ marginTop: 40, textAlign: "center", maxWidth: 560, margin: "40px auto 0" }}
-        >
-          <p style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(248,248,242,0.3)", marginBottom: 10 }}>
-            Para quién NO es
-          </p>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.875rem", color: "rgba(248,248,242,0.4)", lineHeight: 1.65 }}>
-            Si recibes menos de 10 mensajes por semana, ya tienes un equipo completo de atención, o buscas solo un chatbot genérico — esto no es para ti.
+            No importa la industria — si recibes mensajes y necesitas responder, agendar o vender, esto es para tu negocio.
           </p>
         </motion.div>
       </div>
+
+      {/* Dual marquee */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.7, delay: 0.25 }}
+        style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+      >
+        {/* Row 1 — scroll left */}
+        <div style={{
+          overflow: 'hidden',
+          maskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
+        }}>
+          <motion.div
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+            style={{ display: 'flex', gap: 10, width: 'max-content', padding: '4px 0' }}
+          >
+            {d1.map((item, i) => <IndustryPill key={`r1-${i}`} item={item} blue={false} />)}
+          </motion.div>
+        </div>
+
+        {/* Row 2 — scroll right */}
+        <div style={{
+          overflow: 'hidden',
+          maskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
+        }}>
+          <motion.div
+            animate={{ x: ['-50%', '0%'] }}
+            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+            style={{ display: 'flex', gap: 10, width: 'max-content', padding: '4px 0' }}
+          >
+            {d2.map((item, i) => <IndustryPill key={`r2-${i}`} item={item} blue={true} />)}
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Bottom badge */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: 0.5 }}
+        style={{ textAlign: 'center', marginTop: 40, padding: '0 16px' }}
+      >
+        <div style={{
+          display: 'inline-flex', alignItems: 'center', gap: 10,
+          padding: '10px 24px', borderRadius: 999,
+          background: 'rgba(26,128,255,0.07)', border: '1px solid rgba(26,128,255,0.2)',
+        }}>
+          <span style={{ fontSize: '1.1rem' }}>💬</span>
+          <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.82rem', color: 'rgba(248,248,242,0.6)' }}>
+            Si recibes mensajes y los pierdes —{' '}
+            <strong style={{ color: '#f8f8f2', fontWeight: 600 }}>esto es para ti</strong>
+          </span>
+        </div>
+        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'rgba(248,248,242,0.25)', marginTop: 12 }}>
+          No apto para negocios que reciben menos de 10 mensajes por semana
+        </p>
+      </motion.div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(90deg, transparent, rgba(77,159,255,0.15), transparent)" }} />
@@ -549,15 +512,95 @@ export function IntegrationsStrip() {
 // ── Vs Simple Bot — Animated ──────────────────────────────────
 
 const vsRows = [
-  { feature: 'Responde preguntas',     simple: 'Respuestas fijas predefinidas',         resuelto: 'Entiende contexto y adapta la respuesta con IA' },
-  { feature: 'Calificación de leads',  simple: 'No filtra — todo parece un lead',        resuelto: 'Identifica interés, presupuesto y urgencia real' },
-  { feature: 'Integración de agenda',  simple: 'Sin integración',                        resuelto: 'Agenda directo en Google Calendar o Calendly' },
-  { feature: 'Seguimiento automático', simple: 'Se detiene si no responden',             resuelto: 'Secuencias hasta el cierre sin intervención humana' },
-  { feature: 'Entrenamiento',          simple: 'Genérico, igual para todos',             resuelto: 'Entrenado con la lógica y el lenguaje de tu negocio' },
-  { feature: 'Implementación',         simple: 'Tú lo configuras solo',                  resuelto: 'Done-For-You + soporte 30 días incluido' },
-  { feature: 'Registro de leads',      simple: 'Sin historial ni memoria',               resuelto: 'Integración a Sheets, CRM o Notion en tiempo real' },
-  { feature: 'Prospección outbound',   simple: 'No incluye',                             resuelto: 'Cold Email disponible desde el plan Plus' },
+  { feature: 'Responde preguntas',     emoji: '💬', simple: 'Respuestas fijas predefinidas',         resuelto: 'Entiende contexto y adapta la respuesta con IA' },
+  { feature: 'Calificación de leads',  emoji: '🎯', simple: 'No filtra — todo parece un lead',        resuelto: 'Identifica interés, presupuesto y urgencia real' },
+  { feature: 'Integración de agenda',  emoji: '📅', simple: 'Sin integración',                        resuelto: 'Agenda directo en Google Calendar o Calendly' },
+  { feature: 'Seguimiento automático', emoji: '🔄', simple: 'Se detiene si no responden',             resuelto: 'Secuencias hasta el cierre sin intervención humana' },
+  { feature: 'Entrenamiento',          emoji: '🧠', simple: 'Genérico, igual para todos',             resuelto: 'Entrenado con la lógica y el lenguaje de tu negocio' },
+  { feature: 'Implementación',         emoji: '⚙️', simple: 'Tú lo configuras solo',                  resuelto: 'Done-For-You + soporte incluido' },
+  { feature: 'Registro de leads',      emoji: '📊', simple: 'Sin historial ni memoria',               resuelto: 'Integración a Sheets, CRM o Notion en tiempo real' },
 ];
+
+function VsRow({ row, index, inView }: { row: typeof vsRows[0]; index: number; inView: boolean }) {
+  const [sweeping, setSweeping] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  const handleClick = () => {
+    setSweeping(false);
+    requestAnimationFrame(() => {
+      setSweeping(true);
+      setTimeout(() => setSweeping(false), 750);
+    });
+  };
+
+  return (
+    <motion.div
+      onClick={handleClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      initial={{ opacity: 0, x: -28, filter: "blur(6px)" }}
+      animate={inView ? { opacity: 1, x: 0, filter: "blur(0px)" } : {}}
+      transition={{ duration: 0.5, delay: 0.12 + index * 0.07, ease: [0.21, 0.47, 0.32, 0.98] }}
+      style={{
+        position: 'relative', overflow: 'hidden',
+        display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
+        borderBottom: index < vsRows.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+        background: hovered ? 'rgba(26,128,255,0.04)' : 'transparent',
+        cursor: 'pointer',
+        transition: 'background 0.25s ease',
+      }}
+    >
+      {/* Light sweep on click */}
+      <AnimatePresence>
+        {sweeping && (
+          <motion.div
+            key="sweep"
+            initial={{ left: '-60%', opacity: 0 }}
+            animate={{ left: '150%', opacity: [0, 1, 0] }}
+            exit={{}}
+            transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              position: 'absolute', top: 0, bottom: 0, width: '60%',
+              background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.28), rgba(77,159,255,0.14), transparent)',
+              pointerEvents: 'none', zIndex: 2,
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Feature */}
+      <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span style={{ fontSize: '1rem', flexShrink: 0 }}>{row.emoji}</span>
+        <span style={{
+          fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.82rem',
+          color: hovered ? '#f8f8f2' : 'rgba(248,248,242,0.72)',
+          transition: 'color 0.22s ease',
+        }}>{row.feature}</span>
+      </div>
+
+      {/* Bot genérico */}
+      <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 8, borderLeft: '1px solid rgba(255,255,255,0.05)' }}>
+        <X style={{ width: 13, height: 13, color: 'rgba(255,80,80,0.55)', flexShrink: 0 }} />
+        <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', color: 'rgba(248,248,242,0.33)', lineHeight: 1.4 }}>{row.simple}</span>
+      </div>
+
+      {/* RESUELTO IA */}
+      <div style={{
+        padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 8,
+        borderLeft: `1px solid rgba(26,128,255,${hovered ? 0.4 : 0.15})`,
+        background: `rgba(26,128,255,${hovered ? 0.08 : 0.03})`,
+        transition: 'background 0.25s ease, border-color 0.25s ease',
+      }}>
+        <CheckCircle2 style={{ width: 13, height: 13, color: hovered ? '#4D9FFF' : '#1A80FF', flexShrink: 0, transition: 'color 0.22s ease' }} />
+        <span style={{
+          fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', lineHeight: 1.4,
+          color: hovered ? 'rgba(248,248,242,0.95)' : 'rgba(248,248,242,0.68)',
+          transition: 'color 0.25s ease',
+        }}>{row.resuelto}</span>
+      </div>
+    </motion.div>
+  );
+}
 
 export function VsSimpleBotSectionAnimated() {
   const ref = useRef<HTMLDivElement>(null);
@@ -584,54 +627,45 @@ export function VsSimpleBotSectionAnimated() {
             <span style={{ color: '#1A80FF' }}>Es un sistema comercial.</span>
           </h2>
           <p style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.5)', fontSize: '0.9rem', marginTop: 14, maxWidth: 520, margin: '14px auto 0' }}>
-            Un bot simple responde mensajes. Este sistema califica, agenda, hace seguimiento y prospecta — sin intervención humana.
+            Un bot simple responde mensajes. Este sistema califica, agenda y hace seguimiento — sin intervención humana.
           </p>
         </motion.div>
 
-        <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.08 }}
+          style={{ borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.01)' }}
+        >
           {/* Header */}
-          <motion.div
-            className="grid grid-cols-3"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            style={{ background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
-          >
-            <div className="py-4 px-4">
-              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(248,248,242,0.35)' }}>Función</span>
+          <div className="grid grid-cols-3" style={{ background: 'rgba(255,255,255,0.035)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+            <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center' }}>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(248,248,242,0.28)' }}>Función</span>
             </div>
-            <div className="py-4 px-4 flex items-center justify-center" style={{ borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
-              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: 'rgba(248,248,242,0.4)' }}>Bot genérico</span>
+            <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: 'rgba(248,248,242,0.32)' }}>Bot genérico</span>
             </div>
-            <div className="py-4 px-4 flex items-center justify-center" style={{ borderLeft: '1px solid rgba(26,128,255,0.2)', background: 'rgba(26,128,255,0.06)' }}>
-              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: '#1A80FF' }}>RESUELTO Sistema IA</span>
+            {/* RESUELTO header — glowing */}
+            <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', borderLeft: '1px solid rgba(26,128,255,0.25)', background: 'rgba(26,128,255,0.07)' }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, transparent, #1A80FF, #4D9FFF, transparent)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 0%, rgba(26,128,255,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
+              <span style={{ position: 'relative', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: '#4D9FFF' }}>RESUELTO IA</span>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Rows */}
           {vsRows.map((row, i) => (
-            <motion.div
-              key={i}
-              className="grid grid-cols-3"
-              initial={{ opacity: 0, x: -16 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.45, delay: 0.15 + i * 0.06, ease: [0.21, 0.47, 0.32, 0.98] }}
-              style={{ borderBottom: i < vsRows.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none', background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.01)' }}
-            >
-              <div className="py-3 px-4 flex items-center" style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}>
-                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: 'rgba(248,248,242,0.7)', fontWeight: 500 }}>{row.feature}</span>
-              </div>
-              <div className="py-3 px-4 flex items-start gap-2" style={{ borderRight: '1px solid rgba(26,128,255,0.1)' }}>
-                <X style={{ width: 13, height: 13, color: 'rgba(255,80,80,0.7)', flexShrink: 0, marginTop: 2 }} />
-                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'rgba(248,248,242,0.38)' }}>{row.simple}</span>
-              </div>
-              <div className="py-3 px-4 flex items-start gap-2" style={{ background: 'rgba(26,128,255,0.03)' }}>
-                <CheckCircle2 style={{ width: 13, height: 13, color: '#1A80FF', flexShrink: 0, marginTop: 2 }} />
-                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'rgba(248,248,242,0.75)' }}>{row.resuelto}</span>
-              </div>
-            </motion.div>
+            <VsRow key={i} row={row} index={i} inView={inView} />
           ))}
-        </div>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          style={{ textAlign: 'center', marginTop: 16, fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', color: 'rgba(248,248,242,0.22)' }}
+        >
+          Toca cualquier fila para ver el contraste
+        </motion.p>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)' }} />
@@ -643,59 +677,148 @@ export function VsSimpleBotSectionAnimated() {
 
 type ChatMsg = { from: 'bot' | 'lead'; text: string; time: string };
 
-const chatScenarios: { label: string; tag: string; accent: string; desc: string; messages: ChatMsg[] }[] = [
+const chatScenarios: {
+  industry: string; emoji: string; botName: string; status: string;
+  accent: string; accentHex: string; messages: ChatMsg[];
+}[] = [
   {
-    label: 'Calificación inteligente',
-    tag: 'Paso 01',
-    accent: '0,255,135',
-    desc: 'El bot pregunta, entiende el contexto y clasifica al lead antes de que tu equipo intervenga.',
+    industry: 'Clínica',
+    emoji: '🏥',
+    botName: 'Ana · Clínica Aura',
+    status: 'Asistente IA · en línea',
+    accent: '0,200,150',
+    accentHex: '#00C896',
     messages: [
-      { from: 'bot',  text: '¡Hola! 👋 Soy el asistente de ACME. ¿En qué te puedo ayudar?', time: '10:02' },
-      { from: 'lead', text: 'Quiero info de sus servicios', time: '10:03' },
-      { from: 'bot',  text: 'Para orientarte mejor — ¿cuál es el presupuesto mensual de tu empresa?', time: '10:03' },
-      { from: 'lead', text: 'Entre 5 y 10 mil soles', time: '10:04' },
-      { from: 'bot',  text: '✅ Perfil calificado. ¿Tienes 15 min esta semana para una llamada rápida?', time: '10:04' },
+      { from: 'bot',  text: 'Hola 👋 Soy Ana, asistente de Clínica Aura. ¿Qué tratamiento te interesa hoy?', time: '10:02' },
+      { from: 'lead', text: 'Quiero info sobre botox', time: '10:03' },
+      { from: 'bot',  text: '¡Perfecto! 💆‍♀️ Tenemos Botox Express desde S/350. ¿Es tu primera vez con nosotros?', time: '10:03' },
+      { from: 'lead', text: 'No, ya vine hace unos meses', time: '10:04' },
+      { from: 'bot',  text: '¡Qué bueno tenerte de vuelta! 🙌 Como clienta frecuente tienes 10% de descuento aplicado. ¿Agendamos esta semana?', time: '10:04' },
+      { from: 'lead', text: 'Sí, el jueves si hay disponibilidad', time: '10:05' },
+      { from: 'bot',  text: '✅ Jueves 5pm confirmado. Te llega recordatorio automático 24h antes.', time: '10:05' },
     ],
   },
   {
-    label: 'Agendamiento automático',
-    tag: 'Paso 02',
-    accent: '204,68,255',
-    desc: 'El prospecto elige horario, el sistema confirma y bloquea la agenda. Cero coordinación manual.',
+    industry: 'Restaurante',
+    emoji: '🍽️',
+    botName: 'Roma · Osteria Roma',
+    status: 'Reservas · en línea',
+    accent: '255,140,50',
+    accentHex: '#FF8C32',
     messages: [
-      { from: 'bot',  text: 'Tenemos disponibilidad esta semana 📅', time: '11:15' },
-      { from: 'bot',  text: '• Martes 3pm\n• Miércoles 10am\n• Jueves 4pm\n\n¿Cuál te viene mejor?', time: '11:15' },
-      { from: 'lead', text: 'Miércoles a las 10', time: '11:17' },
-      { from: 'bot',  text: '✅ ¡Confirmado! Te envié la invitación. Nos vemos el miércoles a las 10am.', time: '11:17' },
+      { from: 'bot',  text: '¡Bienvenido a Osteria Roma! 🍝 ¿En qué te puedo ayudar?', time: '19:14' },
+      { from: 'lead', text: 'Quiero reservar mesa para el sábado', time: '19:15' },
+      { from: 'bot',  text: '¡Con gusto! ¿Para cuántas personas y a qué hora prefieres?', time: '19:15' },
+      { from: 'lead', text: 'Somos 4, a las 8pm', time: '19:16' },
+      { from: 'bot',  text: '¿Hay alguna ocasión especial o preferencia de mesa? 🥂', time: '19:16' },
+      { from: 'lead', text: 'Es aniversario de bodas', time: '19:17' },
+      { from: 'bot',  text: '¡Feliz aniversario! 🎉 Reservamos mesa con ambientación especial. ¿Nombre para la reserva?', time: '19:17' },
     ],
   },
   {
-    label: 'Seguimiento sin esfuerzo',
-    tag: 'Paso 03',
-    accent: '0,212,255',
-    desc: 'Leads silenciosos reciben follow-up en el momento justo. El sistema trabaja cuando tú no puedes.',
+    industry: 'Inmobiliaria',
+    emoji: '🏠',
+    botName: 'Asistente · Grupo Paredes',
+    status: 'Propiedades · en línea',
+    accent: '77,159,255',
+    accentHex: '#4D9FFF',
     messages: [
-      { from: 'bot',  text: 'Hola 👋 Te escribí hace 2 días. ¿Sigues interesado?', time: '9:30' },
-      { from: 'lead', text: 'Sí, perdón, estuve ocupado', time: '9:45' },
-      { from: 'bot',  text: '¡Sin problema! ¿Prefieres los detalles ahora o agendamos una llamada?', time: '9:45' },
-      { from: 'lead', text: 'Mándame los detalles', time: '9:46' },
-      { from: 'bot',  text: 'Perfecto, aquí va 👇', time: '9:46' },
+      { from: 'bot',  text: 'Hola 👋 Soy el asistente de Grupo Paredes. ¿Buscas comprar, alquilar o invertir?', time: '11:30' },
+      { from: 'lead', text: 'Alquilar un departamento', time: '11:31' },
+      { from: 'bot',  text: '¿Qué zona y rango de precio tienes en mente?', time: '11:31' },
+      { from: 'lead', text: 'Miraflores, hasta S/2,500 al mes', time: '11:32' },
+      { from: 'bot',  text: 'Tenemos 3 opciones disponibles en ese rango 🏠 ¿Puedes ver propiedades este fin de semana?', time: '11:32' },
+      { from: 'lead', text: 'El sábado en la mañana', time: '11:33' },
+      { from: 'bot',  text: '✅ Visita agendada sábado 10am con Carlos, nuestro asesor. ¿Confirmas este número?', time: '11:33' },
     ],
   },
 ];
 
+function ChatWindow({ scenario, inView }: { scenario: typeof chatScenarios[0]; inView: boolean }) {
+  const { accent, accentHex } = scenario;
+  return (
+    <div style={{ borderRadius: 20, overflow: 'hidden', border: `1px solid rgba(${accent},0.22)`, background: '#0d1117', boxShadow: `0 0 80px rgba(${accent},0.07), 0 24px 64px rgba(0,0,0,0.5)` }}>
+      {/* Window chrome */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', background: 'rgba(255,255,255,0.03)', borderBottom: `1px solid rgba(${accent},0.1)` }}>
+        <div style={{ display: 'flex', gap: 7 }}>
+          {['#FF5F57','#FEBC2E','#28C840'].map(c => (
+            <div key={c} style={{ width: 11, height: 11, borderRadius: '50%', background: c, opacity: 0.65 }} />
+          ))}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span style={{ width: 7, height: 7, borderRadius: '50%', background: accentHex, boxShadow: `0 0 8px ${accentHex}`, display: 'inline-block' }} />
+          <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.62rem', color: 'rgba(248,248,242,0.4)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+            Automatizado · En vivo
+          </span>
+        </div>
+        <div style={{ width: 44 }} />
+      </div>
+
+      {/* Chat header */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 18px', background: `rgba(${accent},0.06)`, borderBottom: `1px solid rgba(${accent},0.1)` }}>
+        <div style={{ width: 40, height: 40, borderRadius: '50%', background: `rgba(${accent},0.14)`, border: `1.5px solid rgba(${accent},0.4)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', flexShrink: 0 }}>
+          🤖
+        </div>
+        <div>
+          <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.88rem', color: '#f8f8f2', marginBottom: 2 }}>{scenario.botName}</p>
+          <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.7rem', color: accentHex }}>{scenario.status}</p>
+        </div>
+      </div>
+
+      {/* Messages */}
+      <div style={{ background: '#0b1017', padding: '18px 16px', display: 'flex', flexDirection: 'column', gap: 9, minHeight: 320 }}>
+        {scenario.messages.map((msg, j) => (
+          <motion.div
+            key={j}
+            initial={{ opacity: 0, y: 10, scale: 0.96 }}
+            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ duration: 0.32, delay: 0.3 + j * 0.09, ease: [0.21, 0.47, 0.32, 0.98] }}
+            style={{ display: 'flex', justifyContent: msg.from === 'lead' ? 'flex-end' : 'flex-start' }}
+          >
+            <div style={{
+              maxWidth: '70%',
+              background: msg.from === 'bot' ? `rgba(${accent},0.09)` : 'rgba(255,255,255,0.07)',
+              border: msg.from === 'bot' ? `1px solid rgba(${accent},0.22)` : '1px solid rgba(255,255,255,0.1)',
+              borderRadius: msg.from === 'bot' ? '4px 16px 16px 16px' : '16px 4px 16px 16px',
+              padding: '9px 13px',
+              fontFamily: 'Inter, sans-serif',
+              fontSize: '0.82rem',
+              color: 'rgba(248,248,242,0.9)',
+              lineHeight: 1.5,
+            }}>
+              {msg.text}
+              <span style={{ display: 'block', textAlign: 'right', fontSize: '0.62rem', color: 'rgba(248,248,242,0.28)', marginTop: 3 }}>
+                {msg.time}{msg.from === 'bot' ? ' ✓✓' : ''}
+              </span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Input bar */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', background: 'rgba(255,255,255,0.02)', borderTop: `1px solid rgba(${accent},0.1)` }}>
+        <div style={{ flex: 1, height: 36, borderRadius: 20, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', padding: '0 14px' }}>
+          <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', color: 'rgba(248,248,242,0.2)' }}>Responde automáticamente...</span>
+        </div>
+        <div style={{ width: 36, height: 36, borderRadius: '50%', background: accentHex, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem', color: '#040406', fontWeight: 700, flexShrink: 0 }}>↑</div>
+      </div>
+    </div>
+  );
+}
+
 export function ChatDemoSectionAnimated() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [active, setActive] = useState(0);
 
   return (
     <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: '#040406' }}>
       <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(26,128,255,0.04) 0%, transparent 65%)' }} />
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
           animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.6 }}
@@ -706,71 +829,50 @@ export function ChatDemoSectionAnimated() {
             <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
           </span>
           <h2 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
-            Así lo ve tu cliente.<br />
-            <span style={{ color: '#1A80FF' }}>Así lo ve tu equipo.</span>
+            Así se ve el super agente en acción.<br />
+            <span style={{ color: '#1A80FF' }}>100% automatizado.</span>
           </h2>
           <p style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.5)', fontSize: '0.9rem', marginTop: 14, maxWidth: 520, margin: '14px auto 0' }}>
-            Conversaciones reales: calificación, agendamiento y seguimiento — sin intervención humana.
+            Conversaciones reales por industria — el agente responde, califica y agenda solo.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Industry tabs */}
+        <motion.div
+          className="flex justify-center gap-3 mb-8 flex-wrap"
+          initial={{ opacity: 0, y: 14 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           {chatScenarios.map((s, i) => (
-            <motion.div
+            <button
               key={i}
-              className="flex flex-col rounded-2xl overflow-hidden"
-              initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-              animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-              transition={{ duration: 0.6, delay: 0.1 + i * 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
-              style={{ border: `1px solid rgba(${s.accent},0.18)`, background: `rgba(${s.accent},0.025)` }}
+              onClick={() => setActive(i)}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                padding: '8px 22px', borderRadius: 999, cursor: 'pointer',
+                fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.82rem',
+                border: `1px solid rgba(${s.accent},${active === i ? 0.6 : 0.2})`,
+                background: active === i ? `rgba(${s.accent},0.12)` : 'rgba(255,255,255,0.03)',
+                color: active === i ? s.accentHex : 'rgba(248,248,242,0.45)',
+                transition: 'all 0.22s ease',
+                outline: 'none',
+              }}
             >
-              {/* Phone mockup */}
-              <div className="relative mx-auto mt-6" style={{ width: 190, height: 340, borderRadius: 24, background: '#111', border: `2px solid rgba(${s.accent},0.3)`, overflow: 'hidden', boxShadow: `0 0 40px rgba(${s.accent},0.12)` }}>
-                {/* Status bar */}
-                <div className="flex items-center justify-between px-3 pt-2 pb-1" style={{ background: '#1a1a1a', fontSize: '0.55rem', color: 'rgba(248,248,242,0.4)', fontFamily: 'Inter, sans-serif' }}>
-                  <span>9:41</span>
-                  <span style={{ width: 40, height: 3, background: `rgba(${s.accent},0.6)`, borderRadius: 999, display: 'inline-block' }} />
-                  <span>●●●</span>
-                </div>
-                {/* WA header */}
-                <div className="flex items-center gap-2 px-3 py-2" style={{ background: '#075E54' }}>
-                  <div style={{ width: 22, height: 22, borderRadius: '50%', background: `rgba(${s.accent},0.3)`, border: `1px solid rgba(${s.accent},0.5)` }} />
-                  <div>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.6rem', color: '#f8f8f2' }}>Bot Comercial IA</p>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.5rem', color: 'rgba(248,248,242,0.6)' }}>en línea</p>
-                  </div>
-                </div>
-                {/* Chat bubbles */}
-                <div style={{ background: '#0b141a', height: 263, padding: '6px', display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'hidden' }}>
-                  {s.messages.map((msg, j) => (
-                    <div key={j} style={{ display: 'flex', justifyContent: msg.from === 'lead' ? 'flex-end' : 'flex-start' }}>
-                      <div style={{
-                        maxWidth: '82%',
-                        background: msg.from === 'bot' ? '#1F2C34' : '#005C4B',
-                        borderRadius: msg.from === 'bot' ? '0 6px 6px 6px' : '6px 0 6px 6px',
-                        padding: '3px 6px 2px',
-                        fontSize: '0.5rem',
-                        color: '#f8f8f2',
-                        fontFamily: 'Inter, sans-serif',
-                        lineHeight: 1.45,
-                        whiteSpace: 'pre-line',
-                      }}>
-                        {msg.text}
-                        <span style={{ display: 'block', textAlign: 'right', fontSize: '0.42rem', color: 'rgba(248,248,242,0.4)', marginTop: 1 }}>{msg.time}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              {/* Caption */}
-              <div className="p-5 mt-2">
-                <span style={{ display: 'inline-block', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: `rgba(${s.accent},0.8)`, marginBottom: 6 }}>{s.tag}</span>
-                <h3 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '1rem', color: '#f8f8f2', marginBottom: 6, lineHeight: 1.25 }}>{s.label}</h3>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: 'rgba(248,248,242,0.5)', lineHeight: 1.6 }}>{s.desc}</p>
-              </div>
-            </motion.div>
+              {s.emoji} {s.industry}
+            </button>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Chat window */}
+        <motion.div
+          key={active}
+          initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.42, ease: [0.21, 0.47, 0.32, 0.98] }}
+        >
+          <ChatWindow scenario={chatScenarios[active]} inView={inView} />
+        </motion.div>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)' }} />

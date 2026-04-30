@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Zap } from 'lucide-react';
+import { Zap } from 'lucide-react';
 import { SplineScene } from '@/components/ui/splite';
 import { Spotlight } from '@/components/ui/spotlight';
 import { Typewriter } from '@/components/ui/typewriter';
+import ShinyBordersButton from '@/components/ui/shiny-borders-button';
 
 const AetherFlowHero = () => {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-
   React.useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -191,16 +191,12 @@ const AetherFlowHero = () => {
             className="font-bold tracking-tighter mb-5 leading-[1.05]"
             style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2.25rem, 5vw, 4.5rem)' }}
           >
-            <span
-              className="glitch-text"
-              data-text="Tu negocio responde,"
-              style={{ color: '#f8f8f2' }}
-            >
-              Tu negocio responde,
+            <span style={{ color: '#f8f8f2' }}>
+              Super agente IA que responde,
             </span>
             <br />
             <Typewriter
-              text="filtra y agenda solo."
+              text="agenda y vende por ti 24/7"
               delay={950}
               speed={52}
               style={{
@@ -220,8 +216,7 @@ const AetherFlowHero = () => {
             className="text-base md:text-lg mb-9 max-w-lg leading-relaxed"
             style={{ color: 'rgba(248,248,242,0.6)', fontFamily: 'Inter, sans-serif' }}
           >
-            Instalo un sistema que convierte mensajes de WhatsApp e Instagram en citas
-            calificadas. Sin bots genéricos. Sin leads botados.
+            Maximiza y automatiza tus ventas con inteligencia artificial entrenada con tu negocio
           </motion.p>
 
           <motion.div
@@ -231,41 +226,16 @@ const AetherFlowHero = () => {
             animate="visible"
             className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
           >
-            <motion.a
-              href="https://wa.me/51999999999?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20Express%20de%20IA"
+            <ShinyBordersButton
+              text="Agendar Demo en Vivo →"
+              href="https://wa.me/51907462070?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20de%20Automatizacion%20IA"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base w-full sm:w-auto"
-              style={{
-                background: '#1A80FF',
-                color: '#040406',
-                fontFamily: 'Poppins, sans-serif',
-              }}
-              animate={{
-                boxShadow: [
-                  '0 0 20px rgba(26,128,255,0.3)',
-                  '0 0 52px rgba(26,128,255,0.6), 0 0 100px rgba(26,128,255,0.15)',
-                  '0 0 20px rgba(26,128,255,0.3)',
-                ],
-              }}
-              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Quiero mi sistema <ArrowRight className="h-5 w-5" />
-            </motion.a>
-            <a
+            />
+            <ShinyBordersButton
+              text="Ver paquetes"
               href="#paquetes"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300 hover:scale-105 border w-full sm:w-auto"
-              style={{
-                borderColor: 'rgba(77,159,255,0.4)',
-                color: '#4D9FFF',
-                background: 'rgba(77,159,255,0.08)',
-                fontFamily: 'Poppins, sans-serif',
-              }}
-            >
-              Ver paquetes
-            </a>
+            />
           </motion.div>
 
           {/* Availability indicator */}
@@ -284,7 +254,7 @@ const AetherFlowHero = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: '#1A80FF' }} />
                 <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: '#1A80FF' }} />
               </span>
-              2 cupos disponibles — proyectos Q2 2026
+              3 cupos disponibles
             </span>
           </motion.div>
 
@@ -296,7 +266,7 @@ const AetherFlowHero = () => {
             animate="visible"
             className="mt-3 flex items-center gap-1 flex-wrap"
           >
-            {['Sistema listo en 5 días', 'Garantía 30 días', 'Sin contrato'].map((item, i, arr) => (
+            {['Sistema listo en 5 días', 'Garantía 30 días', 'Con contrato', 'Meta business partners'].map((item, i, arr) => (
               <React.Fragment key={item}>
                 <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.7rem', color: 'rgba(248,248,242,0.32)' }}>
                   ✓ {item}
