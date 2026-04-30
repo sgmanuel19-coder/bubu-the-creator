@@ -462,23 +462,23 @@ export function IntegrationsStrip() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
-  // x/y spread so they cascade from different heights
+  // Cascade positions tightly within the box (15%–85% x range, staggered y)
   const positions = [
-    { x: "8%",  y: "2%"  },
-    { x: "22%", y: "8%"  },
-    { x: "38%", y: "2%"  },
-    { x: "54%", y: "10%" },
-    { x: "70%", y: "4%"  },
-    { x: "83%", y: "12%" },
-    { x: "14%", y: "18%" },
-    { x: "46%", y: "20%" },
+    { x: "15%", y: "2%"  },
+    { x: "35%", y: "5%"  },
+    { x: "55%", y: "2%"  },
+    { x: "75%", y: "8%"  },
+    { x: "25%", y: "12%" },
+    { x: "65%", y: "15%" },
+    { x: "45%", y: "10%" },
+    { x: "20%", y: "20%" },
   ];
 
   return (
     <section ref={ref} className="py-16 relative overflow-hidden" style={{ background: "#040406" }}>
       <div className="absolute top-0 left-0 right-0 h-px beam-divider" />
 
-      <div className="max-w-4xl mx-auto px-4">
+      <div className="max-w-2xl mx-auto px-4">
         <motion.div
           className="text-center mb-8"
           initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
@@ -497,49 +497,61 @@ export function IntegrationsStrip() {
             Arrastra las integraciones 👆
           </p>
         </motion.div>
-      </div>
 
-      {/* Physics container */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        style={{ position: "relative", height: 420, overflow: "hidden" }}
-      >
-        {inView && (
-          <Gravity gravity={{ x: 0, y: 1 }} grabCursor className="w-full h-full">
-            {integrations.map((int, i) => (
-              <MatterBody
-                key={int.name}
-                x={positions[i % positions.length].x}
-                y={positions[i % positions.length].y}
-                matterBodyOptions={{ friction: 0.4, restitution: 0.3, density: 0.003 }}
-                angle={Math.floor(Math.random() * 20) - 10}
-              >
-                <div
-                  style={{
-                    padding: "10px 20px",
-                    borderRadius: 999,
-                    border: `1px solid rgba(${int.color},0.5)`,
-                    background: `rgba(${int.color},0.08)`,
-                    backdropFilter: "blur(8px)",
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 700,
-                    fontSize: "0.82rem",
-                    color: "#f8f8f2",
-                    whiteSpace: "nowrap",
-                    cursor: "grab",
-                    userSelect: "none",
-                    boxShadow: `0 0 18px rgba(${int.color},0.12)`,
-                  }}
+        {/* Tetris box — centered, fixed width, visible border */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          style={{
+            position: "relative",
+            height: 360,
+            borderRadius: 20,
+            border: "1px solid rgba(26,128,255,0.18)",
+            background: "rgba(26,128,255,0.02)",
+            overflow: "hidden",
+            boxShadow: "0 0 60px rgba(26,128,255,0.05), inset 0 0 40px rgba(26,128,255,0.02)",
+          }}
+        >
+          {/* Corner accents */}
+          <div style={{ position:"absolute", top:10, left:10, width:16, height:16, borderTop:"1.5px solid rgba(26,128,255,0.4)", borderLeft:"1.5px solid rgba(26,128,255,0.4)", borderRadius:"4px 0 0 0", pointerEvents:"none" }} />
+          <div style={{ position:"absolute", top:10, right:10, width:16, height:16, borderTop:"1.5px solid rgba(26,128,255,0.4)", borderRight:"1.5px solid rgba(26,128,255,0.4)", borderRadius:"0 4px 0 0", pointerEvents:"none" }} />
+          <div style={{ position:"absolute", bottom:10, left:10, width:16, height:16, borderBottom:"1.5px solid rgba(26,128,255,0.4)", borderLeft:"1.5px solid rgba(26,128,255,0.4)", borderRadius:"0 0 0 4px", pointerEvents:"none" }} />
+          <div style={{ position:"absolute", bottom:10, right:10, width:16, height:16, borderBottom:"1.5px solid rgba(26,128,255,0.4)", borderRight:"1.5px solid rgba(26,128,255,0.4)", borderRadius:"0 0 4px 0", pointerEvents:"none" }} />
+
+          {inView && (
+            <Gravity gravity={{ x: 0, y: 1 }} grabCursor className="w-full h-full">
+              {integrations.map((int, i) => (
+                <MatterBody
+                  key={int.name}
+                  x={positions[i % positions.length].x}
+                  y={positions[i % positions.length].y}
+                  matterBodyOptions={{ friction: 0.55, restitution: 0.25, density: 0.004 }}
                 >
-                  {int.name}
-                </div>
-              </MatterBody>
-            ))}
-          </Gravity>
-        )}
-      </motion.div>
+                  <div
+                    style={{
+                      padding: "9px 18px",
+                      borderRadius: 999,
+                      border: `1px solid rgba(${int.color},0.55)`,
+                      background: `rgba(${int.color},0.1)`,
+                      fontFamily: "Poppins, sans-serif",
+                      fontWeight: 700,
+                      fontSize: "0.78rem",
+                      color: "#f8f8f2",
+                      whiteSpace: "nowrap",
+                      cursor: "grab",
+                      userSelect: "none",
+                      boxShadow: `0 0 14px rgba(${int.color},0.14)`,
+                    }}
+                  >
+                    {int.name}
+                  </div>
+                </MatterBody>
+              ))}
+            </Gravity>
+          )}
+        </motion.div>
+      </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px beam-divider" style={{ animationDelay: "1.5s" }} />
     </section>
