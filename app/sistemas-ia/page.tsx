@@ -43,15 +43,45 @@ import {
 import { SistemasIAProblems } from '@/components/SistemasIAProblems';
 import { CelestialOrrery } from '@/components/ui/celestial-orrery';
 import { DottedSurface } from '@/components/ui/dotted-surface';
+import { SchemaMarkup } from '@/components/SchemaMarkup';
+import { FloatingCTA } from '@/components/ui/floating-cta';
 
 export const metadata: Metadata = {
-  title: 'Sistema Express de Atencion con IA | RESUELTO',
+  title: 'Super Agente IA para WhatsApp | Automatización Comercial 24/7 — RESUELTO',
   description:
-    'Instalo un sistema que responde, filtra y agenda automaticamente. Para empresas que reciben mensajes por WhatsApp e Instagram.',
+    'Sistema de IA que responde WhatsApp, califica leads, agenda citas y hace seguimiento automático 24/7. Listo en 5 días. Para negocios en Perú. Garantía 30 días.',
+  keywords: [
+    'agente ia whatsapp peru',
+    'automatización whatsapp business',
+    'chatbot ia para negocios',
+    'sistema ventas automatico',
+    'responder whatsapp automatico',
+    'bot whatsapp business peru',
+    'automatizar atencion al cliente',
+    'agenda citas automatica whatsapp',
+  ],
+  alternates: {
+    canonical: 'https://sistema-ia-sigma.vercel.app/sistemas-ia',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   openGraph: {
-    title: 'Sistema Express de Atencion con IA | RESUELTO',
+    title: 'Super Agente IA para WhatsApp | Automatización Comercial 24/7',
     description:
-      'Instalo un sistema que responde, filtra y agenda automaticamente. Para empresas que reciben mensajes por WhatsApp e Instagram.',
+      'Sistema de IA que responde WhatsApp, califica leads, agenda citas y hace seguimiento automático 24/7. Listo en 5 días para tu negocio en Perú.',
+    url: 'https://sistema-ia-sigma.vercel.app/sistemas-ia',
+    siteName: 'RESUELTO',
+    locale: 'es_PE',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Super Agente IA para WhatsApp | Automatización Comercial 24/7',
+    description:
+      'IA que responde WhatsApp, califica leads y agenda citas 24/7. Listo en 5 días. Garantía 30 días.',
   },
 };
 
@@ -647,7 +677,9 @@ function FinalCTASection() {
 export default function SistemasIAPage() {
   return (
     <main style={{ background: '#040406', minHeight: '100vh', color: '#f8f8f2' }}>
+      <SchemaMarkup />
       <FacebookPixel />
+      <FloatingCTA />
       <Navbar minimal />
       <HeroClient />
       <SocialProofBarAnimated />
