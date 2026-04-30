@@ -192,7 +192,7 @@ const AetherFlowHero = () => {
             style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(2.25rem, 5vw, 4.5rem)' }}
           >
             <span style={{ color: '#f8f8f2' }}>
-              Super agente IA que responde,
+              Super agente IA para WhatsApp que responde,
             </span>
             <br />
             <Typewriter
@@ -216,7 +216,7 @@ const AetherFlowHero = () => {
             className="text-base md:text-lg mb-9 max-w-lg leading-relaxed"
             style={{ color: 'rgba(248,248,242,0.6)', fontFamily: 'Inter, sans-serif' }}
           >
-            Maximiza y automatiza tus ventas con inteligencia artificial entrenada con tu negocio
+            Sistema listo en 5 días. Entrenado con tu negocio. Garantía de 30 días.
           </motion.p>
 
           <motion.div

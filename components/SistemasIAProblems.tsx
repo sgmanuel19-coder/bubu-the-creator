@@ -5,12 +5,12 @@ import { motion, useInView } from 'framer-motion';
 import { WaveText } from '@/components/ui/wave-text';
 
 const problems = [
-  { emoji: '⏱️', title: 'Demoran en responder',          description: 'Pierden leads en los primeros minutos. El prospecto pregunta, nadie contesta rapido, y ya se fue con la competencia.' },
-  { emoji: '📨', title: 'Leads se pierden por desorden', description: 'Mensajes enterrados en el chat. Nadie hace seguimiento. Los prospectos calientes se enfrian sin que nadie lo note.' },
-  { emoji: '💬', title: 'El equipo responde distinto',    description: 'Sin guion ni criterio. Cada vendedor improvisa y la calidad de la atencion depende del humor del dia.' },
-  { emoji: '🎯', title: 'No filtran prospectos',          description: 'Pierden horas con curiosos que nunca van a comprar. Sin un sistema de calificacion, todo el mundo parece un lead.' },
-  { emoji: '📅', title: 'Agendar les quita horas',        description: 'El vaiven de mensajes para coordinar una cita consume tiempo valioso que deberia dedicarse a cerrar ventas.' },
-  { emoji: '🔁', title: 'Preguntan siempre lo mismo',     description: 'Las mismas 10 preguntas todos los dias. El equipo las responde manualmente, una por una, sin parar.' },
+  { emoji: '⏱️', title: 'Demoran en responder',          description: 'Pierden leads en los primeros minutos. El prospecto pregunta, nadie contesta rápido, y ya se fue con la competencia.' },
+  { emoji: '📨', title: 'Leads se pierden por desorden', description: 'Mensajes enterrados en el chat. Nadie hace seguimiento. Los prospectos calientes se enfrían sin que nadie lo note.' },
+  { emoji: '💬', title: 'El equipo responde distinto',    description: 'Sin guión ni criterio. Cada vendedor improvisa y la calidad de la atención depende del humor del día.' },
+  { emoji: '🎯', title: 'No filtran prospectos',          description: 'Pierden horas con curiosos que nunca van a comprar. Sin un sistema de calificación, todo el mundo parece un lead.' },
+  { emoji: '📅', title: 'Agendar les quita horas',        description: 'El vaivén de mensajes para coordinar una cita consume tiempo valioso que debería dedicarse a cerrar ventas.' },
+  { emoji: '🔁', title: 'Preguntan siempre lo mismo',     description: 'Las mismas 10 preguntas todos los días. El equipo las responde manualmente, una por una, sin parar.' },
 ];
 
 export function SistemasIAProblems() {

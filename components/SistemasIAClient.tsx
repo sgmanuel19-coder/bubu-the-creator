@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Calendar, Clock, Users, TrendingUp, Star, MessageCircle, Shield, CheckCircle } from 'lucide-react';
+import { Calendar, Clock, Users, TrendingUp, Star, MessageCircle } from 'lucide-react';
 import type { Testimonial } from '@/components/ui/glass-testimonial-swiper';
 import CountUp from '@/components/CountUp';
 
@@ -162,8 +162,8 @@ const testimonialData: Testimonial[] = [
       { text: 'Plan Base', type: 'default' },
     ],
     stats: [
-      { icon: Shield, text: 'Respuesta en 30 segundos' },
-      { icon: CheckCircle, text: 'Calificacion automatica' },
+      { icon: Clock, text: '3h/día recuperadas' },
+      { icon: TrendingUp, text: '+40% leads calificados' },
     ],
   },
 ];

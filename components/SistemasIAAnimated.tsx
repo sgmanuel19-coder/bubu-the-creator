@@ -27,6 +27,8 @@ function VSLPlayer() {
           className="absolute inset-0 w-full h-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+          loading="lazy"
+          title="Conoce el Sistema RESUELTO IA — Automatización WhatsApp para tu negocio"
         />
       </div>
     );
@@ -276,6 +278,30 @@ export function HowItWorksAnimated({ steps }: { steps: Step[] }) {
             <StepCardAnimated key={step.number} step={step} index={i} inView={inView} isLast={i === steps.length - 1} />
           ))}
         </div>
+
+        <motion.div
+          className="text-center mt-10"
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.65 }}
+        >
+          <a
+            href="https://wa.me/51907462070?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20de%20Automatizacion%20IA"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '14px 28px', borderRadius: 14,
+              background: 'linear-gradient(135deg, #1A80FF, #4D9FFF)',
+              color: '#fff', fontFamily: 'Poppins, sans-serif',
+              fontWeight: 600, fontSize: '0.9rem',
+              boxShadow: '0 0 28px rgba(26,128,255,0.35)',
+              textDecoration: 'none',
+            }}
+          >
+            Empezar mi diagnóstico →
+          </a>
+        </motion.div>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px beam-divider" style={{ animationDelay: "2s" }} />
