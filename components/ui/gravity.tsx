@@ -163,20 +163,17 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         const x = calculatePosition(props.x, canvasRect.width, width);
         const y = calculatePosition(props.y, canvasRect.height, height);
 
+        const renderOpts = { fillStyle: debug ? "#888" : "#0000", strokeStyle: debug ? "#333" : "#0000", lineWidth: debug ? 3 : 0 };
+        // Cast to any to avoid IChamfer null vs undefined mismatch between @types/matter-js versions
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const bodyOpts: any = { ...props.matterBodyOptions, angle, render: renderOpts };
+
         let body: Matter.Body;
         if (props.bodyType === "circle") {
           const radius = Math.max(width, height) / 2;
-          body = Bodies.circle(x, y, radius, {
-            ...props.matterBodyOptions,
-            angle,
-            render: { fillStyle: debug ? "#888" : "#0000", strokeStyle: debug ? "#333" : "#0000", lineWidth: debug ? 3 : 0 },
-          });
+          body = Bodies.circle(x, y, radius, bodyOpts);
         } else {
-          body = Bodies.rectangle(x, y, width, height, {
-            ...props.matterBodyOptions,
-            angle,
-            render: { fillStyle: debug ? "#888" : "#0000", strokeStyle: debug ? "#333" : "#0000", lineWidth: debug ? 3 : 0 },
-          });
+          body = Bodies.rectangle(x, y, width, height, bodyOpts);
         }
 
         World.add(engine.current.world, [body]);
