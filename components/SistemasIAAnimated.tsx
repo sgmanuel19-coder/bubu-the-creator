@@ -448,30 +448,44 @@ export function IndustriesSectionAnimated() {
 // ── Integrations Strip ────────────────────────────────────────
 
 const integrations = [
-  { name: "WhatsApp Business", color: "37,211,102" },
-  { name: "Instagram DM",      color: "204,68,255" },
-  { name: "Google Calendar",   color: "66,133,244" },
-  { name: "n8n",               color: "235,86,21" },
-  { name: "Make.com",          color: "102,153,255" },
-  { name: "Notion",            color: "248,248,242" },
-  { name: "Gmail",             color: "219,68,55" },
-  { name: "Calendly",          color: "0,106,255" },
+  { name: "WhatsApp Business",  color: "37,211,102"  },
+  { name: "Instagram DM",       color: "204,68,255"  },
+  { name: "Google Calendar",    color: "66,133,244"  },
+  { name: "n8n",                color: "235,86,21"   },
+  { name: "Make.com",           color: "102,153,255" },
+  { name: "Notion",             color: "248,248,242" },
+  { name: "Gmail",              color: "219,68,55"   },
+  { name: "Calendly",           color: "0,106,255"   },
+  { name: "Google Sheets",      color: "52,168,83"   },
+  { name: "HubSpot",            color: "255,122,0"   },
+  { name: "Zapier",             color: "255,79,0"    },
+  { name: "Stripe",             color: "99,91,255"   },
+  { name: "Twilio",             color: "245,22,67"   },
+  { name: "Telegram",           color: "0,136,204"   },
+  { name: "Airtable",           color: "18,196,190"  },
+  { name: "Slack",              color: "74,21,75"    },
+  { name: "Pipedrive",          color: "38,159,122"  },
+  { name: "ActiveCampaign",     color: "57,163,255"  },
+  { name: "Typeform",           color: "255,255,255" },
+  { name: "Shopify",            color: "149,191,71"  },
+  { name: "Facebook Messenger", color: "0,132,255"   },
+  { name: "Mailchimp",          color: "255,232,88"  },
+  { name: "OpenAI",             color: "16,163,127"  },
+  { name: "Google Ads",         color: "66,133,244"  },
 ];
 
 export function IntegrationsStrip() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
-  // Cascade positions tightly within the box (15%–85% x range, staggered y)
+  // 24 cascade positions across 4 columns, staggered drop heights
   const positions = [
-    { x: "15%", y: "2%"  },
-    { x: "35%", y: "5%"  },
-    { x: "55%", y: "2%"  },
-    { x: "75%", y: "8%"  },
-    { x: "25%", y: "12%" },
-    { x: "65%", y: "15%" },
-    { x: "45%", y: "10%" },
-    { x: "20%", y: "20%" },
+    { x: "10%", y: "1%"  }, { x: "25%", y: "3%"  }, { x: "42%", y: "1%"  }, { x: "58%", y: "4%"  },
+    { x: "74%", y: "2%"  }, { x: "88%", y: "5%"  }, { x: "16%", y: "8%"  }, { x: "33%", y: "10%" },
+    { x: "50%", y: "7%"  }, { x: "66%", y: "11%" }, { x: "80%", y: "9%"  }, { x: "8%",  y: "14%" },
+    { x: "22%", y: "16%" }, { x: "40%", y: "13%" }, { x: "56%", y: "17%" }, { x: "72%", y: "15%" },
+    { x: "86%", y: "18%" }, { x: "14%", y: "22%" }, { x: "30%", y: "20%" }, { x: "48%", y: "23%" },
+    { x: "64%", y: "21%" }, { x: "78%", y: "24%" }, { x: "20%", y: "28%" }, { x: "55%", y: "26%" },
   ];
 
   return (
@@ -505,7 +519,7 @@ export function IntegrationsStrip() {
           transition={{ duration: 0.5, delay: 0.25 }}
           style={{
             position: "relative",
-            height: 360,
+            height: 260,
             borderRadius: 20,
             border: "1px solid rgba(26,128,255,0.18)",
             background: "rgba(26,128,255,0.02)",
