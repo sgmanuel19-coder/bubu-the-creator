@@ -414,6 +414,91 @@ function FinalCTASection() {
   );
 }
 
+// ─── PRIVACY POLICY ───────────────────────────────────────────────────────────
+
+function PrivacyPolicySection() {
+  const h = (text: string) => (
+    <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.85rem', color: '#4D9FFF', marginTop: 24, marginBottom: 6 }}>
+      {text}
+    </p>
+  );
+  const p = (text: string) => (
+    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.82rem', color: 'rgba(248,248,242,0.6)', lineHeight: 1.7, marginBottom: 8 }}>
+      {text}
+    </p>
+  );
+
+  return (
+    <section style={{ background: '#040406', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '24px 16px' }}>
+      <div style={{ maxWidth: 760, margin: '0 auto' }}>
+        <details style={{ cursor: 'pointer' }}>
+          <summary style={{
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 12,
+            padding: '10px 0',
+            fontFamily: 'Poppins, sans-serif',
+            fontWeight: 600,
+            fontSize: '0.8rem',
+            color: 'rgba(248,248,242,0.35)',
+            letterSpacing: '0.08em',
+            userSelect: 'none',
+          }}>
+            <span>Política de Privacidad · RESUELTO</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, color: 'rgba(248,248,242,0.25)' }}>
+              <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </summary>
+
+          <div style={{ paddingTop: 20, paddingBottom: 12 }}>
+            {h('1. Responsable del tratamiento')}
+            {p('RESUELTO, representado por Manuel Severo Gordillo, con domicilio en Lima, Perú. Correo de contacto y canal principal: WhatsApp +51 907 462 070.')}
+
+            {h('2. Datos personales que recopilamos')}
+            {p('Al interactuar con esta página o contactarnos por WhatsApp, podemos recopilar: nombre y apellido, número de teléfono (WhatsApp), nombre del negocio o empresa, tipo de industria, correo electrónico (cuando sea proporcionado voluntariamente) y datos de navegación recogidos por herramientas de analítica (dirección IP, tipo de dispositivo, páginas visitadas, tiempo de sesión).')}
+
+            {h('3. Finalidad del tratamiento')}
+            {p('Los datos personales recogidos se utilizan exclusivamente para: (a) responder consultas y brindar información sobre nuestros servicios de automatización con IA, (b) diseñar, configurar e implementar el sistema de atención automatizada contratado, (c) enviar comunicaciones relacionadas con el servicio contratado, incluyendo actualizaciones y soporte técnico, (d) medir el rendimiento de la página web y mejorar la experiencia del usuario mediante herramientas de analítica, (e) mostrar publicidad relevante a través de Meta Ads (Facebook e Instagram) a personas que visitaron esta página, en cumplimiento con las políticas de la plataforma.')}
+
+            {h('4. Base legal del tratamiento')}
+            {p('El tratamiento de sus datos se sustenta en: el consentimiento otorgado al contactarnos voluntariamente, la ejecución de un contrato de servicios cuando se formaliza la contratación, y el interés legítimo de RESUELTO para mejorar sus servicios y comunicar ofertas relevantes a personas que han mostrado interés previo.')}
+
+            {h('5. Cookies y tecnologías de rastreo')}
+            {p('Esta página utiliza el Píxel de Meta (Facebook Pixel) con ID 1298724572307272 para medir conversiones y mostrar anuncios personalizados en plataformas de Meta. Asimismo, utiliza Vercel Analytics para análisis de rendimiento web de forma anónima. El Píxel de Meta puede registrar eventos como visitas a la página (PageView) y acciones de conversión. Puede gestionar sus preferencias de publicidad personalizada en https://www.facebook.com/settings?tab=ads o en la Configuración de privacidad de su cuenta de Meta.')}
+
+            {h('6. Compartición de datos con terceros')}
+            {p('RESUELTO no vende ni cede datos personales a terceros con fines comerciales propios. Los datos podrán ser compartidos únicamente con: (a) Meta Platforms, Inc., como proveedor de la infraestructura de publicidad (Píxel), sujeto a su propia política de privacidad, (b) Vercel Inc., proveedor de hosting y analítica anónima, (c) proveedores tecnológicos necesarios para operar el sistema de automatización contratado (plataformas de mensajería, CRM, calendarios), siempre bajo acuerdos de confidencialidad.')}
+
+            {h('7. Transferencias internacionales')}
+            {p('Algunos proveedores tecnológicos utilizados (Meta, Vercel, Google) operan en los Estados Unidos y otros países fuera del Perú. Al usar esta página, usted consiente que sus datos puedan ser procesados en dichos países, los cuales pueden tener regulaciones de protección de datos distintas a las peruanas.')}
+
+            {h('8. Plazo de conservación')}
+            {p('Los datos de contacto se conservan mientras exista una relación comercial activa o potencial. Los datos de navegación (analítica) se almacenan por el período estándar de cada proveedor (Vercel: hasta 90 días). Una vez concluida la relación, los datos serán eliminados o anonimizados salvo que la ley exija su conservación por un período mayor.')}
+
+            {h('9. Derechos del titular (ARCO)')}
+            {p('En virtud de la Ley N.° 29733 — Ley de Protección de Datos Personales del Perú y su Reglamento (D.S. 003-2013-JUS), usted tiene derecho a: (A) Acceder a sus datos personales que obren en nuestros registros; (R) Rectificar datos inexactos o incompletos; (C) Cancelar o suprimir sus datos cuando ya no sean necesarios para la finalidad para la que fueron recogidos; (O) Oponerse al tratamiento de sus datos para fines de marketing directo. Para ejercer cualquiera de estos derechos, contáctenos a través de WhatsApp +51 907 462 070 indicando su solicitud. Responderemos en un plazo máximo de 10 días hábiles.')}
+
+            {h('10. Seguridad de los datos')}
+            {p('RESUELTO adopta medidas técnicas y organizativas razonables para proteger los datos personales contra accesos no autorizados, alteración, divulgación o destrucción. Sin embargo, ninguna transmisión por Internet es completamente segura, por lo que no podemos garantizar seguridad absoluta.')}
+
+            {h('11. Cambios en esta política')}
+            {p('RESUELTO se reserva el derecho de actualizar esta Política de Privacidad para reflejar cambios en sus prácticas o en la legislación aplicable. La versión vigente estará siempre disponible en esta página. Se recomienda revisarla periódicamente.')}
+
+            {h('12. Ley aplicable y jurisdicción')}
+            {p('Esta Política se rige por la Ley N.° 29733 y demás normativa peruana aplicable. Cualquier controversia será sometida a los tribunales competentes de Lima, Perú.')}
+
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: 'rgba(248,248,242,0.25)', marginTop: 20 }}>
+              Última actualización: abril 2026 · Lima, Perú
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+  );
+}
+
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
 export default function SistemasIAPage() {
@@ -437,6 +522,7 @@ export default function SistemasIAPage() {
       <GuaranteeSection />
       <FAQSection />
       <FinalCTASection />
+      <PrivacyPolicySection />
     </main>
   );
 }
