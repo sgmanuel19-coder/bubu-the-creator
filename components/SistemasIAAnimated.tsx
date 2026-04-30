@@ -693,7 +693,7 @@ const chatScenarios: {
       { from: 'lead', text: 'Quiero info sobre botox', time: '10:03' },
       { from: 'bot',  text: '¡Perfecto! 💆‍♀️ Tenemos Botox Express desde S/350. ¿Es tu primera vez con nosotros?', time: '10:03' },
       { from: 'lead', text: 'No, ya vine hace unos meses', time: '10:04' },
-      { from: 'bot',  text: '¡Qué bueno tenerte de vuelta! 🙌 Como clienta frecuente tienes 10% de descuento aplicado. ¿Agendamos esta semana?', time: '10:04' },
+      { from: 'bot',  text: '¡Qué bueno tenerte de vuelta! 🙌 Como clienta frecuente tienes 10% de descuento. ¿Agendamos esta semana?', time: '10:04' },
       { from: 'lead', text: 'Sí, el jueves si hay disponibilidad', time: '10:05' },
       { from: 'bot',  text: '✅ Jueves 5pm confirmado. Te llega recordatorio automático 24h antes.', time: '10:05' },
     ],
@@ -708,11 +708,11 @@ const chatScenarios: {
     messages: [
       { from: 'bot',  text: '¡Bienvenido a Osteria Roma! 🍝 ¿En qué te puedo ayudar?', time: '19:14' },
       { from: 'lead', text: 'Quiero reservar mesa para el sábado', time: '19:15' },
-      { from: 'bot',  text: '¡Con gusto! ¿Para cuántas personas y a qué hora prefieres?', time: '19:15' },
+      { from: 'bot',  text: '¡Con gusto! ¿Para cuántas personas y a qué hora?', time: '19:15' },
       { from: 'lead', text: 'Somos 4, a las 8pm', time: '19:16' },
-      { from: 'bot',  text: '¿Hay alguna ocasión especial o preferencia de mesa? 🥂', time: '19:16' },
+      { from: 'bot',  text: '¿Hay alguna ocasión especial? 🥂', time: '19:16' },
       { from: 'lead', text: 'Es aniversario de bodas', time: '19:17' },
-      { from: 'bot',  text: '¡Feliz aniversario! 🎉 Reservamos mesa con ambientación especial. ¿Nombre para la reserva?', time: '19:17' },
+      { from: 'bot',  text: '¡Feliz aniversario! 🎉 Mesa reservada con ambientación especial. ¿Nombre para la reserva?', time: '19:17' },
     ],
   },
   {
@@ -723,13 +723,81 @@ const chatScenarios: {
     accent: '77,159,255',
     accentHex: '#4D9FFF',
     messages: [
-      { from: 'bot',  text: 'Hola 👋 Soy el asistente de Grupo Paredes. ¿Buscas comprar, alquilar o invertir?', time: '11:30' },
+      { from: 'bot',  text: 'Hola 👋 ¿Buscas comprar, alquilar o invertir?', time: '11:30' },
       { from: 'lead', text: 'Alquilar un departamento', time: '11:31' },
       { from: 'bot',  text: '¿Qué zona y rango de precio tienes en mente?', time: '11:31' },
       { from: 'lead', text: 'Miraflores, hasta S/2,500 al mes', time: '11:32' },
-      { from: 'bot',  text: 'Tenemos 3 opciones disponibles en ese rango 🏠 ¿Puedes ver propiedades este fin de semana?', time: '11:32' },
+      { from: 'bot',  text: 'Tenemos 3 opciones en ese rango 🏠 ¿Puedes ver propiedades este fin de semana?', time: '11:32' },
       { from: 'lead', text: 'El sábado en la mañana', time: '11:33' },
-      { from: 'bot',  text: '✅ Visita agendada sábado 10am con Carlos, nuestro asesor. ¿Confirmas este número?', time: '11:33' },
+      { from: 'bot',  text: '✅ Visita agendada sábado 10am con Carlos, nuestro asesor. ¿Confirmas?', time: '11:33' },
+    ],
+  },
+  {
+    industry: 'Salón de Belleza',
+    emoji: '💅',
+    botName: 'Lumi · Studio Lumi',
+    status: 'Reservas · en línea',
+    accent: '255,100,200',
+    accentHex: '#FF64C8',
+    messages: [
+      { from: 'bot',  text: 'Hola 💅 Soy Lumi, asistente de Studio Lumi. ¿Qué servicio te interesa?', time: '14:10' },
+      { from: 'lead', text: 'Quiero hacerme el tinte y corte', time: '14:11' },
+      { from: 'bot',  text: '¡Genial! 🎨 ¿Tienes un color en mente o prefieres consultar con nuestra colorista?', time: '14:11' },
+      { from: 'lead', text: 'Quiero algo castaño con mechas', time: '14:12' },
+      { from: 'bot',  text: 'Perfecto, ese look queda increíble ✨ El servicio completo toma aprox 2.5h. ¿Qué día te viene bien?', time: '14:12' },
+      { from: 'lead', text: 'Este viernes si hay lugar', time: '14:13' },
+      { from: 'bot',  text: '✅ Viernes 11am con Valeria confirmado. Te mandamos recordatorio el día anterior 💌', time: '14:13' },
+    ],
+  },
+  {
+    industry: 'Gimnasio',
+    emoji: '💪',
+    botName: 'Max · GymPro',
+    status: 'Membresías · en línea',
+    accent: '80,220,100',
+    accentHex: '#50DC64',
+    messages: [
+      { from: 'bot',  text: '¡Hola! 💪 Soy Max de GymPro. ¿Quieres info sobre membresías o probar una clase gratis?', time: '09:05' },
+      { from: 'lead', text: 'Cuánto cuesta la membresía mensual', time: '09:06' },
+      { from: 'bot',  text: 'Tenemos 3 planes: Básico S/99, Full S/149 y Premium S/199 (incluye clases y nutricionista) 🏋️', time: '09:06' },
+      { from: 'lead', text: 'Me interesa el Full, ¿puedo visitar primero?', time: '09:07' },
+      { from: 'bot',  text: '¡Claro! Te regalo una clase de prueba sin costo. ¿Cuándo te vendría bien?', time: '09:07' },
+      { from: 'lead', text: 'Mañana en la tarde', time: '09:08' },
+      { from: 'bot',  text: '✅ Clase de prueba mañana 6pm agendada. Te esperamos con ropa cómoda 🔥', time: '09:08' },
+    ],
+  },
+  {
+    industry: 'Nutricionista',
+    emoji: '🥗',
+    botName: 'NutriBot · Dra. Valeria',
+    status: 'Consultas · en línea',
+    accent: '255,200,50',
+    accentHex: '#FFC832',
+    messages: [
+      { from: 'bot',  text: 'Hola 🥗 Soy el asistente de la Dra. Valeria. ¿Cuál es tu objetivo principal?', time: '08:30' },
+      { from: 'lead', text: 'Quiero bajar de peso y comer mejor', time: '08:31' },
+      { from: 'bot',  text: '¡Podemos ayudarte! 💚 ¿Tienes alguna condición médica o intolerancia alimentaria que debamos considerar?', time: '08:31' },
+      { from: 'lead', text: 'Soy intolerante a la lactosa', time: '08:32' },
+      { from: 'bot',  text: 'Anotado 📋 La Dra. Valeria diseña planes 100% personalizados. La primera consulta incluye evaluación + plan. ¿Agendamos?', time: '08:32' },
+      { from: 'lead', text: 'Sí, ¿qué días tiene disponibles?', time: '08:33' },
+      { from: 'bot',  text: '✅ Martes y jueves disponibles. Te confirmamos fecha y te enviamos formulario previo por aquí.', time: '08:33' },
+    ],
+  },
+  {
+    industry: 'Consultora B2B',
+    emoji: '💼',
+    botName: 'Nexo · Nexo Consulting',
+    status: 'Prospección · en línea',
+    accent: '160,100,255',
+    accentHex: '#A064FF',
+    messages: [
+      { from: 'bot',  text: 'Hola 👋 Soy el asistente de Nexo Consulting. ¿En qué área busca apoyo su empresa?', time: '10:45' },
+      { from: 'lead', text: 'Necesitamos optimizar nuestro proceso de ventas', time: '10:46' },
+      { from: 'bot',  text: '¿Cuántas personas tiene el área comercial y cuál es el principal cuello de botella hoy?', time: '10:46' },
+      { from: 'lead', text: 'Somos 8 vendedores, el problema es el seguimiento de prospectos', time: '10:47' },
+      { from: 'bot',  text: 'Entendido 📊 Trabajamos exactamente eso — implementamos CRM + automatización de seguimiento. ¿Le interesa una reunión de diagnóstico sin costo?', time: '10:47' },
+      { from: 'lead', text: 'Sí, ¿cuándo podría ser?', time: '10:48' },
+      { from: 'bot',  text: '✅ Agendamos llamada esta semana con nuestro director comercial. ¿Martes o jueves a las 10am?', time: '10:48' },
     ],
   },
 ];
@@ -809,7 +877,20 @@ function ChatWindow({ scenario, inView }: { scenario: typeof chatScenarios[0]; i
 export function ChatDemoSectionAnimated() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const [active, setActive] = useState(0);
+  const [[active, dir], setPage] = useState([0, 0]);
+  const total = chatScenarios.length;
+
+  const paginate = (newDir: number) => {
+    setPage(([prev]) => [(prev + newDir + total) % total, newDir]);
+  };
+
+  const s = chatScenarios[active];
+
+  const slideVariants = {
+    enter: (d: number) => ({ x: d > 0 ? '55%' : '-55%', opacity: 0, filter: 'blur(8px)' }),
+    center: { x: '0%', opacity: 1, filter: 'blur(0px)' },
+    exit:  (d: number) => ({ x: d > 0 ? '-55%' : '55%', opacity: 0, filter: 'blur(8px)' }),
+  };
 
   return (
     <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: '#040406' }}>
@@ -817,10 +898,11 @@ export function ChatDemoSectionAnimated() {
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(26,128,255,0.04) 0%, transparent 65%)' }} />
 
       <div className="max-w-3xl mx-auto">
+        {/* Header */}
         <motion.div
           className="text-center mb-12"
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+          initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+          animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
           transition={{ duration: 0.6 }}
         >
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#1A80FF', marginBottom: 12 }}>
@@ -837,42 +919,104 @@ export function ChatDemoSectionAnimated() {
           </p>
         </motion.div>
 
-        {/* Industry tabs */}
+        {/* Industry badge (current) */}
         <motion.div
-          className="flex justify-center gap-3 mb-8 flex-wrap"
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="flex items-center justify-center mb-6 gap-4"
         >
-          {chatScenarios.map((s, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
+          {/* Prev arrow */}
+          <button
+            onClick={() => paginate(-1)}
+            aria-label="Anterior"
+            style={{
+              width: 42, height: 42, borderRadius: '50%', flexShrink: 0,
+              border: `1px solid rgba(${s.accent},0.3)`,
+              background: `rgba(${s.accent},0.06)`,
+              color: s.accentHex,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', fontSize: '1.1rem', transition: 'all 0.22s ease',
+            }}
+          >‹</button>
+
+          {/* Industry pill */}
+          <AnimatePresence mode="wait" custom={dir}>
+            <motion.div
+              key={active}
+              custom={dir}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '8px 22px', borderRadius: 999, cursor: 'pointer',
-                fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.82rem',
-                border: `1px solid rgba(${s.accent},${active === i ? 0.6 : 0.2})`,
-                background: active === i ? `rgba(${s.accent},0.12)` : 'rgba(255,255,255,0.03)',
-                color: active === i ? s.accentHex : 'rgba(248,248,242,0.45)',
-                transition: 'all 0.22s ease',
-                outline: 'none',
+                padding: '8px 22px', borderRadius: 999,
+                border: `1px solid rgba(${s.accent},0.5)`,
+                background: `rgba(${s.accent},0.1)`,
+                fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.85rem',
+                color: s.accentHex, whiteSpace: 'nowrap',
               }}
             >
               {s.emoji} {s.industry}
-            </button>
-          ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Next arrow */}
+          <button
+            onClick={() => paginate(1)}
+            aria-label="Siguiente"
+            style={{
+              width: 42, height: 42, borderRadius: '50%', flexShrink: 0,
+              border: `1px solid rgba(${s.accent},0.3)`,
+              background: `rgba(${s.accent},0.06)`,
+              color: s.accentHex,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', fontSize: '1.1rem', transition: 'all 0.22s ease',
+            }}
+          >›</button>
         </motion.div>
 
-        {/* Chat window */}
-        <motion.div
-          key={active}
-          initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.42, ease: [0.21, 0.47, 0.32, 0.98] }}
-        >
-          <ChatWindow scenario={chatScenarios[active]} inView={inView} />
-        </motion.div>
+        {/* Carousel window */}
+        <div style={{ position: 'relative', overflow: 'hidden' }}>
+          <AnimatePresence mode="wait" custom={dir}>
+            <motion.div
+              key={active}
+              custom={dir}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.38, ease: [0.21, 0.47, 0.32, 0.98] }}
+            >
+              <ChatWindow scenario={s} inView={inView} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-2 mt-6">
+          {chatScenarios.map((sc, i) => (
+            <button
+              key={i}
+              onClick={() => setPage([i, i > active ? 1 : -1])}
+              aria-label={`Ver ${sc.industry}`}
+              style={{
+                width: active === i ? 22 : 8,
+                height: 8,
+                borderRadius: 999,
+                background: active === i ? sc.accentHex : 'rgba(248,248,242,0.15)',
+                border: 'none', cursor: 'pointer', padding: 0,
+                transition: 'all 0.3s ease',
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Counter */}
+        <p style={{ textAlign: 'center', marginTop: 10, fontFamily: 'Inter, sans-serif', fontSize: '0.7rem', color: 'rgba(248,248,242,0.25)' }}>
+          {active + 1} / {total} industrias
+        </p>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)' }} />
