@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Stethoscope, Home, Scale, GraduationCap, Heart, TrendingUp, Building2, Wifi, Zap, Briefcase, X, CheckCircle2 } from "lucide-react";
+import { Gravity, MatterBody } from "@/components/ui/gravity";
 
 // ── Types ─────────────────────────────────────────────────────
 type Step = { number: string; title: string; description: string };
@@ -459,17 +460,26 @@ const integrations = [
 export function IntegrationsStrip() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  // Duplicate for seamless infinite loop
-  const doubled = [...integrations, ...integrations];
+
+  // x/y spread so they cascade from different heights
+  const positions = [
+    { x: "8%",  y: "2%"  },
+    { x: "22%", y: "8%"  },
+    { x: "38%", y: "2%"  },
+    { x: "54%", y: "10%" },
+    { x: "70%", y: "4%"  },
+    { x: "83%", y: "12%" },
+    { x: "14%", y: "18%" },
+    { x: "46%", y: "20%" },
+  ];
 
   return (
     <section ref={ref} className="py-16 relative overflow-hidden" style={{ background: "#040406" }}>
-      {/* Beam scan top divider */}
       <div className="absolute top-0 left-0 right-0 h-px beam-divider" />
 
       <div className="max-w-4xl mx-auto px-4">
         <motion.div
-          className="text-center mb-10"
+          className="text-center mb-8"
           initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
           animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.55 }}
@@ -482,28 +492,54 @@ export function IntegrationsStrip() {
           <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "clamp(1.25rem, 3vw, 2rem)", color: "#f8f8f2" }}>
             Se conecta con las herramientas que ya usas
           </h2>
+          <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(248,248,242,0.35)", fontSize: "0.78rem", marginTop: 8 }}>
+            Arrastra las integraciones 👆
+          </p>
         </motion.div>
       </div>
 
-      {/* Infinite marquee */}
+      {/* Physics container */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        style={{
-          overflow: "hidden",
-          maskImage: "linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)",
-        }}
+        transition={{ duration: 0.4, delay: 0.3 }}
+        style={{ position: "relative", height: 420, overflow: "hidden" }}
       >
-        <div className="marquee-track" style={{ display: "flex", gap: 12, width: "max-content", padding: "8px 0" }}>
-          {doubled.map((int, i) => (
-            <IntegrationBadge key={`${int.name}-${i}`} item={int} index={i % integrations.length} inView={true} />
-          ))}
-        </div>
+        {inView && (
+          <Gravity gravity={{ x: 0, y: 1 }} grabCursor className="w-full h-full">
+            {integrations.map((int, i) => (
+              <MatterBody
+                key={int.name}
+                x={positions[i % positions.length].x}
+                y={positions[i % positions.length].y}
+                matterBodyOptions={{ friction: 0.4, restitution: 0.3, density: 0.003 }}
+                angle={Math.floor(Math.random() * 20) - 10}
+              >
+                <div
+                  style={{
+                    padding: "10px 20px",
+                    borderRadius: 999,
+                    border: `1px solid rgba(${int.color},0.5)`,
+                    background: `rgba(${int.color},0.08)`,
+                    backdropFilter: "blur(8px)",
+                    fontFamily: "Poppins, sans-serif",
+                    fontWeight: 700,
+                    fontSize: "0.82rem",
+                    color: "#f8f8f2",
+                    whiteSpace: "nowrap",
+                    cursor: "grab",
+                    userSelect: "none",
+                    boxShadow: `0 0 18px rgba(${int.color},0.12)`,
+                  }}
+                >
+                  {int.name}
+                </div>
+              </MatterBody>
+            ))}
+          </Gravity>
+        )}
       </motion.div>
 
-      {/* Beam scan bottom divider */}
       <div className="absolute bottom-0 left-0 right-0 h-px beam-divider" style={{ animationDelay: "1.5s" }} />
     </section>
   );
