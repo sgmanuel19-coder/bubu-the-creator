@@ -231,6 +231,7 @@ const AetherFlowHero = () => {
               href="https://wa.me/51907462070?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20de%20Automatizacion%20IA"
               target="_blank"
               rel="noopener noreferrer"
+              shine
             />
             <ShinyBordersButton
               text="Ver paquetes"

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { ShiningText } from '@/components/ui/shining-text';
 
 interface ShinyBordersButtonProps {
   text: string;
@@ -9,9 +10,10 @@ interface ShinyBordersButtonProps {
   rel?: string;
   onClick?: () => void;
   className?: string;
+  shine?: boolean;
 }
 
-const ShinyBordersButton = ({ text, href, target, rel, onClick, className = '' }: ShinyBordersButtonProps) => {
+const ShinyBordersButton = ({ text, href, target, rel, onClick, className = '', shine = false }: ShinyBordersButtonProps) => {
   const inner = (
     <div className={`group relative p-[2px] rounded-[16px] text-[1rem] border-none cursor-pointer bg-[radial-gradient(circle_80px_at_80%_-10%,_#ffffff,_#181b1b)] transition-all ${className}`}>
       {/* Glow behind button */}
@@ -27,7 +29,7 @@ const ShinyBordersButton = ({ text, href, target, rel, onClick, className = '' }
       <div className="relative px-[25px] py-[14px] group-hover:scale-110 rounded-[14px] text-white bg-[radial-gradient(circle_80px_at_80%_-50%,_#777777,_#0f1111)] z-10 transition-all duration-300 font-semibold tracking-wide flex items-center gap-2 justify-center whitespace-nowrap"
         style={{ fontFamily: 'Poppins, sans-serif' }}
       >
-        {text}
+        {shine ? <ShiningText text={text} /> : text}
         {/* Inner glow layer */}
         <div className="absolute inset-0 rounded-[14px] bg-[radial-gradient(circle_60px_at_0%_100%,_#00e1ff1a,_#0000ff11,_transparent)] z-[-1]" />
       </div>

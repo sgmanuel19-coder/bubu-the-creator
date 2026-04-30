@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { WaveText } from '@/components/ui/wave-text';
 
 const problems = [
   { emoji: '⏱️', title: 'Demoran en responder',          description: 'Pierden leads en los primeros minutos. El prospecto pregunta, nadie contesta rapido, y ya se fue con la competencia.' },
@@ -37,7 +38,7 @@ export function SistemasIAProblems() {
           </span>
           <h2 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
             Pierdes clientes<br />
-            <span style={{ color: '#4D9FFF' }}>todos los dias</span>
+            <WaveText text="todos los dias" className="text-[#4D9FFF]" />
           </h2>
           <p style={{ marginTop: 16, maxWidth: 540, margin: '16px auto 0', fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.55)', fontSize: '1rem' }}>
             No porque seas un mal vendedor, sino porque no tienes un sistema que trabaje y hable como tu

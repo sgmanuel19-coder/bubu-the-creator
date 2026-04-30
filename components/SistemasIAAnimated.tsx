@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Stethoscope, Home, Scale, GraduationCap, Heart, TrendingUp, Building2, Wifi, Zap, Briefcase, X, CheckCircle2 } from "lucide-react";
 import { Gravity, MatterBody } from "@/components/ui/gravity";
+import { WaveText } from "@/components/ui/wave-text";
 
 // ── Types ─────────────────────────────────────────────────────
 type Step = { number: string; title: string; description: string };
@@ -369,7 +370,7 @@ export function IndustriesSectionAnimated() {
           </span>
           <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "clamp(1.75rem, 5vw, 3rem)", color: "#f8f8f2", lineHeight: 1.15 }}>
             Si recibes clientes por WhatsApp<br />
-            <span style={{ color: "#4D9FFF" }}>el agente trabaja por ti.</span>
+            <WaveText text="el agente trabaja por ti." className="text-[#4D9FFF]" />
           </h2>
           <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(248,248,242,0.5)", fontSize: "0.95rem", marginTop: 12 }}>
             No importa la industria — si recibes mensajes y necesitas responder, agendar o vender, esto es para tu negocio.
@@ -660,7 +661,7 @@ export function VsSimpleBotSectionAnimated() {
           </span>
           <h2 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
             No es un chatbot genérico.<br />
-            <span style={{ color: '#1A80FF' }}>Es un sistema comercial.</span>
+            <WaveText text="Es un sistema comercial." className="text-[#1A80FF]" />
           </h2>
           <p style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.5)', fontSize: '0.9rem', marginTop: 14, maxWidth: 520, margin: '14px auto 0' }}>
             Un bot simple responde mensajes. Este sistema califica, agenda y hace seguimiento — sin intervención humana.
@@ -948,7 +949,7 @@ export function ChatDemoSectionAnimated() {
           </span>
           <h2 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
             Así se ve el super agente en acción.<br />
-            <span style={{ color: '#1A80FF' }}>100% automatizado.</span>
+            <WaveText text="100% automatizado." className="text-[#1A80FF]" />
           </h2>
           <p style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.5)', fontSize: '0.9rem', marginTop: 14, maxWidth: 520, margin: '14px auto 0' }}>
             Conversaciones reales por industria — el agente responde, califica y agenda solo.
