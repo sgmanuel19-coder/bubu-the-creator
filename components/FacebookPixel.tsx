@@ -25,6 +25,13 @@ export default function FacebookPixel() {
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '${pixelId}');
             fbq('track', 'PageView');
+            document.addEventListener('click', function(e) {
+              var el = e.target;
+              while (el && el.tagName !== 'A') el = el.parentElement;
+              if (el && el.href && (el.href.indexOf('wa.me') !== -1 || el.href.indexOf('whatsapp.com') !== -1)) {
+                fbq('track', 'Lead', { content_name: 'WhatsApp CTA', content_category: 'sistema-ia' });
+              }
+            });
           `,
         }}
       />
