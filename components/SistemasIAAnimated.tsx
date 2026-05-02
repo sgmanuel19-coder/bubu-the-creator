@@ -432,10 +432,10 @@ export function IndustriesSectionAnimated() {
             position: "relative",
             height: 420,
             borderRadius: 20,
-            border: "1px solid rgba(77,159,255,0.18)",
-            background: "rgba(77,159,255,0.02)",
+            border: "1px solid rgba(77,159,255,0.22)",
+            background: "linear-gradient(135deg, rgba(26,128,255,0.08) 0%, rgba(4,4,6,0.95) 40%, rgba(77,159,255,0.06) 100%)",
             overflow: "hidden",
-            boxShadow: "0 0 60px rgba(77,159,255,0.05), inset 0 0 40px rgba(77,159,255,0.02)",
+            boxShadow: "0 0 80px rgba(26,128,255,0.08), inset 0 0 60px rgba(77,159,255,0.04)",
           }}
         >
           <div style={{ position:"absolute", top:10, left:10, width:16, height:16, borderTop:"1.5px solid rgba(77,159,255,0.4)", borderLeft:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"4px 0 0 0", pointerEvents:"none" }} />
