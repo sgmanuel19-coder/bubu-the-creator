@@ -749,7 +749,7 @@ function VsRow({ row, index, inView }: { row: typeof vsRows[0]; index: number; i
       style={{
         position: 'relative', overflow: 'hidden',
         display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
-        borderBottom: index < vsRows.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+        borderBottom: index < vsRows.length - 1 ? '1px solid rgba(150,175,225,0.1)' : 'none',
         cursor: 'pointer',
       }}
     >
@@ -758,7 +758,7 @@ function VsRow({ row, index, inView }: { row: typeof vsRows[0]; index: number; i
         position: 'absolute', inset: 0, pointerEvents: 'none',
         opacity: hovered ? 1 : 0,
         transition: 'opacity 0.3s ease',
-        background: `radial-gradient(ellipse 380px 100% at ${mouseX}px 50%, rgba(26,128,255,0.2), rgba(77,159,255,0.06) 55%, transparent 75%)`,
+        background: `radial-gradient(ellipse 380px 100% at ${mouseX}px 50%, rgba(140,180,255,0.22), rgba(180,210,255,0.08) 40%, rgba(77,159,255,0.04) 65%, transparent 80%)`,
       }} />
 
       {/* Click sweep burst */}
@@ -772,7 +772,7 @@ function VsRow({ row, index, inView }: { row: typeof vsRows[0]; index: number; i
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
             style={{
               position: 'absolute', top: 0, bottom: 0, width: '65%',
-              background: 'linear-gradient(90deg, transparent, rgba(77,159,255,0.5), rgba(26,128,255,0.3), transparent)',
+              background: 'linear-gradient(90deg, transparent, rgba(180,210,255,0.5), rgba(77,159,255,0.6), rgba(200,220,255,0.4), transparent)',
               pointerEvents: 'none', zIndex: 3,
             }}
           />
@@ -784,13 +784,13 @@ function VsRow({ row, index, inView }: { row: typeof vsRows[0]; index: number; i
         <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>{row.emoji}</span>
         <span style={{
           fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.84rem',
-          color: hovered ? '#f8f8f2' : 'rgba(248,248,242,0.8)',
+          color: hovered ? '#e8eef8' : 'rgba(200,215,240,0.85)',
           transition: 'color 0.22s ease',
         }}>{row.feature}</span>
       </div>
 
       {/* Bot genérico */}
-      <div style={{ padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 8, borderLeft: '1px solid rgba(255,255,255,0.06)', position: 'relative', zIndex: 1 }}>
+      <div style={{ padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 8, borderLeft: '1px solid rgba(150,175,225,0.1)', position: 'relative', zIndex: 1 }}>
         <div style={{
           width: 20, height: 20, borderRadius: '50%', flexShrink: 0,
           background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.35)',
@@ -800,13 +800,13 @@ function VsRow({ row, index, inView }: { row: typeof vsRows[0]; index: number; i
         }}>
           <X style={{ width: 10, height: 10, color: 'rgba(255,80,80,0.7)' }} />
         </div>
-        <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', color: 'rgba(248,248,242,0.3)', lineHeight: 1.4 }}>{row.simple}</span>
+        <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', color: 'rgba(170,185,215,0.42)', lineHeight: 1.4 }}>{row.simple}</span>
       </div>
 
       {/* RESUELTO IA */}
       <div style={{
         padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 8,
-        borderLeft: `1px solid rgba(26,128,255,${hovered ? 0.5 : 0.18})`,
+        borderLeft: `1px solid rgba(100,160,240,${hovered ? 0.55 : 0.2})`,
         background: `rgba(26,128,255,${hovered ? 0.1 : 0.04})`,
         transition: 'background 0.25s ease, border-color 0.25s ease',
         position: 'relative', zIndex: 1,
@@ -823,7 +823,7 @@ function VsRow({ row, index, inView }: { row: typeof vsRows[0]; index: number; i
         </div>
         <span style={{
           fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', lineHeight: 1.4,
-          color: hovered ? '#f8f8f2' : 'rgba(248,248,242,0.72)',
+          color: hovered ? '#dce8ff' : 'rgba(190,210,245,0.78)',
           transition: 'color 0.25s ease',
         }}>{row.resuelto}</span>
       </div>
@@ -836,34 +836,52 @@ export function VsSimpleBotSectionAnimated() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(160deg, #060c20 0%, #040406 45%, #08102a 100%)' }}>
-      {/* Top border line */}
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.5), transparent)' }} />
+    <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(160deg, #080e24 0%, #050710 50%, #0a1030 100%)' }}>
+      {/* Top border line — silver-blue */}
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(160,190,240,0.6), rgba(26,128,255,0.7), rgba(160,190,240,0.6), transparent)' }} />
 
-      {/* Dot grid overlay */}
+      {/* Silver dot grid overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(77,159,255,0.12) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, rgba(160,190,235,0.13) 1px, transparent 1px)',
           backgroundSize: '32px 32px',
-          maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%)',
+          maskImage: 'radial-gradient(ellipse 85% 85% at 50% 50%, black 10%, transparent 100%)',
         }}
       />
 
-      {/* Center radial glow */}
+      {/* Silver shimmer diagonal */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 70% 60% at 50% 40%, rgba(26,128,255,0.12) 0%, rgba(8,16,42,0.3) 50%, transparent 80%)',
+          background: 'linear-gradient(135deg, transparent 30%, rgba(180,205,245,0.03) 50%, transparent 70%)',
         }}
       />
 
-      {/* Left ambient glow */}
+      {/* Center radial glow — silver-blue */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 75% 65% at 50% 40%, rgba(77,130,220,0.13) 0%, rgba(140,170,230,0.04) 45%, transparent 75%)',
+        }}
+      />
+
+      {/* Left ambient glow — silver */}
       <div
         className="absolute pointer-events-none"
         style={{
-          left: '-10%', top: '20%', width: '40%', height: '60%',
-          background: 'radial-gradient(ellipse, rgba(26,128,255,0.08) 0%, transparent 70%)',
+          left: '-10%', top: '15%', width: '45%', height: '65%',
+          background: 'radial-gradient(ellipse, rgba(140,175,230,0.1) 0%, transparent 70%)',
+          filter: 'blur(50px)',
+        }}
+      />
+
+      {/* Right ambient glow — blue */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          right: '-8%', top: '30%', width: '35%', height: '50%',
+          background: 'radial-gradient(ellipse, rgba(26,128,255,0.07) 0%, transparent 70%)',
           filter: 'blur(40px)',
         }}
       />
@@ -900,27 +918,27 @@ export function VsSimpleBotSectionAnimated() {
           style={{
             borderRadius: 24,
             overflow: 'hidden',
-            border: '1px solid rgba(77,159,255,0.18)',
-            background: 'linear-gradient(180deg, rgba(10,20,50,0.9) 0%, rgba(4,8,24,0.95) 100%)',
-            boxShadow: '0 0 0 1px rgba(26,128,255,0.08), 0 24px 80px rgba(8,16,42,0.8), 0 0 60px rgba(26,128,255,0.06)',
+            border: '1px solid rgba(160,190,240,0.2)',
+            background: 'linear-gradient(180deg, rgba(12,20,48,0.92) 0%, rgba(6,10,28,0.97) 100%)',
+            boxShadow: '0 0 0 1px rgba(100,140,220,0.08), 0 24px 80px rgba(4,8,30,0.85), 0 0 80px rgba(100,150,230,0.06), inset 0 1px 0 rgba(200,215,245,0.06)',
           }}
         >
           {/* Header row */}
-          <div className="grid grid-cols-3" style={{ borderBottom: '1px solid rgba(77,159,255,0.15)', background: 'rgba(6,14,40,0.8)' }}>
+          <div className="grid grid-cols-3" style={{ borderBottom: '1px solid rgba(160,190,240,0.14)', background: 'linear-gradient(180deg, rgba(14,22,50,0.95) 0%, rgba(8,14,36,0.9) 100%)' }}>
             {/* "Función" label */}
             <div style={{ padding: '18px 20px', display: 'flex', alignItems: 'center' }}>
-              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.65rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(248,248,242,0.3)' }}>Función</span>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.65rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(180,200,235,0.35)' }}>Función</span>
             </div>
 
-            {/* Bot genérico badge */}
-            <div style={{ padding: '18px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
+            {/* Bot genérico badge — silver */}
+            <div style={{ padding: '18px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderLeft: '1px solid rgba(160,185,225,0.1)' }}>
               <span style={{
                 display: 'inline-flex', alignItems: 'center', gap: 6,
                 padding: '5px 12px', borderRadius: 20,
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                background: 'linear-gradient(135deg, rgba(140,160,200,0.08), rgba(100,120,170,0.05))',
+                border: '1px solid rgba(160,180,220,0.18)',
                 fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.72rem',
-                color: 'rgba(248,248,242,0.38)',
+                color: 'rgba(180,195,225,0.45)',
               }}>
                 <span style={{ fontSize: '0.85rem' }}>🤖</span>
                 Bot genérico
@@ -967,8 +985,8 @@ export function VsSimpleBotSectionAnimated() {
         </motion.p>
       </div>
 
-      {/* Bottom border line */}
-      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.3), transparent)' }} />
+      {/* Bottom border line — silver-blue */}
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(160,190,240,0.5), rgba(26,128,255,0.6), rgba(160,190,240,0.5), transparent)' }} />
     </section>
   );
 }
