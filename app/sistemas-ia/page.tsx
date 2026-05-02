@@ -277,6 +277,14 @@ function GuaranteeSection() {
       <div className="max-w-3xl mx-auto">
         <div className="rounded-3xl p-8 md:p-12 text-center relative overflow-hidden" style={{ background: 'rgba(26,128,255,0.04)', border: '1px solid rgba(26,128,255,0.18)' }}>
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(26,128,255,0.1) 0%, transparent 60%)' }} />
+          {/* Logo watermark inside card */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <img
+              src="/images/logo-mark.png"
+              alt=""
+              style={{ width: 'min(320px, 55vw)', height: 'auto', opacity: 0.04, filter: 'blur(1px) saturate(0)', userSelect: 'none' }}
+            />
+          </div>
           <div className="relative z-10 w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl" style={{ background: 'rgba(26,128,255,0.1)', border: '1px solid rgba(26,128,255,0.3)', boxShadow: '0 0 40px rgba(26,128,255,0.15)' }}>
             <ShieldCheck style={{ width: 32, height: 32, color: '#1A80FF' }} />
           </div>
@@ -339,6 +347,20 @@ function FinalCTASection() {
       }}
     >
       <CelestialOrrery />
+      {/* Logo watermark */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ zIndex: 0 }}>
+        <img
+          src="/images/logo-mark.png"
+          alt=""
+          style={{
+            width: 'min(480px, 60vw)',
+            height: 'auto',
+            opacity: 0.05,
+            filter: 'blur(1px) saturate(0)',
+            userSelect: 'none',
+          }}
+        />
+      </div>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
