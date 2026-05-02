@@ -253,7 +253,8 @@ export function HowItWorksAnimated({ steps }: { steps: Step[] }) {
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(77,159,255,0.04) 0%, transparent 60%)" }} />
 
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
           className="text-center mb-14"
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
@@ -273,35 +274,76 @@ export function HowItWorksAnimated({ steps }: { steps: Step[] }) {
           </p>
         </motion.div>
 
-        <div className="max-w-xl mx-auto flex flex-col">
-          {steps.map((step, i) => (
-            <StepCardAnimated key={step.number} step={step} index={i} inView={inView} isLast={i === steps.length - 1} />
-          ))}
-        </div>
+        {/* Two-column: steps left, image right */}
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
-        <motion.div
-          className="text-center mt-10"
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.65 }}
-        >
-          <a
-            href="https://wa.me/51907462070?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20de%20Automatizacion%20IA"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '14px 28px', borderRadius: 14,
-              background: 'linear-gradient(135deg, #1A80FF, #4D9FFF)',
-              color: '#fff', fontFamily: 'Poppins, sans-serif',
-              fontWeight: 600, fontSize: '0.9rem',
-              boxShadow: '0 0 28px rgba(26,128,255,0.35)',
-              textDecoration: 'none',
-            }}
+          {/* Steps */}
+          <div className="flex-1 w-full max-w-xl mx-auto lg:mx-0 flex flex-col">
+            {steps.map((step, i) => (
+              <StepCardAnimated key={step.number} step={step} index={i} inView={inView} isLast={i === steps.length - 1} />
+            ))}
+
+            <motion.div
+              className="mt-10"
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.65 }}
+            >
+              <a
+                href="https://wa.me/51907462070?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20de%20Automatizacion%20IA"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '14px 28px', borderRadius: 14,
+                  background: 'linear-gradient(135deg, #1A80FF, #4D9FFF)',
+                  color: '#fff', fontFamily: 'Poppins, sans-serif',
+                  fontWeight: 600, fontSize: '0.9rem',
+                  boxShadow: '0 0 28px rgba(26,128,255,0.35)',
+                  textDecoration: 'none',
+                }}
+              >
+                Empezar mi diagnóstico →
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Image */}
+          <motion.div
+            className="flex-1 w-full flex items-center justify-center"
+            initial={{ opacity: 0, x: 40, filter: "blur(10px)" }}
+            animate={inView ? { opacity: 1, x: 0, filter: "blur(0px)" } : {}}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
-            Empezar mi diagnóstico →
-          </a>
-        </motion.div>
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                maxWidth: 480,
+                borderRadius: 24,
+                overflow: "hidden",
+                border: "1px solid rgba(26,128,255,0.2)",
+                boxShadow: "0 0 80px rgba(26,128,255,0.12), 0 32px 64px rgba(0,0,0,0.4)",
+              }}
+            >
+              {/* Glow overlay */}
+              <div
+                style={{
+                  position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none",
+                  background: "linear-gradient(135deg, rgba(26,128,255,0.08) 0%, transparent 50%, rgba(77,159,255,0.06) 100%)",
+                }}
+              />
+              {/* Top accent line */}
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, zIndex: 2, background: "linear-gradient(90deg, transparent, #1A80FF, #4D9FFF, transparent)" }} />
+              <img
+                src="/robot-ia.jpg"
+                alt="Super Agente IA para WhatsApp — RESUELTO"
+                style={{ width: "100%", height: "auto", display: "block" }}
+              />
+            </div>
+          </motion.div>
+
+        </div>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px beam-divider" style={{ animationDelay: "2s" }} />
