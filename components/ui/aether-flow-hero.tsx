@@ -245,18 +245,40 @@ const AetherFlowHero = () => {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-8 flex items-center gap-3"
+            className="mt-8"
           >
-            <span
-              className="flex items-center gap-2 text-xs"
-              style={{ color: 'rgba(248,248,242,0.4)', fontFamily: 'Inter, sans-serif' }}
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full cursor-default select-none"
+              style={{
+                background: 'rgba(255, 75, 35, 0.1)',
+                border: '1px solid rgba(255, 75, 35, 0.45)',
+              }}
+              animate={{
+                boxShadow: [
+                  '0 0 6px rgba(255,75,35,0.15)',
+                  '0 0 22px rgba(255,75,35,0.55)',
+                  '0 0 6px rgba(255,75,35,0.15)',
+                ],
+              }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: '#1A80FF' }} />
-                <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: '#1A80FF' }} />
+              <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
+                <span
+                  className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-80"
+                  style={{ background: '#FF4B23' }}
+                />
+                <span
+                  className="relative inline-flex rounded-full h-2.5 w-2.5"
+                  style={{ background: '#FF4B23' }}
+                />
               </span>
-              3 cupos disponibles
-            </span>
+              <span style={{
+                fontFamily: 'Poppins, sans-serif', fontWeight: 700,
+                fontSize: '0.78rem', color: '#FF7055', letterSpacing: '0.01em',
+              }}>
+                Solo 3 cupos disponibles este mes
+              </span>
+            </motion.div>
           </motion.div>
 
           {/* Trust strip */}
@@ -265,17 +287,33 @@ const AetherFlowHero = () => {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-3 flex items-center gap-1 flex-wrap"
+            className="mt-4 flex items-center gap-2 flex-wrap"
           >
-            {['Sistema listo en 5 días', 'Garantía 30 días', 'Con contrato', 'Meta business partners'].map((item, i, arr) => (
-              <React.Fragment key={item}>
-                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.7rem', color: 'rgba(248,248,242,0.32)' }}>
-                  ✓ {item}
-                </span>
-                {i < arr.length - 1 && (
-                  <span style={{ color: 'rgba(248,248,242,0.15)', fontSize: '0.7rem', margin: '0 4px' }}>·</span>
-                )}
-              </React.Fragment>
+            {[
+              { text: 'Listo en 5 días', color: '#1A80FF', bg: 'rgba(26,128,255,0.1)', border: 'rgba(26,128,255,0.35)', icon: '⚡' },
+              { text: 'Garantía 30 días', color: '#22d47a', bg: 'rgba(34,212,122,0.08)', border: 'rgba(34,212,122,0.3)', icon: '🛡️' },
+              { text: 'Con contrato', color: '#4D9FFF', bg: 'rgba(77,159,255,0.08)', border: 'rgba(77,159,255,0.3)', icon: '📋' },
+              { text: 'Meta Business Partner', color: '#c084fc', bg: 'rgba(192,132,252,0.08)', border: 'rgba(192,132,252,0.3)', icon: '✦' },
+            ].map((item, i) => (
+              <motion.span
+                key={item.text}
+                initial={{ opacity: 0, y: 8, scale: 0.88 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 1.1 + i * 0.1, duration: 0.35, type: 'spring', stiffness: 280, damping: 18 }}
+                whileHover={{ scale: 1.07, transition: { duration: 0.15 } }}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 5,
+                  padding: '5px 11px', borderRadius: 999,
+                  border: `1px solid ${item.border}`,
+                  background: item.bg,
+                  fontFamily: 'Inter, sans-serif', fontSize: '0.72rem',
+                  fontWeight: 600, color: item.color,
+                  cursor: 'default',
+                }}
+              >
+                <span style={{ fontSize: '0.8rem' }}>{item.icon}</span>
+                {item.text}
+              </motion.span>
             ))}
           </motion.div>
         </div>
