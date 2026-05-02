@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { WaveText } from '@/components/ui/wave-text';
 
@@ -12,6 +12,87 @@ const problems = [
   { emoji: '📅', title: 'Agendar les quita horas',        description: 'El vaivén de mensajes para coordinar una cita consume tiempo valioso que debería dedicarse a cerrar ventas.' },
   { emoji: '🔁', title: 'Preguntan siempre lo mismo',     description: 'Las mismas 10 preguntas todos los días. El equipo las responde manualmente, una por una, sin parar.' },
 ];
+
+function ProblemCard({ p, i, inView }: { p: typeof problems[0]; i: number; inView: boolean }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, scale: 0.88, y: 36, filter: 'blur(8px)' }}
+      animate={inView ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' } : {}}
+      transition={{ duration: 0.52, delay: 0.07 * i, ease: [0.21, 0.47, 0.32, 0.98] }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 18,
+        borderRadius: 16,
+        padding: '22px 24px',
+        border: `1px solid rgba(77,159,255,${hovered ? 0.35 : 0.1})`,
+        background: hovered ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.022)',
+        boxShadow: hovered
+          ? '0 8px 40px rgba(77,159,255,0.1), 0 0 0 1px rgba(77,159,255,0.12)'
+          : '0 0 0 0 transparent',
+        transform: hovered ? 'translateY(-3px) scale(1.015)' : 'translateY(0) scale(1)',
+        transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
+        cursor: 'default',
+      }}
+    >
+      {/* Mouse-following radial light */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          opacity: hovered ? 1 : 0,
+          transition: 'opacity 0.35s ease',
+          background: `radial-gradient(circle 200px at ${mousePos.x}px ${mousePos.y}px, rgba(77,159,255,0.22), rgba(26,128,255,0.06) 50%, transparent 70%)`,
+        }}
+      />
+
+      {/* Emoji */}
+      <span style={{ fontSize: '2.1rem', lineHeight: 1, flexShrink: 0, marginTop: 1, position: 'relative', zIndex: 1 }}>
+        {p.emoji}
+      </span>
+
+      {/* Text */}
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <h3 style={{
+          fontFamily: 'Poppins, sans-serif',
+          fontWeight: 600,
+          fontSize: '1rem',
+          color: hovered ? '#f8f8f2' : 'rgba(248,248,242,0.9)',
+          marginBottom: 6,
+          transition: 'color 0.25s ease',
+        }}>
+          {p.title}
+        </h3>
+        <p style={{
+          fontFamily: 'Inter, sans-serif',
+          fontSize: '0.875rem',
+          lineHeight: 1.6,
+          color: hovered ? 'rgba(248,248,242,0.7)' : 'rgba(248,248,242,0.55)',
+          transition: 'color 0.25s ease',
+        }}>
+          {p.description}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
 
 export function SistemasIAProblems() {
   const ref = useRef<HTMLDivElement>(null);
@@ -47,31 +128,7 @@ export function SistemasIAProblems() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {problems.map((p, i) => (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, scale: 0.88, y: 36, filter: 'blur(8px)' }}
-              animate={inView ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' } : {}}
-              transition={{ duration: 0.52, delay: 0.07 * i, ease: [0.21, 0.47, 0.32, 0.98] }}
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 18,
-                borderRadius: 16,
-                padding: '22px 24px',
-                border: '1px solid rgba(77,159,255,0.1)',
-                background: 'rgba(255,255,255,0.022)',
-              }}
-            >
-              <span style={{ fontSize: '2.1rem', lineHeight: 1, flexShrink: 0, marginTop: 1 }}>{p.emoji}</span>
-              <div>
-                <h3 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '1rem', color: '#f8f8f2', marginBottom: 6 }}>
-                  {p.title}
-                </h3>
-                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.875rem', lineHeight: 1.6, color: 'rgba(248,248,242,0.55)' }}>
-                  {p.description}
-                </p>
-              </div>
-            </motion.div>
+            <ProblemCard key={p.title} p={p} i={i} inView={inView} />
           ))}
         </div>
       </div>
