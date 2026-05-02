@@ -371,9 +371,6 @@ function IndustryPill({ item, blue }: { item: typeof industryPills[0]; blue: boo
 export function IndustriesSectionAnimated() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const d1 = [...pillRow1, ...pillRow1];
-  const d2 = [...pillRow2, ...pillRow2];
-
   return (
     <section ref={ref} className="py-20 relative overflow-hidden" style={{ background: "rgba(77,159,255,0.02)" }}>
       <div className="absolute top-0 left-0 right-0 h-px"
@@ -401,44 +398,69 @@ export function IndustriesSectionAnimated() {
           <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(248,248,242,0.5)", fontSize: "0.95rem", marginTop: 12 }}>
             No importa la industria — si recibes mensajes y necesitas responder, agendar o vender, esto es para tu negocio.
           </p>
+          <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(248,248,242,0.35)", fontSize: "0.78rem", marginTop: 8 }}>
+            Arrastra las industrias 👆
+          </p>
         </motion.div>
       </div>
 
-      {/* Dual marquee */}
+      {/* Gravity physics box */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.7, delay: 0.25 }}
-        style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: 0.25 }}
+        style={{ padding: '0 16px' }}
       >
-        {/* Row 1 — scroll left */}
-        <div style={{
-          overflow: 'hidden',
-          maskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
-        }}>
-          <motion.div
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-            style={{ display: 'flex', gap: 10, width: 'max-content', padding: '4px 0' }}
-          >
-            {d1.map((item, i) => <IndustryPill key={`r1-${i}`} item={item} blue={false} />)}
-          </motion.div>
-        </div>
-
-        {/* Row 2 — scroll right */}
-        <div style={{
-          overflow: 'hidden',
-          maskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
-        }}>
-          <motion.div
-            animate={{ x: ['-50%', '0%'] }}
-            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
-            style={{ display: 'flex', gap: 10, width: 'max-content', padding: '4px 0' }}
-          >
-            {d2.map((item, i) => <IndustryPill key={`r2-${i}`} item={item} blue={true} />)}
-          </motion.div>
+        <div
+          style={{
+            position: "relative",
+            height: 340,
+            borderRadius: 20,
+            border: "1px solid rgba(77,159,255,0.18)",
+            background: "rgba(77,159,255,0.02)",
+            overflow: "hidden",
+            boxShadow: "0 0 60px rgba(77,159,255,0.05), inset 0 0 40px rgba(77,159,255,0.02)",
+          }}
+        >
+          <div style={{ position:"absolute", top:10, left:10, width:16, height:16, borderTop:"1.5px solid rgba(77,159,255,0.4)", borderLeft:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"4px 0 0 0", pointerEvents:"none" }} />
+          <div style={{ position:"absolute", top:10, right:10, width:16, height:16, borderTop:"1.5px solid rgba(77,159,255,0.4)", borderRight:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 4px 0 0", pointerEvents:"none" }} />
+          <div style={{ position:"absolute", bottom:10, left:10, width:16, height:16, borderBottom:"1.5px solid rgba(77,159,255,0.4)", borderLeft:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 0 0 4px", pointerEvents:"none" }} />
+          <div style={{ position:"absolute", bottom:10, right:10, width:16, height:16, borderBottom:"1.5px solid rgba(77,159,255,0.4)", borderRight:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 0 4px 0", pointerEvents:"none" }} />
+          {inView && (
+            <Gravity gravity={{ x: 0, y: 1 }} grabCursor className="w-full h-full">
+              {industryPills.map((pill, i) => (
+                <MatterBody
+                  key={pill.label}
+                  x={gravityPositions[i % gravityPositions.length].x}
+                  y={gravityPositions[i % gravityPositions.length].y}
+                  matterBodyOptions={{ friction: 0.55, restitution: 0.25, density: 0.004 }}
+                >
+                  <div
+                    style={{
+                      padding: "8px 14px",
+                      borderRadius: 999,
+                      border: `1px solid rgba(77,159,255,0.55)`,
+                      background: `rgba(77,159,255,0.1)`,
+                      fontFamily: "Poppins, sans-serif",
+                      fontWeight: 700,
+                      fontSize: "0.72rem",
+                      color: "#f8f8f2",
+                      whiteSpace: "nowrap",
+                      cursor: "grab",
+                      userSelect: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 5,
+                      boxShadow: `0 0 12px rgba(77,159,255,0.14)`,
+                    }}
+                  >
+                    <span>{pill.emoji}</span>
+                    <span>{pill.label}</span>
+                  </div>
+                </MatterBody>
+              ))}
+            </Gravity>
+          )}
         </div>
       </motion.div>
 
@@ -500,19 +522,21 @@ const integrations = [
   { name: "Google Ads",         color: "66,133,244"  },
 ];
 
+const intRow1 = integrations.slice(0, 12);
+const intRow2 = integrations.slice(12);
+
+const gravityPositions = [
+  { x: "10%", y: "1%"  }, { x: "25%", y: "3%"  }, { x: "42%", y: "1%"  }, { x: "58%", y: "4%"  },
+  { x: "74%", y: "2%"  }, { x: "88%", y: "5%"  }, { x: "16%", y: "8%"  }, { x: "33%", y: "10%" },
+  { x: "50%", y: "7%"  }, { x: "66%", y: "11%" }, { x: "80%", y: "9%"  }, { x: "8%",  y: "14%" },
+  { x: "22%", y: "16%" }, { x: "40%", y: "13%" }, { x: "56%", y: "17%" }, { x: "72%", y: "15%" },
+  { x: "86%", y: "18%" }, { x: "14%", y: "22%" }, { x: "30%", y: "20%" }, { x: "48%", y: "23%" },
+  { x: "64%", y: "21%" }, { x: "78%", y: "24%" }, { x: "20%", y: "28%" }, { x: "55%", y: "26%" },
+];
+
 export function IntegrationsStrip() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-
-  // 24 cascade positions across 4 columns, staggered drop heights
-  const positions = [
-    { x: "10%", y: "1%"  }, { x: "25%", y: "3%"  }, { x: "42%", y: "1%"  }, { x: "58%", y: "4%"  },
-    { x: "74%", y: "2%"  }, { x: "88%", y: "5%"  }, { x: "16%", y: "8%"  }, { x: "33%", y: "10%" },
-    { x: "50%", y: "7%"  }, { x: "66%", y: "11%" }, { x: "80%", y: "9%"  }, { x: "8%",  y: "14%" },
-    { x: "22%", y: "16%" }, { x: "40%", y: "13%" }, { x: "56%", y: "17%" }, { x: "72%", y: "15%" },
-    { x: "86%", y: "18%" }, { x: "14%", y: "22%" }, { x: "30%", y: "20%" }, { x: "48%", y: "23%" },
-    { x: "64%", y: "21%" }, { x: "78%", y: "24%" }, { x: "20%", y: "28%" }, { x: "55%", y: "26%" },
-  ];
 
   return (
     <section ref={ref} className="py-16 relative overflow-hidden" style={{ background: "#040406" }}>
@@ -534,64 +558,78 @@ export function IntegrationsStrip() {
             Se conecta con las herramientas que ya usas
           </h2>
           <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(248,248,242,0.35)", fontSize: "0.78rem", marginTop: 8 }}>
-            Arrastra las integraciones 👆
+            +24 integraciones disponibles
           </p>
         </motion.div>
-
-        {/* Tetris box — centered, fixed width, visible border */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          style={{
-            position: "relative",
-            height: 260,
-            borderRadius: 20,
-            border: "1px solid rgba(26,128,255,0.18)",
-            background: "rgba(26,128,255,0.02)",
-            overflow: "hidden",
-            boxShadow: "0 0 60px rgba(26,128,255,0.05), inset 0 0 40px rgba(26,128,255,0.02)",
-          }}
-        >
-          {/* Corner accents */}
-          <div style={{ position:"absolute", top:10, left:10, width:16, height:16, borderTop:"1.5px solid rgba(26,128,255,0.4)", borderLeft:"1.5px solid rgba(26,128,255,0.4)", borderRadius:"4px 0 0 0", pointerEvents:"none" }} />
-          <div style={{ position:"absolute", top:10, right:10, width:16, height:16, borderTop:"1.5px solid rgba(26,128,255,0.4)", borderRight:"1.5px solid rgba(26,128,255,0.4)", borderRadius:"0 4px 0 0", pointerEvents:"none" }} />
-          <div style={{ position:"absolute", bottom:10, left:10, width:16, height:16, borderBottom:"1.5px solid rgba(26,128,255,0.4)", borderLeft:"1.5px solid rgba(26,128,255,0.4)", borderRadius:"0 0 0 4px", pointerEvents:"none" }} />
-          <div style={{ position:"absolute", bottom:10, right:10, width:16, height:16, borderBottom:"1.5px solid rgba(26,128,255,0.4)", borderRight:"1.5px solid rgba(26,128,255,0.4)", borderRadius:"0 0 4px 0", pointerEvents:"none" }} />
-
-          {inView && (
-            <Gravity gravity={{ x: 0, y: 1 }} grabCursor className="w-full h-full">
-              {integrations.map((int, i) => (
-                <MatterBody
-                  key={int.name}
-                  x={positions[i % positions.length].x}
-                  y={positions[i % positions.length].y}
-                  matterBodyOptions={{ friction: 0.55, restitution: 0.25, density: 0.004 }}
-                >
-                  <div
-                    style={{
-                      padding: "9px 18px",
-                      borderRadius: 999,
-                      border: `1px solid rgba(${int.color},0.55)`,
-                      background: `rgba(${int.color},0.1)`,
-                      fontFamily: "Poppins, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "0.78rem",
-                      color: "#f8f8f2",
-                      whiteSpace: "nowrap",
-                      cursor: "grab",
-                      userSelect: "none",
-                      boxShadow: `0 0 14px rgba(${int.color},0.14)`,
-                    }}
-                  >
-                    {int.name}
-                  </div>
-                </MatterBody>
-              ))}
-            </Gravity>
-          )}
-        </motion.div>
       </div>
+
+      {/* Dual marquee — full width */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.7, delay: 0.25 }}
+        style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+      >
+        {/* Row 1 — scroll left */}
+        <div style={{
+          overflow: 'hidden',
+          maskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
+        }}>
+          <motion.div
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+            style={{ display: 'flex', gap: 10, width: 'max-content', padding: '4px 0' }}
+          >
+            {[...intRow1, ...intRow1].map((item, i) => (
+              <div
+                key={`ir1-${i}`}
+                style={{
+                  display: 'inline-flex', alignItems: 'center',
+                  padding: '9px 18px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
+                  border: `1px solid rgba(${item.color},0.4)`,
+                  background: `rgba(${item.color},0.08)`,
+                  fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.8rem',
+                  color: 'rgba(248,248,242,0.7)',
+                  cursor: 'default',
+                }}
+              >
+                {item.name}
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Row 2 — scroll right */}
+        <div style={{
+          overflow: 'hidden',
+          maskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%)',
+        }}>
+          <motion.div
+            animate={{ x: ['-50%', '0%'] }}
+            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+            style={{ display: 'flex', gap: 10, width: 'max-content', padding: '4px 0' }}
+          >
+            {[...intRow2, ...intRow2].map((item, i) => (
+              <div
+                key={`ir2-${i}`}
+                style={{
+                  display: 'inline-flex', alignItems: 'center',
+                  padding: '9px 18px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
+                  border: `1px solid rgba(${item.color},0.4)`,
+                  background: `rgba(${item.color},0.08)`,
+                  fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.8rem',
+                  color: 'rgba(248,248,242,0.7)',
+                  cursor: 'default',
+                }}
+              >
+                {item.name}
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px beam-divider" style={{ animationDelay: "1.5s" }} />
     </section>
