@@ -717,20 +717,30 @@ const vsRows = [
 ];
 
 function VsRow({ row, index, inView }: { row: typeof vsRows[0]; index: number; inView: boolean }) {
+  const rowRef = useRef<HTMLDivElement>(null);
+  const [mouseX, setMouseX] = useState(0);
   const [sweeping, setSweeping] = useState(false);
   const [hovered, setHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!rowRef.current) return;
+    const rect = rowRef.current.getBoundingClientRect();
+    setMouseX(e.clientX - rect.left);
+  };
 
   const handleClick = () => {
     setSweeping(false);
     requestAnimationFrame(() => {
       setSweeping(true);
-      setTimeout(() => setSweeping(false), 750);
+      setTimeout(() => setSweeping(false), 800);
     });
   };
 
   return (
     <motion.div
+      ref={rowRef}
       onClick={handleClick}
+      onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       initial={{ opacity: 0, x: -28, filter: "blur(6px)" }}
@@ -739,57 +749,81 @@ function VsRow({ row, index, inView }: { row: typeof vsRows[0]; index: number; i
       style={{
         position: 'relative', overflow: 'hidden',
         display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
-        borderBottom: index < vsRows.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
-        background: hovered ? 'rgba(26,128,255,0.04)' : 'transparent',
+        borderBottom: index < vsRows.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
         cursor: 'pointer',
-        transition: 'background 0.25s ease',
       }}
     >
-      {/* Light sweep on click */}
+      {/* Mouse-following horizontal glow */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        opacity: hovered ? 1 : 0,
+        transition: 'opacity 0.3s ease',
+        background: `radial-gradient(ellipse 380px 100% at ${mouseX}px 50%, rgba(26,128,255,0.2), rgba(77,159,255,0.06) 55%, transparent 75%)`,
+      }} />
+
+      {/* Click sweep burst */}
       <AnimatePresence>
         {sweeping && (
           <motion.div
             key="sweep"
-            initial={{ left: '-60%', opacity: 0 }}
-            animate={{ left: '150%', opacity: [0, 1, 0] }}
+            initial={{ left: '-65%', opacity: 0 }}
+            animate={{ left: '160%', opacity: [0, 1, 1, 0] }}
             exit={{}}
-            transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
             style={{
-              position: 'absolute', top: 0, bottom: 0, width: '60%',
-              background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.28), rgba(77,159,255,0.14), transparent)',
-              pointerEvents: 'none', zIndex: 2,
+              position: 'absolute', top: 0, bottom: 0, width: '65%',
+              background: 'linear-gradient(90deg, transparent, rgba(77,159,255,0.5), rgba(26,128,255,0.3), transparent)',
+              pointerEvents: 'none', zIndex: 3,
             }}
           />
         )}
       </AnimatePresence>
 
       {/* Feature */}
-      <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
-        <span style={{ fontSize: '1rem', flexShrink: 0 }}>{row.emoji}</span>
+      <div style={{ padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 10, position: 'relative', zIndex: 1 }}>
+        <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>{row.emoji}</span>
         <span style={{
-          fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.82rem',
-          color: hovered ? '#f8f8f2' : 'rgba(248,248,242,0.72)',
+          fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.84rem',
+          color: hovered ? '#f8f8f2' : 'rgba(248,248,242,0.8)',
           transition: 'color 0.22s ease',
         }}>{row.feature}</span>
       </div>
 
       {/* Bot genérico */}
-      <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 8, borderLeft: '1px solid rgba(255,255,255,0.05)' }}>
-        <X style={{ width: 13, height: 13, color: 'rgba(255,80,80,0.55)', flexShrink: 0 }} />
-        <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', color: 'rgba(248,248,242,0.33)', lineHeight: 1.4 }}>{row.simple}</span>
+      <div style={{ padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 8, borderLeft: '1px solid rgba(255,255,255,0.06)', position: 'relative', zIndex: 1 }}>
+        <div style={{
+          width: 20, height: 20, borderRadius: '50%', flexShrink: 0,
+          background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.35)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          boxShadow: hovered ? '0 0 8px rgba(255,60,60,0.2)' : 'none',
+          transition: 'box-shadow 0.25s ease',
+        }}>
+          <X style={{ width: 10, height: 10, color: 'rgba(255,80,80,0.7)' }} />
+        </div>
+        <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', color: 'rgba(248,248,242,0.3)', lineHeight: 1.4 }}>{row.simple}</span>
       </div>
 
       {/* RESUELTO IA */}
       <div style={{
-        padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 8,
-        borderLeft: `1px solid rgba(26,128,255,${hovered ? 0.4 : 0.15})`,
-        background: `rgba(26,128,255,${hovered ? 0.08 : 0.03})`,
+        padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 8,
+        borderLeft: `1px solid rgba(26,128,255,${hovered ? 0.5 : 0.18})`,
+        background: `rgba(26,128,255,${hovered ? 0.1 : 0.04})`,
         transition: 'background 0.25s ease, border-color 0.25s ease',
+        position: 'relative', zIndex: 1,
       }}>
-        <CheckCircle2 style={{ width: 13, height: 13, color: hovered ? '#4D9FFF' : '#1A80FF', flexShrink: 0, transition: 'color 0.22s ease' }} />
+        <div style={{
+          width: 20, height: 20, borderRadius: '50%', flexShrink: 0,
+          background: hovered ? 'rgba(26,128,255,0.3)' : 'rgba(26,128,255,0.15)',
+          border: `1px solid rgba(26,128,255,${hovered ? 0.9 : 0.5})`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          boxShadow: hovered ? '0 0 12px rgba(26,128,255,0.6), 0 0 4px rgba(77,159,255,0.4)' : 'none',
+          transition: 'all 0.25s ease',
+        }}>
+          <CheckCircle2 style={{ width: 11, height: 11, color: hovered ? '#4D9FFF' : '#1A80FF', transition: 'color 0.22s ease' }} />
+        </div>
         <span style={{
           fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', lineHeight: 1.4,
-          color: hovered ? 'rgba(248,248,242,0.95)' : 'rgba(248,248,242,0.68)',
+          color: hovered ? '#f8f8f2' : 'rgba(248,248,242,0.72)',
           transition: 'color 0.25s ease',
         }}>{row.resuelto}</span>
       </div>
@@ -802,49 +836,119 @@ export function VsSimpleBotSectionAnimated() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: 'rgba(26,128,255,0.015)' }}>
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
+    <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(160deg, #060c20 0%, #040406 45%, #08102a 100%)' }}>
+      {/* Top border line */}
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.5), transparent)' }} />
 
-      <div className="max-w-4xl mx-auto">
+      {/* Dot grid overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(77,159,255,0.12) 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+          maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%)',
+        }}
+      />
+
+      {/* Center radial glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 70% 60% at 50% 40%, rgba(26,128,255,0.12) 0%, rgba(8,16,42,0.3) 50%, transparent 80%)',
+        }}
+      />
+
+      {/* Left ambient glow */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          left: '-10%', top: '20%', width: '40%', height: '60%',
+          background: 'radial-gradient(ellipse, rgba(26,128,255,0.08) 0%, transparent 70%)',
+          filter: 'blur(40px)',
+        }}
+      />
+
+      <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
           animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#1A80FF', marginBottom: 12 }}>
-            <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
+          <motion.span
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#4D9FFF', marginBottom: 14 }}
+            animate={{ textShadow: ['0 0 0px #4D9FFF', '0 0 16px rgba(77,159,255,0.7)', '0 0 0px #4D9FFF'] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <span style={{ width: 28, height: 1, background: 'linear-gradient(90deg, transparent, rgba(77,159,255,0.8))', display: 'inline-block' }} />
             El diferencial
-            <span style={{ width: 20, height: 1, background: 'rgba(26,128,255,0.5)', display: 'inline-block' }} />
-          </span>
+            <span style={{ width: 28, height: 1, background: 'linear-gradient(90deg, rgba(77,159,255,0.8), transparent)', display: 'inline-block' }} />
+          </motion.span>
           <h2 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 5vw, 3rem)', color: '#f8f8f2', lineHeight: 1.1 }}>
             No es un chatbot genérico.<br />
-            <WaveText text="Es un sistema comercial." className="text-[#1A80FF]" />
+            <WaveText text="Es un sistema comercial." className="text-[#4D9FFF]" />
           </h2>
-          <p style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.5)', fontSize: '0.9rem', marginTop: 14, maxWidth: 520, margin: '14px auto 0' }}>
+          <p style={{ fontFamily: 'Inter, sans-serif', color: 'rgba(248,248,242,0.5)', fontSize: '0.95rem', marginTop: 16, maxWidth: 520, margin: '16px auto 0' }}>
             Un bot simple responde mensajes. Este sistema califica, agenda y hace seguimiento — sin intervención humana.
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.08 }}
-          style={{ borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.01)' }}
+          transition={{ duration: 0.55, delay: 0.1 }}
+          style={{
+            borderRadius: 24,
+            overflow: 'hidden',
+            border: '1px solid rgba(77,159,255,0.18)',
+            background: 'linear-gradient(180deg, rgba(10,20,50,0.9) 0%, rgba(4,8,24,0.95) 100%)',
+            boxShadow: '0 0 0 1px rgba(26,128,255,0.08), 0 24px 80px rgba(8,16,42,0.8), 0 0 60px rgba(26,128,255,0.06)',
+          }}
         >
-          {/* Header */}
-          <div className="grid grid-cols-3" style={{ background: 'rgba(255,255,255,0.035)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-            <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center' }}>
-              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(248,248,242,0.28)' }}>Función</span>
+          {/* Header row */}
+          <div className="grid grid-cols-3" style={{ borderBottom: '1px solid rgba(77,159,255,0.15)', background: 'rgba(6,14,40,0.8)' }}>
+            {/* "Función" label */}
+            <div style={{ padding: '18px 20px', display: 'flex', alignItems: 'center' }}>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.65rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(248,248,242,0.3)' }}>Función</span>
             </div>
-            <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
-              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: 'rgba(248,248,242,0.32)' }}>Bot genérico</span>
+
+            {/* Bot genérico badge */}
+            <div style={{ padding: '18px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
+              <span style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                padding: '5px 12px', borderRadius: 20,
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.72rem',
+                color: 'rgba(248,248,242,0.38)',
+              }}>
+                <span style={{ fontSize: '0.85rem' }}>🤖</span>
+                Bot genérico
+              </span>
             </div>
-            {/* RESUELTO header — glowing */}
-            <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', borderLeft: '1px solid rgba(26,128,255,0.25)', background: 'rgba(26,128,255,0.07)' }}>
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, transparent, #1A80FF, #4D9FFF, transparent)' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 0%, rgba(26,128,255,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
-              <span style={{ position: 'relative', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: '#4D9FFF' }}>RESUELTO IA</span>
+
+            {/* RESUELTO IA badge — glowing */}
+            <div style={{ padding: '18px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', borderLeft: '1px solid rgba(26,128,255,0.3)', background: 'linear-gradient(135deg, rgba(26,128,255,0.12) 0%, rgba(77,159,255,0.06) 100%)' }}>
+              {/* Top accent line */}
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, transparent, #1A80FF, #4D9FFF, #1A80FF, transparent)' }} />
+              {/* Radial glow behind badge */}
+              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 0%, rgba(77,159,255,0.25) 0%, transparent 70%)', pointerEvents: 'none' }} />
+              <motion.span
+                style={{
+                  position: 'relative',
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  padding: '5px 14px', borderRadius: 20,
+                  background: 'linear-gradient(135deg, rgba(26,128,255,0.3), rgba(77,159,255,0.15))',
+                  border: '1px solid rgba(77,159,255,0.5)',
+                  fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.78rem',
+                  color: '#7bc8ff',
+                }}
+                animate={{ boxShadow: ['0 0 0px rgba(77,159,255,0)', '0 0 18px rgba(77,159,255,0.5)', '0 0 0px rgba(77,159,255,0)'] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <span style={{ fontSize: '0.85rem' }}>⚡</span>
+                RESUELTO IA
+              </motion.span>
             </div>
           </div>
 
@@ -856,14 +960,15 @@ export function VsSimpleBotSectionAnimated() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          style={{ textAlign: 'center', marginTop: 16, fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', color: 'rgba(248,248,242,0.22)' }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+          style={{ textAlign: 'center', marginTop: 18, fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', color: 'rgba(248,248,242,0.2)' }}
         >
           Toca cualquier fila para ver el contraste
         </motion.p>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)' }} />
+      {/* Bottom border line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.3), transparent)' }} />
     </section>
   );
 }
