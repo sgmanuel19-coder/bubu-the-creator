@@ -347,20 +347,6 @@ function FinalCTASection() {
       }}
     >
       <CelestialOrrery />
-      {/* Logo watermark */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ zIndex: 0 }}>
-        <img
-          src="/images/logo-mark.png"
-          alt=""
-          style={{
-            width: 'min(480px, 60vw)',
-            height: 'auto',
-            opacity: 0.05,
-            filter: 'blur(1px) saturate(0)',
-            userSelect: 'none',
-          }}
-        />
-      </div>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

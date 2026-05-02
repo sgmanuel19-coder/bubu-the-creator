@@ -164,24 +164,6 @@ const AetherFlowHero = () => {
         fill="rgba(26,128,255,0.5)"
       />
 
-      {/* Logo watermark */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{ zIndex: 1 }}
-      >
-        <img
-          src="/images/logo-mark.png"
-          alt=""
-          style={{
-            width: 'min(520px, 65vw)',
-            height: 'auto',
-            opacity: 0.04,
-            filter: 'blur(2px) saturate(0)',
-            userSelect: 'none',
-          }}
-        />
-      </div>
-
       {/* Content: left text + right Spline */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-0 pt-28 pb-16 lg:pt-24 lg:pb-0 lg:min-h-screen">
 

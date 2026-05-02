@@ -1092,6 +1092,15 @@ export function ChatDemoSectionAnimated() {
       <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(26,128,255,0.04) 0%, transparent 65%)' }} />
 
+      {/* Logo watermark */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ zIndex: 0 }}>
+        <img
+          src="/images/logo-mark.png"
+          alt=""
+          style={{ width: 'min(460px, 58vw)', height: 'auto', opacity: 0.045, filter: 'blur(1px) saturate(0)', userSelect: 'none' }}
+        />
+      </div>
+
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <motion.div
