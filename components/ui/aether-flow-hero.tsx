@@ -239,72 +239,68 @@ const AetherFlowHero = () => {
             />
           </motion.div>
 
-          {/* Social proof card */}
+          {/* Cupos + trust metrics */}
           <motion.div
             custom={4}
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-10 w-full max-w-lg"
+            className="mt-10 mb-6 w-full max-w-lg"
           >
+            {/* Cupos pill */}
             <motion.div
-              className="rounded-2xl overflow-hidden relative"
-              style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.025)' }}
-              animate={{ boxShadow: ['0 0 0px rgba(26,128,255,0)', '0 0 24px rgba(26,128,255,0.1)', '0 0 0px rgba(26,128,255,0)'] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              className="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full select-none"
+              style={{ background: 'rgba(255,75,35,0.08)', border: '1px solid rgba(255,75,35,0.3)' }}
+              animate={{ boxShadow: ['0 0 0px rgba(255,75,35,0)', '0 0 14px rgba(255,75,35,0.4)', '0 0 0px rgba(255,75,35,0)'] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             >
-              {/* Cupos row */}
-              <div className="flex items-center gap-3 px-4 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,75,35,0.06)' }}>
+              <span className="relative flex h-2 w-2 flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: '#FF4B23' }} />
+                <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: '#FF4B23' }} />
+              </span>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.75rem', color: '#FF7055' }}>
+                Solo 3 cupos disponibles · Mayo 2026
+              </span>
+            </motion.div>
+
+            {/* 4 metrics in a row */}
+            <div className="flex items-stretch gap-0 rounded-xl overflow-hidden"
+              style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
+              {[
+                { value: '5',    unit: 'días',    label: 'para activar', color: '#4D9FFF', glow: '77,159,255', icon: '⚡' },
+                { value: '30',   unit: 'días',    label: 'de garantía',  color: '#22d47a', glow: '34,212,122', icon: '🛡️' },
+                { value: '24/7', unit: '',        label: 'sin parar',    color: '#f59e0b', glow: '245,158,11',  icon: '🔥' },
+                { value: '100%', unit: '',        label: 'con contrato', color: '#c084fc', glow: '192,132,252', icon: '✦' },
+              ].map((item, i) => (
                 <motion.div
-                  className="relative flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center"
-                  style={{ background: 'rgba(255,75,35,0.18)', border: '1px solid rgba(255,75,35,0.4)' }}
-                  animate={{ boxShadow: ['0 0 4px rgba(255,75,35,0.3)', '0 0 16px rgba(255,75,35,0.7)', '0 0 4px rgba(255,75,35,0.3)'] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+                  key={item.label}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.0 + i * 0.08, duration: 0.4, type: 'spring', stiffness: 240, damping: 20 }}
+                  whileHover={{
+                    background: `rgba(${item.glow},0.1)`,
+                    transition: { duration: 0.15 },
+                  }}
+                  className="flex-1 flex flex-col items-center justify-center py-4 px-2 cursor-default relative"
+                  style={{
+                    background: 'rgba(255,255,255,0.02)',
+                    borderRight: i < 3 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                  }}
                 >
-                  <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 800, fontSize: '1rem', color: '#FF5535', lineHeight: 1 }}>3</span>
-                  <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: '#FF4B23' }} />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ background: '#FF4B23' }} />
+                  <span style={{ fontSize: '1.1rem', lineHeight: 1, marginBottom: 4 }}>{item.icon}</span>
+                  <motion.span
+                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 800, fontSize: '1.15rem', color: item.color, lineHeight: 1 }}
+                    animate={{ textShadow: [`0 0 0px ${item.color}`, `0 0 12px ${item.color}80`, `0 0 0px ${item.color}`] }}
+                    transition={{ duration: 2.5 + i * 0.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}
+                  >
+                    {item.value}<span style={{ fontSize: '0.65rem', fontWeight: 600, marginLeft: 1, opacity: 0.8 }}>{item.unit}</span>
+                  </motion.span>
+                  <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.62rem', color: 'rgba(248,248,242,0.38)', marginTop: 3, textAlign: 'center' }}>
+                    {item.label}
                   </span>
                 </motion.div>
-                <div>
-                  <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.8rem', color: '#FF7055', lineHeight: 1.2 }}>
-                    Solo 3 cupos disponibles este mes
-                  </p>
-                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.68rem', color: 'rgba(248,248,242,0.38)', marginTop: 2 }}>
-                    Mayo 2026 · Proyectos activos limitados
-                  </p>
-                </div>
-              </div>
-
-              {/* Trust grid 2x2 */}
-              <div className="grid grid-cols-2">
-                {[
-                  { text: 'Listo en 5 días',       color: '#4D9FFF', bg: 'rgba(77,159,255,0.07)',   icon: '⚡', delay: 1.05 },
-                  { text: 'Garantía 30 días',       color: '#22d47a', bg: 'rgba(34,212,122,0.07)',  icon: '🛡️', delay: 1.12 },
-                  { text: 'Con contrato',            color: '#60a5fa', bg: 'rgba(96,165,250,0.07)',  icon: '📋', delay: 1.19 },
-                  { text: 'Meta Business Partner',  color: '#c084fc', bg: 'rgba(192,132,252,0.07)', icon: '✦',  delay: 1.26 },
-                ].map((item, i) => (
-                  <motion.div
-                    key={item.text}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: item.delay, duration: 0.3, type: 'spring', stiffness: 260, damping: 18 }}
-                    whileHover={{ background: item.bg, transition: { duration: 0.15 } }}
-                    className="flex items-center gap-2 px-4 py-3 cursor-default"
-                    style={{
-                      borderRight: i % 2 === 0 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                      borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                    }}
-                  >
-                    <span style={{ fontSize: '1rem', lineHeight: 1 }}>{item.icon}</span>
-                    <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 600, color: item.color }}>
-                      {item.text}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
 
