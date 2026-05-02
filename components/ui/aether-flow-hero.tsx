@@ -239,82 +239,72 @@ const AetherFlowHero = () => {
             />
           </motion.div>
 
-          {/* Availability indicator */}
+          {/* Social proof card */}
           <motion.div
             custom={4}
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-8"
+            className="mt-10 w-full max-w-lg"
           >
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full cursor-default select-none"
-              style={{
-                background: 'rgba(255, 75, 35, 0.1)',
-                border: '1px solid rgba(255, 75, 35, 0.45)',
-              }}
-              animate={{
-                boxShadow: [
-                  '0 0 6px rgba(255,75,35,0.15)',
-                  '0 0 22px rgba(255,75,35,0.55)',
-                  '0 0 6px rgba(255,75,35,0.15)',
-                ],
-              }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+              className="rounded-2xl overflow-hidden relative"
+              style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.025)' }}
+              animate={{ boxShadow: ['0 0 0px rgba(26,128,255,0)', '0 0 24px rgba(26,128,255,0.1)', '0 0 0px rgba(26,128,255,0)'] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
-                <span
-                  className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-80"
-                  style={{ background: '#FF4B23' }}
-                />
-                <span
-                  className="relative inline-flex rounded-full h-2.5 w-2.5"
-                  style={{ background: '#FF4B23' }}
-                />
-              </span>
-              <span style={{
-                fontFamily: 'Poppins, sans-serif', fontWeight: 700,
-                fontSize: '0.78rem', color: '#FF7055', letterSpacing: '0.01em',
-              }}>
-                Solo 3 cupos disponibles este mes
-              </span>
-            </motion.div>
-          </motion.div>
+              {/* Cupos row */}
+              <div className="flex items-center gap-3 px-4 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,75,35,0.06)' }}>
+                <motion.div
+                  className="relative flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center"
+                  style={{ background: 'rgba(255,75,35,0.18)', border: '1px solid rgba(255,75,35,0.4)' }}
+                  animate={{ boxShadow: ['0 0 4px rgba(255,75,35,0.3)', '0 0 16px rgba(255,75,35,0.7)', '0 0 4px rgba(255,75,35,0.3)'] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 800, fontSize: '1rem', color: '#FF5535', lineHeight: 1 }}>3</span>
+                  <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: '#FF4B23' }} />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ background: '#FF4B23' }} />
+                  </span>
+                </motion.div>
+                <div>
+                  <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.8rem', color: '#FF7055', lineHeight: 1.2 }}>
+                    Solo 3 cupos disponibles este mes
+                  </p>
+                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.68rem', color: 'rgba(248,248,242,0.38)', marginTop: 2 }}>
+                    Mayo 2026 · Proyectos activos limitados
+                  </p>
+                </div>
+              </div>
 
-          {/* Trust strip */}
-          <motion.div
-            custom={5}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mt-4 flex items-center gap-2 flex-wrap"
-          >
-            {[
-              { text: 'Listo en 5 días', color: '#1A80FF', bg: 'rgba(26,128,255,0.1)', border: 'rgba(26,128,255,0.35)', icon: '⚡' },
-              { text: 'Garantía 30 días', color: '#22d47a', bg: 'rgba(34,212,122,0.08)', border: 'rgba(34,212,122,0.3)', icon: '🛡️' },
-              { text: 'Con contrato', color: '#4D9FFF', bg: 'rgba(77,159,255,0.08)', border: 'rgba(77,159,255,0.3)', icon: '📋' },
-              { text: 'Meta Business Partner', color: '#c084fc', bg: 'rgba(192,132,252,0.08)', border: 'rgba(192,132,252,0.3)', icon: '✦' },
-            ].map((item, i) => (
-              <motion.span
-                key={item.text}
-                initial={{ opacity: 0, y: 8, scale: 0.88 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: 1.1 + i * 0.1, duration: 0.35, type: 'spring', stiffness: 280, damping: 18 }}
-                whileHover={{ scale: 1.07, transition: { duration: 0.15 } }}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 5,
-                  padding: '5px 11px', borderRadius: 999,
-                  border: `1px solid ${item.border}`,
-                  background: item.bg,
-                  fontFamily: 'Inter, sans-serif', fontSize: '0.72rem',
-                  fontWeight: 600, color: item.color,
-                  cursor: 'default',
-                }}
-              >
-                <span style={{ fontSize: '0.8rem' }}>{item.icon}</span>
-                {item.text}
-              </motion.span>
-            ))}
+              {/* Trust grid 2x2 */}
+              <div className="grid grid-cols-2">
+                {[
+                  { text: 'Listo en 5 días',       color: '#4D9FFF', bg: 'rgba(77,159,255,0.07)',   icon: '⚡', delay: 1.05 },
+                  { text: 'Garantía 30 días',       color: '#22d47a', bg: 'rgba(34,212,122,0.07)',  icon: '🛡️', delay: 1.12 },
+                  { text: 'Con contrato',            color: '#60a5fa', bg: 'rgba(96,165,250,0.07)',  icon: '📋', delay: 1.19 },
+                  { text: 'Meta Business Partner',  color: '#c084fc', bg: 'rgba(192,132,252,0.07)', icon: '✦',  delay: 1.26 },
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.text}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: item.delay, duration: 0.3, type: 'spring', stiffness: 260, damping: 18 }}
+                    whileHover={{ background: item.bg, transition: { duration: 0.15 } }}
+                    className="flex items-center gap-2 px-4 py-3 cursor-default"
+                    style={{
+                      borderRight: i % 2 === 0 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                      borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                    }}
+                  >
+                    <span style={{ fontSize: '1rem', lineHeight: 1 }}>{item.icon}</span>
+                    <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 600, color: item.color }}>
+                      {item.text}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
         </div>
 
