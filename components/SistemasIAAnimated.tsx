@@ -336,6 +336,22 @@ const industryPills = [
   { emoji: '🚚', label: 'Logística & delivery' },
   { emoji: '🎨', label: 'Agencias creativas' },
   { emoji: '📊', label: 'Empresas con pauta Meta' },
+  { emoji: '🐾', label: 'Veterinarias' },
+  { emoji: '💊', label: 'Farmacias' },
+  { emoji: '🏫', label: 'Colegios privados' },
+  { emoji: '🎵', label: 'Academias de música' },
+  { emoji: '📸', label: 'Fotógrafos & studios' },
+  { emoji: '🎯', label: 'Coaches & mentores' },
+  { emoji: '🧴', label: 'Skincare & cosmética' },
+  { emoji: '💻', label: 'Agencias digitales' },
+  { emoji: '🔒', label: 'Seguros & finanzas' },
+  { emoji: '🏊', label: 'Centros deportivos' },
+  { emoji: '🍕', label: 'Delivery de comida' },
+  { emoji: '🏦', label: 'Microfinancieras' },
+  { emoji: '🧪', label: 'Laboratorios' },
+  { emoji: '🎬', label: 'Productoras de video' },
+  { emoji: '🛒', label: 'Tiendas físicas' },
+  { emoji: '🌍', label: 'ONGs & fundaciones' },
 ];
 
 const pillRow1 = industryPills.slice(0, 12);
@@ -414,7 +430,7 @@ export function IndustriesSectionAnimated() {
         <div
           style={{
             position: "relative",
-            height: 340,
+            height: 420,
             borderRadius: 20,
             border: "1px solid rgba(77,159,255,0.18)",
             background: "rgba(77,159,255,0.02)",
@@ -427,7 +443,7 @@ export function IndustriesSectionAnimated() {
           <div style={{ position:"absolute", bottom:10, left:10, width:16, height:16, borderBottom:"1.5px solid rgba(77,159,255,0.4)", borderLeft:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 0 0 4px", pointerEvents:"none" }} />
           <div style={{ position:"absolute", bottom:10, right:10, width:16, height:16, borderBottom:"1.5px solid rgba(77,159,255,0.4)", borderRight:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 0 4px 0", pointerEvents:"none" }} />
           {inView && (
-            <Gravity gravity={{ x: 0, y: 1 }} grabCursor className="w-full h-full">
+            <Gravity gravity={{ x: 0, y: 1 }} grabCursor addTopWall className="w-full h-full">
               {industryPills.map((pill, i) => (
                 <MatterBody
                   key={pill.label}
@@ -437,24 +453,24 @@ export function IndustriesSectionAnimated() {
                 >
                   <div
                     style={{
-                      padding: "8px 14px",
+                      padding: "10px 18px",
                       borderRadius: 999,
-                      border: `1px solid rgba(77,159,255,0.55)`,
-                      background: `rgba(77,159,255,0.1)`,
+                      border: `1px solid rgba(77,159,255,0.6)`,
+                      background: `rgba(77,159,255,0.12)`,
                       fontFamily: "Poppins, sans-serif",
                       fontWeight: 700,
-                      fontSize: "0.72rem",
+                      fontSize: "0.82rem",
                       color: "#f8f8f2",
                       whiteSpace: "nowrap",
                       cursor: "grab",
                       userSelect: "none",
                       display: "flex",
                       alignItems: "center",
-                      gap: 5,
-                      boxShadow: `0 0 12px rgba(77,159,255,0.14)`,
+                      gap: 6,
+                      boxShadow: `0 0 14px rgba(77,159,255,0.18)`,
                     }}
                   >
-                    <span>{pill.emoji}</span>
+                    <span style={{ fontSize: "1rem" }}>{pill.emoji}</span>
                     <span>{pill.label}</span>
                   </div>
                 </MatterBody>
