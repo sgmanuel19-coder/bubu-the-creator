@@ -336,7 +336,7 @@ export function HowItWorksAnimated({ steps }: { steps: Step[] }) {
               {/* Top accent line */}
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, zIndex: 2, background: "linear-gradient(90deg, transparent, #1A80FF, #4D9FFF, transparent)" }} />
               <img
-                src="/robot-ia.jpg"
+                src="/images/robot-ia.jpg"
                 alt="Super Agente IA para WhatsApp — RESUELTO"
                 style={{ width: "100%", height: "auto", display: "block" }}
               />
