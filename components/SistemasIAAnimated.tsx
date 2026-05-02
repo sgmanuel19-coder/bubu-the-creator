@@ -597,7 +597,13 @@ export function IntegrationsStrip() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="py-16 relative overflow-hidden" style={{ background: "#040406" }}>
+    <section ref={ref} className="py-16 relative overflow-hidden" style={{
+      background: "#040406",
+      backgroundImage: "radial-gradient(rgba(26,128,255,0.07) 1px, transparent 1px)",
+      backgroundSize: "28px 28px",
+    }}>
+      {/* Dark fade over grid at edges */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, #040406 100%)" }} />
       <div className="absolute top-0 left-0 right-0 h-px beam-divider" />
 
       <div className="max-w-2xl mx-auto px-4">
@@ -644,11 +650,13 @@ export function IntegrationsStrip() {
                 key={`ir1-${i}`}
                 style={{
                   display: 'inline-flex', alignItems: 'center',
-                  padding: '9px 18px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
-                  border: `1px solid rgba(${item.color},0.4)`,
-                  background: `rgba(${item.color},0.08)`,
-                  fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.8rem',
-                  color: 'rgba(248,248,242,0.7)',
+                  padding: '10px 20px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
+                  border: `1.5px solid rgba(${item.color},0.85)`,
+                  background: `linear-gradient(135deg, rgba(${item.color},0.22) 0%, rgba(${item.color},0.07) 100%)`,
+                  fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.82rem',
+                  color: `rgb(${item.color})`,
+                  boxShadow: `0 0 18px rgba(${item.color},0.4), 0 0 6px rgba(${item.color},0.2)`,
+                  textShadow: `0 0 10px rgba(${item.color},0.7)`,
                   cursor: 'default',
                 }}
               >
@@ -674,11 +682,13 @@ export function IntegrationsStrip() {
                 key={`ir2-${i}`}
                 style={{
                   display: 'inline-flex', alignItems: 'center',
-                  padding: '9px 18px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
-                  border: `1px solid rgba(${item.color},0.4)`,
-                  background: `rgba(${item.color},0.08)`,
-                  fontFamily: 'Poppins, sans-serif', fontWeight: 600, fontSize: '0.8rem',
-                  color: 'rgba(248,248,242,0.7)',
+                  padding: '10px 20px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
+                  border: `1.5px solid rgba(${item.color},0.85)`,
+                  background: `linear-gradient(135deg, rgba(${item.color},0.22) 0%, rgba(${item.color},0.07) 100%)`,
+                  fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.82rem',
+                  color: `rgb(${item.color})`,
+                  boxShadow: `0 0 18px rgba(${item.color},0.4), 0 0 6px rgba(${item.color},0.2)`,
+                  textShadow: `0 0 10px rgba(${item.color},0.7)`,
                   cursor: 'default',
                 }}
               >
