@@ -227,7 +227,7 @@ const AetherFlowHero = () => {
             className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
           >
             <ShinyBordersButton
-              text="Hablar con el bot →"
+              text="Hablar con el Agente IA →"
               href="https://wa.me/51907462070?text=Hola,%20quiero%20ver%20la%20demo%20del%20agente%20IA"
               target="_blank"
               rel="noopener noreferrer"
@@ -241,7 +241,7 @@ const AetherFlowHero = () => {
 
           {/* Demo note */}
           <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.78rem', color: 'rgba(248,248,242,0.38)', marginTop: 10, letterSpacing: '0.01em' }}>
-            Escríbenos → nuestro agente te responde en vivo. Esa es la demo.
+            Escríbenos → el super agente IA de Resuelto te responde en vivo.
           </p>
 
           {/* Cupos + trust metrics */}

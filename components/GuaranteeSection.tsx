@@ -267,7 +267,7 @@ export function GuaranteeSection() {
               transition: 'box-shadow 0.25s ease, transform 0.2s ease',
             }}
           >
-            Hablar con el bot →
+            Hablar con el Agente IA →
           </a>
         </motion.div>
       </div>
