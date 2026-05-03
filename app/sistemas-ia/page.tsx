@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import FacebookPixel from '@/components/FacebookPixel';
-import { ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import FAQAccordion from '@/components/ui/faq-accordion';
 import {
   HeroClient,
@@ -19,6 +19,7 @@ import {
   ChatDemoSectionAnimated,
 } from '@/components/SistemasIAAnimated';
 import { SistemasIAProblems } from '@/components/SistemasIAProblems';
+import { GuaranteeSection } from '@/components/GuaranteeSection';
 import { CelestialOrrery } from '@/components/ui/celestial-orrery';
 import { DottedSurface } from '@/components/ui/dotted-surface';
 import { SchemaMarkup } from '@/components/SchemaMarkup';
@@ -269,71 +270,7 @@ function FAQSection() {
   );
 }
 
-function GuaranteeSection() {
-  return (
-    <section className="py-28 px-4 relative overflow-hidden" style={{ background: '#040406' }}>
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
-
-      <div className="max-w-3xl mx-auto">
-        <div className="rounded-3xl p-8 md:p-12 text-center relative overflow-hidden" style={{ background: 'rgba(26,128,255,0.04)', border: '1px solid rgba(26,128,255,0.18)' }}>
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(26,128,255,0.1) 0%, transparent 60%)' }} />
-          {/* Logo watermark inside card */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <img
-              src="/images/logo-mark.png"
-              alt=""
-              style={{ width: 'min(320px, 55vw)', height: 'auto', opacity: 0.04, filter: 'blur(1px) saturate(0)', userSelect: 'none' }}
-            />
-          </div>
-          <div className="relative z-10 w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl" style={{ background: 'rgba(26,128,255,0.1)', border: '1px solid rgba(26,128,255,0.3)', boxShadow: '0 0 40px rgba(26,128,255,0.15)' }}>
-            <ShieldCheck style={{ width: 32, height: 32, color: '#1A80FF' }} />
-          </div>
-          <span className="relative z-10 inline-block text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#1A80FF', fontFamily: 'Poppins, sans-serif' }}>
-            Garantía de acompañamiento
-          </span>
-          <h2 className="relative z-10 font-bold mb-4" style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', color: '#f8f8f2', lineHeight: 1.2 }}>
-            Si en los primeros 5 días no aterrizamos tu super agente personalizado — te devolvemos todo.
-          </h2>
-          <p className="relative z-10 mb-8 max-w-xl mx-auto" style={{ fontFamily: 'Inter, sans-serif', fontSize: '1rem', color: 'rgba(248,248,242,0.6)', lineHeight: 1.65 }}>
-            Trabajamos contigo desde el día uno. Si en los primeros 5 días no logramos configurar y activar tu agente personalizado, te devolvemos la inversión completa. Y si el sistema arranca, tienes 30 días de acompañamiento para asegurarte que funciona.
-          </p>
-          <div className="relative z-10 flex flex-col sm:flex-row gap-4 justify-center text-left max-w-xl mx-auto">
-            {[
-              'Reembolso total si en 5 días no activamos tu agente',
-              '30 días de acompañamiento incluidos tras la activación',
-              'Con contrato — todo por escrito, sin letra chica',
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-2 flex-1">
-                <CheckCircle2 style={{ width: 15, height: 15, color: '#1A80FF', flexShrink: 0, marginTop: 2 }} />
-                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: 'rgba(248,248,242,0.65)' }}>{item}</span>
-              </div>
-            ))}
-          </div>
-          <div className="relative z-10 mt-8">
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '14px 28px', borderRadius: 14,
-                background: 'linear-gradient(135deg, #1A80FF, #4D9FFF)',
-                color: '#fff', fontFamily: 'Poppins, sans-serif',
-                fontWeight: 600, fontSize: '0.9rem',
-                boxShadow: '0 0 28px rgba(26,128,255,0.35)',
-                textDecoration: 'none',
-              }}
-            >
-              Agendar Demo en Vivo →
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.15), transparent)' }} />
-    </section>
-  );
-}
+// GuaranteeSection is now a client component — imported below
 
 // ─── Final CTA ────────────────────────────────────────────────────────────────
 
