@@ -513,7 +513,7 @@ export function IndustriesSectionAnimated() {
         transition={{ duration: 0.5, delay: 0.25 }}
         style={{ padding: '0 16px' }}
       >
-          {/* Shared container — same look on mobile and desktop */}
+          {/* Physics gravity box — tall on mobile, wide on desktop */}
           <div
             style={{
               position: "relative",
@@ -522,8 +522,7 @@ export function IndustriesSectionAnimated() {
               background: "linear-gradient(135deg, rgba(26,128,255,0.08) 0%, rgba(4,4,6,0.95) 40%, rgba(77,159,255,0.06) 100%)",
               overflow: "hidden",
               boxShadow: "0 0 80px rgba(26,128,255,0.08), inset 0 0 60px rgba(77,159,255,0.04)",
-              height: isMobile ? "auto" : 420,
-              padding: isMobile ? "24px 0" : 0,
+              height: isMobile ? 520 : 420,
             }}
           >
             {/* Corner accents */}
@@ -532,69 +531,36 @@ export function IndustriesSectionAnimated() {
             <div style={{ position:"absolute", bottom:10, left:10, width:16, height:16, borderBottom:"1.5px solid rgba(77,159,255,0.4)", borderLeft:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 0 0 4px", pointerEvents:"none" }} />
             <div style={{ position:"absolute", bottom:10, right:10, width:16, height:16, borderBottom:"1.5px solid rgba(77,159,255,0.4)", borderRight:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 0 4px 0", pointerEvents:"none" }} />
 
-            {isMobile ? (
-              /* Mobile: two marquee rows — same box, zero physics CPU */
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {[industryPills.slice(0, 20), industryPills.slice(20)].map((row, rowIdx) => (
-                  <div key={rowIdx} style={{
-                    overflow: 'hidden',
-                    maskImage: 'linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)',
-                    WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)',
-                  }}>
-                    <div
-                      className="marquee-track"
-                      style={{
-                        display: 'flex', gap: 10, width: 'max-content', padding: '4px 0',
-                        animationDuration: rowIdx === 0 ? '30s' : '24s',
-                        animationDirection: rowIdx === 1 ? 'reverse' : 'normal',
-                      }}
-                    >
-                      {[...row, ...row].map((pill, i) => (
-                        <div key={`mob-${rowIdx}-${i}`} style={{
-                          display: 'inline-flex', alignItems: 'center', gap: 6,
-                          padding: '10px 18px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
-                          border: '1px solid rgba(77,159,255,0.55)',
-                          background: 'rgba(77,159,255,0.11)',
-                          fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.82rem',
-                          color: '#f8f8f2',
-                          boxShadow: '0 0 12px rgba(77,159,255,0.15)',
-                        }}>
-                          <span style={{ fontSize: '1rem' }}>{pill.emoji}</span>
-                          <span>{pill.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              /* Desktop: Matter.js gravity physics */
-              inView && (
-                <Gravity gravity={{ x: 0, y: 1 }} grabCursor addTopWall className="w-full h-full">
-                  {industryPills.map((pill, i) => (
-                    <MatterBody
-                      key={pill.label}
-                      x={gravityPositions[i % gravityPositions.length].x}
-                      y={gravityPositions[i % gravityPositions.length].y}
-                      matterBodyOptions={{ friction: 0.55, restitution: 0.25, density: 0.004 }}
-                    >
-                      <div style={{
-                        padding: "10px 18px", borderRadius: 999,
-                        border: `1px solid rgba(77,159,255,0.6)`,
-                        background: `rgba(77,159,255,0.12)`,
-                        fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "0.82rem",
-                        color: "#f8f8f2", whiteSpace: "nowrap", cursor: "grab", userSelect: "none",
-                        display: "flex", alignItems: "center", gap: 6,
-                        boxShadow: `0 0 14px rgba(77,159,255,0.18)`,
-                      }}>
-                        <span style={{ fontSize: "1rem" }}>{pill.emoji}</span>
-                        <span>{pill.label}</span>
+            {/* Gravity physics — same on mobile & desktop, pills shrink on mobile */}
+            {inView && (
+              <Gravity gravity={{ x: 0, y: 1 }} grabCursor addTopWall className="w-full h-full">
+                {industryPills.map((pill, i) => (
+                  <MatterBody
+                    key={pill.label}
+                    x={gravityPositions[i % gravityPositions.length].x}
+                    y={gravityPositions[i % gravityPositions.length].y}
+                    matterBodyOptions={{ friction: 0.55, restitution: 0.25, density: 0.004 }}
+                  >
+                    <div style={{
+                      padding: isMobile ? "6px 11px" : "10px 18px",
+                      borderRadius: 999,
+                      border: `1px solid rgba(77,159,255,0.6)`,
+                      background: `rgba(77,159,255,0.12)`,
+                      fontFamily: "Poppins, sans-serif",
+                      fontWeight: 700,
+                      fontSize: isMobile ? "0.65rem" : "0.82rem",
+                      color: "#f8f8f2", whiteSpace: "nowrap", cursor: "grab", userSelect: "none",
+                      display: "flex", alignItems: "center",
+                      gap: isMobile ? 4 : 6,
+                      boxShadow: `0 0 14px rgba(77,159,255,0.18)`,
+                    }}>
+                      <span style={{ fontSize: isMobile ? "0.8rem" : "1rem" }}>{pill.emoji}</span>
+                      <span>{pill.label}</span>
                       </div>
                     </MatterBody>
                   ))}
                 </Gravity>
-              )
-            )}
+              )}
           </div>
       </motion.div>
 
