@@ -227,8 +227,8 @@ const AetherFlowHero = () => {
             className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
           >
             <ShinyBordersButton
-              text="Agendar Demo en Vivo →"
-              href="https://wa.me/51907462070?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20de%20Automatizacion%20IA"
+              text="Hablar con el bot →"
+              href="https://wa.me/51907462070?text=Hola,%20quiero%20ver%20la%20demo%20del%20agente%20IA"
               target="_blank"
               rel="noopener noreferrer"
               shine
@@ -238,6 +238,11 @@ const AetherFlowHero = () => {
               href="#paquetes"
             />
           </motion.div>
+
+          {/* Demo note */}
+          <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.78rem', color: 'rgba(248,248,242,0.38)', marginTop: 10, letterSpacing: '0.01em' }}>
+            Escríbenos → nuestro agente te responde en vivo. Esa es la demo.
+          </p>
 
           {/* Cupos + trust metrics */}
           <motion.div

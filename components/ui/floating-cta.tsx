@@ -73,7 +73,7 @@ export function FloatingCTA() {
           >
             <MessageCircle className="w-5 h-5 text-white flex-shrink-0" />
             <span className="text-white text-sm font-semibold" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              Agendar Demo
+              Probar el bot
             </span>
           </motion.a>
         </>

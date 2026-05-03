@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ShieldCheck, Zap, HeartHandshake, FileText } from 'lucide-react';
 
-const WA_LINK = 'https://wa.me/51907462070?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20de%20Automatizacion%20IA';
+const WA_LINK = 'https://wa.me/51907462070?text=Hola,%20quiero%20ver%20la%20demo%20del%20agente%20IA';
 
 function PhaseCard({
   phase, days, icon: Icon, accentColor, accentRgb, title, description, badge, index, inView,
@@ -267,7 +267,7 @@ export function GuaranteeSection() {
               transition: 'box-shadow 0.25s ease, transform 0.2s ease',
             }}
           >
-            Agendar Demo en Vivo →
+            Hablar con el bot →
           </a>
         </motion.div>
       </div>
