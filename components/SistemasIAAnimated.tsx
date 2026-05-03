@@ -1263,6 +1263,8 @@ export function ChatDemoSectionAnimated() {
       <CyberMatrixBg />
       {/* Dark vignette so matrix doesn't overpower content */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(3,4,8,0.75) 80%, rgba(3,4,8,0.95) 100%)', zIndex: 1 }} />
+      {/* Extra fade on title area — top 45% almost fully dark */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(5,8,26,0.94) 0%, rgba(5,8,26,0.80) 20%, rgba(5,8,26,0.45) 40%, transparent 58%)', zIndex: 1 }} />
       <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(155,185,240,0.55), rgba(26,128,255,0.65), rgba(155,185,240,0.55), transparent)', zIndex: 2 }} />
 
       {/* Logo watermark */}
