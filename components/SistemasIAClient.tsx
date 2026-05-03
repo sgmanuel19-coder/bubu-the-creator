@@ -244,3 +244,78 @@ export function SocialProofBarAnimated() {
 export function AnimatedMetricsStrip() {
   return null;
 }
+
+const WA_FINAL =
+  'https://wa.me/51907462070?text=Hola,%20quiero%20info%20sobre%20el%20Sistema%20Express%20de%20IA';
+
+export function FinalCTAHeading() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+
+  const line1 = 'Sistema instalado en 5 días.'.split(' ');
+  const line2 = 'Leads respondidos solos.'.split(' ');
+
+  return (
+    <div ref={ref}>
+      <h2
+        className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
+        style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif', lineHeight: 1.1 }}
+      >
+        {line1.map((word, i) => (
+          <motion.span
+            key={`l1-${i}`}
+            initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
+            animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+            transition={{ duration: 0.45, delay: i * 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
+            style={{ display: 'inline-block', marginRight: '0.28em' }}
+          >
+            {word}
+          </motion.span>
+        ))}
+        <br />
+        <span style={{ color: '#1A80FF' }}>
+          {line2.map((word, i) => (
+            <motion.span
+              key={`l2-${i}`}
+              initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
+              animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+              transition={{ duration: 0.45, delay: (line1.length + i) * 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
+              style={{ display: 'inline-block', marginRight: '0.28em' }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </span>
+      </h2>
+    </div>
+  );
+}
+
+export function FinalCTAWAButton() {
+  return (
+    <motion.a
+      href={WA_FINAL}
+      target="_blank"
+      rel="noopener noreferrer"
+      animate={{
+        boxShadow: [
+          '0 0 30px rgba(26,128,255,0.3)',
+          '0 0 55px rgba(26,128,255,0.7)',
+          '0 0 30px rgba(26,128,255,0.3)',
+        ],
+      }}
+      transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+      whileHover={{ scale: 1.06 }}
+      whileTap={{ scale: 0.97 }}
+      className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl font-bold text-base"
+      style={{
+        background: '#1A80FF',
+        color: '#040406',
+        fontFamily: 'Poppins, sans-serif',
+        textDecoration: 'none',
+      }}
+    >
+      Quiero mi sistema ahora →
+    </motion.a>
+  );
+}

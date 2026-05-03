@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Stethoscope, Home, Scale, GraduationCap, Heart, TrendingUp, Building2, Wifi, Zap, Briefcase, X, CheckCircle2 } from "lucide-react";
 import { Gravity, MatterBody } from "@/components/ui/gravity";
@@ -24,11 +24,10 @@ function VSLPlayer() {
         style={{ aspectRatio: "16/9", border: "1px solid rgba(26,128,255,0.25)" }}
       >
         <iframe
-          src={`https://www.youtube.com/embed/${VSL_EMBED_ID}?rel=0`}
+          src={`https://www.youtube.com/embed/${VSL_EMBED_ID}?rel=0&autoplay=1`}
           className="absolute inset-0 w-full h-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          loading="lazy"
           title="Conoce el Sistema RESUELTO IA — Automatización WhatsApp para tu negocio"
         />
       </div>
@@ -510,57 +509,48 @@ export function IndustriesSectionAnimated() {
         transition={{ duration: 0.5, delay: 0.25 }}
         style={{ padding: '0 16px' }}
       >
-        <div
-          style={{
-            position: "relative",
-            height: 420,
-            borderRadius: 20,
-            border: "1px solid rgba(77,159,255,0.22)",
-            background: "linear-gradient(135deg, rgba(26,128,255,0.08) 0%, rgba(4,4,6,0.95) 40%, rgba(77,159,255,0.06) 100%)",
-            overflow: "hidden",
-            boxShadow: "0 0 80px rgba(26,128,255,0.08), inset 0 0 60px rgba(77,159,255,0.04)",
-          }}
-        >
-          <div style={{ position:"absolute", top:10, left:10, width:16, height:16, borderTop:"1.5px solid rgba(77,159,255,0.4)", borderLeft:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"4px 0 0 0", pointerEvents:"none" }} />
-          <div style={{ position:"absolute", top:10, right:10, width:16, height:16, borderTop:"1.5px solid rgba(77,159,255,0.4)", borderRight:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 4px 0 0", pointerEvents:"none" }} />
-          <div style={{ position:"absolute", bottom:10, left:10, width:16, height:16, borderBottom:"1.5px solid rgba(77,159,255,0.4)", borderLeft:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 0 0 4px", pointerEvents:"none" }} />
-          <div style={{ position:"absolute", bottom:10, right:10, width:16, height:16, borderBottom:"1.5px solid rgba(77,159,255,0.4)", borderRight:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 0 4px 0", pointerEvents:"none" }} />
-          {inView && (
-            <Gravity gravity={{ x: 0, y: 1 }} grabCursor addTopWall className="w-full h-full">
-              {industryPills.map((pill, i) => (
-                <MatterBody
-                  key={pill.label}
-                  x={gravityPositions[i % gravityPositions.length].x}
-                  y={gravityPositions[i % gravityPositions.length].y}
-                  matterBodyOptions={{ friction: 0.55, restitution: 0.25, density: 0.004 }}
-                >
-                  <div
-                    style={{
-                      padding: "10px 18px",
-                      borderRadius: 999,
+          /* ── Gravity physics — drag the tags ── */
+          <div
+            style={{
+              position: "relative",
+              height: 420,
+              borderRadius: 20,
+              border: "1px solid rgba(77,159,255,0.22)",
+              background: "linear-gradient(135deg, rgba(26,128,255,0.08) 0%, rgba(4,4,6,0.95) 40%, rgba(77,159,255,0.06) 100%)",
+              overflow: "hidden",
+              boxShadow: "0 0 80px rgba(26,128,255,0.08), inset 0 0 60px rgba(77,159,255,0.04)",
+            }}
+          >
+            <div style={{ position:"absolute", top:10, left:10, width:16, height:16, borderTop:"1.5px solid rgba(77,159,255,0.4)", borderLeft:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"4px 0 0 0", pointerEvents:"none" }} />
+            <div style={{ position:"absolute", top:10, right:10, width:16, height:16, borderTop:"1.5px solid rgba(77,159,255,0.4)", borderRight:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 4px 0 0", pointerEvents:"none" }} />
+            <div style={{ position:"absolute", bottom:10, left:10, width:16, height:16, borderBottom:"1.5px solid rgba(77,159,255,0.4)", borderLeft:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 0 0 4px", pointerEvents:"none" }} />
+            <div style={{ position:"absolute", bottom:10, right:10, width:16, height:16, borderBottom:"1.5px solid rgba(77,159,255,0.4)", borderRight:"1.5px solid rgba(77,159,255,0.4)", borderRadius:"0 0 4px 0", pointerEvents:"none" }} />
+            {inView && (
+              <Gravity gravity={{ x: 0, y: 1 }} grabCursor addTopWall className="w-full h-full">
+                {industryPills.map((pill, i) => (
+                  <MatterBody
+                    key={pill.label}
+                    x={gravityPositions[i % gravityPositions.length].x}
+                    y={gravityPositions[i % gravityPositions.length].y}
+                    matterBodyOptions={{ friction: 0.55, restitution: 0.25, density: 0.004 }}
+                  >
+                    <div style={{
+                      padding: "10px 18px", borderRadius: 999,
                       border: `1px solid rgba(77,159,255,0.6)`,
                       background: `rgba(77,159,255,0.12)`,
-                      fontFamily: "Poppins, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "0.82rem",
-                      color: "#f8f8f2",
-                      whiteSpace: "nowrap",
-                      cursor: "grab",
-                      userSelect: "none",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 6,
+                      fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "0.82rem",
+                      color: "#f8f8f2", whiteSpace: "nowrap", cursor: "grab", userSelect: "none",
+                      display: "flex", alignItems: "center", gap: 6,
                       boxShadow: `0 0 14px rgba(77,159,255,0.18)`,
-                    }}
-                  >
-                    <span style={{ fontSize: "1rem" }}>{pill.emoji}</span>
-                    <span>{pill.label}</span>
-                  </div>
-                </MatterBody>
-              ))}
-            </Gravity>
-          )}
-        </div>
+                    }}>
+                      <span style={{ fontSize: "1rem" }}>{pill.emoji}</span>
+                      <span>{pill.label}</span>
+                    </div>
+                  </MatterBody>
+                ))}
+              </Gravity>
+            )}
+          </div>
       </motion.div>
 
       {/* Bottom badge */}
@@ -693,8 +683,16 @@ export function IntegrationsStrip() {
             style={{ display: 'flex', gap: 10, width: 'max-content', padding: '4px 0' }}
           >
             {[...intRow1, ...intRow1].map((item, i) => (
-              <div
+              <motion.div
                 key={`ir1-${i}`}
+                animate={{
+                  boxShadow: [
+                    `0 0 18px rgba(${item.color},0.35), 0 0 6px rgba(${item.color},0.18)`,
+                    `0 0 38px rgba(${item.color},0.8), 0 0 14px rgba(${item.color},0.45)`,
+                    `0 0 18px rgba(${item.color},0.35), 0 0 6px rgba(${item.color},0.18)`,
+                  ],
+                }}
+                transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: (i * 0.41) % 3.5 }}
                 style={{
                   display: 'inline-flex', alignItems: 'center',
                   padding: '10px 20px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
@@ -702,13 +700,12 @@ export function IntegrationsStrip() {
                   background: `linear-gradient(135deg, rgba(${item.color},0.22) 0%, rgba(${item.color},0.07) 100%)`,
                   fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.82rem',
                   color: `rgb(${item.color})`,
-                  boxShadow: `0 0 18px rgba(${item.color},0.4), 0 0 6px rgba(${item.color},0.2)`,
                   textShadow: `0 0 10px rgba(${item.color},0.7)`,
                   cursor: 'default',
                 }}
               >
                 {item.name}
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
@@ -725,8 +722,16 @@ export function IntegrationsStrip() {
             style={{ display: 'flex', gap: 10, width: 'max-content', padding: '4px 0' }}
           >
             {[...intRow2, ...intRow2].map((item, i) => (
-              <div
+              <motion.div
                 key={`ir2-${i}`}
+                animate={{
+                  boxShadow: [
+                    `0 0 18px rgba(${item.color},0.35), 0 0 6px rgba(${item.color},0.18)`,
+                    `0 0 38px rgba(${item.color},0.8), 0 0 14px rgba(${item.color},0.45)`,
+                    `0 0 18px rgba(${item.color},0.35), 0 0 6px rgba(${item.color},0.18)`,
+                  ],
+                }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut', delay: (i * 0.53) % 4 }}
                 style={{
                   display: 'inline-flex', alignItems: 'center',
                   padding: '10px 20px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
@@ -734,13 +739,12 @@ export function IntegrationsStrip() {
                   background: `linear-gradient(135deg, rgba(${item.color},0.22) 0%, rgba(${item.color},0.07) 100%)`,
                   fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '0.82rem',
                   color: `rgb(${item.color})`,
-                  boxShadow: `0 0 18px rgba(${item.color},0.4), 0 0 6px rgba(${item.color},0.2)`,
                   textShadow: `0 0 10px rgba(${item.color},0.7)`,
                   cursor: 'default',
                 }}
               >
                 {item.name}
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
@@ -858,16 +862,21 @@ function VsRow({ row, index, inView }: { row: typeof vsRows[0]; index: number; i
         transition: 'background 0.25s ease, border-color 0.25s ease',
         position: 'relative', zIndex: 1,
       }}>
-        <div style={{
-          width: 20, height: 20, borderRadius: '50%', flexShrink: 0,
-          background: hovered ? 'rgba(26,128,255,0.3)' : 'rgba(26,128,255,0.15)',
-          border: `1px solid rgba(26,128,255,${hovered ? 0.9 : 0.5})`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: hovered ? '0 0 12px rgba(26,128,255,0.6), 0 0 4px rgba(77,159,255,0.4)' : 'none',
-          transition: 'all 0.25s ease',
-        }}>
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={inView ? { scale: 1, opacity: 1 } : {}}
+          transition={{ type: 'spring', stiffness: 480, damping: 18, delay: 0.28 + index * 0.07 }}
+          style={{
+            width: 20, height: 20, borderRadius: '50%', flexShrink: 0,
+            background: hovered ? 'rgba(26,128,255,0.3)' : 'rgba(26,128,255,0.15)',
+            border: `1px solid rgba(26,128,255,${hovered ? 0.9 : 0.5})`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: hovered ? '0 0 12px rgba(26,128,255,0.6), 0 0 4px rgba(77,159,255,0.4)' : 'none',
+            transition: 'background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
+          }}
+        >
           <CheckCircle2 style={{ width: 11, height: 11, color: hovered ? '#4D9FFF' : '#1A80FF', transition: 'color 0.22s ease' }} />
-        </div>
+        </motion.div>
         <span style={{
           fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', lineHeight: 1.4,
           color: hovered ? '#dce8ff' : 'rgba(190,210,245,0.78)',
@@ -958,11 +967,13 @@ export function VsSimpleBotSectionAnimated() {
           </p>
         </motion.div>
 
+        <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', margin: '0 -4px', padding: '0 4px' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, delay: 0.1 }}
           style={{
+            minWidth: 560,
             borderRadius: 24,
             overflow: 'hidden',
             border: '1px solid rgba(160,190,240,0.2)',
@@ -1021,6 +1032,7 @@ export function VsSimpleBotSectionAnimated() {
             <VsRow key={i} row={row} index={i} inView={inView} />
           ))}
         </motion.div>
+        </div>
 
         <motion.p
           initial={{ opacity: 0 }}
@@ -1169,6 +1181,32 @@ const chatScenarios: {
 
 function ChatWindow({ scenario, inView }: { scenario: typeof chatScenarios[0]; inView: boolean }) {
   const { accent, accentHex } = scenario;
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [showTyping, setShowTyping] = useState(false);
+
+  useEffect(() => {
+    setVisibleCount(0);
+    setShowTyping(false);
+    if (!inView) return;
+    let cancelled = false;
+    const msgs = scenario.messages;
+    async function reveal() {
+      for (let i = 0; i < msgs.length; i++) {
+        if (cancelled) return;
+        if (msgs[i].from === 'bot') {
+          setShowTyping(true);
+          await new Promise<void>(r => setTimeout(r, 680));
+          if (cancelled) return;
+          setShowTyping(false);
+        }
+        setVisibleCount(i + 1);
+        await new Promise<void>(r => setTimeout(r, msgs[i].from === 'lead' ? 600 : 280));
+      }
+    }
+    const t = setTimeout(reveal, 250);
+    return () => { cancelled = true; clearTimeout(t); };
+  }, [inView, scenario]);
+
   return (
     <div style={{ borderRadius: 20, overflow: 'hidden', border: `1px solid rgba(${accent},0.22)`, background: '#0d1117', boxShadow: `0 0 80px rgba(${accent},0.07), 0 24px 64px rgba(0,0,0,0.5)` }}>
       {/* Window chrome */}
@@ -1200,12 +1238,12 @@ function ChatWindow({ scenario, inView }: { scenario: typeof chatScenarios[0]; i
 
       {/* Messages */}
       <div style={{ background: '#0b1017', padding: '18px 16px', display: 'flex', flexDirection: 'column', gap: 9, minHeight: 320 }}>
-        {scenario.messages.map((msg, j) => (
+        {scenario.messages.slice(0, visibleCount).map((msg, j) => (
           <motion.div
             key={j}
             initial={{ opacity: 0, y: 10, scale: 0.96 }}
-            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-            transition={{ duration: 0.32, delay: 0.3 + j * 0.09, ease: [0.21, 0.47, 0.32, 0.98] }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.28, ease: [0.21, 0.47, 0.32, 0.98] }}
             style={{ display: 'flex', justifyContent: msg.from === 'lead' ? 'flex-end' : 'flex-start' }}
           >
             <div style={{
@@ -1226,6 +1264,35 @@ function ChatWindow({ scenario, inView }: { scenario: typeof chatScenarios[0]; i
             </div>
           </motion.div>
         ))}
+        <AnimatePresence>
+          {showTyping && (
+            <motion.div
+              key="typing"
+              initial={{ opacity: 0, y: 8, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.85 }}
+              transition={{ duration: 0.2 }}
+              style={{ display: 'flex', justifyContent: 'flex-start' }}
+            >
+              <div style={{
+                background: `rgba(${accent},0.09)`,
+                border: `1px solid rgba(${accent},0.22)`,
+                borderRadius: '4px 16px 16px 16px',
+                padding: '12px 16px',
+                display: 'flex', gap: 5, alignItems: 'center',
+              }}>
+                {[0, 1, 2].map(dot => (
+                  <motion.span
+                    key={dot}
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ duration: 0.55, repeat: Infinity, delay: dot * 0.15, ease: 'easeInOut' }}
+                    style={{ width: 6, height: 6, borderRadius: '50%', background: accentHex, display: 'inline-block' }}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Input bar */}

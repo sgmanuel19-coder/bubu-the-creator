@@ -13,14 +13,37 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  compress: true,
   images: {
     remotePatterns: [],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 86400,
   },
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: securityHeaders,
+      },
+      // Cache estático agresivo: JS/CSS/fonts no cambian entre deploys
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      // Videos y assets media
+      {
+        source: '/videos/(.*)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=2592000' },
+        ],
+      },
+      {
+        source: '/images/(.*)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=2592000' },
+        ],
       },
     ];
   },

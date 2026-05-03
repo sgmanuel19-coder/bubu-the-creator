@@ -9,6 +9,8 @@ import {
   TestimonialsClient,
   AnimatedTextClient,
   SocialProofBarAnimated,
+  FinalCTAHeading,
+  FinalCTAWAButton,
 } from '@/components/SistemasIAClient';
 import {
   VSLSectionIA,
@@ -276,13 +278,18 @@ function FAQSection() {
 
 function FinalCTASection() {
   return (
-    <section
-      className="py-24 px-4 relative overflow-hidden"
-      style={{
-        background:
-          'linear-gradient(135deg, rgba(26,128,255,0.06) 0%, rgba(6,6,8,1) 40%, rgba(77,159,255,0.06) 100%)',
-      }}
-    >
+    <section className="py-24 px-4 relative overflow-hidden">
+      {/* Video background */}
+      <video
+        autoPlay muted loop playsInline preload="none"
+        className="absolute inset-0 w-full h-full object-cover object-center hidden sm:block"
+      >
+        <source src="/videos/final-cta-bg.mp4" type="video/mp4" />
+      </video>
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/70" />
+
       <CelestialOrrery />
       <div
         className="absolute inset-0 pointer-events-none"
@@ -293,14 +300,7 @@ function FinalCTASection() {
       />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <h2
-          className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
-          style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
-        >
-          Sistema instalado en 5 días.
-          <br />
-          <span style={{ color: '#1A80FF' }}>Leads respondidos solos.</span>
-        </h2>
+        <FinalCTAHeading />
 
         <p
           className="text-base md:text-lg mb-6 max-w-xl mx-auto"
@@ -331,20 +331,7 @@ function FinalCTASection() {
         />
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-          <a
-            href={WA_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl font-bold text-base transition-all duration-300 hover:scale-105"
-            style={{
-              background: '#1A80FF',
-              color: '#040406',
-              fontFamily: 'Poppins, sans-serif',
-              boxShadow: '0 0 30px rgba(26,128,255,0.3)',
-            }}
-          >
-            Quiero mi sistema ahora →
-          </a>
+          <FinalCTAWAButton />
         </div>
 
         <p

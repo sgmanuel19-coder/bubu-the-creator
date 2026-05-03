@@ -15,6 +15,8 @@ export function CyberMatrixBg() {
 
   useEffect(() => {
     if (!isClient || !gridRef.current) return;
+    // Skip on touch/mobile devices — saves CPU + DOM nodes
+    if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) return;
     const grid = gridRef.current;
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>@#$%&*';
 

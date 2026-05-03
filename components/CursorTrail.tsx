@@ -10,6 +10,7 @@ export default function CursorTrail() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if ("ontouchstart" in window) return;
+    document.body.style.cursor = 'none';
 
     const dot = dotRef.current;
     const ring = ringRef.current;
@@ -95,13 +96,11 @@ export default function CursorTrail() {
       const isClickable = target.closest("a, button, [role='button']");
       if (isClickable) {
         ring.style.transform = `translate(${mouse.x}px, ${mouse.y}px) translate(-50%,-50%) scale(1.8)`;
-        ring.style.borderColor = "rgba(196,181,253,0.9)";
-        ring.style.boxShadow = "0 0 20px rgba(124,58,237,0.8), 0 0 40px rgba(124,58,237,0.4)";
-        dot.style.transform = `translate(${mouse.x}px, ${mouse.y}px) translate(-50%,-50%) scale(0.3)`;
+        ring.style.borderColor = "rgba(77,159,255,0.9)";
+        ring.style.boxShadow = "0 0 20px rgba(26,128,255,0.8), 0 0 40px rgba(26,128,255,0.4)";
       } else {
-        ring.style.borderColor = "rgba(167,139,250,0.6)";
-        ring.style.boxShadow = "0 0 10px rgba(124,58,237,0.5)";
-        dot.style.transform = `translate(${mouse.x}px, ${mouse.y}px) translate(-50%,-50%) scale(1)`;
+        ring.style.borderColor = "rgba(26,128,255,0.55)";
+        ring.style.boxShadow = "0 0 10px rgba(26,128,255,0.4)";
       }
     };
 
@@ -112,7 +111,7 @@ export default function CursorTrail() {
       glowPos.x += (mouse.x - glowPos.x) * 0.07;
       glowPos.y += (mouse.y - glowPos.y) * 0.07;
 
-      dot.style.transform = `translate(${mouse.x}px, ${mouse.y}px) translate(-50%,-50%)`;
+      dot.style.transform = `translate(${mouse.x}px, ${mouse.y}px) translate(-4px, -4px)`;
       ring.style.transform = `translate(${ringPos.x}px, ${ringPos.y}px) translate(-50%,-50%)`;
       glow.style.transform = `translate(${glowPos.x}px, ${glowPos.y}px) translate(-50%,-50%)`;
 
@@ -129,25 +128,35 @@ export default function CursorTrail() {
       document.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("mouseover", onMouseOver);
       cancelAnimationFrame(rafId);
+      document.body.style.cursor = '';
     };
   }, []);
 
   return (
     <>
-      {/* 1. Sharp center dot — neon green */}
+      {/* 1. Logo cursor — arrow-shaped, replaces system cursor */}
       <div
         ref={dotRef}
         className="fixed top-0 left-0 pointer-events-none z-[9999] opacity-0"
         style={{
-          width: 6,
-          height: 6,
-          borderRadius: "50%",
-          background: "#1A80FF",
-          boxShadow: "0 0 8px rgba(26,128,255,1), 0 0 16px rgba(26,128,255,0.6)",
           willChange: "transform",
-          transition: "opacity 0.2s ease, transform 0.05s ease",
+          transition: "opacity 0.2s ease",
         }}
-      />
+      >
+        <img
+          src="/images/logo-mark.png"
+          alt=""
+          style={{
+            width: 36,
+            height: 36,
+            objectFit: 'contain',
+            filter: 'drop-shadow(0 0 6px rgba(26,128,255,0.8)) drop-shadow(0 0 2px rgba(77,159,255,0.6))',
+            userSelect: 'none',
+            display: 'block',
+          }}
+          draggable={false}
+        />
+      </div>
       {/* 2. Lagging ring — cycles green→purple via CSS */}
       <div
         ref={ringRef}

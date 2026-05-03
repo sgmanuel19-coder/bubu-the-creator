@@ -20,6 +20,16 @@
 * { box-sizing: border-box; padding: 0; margin: 0; }
 html { scroll-behavior: smooth; }
 
+/* ── Fast tap: elimina el delay de 300ms en iOS/Android ── */
+a, button, [role="button"], input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* ── Safe area para la barra flotante en iPhone con notch ── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  body { padding-bottom: env(safe-area-inset-bottom); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -521,7 +531,7 @@ body {
 .planet { border-radius: 50%; flex-shrink: 0; }
 
 /* ─────────────────────────────────────────────
-   MOBILE READABILITY
+   MOBILE READABILITY + PERFORMANCE
 ───────────────────────────────────────────── */
 @media (max-width: 640px) {
   /* Base font size bump for legibility */
@@ -536,6 +546,35 @@ body {
 
   /* Horizontal padding más cómodo */
   .container-base { padding-left: 1.25rem; padding-right: 1.25rem; }
+
+  /* ── Orrery: ocultar órbitas externas en mobile — ahorra compositing ── */
+  .orbit-3, .orbit-4 { display: none; }
+  /* Simplificar las 2 órbitas restantes (menos costosas) */
+  .orbit-1 { animation-duration: 10s; }
+  .orbit-2 { animation-duration: 18s; }
+
+  /* ── Glitch animation: demasiado pesado en mobile ── */
+  .glitch-text::before { animation: none; }
+
+  /* ── Beam divider: reduce animation frequency ── */
+  .beam-divider { animation-duration: 6s; }
+
+  /* ── Card shimmer: deshabilitar hover effects en touch ── */
+  .card-shimmer:hover::after { left: -75%; transition: none; }
+  .card-interactive:hover {
+    border-color: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+    box-shadow: none;
+  }
+
+  /* ── Space under floating CTA bar ── */
+  main { padding-bottom: 64px; }
+
+  /* ── Botones mínimo 44px de alto (accesibilidad táctil) ── */
+  a[href], button { min-height: 44px; }
+
+  /* ── Reducir blur filters (GPU-expensive en mobile) ── */
+  .card-glow { filter: none !important; }
 }
 .orbit-1 .planet { width:8px;height:8px;margin-top:-4px;  background:#1A80FF; box-shadow:0 0 10px rgba(26,128,255,.9),0 0 24px rgba(26,128,255,.4); }
 .orbit-2 .planet { width:6px;height:6px;margin-top:-3px;  background:#4D9FFF; box-shadow:0 0 10px rgba(77,159,255,.9),0 0 24px rgba(77,159,255,.4); }

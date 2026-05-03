@@ -107,7 +107,7 @@ function PhaseCard({
 
       {/* Description */}
       <p style={{
-        fontFamily: 'Inter, sans-serif', fontSize: '0.83rem', lineHeight: 1.6,
+        fontFamily: 'Inter, sans-serif', fontSize: '0.88rem', lineHeight: 1.65,
         color: hovered ? 'rgba(185,205,240,0.72)' : 'rgba(160,185,225,0.5)',
         position: 'relative', zIndex: 1,
         transition: 'color 0.25s ease',
@@ -187,7 +187,7 @@ export function GuaranteeSection() {
         </motion.div>
 
         {/* Two phase cards */}
-        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 20 }}>
+        <div className="flex flex-col sm:flex-row" style={{ gap: 16, marginBottom: 20 }}>
           <PhaseCard
             index={0}
             inView={inView}
