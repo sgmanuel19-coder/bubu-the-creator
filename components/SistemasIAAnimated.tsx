@@ -5,6 +5,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Stethoscope, Home, Scale, GraduationCap, Heart, TrendingUp, Building2, Wifi, Zap, Briefcase, X, CheckCircle2 } from "lucide-react";
 import { Gravity, MatterBody } from "@/components/ui/gravity";
 import { WaveText } from "@/components/ui/wave-text";
+import { CyberMatrixBg } from "@/components/ui/cyber-matrix-bg";
 
 // ── Types ─────────────────────────────────────────────────────
 type Step = { number: string; title: string; description: string };
@@ -1257,17 +1258,12 @@ export function ChatDemoSectionAnimated() {
   };
 
   return (
-    <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(150deg, #07091e 0%, #040406 45%, #080d24 100%)' }}>
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(155,185,240,0.55), rgba(26,128,255,0.65), rgba(155,185,240,0.55), transparent)' }} />
-      {/* Silver dot grid */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: 'radial-gradient(circle, rgba(160,190,235,0.10) 1px, transparent 1px)',
-        backgroundSize: '34px 34px',
-        maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 15%, transparent 100%)',
-        WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 15%, transparent 100%)',
-      }} />
-      {/* Center radial glow */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 65% 55% at 50% 40%, rgba(77,130,220,0.10) 0%, rgba(140,170,230,0.03) 50%, transparent 75%)' }} />
+    <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(150deg, #05081a 0%, #030408 45%, #060b1e 100%)' }}>
+      {/* Cyber matrix character grid — blue, reacts to mouse */}
+      <CyberMatrixBg />
+      {/* Dark vignette so matrix doesn't overpower content */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(3,4,8,0.75) 80%, rgba(3,4,8,0.95) 100%)', zIndex: 1 }} />
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(155,185,240,0.55), rgba(26,128,255,0.65), rgba(155,185,240,0.55), transparent)', zIndex: 2 }} />
 
       {/* Logo watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ zIndex: 0 }}>
@@ -1278,7 +1274,7 @@ export function ChatDemoSectionAnimated() {
         />
       </div>
 
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto" style={{ position: 'relative', zIndex: 2 }}>
         {/* Header */}
         <motion.div
           className="text-center mb-12"
