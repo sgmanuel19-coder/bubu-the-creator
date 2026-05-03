@@ -181,10 +181,10 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
         <Shield className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#1A80FF' }} />
         <div>
           <p className="font-semibold text-sm mb-1" style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}>
-            Garantía de entrega
+            Garantía de acompañamiento
           </p>
           <p className="text-xs leading-relaxed" style={{ color: 'rgba(248,248,242,0.55)', fontFamily: 'Inter, sans-serif' }}>
-            30 días de soporte incluido · Entrega en plazo garantizada · Si no entregamos el sistema activo, devolvemos el 100%
+            30 días de acompañamiento incluido · Si en 5 días no activamos tu agente, reembolso total · Con contrato
           </p>
         </div>
       </div>
