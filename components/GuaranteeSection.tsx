@@ -176,9 +176,9 @@ export function GuaranteeSection() {
           </motion.span>
 
           <h2 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#e8eef8', lineHeight: 1.15 }}>
-            Sin riesgo para ti.<br />
+            Tu agente activo en 5 días.<br />
             <span style={{ background: 'linear-gradient(90deg, #4D9FFF, #a0c8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              El compromiso es nuestro.
+              30 días contigo para que funcione.
             </span>
           </h2>
           <p style={{ marginTop: 14, fontFamily: 'Inter, sans-serif', color: 'rgba(170,190,230,0.55)', fontSize: '0.95rem', maxWidth: 480, margin: '14px auto 0' }}>
@@ -197,8 +197,8 @@ export function GuaranteeSection() {
             accentColor="#f59e0b"
             accentRgb="245,158,11"
             title="Aterrizamos tu super agente personalizado"
-            description="En los primeros 5 días configuramos, entrenamos y activamos tu agente con la voz y procesos de tu negocio. Si no lo logramos, te devolvemos todo — sin preguntas."
-            badge="⚡ Reembolso total si no activamos"
+            description="En los primeros 5 días configuramos, entrenamos y activamos tu agente con la voz y procesos de tu negocio. Nos comprometemos a aterrizarlo contigo — ese es nuestro compromiso."
+            badge="⚡ Activación garantizada en 5 días"
           />
 
           {/* Connector arrow */}

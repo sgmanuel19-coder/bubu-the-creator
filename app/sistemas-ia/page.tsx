@@ -127,7 +127,7 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
   },
   {
     question: '¿Cómo funciona la garantía?',
-    answer: <>Son dos etapas. <G>Días 1–5:</G> si no logramos configurar y activar tu super agente personalizado, te devolvemos la inversión completa — sin preguntas. <G>Días 6–30:</G> una vez activo el sistema, tienes 30 días de acompañamiento directo incluido para ajustes, mejoras y dudas. Todo queda por escrito en el contrato antes de empezar.</>,
+    answer: <>Son dos etapas. <G>Días 1–5:</G> nos comprometemos a configurar y activar tu super agente personalizado contigo. <G>Días 6–30:</G> una vez activo el sistema, tienes 30 días de acompañamiento directo incluido para ajustes, mejoras y dudas. Todo queda por escrito en el contrato antes de empezar.</>,
   },
   {
     question: '¿Por qué no contratar un freelancer que me arme esto más barato?',
