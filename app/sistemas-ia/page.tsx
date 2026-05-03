@@ -126,8 +126,8 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
     answer: <>Un bot genérico responde con opciones fijas ("presiona 1, presiona 2") y el lead se va. El sistema de RESUELTO <G>entiende lenguaje natural</G>, califica por presupuesto e interés, agenda directo al calendario y hace seguimiento automático. La diferencia está en la tabla de comparación más arriba.</>,
   },
   {
-    question: '¿Puedo cancelar el servicio en cualquier momento?',
-    answer: <>Sí. <G>No hay contrato de permanencia</G>. El sistema queda instalado en tu número — no dependes de mí para que funcione. El soporte de 30 días está incluido en el precio y no genera cobros adicionales.</>,
+    question: '¿Cómo funciona la garantía?',
+    answer: <>Son dos etapas. <G>Días 1–5:</G> si no logramos configurar y activar tu super agente personalizado, te devolvemos la inversión completa — sin preguntas. <G>Días 6–30:</G> una vez activo el sistema, tienes 30 días de acompañamiento directo incluido para ajustes, mejoras y dudas. Todo queda por escrito en el contrato antes de empezar.</>,
   },
   {
     question: '¿Por qué no contratar un freelancer que me arme esto más barato?',
@@ -314,7 +314,7 @@ function FinalCTASection() {
           {[
             'Sistema instalado en 5-10 días hábiles',
             '30 días de soporte incluido sin costo adicional',
-            'Sin contratos ni mensualidades forzadas',
+            'Con contrato — condiciones claras antes de empezar',
           ].map((item) => (
             <li key={item} className="flex items-center gap-3">
               <span style={{ color: '#1A80FF', fontSize: '1rem', flexShrink: 0 }}>✓</span>
