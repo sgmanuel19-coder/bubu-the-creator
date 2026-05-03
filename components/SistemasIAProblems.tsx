@@ -99,10 +99,25 @@ export function SistemasIAProblems() {
   const inView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section ref={ref} className="py-20 px-4 relative" style={{ background: '#040406' }}>
+    <section ref={ref} className="py-20 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(145deg, #070b1e 0%, #040406 45%, #080d20 100%)' }}>
       <div
         className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(77,159,255,0.3), transparent)' }}
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(160,190,240,0.4), rgba(26,128,255,0.5), rgba(160,190,240,0.4), transparent)' }}
+      />
+      {/* Dot grid silver */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(circle, rgba(160,190,235,0.10) 1px, transparent 1px)',
+        backgroundSize: '28px 28px',
+        maskImage: 'radial-gradient(ellipse 85% 85% at 50% 50%, black 10%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 85% 85% at 50% 50%, black 10%, transparent 100%)',
+      }} />
+      {/* Radial glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'radial-gradient(ellipse 60% 50% at 50% 30%, rgba(77,130,220,0.10) 0%, transparent 70%)',
+      }} />
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(160,190,240,0.4), rgba(26,128,255,0.5), rgba(160,190,240,0.4), transparent)' }}
       />
 
       <div className="max-w-5xl mx-auto">

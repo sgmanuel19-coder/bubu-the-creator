@@ -148,8 +148,23 @@ export function VSLSectionIA() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="py-16 px-4 relative overflow-hidden" style={{ background: "#040406" }}>
-      <div className="absolute top-0 left-0 right-0 h-px beam-divider" />
+    <section ref={ref} className="py-16 px-4 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #06091c 0%, #040406 40%, #090e22 100%)" }}>
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(160,190,240,0.5), rgba(26,128,255,0.6), rgba(160,190,240,0.5), transparent)' }} />
+      {/* Dot grid silver */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(circle, rgba(160,190,235,0.09) 1px, transparent 1px)',
+        backgroundSize: '32px 32px',
+        maskImage: 'radial-gradient(ellipse 85% 85% at 50% 50%, black 10%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 85% 85% at 50% 50%, black 10%, transparent 100%)',
+      }} />
+      {/* Radial glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'radial-gradient(ellipse 70% 60% at 50% 40%, rgba(77,130,220,0.11) 0%, rgba(140,170,230,0.04) 50%, transparent 75%)',
+      }} />
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(160,190,240,0.5), rgba(26,128,255,0.6), rgba(160,190,240,0.5), transparent)' }}
+      />
       <div className="absolute right-0 top-0 w-96 h-64 rounded-full pointer-events-none"
         style={{ background: "rgba(26,128,255,0.04)", filter: "blur(80px)" }} />
 
@@ -248,10 +263,23 @@ export function HowItWorksAnimated({ steps }: { steps: Step[] }) {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="py-20 px-4 relative overflow-hidden" style={{ background: "rgba(26,128,255,0.015)" }}>
-      <div className="absolute top-0 left-0 right-0 h-px beam-divider" style={{ animationDelay: "0.8s" }} />
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(77,159,255,0.04) 0%, transparent 60%)" }} />
+    <section ref={ref} className="py-20 px-4 relative overflow-hidden" style={{ background: "linear-gradient(155deg, #08101e 0%, #050810 50%, #060b1a 100%)" }}>
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(160,190,240,0.35), rgba(26,128,255,0.45), rgba(160,190,240,0.35), transparent)' }} />
+      {/* Dot grid silver */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(circle, rgba(160,190,235,0.08) 1px, transparent 1px)',
+        backgroundSize: '30px 30px',
+        maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 10%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 10%, transparent 100%)',
+      }} />
+      {/* Radial glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'radial-gradient(ellipse 65% 55% at 50% 45%, rgba(77,130,220,0.09) 0%, transparent 68%)',
+      }} />
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(160,190,240,0.35), rgba(26,128,255,0.45), rgba(160,190,240,0.35), transparent)' }}
+      />
 
       <div className="max-w-6xl mx-auto">
         {/* Header */}
@@ -430,11 +458,23 @@ export function IndustriesSectionAnimated() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="py-20 relative overflow-hidden" style={{ background: "rgba(77,159,255,0.02)" }}>
+    <section ref={ref} className="py-20 relative overflow-hidden" style={{ background: "linear-gradient(170deg, #050a1a 0%, #040406 40%, #07102a 100%)" }}>
       <div className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(77,159,255,0.2), transparent)" }} />
+        style={{ background: "linear-gradient(90deg, transparent, rgba(160,190,240,0.55), rgba(77,159,255,0.65), rgba(160,190,240,0.55), transparent)" }} />
+      {/* Silver dot grid */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(circle, rgba(155,185,235,0.11) 1px, transparent 1px)',
+        backgroundSize: '30px 30px',
+        maskImage: 'radial-gradient(ellipse 90% 90% at 50% 50%, black 5%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 90% 90% at 50% 50%, black 5%, transparent 100%)',
+      }} />
+      {/* Center radial glow */}
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(77,159,255,0.04) 0%, transparent 65%)" }} />
+        style={{ background: "radial-gradient(ellipse 65% 55% at 50% 45%, rgba(60,120,220,0.12) 0%, rgba(130,165,225,0.04) 50%, transparent 75%)" }} />
+      {/* Right ambient silver */}
+      <div className="absolute pointer-events-none" style={{ right: '-5%', top: '10%', width: '35%', height: '60%', background: 'radial-gradient(ellipse, rgba(130,170,225,0.09) 0%, transparent 70%)', filter: 'blur(45px)' }} />
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px pointer-events-none" style={{ background: 'linear-gradient(90deg, transparent, rgba(155,185,235,0.45), rgba(77,159,255,0.55), rgba(155,185,235,0.45), transparent)' }} />
 
       {/* Header */}
       <div className="px-4">
@@ -597,13 +637,19 @@ export function IntegrationsStrip() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="py-16 relative overflow-hidden" style={{
-      background: "#040406",
-      backgroundImage: "radial-gradient(rgba(26,128,255,0.07) 1px, transparent 1px)",
-      backgroundSize: "28px 28px",
-    }}>
-      {/* Dark fade over grid at edges */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, #040406 100%)" }} />
+    <section ref={ref} className="py-16 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #060b1c 0%, #040406 50%, #060b1c 100%)" }}>
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(155,185,235,0.5), rgba(26,128,255,0.6), rgba(155,185,235,0.5), transparent)' }} />
+      {/* Silver dot grid */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(circle, rgba(150,185,240,0.12) 1px, transparent 1px)',
+        backgroundSize: '28px 28px',
+        maskImage: 'radial-gradient(ellipse 85% 80% at 50% 50%, black 10%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 85% 80% at 50% 50%, black 10%, transparent 100%)',
+      }} />
+      {/* Silver shimmer */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, transparent 25%, rgba(175,205,250,0.025) 50%, transparent 75%)' }} />
+      {/* Center glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(4,4,6,0.85) 100%)' }} />
       <div className="absolute top-0 left-0 right-0 h-px beam-divider" />
 
       <div className="max-w-2xl mx-auto px-4">
@@ -1211,9 +1257,17 @@ export function ChatDemoSectionAnimated() {
   };
 
   return (
-    <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: '#040406' }}>
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,128,255,0.2), transparent)' }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(26,128,255,0.04) 0%, transparent 65%)' }} />
+    <section ref={ref} className="py-28 px-4 relative overflow-hidden" style={{ background: 'linear-gradient(150deg, #07091e 0%, #040406 45%, #080d24 100%)' }}>
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(155,185,240,0.55), rgba(26,128,255,0.65), rgba(155,185,240,0.55), transparent)' }} />
+      {/* Silver dot grid */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(circle, rgba(160,190,235,0.10) 1px, transparent 1px)',
+        backgroundSize: '34px 34px',
+        maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 15%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 15%, transparent 100%)',
+      }} />
+      {/* Center radial glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 65% 55% at 50% 40%, rgba(77,130,220,0.10) 0%, rgba(140,170,230,0.03) 50%, transparent 75%)' }} />
 
       {/* Logo watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ zIndex: 0 }}>
