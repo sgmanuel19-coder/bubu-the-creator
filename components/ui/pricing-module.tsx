@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Zap, Shield } from 'lucide-react';
 
@@ -21,40 +21,23 @@ interface PricingModuleProps {
 }
 
 export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
-  const [isMonthly, setIsMonthly] = useState(false);
-
   return (
     <div className="w-full max-w-6xl mx-auto px-4">
-      {/* Toggle */}
+      {/* Structure explainer */}
       <div className="flex justify-center mb-10">
         <div
-          className="inline-flex items-center rounded-xl p-1 border"
-          style={{ background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.1)' }}
+          className="inline-flex items-center gap-6 rounded-xl px-6 py-3 border text-sm"
+          style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.09)', fontFamily: 'Inter, sans-serif' }}
         >
-          <button
-            onClick={() => setIsMonthly(false)}
-            className="px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200"
-            style={{
-              fontFamily: 'Poppins, sans-serif',
-              background: !isMonthly ? 'rgba(26,128,255,0.15)' : 'transparent',
-              color: !isMonthly ? '#1A80FF' : 'rgba(248,248,242,0.5)',
-              border: !isMonthly ? '1px solid rgba(26,128,255,0.3)' : '1px solid transparent',
-            }}
-          >
-            Setup unico
-          </button>
-          <button
-            onClick={() => setIsMonthly(true)}
-            className="px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200"
-            style={{
-              fontFamily: 'Poppins, sans-serif',
-              background: isMonthly ? 'rgba(26,128,255,0.15)' : 'transparent',
-              color: isMonthly ? '#1A80FF' : 'rgba(248,248,242,0.5)',
-              border: isMonthly ? '1px solid rgba(26,128,255,0.3)' : '1px solid transparent',
-            }}
-          >
-            Setup + Mensualidad
-          </button>
+          <div className="flex items-center gap-2">
+            <span style={{ color: '#f8f8f2', fontWeight: 600 }}>Implementación</span>
+            <span style={{ color: 'rgba(248,248,242,0.4)' }}>— pago único al inicio</span>
+          </div>
+          <span style={{ color: 'rgba(248,248,242,0.2)' }}>+</span>
+          <div className="flex items-center gap-2">
+            <span style={{ color: '#4D9FFF', fontWeight: 600 }}>Fee mensual</span>
+            <span style={{ color: 'rgba(248,248,242,0.4)' }}>— desde el mes 2</span>
+          </div>
         </div>
       </div>
 
@@ -67,16 +50,20 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.6, ease: 'easeOut' }}
-            className="relative rounded-2xl p-6 flex flex-col"
+            className="relative rounded-2xl flex flex-col"
             style={{
+              padding: 1,
               background: plan.recommended
-                ? 'rgba(26,128,255,0.05)'
-                : 'rgba(255,255,255,0.03)',
-              border: plan.recommended
-                ? '1px solid rgba(26,128,255,0.35)'
-                : '1px solid rgba(255,255,255,0.08)',
+                ? 'linear-gradient(135deg, #1A80FF 0%, #4D9FFF 40%, #a0c8ff 60%, #1A80FF 100%)'
+                : 'linear-gradient(135deg, rgba(100,140,220,0.4) 0%, rgba(160,190,240,0.15) 40%, rgba(77,120,200,0.35) 100%)',
+              boxShadow: plan.recommended
+                ? '0 0 30px rgba(26,128,255,0.25), 0 0 60px rgba(77,159,255,0.10)'
+                : '0 0 20px rgba(77,120,200,0.08)',
             }}
           >
+          <div className="rounded-2xl p-6 flex flex-col h-full" style={{
+            background: plan.recommended ? 'rgba(6,12,30,0.97)' : 'rgba(6,8,22,0.98)',
+          }}>
             {plan.recommended && (
               <div
                 className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1 rounded-full text-xs font-semibold"
@@ -101,22 +88,29 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
               >
                 {plan.name}
               </p>
-              <div className="flex items-end gap-1 mb-2">
-                <span
-                  className="text-4xl font-bold"
-                  style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}
-                >
-                  {isMonthly && plan.monthlyPrice ? plan.monthlyPrice : plan.price}
+              {/* Implementation price */}
+              <div className="flex items-end gap-1.5 mb-1">
+                <span className="text-4xl font-bold" style={{ color: '#f8f8f2', fontFamily: 'Poppins, sans-serif' }}>
+                  {plan.price}
                 </span>
-                {isMonthly && plan.monthlyPrice && (
-                  <span
-                    className="text-sm mb-1.5"
-                    style={{ color: 'rgba(248,248,242,0.4)', fontFamily: 'Inter, sans-serif' }}
-                  >
-                    /mes
-                  </span>
-                )}
+                <span className="text-xs mb-2" style={{ color: 'rgba(248,248,242,0.38)', fontFamily: 'Inter, sans-serif' }}>
+                  implementación
+                </span>
               </div>
+              {/* Monthly fee */}
+              {plan.monthlyPrice && (
+                <div
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg mb-2"
+                  style={{ background: 'rgba(77,159,255,0.08)', border: '1px solid rgba(77,159,255,0.2)' }}
+                >
+                  <span className="text-sm font-bold" style={{ color: '#4D9FFF', fontFamily: 'Poppins, sans-serif' }}>
+                    + {plan.monthlyPrice}
+                  </span>
+                  <span className="text-xs" style={{ color: 'rgba(77,159,255,0.7)', fontFamily: 'Inter, sans-serif' }}>
+                    /mes desde el mes 2
+                  </span>
+                </div>
+              )}
               <p
                 className="text-sm"
                 style={{ color: 'rgba(248,248,242,0.55)', fontFamily: 'Inter, sans-serif' }}
@@ -156,6 +150,7 @@ export const PricingModule = ({ plans, footnote }: PricingModuleProps) => {
             >
               {plan.ctaText}
             </a>
+          </div>
           </motion.div>
         ))}
       </div>

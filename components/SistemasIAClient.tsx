@@ -176,7 +176,7 @@ export function PricingClient() {
   return (
     <PricingModule
       plans={pricingPlans}
-      footnote="Precio de implementación (one-time) + fee mensual de mantenimiento, monitoreo y optimización. Garantía de devolución 30 días."
+      footnote="El precio de implementación se paga una sola vez al inicio. El fee mensual cubre mantenimiento, monitoreo y optimización continua del sistema."
     />
   );
 }
