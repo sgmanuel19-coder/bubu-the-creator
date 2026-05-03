@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * CyberMatrixBg — character grid that reacts to mouse proximity.
- * Blue palette. Designed as an absolute-positioned background layer
- * inside a `relative overflow-hidden` section.
+ * CyberMatrixBg — optimized blue character grid.
+ * Key perf: RAF-throttled mousemove, cached tile positions (no per-tile getBCR),
+ * DocumentFragment batch insert, larger tiles = fewer nodes.
  */
 export function CyberMatrixBg() {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -16,42 +16,84 @@ export function CyberMatrixBg() {
   useEffect(() => {
     if (!isClient || !gridRef.current) return;
     const grid = gridRef.current;
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>/?@#$%^&*{}[]|';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>@#$%&*';
 
-    const createGrid = () => {
+    type TileData = { cx: number; cy: number; el: HTMLElement };
+    let tiles: TileData[] = [];
+    let rafId: number | null = null;
+    let pendingX = -9999;
+    let pendingY = -9999;
+
+    // Build grid — cache positions relative to container (scroll-stable)
+    const buildGrid = () => {
       grid.innerHTML = '';
-      const size = 52;
-      const columns = Math.max(1, Math.floor(grid.offsetWidth / size));
-      const rows    = Math.max(1, Math.floor(grid.offsetHeight / size));
-      grid.style.setProperty('--columns', String(columns));
+      tiles = [];
+      const TILE = 62;
+      const cols = Math.max(1, Math.floor(grid.offsetWidth  / TILE));
+      const rows = Math.max(1, Math.floor(grid.offsetHeight / TILE));
+      grid.style.setProperty('--columns', String(cols));
       grid.style.setProperty('--rows',    String(rows));
-      for (let i = 0; i < columns * rows; i++) {
-        const tile = document.createElement('div');
-        tile.className = 'cmb-tile';
-        tile.textContent = chars[Math.floor(Math.random() * chars.length)];
-        grid.appendChild(tile);
+
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < cols * rows; i++) {
+        const el = document.createElement('div');
+        el.className = 'cmb-tile';
+        el.textContent = chars[Math.floor(Math.random() * chars.length)];
+        frag.appendChild(el);
+      }
+      grid.appendChild(frag);
+
+      // Cache after layout — positions relative to grid (stable on scroll)
+      requestAnimationFrame(() => {
+        const gr = grid.getBoundingClientRect();
+        tiles = (Array.from(grid.children) as HTMLElement[]).map(el => {
+          const r = el.getBoundingClientRect();
+          return {
+            cx: r.left - gr.left + r.width  / 2,
+            cy: r.top  - gr.top  + r.height / 2,
+            el,
+          };
+        });
+      });
+    };
+
+    // RAF-throttled: one getBCR for the container, zero per tile
+    const processFrame = () => {
+      rafId = null;
+      const gr = grid.getBoundingClientRect();
+      const mx = pendingX - gr.left;
+      const my = pendingY - gr.top;
+      const radius = Math.min(gr.width, gr.height) * 0.38;
+      for (const { cx, cy, el } of tiles) {
+        const d = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
+        const v = Math.max(0, 1 - d / radius);
+        el.style.setProperty('--intensity', v > 0.005 ? v.toFixed(2) : '0');
       }
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const radius = Math.min(window.innerWidth, window.innerHeight) * 0.32;
-      for (const el of grid.children as HTMLCollectionOf<HTMLElement>) {
-        const r = el.getBoundingClientRect();
-        const dx = e.clientX - (r.left + r.width  / 2);
-        const dy = e.clientY - (r.top  + r.height / 2);
-        const intensity = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / radius);
-        el.style.setProperty('--intensity', String(intensity.toFixed(3)));
-      }
+    const onMouseMove = (e: MouseEvent) => {
+      pendingX = e.clientX;
+      pendingY = e.clientY;
+      if (!rafId) rafId = requestAnimationFrame(processFrame);
     };
 
-    const ro = new ResizeObserver(createGrid);
+    const onMouseLeave = () => {
+      pendingX = -9999;
+      pendingY = -9999;
+      for (const { el } of tiles) el.style.setProperty('--intensity', '0');
+    };
+
+    const ro = new ResizeObserver(buildGrid);
     ro.observe(grid);
-    window.addEventListener('mousemove', handleMouseMove);
-    createGrid();
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseleave', onMouseLeave);
+    buildGrid();
 
     return () => {
       ro.disconnect();
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseleave', onMouseLeave);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, [isClient]);
 
@@ -63,8 +105,8 @@ export function CyberMatrixBg() {
           position: 'absolute',
           inset: 0,
           display: 'grid',
-          gridTemplateColumns: 'repeat(var(--columns, 12), 1fr)',
-          gridTemplateRows:    'repeat(var(--rows, 8), 1fr)',
+          gridTemplateColumns: 'repeat(var(--columns, 10), 1fr)',
+          gridTemplateRows:    'repeat(var(--rows, 6), 1fr)',
           overflow: 'hidden',
           pointerEvents: 'none',
           zIndex: 0,
@@ -76,16 +118,16 @@ export function CyberMatrixBg() {
           align-items: center;
           justify-content: center;
           font-family: 'Courier New', Courier, monospace;
-          font-size: 0.88rem;
+          font-size: 0.85rem;
           font-weight: 700;
           user-select: none;
           pointer-events: none;
+          will-change: opacity, transform;
           opacity: calc(0.03 + var(--intensity, 0) * 0.88);
           color: hsl(214, 100%, calc(52% + var(--intensity, 0) * 38%));
-          text-shadow: 0 0 calc(var(--intensity, 0) * 20px) rgba(77, 159, 255, 0.9),
-                       0 0 calc(var(--intensity, 0) * 6px)  rgba(160, 200, 255, 0.6);
-          transform: scale(calc(1 + var(--intensity, 0) * 0.18));
-          transition: opacity 0.22s ease, color 0.22s ease, text-shadow 0.22s ease, transform 0.22s ease;
+          text-shadow: 0 0 calc(var(--intensity, 0) * 18px) rgba(77,159,255,0.85);
+          transform: scale(calc(1 + var(--intensity, 0) * 0.14));
+          transition: opacity 0.18s ease, color 0.18s ease, text-shadow 0.18s ease, transform 0.18s ease;
         }
       `}</style>
     </>
