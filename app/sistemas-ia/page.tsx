@@ -289,19 +289,19 @@ function GuaranteeSection() {
             <ShieldCheck style={{ width: 32, height: 32, color: '#1A80FF' }} />
           </div>
           <span className="relative z-10 inline-block text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#1A80FF', fontFamily: 'Poppins, sans-serif' }}>
-            Garantía total
+            Garantía de acompañamiento
           </span>
           <h2 className="relative z-10 font-bold mb-4" style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', color: '#f8f8f2', lineHeight: 1.2 }}>
-            Si en 30 días el sistema no funciona como acordamos — te devolvemos el 100%.
+            Si en los primeros 5 días no aterrizamos tu super agente personalizado — te devolvemos todo.
           </h2>
           <p className="relative z-10 mb-8 max-w-xl mx-auto" style={{ fontFamily: 'Inter, sans-serif', fontSize: '1rem', color: 'rgba(248,248,242,0.6)', lineHeight: 1.65 }}>
-            Sin preguntas. Sin letra chica. Sin excusas. El sistema se entrega funcionando o devolvemos la inversión completa. El riesgo es nuestro — no tuyo.
+            Trabajamos contigo desde el día uno. Si en los primeros 5 días no logramos configurar y activar tu agente personalizado, te devolvemos la inversión completa. Y si el sistema arranca, tienes 30 días de acompañamiento para asegurarte que funciona.
           </p>
           <div className="relative z-10 flex flex-col sm:flex-row gap-4 justify-center text-left max-w-xl mx-auto">
             {[
-              '30 días para validar el sistema en tu negocio real',
-              'Devolución completa si no cumple el alcance acordado',
-              'Sin contratos de permanencia ni cláusulas ocultas',
+              'Reembolso total si en 5 días no activamos tu agente',
+              '30 días de acompañamiento incluidos tras la activación',
+              'Con contrato — todo por escrito, sin letra chica',
             ].map((item) => (
               <div key={item} className="flex items-start gap-2 flex-1">
                 <CheckCircle2 style={{ width: 15, height: 15, color: '#1A80FF', flexShrink: 0, marginTop: 2 }} />
@@ -324,7 +324,7 @@ function GuaranteeSection() {
                 textDecoration: 'none',
               }}
             >
-              Quiero el sistema con garantía →
+              Agendar Demo en Vivo →
             </a>
           </div>
         </div>
