@@ -34,6 +34,13 @@ function embedSrc(reel: typeof REELS[0]): string {
   return `https://www.instagram.com/reel/${reel.id}/embed/`;
 }
 
+function reelUrl(reel: typeof REELS[0]): string {
+  if (!reel.id) return "";
+  if (reel.platform === "youtube") return `https://www.youtube.com/watch?v=${reel.id}`;
+  if (reel.platform === "tiktok") return `https://www.tiktok.com/video/${reel.id}`;
+  return `https://www.instagram.com/reel/${reel.id}/`;
+}
+
 function ReelCard({ reel, index }: { reel: typeof REELS[0]; index: number }) {
   const isGreen = reel.color === "green";
   const borderColor = isGreen ? "rgba(0,255,135,0.18)" : "rgba(204,68,255,0.18)";
@@ -118,12 +125,25 @@ function ReelCard({ reel, index }: { reel: typeof REELS[0]; index: number }) {
       )}
 
       {/* Bottom label */}
-      <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-8 pointer-events-none z-10"
+      <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-8 z-10"
         style={{ background: "linear-gradient(to top, rgba(6,6,8,0.95) 0%, transparent 100%)" }}>
-        <p className={`font-display font-bold text-[10px] tracking-widest uppercase ${accentClass} mb-0.5`}>
+        <p className={`font-display font-bold text-[10px] tracking-widest uppercase ${accentClass} mb-0.5 pointer-events-none`}>
           {reel.label}
         </p>
-        <p className="font-body text-muted/50 text-[10px] leading-snug truncate">{reel.client}</p>
+        <div className="flex items-center justify-between">
+          <p className="font-body text-muted/50 text-[10px] leading-snug truncate pointer-events-none">{reel.client}</p>
+          {reel.id && (
+            <a
+              href={reelUrl(reel)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-[9px] font-display font-bold tracking-wider uppercase px-2 py-0.5 rounded shrink-0 ml-2 ${accentClass} opacity-70 hover:opacity-100`}
+              style={{ border: `1px solid ${borderColor}`, background: "rgba(0,0,0,0.4)" }}
+            >
+              Ver →
+            </a>
+          )}
+        </div>
       </div>
     </motion.div>
   );
