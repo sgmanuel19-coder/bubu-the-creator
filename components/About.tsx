@@ -39,7 +39,7 @@ export default function About() {
                   {ABOUT_VIDEO ? (
                     <>
                       <video autoPlay muted loop playsInline preload="none"
-                        className="absolute inset-0 w-full h-full object-cover hidden sm:block"
+                        className="absolute inset-0 w-full h-full object-cover"
                         style={{ objectPosition: "center top" }}>
                         <source src={ABOUT_VIDEO} type="video/mp4" />
                       </video>
