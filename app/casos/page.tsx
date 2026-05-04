@@ -1,8 +1,10 @@
 import Navbar from "@/components/Navbar";
-import Proof from "@/components/Proof";
 import GridBackground from "@/components/ui/grid-background";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import PortfolioCarousel from "@/components/PortfolioCarousel";
+import CaseSummaryCards from "@/components/CaseSummaryCards";
+import VideoReel from "@/components/VideoReel";
 import { SITE } from "@/lib/constants";
 import type { Metadata } from "next";
 
@@ -39,7 +41,24 @@ export default function CasosPage() {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-purple/20 to-neon-green/20" />
       </section>
 
-      <Proof />
+      {/* Portfolio carousel */}
+      <section id="portafolio" className="relative section-padding overflow-hidden">
+        <div className="container-base">
+          <div className="mb-10">
+            <span className="inline-flex items-center gap-2 text-xs font-display font-semibold tracking-[0.2em] uppercase text-neon-green mb-4">
+              <span className="w-6 h-px bg-neon-green/50" />
+              Portafolio visual
+            </span>
+            <h2 className="font-display font-bold text-2xl lg:text-4xl tracking-tight">
+              El trabajo habla solo
+            </h2>
+          </div>
+          <PortfolioCarousel />
+        </div>
+      </section>
+
+      <VideoReel />
+      <CaseSummaryCards />
       <FinalCTA />
       <Footer />
     </main>
