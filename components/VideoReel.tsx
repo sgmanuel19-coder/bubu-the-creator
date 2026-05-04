@@ -92,6 +92,7 @@ function ReelCard({ reel, index }: { reel: typeof REELS[0]; index: number }) {
           className="absolute inset-0 w-full h-full"
           frameBorder="0"
           scrolling="no"
+          loading="lazy"
           allowTransparency
           allowFullScreen
         />

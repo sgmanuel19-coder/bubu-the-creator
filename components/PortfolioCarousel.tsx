@@ -2,6 +2,9 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+
+const MotionImage = motion(Image);
 
 const slides = [
   { src: "/images/portfolio/slide-01.png", label: "WIN Internet" },
@@ -30,10 +33,13 @@ export default function PortfolioCarousel() {
       <div className="relative w-full overflow-hidden rounded-2xl border border-white/8"
            style={{ aspectRatio: "16/9", background: "#060709" }}>
         <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.img
+          <MotionImage
             key={current}
             src={slides[current].src}
             alt={slides[current].label}
+            fill
+            sizes="(max-width: 768px) 100vw, 80vw"
+            quality={85}
             custom={direction}
             variants={{
               enter: (d: number) => ({ x: d > 0 ? "100%" : "-100%", opacity: 0 }),
@@ -44,7 +50,7 @@ export default function PortfolioCarousel() {
             animate="center"
             exit="exit"
             transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="object-cover"
             draggable={false}
           />
         </AnimatePresence>
