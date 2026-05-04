@@ -518,7 +518,7 @@ export const SITE = {
     cases: [
       {
         slug: "win-internet",
-        image: "[PENDIENTE — subir captura WIN Internet]",
+        image: "/images/portfolio/PORTAFOLIO WIN INTERNET.png",
         client: "WIN Internet",
         sector: "Telecomunicaciones",
         problem: "Mercado saturado y técnico donde las marcas hablan de velocidad pero los usuarios no entienden la diferencia real. WIN no necesitaba más contenido — necesitaba ordenar su comunicación para educar, diferenciarse y sostener confianza en el tiempo.",
@@ -527,7 +527,7 @@ export const SITE = {
       },
       {
         slug: "wong-cencosud",
-        image: "[PENDIENTE — subir captura Wong]",
+        image: "/images/portfolio/PORTAFOLIO WONG.png",
         client: "Wong · Cencosud",
         sector: "Retail Premium",
         problem: "Múltiples campañas simultáneas: nuevos productos, temporadas y activaciones especiales. El reto no era crear contenido bonito — era producir rápido sin perder el estándar premium de la marca.",
@@ -536,7 +536,7 @@ export const SITE = {
       },
       {
         slug: "redondos",
-        image: "[PENDIENTE — subir captura Redondos]",
+        image: "/images/portfolio/PORTAFOLIO REDONDOS.png",
         client: "Redondos",
         sector: "Alimentos / FMCG",
         problem: "Necesitaban impulsar su línea de productos navideños logrando volumen de comunicación sin perder cercanía ni coherencia de marca durante una temporada altamente competitiva.",
@@ -545,7 +545,7 @@ export const SITE = {
       },
       {
         slug: "livoltek",
-        image: "[PENDIENTE — subir captura Livoltek]",
+        image: "/images/portfolio/PORTAFOLIO MAS MARCAS.png",
         client: "Livoltek",
         sector: "Energía Solar / B2B",
         problem: "Marca líder en soluciones energéticas con portafolio técnico avanzado. El reto no era visibilidad — era alinear su comunicación digital al nivel real de la marca y posicionarse como referente técnico y autoridad en el sector.",
@@ -554,7 +554,7 @@ export const SITE = {
       },
       {
         slug: "manana-me-caso",
-        image: "[PENDIENTE — subir captura Mañana Me Caso]",
+        image: "/images/portfolio/PORTAFOLIO MAÑANA ME CASO.png",
         client: "Mañana Me Caso",
         sector: "Entretenimiento / Cine",
         problem: "En un ecosistema saturado de estrenos, las películas compiten meses antes en redes. El reto era construir interés orgánico y narrativa de marca desde la producción — sin esperar al estreno.",
