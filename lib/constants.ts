@@ -18,7 +18,7 @@ export const SITE = {
     linkedin: "https://www.linkedin.com/in/manuel-severo",
     instagram: "https://www.instagram.com/bubu_thecreator",
     tiktok: "https://www.tiktok.com/@bubuthecreator",
-    whatsapp: "https://wa.me/51907462070",
+    whatsapp: "https://wa.me/51932844074",
     calendly: "https://calendly.com/sgmanuel19/30min",
   },
 
