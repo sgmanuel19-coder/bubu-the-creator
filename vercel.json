@@ -1,12 +1,5 @@
 {
   "framework": "nextjs",
   "buildCommand": "next build",
-  "outputDirectory": ".next",
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/sistemas-ia",
-      "permanent": true
-    }
-  ]
+  "outputDirectory": ".next"
 }
