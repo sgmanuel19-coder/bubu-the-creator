@@ -2,23 +2,20 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 /**
- * Dominio del proyecto Sistema IA (automatizaciones WhatsApp).
- * El proyecto RESUELTO (resueltoagencia.vercel.app) sirve la landing normal en /.
- * Este middleware redirige / → /sistemas-ia SOLO en el dominio de Sistema IA.
+ * Separación de proyectos Vercel por dominio.
+ * - resueltoagencia.vercel.app → sirve RESUELTO landing en /
+ * - Cualquier otro dominio (sistema-ia, etc.) → redirige / a /sistemas-ia
  *
  * ⚠️ NO modificar app/page.tsx para agregar redirect().
  *    La separación entre proyectos se maneja aquí, no en la página.
  */
-const SISTEMA_IA_HOSTNAMES = [
-  "project-yvdip.vercel.app",
-  "sistema-ia",
-];
+const RESUELTO_HOSTS = ["resueltoagencia", "localhost"];
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get("host") ?? "";
-  const isSistemaIA = SISTEMA_IA_HOSTNAMES.some((h) => host.includes(h));
+  const isResuelto = RESUELTO_HOSTS.some((h) => host.includes(h));
 
-  if (isSistemaIA && request.nextUrl.pathname === "/") {
+  if (!isResuelto && request.nextUrl.pathname === "/") {
     return NextResponse.redirect(new URL("/sistemas-ia", request.url));
   }
 
