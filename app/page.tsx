@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -20,6 +21,12 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  // Si el proyecto Vercel tiene SITE_MODE=sistemas-ia, redirige a esa landing.
+  // Configurar solo en el proyecto sistema-ia-sigma en el dashboard de Vercel.
+  if (process.env.SITE_MODE === "sistemas-ia") {
+    redirect("/sistemas-ia");
+  }
+
   return (
     <main className="relative overflow-hidden">
       <Navbar />
