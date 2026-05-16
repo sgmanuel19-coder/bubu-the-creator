@@ -9,7 +9,7 @@ import type { NextRequest } from "next/server";
  * ⚠️ NO modificar app/page.tsx para agregar redirect().
  *    La separación entre proyectos se maneja aquí, no en la página.
  */
-const RESUELTO_HOSTS = ["resueltoagencia", "localhost"];
+const RESUELTO_HOSTS = ["resueltoagencia", "resueltoagency", "localhost"];
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get("host") ?? "";
