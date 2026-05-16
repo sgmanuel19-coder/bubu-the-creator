@@ -24,7 +24,7 @@ function VSLPlayer() {
         style={{ aspectRatio: "16/9", border: "1px solid rgba(26,128,255,0.25)" }}
       >
         <iframe
-          src={`https://www.youtube.com/embed/${VSL_EMBED_ID}?rel=0&autoplay=1`}
+          src={`https://www.youtube.com/embed/${VSL_EMBED_ID}?rel=0`}
           className="absolute inset-0 w-full h-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
