@@ -1,5 +1,11 @@
 {
   "framework": "nextjs",
   "buildCommand": "next build",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "rewrites": [
+    {
+      "source": "/ia/:path*",
+      "destination": "https://sistema-ia-sigma.vercel.app/:path*"
+    }
+  ]
 }
