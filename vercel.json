@@ -4,8 +4,12 @@
   "outputDirectory": ".next",
   "rewrites": [
     {
+      "source": "/ia",
+      "destination": "/sistemas-ia"
+    },
+    {
       "source": "/ia/:path*",
-      "destination": "https://sistema-ia-sigma.vercel.app/:path*"
+      "destination": "/sistemas-ia/:path*"
     }
   ]
 }
