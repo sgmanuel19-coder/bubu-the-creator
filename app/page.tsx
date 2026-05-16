@@ -11,12 +11,27 @@ const FinalCTA  = dynamic(() => import("@/components/FinalCTA"));
 const Footer    = dynamic(() => import("@/components/Footer"));
 
 export const metadata: Metadata = {
-  title: "RESUELTO — Comunicación Comercial para Empresas B2B",
-  description: "Sistemas audiovisuales de autoridad y automatización inteligente para empresas técnicas e industriales en Lima, Perú. Estrategia + Producción + IA.",
+  title: "RESUELTO — Comunicación Comercial para Empresas B2B en Lima, Perú",
+  description: "Agencia de comunicación comercial en Lima. Sistemas audiovisuales de autoridad, landing pages premium y automatización con IA para empresas técnicas e industriales en Perú.",
+  keywords: [
+    "agencia comunicación comercial Lima",
+    "comunicación B2B Peru",
+    "estrategia digital empresas Peru",
+    "producción audiovisual Lima",
+    "landing pages premium Peru",
+    "autoridad digital negocios",
+    "marketing empresas industriales Peru",
+    "sistema audiovisual empresas",
+    "agencia marketing B2B Lima",
+    "contenido estratégico B2B",
+  ],
+  alternates: {
+    canonical: "https://resueltoagency.com",
+  },
   openGraph: {
-    title: "RESUELTO — Comunicación Comercial para Empresas B2B",
-    description: "Sistemas audiovisuales de autoridad y automatización inteligente para empresas técnicas e industriales.",
-    url: "/",
+    title: "RESUELTO — Comunicación Comercial para Empresas B2B en Lima, Perú",
+    description: "Sistemas audiovisuales de autoridad y automatización inteligente para empresas técnicas e industriales en Lima, Perú.",
+    url: "https://resueltoagency.com",
   },
 };
 

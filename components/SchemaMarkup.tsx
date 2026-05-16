@@ -7,7 +7,7 @@ export function SchemaMarkup() {
     "provider": {
       "@type": "Organization",
       "name": "RESUELTO",
-      "url": "https://sistema-ia-sigma.vercel.app",
+      "url": "https://resueltoagency.com",
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "sales",
@@ -107,7 +107,7 @@ export function SchemaMarkup() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "RESUELTO",
-    "url": "https://sistema-ia-sigma.vercel.app",
+    "url": "https://resueltoagency.com",
     "description": "Agencia de automatización comercial con inteligencia artificial para negocios en Perú.",
     "foundingLocation": { "@type": "Place", "name": "Lima, Perú" },
     "areaServed": "PE",

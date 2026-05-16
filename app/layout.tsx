@@ -28,7 +28,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const BASE_URL = "https://project-yvdip.vercel.app";
+const BASE_URL = "https://resueltoagency.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -88,6 +88,28 @@ export const metadata: Metadata = {
   },
 };
 
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "RESUELTO",
+  "url": "https://resueltoagency.com",
+  "logo": "https://resueltoagency.com/images/logo-mark.png",
+  "description": "Agencia de comunicación comercial premium en Lima, Perú. Sistemas audiovisuales de autoridad, presencia digital y automatización con IA para empresas B2B.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lima",
+    "addressCountry": "PE"
+  },
+  "areaServed": "PE",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "telephone": "+51-907-462-070",
+    "availableLanguage": "Spanish"
+  },
+  "sameAs": ["https://wa.me/51907462070"]
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -95,6 +117,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="dark">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
+      </head>
       <body
         className={`${poppins.variable} ${montserrat.variable} ${inter.variable} bg-bg text-cream antialiased`}
       >

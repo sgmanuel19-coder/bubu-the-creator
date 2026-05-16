@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://sistema-ia-sigma.vercel.app/sitemap.xml',
+    sitemap: 'https://resueltoagency.com/sitemap.xml',
   };
 }

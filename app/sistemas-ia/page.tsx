@@ -42,18 +42,18 @@ export const metadata: Metadata = {
     'agenda citas automatica whatsapp',
   ],
   alternates: {
-    canonical: 'https://sistema-ia-sigma.vercel.app/sistemas-ia',
+    canonical: 'https://resueltoagency.com/sistemas-ia',
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true },
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
   openGraph: {
     title: 'Super Agente IA para WhatsApp | Automatización Comercial 24/7',
     description:
       'Sistema de IA que responde WhatsApp, califica leads, agenda citas y hace seguimiento automático 24/7. Listo en 5 días para tu negocio en Perú.',
-    url: 'https://sistema-ia-sigma.vercel.app/sistemas-ia',
+    url: 'https://resueltoagency.com/sistemas-ia',
     siteName: 'RESUELTO',
     locale: 'es_PE',
     type: 'website',
