@@ -110,41 +110,21 @@ export default function Services() {
                 </h3>
                 <p className="relative z-10 font-body text-muted text-sm mb-4 leading-relaxed">{premium.tagline}</p>
 
-                {/* Coming soon badge */}
-                <div className="relative z-10 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neon-purple/25 bg-neon-purple/10 self-start mb-5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-neon-purple/60 animate-pulse" />
-                  <span className="text-xs font-display font-semibold text-neon-purple/70 tracking-wider uppercase">
-                    Próximamente
-                  </span>
-                </div>
-
                 <div className="relative z-10 w-12 h-px bg-gradient-to-r from-neon-purple/60 to-transparent mb-5" />
 
-                {/* Two plans side by side */}
-                <div className="relative z-10 grid grid-cols-2 gap-3 flex-1 mb-6">
-                  {(premium as any).plans?.map((plan: any, i: number) => (
-                    <div key={i} className={`rounded-xl p-4 border ${
-                      i === 0
-                        ? "border-neon-purple/15 bg-neon-purple/[0.04]"
-                        : "border-neon-purple/25 bg-neon-purple/[0.08]"
-                    }`}>
-                      <p className="font-display font-bold text-sm text-cream mb-1">{plan.name}</p>
-                      <p className="font-display font-semibold text-xs text-neon-purple/70 mb-3">{plan.price}</p>
-                      <ul className="space-y-2">
-                        {plan.items.map((item: string, j: number) => (
-                          <li key={j} className="flex items-start gap-2">
-                            <span className="text-neon-purple/50 text-[10px] mt-0.5">✦</span>
-                            <span className="font-body text-xs text-cream/60 leading-snug">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                <ul className="relative z-10 space-y-3 mb-6 flex-1">
+                  {premium.items.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="shrink-0 w-5 h-5 rounded-full bg-neon-purple/12 border border-neon-purple/30 flex items-center justify-center mt-0.5">
+                        <span className="text-neon-purple text-[10px] font-bold">✓</span>
+                      </span>
+                      <span className="font-body text-sm text-cream/80 leading-snug">{item}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
 
-
-                <a href={SITE.links.calendly} className="btn-outline relative z-10 self-start text-sm py-3 px-6">
-                  {premium.cta} →
+                <a href={(premium as any).landingUrl} className="btn-outline relative z-10 self-start text-sm py-3 px-6">
+                  {premium.cta}
                 </a>
               </div>
             </TiltCard>
