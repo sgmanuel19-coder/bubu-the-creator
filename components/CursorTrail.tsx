@@ -26,17 +26,17 @@ export default function CursorTrail() {
     let particleToggle = false;
     const spawnParticle = (x: number, y: number) => {
       const now = Date.now();
-      if (now - lastSpawn < 40) return;
+      if (now - lastSpawn < 90) return;
       lastSpawn = now;
 
       particleToggle = !particleToggle;
       const isGreen = particleToggle;
 
       const p = document.createElement("div");
-      const size = 3 + Math.random() * 5;
+      const size = 3 + Math.random() * 4;
       const angle = Math.random() * Math.PI * 2;
       const dist = 8 + Math.random() * 18;
-      const duration = 400 + Math.random() * 350;
+      const duration = 300 + Math.random() * 200;
       const opacity = 0.5 + Math.random() * 0.5;
 
       const color = isGreen

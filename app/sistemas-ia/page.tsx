@@ -1,31 +1,38 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import Navbar from '@/components/Navbar';
 import FacebookPixel from '@/components/FacebookPixel';
 import { CheckCircle2 } from 'lucide-react';
-import FAQAccordion from '@/components/ui/faq-accordion';
+import { SchemaMarkup } from '@/components/SchemaMarkup';
+
+// Above-fold — load eager
 import {
   HeroClient,
-  PricingClient,
-  TestimonialsClient,
-  AnimatedTextClient,
   SocialProofBarAnimated,
-  FinalCTAHeading,
-  FinalCTAWAButton,
 } from '@/components/SistemasIAClient';
-import {
-  VSLSectionIA,
-  HowItWorksAnimated,
-  IndustriesSectionAnimated,
-  IntegrationsStrip,
-  VsSimpleBotSectionAnimated,
-  ChatDemoSectionAnimated,
-} from '@/components/SistemasIAAnimated';
-import { SistemasIAProblems } from '@/components/SistemasIAProblems';
-import { GuaranteeSection } from '@/components/GuaranteeSection';
-import { CelestialOrrery } from '@/components/ui/celestial-orrery';
-import { DottedSurface } from '@/components/ui/dotted-surface';
-import { SchemaMarkup } from '@/components/SchemaMarkup';
-import { FloatingCTA } from '@/components/ui/floating-cta';
+
+// Below-fold — lazy load to cut initial bundle
+const FAQAccordion       = dynamic(() => import('@/components/ui/faq-accordion'));
+const FloatingCTA        = dynamic(() => import('@/components/ui/floating-cta').then(m => ({ default: m.FloatingCTA })), { ssr: false });
+const SistemasIAProblems = dynamic(() => import('@/components/SistemasIAProblems').then(m => ({ default: m.SistemasIAProblems })), { ssr: false });
+const GuaranteeSection   = dynamic(() => import('@/components/GuaranteeSection').then(m => ({ default: m.GuaranteeSection })), { ssr: false });
+const DottedSurface      = dynamic(() => import('@/components/ui/dotted-surface').then(m => ({ default: m.DottedSurface })), { ssr: false });
+const CelestialOrrery    = dynamic(() => import('@/components/ui/celestial-orrery').then(m => ({ default: m.CelestialOrrery })), { ssr: false });
+
+// SistemasIAClient below-fold pieces
+const PricingClient      = dynamic(() => import('@/components/SistemasIAClient').then(m => ({ default: m.PricingClient })), { ssr: false });
+const TestimonialsClient = dynamic(() => import('@/components/SistemasIAClient').then(m => ({ default: m.TestimonialsClient })), { ssr: false });
+const AnimatedTextClient = dynamic(() => import('@/components/SistemasIAClient').then(m => ({ default: m.AnimatedTextClient })), { ssr: false });
+const FinalCTAHeading    = dynamic(() => import('@/components/SistemasIAClient').then(m => ({ default: m.FinalCTAHeading })), { ssr: false });
+const FinalCTAWAButton   = dynamic(() => import('@/components/SistemasIAClient').then(m => ({ default: m.FinalCTAWAButton })), { ssr: false });
+
+// Heavy animated sections — all lazy
+const VSLSectionIA              = dynamic(() => import('@/components/SistemasIAAnimated').then(m => ({ default: m.VSLSectionIA })), { ssr: false });
+const HowItWorksAnimated        = dynamic(() => import('@/components/SistemasIAAnimated').then(m => ({ default: m.HowItWorksAnimated })), { ssr: false });
+const IndustriesSectionAnimated = dynamic(() => import('@/components/SistemasIAAnimated').then(m => ({ default: m.IndustriesSectionAnimated })), { ssr: false });
+const IntegrationsStrip         = dynamic(() => import('@/components/SistemasIAAnimated').then(m => ({ default: m.IntegrationsStrip })), { ssr: false });
+const VsSimpleBotSectionAnimated = dynamic(() => import('@/components/SistemasIAAnimated').then(m => ({ default: m.VsSimpleBotSectionAnimated })), { ssr: false });
+const ChatDemoSectionAnimated   = dynamic(() => import('@/components/SistemasIAAnimated').then(m => ({ default: m.ChatDemoSectionAnimated })), { ssr: false });
 
 export const metadata: Metadata = {
   title: 'Super Agente IA para WhatsApp | Automatización Comercial 24/7 — RESUELTO',

@@ -23,6 +23,19 @@ const nextConfig: NextConfig = {
     remotePatterns: [],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 86400,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
+  experimental: {
+    // Tree-shake heavy packages — reduce bundle by ~30-40%
+    optimizePackageImports: [
+      'framer-motion',
+      'lucide-react',
+      'three',
+      '@react-three/fiber',
+      '@react-three/drei',
+      'lodash',
+    ],
   },
   async headers() {
     return [
