@@ -1,20 +1,14 @@
 import type { NextConfig } from "next";
 
+// Conservative CSP: keeps the safe, non-breaking hardening (object-src,
+// base-uri, form-action, frame-ancestors) without resource allowlists that
+// could block Three.js/Spline/video. upgrade-insecure-requests stays.
 const csp = [
-  "default-src 'self'",
-  // 'unsafe-eval' required by Three.js / Spline / matter-js (shader & physics codegen)
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://connect.facebook.net",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "img-src 'self' data: blob: https://www.facebook.com https://*.fbcdn.net https://*.spline.design",
-  "font-src 'self' https://fonts.gstatic.com data:",
-  "connect-src 'self' https://connect.facebook.net https://www.facebook.com https://vitals.vercel-insights.com https://*.spline.design",
-  "media-src 'self' blob: https://*.spline.design",
   "frame-src https://www.instagram.com https://www.youtube.com https://www.tiktok.com",
   "frame-ancestors 'self'",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
-  "worker-src 'self' blob:",
   "upgrade-insecure-requests",
 ].join('; ');
 
@@ -23,15 +17,8 @@ const permissionsPolicy = [
   'microphone=()',
   'geolocation=()',
   'payment=()',
-  'accelerometer=()',
-  'gyroscope=()',
-  'magnetometer=()',
-  'autoplay=()',
-  'display-capture=()',
-  'screen-wake-lock=()',
   'usb=()',
   'serial=()',
-  'ambient-light-sensor=()',
 ].join(', ');
 
 const securityHeaders = [
