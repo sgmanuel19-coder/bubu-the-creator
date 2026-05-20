@@ -525,6 +525,7 @@ export const SITE = {
         problem: "Mercado saturado y técnico donde las marcas hablan de velocidad pero los usuarios no entienden la diferencia real. WIN no necesitaba más contenido — necesitaba ordenar su comunicación para educar, diferenciarse y sostener confianza en el tiempo.",
         solution: "+3 años de gestión integral de comunicación digital. Pilares como Winnerpedia, Q&A, trends adaptados a marca, campañas comerciales y cobertura de hitos con producción continua y narrativa consistente.",
         result: "+2.5M vistas orgánicas en TikTok por año · +99 piezas publicadas con consistencia editorial · WIN posicionada como autoridad digital en telecomunicaciones.",
+        iaRole: "Planificación mensual asistida por IA: generación de ángulos editoriales, formatos y calendarios con Cerebro Creativo IA entrenado en la marca.",
       },
       {
         slug: "wong-cencosud",
@@ -552,6 +553,7 @@ export const SITE = {
         problem: "Marca líder en soluciones energéticas con portafolio técnico avanzado. El reto no era visibilidad — era alinear su comunicación digital al nivel real de la marca y posicionarse como referente técnico y autoridad en el sector.",
         solution: "Video caso de su participación junto a BCP en ExpoSolar 2025, cobertura del evento y formato fake podcast. IA generativa para visualizar conceptos técnicos. Contenido diseñado para circular entre gerentes, directivos y áreas comerciales.",
         result: "Material reutilizable en presentaciones, ferias y procesos de venta · Base para apertura de nuevos mercados · Mejora sustancial en la percepción de marca en digital.",
+        iaRole: "IA generativa para visualizar conceptos técnicos del sector energético y acelerar la producción de piezas B2B para ferias y ciclos de venta.",
       },
       {
         slug: "manana-me-caso",

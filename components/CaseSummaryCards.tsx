@@ -359,6 +359,20 @@ function CaseCard({ caso, index }: { caso: typeof SITE.proof.cases[0]; index: nu
           ))}
         </div>
 
+        {/* IA Role */}
+        {caso.iaRole && (
+          <div className="flex items-start gap-2 mb-4 p-2.5 rounded-lg"
+            style={{ background: `rgba(${accentRgb},0.05)`, border: `1px solid rgba(${accentRgb},0.12)` }}>
+            <span className="text-sm shrink-0">🤖</span>
+            <div>
+              <span className={`text-[9px] font-display font-bold tracking-widest uppercase ${accentClass} block mb-0.5`}>
+                IA en este caso
+              </span>
+              <p className="font-body text-muted text-[11px] leading-snug">{caso.iaRole}</p>
+            </div>
+          </div>
+        )}
+
         {/* Divider */}
         <div className="h-px mb-4" style={{ background: `rgba(${accentRgb},0.1)` }} />
 

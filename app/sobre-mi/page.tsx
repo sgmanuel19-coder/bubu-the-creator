@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import About from "@/components/About";
+import FutureVision from "@/components/FutureVision";
 import GridBackground from "@/components/ui/grid-background";
 import BehindTheScenes from "@/components/BehindTheScenes";
 import FinalCTA from "@/components/FinalCTA";
@@ -41,6 +42,7 @@ export default function SobreMiPage() {
       </section>
 
       <About />
+      <FutureVision />
       <BehindTheScenes />
       <FinalCTA />
       <Footer />

@@ -4,11 +4,12 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 
-const Problem   = dynamic(() => import("@/components/Problem"));
-const Authority = dynamic(() => import("@/components/Authority"));
-const FAQ       = dynamic(() => import("@/components/FAQ"));
-const FinalCTA  = dynamic(() => import("@/components/FinalCTA"));
-const Footer    = dynamic(() => import("@/components/Footer"));
+const Problem    = dynamic(() => import("@/components/Problem"));
+const IAfrentes  = dynamic(() => import("@/components/IAfrentes"));
+const Authority  = dynamic(() => import("@/components/Authority"));
+const FAQ        = dynamic(() => import("@/components/FAQ"));
+const FinalCTA   = dynamic(() => import("@/components/FinalCTA"));
+const Footer     = dynamic(() => import("@/components/Footer"));
 
 export const metadata: Metadata = {
   title: "RESUELTO — Comunicación Comercial para Empresas B2B en Lima, Perú",
@@ -47,6 +48,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Problem />
+      <IAfrentes />
       <Authority />
       <FAQ />
       <FinalCTA />
