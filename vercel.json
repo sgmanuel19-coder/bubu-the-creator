@@ -11,5 +11,19 @@
       "source": "/ia/:path*",
       "destination": "/sistemas-ia/:path*"
     }
+  ],
+  "headers": [
+    {
+      "source": "/videos/(.*)",
+      "headers": [
+        { "key": "Cross-Origin-Resource-Policy", "value": "same-site" }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        { "key": "Cross-Origin-Resource-Policy", "value": "same-site" }
+      ]
+    }
   ]
 }
