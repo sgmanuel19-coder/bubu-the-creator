@@ -111,7 +111,6 @@ export function SchemaMarkup() {
     "description": "Agencia de automatización comercial con inteligencia artificial para negocios en Perú.",
     "foundingLocation": { "@type": "Place", "name": "Lima, Perú" },
     "areaServed": "PE",
-    "sameAs": ["https://wa.me/51907462070"]
   };
 
   return (

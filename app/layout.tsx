@@ -5,6 +5,7 @@ import { SITE } from "@/lib/constants";
 import CursorTrail from "@/components/CursorTrail";
 import StickyCTA from "@/components/StickyCTA";
 import ScrollProgress from "@/components/ScrollProgress";
+import CookieConsentBanner from "@/components/CookieConsentBanner";
 import { Analytics } from "@vercel/analytics/react";
 
 const poppins = Poppins({
@@ -104,13 +105,6 @@ const orgSchema = {
     "addressCountry": "PE"
   },
   "areaServed": "PE",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "sales",
-    "telephone": "+51-907-462-070",
-    "availableLanguage": "Spanish"
-  },
-  "sameAs": ["https://wa.me/51907462070"]
 };
 
 export default function RootLayout({
@@ -124,7 +118,6 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
-        <link rel="dns-prefetch" href="https://connect.facebook.net" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
@@ -137,7 +130,10 @@ export default function RootLayout({
         <StickyCTA />
         <CursorTrail />
         {children}
+        <CookieConsentBanner />
         <Analytics />
+        {/* Honeypot: invisible to humans, bots follow it and get logged */}
+        <a href="/trap-bot" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1}>.</a>
       </body>
     </html>
   );
