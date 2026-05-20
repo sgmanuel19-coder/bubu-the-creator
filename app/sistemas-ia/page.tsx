@@ -1,38 +1,31 @@
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import Navbar from '@/components/Navbar';
 import FacebookPixel from '@/components/FacebookPixel';
 import { CheckCircle2 } from 'lucide-react';
-import { SchemaMarkup } from '@/components/SchemaMarkup';
-
-// Above-fold — load eager
+import FAQAccordion from '@/components/ui/faq-accordion';
 import {
   HeroClient,
-  SocialProofBarAnimated,
-} from '@/components/SistemasIAClient';
-
-// ssr:false imports live in a client component (Next.js 16 Turbopack requirement)
-import {
-  FloatingCTA,
-  SistemasIAProblems,
-  GuaranteeSection,
-  DottedSurface,
-  CelestialOrrery,
   PricingClient,
   TestimonialsClient,
   AnimatedTextClient,
+  SocialProofBarAnimated,
   FinalCTAHeading,
   FinalCTAWAButton,
+} from '@/components/SistemasIAClient';
+import {
   VSLSectionIA,
   HowItWorksAnimated,
   IndustriesSectionAnimated,
   IntegrationsStrip,
   VsSimpleBotSectionAnimated,
   ChatDemoSectionAnimated,
-} from '@/components/SistemasIALazy';
-
-// No ssr:false — safe to dynamic-import in server component
-const FAQAccordion = dynamic(() => import('@/components/ui/faq-accordion'));
+} from '@/components/SistemasIAAnimated';
+import { SistemasIAProblems } from '@/components/SistemasIAProblems';
+import { GuaranteeSection } from '@/components/GuaranteeSection';
+import { CelestialOrrery } from '@/components/ui/celestial-orrery';
+import { DottedSurface } from '@/components/ui/dotted-surface';
+import { SchemaMarkup } from '@/components/SchemaMarkup';
+import { FloatingCTA } from '@/components/ui/floating-cta';
 
 export const metadata: Metadata = {
   title: 'Super Agente IA para WhatsApp | Automatización Comercial 24/7 — RESUELTO',
@@ -392,7 +385,7 @@ function PrivacyPolicySection() {
 
           <div style={{ paddingTop: 20, paddingBottom: 12 }}>
             {h('1. Responsable del tratamiento')}
-            {p('RESUELTO Agency, con domicilio en Lima, Perú. Contacto: a través de nuestro canal oficial de WhatsApp Business disponible en esta página.')}
+            {p('RESUELTO, representado por Manuel Severo Gordillo, con domicilio en Lima, Perú. Correo de contacto y canal principal: WhatsApp +51 907 462 070.')}
 
             {h('2. Datos personales que recopilamos')}
             {p('Al interactuar con esta página o contactarnos por WhatsApp, podemos recopilar: nombre y apellido, número de teléfono (WhatsApp), nombre del negocio o empresa, tipo de industria, correo electrónico (cuando sea proporcionado voluntariamente) y datos de navegación recogidos por herramientas de analítica (dirección IP, tipo de dispositivo, páginas visitadas, tiempo de sesión).')}
@@ -404,7 +397,7 @@ function PrivacyPolicySection() {
             {p('El tratamiento de sus datos se sustenta en: el consentimiento otorgado al contactarnos voluntariamente, la ejecución de un contrato de servicios cuando se formaliza la contratación, y el interés legítimo de RESUELTO para mejorar sus servicios y comunicar ofertas relevantes a personas que han mostrado interés previo.')}
 
             {h('5. Cookies y tecnologías de rastreo')}
-            {p('Esta página utiliza el Píxel de Meta (Facebook Pixel) con ID 1298724568307272 para medir conversiones y mostrar anuncios personalizados en plataformas de Meta, únicamente si usted ha otorgado su consentimiento. Asimismo, utiliza Vercel Analytics para análisis de rendimiento web de forma anónima. El Píxel de Meta puede registrar eventos como visitas a la página (PageView) y acciones de conversión. Puede gestionar sus preferencias de publicidad personalizada en https://www.facebook.com/settings?tab=ads o en la Configuración de privacidad de su cuenta de Meta.')}
+            {p('Esta página utiliza el Píxel de Meta (Facebook Pixel) con ID 1298724572307272 para medir conversiones y mostrar anuncios personalizados en plataformas de Meta. Asimismo, utiliza Vercel Analytics para análisis de rendimiento web de forma anónima. El Píxel de Meta puede registrar eventos como visitas a la página (PageView) y acciones de conversión. Puede gestionar sus preferencias de publicidad personalizada en https://www.facebook.com/settings?tab=ads o en la Configuración de privacidad de su cuenta de Meta.')}
 
             {h('6. Compartición de datos con terceros')}
             {p('RESUELTO no vende ni cede datos personales a terceros con fines comerciales propios. Los datos podrán ser compartidos únicamente con: (a) Meta Platforms, Inc., como proveedor de la infraestructura de publicidad (Píxel), sujeto a su propia política de privacidad, (b) Vercel Inc., proveedor de hosting y analítica anónima, (c) proveedores tecnológicos necesarios para operar el sistema de automatización contratado (plataformas de mensajería, CRM, calendarios), siempre bajo acuerdos de confidencialidad.')}
@@ -416,7 +409,7 @@ function PrivacyPolicySection() {
             {p('Los datos de contacto se conservan mientras exista una relación comercial activa o potencial. Los datos de navegación (analítica) se almacenan por el período estándar de cada proveedor (Vercel: hasta 90 días). Una vez concluida la relación, los datos serán eliminados o anonimizados salvo que la ley exija su conservación por un período mayor.')}
 
             {h('9. Derechos del titular (ARCO)')}
-            {p('En virtud de la Ley N.° 29733 — Ley de Protección de Datos Personales del Perú y su Reglamento (D.S. 003-2013-JUS), usted tiene derecho a: (A) Acceder a sus datos personales que obren en nuestros registros; (R) Rectificar datos inexactos o incompletos; (C) Cancelar o suprimir sus datos cuando ya no sean necesarios para la finalidad para la que fueron recogidos; (O) Oponerse al tratamiento de sus datos para fines de marketing directo. Para ejercer cualquiera de estos derechos, contáctenos a través de nuestro canal oficial de WhatsApp Business disponible en esta página, indicando su solicitud. Responderemos en un plazo máximo de 10 días hábiles.')}
+            {p('En virtud de la Ley N.° 29733 — Ley de Protección de Datos Personales del Perú y su Reglamento (D.S. 003-2013-JUS), usted tiene derecho a: (A) Acceder a sus datos personales que obren en nuestros registros; (R) Rectificar datos inexactos o incompletos; (C) Cancelar o suprimir sus datos cuando ya no sean necesarios para la finalidad para la que fueron recogidos; (O) Oponerse al tratamiento de sus datos para fines de marketing directo. Para ejercer cualquiera de estos derechos, contáctenos a través de WhatsApp +51 907 462 070 indicando su solicitud. Responderemos en un plazo máximo de 10 días hábiles.')}
 
             {h('10. Seguridad de los datos')}
             {p('RESUELTO adopta medidas técnicas y organizativas razonables para proteger los datos personales contra accesos no autorizados, alteración, divulgación o destrucción. Sin embargo, ninguna transmisión por Internet es completamente segura, por lo que no podemos garantizar seguridad absoluta.')}

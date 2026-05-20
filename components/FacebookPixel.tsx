@@ -1,24 +1,12 @@
-'use client';
 import Script from 'next/script';
-import { useEffect, useState } from 'react';
 
 export default function FacebookPixel() {
-  const [hasConsent, setHasConsent] = useState(false);
   const pixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
 
-  useEffect(() => {
-    const stored = localStorage.getItem('cookie-consent');
-    setHasConsent(stored === 'accepted');
-
-    const handleConsent = (e: Event) => {
-      setHasConsent((e as CustomEvent<string>).detail === 'accepted');
-    };
-    window.addEventListener('cookie-consent-change', handleConsent);
-    return () => window.removeEventListener('cookie-consent-change', handleConsent);
-  }, []);
-
-  const isValidPixelId = /^\d{10,20}$/.test(pixelId ?? '');
-  if (!pixelId || !isValidPixelId || !hasConsent) return null;
+  if (!pixelId) {
+    console.warn('Facebook Pixel ID is not defined');
+    return null;
+  }
 
   return (
     <>
