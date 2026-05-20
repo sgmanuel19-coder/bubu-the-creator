@@ -2,7 +2,8 @@ import type { NextConfig } from "next";
 
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://connect.facebook.net",
+  // 'unsafe-eval' required by Three.js / Spline / matter-js (shader & physics codegen)
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://connect.facebook.net",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "img-src 'self' data: blob: https://www.facebook.com https://*.fbcdn.net https://*.spline.design",
   "font-src 'self' https://fonts.gstatic.com data:",
