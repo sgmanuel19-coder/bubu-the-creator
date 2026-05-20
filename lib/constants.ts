@@ -173,7 +173,7 @@ export const SITE = {
   // ── Servicios ──────────────────────────────────────────────
   services: {
     title: "La implementación",
-    subtitle: "No hacemos contenido por hacer. Construimos un sistema audiovisual y estratégico para que tu empresa comunique con claridad, nivel y peso comercial.",
+    subtitle: "No hacemos contenido por hacer. Construimos un sistema audiovisual y estratégico —con IA integrada en los tres frentes: estrategia, producción de contenido y automatización— para que tu empresa comunique con claridad, nivel y peso comercial.",
     core: {
       badge: "Audiovisual + Estrategia + IA · Done-For-You",
       name: "Sistema Audiovisual de Autoridad",
@@ -212,7 +212,7 @@ export const SITE = {
         {
           num: 2,
           title: "Cerebro Creativo IA con documentación estratégica",
-          summary: "Un sistema IA entrenado con la lógica estratégica de la marca.",
+          summary: "Un sistema de IA entrenado con la lógica de tu marca: acelera la estrategia, genera ángulos de comunicación y alimenta cada guion con criterio.",
           detail: [
             "Brief y contrabrief de marca",
             "Buyer persona y customer journey",
@@ -362,7 +362,7 @@ export const SITE = {
     premium: {
       badge: "Automatización Inteligente · n8n + IA",
       name: "RESUELTO Automation",
-      tagline: "Sistemas inteligentes que escalan tu negocio: chatbot IA 24/7, prospección automatizada y webs de alta conversión.",
+      tagline: "La misma capacidad de IA que aplico al contenido, ahora en tus operaciones: chatbot IA 24/7 que atiende y califica leads, prospección automatizada y webs de alta conversión. Sistemas que trabajan incluso cuando tú no estás.",
       target: "Empresas, startups y consultoras que quieren dejar de perder tiempo en tareas manuales y generar oportunidades de forma automática.",
       landingUrl: "/sistemas-ia",
       items: [
@@ -474,9 +474,9 @@ export const SITE = {
       },
       {
         number: "S7",
-        title: "Edición y construcción",
+        title: "Edición y construcción con IA",
         description:
-          "Edición del video caso, reels verticales y videos con locución. Integración de tomas de apoyo y coherencia visual general. El material bruto se convierte en piezas con forma y nivel.",
+          "Edición del video caso, reels verticales y videos con locución, asistida con IA para acelerar cortes, limpiar audio y sostener consistencia. Integración de tomas de apoyo y coherencia visual general. El material bruto se convierte en piezas con forma y nivel — en menos tiempo.",
       },
       {
         number: "S8",
