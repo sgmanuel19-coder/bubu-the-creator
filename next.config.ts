@@ -1,22 +1,14 @@
 import type { NextConfig } from "next";
 
-// CSP tuned for this site's stack: Three.js, Spline (@splinetool), matter-js,
-// framer-motion, Google Fonts, Facebook Pixel, Vercel Analytics, video embeds.
-// 'unsafe-eval' + 'wasm-unsafe-eval' are required by Spline/Three runtime.
+// Conservative CSP: NO resource allowlists (no default-src/script-src/connect-src),
+// so it cannot block Spline/Three.js/WebGL/fetch. Keeps the protections that don't
+// touch resource loading: anti-clickjacking, plugin block, base & form hijack.
 const csp = [
-  "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://connect.facebook.net",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "img-src 'self' data: blob: https:",
-  "font-src 'self' https://fonts.gstatic.com data:",
-  "connect-src 'self' https://connect.facebook.net https://www.facebook.com https://vitals.vercel-insights.com https://*.spline.design",
-  "media-src 'self' blob: data: https:",
   "frame-src https://www.instagram.com https://www.youtube.com https://www.tiktok.com",
   "frame-ancestors 'self'",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
-  "worker-src 'self' blob:",
   "upgrade-insecure-requests",
 ].join('; ');
 
