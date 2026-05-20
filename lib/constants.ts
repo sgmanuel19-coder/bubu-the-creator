@@ -30,10 +30,10 @@ export const SITE = {
 
   // ── Hero ───────────────────────────────────────────────────
   hero: {
-    eyebrow: "Estrategia · Producción · Resultados",
+    eyebrow: "Estrategia · Producción · IA aplicada",
     headline: ["Elevo la percepción de tu marca", "con sistemas de comunicación comercial."],
     subheadline:
-      "60 días para instalar el sistema de comunicación que convierte la complejidad técnica de tu empresa en su principal argumento de venta.",
+      "60 días para instalar el sistema que convierte la complejidad técnica de tu empresa en su principal argumento de venta. Hoy lo construyo con IA integrada en cada fase —planeación, producción y edición— para entregar más rápido y con más nivel, sin soltar el criterio humano.",
     ctaPrimary: "Quiero implementar el sistema",
     ctaSecondary: "o escríbeme directo",
     anchor: "Diseñado para empresas B2B, técnicas e industriales que necesitan convertir su comunicación en una herramienta de ventas.",
@@ -65,9 +65,9 @@ export const SITE = {
     bio: [
       "Pasé años dentro de las agencias donde los estándares no tienen margen para el error. Trabajé con las marcas más grandes del Perú — desde banca hasta retail — y vi de primera mano cómo la comunicación puede cambiar la percepción de un negocio por completo.",
       "Con el tiempo entendí que el problema real no es 'hacer contenido'. Es que la mayoría de negocios con ofertas valiosas comunican muy por debajo de lo que valen. Y cuando eso cambia, todo cambia: se ven mejor, atraen mejor cliente, convierten con menos fricción.",
-      "Hoy opero bajo RESUELTO en la intersección de cuatro disciplinas: pensamiento estratégico publicitario, producción audiovisual, IA generativa aplicada al negocio y sistemas de comunicación comercial. Una combinación poco frecuente — y la que convierte tu marca en la opción obvia.",
+      "Hoy opero bajo RESUELTO en la intersección de cuatro disciplinas: pensamiento estratégico publicitario, producción audiovisual, IA generativa aplicada al negocio y sistemas de comunicación comercial. Y mi forma de trabajar evolucionó: hoy integro IA en cada fase del proceso de contenido —planeación, producción y postproducción— no para reemplazar el criterio, sino para explorar más rápido, producir más y elevar el nivel de cada pieza. La estrategia sigue siendo humana; la ejecución va potenciada con IA. Una combinación poco frecuente — y la que convierte tu marca en la opción obvia.",
     ],
-    timelineLabel: "Mi evolución — de ejecutar piezas a diseñar sistemas",
+    timelineLabel: "Mi evolución — de ejecutar piezas a diseñar sistemas potenciados con IA",
     timeline: [
       {
         year: "2019",
@@ -107,9 +107,9 @@ export const SITE = {
       {
         year: "HOY",
         company: "RESUELTO",
-        title: "El sistema completo",
+        title: "El sistema completo, potenciado con IA",
         description:
-          "Todo lo anterior, aplicado directamente a tu negocio. Autoridad, presencia y conversión — con criterio.",
+          "Todo lo anterior, aplicado a tu negocio e integrado con IA en cada fase: planeación, producción y postproducción de contenido. Más velocidad y más nivel — con el mismo criterio humano detrás.",
       },
     ],
   },
@@ -194,7 +194,7 @@ export const SITE = {
       pitch:
         "Tu empresa opera bien y tiene algo real que ofrecer. Pero la comunicación no refleja ese nivel: lo técnico es difícil de entender y el contenido no construye autoridad sostenida. El mercado compra al que genera más confianza, no siempre al mejor. Ahí entra Resuelto.",
       whatItIs:
-        "Una implementación audiovisual y estratégica para que tu empresa se vea al nivel que opera, explique mejor lo complejo y tenga activos de comunicación reutilizables. No hacemos contenido por hacer — construimos un sistema con claridad, criterio y peso comercial.",
+        "Una implementación audiovisual y estratégica para que tu empresa se vea al nivel que opera, explique mejor lo complejo y tenga activos de comunicación reutilizables. Hoy la IA atraviesa las tres fases del proceso: planifico con un Cerebro Creativo IA entrenado en tu marca, produzco apoyado en recursos generativos y edito con herramientas asistidas por IA. No hacemos contenido por hacer — construimos un sistema con claridad, criterio y peso comercial, ejecutado más rápido gracias a la IA.",
       pillars: [
         {
           num: 1,
@@ -295,11 +295,12 @@ export const SITE = {
           detail: [
             "Selección de material y estructura de cada pieza",
             "Ritmo, consistencia visual y adaptación al objetivo de cada video",
+            "Edición asistida por IA: cortes más rápidos, limpieza de audio y consistencia entre piezas",
             "Integración de recursos complementarios",
             "Armado de piezas finales listas para uso",
             "Carruseles integrados al lenguaje visual general",
           ],
-          receives: "Contenido terminado que se siente más sólido, claro y profesional.",
+          receives: "Contenido terminado que se siente más sólido, claro y profesional — producido en menos tiempo gracias a la IA.",
         },
         {
           num: 9,
