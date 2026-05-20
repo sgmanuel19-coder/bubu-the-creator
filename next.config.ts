@@ -2,12 +2,12 @@ import type { NextConfig } from "next";
 
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
+  "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://connect.facebook.net",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "img-src 'self' data: blob: https://www.facebook.com https://*.fbcdn.net",
+  "img-src 'self' data: blob: https://www.facebook.com https://*.fbcdn.net https://*.spline.design",
   "font-src 'self' https://fonts.gstatic.com data:",
   "connect-src 'self' https://connect.facebook.net https://www.facebook.com https://vitals.vercel-insights.com https://*.spline.design",
-  "media-src 'self'",
+  "media-src 'self' blob: https://*.spline.design",
   "frame-src https://www.instagram.com https://www.youtube.com https://www.tiktok.com",
   "frame-ancestors 'self'",
   "object-src 'none'",
