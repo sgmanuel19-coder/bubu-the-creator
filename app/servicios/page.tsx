@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Services from "@/components/Services";
+import ServiceSelector from "@/components/ServiceSelector";
 import GridBackground from "@/components/ui/grid-background";
 import Transition from "@/components/Transition";
 import ForWho from "@/components/ForWho";
@@ -43,7 +43,13 @@ export default function ServiciosPage() {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-green/20 to-neon-purple/20" />
       </section>
 
-      <Services />
+      <section className="relative section-padding overflow-hidden" style={{ background: "#050608" }}>
+        <div className="absolute top-0 right-0 w-[450px] h-[350px] rounded-full bg-neon-purple/8 blur-[90px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[450px] h-[350px] rounded-full bg-neon-green/6 blur-[90px] pointer-events-none" />
+        <div className="container-base relative z-10">
+          <ServiceSelector />
+        </div>
+      </section>
       <Transition />
       <ForWho />
       <Availability />
