@@ -274,7 +274,7 @@ function ContenidoIATab() {
           Cerebro Creativo Estratégico con IA
         </h3>
         <p className="font-body text-muted text-sm lg:text-base leading-relaxed max-w-2xl">
-          Adquisición de clientes mediante contenido estratégico mensual. Sin sesiones de grabación requeridas. Para cualquier tipo de negocio.
+          Para marcas de productos complejos, técnicos y premium que merecen verse como lo que son. Creamos lo que la cámara no puede capturar — y lo que todavía no existe.
         </p>
       </div>
 
@@ -287,7 +287,7 @@ function ContenidoIATab() {
           {([
             {
               label: "Fase 01 · Mes 1", icon: "🧠", name: "Cerebro IA", tag: "Solo en mes 1", color: "green",
-              desc: "300–500 páginas de documentación estratégica: briefing, buyer persona, arquitectura de comunicación, benchmark. Prompts maestros entrenados con la voz y lógica de tu marca.",
+              desc: "1,200 páginas de documentación estratégica: briefing, buyer persona, arquitectura de comunicación, benchmark. Prompts maestros entrenados con la voz y lógica de tu marca.",
             },
             {
               label: "Fase 02 · Mensual", icon: "🎬", name: "Producción", tag: "Cada mes", color: "purple",
@@ -295,7 +295,7 @@ function ContenidoIATab() {
             },
             {
               label: "Fase 03 · Mensual", icon: "✨", name: "Entrega", tag: "Cada mes", color: "green",
-              desc: "10 videos listos para redes sociales + 8 piezas gráficas publicitarias. Captions y guía de publicación incluidos.",
+              desc: "10 videos listos para redes sociales + 3 posts estratégicos + 3 carruseles de autoridad. Captions y guía de publicación incluidos.",
             },
           ] as const).map((fase, i) => (
             <div key={i} className={`rounded-xl border p-5 ${
@@ -332,7 +332,7 @@ function ContenidoIATab() {
           {([
             { icon: "🧠", title: "Cerebro IA del negocio", sub: "Docs estratégicos + prompts maestros personalizados (incluido en mes 1)" },
             { icon: "🎬", title: "10 videos para redes", sub: "Generados con Kling 3.0 · Seedance · Veo 3 + edición profesional manual" },
-            { icon: "🖼️", title: "8 piezas gráficas", sub: "Generadas con Banana Pro · GPT Image + retoque y ajuste humano" },
+            { icon: "🎁", title: "Bono: 3 posts + 3 carruseles", sub: "Posts estáticos y carruseles de autoridad diseñados con Banana Pro · GPT Image" },
             { icon: "📋", title: "Guiones + captions", sub: "Redactados con el Cerebro IA, alineados a la voz y tono de tu marca" },
           ] as const).map((item, i) => (
             <div key={i} className="flex items-start gap-3 rounded-xl border border-neon-green/12 bg-neon-green/[0.02] px-4 py-4">
@@ -363,6 +363,37 @@ function ContenidoIATab() {
 
       <div className="h-px bg-white/5 mx-6 lg:mx-10" />
 
+      {/* ── CASOS ── */}
+      <div className="py-14 px-6 lg:px-10">
+        <SectionLabel text="Casos reales" />
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="rounded-xl border border-neon-green/15 bg-neon-green/[0.02] p-5">
+            <p className="font-display font-bold text-sm text-neon-green mb-1">WIN Internet</p>
+            <p className="text-[10px] font-display tracking-widest uppercase text-muted/40 mb-3">Telecomunicaciones</p>
+            <p className="font-body text-cream/70 text-xs leading-relaxed mb-3">
+              Creamos a Fibrin, un personaje 3D con IA para narrar conceptos técnicos complejos que ninguna cámara podría capturar. Contenido educativo y de autoridad que el equipo no podía producir de forma tradicional.
+            </p>
+            <div className="flex items-center gap-2 pt-3 border-t border-white/5">
+              <span className="text-neon-green text-xs">→</span>
+              <p className="font-body text-neon-green/80 text-xs font-semibold">Millones de vistas · ROI amplio sostenido</p>
+            </div>
+          </div>
+          <div className="rounded-xl border border-neon-purple/15 bg-neon-purple/[0.02] p-5">
+            <p className="font-display font-bold text-sm text-neon-purple mb-1">Livoltek</p>
+            <p className="text-[10px] font-display tracking-widest uppercase text-muted/40 mb-3">Energía Solar · B2B</p>
+            <p className="font-body text-cream/70 text-xs leading-relaxed mb-3">
+              Videos de productos que físicamente no existían todavía. Conceptos técnicos complejos visualizados con IA — personalizados por marca. La empresa pasó a verse al nivel de marcas internacionales.
+            </p>
+            <div className="flex items-center gap-2 pt-3 border-t border-white/5">
+              <span className="text-neon-purple text-xs">→</span>
+              <p className="font-body text-neon-purple/80 text-xs font-semibold">Percepción de marca elevada · Material para ferias y ventas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-px bg-white/5 mx-6 lg:mx-10" />
+
       {/* ── PRECIOS ── */}
       <div className="py-14 px-6 lg:px-10">
         <SectionLabel text="Inversión" />
@@ -377,16 +408,22 @@ function ContenidoIATab() {
           <div className="rounded-2xl border border-neon-green/30 bg-neon-green/[0.03] p-6 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-neon-green/80 via-neon-green/40 to-transparent" />
             <p className="text-[10px] font-display font-bold tracking-[0.25em] uppercase text-neon-green/60 mb-1">Mes 1 · Arranque</p>
-            <p className="font-display font-extrabold text-4xl text-neon-green mb-1">S/ 4,500</p>
-            <p className="font-body text-muted/50 text-xs mb-4">+IGV · primera entrega completa</p>
+            <p className="font-display font-extrabold text-4xl text-neon-green mb-1">S/ 4,200</p>
+            <p className="font-body text-muted/50 text-xs mb-4">+IGV · Cerebro IA + primera entrega</p>
             <p className="font-body text-neon-green/70 text-xs italic">✓ Incluye construcción del Cerebro IA</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6">
             <p className="text-[10px] font-display font-bold tracking-[0.25em] uppercase text-muted/50 mb-1">Mes 2+ · Retainer</p>
-            <p className="font-display font-extrabold text-4xl text-cream mb-1">S/ 4,000</p>
-            <p className="font-body text-muted/50 text-xs mb-4">/mes +IGV · 10 videos + 8 piezas</p>
+            <p className="font-display font-extrabold text-4xl text-cream mb-1">S/ 3,600</p>
+            <p className="font-body text-muted/50 text-xs mb-4">/mes +IGV · 10 videos + 6 piezas</p>
             <p className="font-body text-muted/40 text-xs italic">Sin permanencia mínima forzada</p>
           </div>
+        </div>
+        <div className="rounded-xl border border-neon-green/15 bg-neon-green/[0.02] p-5 mb-6">
+          <p className="text-[10px] font-display font-bold tracking-[0.2em] uppercase text-neon-green/60 mb-2">Garantía de Cerebro Perfecto</p>
+          <p className="font-body text-cream/80 text-sm leading-relaxed">
+            Si al entregar el Cerebro IA no refleja tu marca exactamente, lo refinamos — ronda tras ronda, sin costo adicional — hasta que sí.
+          </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-3">
           <a
