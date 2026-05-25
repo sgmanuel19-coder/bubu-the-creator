@@ -74,7 +74,8 @@ export default function FAQ() {
                 >
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className="w-full flex items-center gap-4 px-5 py-5 text-left"
+                    aria-expanded={isOpen}
+                    className="w-full flex items-center gap-4 px-5 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neon-green/40"
                   >
                     <span className={`shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-display font-bold
                       transition-all duration-300

@@ -119,8 +119,10 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
           {/* Mobile hamburger — oculto en modo minimal */}
           {!minimal && (
             <button
-              className="md:hidden flex flex-col gap-1.5 p-2"
+              className="md:hidden flex flex-col gap-1.5 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-green/50 rounded"
               onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={menuOpen}
             >
               <span className={`block w-6 h-0.5 bg-neon-green transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
               <span className={`block w-6 h-0.5 bg-cream transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />

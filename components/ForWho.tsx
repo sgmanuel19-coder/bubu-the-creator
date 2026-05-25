@@ -63,7 +63,7 @@ function OrbitalMap({ onSelect, selected }: {
         return (
           <motion.button
             key={i}
-            className="absolute flex flex-col items-center justify-center rounded-full border transition-all duration-200 outline-none"
+            className="absolute flex flex-col items-center justify-center rounded-full border transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-neon-green/50"
             style={{
               width: planetSize,
               height: planetSize,

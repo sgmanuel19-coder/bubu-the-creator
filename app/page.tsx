@@ -44,7 +44,7 @@ export default function Home() {
   }
 
   return (
-    <main className="relative overflow-hidden">
+    <main id="main-content" className="relative overflow-hidden">
       <Navbar />
       <Hero />
       <Problem />

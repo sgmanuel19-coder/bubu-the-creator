@@ -115,6 +115,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="dark">
       <head>
+        <meta name="theme-color" content="#060608" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
@@ -123,6 +124,12 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${montserrat.variable} ${inter.variable} bg-bg text-cream antialiased`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-neon-green focus:text-bg focus:rounded focus:font-semibold focus:text-sm"
+        >
+          Saltar al contenido
+        </a>
         <ScrollProgress />
         <StickyCTA />
         <CursorTrail />
