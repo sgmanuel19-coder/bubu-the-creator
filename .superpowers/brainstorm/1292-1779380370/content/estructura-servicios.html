@@ -1,0 +1,208 @@
+<h2>¿Cómo estructuramos la sección de servicios?</h2>
+<p class="subtitle">Elige el enfoque de layout que mejor representa lo que ofreces</p>
+
+<style>
+  .mock-service {
+    background: #0a0f0a;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: monospace;
+    font-size: 11px;
+    color: #b0c8b8;
+    padding: 16px;
+    margin-top: 8px;
+    min-height: 220px;
+  }
+  .mock-neon { color: #00FF87; }
+  .mock-purple { color: #CC44FF; }
+  .mock-yellow { color: #FFD700; }
+  .mock-card {
+    border: 1px solid rgba(0,255,135,0.2);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 4px 0;
+    background: rgba(0,255,135,0.03);
+  }
+  .mock-card-purple {
+    border: 1px solid rgba(204,68,255,0.2);
+    background: rgba(204,68,255,0.03);
+  }
+  .mock-card-yellow {
+    border: 1px solid rgba(255,215,0,0.2);
+    background: rgba(255,215,0,0.03);
+  }
+  .mock-tab {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    margin: 2px;
+    cursor: default;
+  }
+  .mock-tab-active {
+    background: rgba(0,255,135,0.15);
+    border: 1px solid rgba(0,255,135,0.4);
+    color: #00FF87;
+  }
+  .mock-tab-inactive {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(176,200,184,0.5);
+  }
+  .mock-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 6px 0;
+  }
+  .mock-num {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(0,255,135,0.15);
+    border: 1px solid rgba(0,255,135,0.3);
+    color: #00FF87;
+    font-size: 9px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mock-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mock-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .mock-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.5; margin-bottom: 4px; }
+  .mock-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 8px 0; }
+  .mock-badge {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: rgba(0,255,135,0.1);
+    border: 1px solid rgba(0,255,135,0.25);
+    color: #00FF87;
+    margin-bottom: 6px;
+  }
+  .mock-badge-purple {
+    background: rgba(204,68,255,0.1);
+    border-color: rgba(204,68,255,0.25);
+    color: #CC44FF;
+  }
+  .mock-badge-yellow {
+    background: rgba(255,215,0,0.1);
+    border-color: rgba(255,215,0,0.25);
+    color: #FFD700;
+  }
+</style>
+
+<div class="options">
+
+  <!-- Opción A: 3 servicios expandibles en vertical -->
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>3 Servicios como acordeón</h3>
+      <p>Tres tarjetas expandibles: Audiovisual, Contenido IA, Comercial IA. Igual al sistema actual pero con un tercer servicio nuevo y más detalle dentro de cada uno.</p>
+      <div class="mock-service">
+        <div class="mock-label">SERVICIOS</div>
+        <div class="mock-card">
+          <span class="mock-badge">● Sistema Audiovisual</span>
+          <div style="color:#e8f0ea; font-weight:bold; font-size:12px;">Sistema de Autoridad</div>
+          <div style="opacity:0.5; font-size:10px; margin-top:3px;">Desde $500 · Ver detalle ↓</div>
+        </div>
+        <div class="mock-card" style="border-color:rgba(0,255,135,0.5); background:rgba(0,255,135,0.06);">
+          <span class="mock-badge">● Sistema Contenido IA</span>
+          <div style="color:#e8f0ea; font-weight:bold; font-size:12px;">Adquisición con Contenido</div>
+          <div style="font-size:10px; color:#00FF87; margin-top:3px;">S/ 4,500/mes · 10 videos + 8 piezas</div>
+          <div class="mock-divider"/>
+          <div style="font-size:10px; opacity:0.7;">🧠 Cerebro IA → 🎬 Producción → 📊 Entrega</div>
+        </div>
+        <div class="mock-card mock-card-purple">
+          <span class="mock-badge mock-badge-purple">● Automatización Comercial</span>
+          <div style="color:#e8f0ea; font-weight:bold; font-size:12px;">Sistema de Captación</div>
+          <div style="opacity:0.5; font-size:10px; margin-top:3px;">Consultar precio · Ver detalle ↓</div>
+        </div>
+      </div>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Familiar para el visitante</li><li>Fácil de navegar</li><li>Cada servicio tiene su espacio</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Puede verse como "más de lo mismo"</li><li>Requiere clic para ver detalle</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Opción B: Tabs por servicio con contenido lateral -->
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Tabs laterales + detalle completo</h3>
+      <p>El visitante elige el servicio en tabs a la izquierda y el detalle completo aparece a la derecha. Muy didáctico, sin scroll hasta encontrar lo que busca.</p>
+      <div class="mock-service" style="display:grid; grid-template-columns: 140px 1fr; gap:12px;">
+        <div>
+          <div class="mock-label">SERVICIOS</div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <div class="mock-tab mock-tab-active">📹 Audiovisual</div>
+            <div class="mock-tab mock-tab-inactive">🤖 Contenido IA</div>
+            <div class="mock-tab mock-tab-inactive">⚡ Comercial IA</div>
+          </div>
+        </div>
+        <div>
+          <div class="mock-badge">● SISTEMA AUDIOVISUAL</div>
+          <div style="color:#e8f0ea; font-weight:bold; font-size:13px; margin-bottom:6px;">Sistema de Autoridad Corporativa</div>
+          <div class="mock-divider"/>
+          <div class="mock-label" style="margin-top:8px;">QUÉ INCLUYE</div>
+          <div class="mock-step"><div class="mock-num">1</div><span>Cerebro IA estratégico del negocio</span></div>
+          <div class="mock-step"><div class="mock-num">2</div><span>Producción audiovisual profesional</span></div>
+          <div class="mock-step"><div class="mock-num">3</div><span>10 videos + VSL + coberturas</span></div>
+          <div class="mock-divider"/>
+          <div style="color:#00FF87; font-size:12px; font-weight:bold;">$3,000 · Plan Autoridad</div>
+        </div>
+      </div>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Muy organizado y profesional</li><li>Detalle completo sin salir de la sección</li><li>Diferencia claramente cada servicio</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Más complejo de implementar</li><li>Puede no funcionar bien en mobile</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Opción C: Cada servicio tiene su propia sección completa -->
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Secciones completas por servicio</h3>
+      <p>Cada servicio tiene su propia sección en la página como si fueran mini-landings. El visitante hace scroll y descubre el detalle completo de cada uno sin clicks.</p>
+      <div class="mock-service">
+        <div style="text-align:center; margin-bottom:10px;">
+          <div class="mock-label">SISTEMA 01</div>
+          <div style="color:#00FF87; font-weight:bold; font-size:13px;">AUDIOVISUAL + IA</div>
+          <div style="opacity:0.5; font-size:10px;">Autoridad corporativa con video profesional</div>
+        </div>
+        <div class="mock-grid-3" style="margin-bottom:8px;">
+          <div class="mock-card" style="text-align:center; padding:6px;">
+            <div style="font-size:16px;">🧠</div>
+            <div style="font-size:9px; color:#00FF87;">Cerebro IA</div>
+          </div>
+          <div class="mock-card" style="text-align:center; padding:6px;">
+            <div style="font-size:16px;">🎬</div>
+            <div style="font-size:9px; color:#00FF87;">Producción</div>
+          </div>
+          <div class="mock-card" style="text-align:center; padding:6px;">
+            <div style="font-size:16px;">✨</div>
+            <div style="font-size:9px; color:#00FF87;">Entrega</div>
+          </div>
+        </div>
+        <div class="mock-divider"/>
+        <div style="text-align:center; font-size:10px; opacity:0.4;">↓ scroll ↓</div>
+        <div style="text-align:center; margin-top:6px;">
+          <div class="mock-label">SISTEMA 02</div>
+          <div style="color:#00FF87; font-weight:bold; font-size:13px;">CONTENIDO ESTRATÉGICO IA</div>
+          <div style="opacity:0.5; font-size:10px;">Adquisición de clientes con contenido</div>
+        </div>
+      </div>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Máximo espacio para explicar cada servicio</li><li>Muy visual e impactante</li><li>Ideal para SEO</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>La página se vuelve muy larga</li><li>El visitante puede perderse</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>

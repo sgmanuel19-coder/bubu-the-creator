@@ -1,0 +1,300 @@
+<h2>Mockup: Tab "Contenido con IA" — interior del panel expandido</h2>
+<p class="subtitle">Así se vería el contenido dentro de la pestaña. Revisa la estructura y dime si falta o sobra algo.</p>
+
+<style>
+  .mock-panel {
+    background: #080d08;
+    border: 1px solid rgba(0,255,135,0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    font-family: monospace;
+    font-size: 11px;
+    color: #b0c8b8;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .mock-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 12px 16px 0;
+    gap: 4px;
+  }
+  .mock-tab {
+    padding: 6px 16px;
+    border-radius: 8px 8px 0 0;
+    font-size: 10px;
+    border: 1px solid;
+    border-bottom: none;
+    cursor: default;
+  }
+  .mock-tab-on {
+    background: rgba(0,255,135,0.08);
+    border-color: rgba(0,255,135,0.3);
+    color: #00FF87;
+    font-weight: bold;
+  }
+  .mock-tab-off {
+    background: rgba(255,255,255,0.02);
+    border-color: rgba(255,255,255,0.08);
+    color: rgba(176,200,184,0.4);
+  }
+  .mock-body { padding: 20px; }
+  .mock-sec {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(0,255,135,0.5);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mock-sec::before { content:''; display:inline-block; width:16px; height:1px; background:rgba(0,255,135,0.4); }
+  .mock-divider { height: 1px; background: rgba(255,255,255,0.05); margin: 16px 0; }
+  .mock-h2 { font-size: 16px; font-weight: bold; color: #e8f0ea; margin-bottom: 4px; line-height: 1.3; }
+  .mock-sub { font-size: 10px; color: rgba(176,200,184,0.5); margin-bottom: 16px; line-height: 1.5; }
+  .mock-phases {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .mock-phase {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid rgba(0,255,135,0.15);
+    background: rgba(0,255,135,0.03);
+  }
+  .mock-phase-num {
+    font-size: 9px;
+    font-weight: bold;
+    color: rgba(0,255,135,0.6);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .mock-phase-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #00FF87;
+    margin-bottom: 4px;
+  }
+  .mock-phase-detail { font-size: 9px; color: rgba(176,200,184,0.55); line-height: 1.4; }
+  .mock-phase-tag {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(0,255,135,0.08);
+    border: 1px solid rgba(0,255,135,0.2);
+    color: rgba(0,255,135,0.7);
+  }
+  .mock-deliverables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .mock-del {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    border: 1px solid rgba(0,255,135,0.1);
+    border-radius: 8px;
+    padding: 8px;
+    background: rgba(0,255,135,0.02);
+  }
+  .mock-del-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(0,255,135,0.1);
+    border: 1px solid rgba(0,255,135,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .mock-del-title { font-size: 10px; font-weight: bold; color: #e8f0ea; }
+  .mock-del-sub { font-size: 9px; color: rgba(176,200,184,0.45); }
+  .mock-pricing {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .mock-price-card {
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid;
+  }
+  .mock-price-card-featured {
+    border-color: rgba(0,255,135,0.35);
+    background: rgba(0,255,135,0.05);
+  }
+  .mock-price-card-plain {
+    border-color: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.02);
+  }
+  .mock-price-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 4px; }
+  .mock-price-big { font-size: 22px; font-weight: bold; color: #00FF87; }
+  .mock-price-note { font-size: 9px; color: rgba(176,200,184,0.45); margin-top: 2px; }
+  .mock-price-includes { font-size: 9px; color: rgba(0,255,135,0.7); margin-top: 8px; font-style: italic; }
+  .mock-ia-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: rgba(0,255,135,0.08);
+    border: 1px solid rgba(0,255,135,0.2);
+    color: rgba(0,255,135,0.8);
+    margin: 2px;
+  }
+  .mock-engines { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .mock-cta-row { display: flex; gap: 8px; margin-top: 16px; }
+  .mock-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: default;
+  }
+  .mock-btn-primary {
+    background: rgba(0,255,135,0.15);
+    border: 1px solid rgba(0,255,135,0.5);
+    color: #00FF87;
+  }
+  .mock-btn-secondary {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(176,200,184,0.6);
+  }
+</style>
+
+<div class="mockup">
+  <div class="mockup-header">Panel expandido — Tarjeta Audiovisual + Contenido</div>
+  <div class="mockup-body" style="padding:0">
+    <div class="mock-panel">
+
+      <!-- Tabs -->
+      <div class="mock-tabs">
+        <div class="mock-tab mock-tab-off">📹 Audiovisual Corporativo</div>
+        <div class="mock-tab mock-tab-on">🤖 Contenido con IA</div>
+      </div>
+
+      <!-- Body: Contenido IA tab -->
+      <div class="mock-body">
+
+        <!-- Header -->
+        <div class="mock-sec">SISTEMA CONTENIDO CON IA</div>
+        <div class="mock-h2">Cerebro Creativo Estratégico con IA</div>
+        <div class="mock-sub">Adquisición de clientes mediante contenido estratégico mensual. Sin sesiones de grabación requeridas. Para cualquier tipo de negocio.</div>
+
+        <!-- Fases del proceso -->
+        <div class="mock-sec">CÓMO FUNCIONA (3 fases)</div>
+        <div class="mock-phases">
+          <div class="mock-phase">
+            <div class="mock-phase-num">Fase 01 · Mes 1</div>
+            <div class="mock-phase-name">🧠 Cerebro IA</div>
+            <div class="mock-phase-detail">300-500 pág. docs estratégicos. Briefing, buyer persona, arq. de comunicación. Prompts maestros de marca.</div>
+            <div class="mock-phase-tag">Solo en mes 1</div>
+          </div>
+          <div class="mock-phase">
+            <div class="mock-phase-num">Fase 02 · Mensual</div>
+            <div class="mock-phase-name">🎬 Producción</div>
+            <div class="mock-phase-detail">Guiones con IA → prompts semióticos → generación de imagen y video → edición profesional manual.</div>
+            <div class="mock-phase-tag">Cada mes</div>
+          </div>
+          <div class="mock-phase">
+            <div class="mock-phase-num">Fase 03 · Mensual</div>
+            <div class="mock-phase-name">✨ Entrega</div>
+            <div class="mock-phase-detail">10 videos listos para redes + 8 piezas gráficas publicitarias. Captions y estrategia de publicación.</div>
+            <div class="mock-phase-tag">Cada mes</div>
+          </div>
+        </div>
+
+        <div class="mock-divider"/>
+
+        <!-- Qué incluye -->
+        <div class="mock-sec">QUÉ RECIBES CADA MES</div>
+        <div class="mock-deliverables">
+          <div class="mock-del">
+            <div class="mock-del-icon">🧠</div>
+            <div>
+              <div class="mock-del-title">Cerebro IA del negocio</div>
+              <div class="mock-del-sub">Docs estratégicos + prompts maestros personalizados (mes 1)</div>
+            </div>
+          </div>
+          <div class="mock-del">
+            <div class="mock-del-icon">🎬</div>
+            <div>
+              <div class="mock-del-title">10 videos para redes</div>
+              <div class="mock-del-sub">Generados con Kling 3.0 · Seedance · Veo 3 + edición manual</div>
+            </div>
+          </div>
+          <div class="mock-del">
+            <div class="mock-del-icon">🖼️</div>
+            <div>
+              <div class="mock-del-title">8 piezas gráficas</div>
+              <div class="mock-del-sub">Generadas con Banana Pro · GPT Image + retoque profesional</div>
+            </div>
+          </div>
+          <div class="mock-del">
+            <div class="mock-del-icon">📋</div>
+            <div>
+              <div class="mock-del-title">Guiones + captions</div>
+              <div class="mock-del-sub">Redactados con el Cerebro IA, alineados a tu voz de marca</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Motores IA usados -->
+        <div style="margin-bottom:16px;">
+          <div style="font-size:9px; color:rgba(176,200,184,0.4); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.15em;">Motores de IA utilizados</div>
+          <div class="mock-engines">
+            <span class="mock-ia-badge">⚡ Kling 3.0</span>
+            <span class="mock-ia-badge">⚡ Seedance</span>
+            <span class="mock-ia-badge">⚡ Veo 3</span>
+            <span class="mock-ia-badge">⚡ Banana Pro</span>
+            <span class="mock-ia-badge">⚡ GPT Image</span>
+          </div>
+        </div>
+
+        <div class="mock-divider"/>
+
+        <!-- Precios -->
+        <div class="mock-sec">INVERSIÓN</div>
+        <div class="mock-pricing">
+          <div class="mock-price-card mock-price-card-featured">
+            <div class="mock-price-label" style="color:rgba(0,255,135,0.6);">Mes 1 · Arranque</div>
+            <div class="mock-price-big">S/ 4,500</div>
+            <div class="mock-price-note">+IGV · Cerebro IA + primera entrega</div>
+            <div class="mock-price-includes">✓ Incluye construcción del Cerebro IA</div>
+          </div>
+          <div class="mock-price-card mock-price-card-plain">
+            <div class="mock-price-label" style="color:rgba(176,200,184,0.4);">Mes 2+ · Retainer</div>
+            <div class="mock-price-big" style="color:#e8f0ea;">S/ 4,000</div>
+            <div class="mock-price-note">/mes +IGV · 10 videos + 8 piezas</div>
+            <div class="mock-price-includes" style="color:rgba(176,200,184,0.4);">Sin permanencia mínima forzada</div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mock-cta-row">
+          <div class="mock-btn mock-btn-primary">Agendar llamada →</div>
+          <div class="mock-btn mock-btn-secondary">WhatsApp →</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <h3>¿Esta estructura del tab te parece bien?</h3>
+  <p class="subtitle">Puedo agregar, quitar o reordenar secciones. Por ejemplo: ¿quieres una sección "Para quién es" o sección de garantía dentro de este tab?</p>
+</div>

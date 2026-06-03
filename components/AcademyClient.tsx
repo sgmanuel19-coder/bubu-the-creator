@@ -8,7 +8,6 @@ import { GlowCard } from "@/components/ui/spotlight-card";
 import CountUp from "@/components/CountUp";
 import TiltCard from "@/components/TiltCard";
 import GridBackground from "@/components/ui/grid-background";
-import HeroWave from "@/components/ui/dynamic-wave-canvas-background";
 import FAQAccordion from "@/components/ui/faq-accordion";
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
@@ -84,13 +83,32 @@ export function AcademyHero() {
   return (
     <section ref={ref} className="relative min-h-[100svh] flex items-center overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <HeroWave className="absolute inset-0 w-full h-full opacity-80" />
-        {/* Dark vignette + legibility overlays */}
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 60% at 50% 45%, rgba(6,6,8,0.35) 0%, rgba(6,6,8,0.78) 100%)" }} />
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-bg via-bg/80 to-transparent" />
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-bg/70 to-transparent" />
+        {/* Subtle grid */}
+        <div className="absolute inset-0 opacity-60"><GridBackground /></div>
+        {/* Drifting aurora blobs — GPU only, carga instantánea */}
+        <motion.div
+          className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[820px] h-[420px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(26,128,255,0.20) 0%, transparent 70%)", filter: "blur(90px)" }}
+          animate={{ x: [-40, 40, -40], y: [0, 30, 0], scale: [1, 1.08, 1] }}
+          transition={{ repeat: Infinity, duration: 16, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-[8%] left-[18%] w-[520px] h-[300px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(238,235,212,0.10) 0%, transparent 70%)", filter: "blur(80px)" }}
+          animate={{ x: [0, 60, 0], y: [0, -30, 0], scale: [1, 1.12, 1] }}
+          transition={{ repeat: Infinity, duration: 20, ease: "easeInOut", delay: 1 }}
+        />
+        <motion.div
+          className="absolute top-[30%] right-[14%] w-[440px] h-[260px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(77,159,255,0.14) 0%, transparent 70%)", filter: "blur(70px)" }}
+          animate={{ x: [0, -40, 0], y: [0, 40, 0], scale: [1.05, 1, 1.05] }}
+          transition={{ repeat: Infinity, duration: 18, ease: "easeInOut", delay: 0.5 }}
+        />
+        {/* Vignette + legibility */}
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 75% 65% at 50% 45%, transparent 0%, rgba(6,6,8,0.55) 100%)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-bg via-bg/70 to-transparent" />
       </div>
-      <div className="absolute inset-0 z-[2] pointer-events-none scanlines opacity-50" />
+      <div className="absolute inset-0 z-[2] pointer-events-none scanlines opacity-30" />
 
       <motion.div style={{ y: yWatermark }} className="absolute inset-0 z-[3] flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <span className="font-brand font-black tracking-[0.25em] text-white/[0.022]" style={{ fontSize: "clamp(5rem, 17vw, 17rem)" }}>

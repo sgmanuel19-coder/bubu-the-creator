@@ -1,0 +1,233 @@
+<h2>¿Cómo entra el "Sistema Contenido IA" dentro de la tarjeta Audiovisual?</h2>
+<p class="subtitle">Las dos son distintas: una es producción corporativa, la otra es contenido mensual para redes. ¿Cómo las separas visualmente dentro del panel expandido?</p>
+
+<style>
+  .mock-dark {
+    background: #080d08;
+    border-radius: 12px;
+    padding: 14px;
+    font-family: monospace;
+    font-size: 11px;
+    color: #b0c8b8;
+    min-height: 200px;
+  }
+  .mock-neon { color: #00FF87; }
+  .mock-muted { color: rgba(176,200,184,0.45); }
+  .mock-cream { color: #e8f0ea; font-weight: bold; }
+  .mock-sec {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(0,255,135,0.5);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mock-sec::before { content:''; display:inline-block; width:16px; height:1px; background:rgba(0,255,135,0.4); }
+  .mock-plan {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px;
+    background: rgba(255,255,255,0.02);
+    margin: 4px 0;
+  }
+  .mock-plan-green {
+    border-color: rgba(0,255,135,0.25);
+    background: rgba(0,255,135,0.04);
+  }
+  .mock-plan-purple {
+    border-color: rgba(204,68,255,0.25);
+    background: rgba(204,68,255,0.04);
+  }
+  .mock-chip {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 5px;
+  }
+  .mock-chip-green { background:rgba(0,255,135,0.1); border:1px solid rgba(0,255,135,0.25); color:#00FF87; }
+  .mock-chip-gray { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:rgba(176,200,184,0.5); }
+  .mock-price-big { font-size:18px; font-weight:bold; color:#00FF87; }
+  .mock-price-sm { font-size:10px; color:rgba(176,200,184,0.5); }
+  .mock-divider { height:1px; background:rgba(255,255,255,0.05); margin:10px 0; }
+  .mock-divider-bold { height:1px; background:rgba(0,255,135,0.15); margin:12px 0; }
+  .mock-tab {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 10px;
+    cursor: default;
+    border: 1px solid;
+  }
+  .mock-tab-on { background:rgba(0,255,135,0.12); border-color:rgba(0,255,135,0.35); color:#00FF87; }
+  .mock-tab-off { background:transparent; border-color:rgba(255,255,255,0.1); color:rgba(176,200,184,0.4); }
+  .mock-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin: 4px 0;
+    font-size: 10px;
+  }
+  .mock-check { color:#00FF87; flex-shrink:0; }
+  .mock-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .mock-grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; }
+  .mock-highlight {
+    background: rgba(0,255,135,0.06);
+    border: 1px solid rgba(0,255,135,0.2);
+    border-left: 3px solid rgba(0,255,135,0.6);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 8px 0;
+  }
+  .mock-tag {
+    font-size:9px;
+    padding:2px 6px;
+    border-radius:4px;
+    background:rgba(0,255,135,0.08);
+    border:1px solid rgba(0,255,135,0.2);
+    color:rgba(0,255,135,0.7);
+    margin-left:4px;
+  }
+</style>
+
+<div class="options">
+
+  <!-- Opción A: Sección destacada al inicio del panel -->
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Primero el Contenido IA (featured), luego los planes audiovisuales</h3>
+      <p>Al abrir la tarjeta, lo primero que ves es el Sistema Contenido IA como el servicio estrella. Abajo, los planes Señal/Presencia/Autoridad para quien necesite producción corporativa.</p>
+      <div class="mock-dark">
+        <!-- FEATURED: Contenido IA -->
+        <div class="mock-highlight">
+          <div class="mock-sec">NUEVO · Sistema Contenido con IA</div>
+          <div class="mock-cream">Cerebro Creativo Estratégico con IA <span class="mock-tag">⚡ RECOMENDADO</span></div>
+          <div class="mock-muted" style="font-size:10px; margin:4px 0 8px;">Adquisición de clientes mediante contenido estratégico mensual</div>
+          <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:6px;">
+            <span class="mock-price-big">S/ 4,500</span>
+            <span class="mock-price-sm">mes 1 +IGV · luego S/4,000/mes</span>
+          </div>
+          <div class="mock-grid2" style="margin-top:6px;">
+            <div>
+              <div class="mock-feature"><span class="mock-check">✓</span>300-500 pág. docs estratégicos</div>
+              <div class="mock-feature"><span class="mock-check">✓</span>Cerebro IA personalizado</div>
+              <div class="mock-feature"><span class="mock-check">✓</span>Prompts maestros de marca</div>
+            </div>
+            <div>
+              <div class="mock-feature"><span class="mock-check">✓</span>10 videos (IA + edición)</div>
+              <div class="mock-feature"><span class="mock-check">✓</span>8 piezas gráficas IA</div>
+              <div class="mock-feature"><span class="mock-check">✓</span>Para cualquier negocio</div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-divider-bold"/>
+        <!-- Planes audiovisuales abajo -->
+        <div class="mock-sec">PRODUCCIÓN AUDIOVISUAL CORPORATIVA</div>
+        <div class="mock-grid3">
+          <div class="mock-plan">
+            <div class="mock-chip mock-chip-gray">Plan Señal</div>
+            <div class="mock-cream" style="font-size:13px;">$500</div>
+            <div class="mock-muted" style="font-size:9px;">por servicio</div>
+          </div>
+          <div class="mock-plan mock-plan-green">
+            <div class="mock-chip mock-chip-green">Plan Presencia</div>
+            <div class="mock-cream" style="font-size:13px; color:#00FF87;">$1,000</div>
+            <div class="mock-muted" style="font-size:9px;">/mes</div>
+          </div>
+          <div class="mock-plan">
+            <div class="mock-chip mock-chip-gray">Plan Autoridad</div>
+            <div class="mock-cream" style="font-size:13px;">$3,000</div>
+            <div class="mock-muted" style="font-size:9px;">pago único</div>
+          </div>
+        </div>
+      </div>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>El servicio nuevo tiene protagonismo</li><li>Clara jerarquía visual</li><li>Vende primero lo que quieres vender</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Los planes audiovisuales quedan relegados</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Opción B: Tabs dentro del panel -->
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Dos tabs dentro del panel: Audiovisual | Contenido IA</h3>
+      <p>El panel expandido tiene dos pestañas. El visitante elige qué tipo de servicio necesita. Cada uno tiene su propia presentación completa.</p>
+      <div class="mock-dark">
+        <!-- Tabs -->
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+          <span class="mock-tab mock-tab-off">📹 Audiovisual Corporativo</span>
+          <span class="mock-tab mock-tab-on">🤖 Contenido con IA</span>
+        </div>
+        <!-- Tab content: Contenido IA activo -->
+        <div class="mock-sec">SISTEMA CONTENIDO CON IA</div>
+        <div class="mock-cream" style="font-size:13px; margin-bottom:6px;">Cerebro Creativo Estratégico con IA</div>
+        <div class="mock-muted" style="font-size:10px; margin-bottom:10px;">Sistema mensual de adquisición de clientes mediante contenido estratégico</div>
+        <div class="mock-grid2" style="margin-bottom:10px;">
+          <div class="mock-plan mock-plan-green">
+            <div class="mock-chip mock-chip-green">Mes 1 · Arranque</div>
+            <div class="mock-price-big">S/ 4,500</div>
+            <div class="mock-price-sm">+IGV · Cerebro IA + contenido</div>
+          </div>
+          <div class="mock-plan">
+            <div class="mock-chip mock-chip-gray">Mes 2+ · Retainer</div>
+            <div class="mock-price-big" style="color:#e8f0ea;">S/ 4,000</div>
+            <div class="mock-price-sm">/mes +IGV · contenido mensual</div>
+          </div>
+        </div>
+        <div class="mock-sec">QUÉ INCLUYE</div>
+        <div class="mock-feature"><span class="mock-check">🧠</span><span>Cerebro IA: 300-500 pág. de docs estratégicos + prompts maestros (mes 1)</span></div>
+        <div class="mock-feature"><span class="mock-check">🎬</span><span>10 videos/mes generados con IA + edición profesional</span></div>
+        <div class="mock-feature"><span class="mock-check">🖼️</span><span>8 piezas gráficas/mes con IA generativa + retoque humano</span></div>
+      </div>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Cada servicio tiene espacio completo</li><li>Sin mezclar audiencias</li><li>Muy organizado</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Requiere implementar lógica de tabs</li><li>El visitante podría no explorar ambas pestañas</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Opción C: Card separada dentro de la sección (no dentro del panel expandible) -->
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Dos tarjetas dentro de Audiovisual: una para corporativo, una para Contenido IA</h3>
+      <p>En lugar de expandir una sola tarjeta, la sección Audiovisual muestra dos sub-tarjetas permanentemente visibles: "Producción Corporativa" y "Sistema Contenido IA". Cada una con su precio y CTA propio.</p>
+      <div class="mock-dark">
+        <div class="mock-sec">SERVICIOS AUDIOVISUALES + CONTENIDO</div>
+        <div class="mock-grid2">
+          <div class="mock-plan">
+            <div class="mock-chip mock-chip-gray">📹 Audiovisual</div>
+            <div class="mock-cream">Producción Corporativa</div>
+            <div class="mock-muted" style="font-size:10px; margin:4px 0;">Video caso, coberturas, VSL, sistema completo de autoridad</div>
+            <div class="mock-divider"/>
+            <div class="mock-feature"><span class="mock-check">✓</span>Plan Señal desde $500</div>
+            <div class="mock-feature"><span class="mock-check">✓</span>Plan Presencia $1,000/mes</div>
+            <div class="mock-feature"><span class="mock-check">✓</span>Plan Autoridad $3,000</div>
+          </div>
+          <div class="mock-plan mock-plan-green">
+            <div class="mock-chip mock-chip-green">🤖 Contenido IA ⚡ Nuevo</div>
+            <div class="mock-cream" style="color:#00FF87;">Cerebro Creativo con IA</div>
+            <div class="mock-muted" style="font-size:10px; margin:4px 0;">Contenido estratégico mensual. Sin sesiones de grabación requeridas.</div>
+            <div class="mock-divider"/>
+            <div class="mock-feature"><span class="mock-check">✓</span>Cerebro IA del negocio</div>
+            <div class="mock-feature"><span class="mock-check">✓</span>10 videos + 8 piezas/mes</div>
+            <div style="margin-top:6px;">
+              <span class="mock-price-big" style="font-size:15px;">S/ 4,500</span>
+              <span class="mock-price-sm"> mes 1 · S/4,000 mes 2+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Todo visible de golpe, sin clicks</li><li>Comparación natural entre servicios</li><li>Diferencia clara: USD corporativo vs Soles contenido</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Menos espacio para cada servicio</li><li>La tarjeta principal puede sentirse abarrotada</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>
