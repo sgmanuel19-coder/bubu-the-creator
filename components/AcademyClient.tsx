@@ -8,6 +8,7 @@ import { GlowCard } from "@/components/ui/spotlight-card";
 import CountUp from "@/components/CountUp";
 import TiltCard from "@/components/TiltCard";
 import GridBackground from "@/components/ui/grid-background";
+import HeroWave from "@/components/ui/dynamic-wave-canvas-background";
 import FAQAccordion from "@/components/ui/faq-accordion";
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
@@ -83,15 +84,13 @@ export function AcademyHero() {
   return (
     <section ref={ref} className="relative min-h-[100svh] flex items-center overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <GridBackground />
-        <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-bg to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-br from-neon-green/5 via-transparent to-neon-purple/8" />
+        <HeroWave className="absolute inset-0 w-full h-full opacity-80" />
+        {/* Dark vignette + legibility overlays */}
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 60% at 50% 45%, rgba(6,6,8,0.35) 0%, rgba(6,6,8,0.78) 100%)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-bg via-bg/80 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-bg/70 to-transparent" />
       </div>
-      <div className="absolute inset-0 z-[2] pointer-events-none scanlines" />
-      <div className="absolute inset-0 z-[2] pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[760px] h-[340px] rounded-full bg-neon-purple/10 blur-[120px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[460px] h-[240px] rounded-full bg-neon-green/8 blur-[90px]" />
-      </div>
+      <div className="absolute inset-0 z-[2] pointer-events-none scanlines opacity-50" />
 
       <motion.div style={{ y: yWatermark }} className="absolute inset-0 z-[3] flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <span className="font-brand font-black tracking-[0.25em] text-white/[0.022]" style={{ fontSize: "clamp(5rem, 17vw, 17rem)" }}>
