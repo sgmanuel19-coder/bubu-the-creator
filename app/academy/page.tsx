@@ -4,14 +4,17 @@ import Footer from "@/components/Footer";
 import {
   AcademyHero,
   AcademyAuthorityBar,
+  AcademyBio,
+  AcademyStatement,
+  AcademyCases,
   AcademyShift,
   AcademyMechanism,
   AcademyTransformation,
+  AcademyForWho,
   AcademyCurriculum,
-  AcademyProof,
   AcademyValueStack,
   AcademyPricing,
-  AcademyForWho,
+  AcademyVersus,
   AcademyFAQ,
   AcademyFinalCTA,
 } from "@/components/AcademyClient";
@@ -42,18 +45,24 @@ export const metadata: Metadata = {
 
 export default function AcademyPage() {
   return (
-    <main className="relative overflow-hidden" style={{ background: "var(--bg)", minHeight: "100vh" }}>
+    <main
+      className="relative overflow-hidden"
+      style={{ background: "var(--bg)", minHeight: "100vh" }}
+    >
       <Navbar minimal />
       <AcademyHero />
       <AcademyAuthorityBar />
+      <AcademyBio />
+      <AcademyStatement />
+      <AcademyCases />
       <AcademyShift />
       <AcademyMechanism />
       <AcademyTransformation />
+      <AcademyForWho />
       <AcademyCurriculum />
-      <AcademyProof />
       <AcademyValueStack />
       <AcademyPricing />
-      <AcademyForWho />
+      <AcademyVersus />
       <AcademyFAQ />
       <AcademyFinalCTA />
       <Footer />
