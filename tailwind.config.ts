@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#060608",
-        surface: "#07090b",
-        "surface-2": "#0c0e12",
+        bg:          "#0D0C08",   /* warm near-black  — brandbook charcoal base  */
+        surface:     "#141209",   /* warm dark surface                           */
+        "surface-2": "#1C1A12",   /* raised card surface                         */
         // Brand palette
         "brand-blue":  "#1A80FF",
         "brand-cream": "#EEEBD4",
@@ -33,8 +33,8 @@ const config: Config = {
           DEFAULT: "#1A80FF",
           light: "#4D9FFF",
         },
-        cream: "#F5F2E4",
-        muted: "#BBC8D4",
+        cream: "#F4F0DE",   /* brandbook cream exact                   */
+        muted: "#9E9882",   /* warm muted — en lugar del cool blue-gray */
         "border-glow": "rgba(26, 128, 255, 0.12)",
       },
       fontFamily: {

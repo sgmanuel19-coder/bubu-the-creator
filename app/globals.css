@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --bg:           #060608;
-  --surface:      #07090b;
-  --green:        #1A80FF;        /* brand blue  */
+  --bg:           #0D0C08;        /* warm near-black  — brandbook charcoal base */
+  --surface:      #141209;        /* warm dark surface                          */
+  --green:        #1A80FF;        /* brand blue (C:90 M:50 Y:0 K:0)            */
   --green-dim:    #1460CC;
   --green-dark:   #0A3A7A;
   --violet:       #EEEBD4;        /* brand cream */
-  --violet-light: #F5F2E4;
+  --violet-light: #F4F0DE;
   --violet-glow:  #D4CFA8;
-  --cream:        #F5F2E4;
-  --muted:        #BBC8D4;
+  --cream:        #F4F0DE;        /* brandbook cream exact                      */
+  --muted:        #9E9882;        /* warm muted text                            */
   --glow-green:   rgba(26, 128, 255, 0.28);
   --glow-violet:  rgba(238, 235, 212, 0.20);
 }
