@@ -22,12 +22,18 @@ const ICONS = [
     strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
     <path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
   </svg>,
+  // CPU/AI — IA sin criterio produce genérico
+  <svg key="cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}
+    strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+    <path d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+  </svg>,
 ];
 
 const ACCENT_COLORS = [
   { border: "border-violet-400/25", bg: "bg-violet-500/10", text: "text-violet-300", bar: "from-violet-500 to-indigo-500" },
   { border: "border-fuchsia-400/25", bg: "bg-fuchsia-500/10", text: "text-fuchsia-300", bar: "from-fuchsia-500 to-violet-500" },
   { border: "border-indigo-400/25", bg: "bg-indigo-500/10", text: "text-indigo-300", bar: "from-indigo-500 to-violet-500" },
+  { border: "border-blue-400/25", bg: "bg-blue-500/10", text: "text-blue-300", bar: "from-blue-500 to-indigo-500" },
 ];
 
 export default function Problem() {
