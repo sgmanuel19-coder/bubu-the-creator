@@ -134,7 +134,7 @@ export default function Hero() {
             <div className="rounded-xl bg-bg/95 px-5 py-3 backdrop-blur-xl
                             border border-neon-green/20 shadow-lg shadow-neon-green/10">
               <p className="text-[10px] text-muted font-body mb-0.5 tracking-wider uppercase">Actualmente con</p>
-              <p className="text-sm font-display font-bold text-neon-green tracking-wide">WIN · LIVOLTEK</p>
+              <p className="text-sm font-display font-bold text-neon-green tracking-wide">WIN · LIVOLTEK · WELLMAX</p>
             </div>
           </motion.div>
         </motion.div>
@@ -202,9 +202,9 @@ export default function Hero() {
 
               <div>
                 <p className="text-base font-display font-bold text-neon-green leading-none">
-                  1 cupo disponible
+                  Sin cupos disponibles
                 </p>
-                <p className="text-[11px] font-body text-white/65 mt-1">este mes · Lima</p>
+                <p className="text-[11px] font-body text-white/65 mt-1">por ahora · Lima</p>
               </div>
             </div>
 
