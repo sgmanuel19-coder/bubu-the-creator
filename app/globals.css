@@ -66,20 +66,10 @@ body {
    HOLOGRAPHIC TEXT  — blue → purple shimmer
 ───────────────────────────────────────────── */
 .text-holo {
-  background: linear-gradient(
-    90deg,
-    #1A80FF 0%,
-    #4D9FFF 18%,
-    #EEEBD4 45%,
-    #F5F2E4 60%,
-    #1A80FF 80%,
-    #4D9FFF 100%
-  );
-  background-size: 300%;
+  background: linear-gradient(135deg, #F4F0DE 0%, #C8D8E8 55%, #1A80FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: holoShimmer 4s linear infinite;
 }
 @keyframes holoShimmer {
   0%   { background-position: 0%   center; }
@@ -119,40 +109,35 @@ body {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.9rem 2.2rem;
-  border-radius: 9999px;
+  border-radius: 8px;
   font-family: var(--font-montserrat);
   font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #fff;
-  background: linear-gradient(135deg, #1A80FF 0%, #1460CC 50%, #1A80FF 100%);
-  background-size: 200% auto;
-  border: 1px solid rgba(26, 128, 255, 0.5);
-  transition: background-position 0.5s ease, box-shadow 0.35s ease, transform 0.2s ease;
+  background: #1A80FF;
+  border: 1px solid rgba(26, 128, 255, 0.6);
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
   overflow: hidden;
 }
 .btn-glow::before {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 9999px;
-  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+  border-radius: 8px;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
   transform: translateX(-100%);
-  transition: transform 0.5s ease;
+  transition: transform 0.45s ease;
 }
 .btn-glow:hover::before { transform: translateX(100%); }
 .btn-glow:hover {
-  background-position: right center;
-  box-shadow:
-    0 0 22px rgba(26,128,255,0.75),
-    0 0 50px rgba(26,128,255,0.35),
-    0 0 90px rgba(26,128,255,0.15),
-    inset 0 0 12px rgba(26,128,255,0.12);
-  transform: translateY(-3px);
-  border-color: rgba(26,128,255,0.85);
+  background: #1460CC;
+  box-shadow: 0 4px 24px rgba(26,128,255,0.35), 0 1px 4px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+  border-color: rgba(26,128,255,0.9);
 }
-.btn-glow:active { transform: translateY(-1px); }
+.btn-glow:active { transform: translateY(0px); }
 
 /* SECONDARY — cream outline */
 .btn-outline {

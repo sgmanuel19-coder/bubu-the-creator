@@ -21,9 +21,6 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-neon-green/4 via-transparent to-neon-purple/6" />
       </div>
 
-      {/* Scanlines + grid */}
-      <div className="absolute inset-0 z-[2] pointer-events-none scanlines" />
-      <div className="absolute inset-0 z-[2] grid-pattern opacity-20 pointer-events-none" />
 
       {/* Glow blobs */}
       <div className="absolute inset-0 z-[2] pointer-events-none">
