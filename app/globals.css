@@ -116,9 +116,9 @@ body {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #fff;
-  background: #1A80FF;
-  border: 1px solid rgba(26, 128, 255, 0.6);
-  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+  background: linear-gradient(135deg, #1A80FF 0%, #0E5BCC 100%);
+  border: 1px solid rgba(26, 128, 255, 0.45);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
   overflow: hidden;
 }
 .btn-glow::before {
@@ -126,16 +126,16 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 8px;
-  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
-  transform: translateX(-100%);
-  transition: transform 0.45s ease;
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.15) 50%, transparent 80%);
+  transform: translateX(-100%) skewX(-15deg);
+  transition: transform 0.55s ease;
 }
-.btn-glow:hover::before { transform: translateX(100%); }
+.btn-glow:hover::before { transform: translateX(150%) skewX(-15deg); }
 .btn-glow:hover {
-  background: #1460CC;
-  box-shadow: 0 4px 24px rgba(26,128,255,0.35), 0 1px 4px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, #2D92FF 0%, #1A80FF 100%);
+  box-shadow: 0 0 28px rgba(26,128,255,0.55), 0 6px 20px rgba(0,0,0,0.35);
   transform: translateY(-2px);
-  border-color: rgba(26,128,255,0.9);
+  border-color: rgba(26,128,255,0.8);
 }
 .btn-glow:active { transform: translateY(0px); }
 
@@ -627,3 +627,80 @@ body {
   inset: -10px;
   border-width: 10px;
 }
+
+/* ─────────────────────────────────────────────
+   BRAND AMBIENT — líneas y glow de marca
+───────────────────────────────────────────── */
+
+/* Blob aurora — solo azul de marca */
+.brand-aurora {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(100px);
+  animation: brandFloat 14s ease-in-out infinite alternate;
+}
+@keyframes brandFloat {
+  0%   { transform: translate(0, 0)      scale(1);    opacity: 0.18; }
+  33%  { transform: translate(40px,-30px) scale(1.08); opacity: 0.22; }
+  66%  { transform: translate(-20px,20px) scale(0.95); opacity: 0.15; }
+  100% { transform: translate(15px,-10px) scale(1.04); opacity: 0.20; }
+}
+
+/* Línea de scan horizontal — sube de abajo a arriba */
+@keyframes scanUp {
+  0%   { top: 105%; opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 0.6; }
+  100% { top: -5%;  opacity: 0; }
+}
+.brand-scan-v {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(26,128,255,0.0) 10%,
+    rgba(26,128,255,0.7) 40%,
+    rgba(244,240,222,0.4) 50%,
+    rgba(26,128,255,0.7) 60%,
+    rgba(26,128,255,0.0) 90%,
+    transparent 100%);
+  animation: scanUp 8s cubic-bezier(0.4,0,0.6,1) infinite;
+}
+.brand-scan-v:nth-child(2) { animation-delay: 4s; opacity: 0.5; }
+
+/* Línea de luz diagonal — decorativa en hero */
+.brand-ray {
+  position: absolute;
+  pointer-events: none;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(26,128,255,0.35) 30%,
+    rgba(244,240,222,0.2) 50%,
+    rgba(26,128,255,0.35) 70%,
+    transparent 100%);
+  animation: rayPulse 6s ease-in-out infinite;
+}
+@keyframes rayPulse {
+  0%,100% { opacity: 0.2; transform: scaleY(0.85); }
+  50%     { opacity: 0.7; transform: scaleY(1);    }
+}
+
+/* Esquinas brillantes en secciones clave */
+.brand-corners::before,
+.brand-corners::after {
+  content: '';
+  position: absolute;
+  width: 40px; height: 40px;
+  border-style: solid;
+  border-color: rgba(26,128,255,0.35);
+  transition: border-color 0.4s ease;
+  pointer-events: none;
+}
+.brand-corners::before { top: 16px; left: 16px; border-width: 1px 0 0 1px; border-radius: 2px 0 0 0; }
+.brand-corners::after  { bottom: 16px; right: 16px; border-width: 0 1px 1px 0; border-radius: 0 0 2px 0; }
+.brand-corners:hover::before,
+.brand-corners:hover::after { border-color: rgba(26,128,255,0.7); }

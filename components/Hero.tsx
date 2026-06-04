@@ -14,19 +14,36 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
 
-      {/* ── GRID BACKGROUND (mismo que subpáginas) ── */}
+      {/* ── FONDO AMBIENTE — solo paleta de marca ── */}
       <div className="absolute inset-0 z-0">
-        <GridBackground />
-        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-bg to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-br from-neon-green/4 via-transparent to-neon-purple/6" />
+        {/* Fade bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-bg to-transparent" />
+
+        {/* Aurora blobs — brand blue únicamente */}
+        <div className="brand-aurora w-[700px] h-[380px]"
+          style={{ top: "8%", left: "50%", transform: "translateX(-50%)",
+            background: "radial-gradient(ellipse, rgba(26,128,255,0.22) 0%, transparent 70%)" }} />
+        <div className="brand-aurora w-[420px] h-[240px]"
+          style={{ bottom: "20%", left: "15%", animationDelay: "5s",
+            background: "radial-gradient(ellipse, rgba(26,128,255,0.12) 0%, transparent 70%)" }} />
+        <div className="brand-aurora w-[300px] h-[180px]"
+          style={{ top: "30%", right: "12%", animationDelay: "9s",
+            background: "radial-gradient(ellipse, rgba(244,240,222,0.06) 0%, transparent 70%)" }} />
+
+        {/* Líneas de scan verticales */}
+        <div className="brand-scan-v" style={{ zIndex: 1 }} />
+        <div className="brand-scan-v" style={{ zIndex: 1 }} />
+
+        {/* Rayos de luz diagonales */}
+        <div className="brand-ray h-[60%]"
+          style={{ left: "22%", top: "20%", transform: "rotate(-15deg)", animationDelay: "1s" }} />
+        <div className="brand-ray h-[40%]"
+          style={{ right: "28%", top: "30%", transform: "rotate(12deg)", animationDelay: "3.5s" }} />
       </div>
 
-
-      {/* Glow blobs */}
-      <div className="absolute inset-0 z-[2] pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full bg-neon-purple/8 blur-[100px]" />
-        <div className="absolute bottom-1/3 left-1/4 w-[400px] h-[200px] rounded-full bg-neon-green/6 blur-[80px]" />
-      </div>
+      {/* Vignette */}
+      <div className="absolute inset-0 z-[1] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 80% 70% at 50% 40%, transparent 40%, rgba(13,12,8,0.6) 100%)" }} />
 
 
       {/* ── CONTENT — stacked centered layout ── */}
