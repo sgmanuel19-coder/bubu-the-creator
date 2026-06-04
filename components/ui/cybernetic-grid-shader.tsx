@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 const CyberneticGridShader = () => {
+  return null;
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
