@@ -68,7 +68,7 @@ export default function Hero() {
             {...fadeUp(0.2)}
             className="font-display font-extrabold tracking-tight leading-[0.95] mb-6
                        drop-shadow-[0_2px_30px_rgba(0,0,0,0.95)]"
-            style={{ fontSize: "clamp(3.2rem, 7vw, 7.5rem)" }}
+            style={{ fontSize: "clamp(2.2rem, 4.5vw, 4.8rem)" }}
           >
             <span className="block text-cream">{SITE.hero.headline[0]}</span>
             <span className="block text-holo mt-1">{SITE.hero.headline[1]}</span>
