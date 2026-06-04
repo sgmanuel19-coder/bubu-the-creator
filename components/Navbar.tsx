@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Sobre mí", href: "/sobre-mi" },
   { label: "Casos", href: "/casos" },
   { label: "Servicios", href: "/servicios" },
+  { label: "Academy", href: "/academy" },
 ];
 
 export default function Navbar({ minimal = false }: { minimal?: boolean }) {
