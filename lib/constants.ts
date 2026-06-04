@@ -31,7 +31,7 @@ export const SITE = {
   // ── Hero ───────────────────────────────────────────────────
   hero: {
     eyebrow: "Estrategia · Producción · IA aplicada",
-    headline: ["Elevo la percepción de tu marca", "con sistemas de comunicación comercial."],
+    headline: ["Elevo la percepción de tu marca", " con sistemas de comunicación comercial."],
     subheadline:
       "60 días para instalar el sistema que convierte la complejidad técnica de tu empresa en su principal argumento de venta. Hoy lo construyo con IA integrada en cada fase —planeación, producción y edición— para entregar más rápido y con más nivel, sin soltar el criterio humano.",
     ctaPrimary: "Quiero implementar el sistema",

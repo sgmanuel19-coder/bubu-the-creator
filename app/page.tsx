@@ -3,16 +3,29 @@ import { redirect } from "next/navigation";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import FAQ from "@/components/FAQ";
 
 const Problem    = dynamic(() => import("@/components/Problem"));
 const IAfrentes  = dynamic(() => import("@/components/IAfrentes"));
 const Authority  = dynamic(() => import("@/components/Authority"));
-const FAQ        = dynamic(() => import("@/components/FAQ"));
 const FinalCTA   = dynamic(() => import("@/components/FinalCTA"));
 const Footer     = dynamic(() => import("@/components/Footer"));
 
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://resueltoagency.com/#webpage",
+  "url": "https://resueltoagency.com",
+  "name": "RESUELTO — Comunicación Comercial B2B · Lima",
+  "description": "RESUELTO es una agencia de comunicación comercial en Lima, Perú, especializada en sistemas audiovisuales de autoridad y automatización con IA para empresas técnicas e industriales B2B. Clientes activos: WIN Internet, Livoltek.",
+  "inLanguage": "es-PE",
+  "dateModified": "2026-05-01",
+  "isPartOf": { "@id": "https://resueltoagency.com/#website" },
+  "publisher": { "@id": "https://resueltoagency.com/#organization" },
+};
+
 export const metadata: Metadata = {
-  title: "RESUELTO — Comunicación Comercial para Empresas B2B en Lima, Perú",
+  title: "RESUELTO — Comunicación Comercial B2B · Lima, Perú",
   description: "Agencia de comunicación comercial en Lima. Sistemas audiovisuales de autoridad, landing pages premium y automatización con IA para empresas técnicas e industriales en Perú.",
   keywords: [
     "agencia comunicación comercial Lima",
@@ -45,6 +58,10 @@ export default function Home() {
 
   return (
     <main id="main-content" className="relative overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
       <Navbar />
       <Hero />
       <Problem />

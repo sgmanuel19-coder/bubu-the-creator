@@ -95,16 +95,58 @@ export const metadata: Metadata = {
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://resueltoagency.com/#organization",
   "name": "RESUELTO",
   "url": "https://resueltoagency.com",
-  "logo": "https://resueltoagency.com/images/logo-mark.png",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://resueltoagency.com/images/logo-mark.png",
+    "width": 512,
+    "height": 512,
+  },
   "description": "Agencia de comunicación comercial premium en Lima, Perú. Sistemas audiovisuales de autoridad, presencia digital y automatización con IA para empresas B2B.",
+  "foundingDate": "2023",
+  "email": "resueltoagency@gmail.com",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Lima",
-    "addressCountry": "PE"
+    "addressCountry": "PE",
   },
   "areaServed": "PE",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "availableLanguage": "Spanish",
+    "url": "https://wa.me/51932844074",
+  },
+  "sameAs": [
+    "https://www.instagram.com/bubu_thecreator",
+    "https://www.tiktok.com/@bubuthecreator",
+    "https://www.linkedin.com/in/manuel-severo",
+  ],
+  "founder": {
+    "@type": "Person",
+    "@id": "https://resueltoagency.com/#founder",
+    "name": "Manuel Severo",
+    "jobTitle": "Fundador y Director",
+    "url": "https://resueltoagency.com/sobre-mi",
+    "sameAs": [
+      "https://www.linkedin.com/in/manuel-severo",
+      "https://www.instagram.com/bubu_thecreator",
+    ],
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://resueltoagency.com/#website",
+  "url": "https://resueltoagency.com",
+  "name": "RESUELTO — Comunicación Comercial Premium",
+  "inLanguage": "es-PE",
+  "publisher": {
+    "@id": "https://resueltoagency.com/#organization",
+  },
 };
 
 export default function RootLayout({
@@ -119,6 +161,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
       <body

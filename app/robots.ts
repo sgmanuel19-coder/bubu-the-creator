@@ -3,17 +3,18 @@ import { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
+      // Bloquear solo bots de entrenamiento IA (no de búsqueda/citación)
       {
-        userAgent: [
-          'GPTBot', 'ChatGPT-User', 'CCBot', 'anthropic-ai', 'Claude-Web',
-          'Bytespider', 'PetalBot', 'Applebot-Extended', 'cohere-ai',
-        ],
+        userAgent: ['CCBot', 'Bytespider', 'PetalBot', 'Applebot-Extended'],
         disallow: ['/'],
       },
+      // Bloquear scrapers de SEO
       {
         userAgent: ['SemrushBot', 'AhrefsBot', 'MJ12bot', 'DotBot', 'BLEXBot'],
         disallow: ['/'],
       },
+      // Permitir todo lo demás: GPTBot, ChatGPT-User, anthropic-ai, Claude-Web,
+      // OAI-SearchBot, PerplexityBot, Google-Extended, Googlebot, Bingbot
       {
         userAgent: '*',
         allow: '/',

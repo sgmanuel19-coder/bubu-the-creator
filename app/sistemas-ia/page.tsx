@@ -28,7 +28,7 @@ import { SchemaMarkup } from '@/components/SchemaMarkup';
 import { FloatingCTA } from '@/components/ui/floating-cta';
 
 export const metadata: Metadata = {
-  title: 'Super Agente IA para WhatsApp | Automatización Comercial 24/7 — RESUELTO',
+  title: 'Agente IA para WhatsApp 24/7 — Automatización Comercial · RESUELTO',
   description:
     'Sistema de IA que responde WhatsApp, califica leads, agenda citas y hace seguimiento automático 24/7. Listo en 5 días. Para negocios en Perú. Garantía 30 días.',
   keywords: [

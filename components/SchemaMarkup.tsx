@@ -3,18 +3,14 @@ export function SchemaMarkup() {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://resueltoagency.com/sistemas-ia/#service",
     "name": "Super Agente IA para WhatsApp — Automatización Comercial",
-    "provider": {
-      "@type": "Organization",
-      "name": "RESUELTO",
-      "url": "https://resueltoagency.com",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "sales",
-        "availableLanguage": "Spanish"
-      }
-    },
+    "serviceType": "Automatización Comercial con IA",
+    "url": "https://resueltoagency.com/sistemas-ia",
     "description": "Sistema de automatización comercial con IA entrenada en tu negocio. Responde WhatsApp Business, califica leads, agenda citas y hace seguimiento automático 24/7.",
+    "provider": {
+      "@id": "https://resueltoagency.com/#organization",
+    },
     "areaServed": { "@type": "Country", "name": "Perú" },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
@@ -22,30 +18,42 @@ export function SchemaMarkup() {
       "itemListElement": [
         {
           "@type": "Offer",
+          "@id": "https://resueltoagency.com/sistemas-ia/#offer-base",
           "name": "Plan Base",
           "description": "Chatbot WhatsApp IA con respuestas automáticas 24/7 y agendamiento",
           "price": "1500",
           "priceCurrency": "PEN",
-          "priceValidUntil": "2026-12-31"
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://resueltoagency.com/sistemas-ia#pricing",
+          "seller": { "@id": "https://resueltoagency.com/#organization" },
         },
         {
           "@type": "Offer",
+          "@id": "https://resueltoagency.com/sistemas-ia/#offer-plus",
           "name": "Plan Plus",
           "description": "Todo Base + nurturing, recuperación de leads fríos, CRM y cold email",
           "price": "3200",
           "priceCurrency": "PEN",
-          "priceValidUntil": "2026-12-31"
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://resueltoagency.com/sistemas-ia#pricing",
+          "seller": { "@id": "https://resueltoagency.com/#organization" },
         },
         {
           "@type": "Offer",
+          "@id": "https://resueltoagency.com/sistemas-ia/#offer-pro",
           "name": "Plan Pro",
           "description": "Sistema comercial completo multi-canal con IA avanzada y landing page",
           "price": "5800",
           "priceCurrency": "PEN",
-          "priceValidUntil": "2026-12-31"
-        }
-      ]
-    }
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://resueltoagency.com/sistemas-ia#pricing",
+          "seller": { "@id": "https://resueltoagency.com/#organization" },
+        },
+      ],
+    },
   };
 
   const faqSchema = {
@@ -103,15 +111,7 @@ export function SchemaMarkup() {
     ]
   };
 
-  const orgSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "RESUELTO",
-    "url": "https://resueltoagency.com",
-    "description": "Agencia de automatización comercial con inteligencia artificial para negocios en Perú.",
-    "foundingLocation": { "@type": "Place", "name": "Lima, Perú" },
-    "areaServed": "PE",
-  };
+  // Organization canonical lives in layout.tsx — referenced here by @id only via Service.provider
 
   return (
     <>
@@ -122,10 +122,6 @@ export function SchemaMarkup() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
       />
     </>
   );
