@@ -41,37 +41,28 @@ const CyberneticGridShader = () => {
         vec2 mouse = (iMouse        - 0.5 * iResolution.xy) / iResolution.y;
         float t    = iTime * 0.18;
 
-        // Mouse warp
+        // Mouse warp — subtle
         float mouseDist = length(uv - mouse);
-        float warp = sin(mouseDist * 22.0 - t * 4.5) * 0.08;
+        float warp = sin(mouseDist * 22.0 - t * 4.5) * 0.03;
         warp *= smoothstep(0.45, 0.0, mouseDist);
         uv += warp;
 
-        // Grid lines — neon green base
+        // Grid lines
         vec2  gridUv = abs(fract(uv * 12.0) - 0.5);
         float line   = pow(1.0 - min(gridUv.x, gridUv.y), 55.0);
 
-        // Neon blue base color
-        vec3 gridColor = vec3(0.0, 0.831, 1.0); // #00d4ff
-        vec3 color     = gridColor * line * (0.4 + sin(t * 2.0) * 0.15);
+        // Brand blue #1A80FF = rgb(0.102, 0.502, 1.0)
+        vec3 gridColor = vec3(0.102, 0.502, 1.0);
+        vec3 color     = gridColor * line * (0.35 + sin(t * 1.2) * 0.08);
 
-        // Purple energy pulses
-        float energy = sin(uv.x * 22.0 + t * 5.0)
-                     * sin(uv.y * 22.0 + t * 3.5);
-        energy = smoothstep(0.82, 1.0, energy);
-        color += vec3(0.8, 0.13, 1.0) * energy * line; // #cc44ff
+        // Mouse glow — brand blue, very subtle
+        float glow = smoothstep(0.10, 0.0, mouseDist);
+        color += gridColor * glow * 0.25;
 
-        // Mouse glow — white/blue
-        float glow = smoothstep(0.12, 0.0, mouseDist);
-        color += vec3(0.0, 0.831, 1.0) * glow * 0.6;
+        // Very dark — barely visible, just structural
+        color *= 0.20;
 
-        // Noise grain
-        color += random(uv + t * 0.08) * 0.04;
-
-        // Keep it very dark — just accent, not overwhelming
-        color *= 0.55;
-
-        gl_FragColor = vec4(color, 0.85);
+        gl_FragColor = vec4(color, 0.55);
       }
     `;
 
