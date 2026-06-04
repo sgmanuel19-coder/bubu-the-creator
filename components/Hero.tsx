@@ -31,17 +31,6 @@ export default function Hero() {
         <div className="absolute bottom-1/3 left-1/4 w-[400px] h-[200px] rounded-full bg-neon-green/6 blur-[80px]" />
       </div>
 
-      {/* Giant watermark */}
-      <div className="absolute inset-0 z-[3] flex items-center justify-center pointer-events-none select-none overflow-hidden">
-        <motion.span
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 0.5 }}
-          className="font-brand font-black tracking-[0.3em] text-white/[0.025]"
-          style={{ fontSize: "clamp(6rem, 18vw, 18rem)" }}
-        >
-          RESUELTO
-        </motion.span>
-      </div>
 
       {/* ── CONTENT — stacked centered layout ── */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6 lg:px-8 pt-28 pb-16" style={{ isolation: "isolate" }}>

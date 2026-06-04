@@ -124,21 +124,6 @@ export default function FinalCTA() {
           </AnimatedSection>
         </div>
 
-        {/* Decorative brand name */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          viewport={{ once: true }}
-          className="mt-20 select-none pointer-events-none text-center"
-        >
-          <p
-            className="font-display font-bold text-gradient-cyber opacity-[0.06] tracking-[0.3em]"
-            style={{ fontSize: "clamp(3rem, 10vw, 9rem)" }}
-          >
-            {SITE.brandName}
-          </p>
-        </motion.div>
       </div>
     </section>
   );
