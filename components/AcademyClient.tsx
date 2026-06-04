@@ -61,6 +61,9 @@ function SectionNum({ n }: { n: string }) {
 }
 
 const brands = [
+  "WIN INTERNET",
+  "WELLMAX",
+  "LIVOLTEK",
   "TBWA",
   "FAHRENHEIT DDB",
   "WONG",
@@ -70,7 +73,6 @@ const brands = [
   "SAN FERNANDO",
   "QUANTICO FILMS",
   "METRO",
-  "CENCOSUD",
 ];
 
 function Marquee() {
@@ -1821,7 +1823,7 @@ export function AcademyFinalCTA() {
         <Reveal>
           <div className="inline-flex items-center gap-3 border border-neon-green/22 rounded-full px-5 py-2.5 text-xs font-body text-cream/50 mb-8 bg-neon-green/[0.04]">
             <span className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
-            Cupos limitados — máximo 15 alumnos por cohorte
+            Cupos llenos — únete a la lista de espera
           </div>
           <Eyebrow>Próximos pasos</Eyebrow>
           <h2

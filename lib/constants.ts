@@ -7,8 +7,8 @@ export const SITE = {
   // ── Identidad ──────────────────────────────────────────────
   brandName: "RESUELTO",
   visibleName: "Manuel Severo",
-  professionalTitle: "Estratega de Comunicación Comercial · RESUELTO",
-  title: "Estratega de Comunicación Comercial",
+  professionalTitle: "Director Creativo IA · Founder, RESUELTO",
+  title: "Director Creativo IA",
   city: "Lima, Perú",
   email: "resueltoagency@gmail.com",
   year: "2026",
@@ -30,13 +30,13 @@ export const SITE = {
 
   // ── Hero ───────────────────────────────────────────────────
   hero: {
-    eyebrow: "Estrategia · Producción · IA aplicada",
-    headline: ["Elevo la percepción de tu marca", " con sistemas de comunicación comercial."],
+    eyebrow: "Agencia IA · Lima, Perú · B2B",
+    headline: ["Contenido de agencia,", "producido con IA."],
     subheadline:
-      "60 días para instalar el sistema que convierte la complejidad técnica de tu empresa en su principal argumento de venta. Hoy lo construyo con IA integrada en cada fase —planeación, producción y edición— para entregar más rápido y con más nivel, sin soltar el criterio humano.",
+      "Integro IA en cada fase del proceso —estrategia, producción y edición— con el criterio de quien pasó por TBWA y Fahrenheit DDB. El resultado para tu empresa: videos y activos de comunicación de nivel global, entregados más rápido y sin depender de un equipo grande.",
     ctaPrimary: "Quiero implementar el sistema",
     ctaSecondary: "o escríbeme directo",
-    anchor: "Diseñado para empresas B2B, técnicas e industriales que necesitan convertir su comunicación en una herramienta de ventas.",
+    anchor: "Para empresas B2B, técnicas e industriales. Clientes activos: WIN Internet · Livoltek · Wellmax.",
   },
 
   // ── Problema ───────────────────────────────────────────────
@@ -55,8 +55,12 @@ export const SITE = {
         label: "Sin continuidad comunicacional",
         text: "Solo aparecen cuando hay proyecto, feria, lanzamiento o campaña. No construyen autoridad de forma sostenida. No convierten contenido en oportunidades.",
       },
+      {
+        label: "Todos usan IA — pero sin criterio solo produce genérico",
+        text: "Tus competidores ya usan IA para crear contenido. El problema es que la IA sin dirección creativa produce lo mismo para todos. La diferencia no está en la herramienta — está en quién la dirige.",
+      },
     ],
-    closing: "Muchas empresas no tienen un problema de operación. Tienen un problema de percepción, claridad y continuidad comunicacional.",
+    closing: "El problema no es la herramienta. Es la falta de criterio creativo detrás. IA sin dirección produce ruido. Criterio sin IA produce lento. La combinación correcta es lo que cambia cómo se percibe tu empresa.",
   },
 
   // ── Sobre mí ───────────────────────────────────────────────
@@ -127,9 +131,10 @@ export const SITE = {
     ],
     logos: [
       { name: "WIN Internet", src: null },
+      { name: "Wellmax", src: null },
+      { name: "Livoltek", src: null },
       { name: "TBWA Perú", src: null },
       { name: "Fahrenheit DDB", src: null },
-      { name: "Livoltek", src: null },
       { name: "Wong", src: null },
       { name: "BCP", src: null },
       { name: "Interbank", src: null },
