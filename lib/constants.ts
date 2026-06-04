@@ -7,8 +7,8 @@ export const SITE = {
   // ── Identidad ──────────────────────────────────────────────
   brandName: "RESUELTO",
   visibleName: "Manuel Severo",
-  professionalTitle: "Director Creativo IA · Founder, RESUELTO",
-  title: "Director Creativo IA",
+  professionalTitle: "Sistemas de Contenido IA · Founder, RESUELTO",
+  title: "Sistemas de Contenido IA",
   city: "Lima, Perú",
   email: "resueltoagency@gmail.com",
   year: "2026",
@@ -30,13 +30,13 @@ export const SITE = {
 
   // ── Hero ───────────────────────────────────────────────────
   hero: {
-    eyebrow: "Agencia IA · Lima, Perú · B2B",
-    headline: ["Contenido de agencia,", "producido con IA."],
+    eyebrow: "Done For You · B2B · Lima, Perú",
+    headline: ["Instalamos tu sistema", "de contenido con IA."],
     subheadline:
-      "Integro IA en cada fase del proceso —estrategia, producción y edición— con el criterio de quien pasó por TBWA y Fahrenheit DDB. El resultado para tu empresa: videos y activos de comunicación de nivel global, entregados más rápido y sin depender de un equipo grande.",
-    ctaPrimary: "Quiero implementar el sistema",
+      "En 60 días tienes estrategia, producción y edición de contenido funcionando para tu empresa — sin equipo interno, sin estudio, sin improvisación. Solo el sistema que convierte lo que tu empresa hace en comunicación que genera autoridad y ventas.",
+    ctaPrimary: "Quiero el sistema",
     ctaSecondary: "o escríbeme directo",
-    anchor: "Para empresas B2B, técnicas e industriales. Clientes activos: WIN Internet · Livoltek · Wellmax.",
+    anchor: "Clientes activos: WIN Internet · Livoltek · Wellmax.",
   },
 
   // ── Problema ───────────────────────────────────────────────

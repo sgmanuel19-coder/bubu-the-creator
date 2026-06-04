@@ -405,7 +405,7 @@ export function AcademyBio() {
                 con clientes reales.{" "}
                 <strong className="text-cream">
                   La IA no es mi punto de partida —es la herramienta que sumé a
-                  más de quince años de criterio.
+                  más de seis años de criterio.
                 </strong>
               </p>
             </Reveal>
@@ -1020,7 +1020,7 @@ export function AcademyForWho() {
               «Pero si estás dispuesto a construir —aunque empieces de cero,
               aunque hoy sientas que no tienes el talento ni la experiencia—
               entonces estás exactamente donde tienes que estar. Porque lo que yo
-              tardé diez años en entender, te lo entrego ordenado, paso a paso.»
+              tardé años en entender, te lo entrego ordenado, paso a paso.»
             </p>
           </blockquote>
         </Reveal>
@@ -1617,7 +1617,7 @@ const versusRows = [
   },
   {
     other: "El instructor aprendió IA la semana pasada",
-    us: "+15 años en agencias creativas reales",
+    us: "+6 años en agencias creativas reales",
   },
   {
     other: "Sin estrategia comercial — solo «hacer videos»",
