@@ -46,6 +46,16 @@ export default async function CasoPage({
   const caso = SITE.proof.cases.find((c) => c.slug === slug);
   if (!caso) notFound();
 
+  const extra = caso as unknown as { status?: string; iaCategories?: string[] };
+  const IA_LABEL: Record<string, string> = {
+    "video-producto": "Video Producto IA",
+    "ugc": "UGC IA",
+    "storytelling": "Storytelling IA",
+    "estrategia": "Estrategia IA",
+    "generativo": "Generativo / Visual IA",
+    "automatizacion": "Automatización IA",
+  };
+
   const index = SITE.proof.cases.indexOf(caso);
   const isGreen = index % 2 === 0;
   const accentRgb = isGreen ? "26,128,255" : "77,159,255";
@@ -82,16 +92,24 @@ export default async function CasoPage({
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-16 items-start">
             {/* Left: text */}
             <div>
-              <span
-                className="inline-block font-display font-bold text-[0.65rem] tracking-widest uppercase px-3 py-1.5 rounded mb-5"
-                style={{
-                  color: accentHex,
-                  background: `rgba(${accentRgb},0.08)`,
-                  border: `1px solid rgba(${accentRgb},0.2)`,
-                }}
-              >
-                {caso.sector}
-              </span>
+              <div className="flex flex-wrap items-center gap-2 mb-5">
+                {extra.status === "activo" && (
+                  <span className="inline-flex items-center gap-1.5 font-display font-bold text-[0.65rem] tracking-widest uppercase px-3 py-1.5 rounded"
+                    style={{ color: "#1A80FF", background: "rgba(26,128,255,0.1)", border: "1px solid rgba(26,128,255,0.4)" }}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" /> Cliente activo
+                  </span>
+                )}
+                <span
+                  className="inline-block font-display font-bold text-[0.65rem] tracking-widest uppercase px-3 py-1.5 rounded"
+                  style={{
+                    color: accentHex,
+                    background: `rgba(${accentRgb},0.08)`,
+                    border: `1px solid rgba(${accentRgb},0.2)`,
+                  }}
+                >
+                  {caso.sector}
+                </span>
+              </div>
 
               <h1
                 className="font-display font-extrabold tracking-tighter leading-[1.05] text-cream mb-6"
@@ -100,9 +118,21 @@ export default async function CasoPage({
                 {caso.client}
               </h1>
 
-              <p className="font-body text-muted text-base lg:text-lg leading-relaxed max-w-xl">
+              <p className="font-body text-muted text-base lg:text-lg leading-relaxed max-w-xl mb-5">
                 {caso.problem}
               </p>
+
+              {extra.iaCategories && extra.iaCategories.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {extra.iaCategories.map((c) => (
+                    <span key={c}
+                      className="text-[11px] font-display font-semibold px-3 py-1.5 rounded-lg"
+                      style={{ background: "rgba(26,128,255,0.08)", border: "1px solid rgba(26,128,255,0.22)", color: "rgba(120,180,255,0.95)" }}>
+                      {IA_LABEL[c] ?? c}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Right: portfolio image */}
