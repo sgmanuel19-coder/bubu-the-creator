@@ -20,57 +20,52 @@ export default function IndustryGrid() {
   const { industriesTitle, industriesSubtitle, industries } = proof;
 
   return (
-    <section id="industrias" className="relative section-padding overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-green/15 to-neon-purple/15" />
-
-      <div className="container-base relative z-10">
-        <div className="mb-10 max-w-2xl">
-          <span className="inline-flex items-center gap-2 text-xs font-display font-semibold tracking-[0.2em] uppercase text-neon-green mb-4">
-            <span className="w-6 h-px bg-neon-green/50" />
+    <section id="industrias" className="relative section-padding">
+      <div className="container-base">
+        {/* Header */}
+        <div className="max-w-2xl mb-12">
+          <span className="font-display text-[11px] font-semibold tracking-[0.28em] uppercase text-neon-green mb-5 block">
             Rango de industrias
           </span>
-          <h2 className="font-display font-bold text-2xl lg:text-4xl tracking-tight mb-3">
+          <h2 className="font-display font-extrabold text-cream tracking-tight leading-[1.05] mb-5"
+            style={{ fontSize: "clamp(2rem, 4.2vw, 3.4rem)" }}>
             {industriesTitle}
           </h2>
-          <p className="font-body text-muted text-sm">{industriesSubtitle}</p>
+          <p className="font-body text-muted text-[15px] leading-relaxed">{industriesSubtitle}</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {/* Matrix */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px rounded-2xl overflow-hidden"
+          style={{ background: "rgba(244,240,222,0.08)" }}>
           {industries.map((ind, i) => {
             const isHi = !!ind.highlight;
-            const rgb = isHi ? "26,128,255" : "77,159,255";
             return (
               <motion.div
                 key={ind.key}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.45, delay: (i % 3) * 0.06 }}
-                className="relative rounded-xl p-5 overflow-hidden"
-                style={{
-                  background: isHi ? `rgba(${rgb},0.05)` : "rgba(5,7,10,0.7)",
-                  border: `1px solid rgba(${rgb},${isHi ? 0.3 : 0.12})`,
-                }}
+                transition={{ duration: 0.4, delay: (i % 3) * 0.05 }}
+                className="group relative bg-bg p-6 transition-colors hover:bg-[rgba(26,128,255,0.03)]"
               >
-                {isHi && (
-                  <span className="absolute top-3 right-3 text-[8px] font-display font-bold tracking-widest uppercase px-2 py-0.5 rounded-full"
-                    style={{ color: "#1A80FF", background: "rgba(26,128,255,0.12)", border: "1px solid rgba(26,128,255,0.3)" }}>
-                    Fuerte
-                  </span>
-                )}
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-2xl">{ind.icon}</span>
-                  <h3 className="font-display font-bold text-cream text-sm leading-tight">{ind.label}</h3>
+                <div className="flex items-baseline justify-between gap-3 mb-4">
+                  <h3 className="font-display font-bold text-cream text-[15px] tracking-tight">{ind.label}</h3>
+                  {isHi && (
+                    <span className="font-display text-[9px] font-bold tracking-[0.18em] uppercase text-neon-green shrink-0">
+                      Fuerte
+                    </span>
+                  )}
                 </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {ind.brands.map((b) => (
-                    <span key={b}
-                      className="text-[10px] font-body px-2 py-0.5 rounded-full"
-                      style={{ background: `rgba(${rgb},0.06)`, border: `1px solid rgba(${rgb},0.15)`, color: "rgba(220,230,245,0.85)" }}>
-                      {b}
+                <div className="flex flex-wrap gap-x-3 gap-y-1.5">
+                  {ind.brands.map((b, j) => (
+                    <span key={b} className="font-body text-[13px] text-muted">
+                      {b}{j < ind.brands.length - 1 && <span className="text-cream/15 ml-3">·</span>}
                     </span>
                   ))}
                 </div>
+                {isHi && (
+                  <span className="absolute left-0 top-0 bottom-0 w-px bg-neon-green/40" />
+                )}
               </motion.div>
             );
           })}

@@ -12,31 +12,24 @@ const STATS = [
 
 export default function StatsBar() {
   return (
-    <section className="relative overflow-hidden py-6">
+    <section className="relative border-y border-cream/8">
       <div className="container-base">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-          {STATS.map((s, i) => {
-            const isG = i % 2 === 0;
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.06 }}
-                className="rounded-xl border px-4 py-4 text-center"
-                style={{
-                  border: `1px solid rgba(${isG ? "26,128,255" : "77,159,255"},0.14)`,
-                  background: `rgba(${isG ? "26,128,255" : "77,159,255"},0.03)`,
-                }}
-              >
-                <p className={`font-display font-black text-2xl ${isG ? "text-neon-green" : "text-neon-purple"}`}>
-                  {s.value}
-                </p>
-                <p className="font-body text-muted text-[11px] mt-1 leading-snug">{s.label}</p>
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 divide-x divide-cream/8">
+          {STATS.map((s, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="px-5 py-7 first:pl-0"
+            >
+              <p className="font-display font-black text-cream text-2xl lg:text-[1.7rem] tabular-nums leading-none">
+                {s.value}
+              </p>
+              <p className="font-body text-muted text-[11.5px] mt-2 leading-snug">{s.label}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

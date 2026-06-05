@@ -644,6 +644,53 @@ export const SITE = {
       { key: "inmobiliario", icon: "🏢", label: "Inmobiliario", brands: ["Remax", "+10 inmobiliarias"] },
       { key: "entretenimiento", icon: "🎬", label: "Entretenimiento", brands: ["Mañana Me Caso"] },
     ],
+
+    // ── Sistema Content IA — fases ─────────────────────────────
+    systemTitle: "El sistema Content IA",
+    systemSubtitle: "No es una herramienta suelta. La IA atraviesa las cuatro fases del trabajo — el criterio sigue siendo humano; la velocidad y el nivel, potenciados.",
+    systemClosing: "IA en cada fase. Criterio humano encima de todo.",
+    system: [
+      {
+        n: "01",
+        title: "Estrategia IA",
+        lead: "Un Cerebro Creativo entrenado en la lógica de tu marca.",
+        points: [
+          "Brief, contrabrief y mensaje central",
+          "Buyer persona, ángulos y benchmark con IA",
+          "Prompts maestros para toda la comunicación",
+        ],
+      },
+      {
+        n: "02",
+        title: "Producción IA",
+        lead: "Recursos generativos en cada pieza, con dirección humana.",
+        points: [
+          "Video de producto y UGC generados con IA",
+          "Locuciones y voz IA de nivel cinematográfico",
+          "Recursos visuales para conceptos técnicos",
+        ],
+      },
+      {
+        n: "03",
+        title: "Edición / Post IA",
+        lead: "El material bruto se vuelve pieza terminada — más rápido.",
+        points: [
+          "Cortes asistidos y limpieza de audio con IA",
+          "Motion, efectos y consistencia entre piezas",
+          "Carruseles y formatos derivados",
+        ],
+      },
+      {
+        n: "04",
+        title: "Automatización IA",
+        lead: "Sistemas que trabajan solos cuando tú no estás.",
+        points: [
+          "Flujos en N8N que conectan tus herramientas",
+          "Bot de WhatsApp IA que atiende y califica",
+          "Reportes, alertas y distribución automática",
+        ],
+      },
+    ],
   },
 
   // ── CTA Final ─────────────────────────────────────────────

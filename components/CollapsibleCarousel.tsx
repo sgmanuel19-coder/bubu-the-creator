@@ -14,8 +14,8 @@ export default function CollapsibleCarousel() {
           onClick={() => setOpen((v) => !v)}
           className="w-full flex items-center justify-between gap-4 rounded-2xl px-6 py-5 transition-colors"
           style={{
-            background: "rgba(5,7,10,0.7)",
-            border: `1px solid rgba(${open ? "26,128,255" : "255,255,255"},${open ? 0.3 : 0.08})`,
+            background: "rgba(20,18,9,0.5)",
+            border: `1px solid rgba(${open ? "26,128,255" : "244,240,222"},${open ? 0.35 : 0.12})`,
           }}
         >
           <div className="text-left">
@@ -29,7 +29,7 @@ export default function CollapsibleCarousel() {
           <motion.span
             animate={{ rotate: open ? 180 : 0 }}
             transition={{ duration: 0.3 }}
-            className="shrink-0 w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/70"
+            className="shrink-0 w-9 h-9 rounded-full border border-cream/15 flex items-center justify-center text-cream/70"
           >
             ▾
           </motion.span>
