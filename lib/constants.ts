@@ -182,22 +182,22 @@ export const SITE = {
     core: {
       badge: "Audiovisual + Estrategia + IA · Done-For-You",
       name: "Sistema Audiovisual de Autoridad",
-      tagline: "Tres formas de entrar. Un solo sistema para que tu empresa comunique con la claridad, el nivel y el peso comercial que realmente merece.",
+      tagline: "Producción audiovisual tradicional: $5,000–$50,000 y semanas de espera. Con IA: el mismo nivel visual, entregado en días — a una fracción del costo.",
       target: "Para empresas B2B, técnicas e industriales que necesitan elevar cómo se ve y comunica su marca.",
       price: "S/ 4,200",
       priceNote: "+IGV · mes 1 incluye Cerebro Creativo IA",
       items: [
-        "Cerebro Creativo IA — 1,200 páginas que entrena la IA como experto en tu marca e industria",
-        "10 videos cinematográficos mensuales — generados con IA y editados profesionalmente",
-        "3 posts estratégicos + 3 carruseles de autoridad — incluidos cada mes",
-        "Sin sesiones de grabación — producción 100% IA + criterio humano",
-        "Para marcas técnicas, industriales y de productos premium que quieren verse como referentes",
+        "10 videos IA mensuales — HiggsField.ai, Kling 3.0 y Seedance con dirección creativa humana",
+        "Cerebro Creativo IA — sistema entrenado en la lógica de tu marca e industria",
+        "3 posts estratégicos + 3 carruseles de autoridad — cada mes",
+        "Sin sesiones de grabación ni equipos externos — producción 100% IA",
+        "Videos individuales desde S/ 600 (simple) o S/ 1,200 (escenas múltiples) — sin retainer",
       ],
       cta: "Quiero implementar el sistema",
 
       // ─── Contenido detallado del servicio ───────────────────
       pitch:
-        "Tu empresa opera bien y tiene algo real que ofrecer. Pero la comunicación no refleja ese nivel: lo técnico es difícil de entender y el contenido no construye autoridad sostenida. El mercado compra al que genera más confianza, no siempre al mejor. Ahí entra Resuelto.",
+        "Una producción audiovisual tradicional cuesta entre $5,000 y $50,000, requiere semanas de planificación y un equipo completo. Con IA, entregamos el mismo nivel visual en 5 días hábiles — a una fracción del costo. Tu empresa opera bien y tiene algo real que ofrecer. El problema es que la comunicación no lo refleja. Ahí entra Resuelto.",
       whatItIs:
         "Una implementación audiovisual y estratégica para que tu empresa se vea al nivel que opera, explique mejor lo complejo y tenga activos de comunicación reutilizables. Hoy la IA atraviesa las tres fases del proceso: planifico con un Cerebro Creativo IA entrenado en tu marca, produzco apoyado en recursos generativos y edito con herramientas asistidas por IA. No hacemos contenido por hacer — construimos un sistema con claridad, criterio y peso comercial, ejecutado más rápido gracias a la IA.",
       pillars: [

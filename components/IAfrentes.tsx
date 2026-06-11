@@ -21,14 +21,14 @@ const FRENTES = [
   {
     icon: "🎬",
     label: "Contenido",
-    title: "Producción asistida con IA",
+    title: "Videos IA — entrega en 5 días",
     description:
-      "IA generativa en cada fase de producción: recursos visuales, locuciones, motion y postproducción asistida. Más nivel de pieza, más velocidad de entrega — con criterio humano encima de todo.",
+      "Producción audiovisual tradicional: $5,000–$50,000, equipo completo, 4–6 semanas. Con IA: el mismo nivel visual en 5 días hábiles. HiggsField.ai, Kling 3.0 y Seedance con dirección creativa humana.",
     items: [
-      "Recursos visuales generativos",
-      "Locuciones y voz IA de nivel cinematográfico",
-      "Motion y efectos asistidos",
-      "Postproducción acelerada con IA",
+      "Video simple (1 clip, hasta 20s): desde S/ 600",
+      "Video complejo (escenas múltiples, hasta 30s): desde S/ 1,200",
+      "Paquetes de 1 a 10 videos — precio por volumen",
+      "2 rondas de revisión incluidas · ajustes extra se cotizan",
     ],
     rgb: "77,159,255",
     hex: "#4D9FFF",
