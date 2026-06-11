@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "¿Cuánto cuesta y qué incluye?",
-    a: "Hay tres formas de entrar: videos IA a demanda desde S/ 600 (sin retainer, entrega en 5 días hábiles), el Sistema de Contenido IA mensual con 10 videos + Cerebro Creativo IA + posts y carruseles, y el sistema completo con automatización. Cada video incluye hasta 2 rondas de ajuste; las iteraciones adicionales consumen tokens de IA y se cotizan por separado.",
+    a: "Hay tres formas de entrar: videos IA a demanda (sin retainer, se cotizan según proyecto, entrega en 5 días hábiles), el Sistema de Contenido IA mensual de S/ 4,500 +IGV con 10 videos + Cerebro Creativo IA + posts y carruseles, y el sistema completo con automatización. Cada video incluye hasta 2 rondas de ajuste; las iteraciones adicionales consumen tokens de IA y se cotizan por separado.",
   },
   {
     q: "¿Con qué tipo de empresas trabajas?",

@@ -148,21 +148,13 @@ function ContenidoIATab() {
       {/* ── PRECIO — limpio y grande ── */}
       <div className="px-6 lg:px-10 py-10">
 
-        <div className="grid sm:grid-cols-2 gap-4 mb-6">
-          {/* Mes 1 */}
+        <div className="max-w-sm mb-6">
           <div className="rounded-2xl border border-neon-green/30 bg-neon-green/[0.04] p-6 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-green via-neon-green/60 to-transparent" />
-            <p className="text-[9px] font-display font-bold tracking-[0.25em] uppercase text-neon-green/60 mb-3">Mes 1 · Arranque</p>
-            <p className="font-display font-extrabold text-5xl text-neon-green leading-none mb-2">S/ 4,200</p>
-            <p className="font-body text-muted/50 text-xs mb-4">+IGV · incluye Cerebro Creativo IA</p>
-            <p className="font-body text-neon-green/60 text-xs">✓ Primera entrega incluida</p>
-          </div>
-          {/* Mes 2+ */}
-          <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-6">
-            <p className="text-[9px] font-display font-bold tracking-[0.25em] uppercase text-muted/40 mb-3">Mes 2+ · Retainer</p>
-            <p className="font-display font-extrabold text-5xl text-cream leading-none mb-2">S/ 3,600</p>
-            <p className="font-body text-muted/50 text-xs mb-4">/mes +IGV</p>
-            <p className="font-body text-muted/40 text-xs">Sin permanencia mínima forzada</p>
+            <p className="text-[9px] font-display font-bold tracking-[0.25em] uppercase text-neon-green/60 mb-3">Sistema mensual</p>
+            <p className="font-display font-extrabold text-5xl text-neon-green leading-none mb-2">S/ 4,500</p>
+            <p className="font-body text-muted/50 text-xs mb-4">/mes +IGV · incluye Cerebro Creativo IA</p>
+            <p className="font-body text-neon-green/60 text-xs">✓ Sin permanencia mínima forzada</p>
           </div>
         </div>
 
@@ -234,29 +226,24 @@ function AudiovisualTab() {
 
       {/* PRECIO */}
       <div className="px-6 lg:px-10 py-10">
-        <p className="text-[10px] font-display font-bold tracking-[0.3em] uppercase text-muted/40 mb-4">Inversión · Por video</p>
+        <p className="text-[10px] font-display font-bold tracking-[0.3em] uppercase text-muted/40 mb-4">Inversión · Por proyecto</p>
 
-        <div className="grid sm:grid-cols-2 gap-4 mb-7 max-w-2xl">
-          {/* Video simple */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6">
-            <p className="text-[9px] font-display font-bold tracking-[0.25em] uppercase text-muted/40 mb-3">Video simple · hasta 20s</p>
-            <p className="font-display font-extrabold text-5xl text-cream leading-none mb-2">S/ 600</p>
-            <p className="font-body text-muted/50 text-xs mb-4">desde · +IGV · 1 concepto, 1 clip</p>
-            <p className="font-body text-muted/40 text-xs">Entrega en 5 días hábiles</p>
-          </div>
-          {/* Video complejo */}
+        <div className="max-w-2xl mb-7">
           <div className="rounded-2xl border border-neon-green/25 bg-neon-green/[0.03] p-6 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-green via-neon-green/60 to-transparent" />
-            <p className="text-[9px] font-display font-bold tracking-[0.25em] uppercase text-neon-green/60 mb-3">Escenas múltiples · hasta 30s</p>
-            <p className="font-display font-extrabold text-5xl text-neon-green leading-none mb-2">S/ 1,200</p>
-            <p className="font-body text-muted/50 text-xs mb-4">desde · +IGV · narrativa escena por escena</p>
-            <p className="font-body text-neon-green/60 text-xs">✓ Nivel comercial publicitario</p>
+            <p className="text-[9px] font-display font-bold tracking-[0.25em] uppercase text-neon-green/60 mb-3">Cotización a medida</p>
+            <p className="font-display font-extrabold text-4xl text-cream leading-none mb-3">Cada proyecto es distinto.</p>
+            <p className="font-body text-muted/60 text-xs leading-relaxed mb-4">
+              El precio depende del concepto, la duración y la complejidad de escenas.
+              Me cuentas qué necesitas y te paso una propuesta concreta el mismo día.
+            </p>
+            <p className="font-body text-neon-green/60 text-xs">✓ Entrega en 5 días hábiles · 2 rondas de ajuste incluidas</p>
           </div>
         </div>
 
         <div className="rounded-xl border border-white/8 bg-white/[0.02] px-5 py-4 mb-7 max-w-2xl">
           <p className="font-body text-muted/60 text-xs leading-relaxed">
-            Incluye 2 rondas de ajuste por video. Iteraciones adicionales consumen tokens de IA y se cotizan por separado.
+            Iteraciones adicionales consumen tokens de IA y se cotizan por separado.
             Paquetes de 1 a 10 videos con precio por volumen. <span className="text-red-300/60 line-through decoration-red-400/40">Equivalente tradicional: $3,000–$8,000 por pieza.</span>
           </p>
         </div>

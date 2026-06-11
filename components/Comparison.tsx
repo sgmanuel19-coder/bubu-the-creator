@@ -63,7 +63,7 @@ const TRADICIONAL = [
 const CON_IA = [
   { icon: "🧠", text: "Dirección creativa humana + IA generativa de última generación" },
   { icon: "⚡", text: "5 días hábiles desde la aprobación del concepto" },
-  { icon: "✦", text: "Desde S/ 600 por video — una fracción del costo" },
+  { icon: "✦", text: "10 videos mensuales por menos que una sola pieza tradicional" },
   { icon: "♾️", text: "Lo que la cámara no puede: productos que no existen, escenas imposibles" },
 ];
 
@@ -185,9 +185,9 @@ export default function Comparison() {
             </p>
             <div className="flex items-baseline gap-2 mb-6">
               <span className="font-display font-extrabold text-4xl lg:text-5xl text-neon-green tracking-tight">
-                S/ <CountUp to={600} />
+                S/ <CountUp to={4500} />
               </span>
-              <span className="font-body text-muted/70 text-sm">desde · por video</span>
+              <span className="font-body text-muted/70 text-sm">/mes · sistema completo</span>
             </div>
             <ul className="space-y-4">
               {CON_IA.map((item, i) => (

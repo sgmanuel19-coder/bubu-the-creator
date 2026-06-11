@@ -25,9 +25,9 @@ const FRENTES = [
     description:
       "Producción audiovisual tradicional: $5,000–$50,000, equipo completo, 4–6 semanas. Con IA: el mismo nivel visual en 5 días hábiles. HiggsField.ai, Kling 3.0 y Seedance con dirección creativa humana.",
     items: [
-      "Video simple (1 clip, hasta 20s): desde S/ 600",
-      "Video complejo (escenas múltiples, hasta 30s): desde S/ 1,200",
-      "Paquetes de 1 a 10 videos — precio por volumen",
+      "Videos simples y de escenas múltiples — hasta 30s",
+      "Lo que la cámara no puede: productos que no existen, escenas imposibles",
+      "Paquetes de 1 a 10 videos — se cotizan según proyecto",
       "2 rondas de revisión incluidas · ajustes extra se cotizan",
     ],
     rgb: "77,159,255",

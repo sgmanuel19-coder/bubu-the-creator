@@ -13,7 +13,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `Servicios — ${SITE.brandName}`,
-  description: "Creación de contenido con IA para empresas B2B. Videos a demanda desde S/ 600, sistema mensual de contenido IA y automatización completa. El nivel de una producción tradicional, en días.",
+  description: "Creación de contenido con IA para empresas B2B. Videos a demanda, sistema mensual de contenido IA y automatización completa. El nivel de una producción tradicional, en días.",
 };
 
 export default function ServiciosPage() {
