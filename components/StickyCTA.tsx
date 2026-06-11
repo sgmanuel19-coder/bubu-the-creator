@@ -44,8 +44,8 @@ export default function StickyCTA() {
           <div className="flex items-center gap-2 min-w-0">
             <span className="flex-shrink-0 w-2 h-2 rounded-full bg-neon-green slot-available" />
             <p className="font-body text-xs text-muted truncate">
-              <span className="text-neon-green font-semibold">Sin cupos disponibles</span>
-              <span className="hidden sm:inline"> — lista de espera abierta</span>
+              <span className="text-neon-green font-semibold">1 cupo disponible este mes</span>
+              <span className="hidden sm:inline"> — producción 100% remota con IA</span>
             </p>
           </div>
 

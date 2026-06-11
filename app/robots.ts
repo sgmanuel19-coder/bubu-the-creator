@@ -14,10 +14,12 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/'],
       },
       // Permitir todo lo demás: GPTBot, ChatGPT-User, anthropic-ai, Claude-Web,
-      // OAI-SearchBot, PerplexityBot, Google-Extended, Googlebot, Bingbot
+      // OAI-SearchBot, PerplexityBot, Google-Extended, Googlebot, Bingbot.
+      // /trap-bot es un honeypot — nunca debe indexarse.
       {
         userAgent: '*',
         allow: '/',
+        disallow: '/trap-bot',
       },
     ],
     sitemap: 'https://resueltoagency.com/sitemap.xml',

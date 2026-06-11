@@ -8,7 +8,15 @@ import { SITE } from "@/lib/constants";
 const faqs = [
   {
     q: "¿Qué hace exactamente RESUELTO?",
-    a: "RESUELTO opera en dos líneas: sistemas audiovisuales de autoridad para empresas B2B (estrategia + producción + IA) y sistemas de automatización inteligente (chatbots IA, prospección automatizada, webs de conversión). Ambos tienen el mismo objetivo: que tu empresa se vea y opere al nivel que realmente merece.",
+    a: "RESUELTO opera en dos líneas: creación de contenido con IA para empresas B2B (videos con nivel cinematográfico generados con IA, estrategia y dirección creativa humana) y sistemas de automatización inteligente (chatbots IA, prospección automatizada, webs de conversión). Ambos tienen el mismo objetivo: que tu empresa se vea y opere al nivel que realmente merece.",
+  },
+  {
+    q: "¿Por qué producir con IA en vez de una productora tradicional?",
+    a: "Una producción audiovisual tradicional cuesta entre $5,000 y $50,000, requiere equipo completo y toma de 4 a 6 semanas. Con IA entregamos el mismo nivel visual en días — a una fracción del costo. Además podemos crear lo que una cámara no puede capturar: productos que aún no existen, conceptos técnicos invisibles, escenas imposibles de grabar. La diferencia no está en la herramienta, está en la dirección creativa detrás.",
+  },
+  {
+    q: "¿Cuánto cuesta y qué incluye?",
+    a: "Hay tres formas de entrar: videos IA a demanda desde S/ 600 (sin retainer, entrega en 5 días hábiles), el Sistema de Contenido IA mensual con 10 videos + Cerebro Creativo IA + posts y carruseles, y el sistema completo con automatización. Cada video incluye hasta 2 rondas de ajuste; las iteraciones adicionales consumen tokens de IA y se cotizan por separado.",
   },
   {
     q: "¿Con qué tipo de empresas trabajas?",

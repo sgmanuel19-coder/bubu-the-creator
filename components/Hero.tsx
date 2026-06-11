@@ -181,7 +181,7 @@ export default function Hero() {
 
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-display font-bold tracking-[0.2em] uppercase text-neon-green/80">
-                  Sistema Audiovisual
+                  Contenido IA
                 </span>
                 <span className="w-2 h-2 rounded-full bg-neon-green slot-available"
                   style={{ boxShadow: "0 0 8px rgba(0,255,135,0.9)" }} />
@@ -202,9 +202,9 @@ export default function Hero() {
 
               <div>
                 <p className="text-base font-display font-bold text-neon-green leading-none">
-                  Sin cupos disponibles
+                  1 cupo disponible
                 </p>
-                <p className="text-[11px] font-body text-white/65 mt-1">por ahora · Lima</p>
+                <p className="text-[11px] font-body text-white/65 mt-1">este mes · 100% remoto</p>
               </div>
             </div>
 

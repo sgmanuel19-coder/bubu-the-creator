@@ -199,14 +199,14 @@ function AudiovisualTab() {
       {/* HERO */}
       <div className="px-6 lg:px-10 pt-12 pb-10">
         <p className="text-[10px] font-display font-bold tracking-[0.3em] uppercase text-neon-green/60 mb-4">
-          Sistema Audiovisual con IA
+          Videos IA a Demanda
         </p>
         <h3 className="font-display font-extrabold text-2xl lg:text-4xl text-cream leading-[1.1] tracking-tight mb-4">
-          Una pieza de autoridad.<br />
+          Una pieza de nivel publicitario.<br />
           <span className="text-neon-green">Sin contratar productora.</span>
         </h3>
         <p className="font-body text-muted text-sm lg:text-base leading-relaxed max-w-xl">
-          Para empresas que necesitan una pieza específica de alto valor — video caso, evento, conceptos técnicos con IA. Sin permanencia. Entra por donde necesitas.
+          Para empresas que necesitan una pieza específica de alto valor — video de producto, pieza institucional, conceptos técnicos visualizados con IA. Sin retainer. Entra por donde necesitas.
         </p>
       </div>
 
@@ -214,10 +214,10 @@ function AudiovisualTab() {
       <div className="px-6 lg:px-10 pb-10">
         <div className="grid sm:grid-cols-2 gap-3">
           {([
-            { icon: "🎬", title: "Video caso o pieza principal", desc: "La pieza central de autoridad de tu empresa — dirigida y editada." },
-            { icon: "🤖", title: "Recursos visuales con IA", desc: "Tomas y conceptos que ninguna cámara podría capturar." },
+            { icon: "🎬", title: "Video con IA cinematográfica", desc: "Generado con Kling, Seedance y Veo — dirigido y editado con criterio publicitario." },
+            { icon: "🤖", title: "Lo que la cámara no puede", desc: "Productos que no existen aún, conceptos invisibles, escenas imposibles de grabar." },
             { icon: "✂️", title: "Edición profesional", desc: "Criterio humano sobre producción IA. Resultado de nivel corporativo." },
-            { icon: "🧠", title: "Estrategia incluida", desc: "Guión y comunicación definidos antes de producir una sola toma." },
+            { icon: "🧠", title: "Estrategia incluida", desc: "Guion y dirección de arte definidos antes de generar una sola escena." },
           ] as const).map((item, i) => (
             <div key={i} className="flex items-start gap-3 rounded-2xl border border-neon-green/15 bg-neon-green/[0.02] p-5">
               <span className="text-2xl shrink-0">{item.icon}</span>
@@ -234,27 +234,31 @@ function AudiovisualTab() {
 
       {/* PRECIO */}
       <div className="px-6 lg:px-10 py-10">
-        <p className="text-[10px] font-display font-bold tracking-[0.3em] uppercase text-muted/40 mb-4">Inversión · Plan Señal</p>
+        <p className="text-[10px] font-display font-bold tracking-[0.3em] uppercase text-muted/40 mb-4">Inversión · Por video</p>
 
-        <div className="max-w-sm mb-7">
+        <div className="grid sm:grid-cols-2 gap-4 mb-7 max-w-2xl">
+          {/* Video simple */}
           <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6">
-            <p className="font-display font-extrabold text-5xl text-cream leading-none mb-2">$500</p>
-            <p className="font-body text-muted/50 text-xs mb-5">USD +IGV · pago único · sin permanencia</p>
-            <div className="space-y-2">
-              {[
-                { k: "A", v: "Video caso de éxito" },
-                { k: "B", v: "Cobertura express de evento" },
-                { k: "C", v: "Jornada de grabación" },
-                { k: "D", v: "Cerebro IA personalizado" },
-                { k: "E", v: "Piezas de contenido IA" },
-              ].map(({ k, v }) => (
-                <div key={k} className="flex items-center gap-3">
-                  <span className="shrink-0 w-6 h-6 rounded bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-display font-bold text-muted/50">{k}</span>
-                  <span className="font-body text-cream/60 text-sm">{v}</span>
-                </div>
-              ))}
-            </div>
+            <p className="text-[9px] font-display font-bold tracking-[0.25em] uppercase text-muted/40 mb-3">Video simple · hasta 20s</p>
+            <p className="font-display font-extrabold text-5xl text-cream leading-none mb-2">S/ 600</p>
+            <p className="font-body text-muted/50 text-xs mb-4">desde · +IGV · 1 concepto, 1 clip</p>
+            <p className="font-body text-muted/40 text-xs">Entrega en 5 días hábiles</p>
           </div>
+          {/* Video complejo */}
+          <div className="rounded-2xl border border-neon-green/25 bg-neon-green/[0.03] p-6 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-green via-neon-green/60 to-transparent" />
+            <p className="text-[9px] font-display font-bold tracking-[0.25em] uppercase text-neon-green/60 mb-3">Escenas múltiples · hasta 30s</p>
+            <p className="font-display font-extrabold text-5xl text-neon-green leading-none mb-2">S/ 1,200</p>
+            <p className="font-body text-muted/50 text-xs mb-4">desde · +IGV · narrativa escena por escena</p>
+            <p className="font-body text-neon-green/60 text-xs">✓ Nivel comercial publicitario</p>
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-white/8 bg-white/[0.02] px-5 py-4 mb-7 max-w-2xl">
+          <p className="font-body text-muted/60 text-xs leading-relaxed">
+            Incluye 2 rondas de ajuste por video. Iteraciones adicionales consumen tokens de IA y se cotizan por separado.
+            Paquetes de 1 a 10 videos con precio por volumen. <span className="text-red-300/60 line-through decoration-red-400/40">Equivalente tradicional: $3,000–$8,000 por pieza.</span>
+          </p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
@@ -291,7 +295,7 @@ export default function ServiceDetailAudiovisual() {
                 : "border-transparent text-muted/40 hover:text-cream/60"
             }`}
           >
-            {tab === "contenido" ? "🤖 Contenido con IA" : "📹 Audiovisual Corporativo"}
+            {tab === "contenido" ? "🤖 Sistema mensual" : "🎬 Videos a demanda"}
           </button>
         ))}
       </div>

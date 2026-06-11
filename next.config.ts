@@ -1,9 +1,15 @@
 import type { NextConfig } from "next";
 
-// Conservative CSP: NO resource allowlists (no default-src/script-src/connect-src),
-// so it cannot block Spline/Three.js/WebGL/fetch. Keeps the protections that don't
-// touch resource loading: anti-clickjacking, plugin block, base & form hijack.
+// CSP con script-src: bloquea scripts de orígenes no listados (mitiga XSS).
+// 'unsafe-inline' es necesario para los scripts de hidratación de Next.js (sin infra de nonces).
+// 'wasm-unsafe-eval' + blob: son necesarios para Spline/Three.js (WebAssembly + web workers).
+// Sin connect-src/default-src para no bloquear fetch de escenas Spline ni analytics.
+// React en modo desarrollo necesita eval() para debugging; en producción nunca lo usa.
+const devEval = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
+
 const csp = [
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${devEval} blob: https://connect.facebook.net https://va.vercel-scripts.com`,
+  "worker-src 'self' blob:",
   "frame-src https://www.instagram.com https://www.youtube.com https://www.tiktok.com",
   "frame-ancestors 'self'",
   "object-src 'none'",

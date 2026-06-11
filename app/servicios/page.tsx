@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
-import ServiceSelector from "@/components/ServiceSelector";
+import PricingTiers from "@/components/PricingTiers";
+import ServiceDetailAudiovisual from "@/components/ServiceDetailAudiovisual";
 import GridBackground from "@/components/ui/grid-background";
 import Transition from "@/components/Transition";
 import ForWho from "@/components/ForWho";
@@ -12,7 +13,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `Servicios — ${SITE.brandName}`,
-  description: "Sistema Comercial Digital y Sistema de Autoridad y Comunicación Estratégica. Dos niveles de trabajo, mismo criterio.",
+  description: "Creación de contenido con IA para empresas B2B. Videos a demanda desde S/ 600, sistema mensual de contenido IA y automatización completa. El nivel de una producción tradicional, en días.",
 };
 
 export default function ServiciosPage() {
@@ -36,18 +37,32 @@ export default function ServiciosPage() {
             Servicios
           </h1>
           <p className="font-body text-muted text-lg mt-4 max-w-xl">
-            Dos niveles de trabajo. Distintos en alcance — el mismo criterio en ambos.
+            Tres formas de entrar. Distintas en alcance — el mismo nivel en todas.
           </p>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-green/20 to-neon-purple/20" />
       </section>
 
+      <PricingTiers />
+
+      {/* Detalle completo de los servicios de contenido */}
       <section className="relative section-padding overflow-hidden" style={{ background: "#050608" }}>
         <div className="absolute top-0 right-0 w-[450px] h-[350px] rounded-full bg-neon-purple/8 blur-[90px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[450px] h-[350px] rounded-full bg-neon-green/6 blur-[90px] pointer-events-none" />
         <div className="container-base relative z-10">
-          <ServiceSelector />
+          <div className="mb-8">
+            <span className="inline-flex items-center gap-2 text-xs font-display font-semibold tracking-[0.25em] uppercase text-neon-green mb-3">
+              <span className="w-6 h-px bg-neon-green/50" />
+              El detalle completo
+            </span>
+            <h2 className="font-display font-bold text-2xl lg:text-3xl tracking-tight">
+              Qué recibes exactamente
+            </h2>
+          </div>
+          <div className="rounded-2xl border border-neon-green/25 bg-neon-green/[0.02] overflow-hidden">
+            <ServiceDetailAudiovisual />
+          </div>
         </div>
       </section>
       <Transition />
