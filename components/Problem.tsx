@@ -29,11 +29,12 @@ const ICONS = [
   </svg>,
 ];
 
+// Rampa monocromática de marca: azul #1A80FF en intensidades — coherente con toda la línea visual
 const ACCENT_COLORS = [
-  { border: "border-violet-400/25", bg: "bg-violet-500/10", text: "text-violet-300", bar: "from-violet-500 to-indigo-500" },
-  { border: "border-fuchsia-400/25", bg: "bg-fuchsia-500/10", text: "text-fuchsia-300", bar: "from-fuchsia-500 to-violet-500" },
-  { border: "border-indigo-400/25", bg: "bg-indigo-500/10", text: "text-indigo-300", bar: "from-indigo-500 to-violet-500" },
-  { border: "border-blue-400/25", bg: "bg-blue-500/10", text: "text-blue-300", bar: "from-blue-500 to-indigo-500" },
+  { border: "border-neon-green/25", bg: "bg-neon-green/10", text: "text-violet-light", bar: "from-neon-green to-violet-light" },
+  { border: "border-violet-light/25", bg: "bg-violet-light/10", text: "text-violet-light", bar: "from-violet-light to-neon-green" },
+  { border: "border-neon-green/25", bg: "bg-neon-green/10", text: "text-violet-light", bar: "from-violet-dark to-neon-green" },
+  { border: "border-violet-light/25", bg: "bg-violet-light/10", text: "text-violet-light", bar: "from-neon-green to-violet-dark" },
 ];
 
 export default function Problem() {
@@ -53,8 +54,8 @@ export default function Problem() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/70 to-black/70" />
 
       {/* Border lines */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent" />
-      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent" />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-neon-green/40 to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-neon-green/40 to-transparent" />
 
       {/* Content */}
       <div className="relative z-10 max-w-2xl mx-auto px-6">
@@ -67,15 +68,16 @@ export default function Problem() {
           transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="text-center mb-14"
         >
-          <span className="inline-flex items-center gap-2 text-xs font-display font-semibold tracking-[0.25em] uppercase text-violet-300 mb-5">
-            <span className="w-6 h-px bg-violet-400/50" />
+          <span className="inline-flex items-center gap-2 text-xs font-display font-semibold tracking-[0.25em] uppercase text-violet-light mb-5">
+            <span className="w-6 h-px bg-neon-green/50" />
             El problema real
-            <span className="w-6 h-px bg-violet-400/50" />
+            <span className="w-6 h-px bg-neon-green/50" />
           </span>
-          <h2 className="font-display font-bold text-3xl lg:text-5xl tracking-tight text-white mb-5">
+          <h2 className="font-display font-extrabold tracking-tighter text-white mb-5"
+            style={{ fontSize: "clamp(2rem, 4.5vw, 3.4rem)" }}>
             {SITE.problem.title}
           </h2>
-          <div className="w-16 h-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 mx-auto" />
+          <div className="w-16 h-0.5 bg-gradient-to-r from-neon-green to-violet-light mx-auto" />
         </motion.div>
 
         {/* Problem cards */}
@@ -89,15 +91,17 @@ export default function Problem() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.75, delay: i * 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
-                className={`relative rounded-xl border ${accent.border} bg-white/[0.05] backdrop-blur-sm overflow-hidden`}
+                className={`group relative rounded-xl border ${accent.border} bg-white/[0.05] backdrop-blur-sm overflow-hidden
+                  transition-all duration-300 hover:-translate-y-0.5 hover:border-neon-green/45 hover:shadow-[0_0_32px_rgba(26,128,255,0.15)]`}
               >
-                {/* Top accent bar */}
-                <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${accent.bar} opacity-60`} />
+                {/* Top accent bar — crece al hover */}
+                <div className={`absolute top-0 left-0 h-0.5 bg-gradient-to-r ${accent.bar} opacity-60 w-1/3 transition-all duration-500 group-hover:w-full group-hover:opacity-100`} />
 
                 <div className="flex items-start gap-5 p-6">
                   {/* Icon box */}
                   <div className={`shrink-0 w-12 h-12 rounded-xl ${accent.bg} border ${accent.border}
-                                   flex items-center justify-center ${accent.text}`}>
+                                   flex items-center justify-center ${accent.text}
+                                   transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(26,128,255,0.35)]`}>
                     {ICONS[i]}
                   </div>
 
@@ -129,7 +133,7 @@ export default function Problem() {
           transition={{ duration: 0.7, delay: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="text-center"
         >
-          <p className="font-display font-semibold text-lg lg:text-xl bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+          <p className="font-display font-semibold text-lg lg:text-xl bg-gradient-to-r from-violet-light via-cream to-violet-light bg-clip-text text-transparent">
             {SITE.problem.closing}
           </p>
         </motion.div>

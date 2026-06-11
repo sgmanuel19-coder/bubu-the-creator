@@ -79,6 +79,7 @@ export default function Comparison() {
   return (
     <section ref={sectionRef} className="relative section-padding overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute inset-0 grid-pattern opacity-[0.06] pointer-events-none" />
 
       {/* Parallax glow */}
       <motion.div
@@ -118,9 +119,17 @@ export default function Comparison() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="relative rounded-2xl border border-white/8 bg-white/[0.015] p-7 lg:p-8"
+            className="relative rounded-2xl border border-white/8 bg-white/[0.015] p-7 lg:p-8 overflow-hidden"
             style={{ filter: "saturate(0.4)" }}
           >
+            {/* Ghost backdrop */}
+            <span
+              aria-hidden
+              className="absolute -bottom-6 -right-2 font-display font-black select-none pointer-events-none leading-none"
+              style={{ fontSize: "clamp(5rem, 10vw, 8rem)", color: "rgba(244,240,222,0.03)" }}
+            >
+              $$$
+            </span>
             <p className="text-[10px] font-display font-bold tracking-[0.3em] uppercase text-muted/50 mb-1">
               Producción tradicional
             </p>
@@ -155,15 +164,25 @@ export default function Comparison() {
           {/* ── VS divider ── */}
           <div className="flex lg:flex-col items-center justify-center gap-3">
             <span className="hidden lg:block w-px flex-1 bg-gradient-to-b from-transparent via-white/15 to-transparent" />
-            <motion.span
+            <motion.div
               initial={{ opacity: 0, scale: 0.6 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3, type: "spring", stiffness: 200 }}
-              className="font-display font-extrabold text-sm tracking-widest uppercase text-cream/60 border border-white/15 rounded-full w-12 h-12 flex items-center justify-center bg-bg shrink-0"
+              className="relative shrink-0"
             >
-              VS
-            </motion.span>
+              {/* Anillo pulsante */}
+              {!reduceMotion && (
+                <motion.span
+                  animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+                  className="absolute inset-0 rounded-full border border-neon-green/50"
+                />
+              )}
+              <span className="font-display font-extrabold text-sm tracking-widest uppercase text-cream/70 border border-neon-green/25 rounded-full w-12 h-12 flex items-center justify-center bg-bg relative z-10">
+                VS
+              </span>
+            </motion.div>
             <span className="hidden lg:block w-px flex-1 bg-gradient-to-b from-transparent via-white/15 to-transparent" />
           </div>
 
@@ -180,6 +199,23 @@ export default function Comparison() {
             }}
           >
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-green via-neon-green/50 to-transparent" />
+            {/* Scan line sweep */}
+            {!reduceMotion && (
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl">
+                <div
+                  className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-green/30 to-transparent"
+                  style={{ animation: "scanSweep 5s linear infinite" }}
+                />
+              </div>
+            )}
+            {/* Ghost backdrop */}
+            <span
+              aria-hidden
+              className="absolute -bottom-8 -right-2 font-display font-black select-none pointer-events-none leading-none"
+              style={{ fontSize: "clamp(5rem, 10vw, 8rem)", color: "rgba(26,128,255,0.05)" }}
+            >
+              IA
+            </span>
             <p className="text-[10px] font-display font-bold tracking-[0.3em] uppercase text-neon-green/70 mb-1">
               RESUELTO con IA
             </p>
