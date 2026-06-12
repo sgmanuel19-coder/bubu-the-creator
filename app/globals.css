@@ -48,10 +48,14 @@ body {
   overflow-x: hidden;
 }
 
-/* Hide default cursor on desktop */
+/* Hide default cursor on desktop (solo landing — el panel ICS usa cursor normal) */
 @media (hover: hover) and (pointer: fine) {
   * { cursor: none !important; }
   input, textarea { cursor: text !important; }
+  .ics-root, .ics-root * { cursor: auto !important; }
+  .ics-root button, .ics-root a, .ics-root select,
+  .ics-root [role="button"], .ics-root label { cursor: pointer !important; }
+  .ics-root input, .ics-root textarea { cursor: text !important; }
 }
 
 ::-webkit-scrollbar { width: 3px; }

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ICSLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-bg text-cream font-body">
+    <div className="ics-root min-h-screen bg-bg text-cream font-body">
       {children}
     </div>
   );
