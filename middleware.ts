@@ -23,8 +23,11 @@ export async function middleware(request: NextRequest) {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-    // Supabase aún no configurado: no bloquear el resto del sitio.
-    if (!url || !anonKey) return NextResponse.next();
+    // Supabase aún no configurado: solo se sirve el login (evita 500s).
+    if (!url || !anonKey) {
+      if (pathname === `${ICS}/login`) return NextResponse.next();
+      return NextResponse.redirect(new URL(`${ICS}/login`, request.url));
+    }
 
     let response = NextResponse.next({ request });
 
