@@ -10,7 +10,7 @@ const devEval = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
 const csp = [
   `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${devEval} blob: https://connect.facebook.net https://va.vercel-scripts.com`,
   "worker-src 'self' blob:",
-  "frame-src https://www.instagram.com https://www.youtube.com https://www.tiktok.com",
+  "frame-src https://www.instagram.com https://www.youtube.com https://www.tiktok.com https://drive.google.com",
   "frame-ancestors 'self'",
   "object-src 'none'",
   "base-uri 'self'",

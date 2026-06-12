@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/constants";
-import CursorTrail from "@/components/CursorTrail";
-import StickyCTA from "@/components/StickyCTA";
-import ScrollProgress from "@/components/ScrollProgress";
-import CookieConsentBanner from "@/components/CookieConsentBanner";
+import LandingChrome from "@/components/LandingChrome";
 import { Analytics } from "@vercel/analytics/react";
 
 const poppins = Poppins({
@@ -176,11 +173,8 @@ export default function RootLayout({
         >
           Saltar al contenido
         </a>
-        <ScrollProgress />
-        <StickyCTA />
-        <CursorTrail />
+        <LandingChrome />
         {children}
-        <CookieConsentBanner />
         <Analytics />
         {/* Honeypot: invisible to humans, bots follow it and get logged */}
         <a href="/trap-bot" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1}>.</a>

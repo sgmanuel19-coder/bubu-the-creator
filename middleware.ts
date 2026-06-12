@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { createServerClient } from "@supabase/ssr";
 
 /**
  * Separación de proyectos Vercel por dominio.
@@ -8,14 +9,63 @@ import type { NextRequest } from "next/server";
  *
  * ⚠️ NO modificar app/page.tsx para agregar redirect().
  *    La separación entre proyectos se maneja aquí, no en la página.
+ *
+ * /ia-content-system/* → refresco de sesión Supabase + gate de auth.
  */
 const RESUELTO_HOSTS = ["resueltoagencia", "resueltoagency", "localhost"];
+const ICS = "/ia-content-system";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // ----- RESUELTO / IA CONTENT SYSTEM -----
+  if (pathname.startsWith(ICS)) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    // Supabase aún no configurado: no bloquear el resto del sitio.
+    if (!url || !anonKey) return NextResponse.next();
+
+    let response = NextResponse.next({ request });
+
+    const supabase = createServerClient(url, anonKey, {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value),
+          );
+          response = NextResponse.next({ request });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options),
+          );
+        },
+      },
+    });
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const isLogin = pathname === `${ICS}/login`;
+
+    if (!user && !isLogin) {
+      return NextResponse.redirect(new URL(`${ICS}/login`, request.url));
+    }
+    if (user && isLogin) {
+      return NextResponse.redirect(new URL(ICS, request.url));
+    }
+
+    return response;
+  }
+
+  // ----- Separación por host (comportamiento original) -----
   const host = request.headers.get("host") ?? "";
   const isResuelto = RESUELTO_HOSTS.some((h) => host.includes(h));
 
-  if (!isResuelto && request.nextUrl.pathname === "/") {
+  if (!isResuelto && pathname === "/") {
     return NextResponse.redirect(new URL("/sistemas-ia", request.url));
   }
 
@@ -23,5 +73,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/"],
+  matcher: ["/", "/ia-content-system/:path*"],
 };
