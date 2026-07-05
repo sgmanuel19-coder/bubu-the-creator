@@ -1,0 +1,77 @@
+{
+  "name": "Taller — Registro de alumnos",
+  "nodes": [
+    {
+      "id": "wh-1",
+      "name": "Webhook Registro",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "taller-registro",
+        "responseMode": "onReceived"
+      }
+    },
+    {
+      "id": "set-1",
+      "name": "Datos del alumno",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [220, 0],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "a1", "name": "Nombre", "type": "string", "value": "={{ $json.body.nombre }}" },
+            { "id": "a2", "name": "Correo", "type": "string", "value": "={{ $json.body.email }}" },
+            { "id": "a3", "name": "Producto", "type": "string", "value": "={{ $json.body.producto }}" },
+            { "id": "a4", "name": "Fecha", "type": "string", "value": "={{ $json.body.fecha }}" },
+            { "id": "a5", "name": "Origen", "type": "string", "value": "={{ $json.body.origen }}" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "gs-1",
+      "name": "Guardar en Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [440, -100],
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "mode": "list", "value": "" },
+        "sheetName": { "__rl": true, "mode": "list", "value": "" },
+        "columns": { "mappingMode": "autoMapInputData", "value": {} },
+        "options": {}
+      }
+    },
+    {
+      "id": "gm-1",
+      "name": "Avisar a Manuel",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [440, 100],
+      "parameters": {
+        "sendTo": "sgmanuel19@gmail.com",
+        "subject": "=Nuevo registro al taller: {{ $json.Nombre }}",
+        "message": "=Nuevo registro en el portal del taller:\n\nNombre: {{ $json.Nombre }}\nCorreo: {{ $json.Correo }}\nCompró: {{ $json.Producto }}\nFecha: {{ $json.Fecha }}\n\n→ Responde a ese correo con la contraseña de acceso.",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Registro": {
+      "main": [[{ "node": "Datos del alumno", "type": "main", "index": 0 }]]
+    },
+    "Datos del alumno": {
+      "main": [
+        [
+          { "node": "Guardar en Google Sheets", "type": "main", "index": 0 },
+          { "node": "Avisar a Manuel", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  },
+  "settings": {}
+}

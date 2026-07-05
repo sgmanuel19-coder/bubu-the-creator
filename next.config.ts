@@ -10,7 +10,7 @@ const devEval = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
 const csp = [
   `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${devEval} blob: https://connect.facebook.net https://va.vercel-scripts.com`,
   "worker-src 'self' blob:",
-  "frame-src https://www.instagram.com https://www.youtube.com https://www.tiktok.com https://drive.google.com",
+  "frame-src https://www.instagram.com https://www.youtube.com https://www.youtube-nocookie.com https://www.tiktok.com https://drive.google.com",
   "frame-ancestors 'self'",
   "object-src 'none'",
   "base-uri 'self'",
@@ -64,12 +64,19 @@ const nextConfig: NextConfig = {
         source: '/(.*)',
         headers: securityHeaders,
       },
-      {
-        source: '/_next/static/(.*)',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-        ],
-      },
+      // Solo en producción: en dev los chunks conservan el mismo nombre entre
+      // ediciones y un immutable de 1 año hace que el navegador sirva JS viejo
+      // (rompe HMR e hidratación — advertencia oficial de Next en los logs).
+      ...(process.env.NODE_ENV === 'production'
+        ? [
+            {
+              source: '/_next/static/(.*)',
+              headers: [
+                { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+              ],
+            },
+          ]
+        : []),
       {
         source: '/videos/(.*)',
         headers: [
