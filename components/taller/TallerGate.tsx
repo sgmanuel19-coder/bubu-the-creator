@@ -3,7 +3,16 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { TALLER } from "@/lib/taller/content";
-import { trackTaller } from "@/lib/taller/analytics";
+import { trackMeta, trackTaller } from "@/lib/taller/analytics";
+
+// Un clic de compra dispara ambos sistemas de medición:
+// Vercel Analytics (funnel propio) + Pixel de Meta (optimización de pauta).
+function clickComprar(producto: "grabado" | "vivo") {
+  trackTaller("taller_cta_comprar", { producto });
+  trackMeta("InitiateCheckout", {
+    content_name: `Masterclass Creatividad Publicitaria IA — ${producto}`,
+  });
+}
 
 const inputStyle: React.CSSProperties = {
   background: "rgba(244,240,222,0.06)",
@@ -348,7 +357,7 @@ function ProductoCard({ tipo }: { tipo: "grabado" | "vivo" }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() => trackTaller("taller_cta_comprar", { producto: tipo })}
+        onClick={() => clickComprar(tipo)}
         className="mt-6 rounded-xl py-3.5 text-center text-sm font-semibold transition-opacity hover:opacity-90"
         style={
           esVivo
@@ -372,6 +381,12 @@ function ProductoCard({ tipo }: { tipo: "grabado" | "vivo" }) {
 export default function TallerGate() {
   const [loginAbierto, setLoginAbierto] = useState(false);
   const { gate } = TALLER;
+
+  useEffect(() => {
+    trackMeta("ViewContent", {
+      content_name: "Masterclass Creatividad Publicitaria IA — landing",
+    });
+  }, []);
 
   return (
     <>
@@ -610,7 +625,7 @@ export default function TallerGate() {
               href={urlVivo()}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackTaller("taller_cta_comprar", { producto: "vivo" })}
+              onClick={() => clickComprar("vivo")}
               className="w-full rounded-xl px-7 py-3.5 text-sm font-semibold transition-opacity hover:opacity-90 sm:w-auto"
               style={{ background: "var(--green)", color: "#fff" }}
             >
@@ -620,7 +635,7 @@ export default function TallerGate() {
               href={urlGrabado()}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackTaller("taller_cta_comprar", { producto: "grabado" })}
+              onClick={() => clickComprar("grabado")}
               className="w-full rounded-xl border px-7 py-3.5 text-sm font-semibold transition-opacity hover:opacity-80 sm:w-auto"
               style={{ borderColor: "rgba(244,240,222,0.3)", color: "var(--cream)" }}
             >

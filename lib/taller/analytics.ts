@@ -24,3 +24,18 @@ export function trackTaller(
     // sin analytics no pasa nada
   }
 }
+
+// Eventos estándar del Pixel de Meta (brief sección 6). Solo dispara si el
+// pixel está activo (requiere consentimiento de cookies — FacebookPixel.tsx).
+// Purchase se registra en Hotmart con su propia integración de pixel.
+export function trackMeta(
+  evento: "ViewContent" | "InitiateCheckout",
+  props?: Record<string, string>,
+) {
+  try {
+    const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
+    fbq?.("track", evento, props);
+  } catch {
+    // sin pixel no pasa nada
+  }
+}
