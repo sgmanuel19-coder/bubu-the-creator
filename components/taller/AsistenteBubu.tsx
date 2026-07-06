@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { TALLER, type Leccion } from "@/lib/taller/content";
 import { getVistas, getUltimaLeccion } from "@/lib/taller/progress";
+import { responder, PREGUNTAS_RAPIDAS, CONSEJOS } from "@/lib/taller/bubu";
 import { trackTaller } from "@/lib/taller/analytics";
 
 // ── Personaje pixel art: hombre con lentes, estilo retro ──────
@@ -38,7 +39,13 @@ const COLORES: Record<string, string> = {
   W: "#F4F0DE", // cuello del polo
 };
 
-function PixelBubu({ size = 56 }: { size?: number }) {
+function PixelBubu({
+  size = 56,
+  parpadeo = false,
+}: {
+  size?: number;
+  parpadeo?: boolean;
+}) {
   const px = size / 16;
   return (
     <svg
@@ -49,75 +56,103 @@ function PixelBubu({ size = 56 }: { size?: number }) {
       aria-hidden="true"
     >
       {PIXELES.flatMap((fila, y) =>
-        [...fila].map((c, x) =>
-          COLORES[c] ? (
+        [...fila].map((c, x) => {
+          // Al parpadear, las lunas de los lentes se oscurecen un instante.
+          const color = parpadeo && c === "L" ? "#2A4A73" : COLORES[c];
+          return color ? (
             <rect
               key={`${x}-${y}`}
               x={x * px}
               y={y * px}
               width={px}
               height={px}
-              fill={COLORES[c]}
+              fill={color}
             />
-          ) : null,
-        ),
+          ) : null;
+        }),
       )}
     </svg>
   );
 }
 
-// ── Lógica de mensajes contextuales ───────────────────────────
-function siguienteLeccion(vistas: Record<string, boolean>): Leccion | null {
+// ── Progreso del alumno (para mensajes y consejos) ────────────
+function calcularProgreso(): { pct: number; siguiente: Leccion | null; hayVideos: boolean } {
+  const vistas = getVistas();
+  const conVideo = TALLER.modulos
+    .filter((m) => m.disponible)
+    .flatMap((m) => m.lecciones)
+    .filter((l) => l.youtubeId);
+  if (conVideo.length === 0) return { pct: 0, siguiente: null, hayVideos: false };
+  const total = conVideo.filter((l) => vistas[l.youtubeId]).length;
+  const pct = Math.round((total / conVideo.length) * 100);
+  let siguiente: Leccion | null = null;
   for (const m of TALLER.modulos) {
     if (!m.disponible) continue;
-    const pendiente = m.lecciones.find((l) => l.youtubeId && !vistas[l.youtubeId]);
-    if (pendiente) return pendiente;
+    const p = m.lecciones.find((l) => l.youtubeId && !vistas[l.youtubeId]);
+    if (p) {
+      siguiente = p;
+      break;
+    }
   }
-  return null;
+  return { pct, siguiente, hayVideos: true };
+}
+
+function etapaDe(pct: number, hayVideos: boolean): keyof typeof CONSEJOS {
+  if (!hayVideos || pct === 0) return "arranque";
+  if (pct < 50) return "progreso";
+  if (pct < 100) return "avanzado";
+  return "completo";
 }
 
 function usarMensaje(pathname: string): string {
   const nombre = TALLER.asistente.nombre;
   return useMemo(() => {
     if (pathname === "/taller") {
-      return `¡Hola! Soy ${nombre}, el asistente de Manuel. Si tienes dudas sobre la masterclass, toca aquí y te las respondo al instante.`;
+      return `¡Hola! Soy ${nombre}, tu guía de la masterclass. Toca aquí y pregúntame lo que quieras — respondo al instante.`;
     }
     if (pathname.startsWith("/taller/en-vivo")) {
       return `Consejo de ${nombre}: entra 10 minutos antes del vivo y ven con una marca o producto en mente — lo vamos a trabajar en la sesión.`;
     }
-    // /taller/curso — mensajes según el progreso real del alumno
-    const vistas = getVistas();
-    const conVideo = TALLER.modulos
-      .filter((m) => m.disponible)
-      .flatMap((m) => m.lecciones)
-      .filter((l) => l.youtubeId);
-    if (conVideo.length === 0) {
-      return `Soy ${nombre} 👋 Los videos se publican pronto. Mientras tanto, revisa la agenda del vivo y prepara tu marca o producto.`;
+    const { pct, siguiente, hayVideos } = calcularProgreso();
+    if (!hayVideos) {
+      return `Soy ${nombre} 👋 Los videos se publican pronto. Mientras tanto pregúntame lo que quieras de la masterclass — me sé el temario completo.`;
     }
-    const total = conVideo.filter((l) => vistas[l.youtubeId]).length;
-    const pct = Math.round((total / conVideo.length) * 100);
     if (pct === 0) {
-      return `¡Bienvenido! Soy ${nombre}, te acompaño en todo el curso. Mi consejo: empieza por la PARTE 0 y no te saltes el ACTO 1 — la estrategia es lo que separa tu contenido del resto.`;
+      return `¡Bienvenido! Soy ${nombre}, te acompaño en todo el curso. Empieza por la PARTE 0 y no te saltes el ACTO 1 — la estrategia es lo que separa tu contenido del resto.`;
     }
     if (pct === 100) {
-      return `¡100% completado! 🎉 Ya tienes el sistema entero. Ahora toca COBRAR: baja al final de la página y mira las dos formas de ir más rápido.`;
+      return `¡100% completado! 🎉 Ya tienes el sistema entero. Ahora toca COBRAR: pídeme un consejo y te digo cómo arrancar tu plan de 30 días.`;
     }
-    const siguiente = siguienteLeccion(vistas);
-    const ultima = getUltimaLeccion();
-    if (ultima && siguiente) {
-      return `Vas en ${pct}% — buen ritmo. Tu siguiente lección: «${siguiente.titulo}». Un módulo por día y en una semana tienes el sistema completo.`;
+    if (siguiente) {
+      return `Vas en ${pct}% — buen ritmo. Tu siguiente lección: «${siguiente.titulo}». ¿Dudas? Pregúntame aquí.`;
     }
     return `Vas en ${pct}%. Sigue así — cada parte construye sobre la anterior.`;
   }, [pathname, nombre]);
 }
+
+type Mensaje = { de: "alumno" | "bubu"; texto: string };
 
 // ── Componente principal ──────────────────────────────────────
 export default function AsistenteBubu() {
   const pathname = usePathname();
   const [abierto, setAbierto] = useState(false);
   const [burbuja, setBurbuja] = useState(false);
+  const [parpadeo, setParpadeo] = useState(false);
+  const [chat, setChat] = useState<Mensaje[]>([]);
+  const [pregunta, setPregunta] = useState("");
+  const [consejoIdx, setConsejoIdx] = useState(0);
+  const chatRef = useRef<HTMLDivElement>(null);
   const mensaje = usarMensaje(pathname);
-  const { asistente, whatsapp, gate } = TALLER;
+  const { asistente } = TALLER;
+
+  // Parpadeo del personaje cada ~4 segundos.
+  useEffect(() => {
+    const id = setInterval(() => {
+      setParpadeo(true);
+      setTimeout(() => setParpadeo(false), 180);
+    }, 4200);
+    return () => clearInterval(id);
+  }, []);
 
   // La burbuja aparece sola una vez por página por sesión, sin acosar.
   useEffect(() => {
@@ -135,12 +170,35 @@ export default function AsistenteBubu() {
     }
   }, [pathname]);
 
+  // Autoscroll del chat al último mensaje.
+  useEffect(() => {
+    chatRef.current?.scrollTo({ top: chatRef.current.scrollHeight, behavior: "smooth" });
+  }, [chat]);
+
   if (!asistente.activo) return null;
 
   function abrir() {
     setBurbuja(false);
     setAbierto(true);
     trackTaller("taller_asistente", { accion: "abrir", pagina: pathname });
+  }
+
+  function preguntar(texto: string) {
+    const limpio = texto.trim();
+    if (!limpio) return;
+    const { respuesta, id } = responder(limpio);
+    setChat((c) => [...c, { de: "alumno", texto: limpio }, { de: "bubu", texto: respuesta }]);
+    setPregunta("");
+    trackTaller("taller_asistente", { accion: "pregunta", tema: id });
+  }
+
+  function darConsejo() {
+    const { pct, hayVideos } = calcularProgreso();
+    const pool = CONSEJOS[etapaDe(pct, hayVideos)];
+    const texto = pool[consejoIdx % pool.length];
+    setConsejoIdx((i) => i + 1);
+    setChat((c) => [...c, { de: "bubu", texto: `💡 ${texto}` }]);
+    trackTaller("taller_asistente", { accion: "consejo" });
   }
 
   return (
@@ -152,7 +210,7 @@ export default function AsistenteBubu() {
           style={{
             borderColor: "rgba(244,240,222,0.15)",
             background: "var(--surface)",
-            maxHeight: "70vh",
+            height: "min(560px, 72vh)",
           }}
           role="dialog"
           aria-label={`Asistente ${asistente.nombre}`}
@@ -162,11 +220,11 @@ export default function AsistenteBubu() {
             style={{ borderColor: "rgba(244,240,222,0.10)", background: "rgba(26,128,255,0.08)" }}
           >
             <div className="flex items-center gap-3">
-              <PixelBubu size={36} />
+              <PixelBubu size={36} parpadeo={parpadeo} />
               <div>
                 <p className="text-sm font-bold">{asistente.nombre}</p>
                 <p className="text-[11px]" style={{ color: "var(--muted)" }}>
-                  Asistente de la masterclass
+                  Tu guía de la masterclass
                 </p>
               </div>
             </div>
@@ -181,56 +239,93 @@ export default function AsistenteBubu() {
             </button>
           </div>
 
-          <div className="overflow-y-auto p-4">
-            {/* Mensaje contextual */}
+          {/* Conversación */}
+          <div ref={chatRef} className="flex-1 space-y-3 overflow-y-auto p-4">
             <div
-              className="rounded-2xl rounded-tl-sm border px-4 py-3 text-sm leading-relaxed"
+              className="max-w-[90%] rounded-2xl rounded-tl-sm border px-4 py-3 text-sm leading-relaxed"
               style={{ borderColor: "rgba(26,128,255,0.35)", background: "rgba(26,128,255,0.07)" }}
             >
               {mensaje}
             </div>
+            {chat.map((m, i) => (
+              <div
+                key={`${i}-${m.texto.slice(0, 12)}`}
+                className={`max-w-[90%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  m.de === "alumno" ? "ml-auto rounded-tr-sm" : "rounded-tl-sm border"
+                }`}
+                style={
+                  m.de === "alumno"
+                    ? { background: "var(--green)", color: "#fff" }
+                    : {
+                        borderColor: "rgba(26,128,255,0.35)",
+                        background: "rgba(26,128,255,0.07)",
+                      }
+                }
+              >
+                {m.texto}
+              </div>
+            ))}
 
-            {/* Preguntas frecuentes */}
-            <p
-              className="mt-4 text-[11px] uppercase tracking-[0.2em]"
-              style={{ color: "var(--muted)" }}
-            >
-              Respuestas al instante
-            </p>
-            <div className="mt-2 space-y-2">
-              {gate.faq.map((f) => (
-                <details
-                  key={f.q}
-                  className="rounded-xl border px-3 py-2.5"
-                  style={{ borderColor: "rgba(244,240,222,0.12)" }}
-                  onToggle={(e) => {
-                    if ((e.target as HTMLDetailsElement).open) {
-                      trackTaller("taller_asistente", { accion: "faq", pregunta: f.q });
-                    }
-                  }}
-                >
-                  <summary className="cursor-pointer text-sm font-medium">{f.q}</summary>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                    {f.a}
-                  </p>
-                </details>
-              ))}
-            </div>
+            {/* Preguntas rápidas (solo al inicio de la conversación) */}
+            {chat.length === 0 && (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {PREGUNTAS_RAPIDAS.map((q) => (
+                  <button
+                    key={q}
+                    type="button"
+                    onClick={() => preguntar(q)}
+                    className="rounded-full border px-3 py-1.5 text-xs transition-opacity hover:opacity-80"
+                    style={{ borderColor: "rgba(244,240,222,0.25)", color: "var(--cream)" }}
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
-            {/* Derivación al bot de WhatsApp */}
-            <a
-              href={`${whatsapp}?text=${encodeURIComponent(asistente.mensajeWhatsApp)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackTaller("taller_asistente", { accion: "whatsapp" })}
-              className="mt-4 block rounded-xl py-3 text-center text-sm font-semibold transition-opacity hover:opacity-90"
-              style={{ background: "var(--green)", color: "#fff" }}
+          {/* Acciones */}
+          <div
+            className="border-t p-3"
+            style={{ borderColor: "rgba(244,240,222,0.10)" }}
+          >
+            <button
+              type="button"
+              onClick={darConsejo}
+              className="mb-2 w-full rounded-xl border py-2 text-xs font-semibold transition-opacity hover:opacity-80"
+              style={{ borderColor: "rgba(26,128,255,0.45)", color: "var(--green)" }}
             >
-              ¿Otra pregunta? Escríbeme por WhatsApp →
-            </a>
-            <p className="mt-2 text-center text-[11px]" style={{ color: "var(--muted)" }}>
-              Respondo 24/7 y Manuel entra cuando hace falta.
-            </p>
+              💡 Dame un consejo según mi avance
+            </button>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                preguntar(pregunta);
+              }}
+              className="flex gap-2"
+            >
+              <input
+                type="text"
+                value={pregunta}
+                onChange={(e) => setPregunta(e.target.value)}
+                placeholder="Pregúntame algo de la masterclass…"
+                aria-label="Escribe tu pregunta"
+                className="w-full rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2"
+                style={{
+                  background: "rgba(244,240,222,0.06)",
+                  border: "1px solid rgba(244,240,222,0.18)",
+                  color: "var(--cream)",
+                }}
+              />
+              <button
+                type="submit"
+                aria-label="Enviar pregunta"
+                className="shrink-0 rounded-xl px-4 text-sm font-semibold transition-opacity hover:opacity-90"
+                style={{ background: "var(--green)", color: "#fff" }}
+              >
+                →
+              </button>
+            </form>
           </div>
         </div>
       )}
@@ -251,15 +346,15 @@ export default function AsistenteBubu() {
         </button>
       )}
 
-      {/* Botón flotante (el personaje) */}
+      {/* Botón flotante (el personaje, con animación) */}
       <button
         type="button"
         onClick={abierto ? () => setAbierto(false) : abrir}
         aria-label={`Abrir asistente ${asistente.nombre}`}
-        className="fixed bottom-4 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-2xl border shadow-xl transition-transform hover:scale-105"
+        className="bubu-flota fixed bottom-4 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-2xl border shadow-xl"
         style={{ borderColor: "rgba(26,128,255,0.45)", background: "var(--surface)" }}
       >
-        <PixelBubu size={48} />
+        <PixelBubu size={48} parpadeo={parpadeo} />
       </button>
     </>
   );

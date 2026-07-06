@@ -61,6 +61,19 @@ body {
   .taller-root input, .taller-root textarea { cursor: text !important; }
 }
 
+/* ── Asistente Bubu (portal del taller) ── */
+@keyframes bubuFlota {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+.bubu-flota { animation: bubuFlota 2.8s ease-in-out infinite; }
+@keyframes bubuSaluda {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-4deg); }
+  75%      { transform: rotate(4deg); }
+}
+.bubu-flota:hover { animation: bubuSaluda 0.6s ease-in-out; }
+
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
