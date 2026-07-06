@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TALLER } from "@/lib/taller/content";
+import AsistenteBubu from "@/components/taller/AsistenteBubu";
 
 export const metadata: Metadata = {
   title: `${TALLER.nombre} — Portal de alumnos | ${TALLER.marca}`,
@@ -18,6 +19,7 @@ export default function TallerLayout({
       style={{ background: "var(--bg)", color: "var(--cream)" }}
     >
       {children}
+      <AsistenteBubu />
     </div>
   );
 }

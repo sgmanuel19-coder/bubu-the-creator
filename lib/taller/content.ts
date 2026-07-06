@@ -14,6 +14,14 @@ export const TALLER = {
   marca: "RESUELTO Academy",
   whatsapp: "https://wa.me/51932844074",
 
+  // ── Asistente virtual (personaje pixel art) ──────────────────
+  asistente: {
+    activo: true,
+    nombre: "Bubu",
+    // Las preguntas que no están en el FAQ van al bot de WhatsApp.
+    mensajeWhatsApp: "Hola, estoy en el portal de la masterclass y tengo una pregunta:",
+  },
+
   // ── Landing de venta ─────────────────────────────────────────
   gate: {
     headline:

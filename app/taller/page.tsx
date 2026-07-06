@@ -7,7 +7,7 @@ export default async function TallerPage() {
   const cookieStore = await cookies();
   const session = cookieStore.get(TALLER_COOKIE)?.value;
   if (await isValidSession(session)) {
-    redirect("/taller/en-vivo");
+    redirect("/taller/curso");
   }
   return <TallerGate />;
 }
