@@ -9,8 +9,10 @@ export type TallerEvento =
   | "taller_registro"
   | "taller_leccion_vista"
   | "taller_cta_venta"
+  | "taller_cta_comprar"
   | "taller_recurso"
-  | "taller_pregunta_vivo";
+  | "taller_pregunta_vivo"
+  | "taller_calendario";
 
 export function trackTaller(
   evento: TallerEvento,

@@ -11,6 +11,33 @@ import {
 import { trackTaller } from "@/lib/taller/analytics";
 import VentaCTA from "@/components/taller/VentaCTA";
 
+function ProgressRing({ pct }: { pct: number }) {
+  const r = 16;
+  const c = 2 * Math.PI * r;
+  return (
+    <div className="relative h-11 w-11 shrink-0" aria-label={`${pct}% completado`}>
+      <svg viewBox="0 0 40 40" className="h-full w-full -rotate-90">
+        <circle cx="20" cy="20" r={r} fill="none" strokeWidth="4" stroke="rgba(244,240,222,0.12)" />
+        <circle
+          cx="20"
+          cy="20"
+          r={r}
+          fill="none"
+          strokeWidth="4"
+          stroke="var(--green)"
+          strokeLinecap="round"
+          strokeDasharray={c}
+          strokeDashoffset={c * (1 - pct / 100)}
+          style={{ transition: "stroke-dashoffset 0.4s" }}
+        />
+      </svg>
+      <span className="absolute inset-0 flex items-center justify-center text-[10px] font-semibold tabular-nums">
+        {pct}%
+      </span>
+    </div>
+  );
+}
+
 function primeraConVideo(): Leccion | null {
   for (const m of TALLER.modulos) {
     if (!m.disponible) continue;
@@ -152,7 +179,7 @@ export default function CursoClient() {
                 opacity: modulo.disponible ? 1 : 0.55,
               }}
             >
-              <div className="flex items-start justify-between gap-4 px-5 py-4">
+              <div className="flex items-center justify-between gap-4 px-5 py-4">
                 <div>
                   <p
                     className="text-[11px] uppercase tracking-[0.2em]"
@@ -170,12 +197,19 @@ export default function CursoClient() {
                     {modulo.descripcion}
                   </p>
                 </div>
-                {!modulo.disponible && (
+                {modulo.disponible ? (
+                  cargado &&
+                  conVideo.length > 0 && (
+                    <ProgressRing
+                      pct={Math.round((vistasModulo / conVideo.length) * 100)}
+                    />
+                  )
+                ) : (
                   <span
-                    className="shrink-0 rounded-full border px-3 py-1 text-[11px] uppercase tracking-wider"
+                    className="flex shrink-0 items-center gap-2 rounded-full border px-3 py-1 text-[11px] uppercase tracking-wider"
                     style={{ borderColor: "rgba(244,240,222,0.25)", color: "var(--muted)" }}
                   >
-                    Próximamente
+                    🔒 Próximamente
                   </span>
                 )}
               </div>

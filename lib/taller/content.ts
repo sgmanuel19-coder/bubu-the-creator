@@ -12,11 +12,25 @@ export const TALLER = {
   nombre: "Dirección Creativa con IA",
   marca: "RESUELTO Academy",
 
-  // ── Puerta de entrada (lo que ve quien aún no tiene contraseña)
+  // ── Landing pública de /taller (estilo Skool About page) ────
   gate: {
     // Texto libre, ej. "Próxima cohorte: martes 15 de julio · 7:00 pm (Lima)".
     // Déjalo "" para ocultarlo.
     proximoTaller: "",
+    // Promesa del hero (subtítulo grande debajo del nombre del taller).
+    promesa:
+      "Aprende a dirigir la IA como un director creativo y produce piezas publicitarias de nivel cinematográfico — sin cámara, sin equipo y sin experiencia previa.",
+    // Video de venta (VSL) — ID de YouTube oculto. "" lo oculta.
+    vslYoutubeId: "",
+    // Prueba social, ej. "+40 alumnos ya están dentro". "" lo oculta.
+    alumnos: "",
+    precio: {
+      monto: "S/ 350",
+      nota: "pago único · incluye el en vivo y el grabado para siempre",
+    },
+    ctaComprar: "Unirme al taller",
+    // Mensaje que llega a tu WhatsApp cuando tocan el botón de compra.
+    mensajeCompra: "Hola Manuel, quiero unirme al taller Dirección Creativa con IA",
     incluye: [
       "3 días de taller en vivo con Manuel Severo",
       "Acceso al curso grabado, para verlo cuando quieras",
@@ -25,7 +39,31 @@ export const TALLER = {
     ],
     credenciales:
       "Dictado por Manuel Severo — ex TBWA Perú y Fahrenheit DDB. +2,000 piezas producidas para marcas como Wong, BCP, Cencosud y Redondos.",
+    // Testimonios de alumnos reales. [] oculta la sección — no inventes.
+    testimonios: [] as { texto: string; nombre: string }[],
+    faq: [
+      {
+        q: "¿Cómo recibo mi acceso después de pagar?",
+        a: "Te enviamos la contraseña del portal a tu correo el mismo día. Con ella entras al taller en vivo y al curso grabado desde cualquier dispositivo.",
+      },
+      {
+        q: "¿Necesito experiencia con IA o con edición?",
+        a: "No. El taller empieza desde el criterio creativo y te lleva paso a paso por las herramientas. Si sabes usar un navegador, puedes con esto.",
+      },
+      {
+        q: "¿Qué herramientas se usan y cuánto cuestan?",
+        a: "Trabajamos con Higgsfield, Kling y Seedance. Puedes empezar con sus planes de entrada; en el taller te digo exactamente cuál conviene según tu caso.",
+      },
+      {
+        q: "¿Hasta cuándo tengo acceso al grabado?",
+        a: "Para siempre. El curso queda en tu portal y se actualiza cuando mejoro el material.",
+      },
+    ],
   },
+
+  // ── Próximas sesiones (Calendar) ────────────────────────────
+  // fecha en formato ISO con zona Lima: "2026-07-15T19:00:00-05:00"
+  sesiones: [] as { titulo: string; fecha: string; duracionMin: number }[],
 
   // ── Transmisión en vivo ─────────────────────────────────────
   enVivo: {
