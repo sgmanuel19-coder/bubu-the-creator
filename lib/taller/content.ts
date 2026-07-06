@@ -12,6 +12,21 @@ export const TALLER = {
   nombre: "Dirección Creativa con IA",
   marca: "RESUELTO Academy",
 
+  // ── Puerta de entrada (lo que ve quien aún no tiene contraseña)
+  gate: {
+    // Texto libre, ej. "Próxima cohorte: martes 15 de julio · 7:00 pm (Lima)".
+    // Déjalo "" para ocultarlo.
+    proximoTaller: "",
+    incluye: [
+      "3 días de taller en vivo con Manuel Severo",
+      "Acceso al curso grabado, para verlo cuando quieras",
+      "Prompts maestros y plantillas descargables",
+      "Q&A en vivo para resolver tu caso",
+    ],
+    credenciales:
+      "Dictado por Manuel Severo — ex TBWA Perú y Fahrenheit DDB. +2,000 piezas producidas para marcas como Wong, BCP, Cencosud y Redondos.",
+  },
+
   // ── Transmisión en vivo ─────────────────────────────────────
   enVivo: {
     // ID del video de YouTube Live (déjalo "" si aún no creas el stream).
@@ -22,6 +37,36 @@ export const TALLER = {
     titulo: "Taller en vivo",
     descripcion:
       "La transmisión se activa aquí mismo el día del taller. Entra unos minutos antes con esta misma contraseña.",
+    // Agenda del día — se muestra junto al stream. Déjala [] para ocultarla.
+    agenda: [] as string[],
+  },
+
+  // ── Recursos descargables ───────────────────────────────────
+  // url: link de Google Drive/Notion/PDF. disponible: false lo muestra
+  // como "próximamente" sin link.
+  recursos: [
+    {
+      titulo: "Prompts maestros del taller",
+      descripcion: "Los prompts exactos que uso para dirección de arte y generación cinematográfica.",
+      url: "",
+      disponible: false,
+    },
+    {
+      titulo: "Plantilla de guion publicitario",
+      descripcion: "La estructura con la que escribo cada pieza antes de generarla.",
+      url: "",
+      disponible: false,
+    },
+  ],
+
+  // ── CTA de venta (al final del curso) ───────────────────────
+  venta: {
+    titulo: "¿Quieres que este sistema trabaje para tu marca?",
+    texto:
+      "Lo que viste en el taller es exactamente lo que implemento para empresas: estrategia, producción cinematográfica con IA y sistema de contenido funcionando en 60 días. Si quieres que lo instale contigo, hablemos.",
+    ctaPrincipal: "Agendar una llamada con Manuel",
+    urlCalendly: "https://calendly.com/sgmanuel19/30min",
+    ctaSecundario: "Escribir por WhatsApp",
   },
 
   // ── Curso en módulos ────────────────────────────────────────

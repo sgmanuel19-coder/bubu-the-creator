@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { TALLER } from "@/lib/taller/content";
+import { trackTaller } from "@/lib/taller/analytics";
 
 function useCountdown(target: string) {
   const [now, setNow] = useState(() => Date.now());
@@ -22,7 +23,7 @@ function useCountdown(target: string) {
 }
 
 export default function EnVivoClient() {
-  const { youtubeId, proximaFecha, titulo, descripcion } = TALLER.enVivo;
+  const { youtubeId, proximaFecha, titulo, descripcion, agenda } = TALLER.enVivo;
   const countdown = useCountdown(proximaFecha);
   // El chat de YouTube exige el dominio que lo embebe; solo existe en el navegador.
   const [host, setHost] = useState("");
@@ -30,7 +31,43 @@ export default function EnVivoClient() {
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-10">
-      <h1 className="text-2xl font-bold sm:text-3xl">{titulo}</h1>
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <h1 className="text-2xl font-bold sm:text-3xl">{titulo}</h1>
+        <a
+          href={TALLER.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackTaller("taller_pregunta_vivo")}
+          className="rounded-full border px-4 py-2 text-sm font-medium transition-opacity hover:opacity-80"
+          style={{ borderColor: "rgba(26,128,255,0.5)", color: "var(--green)" }}
+        >
+          💬 Hacer una pregunta
+        </a>
+      </div>
+
+      {agenda.length > 0 && (
+        <div
+          className="mt-4 rounded-2xl border px-5 py-4"
+          style={{ borderColor: "rgba(244,240,222,0.12)", background: "var(--surface)" }}
+        >
+          <p
+            className="text-[11px] uppercase tracking-[0.2em]"
+            style={{ color: "var(--green)" }}
+          >
+            Agenda de hoy
+          </p>
+          <ol className="mt-2 space-y-1">
+            {agenda.map((punto, i) => (
+              <li key={punto} className="flex gap-3 text-sm">
+                <span className="tabular-nums" style={{ color: "var(--muted)" }}>
+                  {i + 1}.
+                </span>
+                {punto}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
 
       {youtubeId ? (
         <div className="mt-6 grid gap-4 lg:grid-cols-[1fr_320px]">
