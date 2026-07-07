@@ -187,12 +187,18 @@ export const TALLER = {
     nombre: "Bubu",
   },
 
-  // ── Comunidad (contadores social proof, editables a mano) ────
-  // Nota: "miembros" y "admins" los ajustas tú. El conteo de
-  // "conectados en tiempo real" llega con la base de datos (Fase 2).
+  // ── Comunidad (tarjeta estilo Skool + contadores) ───────────
+  // "miembros" y "admins" los ajustas tú. El conteo de "conectados
+  // en tiempo real" llega con la base de datos (Fase 2).
   comunidad: {
+    nombre: "RESUELTO Academy",
+    cover: "🎬", // miniatura de la comunidad (emoji; luego imagen)
+    descripcion:
+      "Aprende a producir campañas publicitarias con IA y a cobrar por ello.",
     miembros: 0, // total de alumnos — súbelo cuando vendas
     admins: 1, // tú (y tu equipo si sumas a alguien)
+    // Precio de membresía mensual, ej. "$57/mes". "" oculta la línea.
+    precioMembresia: "",
   },
 
   // ── Novedades / anuncios (tablón del portal) ─────────────────
@@ -220,6 +226,19 @@ export const TALLER = {
     videosEjemplo: [] as { titulo: string; youtubeId: string }[],
     // Prueba social, ej. "+15 alumnos en la primera cohorte". "" lo oculta.
     alumnos: "",
+
+    // Visual "iceberg": la punta que todos ven vs. el sistema debajo.
+    iceberg: {
+      tip: "Lo que todos hacen: «pedirle videos a la IA»",
+      capas: [
+        "Estrategia creativa: qué contar, a quién y por qué",
+        "El Cerebro Creativo IA — el proceso que lo cambia todo",
+        "La Biblia Publicitaria: 60 documentos de oficio",
+        "Dirección de arte, storyboard y consistencia",
+        "Producción cinematográfica y edición con IA",
+        "Empaquetarlo y cobrarlo — proyectos desde $2,000",
+      ],
+    },
 
     dolor: {
       titulo: "El problema no eres tú",

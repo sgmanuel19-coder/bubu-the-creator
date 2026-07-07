@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { TALLER } from "@/lib/taller/content";
 import { trackMeta, trackTaller } from "@/lib/taller/analytics";
+import ComunidadCard from "@/components/taller/ComunidadCard";
+import IcebergSistema from "@/components/taller/IcebergSistema";
 
 // Un clic de compra dispara ambos sistemas de medición:
 // Vercel Analytics (funnel propio) + Pixel de Meta (optimización de pauta).
@@ -454,6 +456,9 @@ export default function TallerGate() {
           </p>
         </section>
 
+        {/* ── Tarjeta de comunidad (estilo Skool) ── */}
+        <ComunidadCard />
+
         {/* ── Míralo en acción (galería de ejemplos) ── */}
         <section className="mt-16">
           <h2 className="text-center text-2xl font-bold">Míralo en acción</h2>
@@ -520,6 +525,9 @@ export default function TallerGate() {
             ))}
           </div>
         </section>
+
+        {/* ── Iceberg: lo que se ve vs. el sistema debajo ── */}
+        <IcebergSistema />
 
         {/* ── Los 3 actos ── */}
         <section className="mt-20">
