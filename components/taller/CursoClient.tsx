@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { type Curso, type Leccion } from "@/lib/taller/content";
 import {
   getVistas,
@@ -116,13 +115,13 @@ export default function CursoClient({
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-10">
-      <Link
+      <a
         href="/taller/curso"
         className="text-sm transition-opacity hover:opacity-80"
         style={{ color: "var(--muted)" }}
       >
         ← Todos los cursos
-      </Link>
+      </a>
 
       <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
         <div>
@@ -315,42 +314,32 @@ export default function CursoClient({
         })}
       </div>
 
-      {/* Recursos descargables */}
+      {/* Recursos del curso (abren su página de detalle en la bóveda) */}
       {curso.recursos.length > 0 && (
         <section className="mt-12">
           <h2 className="text-lg font-bold">Recursos del curso</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {curso.recursos.map((r) => (
-              <div
-                key={r.titulo}
-                className="rounded-2xl border p-5"
+              <a
+                key={r.slug}
+                href={`/taller/recursos/${r.slug}`}
+                className="flex flex-col rounded-2xl border p-5 transition-transform hover:-translate-y-0.5"
                 style={{
                   borderColor: "rgba(244,240,222,0.12)",
                   background: "var(--surface)",
                   opacity: desbloqueado && r.disponible ? 1 : 0.7,
                 }}
               >
-                <p className="font-semibold">📎 {r.titulo}</p>
-                <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
+                <p className="font-semibold">
+                  {desbloqueado ? "📂" : "🔒"} {r.titulo}
+                </p>
+                <p className="mt-1 flex-1 text-sm" style={{ color: "var(--muted)" }}>
                   {r.descripcion}
                 </p>
-                {desbloqueado && r.disponible && r.url ? (
-                  <a
-                    href={r.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackTaller("taller_recurso", { recurso: r.titulo })}
-                    className="mt-3 inline-block rounded-lg border px-4 py-2 text-xs font-semibold transition-opacity hover:opacity-80"
-                    style={{ borderColor: "rgba(26,128,255,0.5)", color: "var(--green)" }}
-                  >
-                    Descargar →
-                  </a>
-                ) : (
-                  <p className="mt-3 text-xs uppercase tracking-wider" style={{ color: "var(--muted)" }}>
-                    {desbloqueado ? "Próximamente" : "🔒 Solo alumnos"}
-                  </p>
-                )}
-              </div>
+                <p className="mt-3 text-xs font-medium" style={{ color: "var(--green)" }}>
+                  {desbloqueado ? "Abrir →" : "🔒 Desbloquea para abrir"}
+                </p>
+              </a>
             ))}
           </div>
         </section>

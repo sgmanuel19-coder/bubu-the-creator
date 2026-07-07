@@ -377,9 +377,10 @@ function ProductoCard({ tipo }: { tipo: "grabado" | "vivo" }) {
   );
 }
 
-// ── Landing ───────────────────────────────────────────────────
+// ── Landing (Inicio) ──────────────────────────────────────────
+// El header/nav lo pone PortalNav desde la página; aquí sólo va el
+// contenido de venta.
 export default function TallerGate() {
-  const [loginAbierto, setLoginAbierto] = useState(false);
   const { gate } = TALLER;
 
   useEffect(() => {
@@ -390,32 +391,6 @@ export default function TallerGate() {
 
   return (
     <>
-      {/* Barra superior */}
-      <header
-        className="sticky top-0 z-40 border-b backdrop-blur-md"
-        style={{ borderColor: "rgba(244,240,222,0.10)", background: "rgba(13,12,8,0.85)" }}
-      >
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 py-4">
-          <div className="flex flex-col">
-            <span
-              className="text-[11px] uppercase tracking-[0.2em]"
-              style={{ color: "var(--muted)" }}
-            >
-              {TALLER.marca}
-            </span>
-            <span className="text-sm font-semibold sm:text-base">Masterclass de Creatividad Publicitaria IA</span>
-          </div>
-          <button
-            type="button"
-            onClick={() => setLoginAbierto(true)}
-            className="shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-opacity hover:opacity-80"
-            style={{ borderColor: "rgba(244,240,222,0.25)", color: "var(--cream)" }}
-          >
-            Ya soy alumno →
-          </button>
-        </div>
-      </header>
-
       <main className="mx-auto max-w-5xl px-5 pb-20">
         {/* ── Hero ── */}
         <section className="pt-14 text-center sm:pt-20">
@@ -717,8 +692,6 @@ export default function TallerGate() {
           </div>
         </section>
       </main>
-
-      {loginAbierto && <LoginModal onClose={() => setLoginAbierto(false)} />}
     </>
   );
 }

@@ -18,10 +18,13 @@ export type Modulo = {
   lecciones: Leccion[];
 };
 export type Recurso = {
+  slug: string; // para la página de detalle /taller/recursos/<slug>
   titulo: string;
-  descripcion: string;
-  url: string;
+  descripcion: string; // resumen para la tarjeta
   disponible: boolean;
+  // Página de detalle (bóveda): info + archivos descargables.
+  contenido?: string[]; // párrafos de info (tipo blog)
+  descargas?: { nombre: string; url: string }[]; // archivos con su link
 };
 export type Curso = {
   slug: string;
@@ -114,31 +117,55 @@ const MODULOS_MASTERCLASS: Modulo[] = [
 
 const RECURSOS_MASTERCLASS: Recurso[] = [
   {
+    slug: "biblia-publicitaria",
     titulo: "La Biblia Publicitaria (60 PDFs)",
     descripcion:
       "Los 60 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema.",
-    url: "",
     disponible: false,
+    contenido: [
+      "La Biblia Publicitaria es el corazón del Cerebro Creativo IA: 60 documentos que condensan el oficio del director creativo — insights, retóricas, estructuras narrativas, hooks, tipos de campaña y más.",
+      "Descárgala completa y cárgala en tu Cerebro Creativo tal como se muestra en la PARTE 2. Es el material que hace que la IA razone como un creativo senior dentro de tu marca.",
+    ],
+    descargas: [
+      // { nombre: "Biblia Publicitaria — 60 PDFs (.zip)", url: "https://..." },
+    ],
   },
   {
+    slug: "baraja-gpts",
     titulo: "La baraja de GPTs de mi proceso",
     descripcion:
       "Links de acceso a las 4 piezas de mi flujo real: CinePromt, Storyboard, UGC y Seedance Director.",
-    url: "",
     disponible: false,
+    contenido: [
+      "Las 4 piezas del flujo de producción. Requieren una cuenta de ChatGPT de pago. Ábrelas y guárdalas en tus favoritos.",
+    ],
+    descargas: [
+      // { nombre: "CinePromt", url: "https://chatgpt.com/g/..." },
+      // { nombre: "Storyboard", url: "https://chatgpt.com/g/..." },
+      // { nombre: "UGC", url: "https://chatgpt.com/g/..." },
+      // { nombre: "Seedance Director", url: "https://chatgpt.com/g/..." },
+    ],
   },
   {
+    slug: "plantillas-sistema",
     titulo: "Plantillas del sistema",
     descripcion: "Hoja de personaje, ADN de marca y biblioteca de prompts.",
-    url: "",
     disponible: false,
+    contenido: [
+      "Las plantillas base del sistema. La hoja de personaje resuelve la consistencia; el ADN de marca alimenta al Cerebro; la biblioteca de prompts acelera cada generación.",
+    ],
+    descargas: [],
   },
   {
+    slug: "checklist-parece-agencia",
     titulo: "Checklist «parece agencia»",
     descripcion:
       "Los detalles de acabado de edición que separan «video de IA» de pieza publicitaria.",
-    url: "",
     disponible: false,
+    contenido: [
+      "Antes de publicar cualquier pieza, pásala por este checklist de acabado. Son los detalles que hacen que un video se vea profesional y no «hecho con IA».",
+    ],
+    descargas: [],
   },
 ];
 
@@ -424,6 +451,24 @@ export const TALLER = {
 // ── Helpers del Classroom ─────────────────────────────────────
 export function buscarCurso(slug: string): Curso | undefined {
   return TALLER.cursos.find((c) => c.slug === slug);
+}
+
+// Busca un recurso por slug en todos los cursos (para su página de detalle).
+export function buscarRecurso(
+  slug: string,
+): { recurso: Recurso; curso: Curso } | undefined {
+  for (const curso of TALLER.cursos) {
+    const recurso = curso.recursos.find((r) => r.slug === slug);
+    if (recurso) return { recurso, curso };
+  }
+  return undefined;
+}
+
+// Todos los recursos de cursos publicados (para la bóveda /taller/recursos).
+export function recursosGlobales(): { recurso: Recurso; curso: Curso }[] {
+  return TALLER.cursos
+    .filter((c) => c.disponible)
+    .flatMap((c) => c.recursos.map((recurso) => ({ recurso, curso: c })));
 }
 
 // Todas las lecciones con video de los cursos disponibles (para el

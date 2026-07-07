@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { TALLER } from "@/lib/taller/content";
 import { trackTaller } from "@/lib/taller/analytics";
 
@@ -14,7 +13,6 @@ const inputStyle: React.CSSProperties = {
 // Modal de acceso reutilizable. Al validar, refresca la página actual para
 // que el contenido se desbloquee en el mismo lugar (sin saltar de pantalla).
 export default function LoginModal({ onClose }: { onClose: () => void }) {
-  const router = useRouter();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -38,8 +36,10 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
       const data = await res.json();
       if (data.ok) {
         trackTaller("taller_login");
-        router.refresh();
-        onClose();
+        // Recarga completa: descarta el Router Cache de Next (que guardó las
+        // pestañas en su estado bloqueado por prefetch) y reconstruye todo ya
+        // con sesión. Así no vuelve a pedir la contraseña al cambiar de tab.
+        window.location.reload();
         return;
       }
       setError(data.error ?? "No pudimos validar la contraseña.");

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TALLER } from "@/lib/taller/content";
 import LoginModal from "@/components/taller/LoginModal";
@@ -65,8 +64,11 @@ export default function PortalNav({ desbloqueado = false }: { desbloqueado?: boo
                 : tab.href === "/taller/curso"
                   ? pathname.startsWith("/taller/curso")
                   : pathname === tab.href;
+            // Navegación real (no SPA): cada pestaña se renderiza fresca en
+            // el servidor leyendo la cookie, así el estado de sesión siempre
+            // es correcto y no vuelve a pedir la contraseña al cambiar de tab.
             return (
-              <Link
+              <a
                 key={tab.href}
                 href={tab.href}
                 className="shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors sm:px-4 sm:text-sm"
@@ -77,7 +79,7 @@ export default function PortalNav({ desbloqueado = false }: { desbloqueado?: boo
                 }
               >
                 {tab.label}
-              </Link>
+              </a>
             );
           })}
         </nav>

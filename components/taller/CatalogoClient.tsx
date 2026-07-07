@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { TALLER, type Curso } from "@/lib/taller/content";
 import { getVistas } from "@/lib/taller/progress";
 import GamificacionHeader from "@/components/taller/GamificacionHeader";
@@ -131,14 +130,14 @@ export default function CatalogoClient({ desbloqueado }: { desbloqueado: boolean
           };
 
           return curso.disponible ? (
-            <Link
+            <a
               key={curso.slug}
               href={`/taller/curso/${curso.slug}`}
               className="flex flex-col overflow-hidden rounded-2xl border transition-transform hover:-translate-y-0.5"
               style={cardStyle}
             >
               {contenido}
-            </Link>
+            </a>
           ) : (
             <div
               key={curso.slug}
