@@ -160,6 +160,25 @@ export const TALLER = {
     nombre: "Bubu",
   },
 
+  // ── Comunidad (contadores social proof, editables a mano) ────
+  // Nota: "miembros" y "admins" los ajustas tú. El conteo de
+  // "conectados en tiempo real" llega con la base de datos (Fase 2).
+  comunidad: {
+    miembros: 0, // total de alumnos — súbelo cuando vendas
+    admins: 1, // tú (y tu equipo si sumas a alguien)
+  },
+
+  // ── Novedades / anuncios (tablón del portal) ─────────────────
+  // Lo más nuevo arriba. fecha en texto libre, ej. "6 jul 2026".
+  novedades: [
+    {
+      fecha: "",
+      titulo: "¡Bienvenido a RESUELTO Academy!",
+      texto:
+        "Aquí verás cada novedad: nuevos módulos, recursos y fechas de los en vivo. Empieza por tu primer curso en la pestaña Cursos.",
+    },
+  ] as { fecha: string; titulo: string; texto: string }[],
+
   // ── Landing de venta ─────────────────────────────────────────
   gate: {
     headline:

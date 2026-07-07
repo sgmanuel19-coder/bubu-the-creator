@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { TALLER, type Curso } from "@/lib/taller/content";
 import { getVistas } from "@/lib/taller/progress";
+import GamificacionHeader from "@/components/taller/GamificacionHeader";
 
 function pctCurso(curso: Curso, vistas: Record<string, boolean>): number {
   const conVideo = curso.modulos
@@ -30,7 +31,9 @@ export default function CatalogoClient() {
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-10">
-      <h1 className="text-2xl font-bold sm:text-3xl">Tus cursos</h1>
+      <GamificacionHeader />
+
+      <h1 className="mt-10 text-2xl font-bold sm:text-3xl">Tus cursos</h1>
       <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
         Todo tu Classroom en un solo lugar. Entra a un curso para ver sus módulos.
       </p>
