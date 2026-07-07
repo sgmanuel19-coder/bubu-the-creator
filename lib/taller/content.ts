@@ -166,8 +166,12 @@ export const TALLER = {
       "No te enseño a usar la IA. Te enseño a que la IA piense como un director creativo con 20 años de experiencia en tu negocio.",
     subheadline:
       "La masterclass del Cerebro Creativo IA: genera estrategia, conceptos y guiones publicitarios con criterio de agencia, y produce la campaña completa con calidad de cine. Sin cámara, sin productora.",
-    // Video de venta (VSL) — ID de YouTube oculto. "" lo oculta.
+    // Video de venta (VSL) — ID de YouTube oculto. Si lo dejas "" se
+    // muestra un recuadro con marcador de posición ("Aquí va tu VSL").
     vslYoutubeId: "",
+    // Videos de ejemplo (galería "Míralo en acción"). Agrega piezas que
+    // hayas producido con el sistema. [] muestra marcadores de posición.
+    videosEjemplo: [] as { titulo: string; youtubeId: string }[],
     // Prueba social, ej. "+15 alumnos en la primera cohorte". "" lo oculta.
     alumnos: "",
 

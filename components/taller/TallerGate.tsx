@@ -429,11 +429,16 @@ export default function TallerGate() {
             {gate.subheadline}
           </p>
 
-          {gate.vslYoutubeId && (
-            <div
-              className="relative mx-auto mt-8 w-full max-w-3xl overflow-hidden rounded-2xl border"
-              style={{ aspectRatio: "16 / 9", borderColor: "rgba(244,240,222,0.12)" }}
-            >
+          {/* Video de presentación (VSL). Sin ID muestra un marcador. */}
+          <div
+            className="relative mx-auto mt-8 w-full max-w-3xl overflow-hidden rounded-2xl border"
+            style={{
+              aspectRatio: "16 / 9",
+              borderColor: "rgba(244,240,222,0.12)",
+              background: "var(--surface)",
+            }}
+          >
+            {gate.vslYoutubeId ? (
               <iframe
                 src={`https://www.youtube-nocookie.com/embed/${gate.vslYoutubeId}?rel=0&modestbranding=1`}
                 title="Presentación de la masterclass"
@@ -441,8 +446,16 @@ export default function TallerGate() {
                 allowFullScreen
                 className="absolute inset-0 h-full w-full"
               />
-            </div>
-          )}
+            ) : (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-6 text-center">
+                <span className="text-4xl">▶</span>
+                <p className="text-sm font-semibold">Aquí va tu video de presentación (VSL)</p>
+                <p className="text-xs" style={{ color: "var(--muted)" }}>
+                  Súbelo oculto a YouTube y pega su ID en gate.vslYoutubeId
+                </p>
+              </div>
+            )}
+          </div>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
@@ -464,6 +477,53 @@ export default function TallerGate() {
           >
             {gate.credenciales}
           </p>
+        </section>
+
+        {/* ── Míralo en acción (galería de ejemplos) ── */}
+        <section className="mt-16">
+          <h2 className="text-center text-2xl font-bold">Míralo en acción</h2>
+          <p className="mt-2 text-center text-sm" style={{ color: "var(--muted)" }}>
+            Piezas producidas de punta a punta con este sistema — sin cámara ni productora.
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {(gate.videosEjemplo.length > 0
+              ? gate.videosEjemplo
+              : [
+                  { titulo: "Ejemplo próximamente", youtubeId: "" },
+                  { titulo: "Ejemplo próximamente", youtubeId: "" },
+                  { titulo: "Ejemplo próximamente", youtubeId: "" },
+                ]
+            ).map((v, i) => (
+              <div
+                key={`${i}-${v.titulo}`}
+                className="overflow-hidden rounded-2xl border"
+                style={cardStyle}
+              >
+                <div
+                  className="relative w-full"
+                  style={{ aspectRatio: "16 / 9", background: "var(--bg)" }}
+                >
+                  {v.youtubeId ? (
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${v.youtubeId}?rel=0&modestbranding=1`}
+                      title={v.titulo}
+                      allow="encrypted-media; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full"
+                    />
+                  ) : (
+                    <div
+                      className="absolute inset-0 flex items-center justify-center text-3xl"
+                      style={{ color: "var(--muted)" }}
+                    >
+                      ▶
+                    </div>
+                  )}
+                </div>
+                <p className="px-4 py-3 text-sm font-medium">{v.titulo}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* ── Dolor ── */}

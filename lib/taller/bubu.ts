@@ -177,6 +177,81 @@ export const CONOCIMIENTO: Entrada[] = [
   },
 ];
 
+// ============================================================
+// CONOCIMIENTO DE VENTAS — para la landing pública.
+// Aquí Bubu ayuda a DECIDIR la compra: precio, qué incluye,
+// garantía, para quién. NO da detalle a profundidad de los
+// módulos (eso es solo para alumnos, adentro).
+// ============================================================
+export const CONOCIMIENTO_VENTAS: Entrada[] = [
+  {
+    id: "v-precio",
+    claves: ["precio", "cuanto cuesta", "cuanto vale", "costo", "cuotas", "vale", "pagar"],
+    respuesta:
+      "Hay dos formas de entrar: el curso grabado a $120 (S/450), acceso inmediato y de por vida; y la masterclass en vivo a $250 (S/950), que es una cohorte con fecha fija de ~4.5 horas, con Q&A y revisión de tu proyecto, e incluye el grabado de por vida. Ambos con cuotas. Para dimensionarlo: un proyecto con este sistema se ofrece a empresas desde $2,000 — aprenderlo cuesta menos del 10% de eso. Baja a la sección de precios para elegir.",
+  },
+  {
+    id: "v-incluye",
+    claves: ["que incluye", "que me llevo", "que trae", "que viene", "que recibo", "contenido"],
+    respuesta:
+      "Recibes la masterclass completa en módulos, la Biblia Publicitaria completa (60 documentos, el bono estrella), la baraja de GPTs de mi proceso, todas las plantillas del sistema, la comunidad con soporte por 30 días y una llamada grupal de seguimiento al día 14. La versión en vivo suma la sesión Q&A y la revisión de tu primer proyecto conmigo.",
+  },
+  {
+    id: "v-garantia",
+    claves: ["garant", "devol", "devuel", "reembols", "dinero", "riesgo"],
+    respuesta:
+      "El grabado tiene 7 días de garantía: si entras, lo ves y no es para ti, te devuelvo el dinero completo, sin preguntas. En el vivo la garantía es aún más fuerte: asiste, aplica el sistema, y si en 7 días no produces tu primer spot con IA, te devuelvo el 100%.",
+  },
+  {
+    id: "v-para-quien",
+    claves: ["es para mi", "para quien", "me sirve", "sirve para mi", "principiante", "sin experiencia", "no se de publicidad", "desde cero"],
+    respuesta:
+      "Es para ti si vives de crear contenido o quieres vivir de eso: creativos, community managers, editores, freelancers, y también dueños de agencias chicas o emprendedores con marca propia. No necesitas saber de publicidad ni tener experiencia: el sistema incluye toda la parte estratégica y empiezas desde cero. Si solo tienes curiosidad por la IA sin querer producir de verdad, quizá no es para ti.",
+  },
+  {
+    id: "v-vivo-vs-grabado",
+    claves: ["vivo o grabado", "diferencia", "cual elijo", "cual me conviene", "vivo vs", "grabado vs"],
+    respuesta:
+      "El grabado ($120) es el mismo contenido para verlo a tu ritmo, cuando quieras, de por vida. El vivo ($250) es una cohorte con fecha fija donde lo vemos juntos en ~4.5 horas, con sesión de preguntas en directo y revisión grupal de TU proyecto — y además te llevas el grabado de por vida. Si quieres acompañamiento y feedback directo, el vivo; si prefieres ir solo a tu ritmo, el grabado.",
+  },
+  {
+    id: "v-herramientas",
+    claves: ["herramientas", "que necesito", "requisitos", "higgsfield", "claude", "chatgpt", "programas", "stack"],
+    respuesta:
+      "Para aplicar el sistema necesitas, como mínimo, el plan básico de Higgsfield, el plan básico de Claude Code y una cuenta de ChatGPT de pago para la baraja de GPTs. Dentro te doy la lista completa con precios y el orden en que conviene contratar cada cosa. Si ya pagas alguna herramienta de IA, vas con ventaja.",
+  },
+  {
+    id: "v-acceso",
+    claves: ["como accedo", "despues de pagar", "como entro", "como ingreso", "contrasena", "password", "recibo el acceso"],
+    respuesta:
+      "Apenas confirmes tu pago te enviamos por correo la contraseña de acceso. Con ella entras al portal desde el botón «Ya soy alumno» (arriba a la derecha) y ves el curso y, si compraste el vivo, la transmisión. El acceso es de por vida.",
+  },
+  {
+    id: "v-cerebro",
+    claves: ["cerebro creativo", "cerebro", "que es lo que ensenas", "que aprendo", "mecanismo", "diferente"],
+    respuesta:
+      "El corazón de la masterclass es el Cerebro Creativo IA: un proceso que inventé para que la IA piense y responda como un director creativo con 20 años de experiencia dentro de tu negocio. No es apretar botones ni un prompt suelto: es el paso estratégico que va ANTES de producir, el que las agencias cobran más caro. Eso no lo vas a encontrar en ningún otro curso.",
+  },
+  {
+    id: "v-biblia",
+    claves: ["biblia", "60 documentos", "60 docs", "documentos"],
+    respuesta:
+      "La Biblia Publicitaria son los 60 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema. Te la llevas COMPLETA con tu compra. Es el bono estrella: por sí sola justifica el precio.",
+  },
+  {
+    id: "v-comercial",
+    claves: ["uso comercial", "comercialmente", "vender lo que", "cobrar por lo que", "clientes reales", "derechos"],
+    respuesta:
+      "Sí, puedes usar comercialmente todo lo que produzcas: las plataformas del stack lo permiten en sus planes de pago. De hecho, el tercer acto de la masterclass es exactamente cómo cobrar por esto — un proyecto con este sistema se ofrece a empresas desde $2,000.",
+  },
+  {
+    id: "v-upgrade",
+    claves: ["upgrade", "subir al vivo", "del grabado al vivo", "cambiar al vivo", "130"],
+    respuesta:
+      "Si compras el grabado y luego quieres el acompañamiento en vivo, subes a la cohorte por solo $130 más (la diferencia). Ganas la sesión de Q&A y la revisión de tu primer proyecto conmigo.",
+  },
+];
+
 // ── Buscador offline ──────────────────────────────────────────
 function normalizar(s: string): string {
   return s
@@ -185,11 +260,10 @@ function normalizar(s: string): string {
     .replace(/[̀-ͯ]/g, "");
 }
 
-export function responder(pregunta: string): { respuesta: string; id: string } {
-  const q = normalizar(pregunta);
+function buscar(base: Entrada[], q: string): Entrada | null {
   let mejor: Entrada | null = null;
   let mejorPuntaje = 0;
-  for (const e of CONOCIMIENTO) {
+  for (const e of base) {
     let puntaje = 0;
     for (const clave of e.claves) {
       if (q.includes(clave)) puntaje += clave.includes(" ") ? 2 : 1;
@@ -199,7 +273,26 @@ export function responder(pregunta: string): { respuesta: string; id: string } {
       mejor = e;
     }
   }
+  return mejor;
+}
+
+// modo "ventas" → responde desde la landing (info para decidir la compra).
+// modo "curso"  → responde a profundidad (solo para alumnos, adentro).
+export function responder(
+  pregunta: string,
+  modo: "ventas" | "curso" = "curso",
+): { respuesta: string; id: string } {
+  const q = normalizar(pregunta);
+  const base = modo === "ventas" ? CONOCIMIENTO_VENTAS : CONOCIMIENTO;
+  const mejor = buscar(base, q);
   if (mejor) return { respuesta: mejor.respuesta, id: mejor.id };
+  if (modo === "ventas") {
+    return {
+      respuesta:
+        "Buena pregunta. Aquí te ayudo a decidir si la masterclass es para ti — pregúntame por el precio, qué incluye, la garantía, si es para tu caso, o la diferencia entre el grabado y el vivo. El detalle a fondo de cada módulo lo ves cuando entres como alumno. Y si quieres, escríbele a Manuel por WhatsApp para dudas específicas de tu proyecto.",
+      id: "fallback-ventas",
+    };
+  }
   return {
     respuesta:
       "Esa no la tengo en mi libreta todavía 😅 Prueba preguntarme por: el Cerebro Creativo, la Biblia, las herramientas que necesitas, precios y garantía, por dónde empezar, cómo cobrar, consistencia de personajes, animación, o los casos reales. Y si es algo muy específico de tu proyecto, guárdalo para la sesión Q&A del vivo o la llamada de seguimiento del día 14.",
@@ -213,6 +306,13 @@ export const PREGUNTAS_RAPIDAS = [
   "¿Qué es el Cerebro Creativo?",
   "¿Qué herramientas necesito?",
   "¿Cuánto cobro por un proyecto?",
+];
+
+export const PREGUNTAS_RAPIDAS_VENTAS = [
+  "¿Qué incluye?",
+  "¿Cuánto cuesta?",
+  "¿Es para mí?",
+  "¿En vivo o grabado?",
 ];
 
 // ── Consejos según el avance del alumno ───────────────────────

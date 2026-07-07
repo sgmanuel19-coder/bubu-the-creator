@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { TALLER, leccionesConVideoGlobal, type Leccion } from "@/lib/taller/content";
 import { getVistas, getUltimaLeccion } from "@/lib/taller/progress";
-import { responder, PREGUNTAS_RAPIDAS, CONSEJOS } from "@/lib/taller/bubu";
+import { responder, PREGUNTAS_RAPIDAS, PREGUNTAS_RAPIDAS_VENTAS, CONSEJOS } from "@/lib/taller/bubu";
 import { trackTaller } from "@/lib/taller/analytics";
 
 // ── Personaje pixel art: hombre con lentes, estilo retro ──────
@@ -134,6 +134,8 @@ export default function AsistenteBubu() {
   const chatRef = useRef<HTMLDivElement>(null);
   const mensaje = usarMensaje(pathname);
   const { asistente } = TALLER;
+  // En la landing Bubu vende (info para decidir); adentro guía a profundidad.
+  const modo: "ventas" | "curso" = pathname === "/taller" ? "ventas" : "curso";
 
   // Parpadeo del personaje cada ~4 segundos.
   useEffect(() => {
@@ -176,7 +178,7 @@ export default function AsistenteBubu() {
   function preguntar(texto: string) {
     const limpio = texto.trim();
     if (!limpio) return;
-    const { respuesta, id } = responder(limpio);
+    const { respuesta, id } = responder(limpio, modo);
     setChat((c) => [...c, { de: "alumno", texto: limpio }, { de: "bubu", texto: respuesta }]);
     setPregunta("");
     trackTaller("taller_asistente", { accion: "pregunta", tema: id });
@@ -259,7 +261,7 @@ export default function AsistenteBubu() {
             {/* Preguntas rápidas (solo al inicio de la conversación) */}
             {chat.length === 0 && (
               <div className="flex flex-wrap gap-2 pt-1">
-                {PREGUNTAS_RAPIDAS.map((q) => (
+                {(modo === "ventas" ? PREGUNTAS_RAPIDAS_VENTAS : PREGUNTAS_RAPIDAS).map((q) => (
                   <button
                     key={q}
                     type="button"
@@ -279,14 +281,29 @@ export default function AsistenteBubu() {
             className="border-t p-3"
             style={{ borderColor: "rgba(244,240,222,0.10)" }}
           >
-            <button
-              type="button"
-              onClick={darConsejo}
-              className="mb-2 w-full rounded-xl border py-2 text-xs font-semibold transition-opacity hover:opacity-80"
-              style={{ borderColor: "rgba(26,128,255,0.45)", color: "var(--green)" }}
-            >
-              💡 Dame un consejo según mi avance
-            </button>
+            {modo === "curso" ? (
+              <button
+                type="button"
+                onClick={darConsejo}
+                className="mb-2 w-full rounded-xl border py-2 text-xs font-semibold transition-opacity hover:opacity-80"
+                style={{ borderColor: "rgba(26,128,255,0.45)", color: "var(--green)" }}
+              >
+                💡 Dame un consejo según mi avance
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setAbierto(false);
+                  document.getElementById("precios")?.scrollIntoView({ behavior: "smooth" });
+                  trackTaller("taller_asistente", { accion: "ver_planes" });
+                }}
+                className="mb-2 w-full rounded-xl border py-2 text-xs font-semibold transition-opacity hover:opacity-80"
+                style={{ borderColor: "rgba(26,128,255,0.45)", color: "var(--green)" }}
+              >
+                Ver planes y precios ↓
+              </button>
+            )}
             <form
               onSubmit={(e) => {
                 e.preventDefault();

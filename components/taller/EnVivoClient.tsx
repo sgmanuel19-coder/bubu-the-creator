@@ -141,27 +141,51 @@ export default function EnVivoClient() {
 
       {youtubeId ? (
         <div className="mt-6 grid gap-4 lg:grid-cols-[1fr_320px]">
+          {/* Reproductor con marco de marca "en vivo ahora" */}
           <div
-            className="relative w-full overflow-hidden rounded-2xl border"
-            style={{ aspectRatio: "16 / 9", borderColor: "rgba(244,240,222,0.12)" }}
+            className="overflow-hidden rounded-2xl border"
+            style={{ borderColor: "rgba(26,128,255,0.4)", background: "var(--surface)" }}
           >
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`}
-              title={titulo}
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 h-full w-full"
-            />
+            <div
+              className="flex items-center justify-between gap-3 border-b px-4 py-2.5"
+              style={{ borderColor: "rgba(244,240,222,0.10)", background: "rgba(26,128,255,0.08)" }}
+            >
+              <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider">
+                <span
+                  className="bubu-pulse inline-block h-2.5 w-2.5 rounded-full"
+                  style={{ background: "#FF4D4D" }}
+                />
+                En vivo ahora
+              </span>
+              <span className="text-[11px]" style={{ color: "var(--muted)" }}>
+                {TALLER.marca}
+              </span>
+            </div>
+            <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                title={titulo}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full"
+              />
+            </div>
           </div>
           {host && (
             <div
-              className="hidden overflow-hidden rounded-2xl border lg:block"
-              style={{ borderColor: "rgba(244,240,222,0.12)" }}
+              className="hidden flex-col overflow-hidden rounded-2xl border lg:flex"
+              style={{ borderColor: "rgba(244,240,222,0.12)", background: "var(--surface)" }}
             >
+              <div
+                className="border-b px-4 py-2.5 text-xs font-semibold uppercase tracking-wider"
+                style={{ borderColor: "rgba(244,240,222,0.10)" }}
+              >
+                💬 Chat en vivo
+              </div>
               <iframe
                 src={`https://www.youtube.com/live_chat?v=${youtubeId}&embed_domain=${host}`}
                 title="Chat en vivo"
-                className="h-full w-full"
+                className="h-full w-full flex-1"
               />
             </div>
           )}
