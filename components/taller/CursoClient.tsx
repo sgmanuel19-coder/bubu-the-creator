@@ -11,6 +11,7 @@ import {
 } from "@/lib/taller/progress";
 import { trackTaller } from "@/lib/taller/analytics";
 import VentaCTA from "@/components/taller/VentaCTA";
+import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 
 function ProgressRing({ pct }: { pct: number }) {
   const r = 16;
@@ -39,7 +40,13 @@ function ProgressRing({ pct }: { pct: number }) {
   );
 }
 
-export default function CursoClient({ curso }: { curso: Curso }) {
+export default function CursoClient({
+  curso,
+  desbloqueado,
+}: {
+  curso: Curso;
+  desbloqueado: boolean;
+}) {
   const primera = (): Leccion | null => {
     for (const m of curso.modulos) {
       if (!m.disponible) continue;
@@ -49,18 +56,17 @@ export default function CursoClient({ curso }: { curso: Curso }) {
     return null;
   };
 
-  const [actual, setActual] = useState<Leccion | null>(primera);
-  // El progreso vive en localStorage: se lee tras montar para no romper
-  // la hidratación (el servidor no conoce el progreso del alumno).
+  // Sin sesión no se selecciona ninguna lección (no se expone ningún video).
+  const [actual, setActual] = useState<Leccion | null>(desbloqueado ? primera : null);
   const [vistas, setVistas] = useState<Record<string, boolean>>({});
   const [cargado, setCargado] = useState(false);
 
-  // Sólo las lecciones de ESTE curso, para que "continuar" no salte a otro.
   const idsDelCurso = new Set(
     curso.modulos.flatMap((m) => m.lecciones.map((l) => l.youtubeId)).filter(Boolean),
   );
 
   useEffect(() => {
+    if (!desbloqueado) return;
     setVistas(getVistas());
     const ultima = getUltimaLeccion();
     if (ultima && idsDelCurso.has(ultima)) {
@@ -74,7 +80,7 @@ export default function CursoClient({ curso }: { curso: Curso }) {
     }
     setCargado(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [curso.slug]);
+  }, [curso.slug, desbloqueado]);
 
   function abrirLeccion(leccion: Leccion) {
     setActual(leccion);
@@ -125,7 +131,7 @@ export default function CursoClient({ curso }: { curso: Curso }) {
             {curso.descripcion}
           </p>
         </div>
-        {cargado && todasConVideo.length > 0 && (
+        {desbloqueado && cargado && todasConVideo.length > 0 && (
           <div className="min-w-[180px]">
             <div className="flex items-center justify-between text-xs" style={{ color: "var(--muted)" }}>
               <span>Tu avance</span>
@@ -144,8 +150,14 @@ export default function CursoClient({ curso }: { curso: Curso }) {
         )}
       </div>
 
-      {/* Reproductor */}
-      {actual ? (
+      {!desbloqueado && (
+        <div className="mt-6">
+          <DesbloquearBanner />
+        </div>
+      )}
+
+      {/* Reproductor: sólo con sesión se carga el video real */}
+      {desbloqueado && actual ? (
         <div className="mt-6">
           <div
             className="relative w-full overflow-hidden rounded-2xl border"
@@ -164,14 +176,24 @@ export default function CursoClient({ curso }: { curso: Curso }) {
         </div>
       ) : (
         <div
-          className="mt-6 rounded-2xl border px-6 py-14 text-center text-sm"
+          className="mt-6 flex flex-col items-center justify-center gap-2 rounded-2xl border px-6 py-16 text-center"
           style={{
+            aspectRatio: "16 / 9",
             borderColor: "rgba(244,240,222,0.12)",
             background: "var(--surface)",
-            color: "var(--muted)",
           }}
         >
-          Los videos de este curso se publican pronto. Vuelve en unos días.
+          <span className="text-4xl">{desbloqueado ? "▶" : "🔒"}</span>
+          <p className="text-sm font-semibold">
+            {desbloqueado
+              ? "Los videos de este curso se publican pronto."
+              : "Contenido para alumnos"}
+          </p>
+          {!desbloqueado && (
+            <p className="text-xs" style={{ color: "var(--muted)" }}>
+              Desbloquea con tu contraseña para reproducir las clases.
+            </p>
+          )}
         </div>
       )}
 
@@ -197,7 +219,7 @@ export default function CursoClient({ curso }: { curso: Curso }) {
                     style={{ color: "var(--green)" }}
                   >
                     Módulo {i + 1}
-                    {cargado && modulo.disponible && conVideo.length > 0 && (
+                    {desbloqueado && cargado && modulo.disponible && conVideo.length > 0 && (
                       <span style={{ color: "var(--muted)" }}>
                         {" "}· {vistasModulo}/{conVideo.length} vistas
                       </span>
@@ -208,21 +230,20 @@ export default function CursoClient({ curso }: { curso: Curso }) {
                     {modulo.descripcion}
                   </p>
                 </div>
-                {modulo.disponible ? (
-                  cargado &&
-                  conVideo.length > 0 && (
-                    <ProgressRing
-                      pct={Math.round((vistasModulo / conVideo.length) * 100)}
-                    />
-                  )
-                ) : (
+                {!modulo.disponible ? (
                   <span
                     className="flex shrink-0 items-center gap-2 rounded-full border px-3 py-1 text-[11px] uppercase tracking-wider"
                     style={{ borderColor: "rgba(244,240,222,0.25)", color: "var(--muted)" }}
                   >
                     🔒 Próximamente
                   </span>
-                )}
+                ) : desbloqueado && cargado && conVideo.length > 0 ? (
+                  <ProgressRing pct={Math.round((vistasModulo / conVideo.length) * 100)} />
+                ) : !desbloqueado ? (
+                  <span className="shrink-0 text-lg" aria-label="Bloqueado">
+                    🔒
+                  </span>
+                ) : null}
               </div>
 
               {modulo.disponible && (
@@ -232,8 +253,11 @@ export default function CursoClient({ curso }: { curso: Curso }) {
                 >
                   {modulo.lecciones.map((leccion) => {
                     const tieneVideo = leccion.youtubeId !== "";
-                    const activa = tieneVideo && actual?.youtubeId === leccion.youtubeId;
-                    const vista = cargado && tieneVideo && !!vistas[leccion.youtubeId];
+                    const activa =
+                      desbloqueado && tieneVideo && actual?.youtubeId === leccion.youtubeId;
+                    const vista = desbloqueado && cargado && tieneVideo && !!vistas[leccion.youtubeId];
+                    // Sin sesión, ninguna lección es abrible.
+                    const abrible = desbloqueado && tieneVideo;
                     return (
                       <li
                         key={leccion.titulo}
@@ -242,31 +266,37 @@ export default function CursoClient({ curso }: { curso: Curso }) {
                           background: activa ? "rgba(26,128,255,0.12)" : "transparent",
                         }}
                       >
+                        {desbloqueado ? (
+                          <button
+                            type="button"
+                            disabled={!tieneVideo}
+                            onClick={() => toggleVista(leccion)}
+                            aria-label={vista ? "Marcar como no vista" : "Marcar como vista"}
+                            className="ml-4 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] disabled:opacity-30"
+                            style={
+                              vista
+                                ? { background: "var(--green)", borderColor: "var(--green)", color: "#fff" }
+                                : { borderColor: "rgba(244,240,222,0.3)", color: "transparent" }
+                            }
+                          >
+                            ✓
+                          </button>
+                        ) : (
+                          <span className="ml-4 shrink-0 text-sm" aria-label="Bloqueado">
+                            🔒
+                          </span>
+                        )}
                         <button
                           type="button"
-                          disabled={!tieneVideo}
-                          onClick={() => toggleVista(leccion)}
-                          aria-label={vista ? "Marcar como no vista" : "Marcar como vista"}
-                          className="ml-4 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] disabled:opacity-30"
-                          style={
-                            vista
-                              ? { background: "var(--green)", borderColor: "var(--green)", color: "#fff" }
-                              : { borderColor: "rgba(244,240,222,0.3)", color: "transparent" }
-                          }
-                        >
-                          ✓
-                        </button>
-                        <button
-                          type="button"
-                          disabled={!tieneVideo}
+                          disabled={!abrible}
                           onClick={() => abrirLeccion(leccion)}
                           className="flex w-full items-center justify-between gap-4 px-4 py-3 text-left text-sm transition-colors disabled:cursor-not-allowed"
-                          style={{ color: tieneVideo ? "var(--cream)" : "var(--muted)" }}
+                          style={{ color: abrible ? "var(--cream)" : "var(--muted)" }}
                         >
                           <span>
                             {activa ? "▶ " : ""}
                             {leccion.titulo}
-                            {!tieneVideo && " · disponible pronto"}
+                            {desbloqueado && !tieneVideo && " · disponible pronto"}
                           </span>
                           <span
                             className="shrink-0 tabular-nums"
@@ -297,14 +327,14 @@ export default function CursoClient({ curso }: { curso: Curso }) {
                 style={{
                   borderColor: "rgba(244,240,222,0.12)",
                   background: "var(--surface)",
-                  opacity: r.disponible ? 1 : 0.55,
+                  opacity: desbloqueado && r.disponible ? 1 : 0.7,
                 }}
               >
                 <p className="font-semibold">📎 {r.titulo}</p>
                 <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
                   {r.descripcion}
                 </p>
-                {r.disponible && r.url ? (
+                {desbloqueado && r.disponible && r.url ? (
                   <a
                     href={r.url}
                     target="_blank"
@@ -317,7 +347,7 @@ export default function CursoClient({ curso }: { curso: Curso }) {
                   </a>
                 ) : (
                   <p className="mt-3 text-xs uppercase tracking-wider" style={{ color: "var(--muted)" }}>
-                    Próximamente
+                    {desbloqueado ? "Próximamente" : "🔒 Solo alumnos"}
                   </p>
                 )}
               </div>
@@ -326,7 +356,7 @@ export default function CursoClient({ curso }: { curso: Curso }) {
         </section>
       )}
 
-      <VentaCTA />
+      {desbloqueado && <VentaCTA />}
     </main>
   );
 }

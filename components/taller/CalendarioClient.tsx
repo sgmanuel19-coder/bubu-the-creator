@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { TALLER } from "@/lib/taller/content";
 import { trackTaller } from "@/lib/taller/analytics";
+import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 
 function formatoLima(iso: string): string {
   const d = new Date(iso);
@@ -32,7 +33,7 @@ function linkGoogleCalendar(titulo: string, iso: string, duracionMin: number): s
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-export default function CalendarioClient() {
+export default function CalendarioClient({ desbloqueado }: { desbloqueado: boolean }) {
   const [ahora, setAhora] = useState<number | null>(null);
   useEffect(() => setAhora(Date.now()), []);
 
@@ -46,6 +47,12 @@ export default function CalendarioClient() {
       <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
         Las fechas de los próximos en vivo y la llamada de seguimiento. Agrega las que quieras a tu Google Calendar.
       </p>
+
+      {!desbloqueado && (
+        <div className="mt-6">
+          <DesbloquearBanner />
+        </div>
+      )}
 
       {sesiones.length === 0 ? (
         <div

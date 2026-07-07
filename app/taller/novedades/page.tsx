@@ -1,26 +1,32 @@
 import PortalNav from "@/components/taller/PortalNav";
+import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 import { TALLER } from "@/lib/taller/content";
+import { estaDesbloqueado } from "@/lib/taller/session";
 
-export default function NovedadesPage() {
+export default async function NovedadesPage() {
+  const desbloqueado = await estaDesbloqueado();
   const { novedades } = TALLER;
+
   return (
     <>
-      <PortalNav />
+      <PortalNav desbloqueado={desbloqueado} />
       <main className="mx-auto max-w-3xl px-5 py-10">
         <h1 className="text-2xl font-bold sm:text-3xl">Novedades</h1>
         <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
           Lo más nuevo del programa: módulos, recursos y anuncios.
         </p>
 
+        <div className="mt-6">{!desbloqueado && <DesbloquearBanner />}</div>
+
         {novedades.length === 0 ? (
           <div
-            className="mt-8 rounded-2xl border px-6 py-14 text-center text-sm"
+            className="rounded-2xl border px-6 py-14 text-center text-sm"
             style={{ borderColor: "rgba(244,240,222,0.12)", background: "var(--surface)", color: "var(--muted)" }}
           >
             Sin novedades por ahora. Vuelve pronto.
           </div>
         ) : (
-          <div className="mt-6 space-y-3">
+          <div className={`space-y-3 ${desbloqueado ? "" : "select-none opacity-60"}`}>
             {novedades.map((n, i) => (
               <article
                 key={`${i}-${n.titulo}`}
@@ -28,7 +34,8 @@ export default function NovedadesPage() {
                 style={{ borderColor: "rgba(244,240,222,0.12)", background: "var(--surface)" }}
               >
                 <div className="flex items-center gap-2">
-                  {i === 0 && (
+                  {!desbloqueado && <span aria-hidden>🔒</span>}
+                  {desbloqueado && i === 0 && (
                     <span
                       className="rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider"
                       style={{ background: "var(--green)", color: "#fff" }}

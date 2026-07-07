@@ -1,13 +1,8 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { isValidSession, TALLER_COOKIE } from "@/lib/taller/auth";
 import TallerGate from "@/components/taller/TallerGate";
 
-export default async function TallerPage() {
-  const cookieStore = await cookies();
-  const session = cookieStore.get(TALLER_COOKIE)?.value;
-  if (await isValidSession(session)) {
-    redirect("/taller/curso");
-  }
+// INICIO del portal — página de venta pública. Es una pestaña más del
+// portal (junto a Cursos, En vivo, etc.), así que se muestra a todos,
+// alumnos o no. La conversión y el login viven dentro de TallerGate.
+export default function TallerPage() {
   return <TallerGate />;
 }

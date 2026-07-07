@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
-import { isValidSession, TALLER_COOKIE } from "@/lib/taller/auth";
 
 /**
  * Separación de proyectos Vercel por dominio.
@@ -19,16 +18,11 @@ const ICS = "/ia-content-system";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // ----- PORTAL DEL TALLER (contraseña compartida) -----
-  // /taller es la puerta (pública); todo lo demás bajo /taller requiere
-  // la cookie de sesión válida contra TALLER_PASSWORD.
-  if (pathname.startsWith("/taller/")) {
-    const cookie = request.cookies.get(TALLER_COOKIE)?.value;
-    if (!(await isValidSession(cookie))) {
-      return NextResponse.redirect(new URL("/taller", request.url));
-    }
-    return NextResponse.next();
-  }
+  // ----- PORTAL DEL TALLER -----
+  // Todo /taller/* es PÚBLICO (vista previa con candado). Cada página lee
+  // la sesión en el servidor y sólo muestra el contenido real (videos,
+  // recursos) si la cookie es válida. La protección vive en las páginas,
+  // no aquí, para dar la ilusión de ver toda la plataforma bloqueada.
 
   // ----- RESUELTO / IA CONTENT SYSTEM -----
   if (pathname.startsWith(ICS)) {
@@ -88,5 +82,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/ia-content-system/:path*", "/taller/:path*"],
+  matcher: ["/", "/ia-content-system/:path*"],
 };

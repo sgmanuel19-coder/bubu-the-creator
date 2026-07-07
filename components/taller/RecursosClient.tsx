@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { TALLER } from "@/lib/taller/content";
 import { trackTaller } from "@/lib/taller/analytics";
+import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 
 type RecursoPlano = {
   curso: string;
@@ -16,7 +17,7 @@ function normalizar(s: string): string {
   return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 }
 
-export default function RecursosClient() {
+export default function RecursosClient({ desbloqueado }: { desbloqueado: boolean }) {
   const todos: RecursoPlano[] = useMemo(
     () =>
       TALLER.cursos
@@ -44,6 +45,12 @@ export default function RecursosClient() {
       <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
         Todos los documentos de apoyo de tus cursos, en un solo lugar. Búscalos por nombre.
       </p>
+
+      {!desbloqueado && (
+        <div className="mt-6">
+          <DesbloquearBanner />
+        </div>
+      )}
 
       {/* Buscador */}
       <div className="mt-6">
@@ -79,17 +86,19 @@ export default function RecursosClient() {
               style={{
                 borderColor: "rgba(244,240,222,0.12)",
                 background: "var(--surface)",
-                opacity: r.disponible ? 1 : 0.55,
+                opacity: desbloqueado && r.disponible ? 1 : 0.7,
               }}
             >
               <p className="text-[11px] uppercase tracking-[0.2em]" style={{ color: "var(--green)" }}>
                 {r.curso}
               </p>
-              <p className="mt-1 font-semibold">📎 {r.titulo}</p>
+              <p className="mt-1 font-semibold">
+                {desbloqueado ? "📎" : "🔒"} {r.titulo}
+              </p>
               <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
                 {r.descripcion}
               </p>
-              {r.disponible && r.url ? (
+              {desbloqueado && r.disponible && r.url ? (
                 <a
                   href={r.url}
                   target="_blank"
@@ -102,7 +111,7 @@ export default function RecursosClient() {
                 </a>
               ) : (
                 <p className="mt-3 text-xs uppercase tracking-wider" style={{ color: "var(--muted)" }}>
-                  Próximamente
+                  {desbloqueado ? "Próximamente" : "🔒 Solo alumnos"}
                 </p>
               )}
             </div>

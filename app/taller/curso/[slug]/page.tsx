@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import PortalNav from "@/components/taller/PortalNav";
 import CursoClient from "@/components/taller/CursoClient";
 import { TALLER, buscarCurso } from "@/lib/taller/content";
+import { estaDesbloqueado } from "@/lib/taller/session";
 
 // Pre-renderiza una página por cada curso publicado del catálogo.
 export function generateStaticParams() {
@@ -16,11 +17,12 @@ export default async function CursoDetallePage({
   const { slug } = await params;
   const curso = buscarCurso(slug);
   if (!curso || !curso.disponible) notFound();
+  const desbloqueado = await estaDesbloqueado();
 
   return (
     <>
-      <PortalNav />
-      <CursoClient curso={curso} />
+      <PortalNav desbloqueado={desbloqueado} />
+      <CursoClient curso={curso} desbloqueado={desbloqueado} />
     </>
   );
 }

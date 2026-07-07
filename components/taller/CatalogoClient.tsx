@@ -5,6 +5,7 @@ import Link from "next/link";
 import { TALLER, type Curso } from "@/lib/taller/content";
 import { getVistas } from "@/lib/taller/progress";
 import GamificacionHeader from "@/components/taller/GamificacionHeader";
+import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 
 function pctCurso(curso: Curso, vistas: Record<string, boolean>): number {
   const conVideo = curso.modulos
@@ -20,7 +21,7 @@ function contarLecciones(curso: Curso): number {
   return curso.modulos.reduce((n, m) => n + m.lecciones.length, 0);
 }
 
-export default function CatalogoClient() {
+export default function CatalogoClient({ desbloqueado }: { desbloqueado: boolean }) {
   const [vistas, setVistas] = useState<Record<string, boolean>>({});
   const [cargado, setCargado] = useState(false);
 
@@ -33,10 +34,18 @@ export default function CatalogoClient() {
     <main className="mx-auto max-w-5xl px-5 py-10">
       <GamificacionHeader />
 
-      <h1 className="mt-10 text-2xl font-bold sm:text-3xl">Tus cursos</h1>
+      <h1 className="mt-10 text-2xl font-bold sm:text-3xl">
+        {desbloqueado ? "Tus cursos" : "Cursos"}
+      </h1>
       <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
         Todo tu Classroom en un solo lugar. Entra a un curso para ver sus módulos.
       </p>
+
+      {!desbloqueado && (
+        <div className="mt-6">
+          <DesbloquearBanner />
+        </div>
+      )}
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2">
         {TALLER.cursos.map((curso) => {
@@ -54,13 +63,22 @@ export default function CatalogoClient() {
               <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-center gap-2">
                   <h2 className="font-semibold">{curso.titulo}</h2>
-                  {!curso.disponible && (
+                  {!curso.disponible ? (
                     <span
                       className="shrink-0 rounded-full border px-2 py-0.5 text-[10px] uppercase tracking-wider"
                       style={{ borderColor: "rgba(244,240,222,0.25)", color: "var(--muted)" }}
                     >
                       🔒 Pronto
                     </span>
+                  ) : (
+                    !desbloqueado && (
+                      <span
+                        className="shrink-0 rounded-full border px-2 py-0.5 text-[10px] uppercase tracking-wider"
+                        style={{ borderColor: "rgba(26,128,255,0.5)", color: "var(--green)" }}
+                      >
+                        🔒 Bloqueado
+                      </span>
+                    )
                   )}
                 </div>
                 <p className="mt-1 flex-1 text-sm" style={{ color: "var(--muted)" }}>
@@ -72,7 +90,11 @@ export default function CatalogoClient() {
                     <p className="mt-4 text-xs" style={{ color: "var(--muted)" }}>
                       {curso.modulos.length} módulos · {lecciones} lecciones
                     </p>
-                    {cargado && (
+                    {!desbloqueado ? (
+                      <p className="mt-2 text-xs font-medium" style={{ color: "var(--green)" }}>
+                        Desbloquea para ver los videos →
+                      </p>
+                    ) : cargado && (
                       <div className="mt-2">
                         <div
                           className="flex items-center justify-between text-xs"
@@ -105,7 +127,7 @@ export default function CatalogoClient() {
           const cardStyle: React.CSSProperties = {
             borderColor: "rgba(244,240,222,0.12)",
             background: "var(--surface)",
-            opacity: curso.disponible ? 1 : 0.6,
+            opacity: !curso.disponible ? 0.6 : desbloqueado ? 1 : 0.85,
           };
 
           return curso.disponible ? (

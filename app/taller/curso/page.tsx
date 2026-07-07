@@ -1,11 +1,13 @@
 import PortalNav from "@/components/taller/PortalNav";
 import CatalogoClient from "@/components/taller/CatalogoClient";
+import { estaDesbloqueado } from "@/lib/taller/session";
 
-export default function CursoCatalogoPage() {
+export default async function CursoCatalogoPage() {
+  const desbloqueado = await estaDesbloqueado();
   return (
     <>
-      <PortalNav />
-      <CatalogoClient />
+      <PortalNav desbloqueado={desbloqueado} />
+      <CatalogoClient desbloqueado={desbloqueado} />
     </>
   );
 }

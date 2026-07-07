@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TALLER } from "@/lib/taller/content";
+import LoginModal from "@/components/taller/LoginModal";
 
 const TABS = [
+  { href: "/taller", label: "Inicio" },
   { href: "/taller/curso", label: "Cursos" },
   { href: "/taller/en-vivo", label: "● En vivo" },
   { href: "/taller/calendario", label: "Calendario" },
@@ -12,8 +15,9 @@ const TABS = [
   { href: "/taller/novedades", label: "Novedades" },
 ];
 
-export default function PortalNav() {
+export default function PortalNav({ desbloqueado = false }: { desbloqueado?: boolean }) {
   const pathname = usePathname();
+  const [login, setLogin] = useState(false);
 
   return (
     <header
@@ -31,25 +35,36 @@ export default function PortalNav() {
             </span>
             <span className="text-sm font-semibold sm:text-base">{TALLER.nombre}</span>
           </div>
-          <form action="/api/taller/logout" method="POST">
+          {desbloqueado ? (
+            <form action="/api/taller/logout" method="POST">
+              <button
+                type="submit"
+                className="shrink-0 rounded-full border px-3 py-1.5 text-xs transition-opacity hover:opacity-80"
+                style={{ borderColor: "rgba(244,240,222,0.25)", color: "var(--muted)" }}
+              >
+                Salir
+              </button>
+            </form>
+          ) : (
             <button
-              type="submit"
-              className="shrink-0 rounded-full border px-3 py-1.5 text-xs transition-opacity hover:opacity-80"
-              style={{ borderColor: "rgba(244,240,222,0.25)", color: "var(--muted)" }}
+              type="button"
+              onClick={() => setLogin(true)}
+              className="shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold transition-opacity hover:opacity-90"
+              style={{ background: "var(--green)", color: "#fff" }}
             >
-              Salir
+              Entrar
             </button>
-          </form>
+          )}
         </div>
 
         <nav className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-2 pt-3 sm:gap-2">
           {TABS.map((tab) => {
-            // La pestaña "Cursos" queda activa también en el detalle de un
-            // curso (/taller/curso/<slug>).
             const active =
-              tab.href === "/taller/curso"
-                ? pathname.startsWith("/taller/curso")
-                : pathname === tab.href;
+              tab.href === "/taller"
+                ? pathname === "/taller"
+                : tab.href === "/taller/curso"
+                  ? pathname.startsWith("/taller/curso")
+                  : pathname === tab.href;
             return (
               <Link
                 key={tab.href}
@@ -67,6 +82,8 @@ export default function PortalNav() {
           })}
         </nav>
       </div>
+
+      {login && <LoginModal onClose={() => setLogin(false)} />}
     </header>
   );
 }
