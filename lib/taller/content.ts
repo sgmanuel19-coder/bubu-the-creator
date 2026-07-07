@@ -1,25 +1,163 @@
 // ============================================================
-// MASTERCLASS DE CREATIVIDAD PUBLICITARIA IA — CONTENIDO EDITABLE
-// Fuente de verdad del copy: Obsidian → RESUELTO CEREBRO MADRE/
-// TALLERES/MASTERCLASS CREATIVIDAD PUBLICITARIA IA (docs 00, 02, 03, 06).
-// Edita este archivo para actualizar landing y plataforma. Requiere redeploy.
+// PORTAL RESUELTO ACADEMY — CONTENIDO EDITABLE
+// Fuente de verdad del copy de la masterclass: Obsidian →
+// RESUELTO CEREBRO MADRE/TALLERES/MASTERCLASS CREATIVIDAD PUBLICITARIA IA
+// (docs 00, 02, 03, 06). Edita este archivo para actualizar todo. Redeploy.
 //
 // Cómo obtener el ID de un video de YouTube:
 //   https://www.youtube.com/watch?v=ABC123xyz  →  el ID es "ABC123xyz"
 //   Sube los videos como "Oculto" (unlisted), nunca como públicos.
 // ============================================================
 
+// ── Tipos del Classroom ──────────────────────────────────────
+export type Leccion = { titulo: string; duracion: string; youtubeId: string };
+export type Modulo = {
+  titulo: string;
+  descripcion: string;
+  disponible: boolean;
+  lecciones: Leccion[];
+};
+export type Recurso = {
+  titulo: string;
+  descripcion: string;
+  url: string;
+  disponible: boolean;
+};
+export type Curso = {
+  slug: string;
+  titulo: string;
+  descripcion: string;
+  portada: { emoji: string; color: string };
+  disponible: boolean;
+  modulos: Modulo[];
+  recursos: Recurso[];
+};
+
+// ── Módulos de la masterclass: las 6 partes como capítulos ────
+const MODULOS_MASTERCLASS: Modulo[] = [
+  {
+    titulo: "PARTE 0 — Bienvenida y las bases",
+    descripcion:
+      "El resultado primero, las 3 máquinas del sistema (Claude, Higgsfield y CapCut) y el mapa completo de lo que viene.",
+    disponible: true,
+    lecciones: [
+      { titulo: "El resultado primero: lo que vas a poder producir", duracion: "", youtubeId: "" },
+      { titulo: "Las 3 máquinas: Claude, Higgsfield y CapCut", duracion: "", youtubeId: "" },
+      { titulo: "El mapa de la masterclass", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "PARTE 1 — PENSAR: el pensamiento del director creativo",
+    descripcion:
+      "El protocolo del director creativo, las 4 etapas, el insight y sus 6 tipos, la Big Idea, retóricas, 10 estructuras narrativas, fórmulas de headline y 9 hooks, géneros de storytelling y tipos de campaña.",
+    disponible: true,
+    lecciones: [
+      { titulo: "El protocolo del director creativo y las 4 etapas", duracion: "", youtubeId: "" },
+      { titulo: "El insight y sus 6 tipos", duracion: "", youtubeId: "" },
+      { titulo: "Big Idea y retóricas publicitarias", duracion: "", youtubeId: "" },
+      { titulo: "Las 10 estructuras narrativas", duracion: "", youtubeId: "" },
+      { titulo: "Fórmulas de headline y los 9 hooks", duracion: "", youtubeId: "" },
+      { titulo: "Géneros de storytelling y tipos de campaña — el mapa completo", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "PARTE 2 — EL SISTEMA: Cerebro Creativo IA",
+    descripcion:
+      "La Biblia de 60 documentos, el ADN de marca, el Prompt Maestro, Claude Code y Obsidian, skills, agentes y MCP — con demo del Cerebro razonando en vivo.",
+    disponible: true,
+    lecciones: [
+      { titulo: "La Biblia Publicitaria: los 60 documentos", duracion: "", youtubeId: "" },
+      { titulo: "El ADN de marca y el Prompt Maestro", duracion: "", youtubeId: "" },
+      { titulo: "Claude Code y Obsidian como centro de operaciones", duracion: "", youtubeId: "" },
+      { titulo: "Skills, agentes y MCP", duracion: "", youtubeId: "" },
+      { titulo: "Demo: el Cerebro Creativo razonando una campaña", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "PARTE 3 — CREAR: producción con IA",
+    descripcion:
+      "Prompt engineering, Higgsfield a fondo, Kling y Seedance, audio y voz IA, la baraja de GPTs, consistencia con hoja de personaje, y ensamblaje y montaje en CapCut.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Prompt engineering profesional", duracion: "", youtubeId: "" },
+      { titulo: "Higgsfield a fondo (Nano Banana Pro, GPT Image 2)", duracion: "", youtubeId: "" },
+      { titulo: "Storyboard y hoja de personaje: consistencia total", duracion: "", youtubeId: "" },
+      { titulo: "Animación con Kling y Seedance (Seedance Director)", duracion: "", youtubeId: "" },
+      { titulo: "Audio, voz IA y UGC", duracion: "", youtubeId: "" },
+      { titulo: "Ensamblaje y montaje en CapCut", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "PARTE 4 — CASOS: marcas reales",
+    descripcion:
+      "El caso Wellmax completo, el personaje de marca de WIN, galería de referencias y cómo adaptar el sistema a tu caso.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Caso Wellmax: la campaña completa", duracion: "", youtubeId: "" },
+      { titulo: "Caso WIN: personaje de marca", duracion: "", youtubeId: "" },
+      { titulo: "Galería y adaptación a tu caso", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "PARTE 5 — COBRAR: el negocio",
+    descripcion:
+      "Tu propuesta de valor, tu oferta irresistible, cuánto cobrar, el pitch de 60 segundos y tu plan de 30 días.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Propuesta de valor y oferta irresistible", duracion: "", youtubeId: "" },
+      { titulo: "Cuánto cobrar: rangos reales de mercado", duracion: "", youtubeId: "" },
+      { titulo: "El pitch de 60 segundos", duracion: "", youtubeId: "" },
+      { titulo: "Tu plan de 30 días", duracion: "", youtubeId: "" },
+    ],
+  },
+];
+
+const RECURSOS_MASTERCLASS: Recurso[] = [
+  {
+    titulo: "La Biblia Publicitaria (60 PDFs)",
+    descripcion:
+      "Los 60 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema.",
+    url: "",
+    disponible: false,
+  },
+  {
+    titulo: "La baraja de GPTs de mi proceso",
+    descripcion:
+      "Links de acceso a las 4 piezas de mi flujo real: CinePromt, Storyboard, UGC y Seedance Director.",
+    url: "",
+    disponible: false,
+  },
+  {
+    titulo: "Plantillas del sistema",
+    descripcion: "Hoja de personaje, ADN de marca y biblioteca de prompts.",
+    url: "",
+    disponible: false,
+  },
+  {
+    titulo: "Checklist «parece agencia»",
+    descripcion:
+      "Los detalles de acabado de edición que separan «video de IA» de pieza publicitaria.",
+    url: "",
+    disponible: false,
+  },
+];
+
+// ── Cómo agregar un curso nuevo al Classroom ─────────────────
+// 1) Define sus módulos/recursos como constantes arriba (copia
+//    MODULOS_MASTERCLASS y renómbralas, ej. MODULOS_MINICURSO).
+// 2) Agrega un objeto al array `cursos` de TALLER con su slug único,
+//    título, portada (emoji + color) y esas constantes.
+// 3) disponible: true para publicarlo. Redeploy. Nada más.
+
 export const TALLER = {
   nombre: "Masterclass de Creatividad Publicitaria IA",
   marca: "RESUELTO Academy",
   whatsapp: "https://wa.me/51932844074",
 
-  // ── Asistente virtual (personaje pixel art) ──────────────────
+  // ── Asistente virtual (personaje pixel art, 100% offline) ──
   asistente: {
     activo: true,
     nombre: "Bubu",
-    // Las preguntas que no están en el FAQ van al bot de WhatsApp.
-    mensajeWhatsApp: "Hola, estoy en el portal de la masterclass y tengo una pregunta:",
   },
 
   // ── Landing de venta ─────────────────────────────────────────
@@ -205,117 +343,34 @@ export const TALLER = {
   // Incluye aquí también la llamada de seguimiento del día 14.
   sesiones: [] as { titulo: string; fecha: string; duracionMin: number }[],
 
-  // ── Curso grabado: las 6 partes como capítulos ───────────────
-  modulos: [
+  // ── CLASSROOM: catálogo de cursos (estilo Skool) ─────────────
+  // Cada curso tiene su tarjeta en /taller/curso y su página propia
+  // en /taller/curso/<slug>. Ver la nota de arriba para agregar uno.
+  cursos: [
     {
-      titulo: "PARTE 0 — Bienvenida y las bases",
+      slug: "masterclass",
+      titulo: "Masterclass de Creatividad Publicitaria IA",
       descripcion:
-        "El resultado primero, las 3 máquinas del sistema (Claude, Higgsfield y CapCut) y el mapa completo de lo que viene.",
+        "El sistema completo: estrategia con el Cerebro Creativo IA, producción cinematográfica y cómo cobrarlo.",
+      // Portada de la tarjeta: emoji grande + color de fondo.
+      portada: { emoji: "🎬", color: "rgba(26,128,255,0.18)" },
       disponible: true,
-      lecciones: [
-        { titulo: "El resultado primero: lo que vas a poder producir", duracion: "", youtubeId: "" },
-        { titulo: "Las 3 máquinas: Claude, Higgsfield y CapCut", duracion: "", youtubeId: "" },
-        { titulo: "El mapa de la masterclass", duracion: "", youtubeId: "" },
-      ],
+      modulos: MODULOS_MASTERCLASS,
+      recursos: RECURSOS_MASTERCLASS,
     },
     {
-      titulo: "PARTE 1 — PENSAR: el pensamiento del director creativo",
+      // Plantilla del próximo curso. Cámbiala cuando subas tu curso
+      // complementario, o pon disponible: false mientras tanto.
+      slug: "proximo-curso",
+      titulo: "Nuevo curso complementario",
       descripcion:
-        "El protocolo del director creativo, las 4 etapas, el insight y sus 6 tipos, la Big Idea, retóricas, 10 estructuras narrativas, fórmulas de headline y 9 hooks, géneros de storytelling y tipos de campaña.",
-      disponible: true,
-      lecciones: [
-        { titulo: "El protocolo del director creativo y las 4 etapas", duracion: "", youtubeId: "" },
-        { titulo: "El insight y sus 6 tipos", duracion: "", youtubeId: "" },
-        { titulo: "Big Idea y retóricas publicitarias", duracion: "", youtubeId: "" },
-        { titulo: "Las 10 estructuras narrativas", duracion: "", youtubeId: "" },
-        { titulo: "Fórmulas de headline y los 9 hooks", duracion: "", youtubeId: "" },
-        { titulo: "Géneros de storytelling y tipos de campaña — el mapa completo", duracion: "", youtubeId: "" },
-      ],
-    },
-    {
-      titulo: "PARTE 2 — EL SISTEMA: Cerebro Creativo IA",
-      descripcion:
-        "La Biblia de 60 documentos, el ADN de marca, el Prompt Maestro, Claude Code y Obsidian, skills, agentes y MCP — con demo del Cerebro razonando en vivo.",
-      disponible: true,
-      lecciones: [
-        { titulo: "La Biblia Publicitaria: los 60 documentos", duracion: "", youtubeId: "" },
-        { titulo: "El ADN de marca y el Prompt Maestro", duracion: "", youtubeId: "" },
-        { titulo: "Claude Code y Obsidian como centro de operaciones", duracion: "", youtubeId: "" },
-        { titulo: "Skills, agentes y MCP", duracion: "", youtubeId: "" },
-        { titulo: "Demo: el Cerebro Creativo razonando una campaña", duracion: "", youtubeId: "" },
-      ],
-    },
-    {
-      titulo: "PARTE 3 — CREAR: producción con IA",
-      descripcion:
-        "Prompt engineering, Higgsfield a fondo, Kling y Seedance, audio y voz IA, la baraja de GPTs, consistencia con hoja de personaje, y ensamblaje y montaje en CapCut.",
-      disponible: true,
-      lecciones: [
-        { titulo: "Prompt engineering profesional", duracion: "", youtubeId: "" },
-        { titulo: "Higgsfield a fondo (Nano Banana Pro, GPT Image 2)", duracion: "", youtubeId: "" },
-        { titulo: "Storyboard y hoja de personaje: consistencia total", duracion: "", youtubeId: "" },
-        { titulo: "Animación con Kling y Seedance (Seedance Director)", duracion: "", youtubeId: "" },
-        { titulo: "Audio, voz IA y UGC", duracion: "", youtubeId: "" },
-        { titulo: "Ensamblaje y montaje en CapCut", duracion: "", youtubeId: "" },
-      ],
-    },
-    {
-      titulo: "PARTE 4 — CASOS: marcas reales",
-      descripcion:
-        "El caso Wellmax completo, el personaje de marca de WIN, galería de referencias y cómo adaptar el sistema a tu caso.",
-      disponible: true,
-      lecciones: [
-        { titulo: "Caso Wellmax: la campaña completa", duracion: "", youtubeId: "" },
-        { titulo: "Caso WIN: personaje de marca", duracion: "", youtubeId: "" },
-        { titulo: "Galería y adaptación a tu caso", duracion: "", youtubeId: "" },
-      ],
-    },
-    {
-      titulo: "PARTE 5 — COBRAR: el negocio",
-      descripcion:
-        "Tu propuesta de valor, tu oferta irresistible, cuánto cobrar, el pitch de 60 segundos y tu plan de 30 días.",
-      disponible: true,
-      lecciones: [
-        { titulo: "Propuesta de valor y oferta irresistible", duracion: "", youtubeId: "" },
-        { titulo: "Cuánto cobrar: rangos reales de mercado", duracion: "", youtubeId: "" },
-        { titulo: "El pitch de 60 segundos", duracion: "", youtubeId: "" },
-        { titulo: "Tu plan de 30 días", duracion: "", youtubeId: "" },
-      ],
-    },
-  ],
-
-  // ── Recursos descargables ────────────────────────────────────
-  // url: link de Drive/Notion/PDF. disponible: false lo muestra
-  // como "próximamente" sin link.
-  recursos: [
-    {
-      titulo: "La Biblia Publicitaria (60 PDFs)",
-      descripcion:
-        "Los 60 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema.",
-      url: "",
+        "Un curso corto para llevar tu sistema aún más lejos. Muy pronto en tu Classroom.",
+      portada: { emoji: "🎁", color: "rgba(244,240,222,0.10)" },
       disponible: false,
+      modulos: [],
+      recursos: [],
     },
-    {
-      titulo: "La baraja de GPTs de mi proceso",
-      descripcion:
-        "Links de acceso a las 4 piezas de mi flujo real: CinePromt, Storyboard, UGC y Seedance Director.",
-      url: "",
-      disponible: false,
-    },
-    {
-      titulo: "Plantillas del sistema",
-      descripcion: "Hoja de personaje, ADN de marca y biblioteca de prompts.",
-      url: "",
-      disponible: false,
-    },
-    {
-      titulo: "Checklist «parece agencia»",
-      descripcion:
-        "Los detalles de acabado de edición que separan «video de IA» de pieza publicitaria.",
-      url: "",
-      disponible: false,
-    },
-  ],
+  ] as Curso[],
 
   // ── Backend post-compra (dentro de la plataforma) ────────────
   venta: {
@@ -343,5 +398,18 @@ export const TALLER = {
   },
 };
 
-export type Modulo = (typeof TALLER.modulos)[number];
-export type Leccion = Modulo["lecciones"][number];
+// ── Helpers del Classroom ─────────────────────────────────────
+export function buscarCurso(slug: string): Curso | undefined {
+  return TALLER.cursos.find((c) => c.slug === slug);
+}
+
+// Todas las lecciones con video de los cursos disponibles (para el
+// progreso global que usa el asistente).
+export function leccionesConVideoGlobal(): Leccion[] {
+  return TALLER.cursos
+    .filter((c) => c.disponible)
+    .flatMap((c) => c.modulos)
+    .filter((m) => m.disponible)
+    .flatMap((m) => m.lecciones)
+    .filter((l) => l.youtubeId);
+}

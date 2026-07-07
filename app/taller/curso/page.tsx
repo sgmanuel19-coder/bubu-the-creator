@@ -1,11 +1,11 @@
 import PortalNav from "@/components/taller/PortalNav";
-import CursoClient from "@/components/taller/CursoClient";
+import CatalogoClient from "@/components/taller/CatalogoClient";
 
-export default function CursoPage() {
+export default function CursoCatalogoPage() {
   return (
     <>
       <PortalNav />
-      <CursoClient />
+      <CatalogoClient />
     </>
   );
 }

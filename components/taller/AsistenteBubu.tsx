@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { TALLER, type Leccion } from "@/lib/taller/content";
+import { TALLER, leccionesConVideoGlobal, type Leccion } from "@/lib/taller/content";
 import { getVistas, getUltimaLeccion } from "@/lib/taller/progress";
 import { responder, PREGUNTAS_RAPIDAS, CONSEJOS } from "@/lib/taller/bubu";
 import { trackTaller } from "@/lib/taller/analytics";
@@ -78,22 +78,12 @@ function PixelBubu({
 // ── Progreso del alumno (para mensajes y consejos) ────────────
 function calcularProgreso(): { pct: number; siguiente: Leccion | null; hayVideos: boolean } {
   const vistas = getVistas();
-  const conVideo = TALLER.modulos
-    .filter((m) => m.disponible)
-    .flatMap((m) => m.lecciones)
-    .filter((l) => l.youtubeId);
+  // Progreso a través de TODOS los cursos del Classroom.
+  const conVideo = leccionesConVideoGlobal();
   if (conVideo.length === 0) return { pct: 0, siguiente: null, hayVideos: false };
   const total = conVideo.filter((l) => vistas[l.youtubeId]).length;
   const pct = Math.round((total / conVideo.length) * 100);
-  let siguiente: Leccion | null = null;
-  for (const m of TALLER.modulos) {
-    if (!m.disponible) continue;
-    const p = m.lecciones.find((l) => l.youtubeId && !vistas[l.youtubeId]);
-    if (p) {
-      siguiente = p;
-      break;
-    }
-  }
+  const siguiente = conVideo.find((l) => !vistas[l.youtubeId]) ?? null;
   return { pct, siguiente, hayVideos: true };
 }
 

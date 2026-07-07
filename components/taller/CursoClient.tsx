@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { TALLER, type Leccion } from "@/lib/taller/content";
+import Link from "next/link";
+import { type Curso, type Leccion } from "@/lib/taller/content";
 import {
   getVistas,
   setVista,
@@ -38,39 +39,42 @@ function ProgressRing({ pct }: { pct: number }) {
   );
 }
 
-function primeraConVideo(): Leccion | null {
-  for (const m of TALLER.modulos) {
-    if (!m.disponible) continue;
-    const conVideo = m.lecciones.find((l) => l.youtubeId);
-    if (conVideo) return conVideo;
-  }
-  return null;
-}
+export default function CursoClient({ curso }: { curso: Curso }) {
+  const primera = (): Leccion | null => {
+    for (const m of curso.modulos) {
+      if (!m.disponible) continue;
+      const conVideo = m.lecciones.find((l) => l.youtubeId);
+      if (conVideo) return conVideo;
+    }
+    return null;
+  };
 
-function buscarLeccion(youtubeId: string): Leccion | null {
-  for (const m of TALLER.modulos) {
-    const l = m.lecciones.find((x) => x.youtubeId === youtubeId);
-    if (l) return l;
-  }
-  return null;
-}
-
-export default function CursoClient() {
-  const [actual, setActual] = useState<Leccion | null>(primeraConVideo);
+  const [actual, setActual] = useState<Leccion | null>(primera);
   // El progreso vive en localStorage: se lee tras montar para no romper
   // la hidratación (el servidor no conoce el progreso del alumno).
   const [vistas, setVistas] = useState<Record<string, boolean>>({});
   const [cargado, setCargado] = useState(false);
 
+  // Sólo las lecciones de ESTE curso, para que "continuar" no salte a otro.
+  const idsDelCurso = new Set(
+    curso.modulos.flatMap((m) => m.lecciones.map((l) => l.youtubeId)).filter(Boolean),
+  );
+
   useEffect(() => {
     setVistas(getVistas());
     const ultima = getUltimaLeccion();
-    if (ultima) {
-      const l = buscarLeccion(ultima);
-      if (l) setActual(l);
+    if (ultima && idsDelCurso.has(ultima)) {
+      for (const m of curso.modulos) {
+        const l = m.lecciones.find((x) => x.youtubeId === ultima);
+        if (l) {
+          setActual(l);
+          break;
+        }
+      }
     }
     setCargado(true);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [curso.slug]);
 
   function abrirLeccion(leccion: Leccion) {
     setActual(leccion);
@@ -79,7 +83,7 @@ export default function CursoClient() {
       setVista(leccion.youtubeId, true);
       setVistas((v) => ({ ...v, [leccion.youtubeId]: true }));
     }
-    trackTaller("taller_leccion_vista", { leccion: leccion.titulo });
+    trackTaller("taller_leccion_vista", { curso: curso.slug, leccion: leccion.titulo });
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -94,8 +98,7 @@ export default function CursoClient() {
     });
   }
 
-  // Progreso general (solo lecciones que ya tienen video)
-  const todasConVideo = TALLER.modulos
+  const todasConVideo = curso.modulos
     .filter((m) => m.disponible)
     .flatMap((m) => m.lecciones)
     .filter((l) => l.youtubeId);
@@ -107,11 +110,19 @@ export default function CursoClient() {
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-10">
-      <div className="flex flex-wrap items-end justify-between gap-4">
+      <Link
+        href="/taller/curso"
+        className="text-sm transition-opacity hover:opacity-80"
+        style={{ color: "var(--muted)" }}
+      >
+        ← Todos los cursos
+      </Link>
+
+      <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold sm:text-3xl">Curso grabado</h1>
-          <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
-            Todos los módulos del taller, para verlos a tu ritmo cuando quieras.
+          <h1 className="text-2xl font-bold sm:text-3xl">{curso.titulo}</h1>
+          <p className="mt-2 max-w-2xl text-sm" style={{ color: "var(--muted)" }}>
+            {curso.descripcion}
           </p>
         </div>
         {cargado && todasConVideo.length > 0 && (
@@ -160,13 +171,13 @@ export default function CursoClient() {
             color: "var(--muted)",
           }}
         >
-          Los videos del curso se publicarán aquí después del taller en vivo.
+          Los videos de este curso se publican pronto. Vuelve en unos días.
         </div>
       )}
 
       {/* Módulos */}
       <div className="mt-10 space-y-4">
-        {TALLER.modulos.map((modulo, i) => {
+        {curso.modulos.map((modulo, i) => {
           const conVideo = modulo.lecciones.filter((l) => l.youtubeId);
           const vistasModulo = conVideo.filter((l) => vistas[l.youtubeId]).length;
           return (
@@ -231,7 +242,6 @@ export default function CursoClient() {
                           background: activa ? "rgba(26,128,255,0.12)" : "transparent",
                         }}
                       >
-                        {/* Check de visto (clic para marcar/desmarcar) */}
                         <button
                           type="button"
                           disabled={!tieneVideo}
@@ -276,11 +286,11 @@ export default function CursoClient() {
       </div>
 
       {/* Recursos descargables */}
-      {TALLER.recursos.length > 0 && (
+      {curso.recursos.length > 0 && (
         <section className="mt-12">
-          <h2 className="text-lg font-bold">Recursos del taller</h2>
+          <h2 className="text-lg font-bold">Recursos del curso</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {TALLER.recursos.map((r) => (
+            {curso.recursos.map((r) => (
               <div
                 key={r.titulo}
                 className="rounded-2xl border p-5"

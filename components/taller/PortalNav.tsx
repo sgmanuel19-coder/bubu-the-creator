@@ -32,7 +32,12 @@ export default function PortalNav() {
 
         <nav className="flex items-center gap-1 sm:gap-2">
           {TABS.map((tab) => {
-            const active = pathname === tab.href;
+            // La pestaña "Curso grabado" queda activa también en el detalle
+            // de cada curso (/taller/curso/<slug>).
+            const active =
+              tab.href === "/taller/curso"
+                ? pathname.startsWith("/taller/curso")
+                : pathname === tab.href;
             return (
               <Link
                 key={tab.href}
