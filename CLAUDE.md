@@ -1,65 +1,63 @@
-# SISTEMA IA — Plataforma de Atención al Cliente con IA
+# RESUELTO — Sitio principal (resueltoagency.com)
 
-## ¿Qué es este proyecto?
-Landing page independiente para **Sistema IA**, plataforma de atención al cliente automatizada con inteligencia artificial. Desarrollado para **RESUELTO** (Manuel Severo). Deployed en Vercel como proyecto separado.
+Monorepo Next.js 16 (App Router) de Manuel Severo. Deploy en Vercel
+(proyecto `bubuthecreator`), auto-deploy con `git push` a main.
+GitHub: `sgmanuel19-coder/bubu-the-creator`.
 
-## Stack
-- Next.js 16 (App Router, `output: "export"` para deploy estático)
-- Tailwind CSS con diseño profesional azul y blanco
-- Framer Motion — animaciones scroll-triggered
-- Facebook Pixel — tracking de conversiones
-- Vercel Analytics
+## Qué vive aquí (3 productos en un repo)
 
-## Identidad visual
-| Token | Valor |
-|---|---|
-| Azul primario | `#1A80FF` |
-| Azul secundario | `#4D9FFF` |
-| Fondo | `#FFFFFF` |
-| Texto | `#000000` / `#666666` |
-| Font display | Inter / Space Grotesk |
-| Font body | Inter |
-
-## Reglas críticas
-
-1. **Sistema IA es proyecto independiente** — completamente separado de Resuelto. Vercel dashboard muestra como proyecto distinto.
-2. **`app/sistemas-ia/page.tsx` es la única página** — todas las secciones viven en este archivo o sus imports.
-3. **Server vs Client**: La página `app/sistemas-ia/page.tsx` es Server Component. Componentes con interactividad usan `"use client"`.
-4. **Static export**: El sitio se exporta estáticamente para máxima velocidad.
-5. **Facebook Pixel tracking** — implementado vía componente `FacebookPixel.tsx`. Se dispara en cada pageview y eventos de conversión.
-6. **Mobile-first**: Tailwind responsive design `base → sm → md → lg`.
-
-## Páginas
-| Ruta | Archivo | Nota |
+| Ruta | Qué es | Estado |
 |---|---|---|
-| `/` | `app/page.tsx` | Home temporal (redirige a Sistema IA) |
-| `/app` | `app/sistemas-ia/page.tsx` | Landing principal |
+| `/` + `/casos`, `/servicios`, `/sobre-mi`, `/academy` | Landing de Resuelto Agency | Producción |
+| `/sistemas-ia` | Landing de Sistema IA (atención al cliente) | Producción |
+| `/taller/*` | **RESUELTO Academy**: landing de venta + plataforma de cursos de la Masterclass de Creatividad Publicitaria IA | Producción |
+| `/ia-content-system/*` | Portal cliente-agencia (Supabase) | Deployado, Supabase caído |
 
-## Deploy
-```bash
-npm run dev          # desarrollo
-npm run build        # build local
-npx vercel --prod    # deploy producción
-git push             # auto-deploy vía GitHub→Vercel
-```
+## RESUELTO Academy (`/taller`) — reglas críticas
 
-## Variables de Entorno
-```
-NEXT_PUBLIC_FACEBOOK_PIXEL_ID=1298724568307272
-```
+- **Todo el contenido editable vive en `lib/taller/content.ts`** (cursos,
+  módulos, lecciones con IDs de YouTube ocultos, recursos de la bóveda,
+  precios, FAQ, sesiones del calendario, novedades). Editar ahí + redeploy.
+- **Acceso**: contraseña compartida en env `TALLER_PASSWORD` (Vercel).
+  Cookie = SHA-256 (`lib/taller/auth.ts`). Todo `/taller/*` es PÚBLICO en
+  modo "vista previa con candado": cada página lee la sesión server-side
+  (`lib/taller/session.ts` → `estaDesbloqueado()`) y solo renderiza el
+  contenido real (iframes de video, links de descarga) si hay sesión.
+  **Nunca** filtrar contenido real al público.
+- **Nav del portal usa `<a>` (navegación real), NO `<Link>`**: el Router
+  Cache de Next cachea por ruta sin distinguir sesión y re-bloquea pestañas
+  a alumnos logueados. Bug ya resuelto — no reintroducir `<Link>` ahí.
+- **Copy de la landing**: sigue reglas de posicionamiento estrictas
+  (Obsidian → `RESUELTO CEREBRO MADRE/TALLERES/MASTERCLASS CREATIVIDAD
+  PUBLICITARIA IA/06 - Brief...`): liderar con estrategia/Cerebro Creativo
+  (nunca "aprende IA"), Biblia como bono estrella, ancla $2,000, GPTs son
+  "de mi proceso" (nunca "los creé"), urgencia solo real, CTA vivo →
+  WhatsApp / CTA grabado → Hotmart (`gate.productos.grabado.hotmartUrl`).
+- **Asistente Bubu**: 100% offline (`lib/taller/bubu.ts`); modo "ventas" en
+  `/taller` (no revela detalle de módulos) y modo "curso" adentro.
+- **Leads del registro**: `/api/taller/registro` → n8n (`TALLER_N8N_WEBHOOK`)
+  con respaldo a correo vía FormSubmit (`TALLER_LEADS_EMAIL`).
+- **Fase 2 (pendiente de claves de Supabase)**: plan completo en
+  `docs/superpowers/specs/2026-07-07-fase2-supabase-plan.md` + esquema en
+  `supabase/migrations/003_academy_schema.sql`.
 
-## Componentes Clave
-- **FacebookPixel.tsx** — Inicializa Facebook Pixel para tracking de conversiones
-- **Secciones en `sistemas-ia/page.tsx`**:
-  - Problems — Pain points del cliente
-  - HowItWorks — Explicación de cómo funciona
-  - Pricing — Planes de pago
-  - Industries — Industrias objetivo
-  - Testimonials — Casos de éxito
-  - FAQ — Preguntas frecuentes
-  - Guarantee — Garantía de satisfacción
-  - FinalCTA — Llamada a acción final con WhatsApp
+## Reglas del repo
 
-## Contacto
-- **WhatsApp**: Botones CTA enlazan directamente a conversación WhatsApp
-- **Píxel de conversión**: Track automático de view_content, add_to_cart, purchase events
+1. La separación por dominio se maneja en `middleware.ts` — NO agregar
+   `redirect()` en `app/page.tsx`.
+2. El header `Cache-Control: immutable` de `/_next/static` aplica SOLO en
+   producción (en dev rompe HMR/hidratación) — ya condicionado en
+   `next.config.ts`. No quitar la condición.
+3. CSP en `next.config.ts`: si se embebe un origen nuevo en iframe,
+   agregarlo a `frame-src`.
+4. Identidad visual del sitio: tokens en `app/globals.css` (`--bg` #0D0C08,
+   `--cream` #F4F0DE, azul `--green` #1A80FF, Inter). El portal usa
+   `.taller-root` (cursor normal).
+5. Probar con `npm run build` antes de push (el push a main deploya solo).
+
+## Env vars (Vercel)
+
+`TALLER_PASSWORD` (acceso alumnos) · `TALLER_N8N_WEBHOOK` (leads, opcional) ·
+`TALLER_LEADS_EMAIL` (respaldo leads, default sgmanuel19@gmail.com) ·
+`NEXT_PUBLIC_FACEBOOK_PIXEL_ID` · `NEXT_PUBLIC_SUPABASE_URL` +
+`NEXT_PUBLIC_SUPABASE_ANON_KEY` + `SUPABASE_SERVICE_ROLE_KEY` (ICS/Fase 2).
