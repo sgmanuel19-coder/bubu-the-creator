@@ -66,13 +66,21 @@ export async function POST(request: Request) {
   let nombre = "";
   let email = "";
   let producto = "";
+  let honeypot = "";
   try {
     const body = await request.json();
     nombre = typeof body?.nombre === "string" ? body.nombre.trim().slice(0, 120) : "";
     email = typeof body?.email === "string" ? body.email.trim().slice(0, 160) : "";
     producto = typeof body?.producto === "string" ? body.producto.trim().slice(0, 60) : "";
+    honeypot = typeof body?.web === "string" ? body.web.trim() : "";
   } catch {
     // body inválido → cae a la validación
+  }
+
+  // Honeypot anti-spam: el campo "web" es invisible para humanos; si un bot
+  // lo llena, respondemos éxito falso y descartamos (no le avisamos al bot).
+  if (honeypot) {
+    return NextResponse.json({ ok: true });
   }
 
   if (!nombre || !EMAIL_RE.test(email)) {

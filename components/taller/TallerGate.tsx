@@ -41,11 +41,42 @@ function urlVivo() {
   return waLink(TALLER.gate.productos.vivo.mensajeWhatsApp);
 }
 
+// ── CTA fijo en móvil (aparece tras pasar el hero) ────────────
+function StickyCompra() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 600);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  if (!visible) return null;
+  return (
+    <div
+      className="fixed inset-x-0 bottom-0 z-40 border-t px-4 py-3 pr-24 backdrop-blur-md lg:hidden"
+      style={{ borderColor: "rgba(244,240,222,0.12)", background: "rgba(13,12,8,0.92)" }}
+    >
+      <a
+        href="#precios"
+        onClick={() => trackTaller("taller_cta_comprar", { producto: "sticky-precios" })}
+        className="flex items-center justify-between rounded-xl px-5 py-3 text-sm font-semibold"
+        style={{ background: "var(--green)", color: "#fff" }}
+      >
+        <span>Elegir mi acceso</span>
+        <span className="text-xs font-normal opacity-90">$120 · $250 →</span>
+      </a>
+    </div>
+  );
+}
+
 // ── Registro para quien ya pagó y no tiene contraseña ─────────
 function RegistroCard() {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [producto, setProducto] = useState("Masterclass en vivo");
+  const [web, setWeb] = useState(""); // honeypot: los humanos nunca lo ven
   const [estado, setEstado] = useState<"idle" | "sending" | "done">("idle");
   const [error, setError] = useState("");
   const [showWhatsApp, setShowWhatsApp] = useState(false);
@@ -59,7 +90,7 @@ function RegistroCard() {
       const res = await fetch("/api/taller/registro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, email, producto }),
+        body: JSON.stringify({ nombre, email, producto, web }),
       });
       const data = await res.json();
       if (data.ok) {
@@ -94,6 +125,17 @@ function RegistroCard() {
 
   return (
     <form onSubmit={handleRegistro} className="space-y-4">
+      {/* Honeypot anti-spam: invisible y fuera del orden de tabulación */}
+      <input
+        type="text"
+        name="web"
+        value={web}
+        onChange={(e) => setWeb(e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="nombre" className="mb-1.5 block text-sm">
@@ -343,9 +385,6 @@ export default function TallerGate() {
           </p>
         </section>
 
-        {/* ── Tarjeta de comunidad (estilo Skool) ── */}
-        <ComunidadCard />
-
         {/* ── Míralo en acción (galería de ejemplos) ── */}
         <section className="mt-16">
           <h2 className="text-center text-2xl font-bold">Míralo en acción</h2>
@@ -374,6 +413,7 @@ export default function TallerGate() {
                     <iframe
                       src={`https://www.youtube-nocookie.com/embed/${v.youtubeId}?rel=0&modestbranding=1`}
                       title={v.titulo}
+                      loading="lazy"
                       allow="encrypted-media; picture-in-picture"
                       allowFullScreen
                       className="absolute inset-0 h-full w-full"
@@ -491,6 +531,9 @@ export default function TallerGate() {
           </p>
         </section>
 
+        {/* ── Tarjeta de comunidad (prueba social junto a la decisión) ── */}
+        <ComunidadCard />
+
         {/* ── Precios ── */}
         <section id="precios" className="mt-20 scroll-mt-24">
           <h2 className="text-center text-2xl font-bold">Elige cómo entrar</h2>
@@ -587,6 +630,8 @@ export default function TallerGate() {
           </div>
         </section>
       </main>
+
+      <StickyCompra />
     </>
   );
 }
