@@ -6,6 +6,8 @@ import AsistenteBubu from "@/components/taller/AsistenteBubu";
 // propia metadata completa en page.tsx; las páginas internas del portal
 // declaran noindex individualmente.
 export const metadata: Metadata = {
+  // URLs absolutas de OG/canonical directas al dominio con www (sin 308).
+  metadataBase: new URL("https://www.resueltoagency.com"),
   title: `${TALLER.nombre} | ${TALLER.marca}`,
   description:
     "Aprende a pensar campañas como un director creativo y a producirlas con calidad de cine usando IA.",
