@@ -240,6 +240,13 @@ export const TALLER = {
       ],
     },
 
+    // Comparativo animado: producción tradicional vs. tu sistema.
+    versus: [
+      { metrica: "Costo por campaña", tradicional: "$5,000 – $50,000", sistema: "Una fracción", barraTrad: 100, barraSis: 8 },
+      { metrica: "Tiempo de producción", tradicional: "4 – 6 semanas", sistema: "Días", barraTrad: 100, barraSis: 12 },
+      { metrica: "Equipo necesario", tradicional: "Productora completa", sistema: "Tú + tu laptop", barraTrad: 100, barraSis: 10 },
+    ],
+
     dolor: {
       titulo: "El problema no eres tú",
       parrafos: [

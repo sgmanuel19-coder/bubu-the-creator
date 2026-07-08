@@ -5,6 +5,9 @@ import { TALLER } from "@/lib/taller/content";
 import { trackMeta, trackTaller } from "@/lib/taller/analytics";
 import ComunidadCard from "@/components/taller/ComunidadCard";
 import IcebergSistema from "@/components/taller/IcebergSistema";
+import VersusAnimado from "@/components/taller/VersusAnimado";
+import RutaDelSistema from "@/components/taller/RutaDelSistema";
+import ValorGrafico from "@/components/taller/ValorGrafico";
 
 // Un clic de compra dispara ambos sistemas de medición:
 // Vercel Analytics (funnel propio) + Pixel de Meta (optimización de pauta).
@@ -453,6 +456,9 @@ export default function TallerGate() {
           </div>
         </section>
 
+        {/* ── Comparativo animado: tradicional vs. sistema ── */}
+        <VersusAnimado />
+
         {/* ── Iceberg: lo que se ve vs. el sistema debajo ── */}
         <IcebergSistema />
 
@@ -479,6 +485,9 @@ export default function TallerGate() {
             ))}
           </div>
         </section>
+
+        {/* ── Mapa de ruta estilo videojuego ── */}
+        <RutaDelSistema />
 
         {/* ── Stack de valor ── */}
         <section className="mx-auto mt-20 max-w-3xl">
@@ -515,6 +524,9 @@ export default function TallerGate() {
               </div>
             ))}
           </div>
+          {/* Gráfica del valor total (número héroe + barras) */}
+          <ValorGrafico />
+
           <p
             className="mt-6 rounded-2xl border px-5 py-4 text-center text-sm font-medium leading-relaxed"
             style={{ borderColor: "rgba(26,128,255,0.45)" }}
