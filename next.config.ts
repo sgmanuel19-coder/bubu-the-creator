@@ -58,6 +58,12 @@ const nextConfig: NextConfig = {
       'lodash',
     ],
   },
+  async redirects() {
+    return [
+      // La landing vieja de Academy fue reemplazada por el portal /taller.
+      { source: "/academy", destination: "/taller", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
