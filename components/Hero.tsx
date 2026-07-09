@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { SITE } from "@/lib/constants";
 import GridBackground from "@/components/ui/grid-background";
+import VideoFacade from "@/components/VideoFacade";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -99,12 +100,9 @@ export default function Hero() {
           <div className="holo-border holo-border-hover">
             <div className="relative rounded-[calc(1.25rem-1px)] overflow-hidden bg-[#060810] aspect-video">
 
-              <iframe
-                src="https://www.youtube.com/embed/WLtnDdsYFqc"
+              <VideoFacade
+                videoId="WLtnDdsYFqc"
                 title="Video Sales Letter - Resuelto Agency"
-                className="absolute inset-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
               />
 
               {/* Scan line */}

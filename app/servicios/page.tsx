@@ -14,6 +14,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: `Servicios — ${SITE.brandName}`,
   description: "Creación de contenido con IA para empresas B2B. Videos a demanda, sistema mensual de contenido IA y automatización completa. El nivel de una producción tradicional, en días.",
+  alternates: { canonical: "https://resueltoagency.com/servicios" },
+  openGraph: {
+    title: `Servicios — ${SITE.brandName}`,
+    description: "Creación de contenido con IA para empresas B2B. Videos a demanda, sistema mensual y automatización completa. El nivel de una producción tradicional, en días.",
+    url: "https://resueltoagency.com/servicios",
+  },
 };
 
 export default function ServiciosPage() {

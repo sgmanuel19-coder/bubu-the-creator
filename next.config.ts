@@ -25,7 +25,9 @@ const permissionsPolicy = [
   'payment=()',
   'usb=()',
   'serial=()',
-  'autoplay=(self)',
+  // YouTube necesita permiso de autoplay delegado para que el facade
+  // (thumbnail → click → iframe con autoplay=1) arranque sin segundo click.
+  'autoplay=(self "https://www.youtube.com" "https://www.youtube-nocookie.com")',
 ].join(', ');
 
 const securityHeaders = [

@@ -11,6 +11,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: `Sobre mí — ${SITE.brandName}`,
   description: "Estratega de contenido con +5 años trabajando con las marcas más exigentes del Perú. De agencias top-tier a sistemas propios de conversión.",
+  alternates: { canonical: "https://resueltoagency.com/sobre-mi" },
+  openGraph: {
+    title: `Manuel Severo — ${SITE.brandName}`,
+    description: "Estratega de contenido con +5 años trabajando con las marcas más exigentes del Perú. De agencias top-tier a sistemas propios de conversión.",
+    url: "https://resueltoagency.com/sobre-mi",
+  },
 };
 
 export default function SobreMiPage() {
