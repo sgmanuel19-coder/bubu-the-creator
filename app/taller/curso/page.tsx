@@ -6,10 +6,12 @@ import { estaDesbloqueado } from "@/lib/taller/session";
 export const metadata = { robots: { index: false, follow: false } };
 
 export default async function CursoCatalogoPage() {
-  const desbloqueado = await estaDesbloqueado();
+  const algunNivel = await estaDesbloqueado();
+  // Los cursos grabados piden el nivel "grabado" o el acceso maestro.
+  const desbloqueado = await estaDesbloqueado("grabado");
   return (
     <>
-      <PortalNav desbloqueado={desbloqueado} />
+      <PortalNav desbloqueado={algunNivel} />
       <CatalogoClient desbloqueado={desbloqueado} />
     </>
   );

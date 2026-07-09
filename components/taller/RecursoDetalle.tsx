@@ -1,15 +1,21 @@
 "use client";
 
-import { linkWhatsAppPremium, type RecursoBoveda } from "@/lib/taller/content";
+import { type RecursoBoveda } from "@/lib/taller/content";
 import { trackTaller } from "@/lib/taller/analytics";
+import BandejaPago from "@/components/taller/BandejaPago";
 import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
+import SeccionesRecurso, { IndiceSecciones } from "@/components/taller/SeccionesRecurso";
 
 export default function RecursoDetalle({
   recurso,
   desbloqueado,
+  indiceTitulos,
 }: {
   recurso: RecursoBoveda;
   desbloqueado: boolean;
+  // Bloqueado: la página server-side despoja secciones/descargas y solo
+  // manda los títulos — el contenido real nunca viaja al navegador.
+  indiceTitulos?: string[];
 }) {
   const descargas = recurso.descargas ?? [];
   const esPremium = Boolean(recurso.premium);
@@ -28,7 +34,7 @@ export default function RecursoDetalle({
         {recurso.cursoRelacionado ?? `${recurso.tipo} · ${recurso.nivel}`}
       </p>
       <h1 className="mt-1 text-2xl font-bold sm:text-3xl">
-        {esPremium ? "💎" : desbloqueado ? "📂" : "🔒"} {recurso.titulo}
+        {esPremium && !desbloqueado ? "💎" : desbloqueado ? "📂" : "🔒"} {recurso.titulo}
       </h1>
       <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
         {recurso.descripcion}
@@ -41,12 +47,10 @@ export default function RecursoDetalle({
         </div>
       )}
 
-      {/* Información (tipo blog) */}
+      {/* Resumen / intro (visible siempre: vende la guía) */}
       {recurso.contenido && recurso.contenido.length > 0 && (
         <div
-          className={`mt-6 space-y-4 rounded-2xl border p-6 ${
-            esPremium || desbloqueado ? "" : "select-none opacity-60"
-          }`}
+          className="mt-6 space-y-4 rounded-2xl border p-6"
           style={{ borderColor: "rgba(244,240,222,0.12)", background: "var(--surface)" }}
         >
           {recurso.contenido.map((p, i) => (
@@ -55,6 +59,15 @@ export default function RecursoDetalle({
             </p>
           ))}
         </div>
+      )}
+
+      {/* Guía a fondo: completa con el nivel correcto; sin él, solo el
+          índice de títulos (el server nunca manda el contenido real) */}
+      {desbloqueado && recurso.secciones && recurso.secciones.length > 0 && (
+        <SeccionesRecurso secciones={recurso.secciones} />
+      )}
+      {!desbloqueado && indiceTitulos && indiceTitulos.length > 0 && (
+        <IndiceSecciones titulos={indiceTitulos} />
       )}
 
       {/* Repo externo */}
@@ -73,34 +86,18 @@ export default function RecursoDetalle({
         </a>
       )}
 
-      {/* Premium: caja de compra por WhatsApp */}
-      {esPremium && (
-        <section
-          className="mt-8 rounded-2xl border p-6"
-          style={{ borderColor: "rgba(255,209,102,0.4)", background: "var(--surface)" }}
-        >
-          <p className="text-lg font-bold" style={{ color: "#FFD166" }}>
-            💎 Recurso exclusivo · {recurso.premium!.precio}
-          </p>
-          <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
-            Este material se entrega en persona: me escribes por WhatsApp, coordinamos el pago y
-            te lo mando directo con una explicación de cómo usarlo.
-          </p>
-          <a
-            href={linkWhatsAppPremium(recurso)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackTaller("taller_recurso", { recurso: recurso.titulo, premium: "si" })}
-            className="mt-4 inline-block rounded-xl px-6 py-3 text-sm font-bold transition-opacity hover:opacity-90"
-            style={{ background: "#FFD166", color: "#0D0C08" }}
-          >
-            Desbloquear por WhatsApp →
-          </a>
-        </section>
+      {/* Premium bloqueado: bandeja de pago (transferencia/Yape/Plin +
+          captura por WhatsApp + clave si ya la tiene) */}
+      {esPremium && !desbloqueado && (
+        <BandejaPago
+          nombre={recurso.titulo}
+          precio={recurso.premium!.precio}
+          hotmartUrl={recurso.premium!.hotmartUrl}
+        />
       )}
 
-      {/* Descargables (solo recursos normales) */}
-      {!esPremium && !recurso.linkExterno && (
+      {/* Descargables (recursos normales, y premium ya desbloqueados) */}
+      {(!esPremium || desbloqueado) && !recurso.linkExterno && (
         <section className="mt-8">
           <h2 className="text-lg font-bold">Descargables</h2>
           {!desbloqueado ? (

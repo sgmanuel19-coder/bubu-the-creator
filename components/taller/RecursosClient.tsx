@@ -1,13 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import {
-  bovedaGlobal,
-  linkWhatsAppPremium,
+  NIVELES_VENTA,
   type NivelRecurso,
-  type RecursoBoveda,
+  type RecursoTarjeta,
   type TipoRecurso,
 } from "@/lib/taller/content";
+import BandejaPago from "@/components/taller/BandejaPago";
 import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 
 function normalizar(s: string): string {
@@ -65,7 +65,7 @@ function Pill({
   );
 }
 
-function Badges({ recurso }: { recurso: RecursoBoveda }) {
+function Badges({ recurso }: { recurso: RecursoTarjeta }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <span
@@ -95,27 +95,30 @@ function Badges({ recurso }: { recurso: RecursoBoveda }) {
 function TarjetaBoveda({
   recurso,
   desbloqueado,
+  premiumDesbloqueado,
 }: {
-  recurso: RecursoBoveda;
+  recurso: RecursoTarjeta;
   desbloqueado: boolean;
+  premiumDesbloqueado: boolean;
 }) {
-  // Premium: la tarjeta entera abre WhatsApp en pestaña nueva.
+  // Premium: lleva a su página de detalle (ahí vive la bandeja de pago,
+  // o el contenido completo si su nivel ya está desbloqueado).
   if (recurso.premium) {
     return (
       <a
-        href={linkWhatsAppPremium(recurso)}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={`/taller/recursos/${recurso.slug}`}
         className="flex flex-col rounded-2xl border p-5 transition-transform hover:-translate-y-0.5"
         style={{ borderColor: "rgba(255,209,102,0.4)", background: "var(--surface)" }}
       >
         <Badges recurso={recurso} />
-        <p className="mt-3 font-semibold">💎 {recurso.titulo}</p>
+        <p className="mt-3 font-semibold">
+          {premiumDesbloqueado ? "📂" : "💎"} {recurso.titulo}
+        </p>
         <p className="mt-1 flex-1 text-sm" style={{ color: "var(--muted)" }}>
           {recurso.descripcion}
         </p>
         <p className="mt-3 text-xs font-semibold" style={{ color: "#FFD166" }}>
-          Desbloquear por WhatsApp →
+          {premiumDesbloqueado ? "Abrir →" : `Ver y desbloquear · ${recurso.premium.precio} →`}
         </p>
       </a>
     );
@@ -144,7 +147,7 @@ function TarjetaBoveda({
   }
 
   // Normales: página de detalle, con candado para no-alumnos.
-  const nDescargas = recurso.descargas?.length ?? 0;
+  const nDescargas = recurso.nDescargas;
   return (
     <a
       href={`/taller/recursos/${recurso.slug}`}
@@ -176,12 +179,22 @@ function TarjetaBoveda({
   );
 }
 
-export default function RecursosClient({ desbloqueado }: { desbloqueado: boolean }) {
-  const todos = useMemo(() => bovedaGlobal(), []);
+export default function RecursosClient({
+  recursos,
+  desbloqueado,
+  niveles,
+}: {
+  recursos: RecursoTarjeta[]; // versión tarjeta (sin contenido real)
+  desbloqueado: boolean; // acceso a los recursos normales (grabado | todo)
+  niveles: string[]; // niveles activos de la sesión (para premium y tiers)
+}) {
+  const todos = recursos;
+  const tieneNivel = (n: string) => niveles.includes("todo") || niveles.includes(n);
 
   const [q, setQ] = useState("");
   const [tipo, setTipo] = useState<"todo" | TipoRecurso>("todo");
   const [nivel, setNivel] = useState<"todos" | NivelRecurso>("todos");
+  const [tierAbierto, setTierAbierto] = useState<string | null>(null);
 
   const filtro = normalizar(q.trim());
   const filtrados = todos.filter((r) => {
@@ -211,6 +224,63 @@ export default function RecursosClient({ desbloqueado }: { desbloqueado: boolean
           <DesbloquearBanner />
         </div>
       )}
+
+      {/* ── ¿Qué incluye cada acceso? (Acceso total destacado) ── */}
+      <section className="mt-8">
+        <p className="text-sm font-bold">¿Qué incluye cada acceso?</p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          {NIVELES_VENTA.map((t) => {
+            const esTodo = t.nivel === "todo";
+            const yaLoTiene = tieneNivel(t.nivel);
+            return (
+              <div
+                key={t.nivel}
+                className="flex flex-col rounded-2xl border p-5"
+                style={{
+                  borderColor: esTodo ? "rgba(255,209,102,0.5)" : "rgba(244,240,222,0.12)",
+                  background: "var(--surface)",
+                }}
+              >
+                <p className="font-bold" style={esTodo ? { color: "#FFD166" } : undefined}>
+                  {esTodo ? "💎 " : ""}
+                  {t.nombre}
+                </p>
+                <p className="mt-1 text-lg font-extrabold">{t.precio}</p>
+                <ul className="mt-2 flex-1 space-y-1">
+                  {t.incluye.map((item) => (
+                    <li key={item} className="text-xs" style={{ color: "var(--muted)" }}>
+                      ✓ {item}
+                    </li>
+                  ))}
+                </ul>
+                {yaLoTiene ? (
+                  <p className="mt-3 text-xs font-semibold" style={{ color: "var(--green)" }}>
+                    ✓ Ya tienes este acceso
+                  </p>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setTierAbierto(tierAbierto === t.nivel ? null : t.nivel)}
+                    className="mt-3 rounded-xl px-4 py-2.5 text-xs font-bold transition-opacity hover:opacity-90"
+                    style={
+                      esTodo
+                        ? { background: "#FFD166", color: "#0D0C08" }
+                        : { background: "var(--green)", color: "#fff" }
+                    }
+                  >
+                    {tierAbierto === t.nivel ? "Cerrar" : "Quiero este acceso →"}
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+        {tierAbierto &&
+          (() => {
+            const t = NIVELES_VENTA.find((n) => n.nivel === tierAbierto);
+            return t ? <BandejaPago nombre={t.nombre} precio={t.precio} /> : null;
+          })()}
+      </section>
 
       <div className="mt-6">
         <input
@@ -254,7 +324,12 @@ export default function RecursosClient({ desbloqueado }: { desbloqueado: boolean
       ) : (
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {filtrados.map((r) => (
-            <TarjetaBoveda key={r.slug} recurso={r} desbloqueado={desbloqueado} />
+            <TarjetaBoveda
+              key={r.slug}
+              recurso={r}
+              desbloqueado={desbloqueado}
+              premiumDesbloqueado={tieneNivel(r.slug)}
+            />
           ))}
         </div>
       )}

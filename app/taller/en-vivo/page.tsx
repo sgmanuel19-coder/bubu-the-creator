@@ -6,10 +6,12 @@ import { estaDesbloqueado } from "@/lib/taller/session";
 export const metadata = { robots: { index: false, follow: false } };
 
 export default async function EnVivoPage() {
-  const desbloqueado = await estaDesbloqueado();
+  const algunNivel = await estaDesbloqueado();
+  // El en vivo pide su propio nivel ("vivo") o el acceso maestro.
+  const desbloqueado = await estaDesbloqueado("vivo");
   return (
     <>
-      <PortalNav desbloqueado={desbloqueado} />
+      <PortalNav desbloqueado={algunNivel} />
       <EnVivoClient desbloqueado={desbloqueado} />
     </>
   );

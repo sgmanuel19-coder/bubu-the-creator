@@ -185,6 +185,24 @@ export const CONOCIMIENTO: Entrada[] = [
 // ============================================================
 export const CONOCIMIENTO_VENTAS: Entrada[] = [
   {
+    id: "v-como-pago",
+    claves: ["como pago", "formas de pago", "yape", "plin", "transferencia", "deposito", "tarjeta", "metodo de pago", "cuenta"],
+    respuesta:
+      "Puedes pagar por transferencia (Interbank), Yape o Plin — al abrir cualquier recurso premium o acceso verás la bandeja con los datos y el paso a paso: transfieres, tomas la captura y se la envías a Manuel por WhatsApp. Él confirma y te manda tu acceso al instante. Algunos productos también tienen pago con tarjeta vía Hotmart.",
+  },
+  {
+    id: "v-niveles",
+    claves: ["niveles", "acceso total", "que acceso", "tipos de acceso", "solo el vivo", "solo grabado", "desbloquear todo"],
+    respuesta:
+      "Hay tres accesos: Cursos grabados (la masterclass completa a tu ritmo + recursos del curso), Cohorte en vivo (las sesiones en vivo con la comunidad), y el Acceso total 💎 que abre TODO el portal: cursos, en vivo y cada recurso premium de la bóveda — incluidos los que se publiquen después. Los ves comparados en la pestaña Recursos, arriba de la bóveda.",
+  },
+  {
+    id: "v-premium",
+    claves: ["premium", "recurso de paga", "pack de prompts", "plantilla maestra", "desbloquear recurso", "clave", "contraseña del recurso"],
+    respuesta:
+      "Los recursos premium 💎 de la bóveda se compran individual: abres el recurso, ves qué incluye y la bandeja de pago con Yape/Plin o transferencia. Pagas, mandas tu captura por WhatsApp y Manuel te envía tu acceso — un link que abres y quedas dentro, directo en tu recurso. Si tienes el Acceso total, ya están todos incluidos.",
+  },
+  {
     id: "v-precio",
     claves: ["precio", "cuanto cuesta", "cuanto vale", "costo", "cuotas", "vale", "pagar"],
     respuesta:

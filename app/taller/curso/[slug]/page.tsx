@@ -20,11 +20,13 @@ export default async function CursoDetallePage({
   const { slug } = await params;
   const curso = buscarCurso(slug);
   if (!curso || !curso.disponible) notFound();
-  const desbloqueado = await estaDesbloqueado();
+  const algunNivel = await estaDesbloqueado();
+  // Los cursos grabados piden el nivel "grabado" o el acceso maestro.
+  const desbloqueado = await estaDesbloqueado("grabado");
 
   return (
     <>
-      <PortalNav desbloqueado={desbloqueado} />
+      <PortalNav desbloqueado={algunNivel} />
       <CursoClient curso={curso} desbloqueado={desbloqueado} />
     </>
   );

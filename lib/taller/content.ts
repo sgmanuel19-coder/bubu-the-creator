@@ -189,14 +189,111 @@ const RECURSOS_MASTERCLASS: Recurso[] = [
 export type TipoRecurso = "guia" | "repo" | "proyecto" | "plantilla";
 export type NivelRecurso = "principiante" | "intermedio" | "avanzado";
 
+// ── Bloques de contenido rico (guías a fondo, estilo artículo) ──
+// Una guía completa se arma con secciones numeradas; cada sección mezcla
+// bloques: párrafos, listas, pasos, tablas, prompts copiables y notas.
+export type BloqueRecurso =
+  | { tipo: "parrafo"; texto: string }
+  | { tipo: "lista"; items: string[] }
+  | { tipo: "pasos"; items: { titulo: string; detalle: string }[] }
+  | { tipo: "tabla"; columnas: string[]; filas: string[][] }
+  // copiable: prompt o comando con botón de copiar (como la referencia)
+  | { tipo: "copiable"; etiqueta: string; contenido: string }
+  // nota: advertencia honesta / tip destacado
+  | { tipo: "nota"; texto: string }
+  // cita: frase de cierre
+  | { tipo: "cita"; texto: string };
+
+export type SeccionRecurso = {
+  titulo: string; // ej. "El problema" (el número se pinta solo)
+  bloques: BloqueRecurso[];
+};
+
 export type RecursoBoveda = Recurso & {
   tipo: TipoRecurso;
   nivel: NivelRecurso;
   tags?: string[];
-  premium?: { precio: string }; // ej. "S/97" — presencia = de paga
+  // premium = de paga. Su nivel de acceso es el propio slug del recurso
+  // (agrega la contraseña en la env TALLER_PASSWORDS de Vercel).
+  // hotmartUrl opcional = segunda vía de pago con tarjeta.
+  premium?: { precio: string; hotmartUrl?: string };
   linkExterno?: string; // repos: URL de GitHub (abre en pestaña nueva)
   cursoRelacionado?: string; // etiqueta pequeña en la tarjeta
+  // Guía a fondo (secciones numeradas). Se define en lib/taller/boveda/
+  // y se une aquí por slug. Sin sesión solo se muestra el índice.
+  secciones?: SeccionRecurso[];
 };
+
+// ── Datos de pago (bandeja antes de WhatsApp) ───────────────────
+// Los QR van en /public/images/pagos/ — deja "" hasta subir la imagen
+// y la bandeja muestra "QR próximamente".
+export const PAGOS = {
+  banco: "Interbank",
+  titular: "RESUELTO SMART SOLUTIONS S.A.C.",
+  cuenta: "2003008386810",
+  cci: "00320000300838681036",
+  yapePlin: {
+    numero: "932 844 074", // cámbialo si tu Yape/Plin usa otro número
+    qrYape: "", // ej. "/images/pagos/qr-yape.png"
+    qrPlin: "", // ej. "/images/pagos/qr-plin.png"
+  },
+  pasos: [
+    "Transfiere o yapea el monto exacto del recurso.",
+    "Toma la captura de tu pago.",
+    "Envíamela por WhatsApp y te mando tu acceso al instante.",
+  ],
+};
+
+// ── Niveles de acceso vendibles (tarjeta Acceso total + franja) ─
+// El nivel "todo" abre TODO el portal (cursos + en vivo + todos los
+// premium). Ajusta precios aquí; las contraseñas van en Vercel.
+export type NivelVenta = {
+  nivel: "todo" | "grabado" | "vivo";
+  nombre: string;
+  precio: string;
+  descripcion: string;
+  incluye: string[];
+};
+
+export const NIVELES_VENTA: NivelVenta[] = [
+  {
+    nivel: "todo",
+    nombre: "Acceso total",
+    precio: "S/497", // ← PLACEHOLDER: define tu precio real
+    descripcion:
+      "Todo el portal, para siempre: la masterclass completa, los en vivo y cada recurso premium de la bóveda — los de hoy y los que se sumen.",
+    incluye: [
+      "Masterclass grabada completa (6 partes)",
+      "Acceso a las sesiones en vivo",
+      "TODOS los recursos premium de la bóveda",
+      "Todo lo premium que se publique después",
+    ],
+  },
+  {
+    nivel: "grabado",
+    nombre: "Cursos grabados",
+    precio: "$120",
+    descripcion:
+      "La masterclass completa a tu ritmo + los recursos del curso en la bóveda.",
+    incluye: [
+      "Masterclass grabada completa (6 partes)",
+      "Biblia, plantillas y recursos del curso",
+      "Acceso de por vida a las actualizaciones del grabado",
+    ],
+  },
+  {
+    nivel: "vivo",
+    nombre: "Cohorte en vivo",
+    precio: "$250",
+    descripcion:
+      "Las sesiones en vivo de la cohorte actual, con acceso al chat de la comunidad.",
+    incluye: [
+      "Sesiones en vivo de la cohorte",
+      "Chat en vivo de la comunidad",
+      "Acceso durante toda la cohorte",
+    ],
+  },
+];
 
 // ── Premium (vitrina para todos; ajusta precios aquí) ──────────
 const BOVEDA_PREMIUM: RecursoBoveda[] = [
@@ -882,9 +979,12 @@ const BOVEDA_CONTENIDO: RecursoBoveda[] = [
   },
 ];
 
-// La bóveda completa: premium arriba (vitrina), luego lo de la
-// masterclass, luego comunidad, Meta Ads, producción, contenido y repos.
-export const BOVEDA: RecursoBoveda[] = [
+// Los recursos de la bóveda SIN las guías a fondo. El ensamblado final
+// (que une las secciones por slug) vive en lib/taller/boveda-server.ts y
+// SOLO se importa desde páginas/rutas del servidor: si un componente
+// cliente importara la bóveda completa, todo el contenido de pago se
+// filtraría en el JS del navegador.
+export const BOVEDA_BASE: RecursoBoveda[] = [
   ...BOVEDA_PREMIUM,
   ...BOVEDA_MASTERCLASS,
   ...BOVEDA_COMUNIDAD,
@@ -1215,22 +1315,14 @@ export function recursosGlobales(): { recurso: Recurso; curso: Curso }[] {
     .flatMap((c) => c.recursos.map((recurso) => ({ recurso, curso: c })));
 }
 
-// ── Helpers de la bóveda (/taller/recursos) ─────────────────────
-export function bovedaGlobal(): RecursoBoveda[] {
-  return BOVEDA;
-}
-
-export function recursoBovedaPorSlug(slug: string): RecursoBoveda | undefined {
-  return BOVEDA.find((r) => r.slug === slug);
-}
-
-// Link de WhatsApp para desbloquear un recurso premium (pestaña nueva).
-export function linkWhatsAppPremium(recurso: RecursoBoveda): string {
-  const texto = `Hola Manuel, quiero desbloquear «${recurso.titulo}»${
-    recurso.premium ? ` (${recurso.premium.precio})` : ""
-  } de la bóveda de RESUELTO Academy.`;
-  return `${TALLER.whatsapp}?text=${encodeURIComponent(texto)}`;
-}
+// ── Tipo "tarjeta" de la bóveda ─────────────────────────────────
+// Versión de un recurso SIN secciones, contenido ni descargas. Es lo
+// único que puede viajar a componentes cliente en listados — las props
+// de un client component se serializan al navegador aunque no se
+// rendericen. Los helpers que la producen viven en boveda-server.ts.
+export type RecursoTarjeta = Omit<RecursoBoveda, "secciones" | "contenido" | "descargas"> & {
+  nDescargas: number; // solo el conteo — nunca las URLs
+};
 
 // Todas las lecciones con video de los cursos disponibles (para el
 // progreso global que usa el asistente).
