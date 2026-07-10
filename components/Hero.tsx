@@ -206,8 +206,9 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Bot IA Comercial */}
-            <div className="flex-1 relative rounded-2xl border border-neon-purple/35 px-5 py-5 flex flex-col gap-3 overflow-hidden"
+            {/* Bot IA Comercial — enlaza a su landing (/sistemas-ia) */}
+            <a href="/sistemas-ia"
+              className="flex-1 relative rounded-2xl border border-neon-purple/35 px-5 py-5 flex flex-col gap-3 overflow-hidden transition-transform hover:-translate-y-0.5"
               style={{
                 background: "rgba(16, 10, 20, 0.72)",
                 backdropFilter: "blur(18px) saturate(160%)",
@@ -240,9 +241,9 @@ export default function Hero() {
                 <p className="text-base font-display font-bold text-neon-purple leading-none">
                   Plazas abiertas
                 </p>
-                <p className="text-[11px] font-body text-white/65 mt-1">sin límite · próximamente</p>
+                <p className="text-[11px] font-body text-white/65 mt-1">atención 24/7 · ver el sistema →</p>
               </div>
-            </div>
+            </a>
 
           </div>
         </motion.div>

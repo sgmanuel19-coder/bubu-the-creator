@@ -8,6 +8,7 @@ import Availability from "@/components/Availability";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import PuenteOfertas from "@/components/PuenteOfertas";
 import { SITE } from "@/lib/constants";
 import type { Metadata } from "next";
 
@@ -75,6 +76,12 @@ export default function ServiciosPage() {
       <ForWho />
       <Availability />
       <FAQ />
+      {/* Puente de coherencia: los otros caminos del sistema */}
+      <PuenteOfertas
+        titulo="Los otros caminos para trabajar conmigo"
+        subtitulo="El contenido es la mitad del sistema. La otra mitad: automatizar tu atención comercial, o aprender el método y producirlo tú."
+        caminos={["sistemas", "academy"]}
+      />
       <FinalCTA />
       <Footer />
     </main>

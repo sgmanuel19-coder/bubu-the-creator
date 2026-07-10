@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Sobre mí", href: "/sobre-mi" },
   { label: "Casos", href: "/casos" },
   { label: "Servicios", href: "/servicios" },
+  { label: "Sistemas IA", href: "/sistemas-ia" },
   // Academy apunta al portal de la masterclass (landing + plataforma).
   { label: "Academy", href: "/taller" },
 ];

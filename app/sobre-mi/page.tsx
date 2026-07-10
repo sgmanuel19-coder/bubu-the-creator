@@ -5,6 +5,7 @@ import GridBackground from "@/components/ui/grid-background";
 import BehindTheScenes from "@/components/BehindTheScenes";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import PuenteOfertas from "@/components/PuenteOfertas";
 import { SITE } from "@/lib/constants";
 import type { Metadata } from "next";
 
@@ -50,6 +51,12 @@ export default function SobreMiPage() {
       <About />
       <FutureVision />
       <BehindTheScenes />
+      {/* Puente de coherencia: todo lo que hago, en tres caminos */}
+      <PuenteOfertas
+        titulo="Tres formas de trabajar conmigo"
+        subtitulo="Produzco campañas con IA para marcas, enseño el sistema exacto con el que lo hago, y una parte del método la regalo — para que decidas con evidencia."
+        caminos={["agencia", "academy", "boveda"]}
+      />
       <FinalCTA />
       <Footer />
     </main>

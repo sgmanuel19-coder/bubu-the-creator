@@ -88,6 +88,14 @@ function Badges({ recurso }: { recurso: RecursoTarjeta }) {
           💎 {recurso.premium.precio}
         </span>
       )}
+      {recurso.gratis && (
+        <span
+          className="rounded-md px-2 py-0.5 text-[10px] font-bold uppercase"
+          style={{ background: "rgba(26,128,255,0.2)", color: "var(--green)" }}
+        >
+          Gratis
+        </span>
+      )}
     </div>
   );
 }
@@ -147,15 +155,17 @@ function TarjetaBoveda({
   }
 
   // Normales: página de detalle, con candado para no-alumnos.
+  // Las gratis están abiertas para todos (imán público).
+  const abierta = desbloqueado || Boolean(recurso.gratis);
   const nDescargas = recurso.nDescargas;
   return (
     <a
       href={`/taller/recursos/${recurso.slug}`}
       className="flex flex-col rounded-2xl border p-5 transition-transform hover:-translate-y-0.5"
       style={{
-        borderColor: "rgba(244,240,222,0.12)",
+        borderColor: recurso.gratis ? "rgba(26,128,255,0.35)" : "rgba(244,240,222,0.12)",
         background: "var(--surface)",
-        opacity: desbloqueado && recurso.disponible ? 1 : 0.8,
+        opacity: abierta && recurso.disponible ? 1 : 0.8,
       }}
     >
       <Badges recurso={recurso} />
@@ -165,15 +175,17 @@ function TarjetaBoveda({
         </p>
       )}
       <p className={recurso.cursoRelacionado ? "mt-1 font-semibold" : "mt-3 font-semibold"}>
-        {desbloqueado ? "📂" : "🔒"} {recurso.titulo}
+        {recurso.gratis ? "📖" : abierta ? "📂" : "🔒"} {recurso.titulo}
       </p>
       <p className="mt-1 flex-1 text-sm" style={{ color: "var(--muted)" }}>
         {recurso.descripcion}
       </p>
       <p className="mt-3 text-xs font-medium" style={{ color: "var(--green)" }}>
-        {desbloqueado
-          ? `Abrir${nDescargas ? ` · ${nDescargas} descargable${nDescargas > 1 ? "s" : ""}` : ""} →`
-          : "🔒 Desbloquea para abrir"}
+        {recurso.gratis
+          ? "Leer gratis →"
+          : abierta
+            ? `Abrir${nDescargas ? ` · ${nDescargas} descargable${nDescargas > 1 ? "s" : ""}` : ""} →`
+            : "🔒 Desbloquea para abrir"}
       </p>
     </a>
   );

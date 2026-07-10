@@ -217,6 +217,10 @@ export type RecursoBoveda = Recurso & {
   // (agrega la contraseña en la env TALLER_PASSWORDS de Vercel).
   // hotmartUrl opcional = segunda vía de pago con tarjeta.
   premium?: { precio: string; hotmartUrl?: string };
+  // gratis = imán público: la guía completa se lee SIN candado, la página
+  // se indexa en Google y cierra con CTA a la masterclass. Es la vitrina
+  // del método (la bóveda demuestra gratis lo que la academy vende).
+  gratis?: boolean;
   linkExterno?: string; // repos: URL de GitHub (abre en pestaña nueva)
   cursoRelacionado?: string; // etiqueta pequeña en la tarjeta
   // Guía a fondo (secciones numeradas). Se define en lib/taller/boveda/
@@ -433,6 +437,7 @@ const BOVEDA_COMUNIDAD: RecursoBoveda[] = [
     tipo: "guia",
     nivel: "principiante",
     disponible: true,
+    gratis: true,
     tags: ["productividad", "calendar", "organización"],
     contenido: [
       "Activa el conector de Google Calendar en claude.ai (Configuración → Conectores). Con eso Claude puede leer y crear eventos por ti.",
@@ -448,6 +453,7 @@ const BOVEDA_COMUNIDAD: RecursoBoveda[] = [
     tipo: "guia",
     nivel: "principiante",
     disponible: true,
+    gratis: true,
     tags: ["principiantes", "primeros pasos"],
     contenido: [
       "Claude vive en varios lugares: la app web y móvil (conversar, analizar, crear), Claude Code (construir y automatizar en tu compu) y los conectores que lo enchufan a tus herramientas. No necesitas todos el primer día.",
@@ -568,6 +574,7 @@ const BOVEDA_COMUNIDAD: RecursoBoveda[] = [
     tipo: "proyecto",
     nivel: "principiante",
     disponible: true,
+    gratis: true,
     tags: ["storytelling", "virales", "hooks"],
     contenido: [
       "Detrás de cada video viral hay una estructura que se puede nombrar: tipo de gancho, promesa, desarrollo, recompensa. Este proyecto entrena a Claude para extraerla de cualquier referencia que le pases.",
@@ -583,6 +590,7 @@ const BOVEDA_COMUNIDAD: RecursoBoveda[] = [
     tipo: "proyecto",
     nivel: "intermedio",
     disponible: true,
+    gratis: true,
     tags: ["web", "landing", "claude code"],
     contenido: [
       "Una landing de agencia se cobra en miles por una razón: estrategia + diseño + código. Claude puede ejecutar las tres si tú pones la dirección — este proyecto te da el orden.",
@@ -782,6 +790,7 @@ const BOVEDA_META_ADS: RecursoBoveda[] = [
     tipo: "guia",
     nivel: "principiante",
     disponible: true,
+    gratis: true,
     tags: ["meta ads", "pauta", "facebook", "instagram"],
     contenido: [
       "El error número uno en Meta Ads no es la segmentación — es entrar sin saber qué acción quieres provocar. Antes de tocar el administrador de anuncios, define una sola cosa: ¿este ad existe para que te vean, para que te escriban o para que compren? Cada objetivo se configura distinto y se mide distinto.",

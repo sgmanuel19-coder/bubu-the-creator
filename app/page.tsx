@@ -10,6 +10,7 @@ const Comparison   = dynamic(() => import("@/components/Comparison"));
 const IAfrentes    = dynamic(() => import("@/components/IAfrentes"));
 const Authority    = dynamic(() => import("@/components/Authority"));
 const PricingTiers = dynamic(() => import("@/components/PricingTiers"));
+const PuenteOfertas = dynamic(() => import("@/components/PuenteOfertas"));
 const FinalCTA     = dynamic(() => import("@/components/FinalCTA"));
 const Footer       = dynamic(() => import("@/components/Footer"));
 
@@ -71,6 +72,13 @@ export default function Home() {
       <IAfrentes />
       <Authority />
       <PricingTiers />
+      {/* Puente de coherencia: la agencia es la prueba del método;
+          la academy lo enseña y la bóveda lo demuestra gratis */}
+      <PuenteOfertas
+        titulo="El mismo sistema que uso con mis clientes, enseñado paso a paso"
+        subtitulo="Si todavía no es momento de delegarlo, apréndelo: el método completo está en la Academy — y puedes probarlo gratis en la bóveda."
+        caminos={["academy", "boveda"]}
+      />
       <FAQ />
       <FinalCTA />
       <Footer />

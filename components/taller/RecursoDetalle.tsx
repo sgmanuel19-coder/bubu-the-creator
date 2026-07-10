@@ -34,14 +34,22 @@ export default function RecursoDetalle({
         {recurso.cursoRelacionado ?? `${recurso.tipo} · ${recurso.nivel}`}
       </p>
       <h1 className="mt-1 text-2xl font-bold sm:text-3xl">
-        {esPremium && !desbloqueado ? "💎" : desbloqueado ? "📂" : "🔒"} {recurso.titulo}
+        {recurso.gratis ? "📖" : esPremium && !desbloqueado ? "💎" : desbloqueado ? "📂" : "🔒"}{" "}
+        {recurso.titulo}
       </h1>
+      {recurso.gratis && (
+        <p className="mt-2 inline-block rounded-md px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider"
+          style={{ background: "rgba(26,128,255,0.15)", color: "var(--green)" }}>
+          Guía gratuita
+        </p>
+      )}
       <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
         {recurso.descripcion}
       </p>
 
-      {/* Los premium no usan el candado de alumno: se compran por WhatsApp */}
-      {!esPremium && !desbloqueado && (
+      {/* Los premium no usan el candado de alumno: se compran por WhatsApp.
+          Las gratis no llevan candado (imán público). */}
+      {!esPremium && !recurso.gratis && !desbloqueado && (
         <div className="mt-6">
           <DesbloquearBanner />
         </div>
@@ -65,6 +73,44 @@ export default function RecursoDetalle({
           índice de títulos (el server nunca manda el contenido real) */}
       {desbloqueado && recurso.secciones && recurso.secciones.length > 0 && (
         <SeccionesRecurso secciones={recurso.secciones} />
+      )}
+
+      {/* CTA de las guías gratis: la bóveda demuestra, la masterclass vende */}
+      {recurso.gratis && (
+        <section
+          className="mt-12 rounded-2xl border p-6"
+          style={{ borderColor: "rgba(26,128,255,0.4)", background: "var(--surface)" }}
+        >
+          <p className="text-[11px] font-bold uppercase tracking-[0.25em]" style={{ color: "var(--green)" }}>
+            Esta guía es gratis
+          </p>
+          <p className="mt-3 text-lg font-bold leading-snug">
+            El sistema completo — pensar como director creativo y producir campañas
+            con IA que se cobran de verdad — está en la masterclass.
+          </p>
+          <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+            Lo que acabas de leer es una pieza del método. En la Masterclass de
+            Creatividad Publicitaria IA está el proceso entero: las 4 etapas, la
+            Biblia Publicitaria y el flujo de producción que uso con mis clientes.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <a
+              href="/taller"
+              onClick={() => trackTaller("taller_cta_venta", { origen: `guia-gratis-${recurso.slug}` })}
+              className="rounded-xl px-6 py-3 text-sm font-bold transition-opacity hover:opacity-90"
+              style={{ background: "var(--green)", color: "#fff" }}
+            >
+              Ver la masterclass →
+            </a>
+            <a
+              href="/taller/recursos"
+              className="rounded-xl border px-6 py-3 text-sm font-semibold transition-opacity hover:opacity-80"
+              style={{ borderColor: "rgba(244,240,222,0.25)", color: "var(--cream)" }}
+            >
+              Más recursos de la bóveda
+            </a>
+          </div>
+        </section>
       )}
       {!desbloqueado && indiceTitulos && indiceTitulos.length > 0 && (
         <IndiceSecciones titulos={indiceTitulos} />
