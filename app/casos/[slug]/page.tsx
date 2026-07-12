@@ -81,7 +81,7 @@ export default async function CasoPage({
               href="/casos"
               className="font-display text-[0.68rem] tracking-widest uppercase text-muted hover:text-cream transition-colors"
             >
-              ← Casos
+              ← Portafolio
             </Link>
             <span className="text-muted/30">/</span>
             <span className="font-display text-[0.68rem] tracking-widest uppercase" style={{ color: accentHex }}>

@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 // Vista previa al compartir /casos (WhatsApp, Meta, etc.).
 // Se genera en el edge con la identidad del sitio — sin assets externos.
-export const alt = "Casos & Sistema IA — RESUELTO";
+export const alt = "Portafolio — RESUELTO";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -31,7 +31,7 @@ export default function Image() {
               textTransform: "uppercase",
             }}
           >
-            RESUELTO · Casos
+            RESUELTO · Portafolio
           </div>
           <div
             style={{
