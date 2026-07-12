@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { SITE } from "@/lib/constants";
-import { SHOWREEL, CHAPTERS, embedSrc, type Piece } from "@/lib/portafolio";
+import { SHOWREEL, CHAPTERS, embedSrc, isVideoFile, type Piece } from "@/lib/portafolio";
 
 const BLUE = "#1A80FF";
 const CREAM = "#F4F0DE";
@@ -47,7 +47,10 @@ function Frame({ piece, index }: { piece: Piece; index: number }) {
       style={{ gridColumn: piece.wide ? "span 2" : undefined, aspectRatio: piece.wide ? "16/9" : "9/16" }}
     >
       <span className="pf-ia">Hecho con IA</span>
-      {src ? (
+      {isVideoFile(piece.url) ? (
+        <video src={piece.url as string} autoPlay muted loop playsInline preload="metadata"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      ) : src ? (
         <iframe src={src} loading="lazy" allowFullScreen scrolling="no"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
       ) : (
@@ -87,7 +90,10 @@ export default function Portafolio() {
 
             <div className="pf-showreel">
               <span className="pf-showreel-badge">Showreel</span>
-              {showreelSrc && openReel ? (
+              {isVideoFile(SHOWREEL.url) ? (
+                <video src={SHOWREEL.url} controls autoPlay muted loop playsInline preload="metadata"
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+              ) : showreelSrc && openReel ? (
                 <iframe src={showreelSrc} loading="lazy" allowFullScreen scrolling="no"
                   style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
               ) : (
@@ -98,10 +104,12 @@ export default function Portafolio() {
                   </b>
                 </button>
               )}
-              <div className="pf-showreel-lbl">
-                <b>Resumen del portafolio</b>
-                <span>{SHOWREEL.handle}</span>
-              </div>
+              {!isVideoFile(SHOWREEL.url) && (
+                <div className="pf-showreel-lbl">
+                  <b>Resumen del portafolio</b>
+                  <span>{SHOWREEL.handle}</span>
+                </div>
+              )}
             </div>
           </div>
 

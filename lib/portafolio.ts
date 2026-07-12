@@ -1,9 +1,15 @@
 // ============================================================
 // PORTAFOLIO — DATA EDITABLE
 // Para agregar un video a una sección, pega su link en `url`.
-//   Instagram: https://www.instagram.com/reel/XXXX/  ó  /p/XXXX/
+//
+//   ★ RECOMENDADO — Video propio (se ve SOLO el video, sin chrome):
+//     coloca el archivo en /public/videos/ y usa la ruta:
+//     url: "/videos/mi-comercial.mp4"
+//
+//   Instagram: https://www.instagram.com/reel/XXXX/  ó  /p/XXXX/   (muestra la UI de Instagram)
 //   TikTok:    https://www.tiktok.com/@user/video/1234567890
 //   YouTube:   https://www.youtube.com/watch?v=XXXX  (usa wide:true para 16:9)
+//
 // Un slot con url:null se muestra como "Tu pieza reciente + agregar".
 // Todo lo de estos capítulos es TRABAJO RECIENTE HECHO CON IA.
 // ============================================================
@@ -87,9 +93,16 @@ export const CHAPTERS: Chapter[] = [
   },
 ];
 
+// True si la url es un archivo de video propio (se muestra SOLO el video).
+export function isVideoFile(url: string | null): boolean {
+  if (!url) return false;
+  return /\.(mp4|webm|mov|m4v)$/i.test(url) || url.startsWith("/videos/");
+}
+
 // Convierte un link de la pieza al src del iframe embebido.
 export function embedSrc(url: string | null): string | null {
   if (!url) return null;
+  if (isVideoFile(url)) return url;
   if (url.includes("youtube.com") || url.includes("youtu.be")) {
     const id = url.includes("youtu.be")
       ? url.split("youtu.be/")[1]?.split(/[?&/]/)[0]
