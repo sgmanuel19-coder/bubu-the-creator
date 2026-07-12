@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SITE } from "@/lib/constants";
 import { SHOWREEL, CHAPTERS, embedSrc, isVideoFile, type Piece } from "@/lib/portafolio";
@@ -34,6 +34,44 @@ const PlayIcon = () => (
   </svg>
 );
 
+// ── Video propio que solo carga/reproduce cuando está en pantalla ──
+function LazyVideo({ src, controls = false }: { src: string; controls?: boolean }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [load, setLoad] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoad(true);
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      src={load ? src : undefined}
+      data-src={src}
+      muted
+      loop
+      playsInline
+      preload="none"
+      controls={controls}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+    />
+  );
+}
+
 // ── Marco de video (9:16 ó 16:9) ────────────────────────────
 function Frame({ piece, index }: { piece: Piece; index: number }) {
   const src = embedSrc(piece.url);
@@ -48,8 +86,7 @@ function Frame({ piece, index }: { piece: Piece; index: number }) {
     >
       <span className="pf-ia">Hecho con IA</span>
       {isVideoFile(piece.url) ? (
-        <video src={piece.url as string} autoPlay muted loop playsInline preload="metadata"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        <LazyVideo src={piece.url as string} />
       ) : src ? (
         <iframe src={src} loading="lazy" allowFullScreen scrolling="no"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
@@ -91,8 +128,7 @@ export default function Portafolio() {
             <div className="pf-showreel">
               <span className="pf-showreel-badge">Showreel</span>
               {isVideoFile(SHOWREEL.url) ? (
-                <video src={SHOWREEL.url} controls autoPlay muted loop playsInline preload="metadata"
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                <LazyVideo src={SHOWREEL.url} controls />
               ) : showreelSrc && openReel ? (
                 <iframe src={showreelSrc} loading="lazy" allowFullScreen scrolling="no"
                   style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
