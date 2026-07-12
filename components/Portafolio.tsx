@@ -104,7 +104,6 @@ function Frame({ piece, index }: { piece: Piece; index: number }) {
 }
 
 export default function Portafolio() {
-  const [openReel, setOpenReel] = useState(false);
   const showreelSrc = embedSrc(SHOWREEL.url);
 
   return (
@@ -129,21 +128,12 @@ export default function Portafolio() {
               <span className="pf-showreel-badge">Showreel</span>
               {isVideoFile(SHOWREEL.url) ? (
                 <LazyVideo src={SHOWREEL.url} controls />
-              ) : showreelSrc && openReel ? (
+              ) : showreelSrc ? (
                 <iframe src={showreelSrc} loading="lazy" allowFullScreen scrolling="no"
                   style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
               ) : (
-                <button className="pf-ph" onClick={() => setOpenReel(true)} aria-label="Reproducir showreel">
+                <div className="pf-ph">
                   <span className="pf-ring"><PlayIcon /></span>
-                  <b style={{ fontSize: 11, letterSpacing: ".24em", textTransform: "uppercase", color: "#8fc0ff" }}>
-                    Reel resumen
-                  </b>
-                </button>
-              )}
-              {!isVideoFile(SHOWREEL.url) && (
-                <div className="pf-showreel-lbl">
-                  <b>Resumen del portafolio</b>
-                  <span>{SHOWREEL.handle}</span>
                 </div>
               )}
             </div>
