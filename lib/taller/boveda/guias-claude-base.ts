@@ -740,4 +740,182 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
       ],
     },
   ],
+
+  // ── Niveles de esfuerzo ─────────────────────────────────────────
+  "niveles-de-esfuerzo": [
+    {
+      titulo: "El reflejo que te está costando caro",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "La gente trae a Claude siempre al tope pensando que así saca mejor resultado. Pero el esfuerzo — cuánto «piensa» antes de responder — es una perilla, no un botón de «mejor calidad». Súbela en las tareas que la necesitan y bájala en las que no.",
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "En tareas simples (reescribir un caption, ajustar un título), el esfuerzo alto no mejora el resultado — a veces lo empeora porque el modelo sobre-piensa algo que no lo necesitaba, y de paso quema minutos y presupuesto que ibas a necesitar para la tarea de verdad grande del día.",
+        },
+      ],
+    },
+    {
+      titulo: "Los niveles, de menos a más",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Nivel", "Cuándo usarlo", "Cuándo NO"],
+          filas: [
+            [
+              "Bajo",
+              "Preguntas directas, ajustes de texto, tareas de una sola instrucción clara.",
+              "Cuando el problema tiene varias piezas que conectar entre sí.",
+            ],
+            [
+              "Medio",
+              "El default razonable para la mayoría de tu trabajo diario de producción.",
+              "Decisiones grandes de estrategia o cambios que tocan muchas piezas a la vez.",
+            ],
+            [
+              "Alto",
+              "Estrategia de campaña completa, depurar un problema que no encuentras, un guion con varias capas de estructura.",
+              "Tareas rutinarias — ahí solo quemas tiempo y presupuesto.",
+            ],
+            [
+              "Máximo",
+              "Auditorías completas, migraciones grandes, la tarea más difícil del mes.",
+              "Casi todo lo demás — resérvalo, no lo dejes de default.",
+            ],
+          ],
+        },
+      ],
+    },
+    {
+      titulo: "El hábito que te ahorra la cuenta",
+      bloques: [
+        {
+          tipo: "lista",
+          items: [
+            "Empieza en medio por default; sube solo cuando sientas que la respuesta se quedó corta o superficial.",
+            "Baja el esfuerzo para tareas que se repiten seguido — no necesitas razonamiento profundo para lo que ya sabes que funciona.",
+            "Si vas a lanzar la tarea más pesada del día, ese es el momento de subir a alto o máximo — no antes.",
+          ],
+        },
+        {
+          tipo: "copiable",
+          etiqueta: "Prompt · pregúntale a Claude si vale la pena subir el esfuerzo",
+          contenido:
+            "Antes de esta tarea, dime en una línea si te conviene más esfuerzo del que traes ahora, y por qué.",
+        },
+        {
+          tipo: "nota",
+          texto:
+            "El esfuerzo no es gratis: se paga en tiempo de espera y en presupuesto de tu cuenta. Trátalo como el resto de tus herramientas de producción — la dosis correcta, no la máxima siempre.",
+        },
+      ],
+    },
+  ],
+
+  // ── Más comandos de Claude Code ──────────────────────────────────
+  "mas-comandos-claude-code": [
+    {
+      titulo: "Cuando el proyecto ya no es tarea de una persona",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Cuando empiezas, con /memory, /clear y /cost te alcanza. El punto donde necesitas más es cuando el trabajo se vuelve grande: varias piezas en paralelo, herramientas conectadas que hay que auditar, sesiones que se cortan a media tarea. Ahí entran estos.",
+        },
+      ],
+    },
+    {
+      titulo: "Los comandos que sí vas a usar después",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Comando", "Para qué"],
+          filas: [
+            ["/agents", "Arma y administra tu equipo de subagentes — cada uno especializado en una parte del trabajo, corriendo en paralelo."],
+            ["/mcp", "Revisa qué herramientas externas (MCP) están conectadas a esa sesión — de dónde saca datos o a dónde puede escribir."],
+            ["/resume", "Retoma una sesión anterior donde la dejaste, en vez de empezar de cero explicando todo otra vez."],
+            ["/doctor", "Diagnóstico rápido de tu instalación cuando algo no funciona como debería."],
+            ["/permissions", "Ajusta qué puede hacer Claude sin pedirte permiso cada vez — útil cuando confías en una rutina que repites seguido."],
+            ["/add-dir", "Súmale otra carpeta a la sesión cuando el trabajo cruza más de un proyecto."],
+            ["/export", "Saca la conversación completa a un archivo — para guardar una decisión importante o compartirla con tu equipo."],
+          ],
+        },
+      ],
+    },
+    {
+      titulo: "Cómo aprenderlos sin memorizar la lista",
+      bloques: [
+        {
+          tipo: "pasos",
+          items: [
+            {
+              titulo: "Escribe / solo y mira el menú",
+              detalle: "Claude Code te muestra todos los comandos disponibles con una línea de qué hace cada uno — no hace falta memorizar nada.",
+            },
+            {
+              titulo: "Prueba uno nuevo por semana",
+              detalle: "Súmalo a tu rutina de a uno; la lista completa junta abruma y no se queda.",
+            },
+            {
+              titulo: "Anota los tuyos en tu propio CLAUDE.md",
+              detalle: "Los tres o cuatro que terminas usando de verdad, déjalos escritos como recordatorio de tu propio flujo.",
+            },
+          ],
+        },
+        {
+          tipo: "cita",
+          texto: "El comando que no usas no te ahorra nada. Suma solo los que de verdad entran a tu rutina.",
+        },
+      ],
+    },
+  ],
+
+  // ── Terminal o app ────────────────────────────────────────────────
+  "terminal-o-app": [
+    {
+      titulo: "Misma herramienta, dos puertas",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Terminal y app corren el mismo Claude Code por debajo, pero cambian cuánto ves y cuánto controlas. La terminal es la versión completa: acceso total a tus archivos, tareas que corren en el fondo o programadas, y tus propias herramientas (skills, MCP, hooks). La app es la versión guiada: más rápida para empezar, con menos perillas que tocar.",
+        },
+      ],
+    },
+    {
+      titulo: "La comparación directa",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["", "Terminal", "App"],
+          filas: [
+            ["Para quién", "Quien ya construye piezas complejas y quiere control fino", "Quien recién empieza o produce piezas simples y rápidas"],
+            ["Visibilidad de gasto", "Ves tu conteo de contexto y ajustas en el momento", "Menos controles expuestos — más automático"],
+            ["Tareas en segundo plano", "Sí, y también programadas", "Limitado o inexistente según la versión"],
+            ["Curva de entrada", "Un poco más de fricción al inicio", "Casi inmediata"],
+          ],
+        },
+      ],
+    },
+    {
+      titulo: "Mi recomendación honesta",
+      bloques: [
+        {
+          tipo: "lista",
+          items: [
+            "Si estás armando tus primeras piezas de contenido o apenas estás probando el sistema, empieza en la app — sin fricción.",
+            "El día que sientas el límite (necesitas más control, más herramientas conectadas, tareas que corran solas), ese es tu momento de pasar a la terminal — no antes.",
+            "No necesitas elegir una para siempre: yo uso ambas según la tarea del día.",
+          ],
+        },
+        {
+          tipo: "cita",
+          texto: "La herramienta correcta es la que no te hace pensar en la herramienta — solo en lo que estás produciendo.",
+        },
+      ],
+    },
+  ],
 };

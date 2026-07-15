@@ -598,6 +598,52 @@ const BOVEDA_COMUNIDAD: RecursoBoveda[] = [
       "Mi consejo de producción: aprueba el texto antes que el diseño, y el diseño antes que el código. Corregir palabras es gratis; corregir código construido, no.",
     ],
   },
+  {
+    slug: "niveles-de-esfuerzo",
+    titulo: "Cuánto piensa Claude · los niveles de esfuerzo y cuándo NO usar el máximo",
+    descripcion:
+      "Traerlo siempre en máximo no te da mejor resultado — te cobra más, tarda más y en tareas simples hasta responde peor. Cómo elegir el nivel correcto según lo que le pides.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    tags: ["niveles de esfuerzo", "claude code", "ahorro de tokens"],
+    contenido: [
+      "El esfuerzo es una perilla, no un botón de «mejor calidad». Subirla en tareas que no la necesitan no mejora el resultado — a veces lo empeora, porque el modelo sobre-piensa algo simple, y de paso quema minutos y presupuesto que necesitas para la tarea grande del día.",
+      "La regla práctica: empieza en un nivel medio por default, y sube solo cuando sientas que la respuesta se quedó corta o superficial. Resérvalo alto para estrategia de campaña completa, depurar un problema que no encuentras, o la tarea más pesada del mes — no para lo rutinario.",
+      "Antes de lanzar una tarea, pregúntale a Claude en una línea si le conviene más esfuerzo del que trae — cuesta un segundo y te evita pagar de más por algo que no lo necesitaba.",
+    ],
+  },
+  {
+    slug: "mas-comandos-claude-code",
+    titulo: "Más comandos de Claude Code · los que suman cuando ya no eres principiante",
+    descripcion:
+      "Ya tienes /memory, /clear y /cost. Estos son los que uso cuando el proyecto crece: repartir tareas, revisar qué está conectado y recuperar una sesión que se cortó.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    tags: ["comandos", "claude code", "productividad"],
+    cursoRelacionado: "Comandos de Claude Code",
+    contenido: [
+      "Cuando empiezas, con los seis comandos básicos te alcanza. El punto donde necesitas más es cuando el trabajo crece: varias piezas en paralelo, herramientas conectadas que hay que auditar, sesiones que se cortan a media tarea.",
+      "/agents arma tu equipo de subagentes especializados corriendo en paralelo. /mcp revisa qué herramientas externas están conectadas a esa sesión. /resume retoma una sesión anterior sin explicar todo de nuevo. /doctor diagnostica tu instalación cuando algo falla. /permissions ajusta qué puede hacer Claude sin pedirte autorización cada vez. /add-dir suma otra carpeta cuando el trabajo cruza más de un proyecto. /export saca la conversación completa a un archivo para guardar una decisión importante.",
+      "No memorices la lista: escribe / solo y mira el menú, con una línea de qué hace cada comando. Prueba uno nuevo por semana y anota en tu propio CLAUDE.md los tres o cuatro que terminen entrando de verdad a tu rutina.",
+    ],
+  },
+  {
+    slug: "terminal-o-app",
+    titulo: "Terminal o app · qué versión de Claude Code te conviene",
+    descripcion:
+      "Claude Code vive en la terminal y en una app con interfaz. No son lo mismo: una te da control total, la otra velocidad para empezar. Cuál te conviene según lo que produces.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    tags: ["claude code", "terminal", "principiantes"],
+    contenido: [
+      "Terminal y app corren el mismo Claude Code por debajo, pero cambian cuánto ves y cuánto controlas. La terminal es la versión completa: acceso total a tus archivos, tareas en segundo plano o programadas, y tus propias herramientas (skills, MCP, hooks). La app es la versión guiada: más rápida para empezar, con menos perillas que tocar.",
+      "Si estás armando tus primeras piezas de contenido o recién estás probando el sistema, empieza en la app — sin fricción. El día que sientas el límite (necesitas más control, más herramientas conectadas, tareas que corran solas), ese es tu momento de pasar a la terminal, no antes.",
+      "No hace falta elegir una para siempre: yo uso ambas según la tarea del día. La herramienta correcta es la que no te hace pensar en la herramienta — solo en lo que estás produciendo.",
+    ],
+  },
 ];
 
 // ── Repos de la comunidad (terceros/oficiales, descripciones propias) ─
@@ -777,6 +823,83 @@ const BOVEDA_REPOS: RecursoBoveda[] = [
     disponible: true,
     linkExterno: "https://github.com/DietrichGebert/ponytail",
     tags: ["claude code", "calidad"],
+  },
+  {
+    slug: "repo-claude-video-vision",
+    titulo: "jordanrendric/claude-video-vision",
+    descripcion:
+      "Le pasas un reel viral y te devuelve su esqueleto: hook, tomas, ritmo y transiciones, plano por plano. El complemento técnico de mi proyecto «Desarma videos virales».",
+    tipo: "repo",
+    nivel: "intermedio",
+    disponible: true,
+    linkExterno: "https://github.com/jordanrendric/claude-video-vision",
+    tags: ["análisis de video", "virales", "claude code"],
+  },
+  {
+    slug: "repo-humanizer-blader",
+    titulo: "blader/humanizer",
+    descripcion:
+      "La herramienta que le quita a un texto los tics de IA — frases infladas, muletillas de robot — antes de publicarlo. En mi flujo ningún guion sale sin pasar por un humanizer; esta es la versión open-source si quieres la tuya.",
+    tipo: "repo",
+    nivel: "principiante",
+    disponible: true,
+    linkExterno: "https://github.com/blader/humanizer",
+    tags: ["guiones", "humanizer", "edición de texto"],
+  },
+  {
+    slug: "repo-awesome-gpt-image-2",
+    titulo: "YouMind-OpenLab/awesome-gpt-image-2",
+    descripcion:
+      "Más de 4,000 prompts probados para GPT Image 2 — el mismo modelo que uso dentro de Higgsfield. Banco de referencia para cuando se te seca la idea de cómo pedir una imagen.",
+    tipo: "repo",
+    nivel: "intermedio",
+    disponible: true,
+    linkExterno: "https://github.com/YouMind-OpenLab/awesome-gpt-image-2",
+    tags: ["prompts", "imagen", "gpt image"],
+  },
+  {
+    slug: "repo-agent-browser-vercel",
+    titulo: "vercel-labs/agent-browser",
+    descripcion:
+      "Un navegador para Claude que le cuesta hasta 10 veces menos investigar en internet. Súmalo a tu kit de scraping — mismo territorio que Apify, pero para cuando la tarea es navegar y leer, no extraer en volumen.",
+    tipo: "repo",
+    nivel: "intermedio",
+    disponible: true,
+    linkExterno: "https://github.com/vercel-labs/agent-browser",
+    tags: ["navegador", "scraping", "investigación"],
+  },
+  {
+    slug: "repo-claude-ads-agricidaniel",
+    titulo: "AgriciDaniel/claude-ads",
+    descripcion:
+      "Skill de la comunidad que audita tus campañas de Meta Ads con reglas de seguridad incluidas. Segundo par de ojos antes de subir presupuesto — no reemplaza el criterio de «Mide lo que vende», lo complementa.",
+    tipo: "repo",
+    nivel: "intermedio",
+    disponible: true,
+    linkExterno: "https://github.com/AgriciDaniel/claude-ads",
+    tags: ["meta ads", "auditoría", "claude code"],
+  },
+  {
+    slug: "repo-awesome-design-md",
+    titulo: "VoltAgent/awesome-design-md",
+    descripcion:
+      "55 documentos de identidad de marca de empresas reales, en el mismo formato que tu ADN de marca. Cópiate uno como plantilla y Claude diseña ya alineado a ese estilo.",
+    tipo: "repo",
+    nivel: "principiante",
+    disponible: true,
+    linkExterno: "https://github.com/VoltAgent/awesome-design-md",
+    tags: ["identidad de marca", "diseño", "adn de marca"],
+  },
+  {
+    slug: "repo-marketing-skills-stack",
+    titulo: "coreyhaines31/marketingskills",
+    descripcion:
+      "Un stack de más de 25 skills de marketing para Claude Code — copywriting, SEO, ads, email — instalables juntas. Para cuando quieres que Claude piense como un equipo de marketing completo, no solo un redactor.",
+    tipo: "repo",
+    nivel: "intermedio",
+    disponible: true,
+    linkExterno: "https://github.com/coreyhaines31/marketingskills",
+    tags: ["marketing", "skills", "claude code"],
   },
 ];
 
