@@ -80,7 +80,7 @@ export const CHAPTERS: Chapter[] = [
   {
     n: "04",
     id: "storytelling-ia",
-    title: "Storytelling & B-Rolls IA",
+    title: "Content Storytelling IA",
     desc: "Narrativa de marca y b-rolls cinematográficos generados con IA que construyen percepción premium.",
     pieces: [
       { url: null, label: "Storytelling IA", client: "Tu pieza reciente" },
@@ -93,7 +93,7 @@ export const CHAPTERS: Chapter[] = [
   {
     n: "05",
     id: "content-ia",
-    title: "Content IA",
+    title: "Avatar IA",
     desc: "Contenido continuo para redes producido con IA: formatos expertos, trends y sistemas de producción.",
     pieces: [
       { url: "https://www.instagram.com/reel/DW6m1y9E6hy/", label: "Contenido IA", client: "WIN Internet" },
