@@ -56,11 +56,12 @@ export const CHAPTERS: Chapter[] = [
     title: "Video de Producto IA",
     desc: "Producto que se ve premium sin estudio: generación IA + criterio de dirección de arte.",
     pieces: [
-      { url: null, label: "Video producto IA", client: "Tu pieza reciente" },
-      { url: null, label: "Video producto IA", client: "Tu pieza reciente" },
-      { url: null, label: "Video producto IA", client: "Tu pieza reciente" },
-      { url: null, label: "Video producto IA", client: "Tu pieza reciente" },
-      { url: null, label: "Video producto IA", client: "Tu pieza reciente" },
+      { url: "/videos/producto-01.mp4", label: "Video producto IA", client: "Bubu The Creator", wide: true },
+      { url: "/videos/producto-02.mp4", label: "Video producto IA", client: "Bubu The Creator" },
+      { url: "/videos/producto-03.mp4", label: "Video producto IA", client: "Bubu The Creator" },
+      { url: "/videos/producto-04.mp4", label: "Video producto IA", client: "Bubu The Creator" },
+      { url: "/videos/producto-05.mp4", label: "Video producto IA", client: "Bubu The Creator" },
+      { url: "/videos/producto-06.mp4", label: "Video producto IA", client: "Bubu The Creator" },
     ],
   },
   {
