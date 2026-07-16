@@ -71,10 +71,11 @@ export const CHAPTERS: Chapter[] = [
     desc: "Prueba social a escala: creadores generados con IA hablando del producto como un usuario real.",
     pieces: [
       { url: "https://www.instagram.com/reel/DSXaFmajAYQ/", label: "Experto IA", client: "Livoltek" },
-      { url: null, label: "UGC IA", client: "Tu pieza reciente" },
-      { url: null, label: "UGC IA", client: "Tu pieza reciente" },
-      { url: null, label: "UGC IA", client: "Tu pieza reciente" },
-      { url: null, label: "UGC IA", client: "Tu pieza reciente" },
+      { url: "/videos/ugc-01.mp4", label: "UGC IA", client: "Bubu The Creator" },
+      { url: "/videos/ugc-02.mp4", label: "UGC IA", client: "Bubu The Creator" },
+      { url: "/videos/ugc-03.mp4", label: "UGC IA", client: "Bubu The Creator" },
+      { url: "/videos/ugc-04.mp4", label: "UGC IA", client: "Bubu The Creator" },
+      { url: "/videos/ugc-05.mp4", label: "UGC IA", client: "Bubu The Creator" },
     ],
   },
   {
