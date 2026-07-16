@@ -47,7 +47,7 @@ export const CHAPTERS: Chapter[] = [
     title: "Comerciales IA",
     desc: "Spots y campañas generados con IA: nivel de producción cinematográfica sin rodaje ni set.",
     pieces: [
-      { url: "/videos/comercial-01.mp4", label: "Comercial IA", client: "Bubu The Creator" },
+      { url: "/videos/comercial-01.mp4", label: "Comercial IA", client: "Bubu The Creator", wide: true },
     ],
   },
   {

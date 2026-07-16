@@ -197,8 +197,11 @@ export default function Portafolio() {
           ))}
         </div>
 
-        {/* Grilla densa de miniaturas */}
-        <div className="pf-gal-grid" key={active.id}>
+        {/* Grilla densa de miniaturas — menos columnas cuando hay pocas piezas */}
+        <div
+          className={`pf-gal-grid${active.pieces.length === 1 ? " pf-gal-grid-solo" : active.pieces.length === 2 ? " pf-gal-grid-duo" : ""}`}
+          key={active.id}
+        >
           {active.pieces.map((p, i) => (
             <GalleryCard key={`${active.id}-${i}`} piece={p} index={i} onOpen={setOpen} />
           ))}

@@ -777,6 +777,19 @@ body {
 .pf-tab:hover{ border-color:rgba(26,128,255,.4);color:var(--pf-cream); }
 .pf-tab.on{ background:rgba(26,128,255,.12);border-color:rgba(26,128,255,.55);color:var(--pf-cream);box-shadow:0 0 22px rgba(26,128,255,.14); }
 .pf-gal-grid{ display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px;animation:pfFade .4s ease; }
+.pf-gal-grid-solo{ grid-template-columns:1fr !important;max-width:920px; }
+.pf-gal-grid-solo .pf-card{ aspect-ratio:16/9 !important;grid-column:auto !important; }
+.pf-gal-grid-duo{ grid-template-columns:repeat(2,1fr) !important; }
+.pf-gal-grid-duo .pf-card{ aspect-ratio:16/9 !important;grid-column:auto !important; }
+@media (max-width:640px){
+  .pf-gal-grid-duo{ grid-template-columns:1fr !important; }
+}
+.pf-gal-grid-solo .pf-card-play{ width:68px;height:68px; }
+.pf-gal-grid-solo .pf-card-play svg{ width:26px;height:26px; }
+.pf-gal-grid-solo .pf-tag{ padding:56px 22px 20px; }
+.pf-gal-grid-solo .pf-tag b{ font-size:12px; }
+.pf-gal-grid-solo .pf-tag span{ font-size:13px; }
+.pf-gal-grid-solo .pf-ia{ top:16px;left:16px;font-size:10px;padding:5px 11px; }
 @keyframes pfFade{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
 .pf-card{ position:relative;border-radius:10px;overflow:hidden;background:linear-gradient(160deg,#1A1810 0%,#0a0906 100%);border:1px solid var(--pf-line);transition:transform .3s,border-color .3s,box-shadow .3s;cursor:pointer;padding:0;display:block;width:100%;font-family:inherit;text-align:left; }
 .pf-card:hover{ transform:translateY(-5px);border-color:rgba(26,128,255,.55);box-shadow:0 16px 40px rgba(0,0,0,.55),0 0 26px rgba(26,128,255,.16); }
