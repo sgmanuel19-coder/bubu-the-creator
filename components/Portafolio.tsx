@@ -13,6 +13,7 @@ const LINE = "rgba(244,240,222,.08)";
 
 type PfCase = {
   slug: string;
+  image?: string;
   client: string;
   sector: string;
   era: string;
@@ -22,6 +23,16 @@ type PfCase = {
   status?: string;
   iaCategories?: readonly string[];
 };
+
+// Imágenes reales del trabajo — filmstrip y fondos.
+const WORK_IMAGES = [
+  { src: "/images/portfolio/slide-01.png", label: "WIN Internet" },
+  { src: "/images/portfolio/slide-02.png", label: "Mañana Me Caso" },
+  { src: "/images/portfolio/slide-03.png", label: "Livoltek" },
+  { src: "/images/portfolio/slide-04.png", label: "Redondos" },
+  { src: "/images/portfolio/slide-05.png", label: "Wong Cencosud" },
+  { src: "/images/portfolio/slide-06.png", label: "Marcas" },
+];
 
 const allCases = SITE.proof.cases as unknown as PfCase[];
 const iaCases = allCases.filter((c) => c.era === "ia");
@@ -157,6 +168,10 @@ export default function Portafolio() {
     <div className="pf">
       {/* ── HERO ── */}
       <header className="pf-hero">
+        {/* Video de fondo full-bleed */}
+        <video className="pf-hero-video" src="/videos/problem-section-bg.mp4"
+          autoPlay muted loop playsInline preload="metadata" />
+        <div className="pf-hero-shade" />
         <div className="pf-glow" />
         <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
           <div className="pf-hero-grid">
@@ -200,6 +215,21 @@ export default function Portafolio() {
         </div>
       </header>
 
+      {/* ── MARQUEE DE CATEGORÍAS ── */}
+      <div className="pf-marquee" aria-hidden="true">
+        <div className="pf-marquee-inner">
+          {[0, 1].map((rep) => (
+            <span key={rep}>
+              {CHAPTERS.map((ch) => (
+                <span className="pf-mq-item" key={`${rep}-${ch.id}`}>
+                  {ch.title} <i>●</i>
+                </span>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* ── GALERÍA CON TABS ── */}
       <section className="container-base pf-gallery" id="trabajo">
         <div className="pf-gal-head">
@@ -237,6 +267,19 @@ export default function Portafolio() {
       {/* Lightbox */}
       {open && <Lightbox piece={open} onClose={() => setOpen(null)} />}
 
+      {/* ── FILMSTRIP — trabajo real desplazándose ── */}
+      <div className="pf-filmstrip" aria-hidden="true">
+        <div className="pf-filmstrip-inner">
+          {[...WORK_IMAGES, ...WORK_IMAGES].map((img, i) => (
+            <div className="pf-fs-item" key={i}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={img.src} alt={img.label} loading="lazy" />
+              <span>{img.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── CASOS DE ÉXITO POR MARCA ── */}
       <section className="container-base pf-cases">
         <span className="pf-eyebrow">Casos de éxito</span>
@@ -246,12 +289,21 @@ export default function Portafolio() {
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5 }}>
             <div className="left">
-              <div>
+              {c.image && (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="pf-case-img" src={c.image} alt={c.client} loading="lazy" />
+                  <div className="pf-case-shade" />
+                </>
+              )}
+              <div style={{ position: "relative", zIndex: 2 }}>
                 <div className="brand">{c.client}</div>
                 <div className="sector">{c.sector}</div>
               </div>
               {c.status === "activo" && (
-                <div className="metric"><b>Cliente activo</b><span>sistema de IA en operación</span></div>
+                <div className="metric" style={{ position: "relative", zIndex: 2 }}>
+                  <b>Cliente activo</b><span>sistema de IA en operación</span>
+                </div>
               )}
             </div>
             <div className="right">
@@ -280,10 +332,18 @@ export default function Portafolio() {
           <div className="pf-old-grid">
             {oldCases.map((c) => (
               <div className="pf-old" key={c.slug}>
-                <span className="yr">{c.sector}</span>
-                <h3>{c.client}</h3>
-                <p>{c.solution}</p>
-                <div className="res">{c.result}</div>
+                {c.image && (
+                  <div className="pf-old-img">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={c.image} alt={c.client} loading="lazy" />
+                  </div>
+                )}
+                <div className="pf-old-body">
+                  <span className="yr">{c.sector}</span>
+                  <h3>{c.client}</h3>
+                  <p>{c.solution}</p>
+                  <div className="res">{c.result}</div>
+                </div>
               </div>
             ))}
           </div>

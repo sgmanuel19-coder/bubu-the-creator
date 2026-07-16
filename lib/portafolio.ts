@@ -2,10 +2,12 @@
 // PORTAFOLIO — DATA EDITABLE
 // Para agregar un video a una sección, pega su link en `url`.
 //
-//   ★ RECOMENDADO — Video propio (se ve SOLO el video, sin chrome):
-//     coloca el archivo en /public/videos/ y usa la ruta:
-//     url: "/videos/mi-comercial.mp4"
+//   ★ RECOMENDADO — Google Drive (miniatura automática + video limpio):
+//     sube el video a Drive, compártelo como "Cualquiera con el enlace",
+//     y pega el link:  https://drive.google.com/file/d/FILE_ID/view
 //
+//   También soportado:
+//   Archivo propio: coloca el mp4 en /public/videos/ → url: "/videos/pieza.mp4"
 //   Instagram: https://www.instagram.com/reel/XXXX/  ó  /p/XXXX/   (muestra la UI de Instagram)
 //   TikTok:    https://www.tiktok.com/@user/video/1234567890
 //   YouTube:   https://www.youtube.com/watch?v=XXXX  (usa wide:true para 16:9)
@@ -111,6 +113,15 @@ export function isVideoFile(url: string | null): boolean {
   return /\.(mp4|webm|mov|m4v)$/i.test(url) || url.startsWith("/videos/");
 }
 
+// Extrae el ID de un link de Google Drive.
+//   https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+//   https://drive.google.com/open?id=FILE_ID
+export function driveId(url: string | null): string | null {
+  if (!url || !url.includes("drive.google.com")) return null;
+  const m = url.match(/\/file\/d\/([^/?#]+)/) || url.match(/[?&]id=([^&#]+)/);
+  return m ? m[1] : null;
+}
+
 // Extrae el ID de un link de YouTube.
 export function youtubeId(url: string | null): string | null {
   if (!url) return null;
@@ -122,6 +133,8 @@ export function youtubeId(url: string | null): string | null {
 // Miniatura automática para la tarjeta de la galería.
 export function autoThumb(piece: Piece): string | null {
   if (piece.thumb) return piece.thumb;
+  const dv = driveId(piece.url);
+  if (dv) return `https://drive.google.com/thumbnail?id=${dv}&sz=w800`;
   const yt = youtubeId(piece.url);
   if (yt) return `https://img.youtube.com/vi/${yt}/hqdefault.jpg`;
   return null;
@@ -131,6 +144,8 @@ export function autoThumb(piece: Piece): string | null {
 export function embedSrc(url: string | null): string | null {
   if (!url) return null;
   if (isVideoFile(url)) return url;
+  const dv = driveId(url);
+  if (dv) return `https://drive.google.com/file/d/${dv}/preview`;
   if (url.includes("youtube.com") || url.includes("youtu.be")) {
     const id = url.includes("youtu.be")
       ? url.split("youtu.be/")[1]?.split(/[?&/]/)[0]
