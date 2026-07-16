@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SITE } from "@/lib/constants";
-import { SHOWREEL, CHAPTERS, embedSrc, isVideoFile, type Piece } from "@/lib/portafolio";
+import { SHOWREEL, CHAPTERS, embedSrc, isVideoFile, autoThumb, type Piece } from "@/lib/portafolio";
 
 const BLUE = "#1A80FF";
 const CREAM = "#F4F0DE";
@@ -72,39 +72,86 @@ function LazyVideo({ src, controls = false }: { src: string; controls?: boolean 
   );
 }
 
-// ── Marco de video (9:16 ó 16:9) ────────────────────────────
-function Frame({ piece, index }: { piece: Piece; index: number }) {
-  const src = embedSrc(piece.url);
+// ── Tarjeta de la galería (miniatura + play, reproduce al clic) ──
+function GalleryCard({ piece, index, onOpen }: { piece: Piece; index: number; onOpen: (p: Piece) => void }) {
+  const thumb = autoThumb(piece);
+  const isFile = isVideoFile(piece.url);
+  const clickable = Boolean(piece.url);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 18 }}
+    <motion.button
+      type="button"
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: (index % 4) * 0.07 }}
-      className="pf-frame"
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.4, delay: (index % 5) * 0.05 }}
+      className={`pf-card${clickable ? "" : " pf-card-empty"}`}
       style={{ gridColumn: piece.wide ? "span 2" : undefined, aspectRatio: piece.wide ? "16/9" : "9/16" }}
+      onClick={() => clickable && onOpen(piece)}
+      aria-label={clickable ? `Reproducir: ${piece.label} — ${piece.client}` : "Espacio disponible"}
     >
       <span className="pf-ia">Hecho con IA</span>
-      {isVideoFile(piece.url) ? (
-        <LazyVideo src={piece.url as string} />
-      ) : src ? (
-        <iframe src={src} loading="lazy" allowFullScreen scrolling="no"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
-      ) : (
-        <div className="pf-ph">
-          <span className="pf-ring"><PlayIcon /></span>
-        </div>
-      )}
+      {isFile ? (
+        <video src={`${piece.url}#t=0.1`} muted playsInline preload="metadata"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      ) : thumb ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={thumb} alt={`${piece.label} — ${piece.client}`} loading="lazy"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      ) : clickable ? (
+        <div className="pf-card-grad" />
+      ) : null}
+      <span className="pf-card-play"><PlayIcon /></span>
       <div className="pf-tag">
         <b>{piece.label}</b>
         <span>{piece.url ? piece.client : "+ agregar"}</span>
       </div>
-    </motion.div>
+    </motion.button>
+  );
+}
+
+// ── Lightbox: reproduce la pieza en grande ──────────────────
+function Lightbox({ piece, onClose }: { piece: Piece; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  const src = embedSrc(piece.url);
+
+  return (
+    <div className="pf-lightbox" onClick={onClose} role="dialog" aria-modal="true" aria-label={piece.label}>
+      <button className="pf-lb-close" onClick={onClose} aria-label="Cerrar">✕</button>
+      <div
+        className={`pf-lb-player${piece.wide ? " pf-lb-wide" : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {isVideoFile(piece.url) ? (
+          <video src={piece.url as string} controls autoPlay playsInline
+            style={{ width: "100%", height: "100%", objectFit: "contain", background: "#000" }} />
+        ) : src ? (
+          <iframe src={src} allowFullScreen scrolling="no" allow="autoplay; encrypted-media"
+            style={{ width: "100%", height: "100%", border: 0, background: "#000" }} />
+        ) : null}
+        <div className="pf-lb-info">
+          <b>{piece.label}</b>
+          <span>{piece.client}</span>
+        </div>
+      </div>
+    </div>
   );
 }
 
 export default function Portafolio() {
   const showreelSrc = embedSrc(SHOWREEL.url);
+  const [tab, setTab] = useState(0);
+  const [open, setOpen] = useState<Piece | null>(null);
+  const active = CHAPTERS[tab];
 
   return (
     <div className="pf">
@@ -153,38 +200,42 @@ export default function Portafolio() {
         </div>
       </header>
 
-      {/* ── ÍNDICE ── */}
-      <section className="container-base pf-indice">
-        <span className="pf-eyebrow">Índice</span>
-        <ol>
-          {CHAPTERS.map((ch) => (
-            <li key={ch.id}>
-              <a href={`#${ch.id}`}>
-                <span className="num">{ch.n}</span>
-                <span className="name">{ch.title}</span>
-                <span className="count">Trabajo reciente</span>
-                <span className="arr">→</span>
-              </a>
-            </li>
+      {/* ── GALERÍA CON TABS ── */}
+      <section className="container-base pf-gallery" id="trabajo">
+        <div className="pf-gal-head">
+          <div>
+            <span className="pf-eyebrow">El trabajo</span>
+            <h2>Piezas hechas<br />con IA.</h2>
+          </div>
+          <p className="pf-gal-desc" key={active.id}>{active.desc}</p>
+        </div>
+
+        {/* Tab bar */}
+        <div className="pf-tabs" role="tablist" aria-label="Categorías del portafolio">
+          {CHAPTERS.map((ch, i) => (
+            <button
+              key={ch.id}
+              role="tab"
+              aria-selected={tab === i}
+              className={`pf-tab${tab === i ? " on" : ""}`}
+              onClick={() => setTab(i)}
+            >
+              <span className="n">{ch.n}</span>
+              {ch.title}
+            </button>
           ))}
-        </ol>
+        </div>
+
+        {/* Grilla densa de miniaturas */}
+        <div className="pf-gal-grid" key={active.id}>
+          {active.pieces.map((p, i) => (
+            <GalleryCard key={`${active.id}-${i}`} piece={p} index={i} onOpen={setOpen} />
+          ))}
+        </div>
       </section>
 
-      {/* ── CAPÍTULOS ── */}
-      {CHAPTERS.map((ch) => (
-        <section key={ch.id} id={ch.id} className="container-base pf-chapter">
-          <div className="pf-chapter-head">
-            <div className="big">
-              <span className="n">{ch.n}</span>
-              <h2>{ch.title}</h2>
-            </div>
-            <p>{ch.desc}</p>
-          </div>
-          <div className="pf-strip">
-            {ch.pieces.map((p, i) => <Frame key={i} piece={p} index={i} />)}
-          </div>
-        </section>
-      ))}
+      {/* Lightbox */}
+      {open && <Lightbox piece={open} onClose={() => setOpen(null)} />}
 
       {/* ── CASOS DE ÉXITO POR MARCA ── */}
       <section className="container-base pf-cases">

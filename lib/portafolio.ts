@@ -19,6 +19,9 @@ export type Piece = {
   label: string;
   client: string;
   wide?: boolean;
+  // Miniatura opcional (ruta en /public, ej. "/images/portfolio/thumbs/comercial-1.jpg").
+  // Si no se define: mp4 usa su primer frame, YouTube usa su thumbnail automático.
+  thumb?: string;
 };
 
 export type Chapter = {
@@ -42,7 +45,9 @@ export const CHAPTERS: Chapter[] = [
     title: "Comerciales IA",
     desc: "Spots y campañas generados con IA: nivel de producción cinematográfica sin rodaje ni set.",
     pieces: [
-      { url: null, label: "Comercial IA", client: "Tu pieza reciente", wide: true },
+      { url: null, label: "Comercial IA", client: "Tu pieza reciente" },
+      { url: null, label: "Comercial IA", client: "Tu pieza reciente" },
+      { url: null, label: "Comercial IA", client: "Tu pieza reciente" },
       { url: null, label: "Comercial IA", client: "Tu pieza reciente" },
       { url: null, label: "Comercial IA", client: "Tu pieza reciente" },
     ],
@@ -53,6 +58,8 @@ export const CHAPTERS: Chapter[] = [
     title: "Video de Producto IA",
     desc: "Producto que se ve premium sin estudio: generación IA + criterio de dirección de arte.",
     pieces: [
+      { url: null, label: "Video producto IA", client: "Tu pieza reciente" },
+      { url: null, label: "Video producto IA", client: "Tu pieza reciente" },
       { url: null, label: "Video producto IA", client: "Tu pieza reciente" },
       { url: null, label: "Video producto IA", client: "Tu pieza reciente" },
       { url: null, label: "Video producto IA", client: "Tu pieza reciente" },
@@ -67,6 +74,8 @@ export const CHAPTERS: Chapter[] = [
       { url: "https://www.instagram.com/reel/DSXaFmajAYQ/", label: "Experto IA", client: "Livoltek" },
       { url: null, label: "UGC IA", client: "Tu pieza reciente" },
       { url: null, label: "UGC IA", client: "Tu pieza reciente" },
+      { url: null, label: "UGC IA", client: "Tu pieza reciente" },
+      { url: null, label: "UGC IA", client: "Tu pieza reciente" },
     ],
   },
   {
@@ -75,6 +84,8 @@ export const CHAPTERS: Chapter[] = [
     title: "Storytelling & B-Rolls IA",
     desc: "Narrativa de marca y b-rolls cinematográficos generados con IA que construyen percepción premium.",
     pieces: [
+      { url: null, label: "Storytelling IA", client: "Tu pieza reciente" },
+      { url: null, label: "B-Roll IA", client: "Tu pieza reciente" },
       { url: null, label: "Storytelling IA", client: "Tu pieza reciente" },
       { url: null, label: "B-Roll IA", client: "Tu pieza reciente" },
       { url: null, label: "Storytelling IA", client: "Tu pieza reciente" },
@@ -88,6 +99,7 @@ export const CHAPTERS: Chapter[] = [
     pieces: [
       { url: "https://www.instagram.com/reel/DW6m1y9E6hy/", label: "Contenido IA", client: "WIN Internet" },
       { url: null, label: "Contenido IA", client: "Tu pieza reciente" },
+      { url: null, label: "Contenido IA", client: "Tu pieza reciente" },
       { url: "https://www.youtube.com/watch?v=pKEcI6peLSA", label: "Automatizaciones IA", client: "Resuelto", wide: true },
     ],
   },
@@ -97,6 +109,22 @@ export const CHAPTERS: Chapter[] = [
 export function isVideoFile(url: string | null): boolean {
   if (!url) return false;
   return /\.(mp4|webm|mov|m4v)$/i.test(url) || url.startsWith("/videos/");
+}
+
+// Extrae el ID de un link de YouTube.
+export function youtubeId(url: string | null): string | null {
+  if (!url) return null;
+  if (url.includes("youtu.be")) return url.split("youtu.be/")[1]?.split(/[?&/]/)[0] || null;
+  if (url.includes("youtube.com")) return new URLSearchParams(url.split("?")[1] || "").get("v");
+  return null;
+}
+
+// Miniatura automática para la tarjeta de la galería.
+export function autoThumb(piece: Piece): string | null {
+  if (piece.thumb) return piece.thumb;
+  const yt = youtubeId(piece.url);
+  if (yt) return `https://img.youtube.com/vi/${yt}/hqdefault.jpg`;
+  return null;
 }
 
 // Convierte un link de la pieza al src del iframe embebido.
