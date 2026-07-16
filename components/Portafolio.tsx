@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SITE } from "@/lib/constants";
-import { SHOWREEL, CHAPTERS, embedSrc, isVideoFile, autoThumb, type Piece } from "@/lib/portafolio";
+import { CHAPTERS, embedSrc, isVideoFile, autoThumb, type Piece } from "@/lib/portafolio";
 
 const BLUE = "#1A80FF";
 const CREAM = "#F4F0DE";
@@ -44,44 +44,6 @@ const PlayIcon = () => (
     <path d="M8 5v14l11-7z" />
   </svg>
 );
-
-// ── Video propio que solo carga/reproduce cuando está en pantalla ──
-function LazyVideo({ src, controls = false }: { src: string; controls?: boolean }) {
-  const ref = useRef<HTMLVideoElement>(null);
-  const [load, setLoad] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setLoad(true);
-          el.play().catch(() => {});
-        } else {
-          el.pause();
-        }
-      },
-      { threshold: 0.35 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  return (
-    <video
-      ref={ref}
-      src={load ? src : undefined}
-      data-src={src}
-      muted
-      loop
-      playsInline
-      preload="none"
-      controls={controls}
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-    />
-  );
-}
 
 // ── Tarjeta de la galería (miniatura + play, reproduce al clic) ──
 function GalleryCard({ piece, index, onOpen }: { piece: Piece; index: number; onOpen: (p: Piece) => void }) {
@@ -159,47 +121,26 @@ function Lightbox({ piece, onClose }: { piece: Piece; onClose: () => void }) {
 }
 
 export default function Portafolio() {
-  const showreelSrc = embedSrc(SHOWREEL.url);
   const [tab, setTab] = useState(0);
   const [open, setOpen] = useState<Piece | null>(null);
   const active = CHAPTERS[tab];
 
   return (
     <div className="pf">
-      {/* ── HERO ── */}
-      <header className="pf-hero">
-        {/* Video de fondo full-bleed */}
-        <video className="pf-hero-video" src="/videos/problem-section-bg.mp4"
-          autoPlay muted loop playsInline preload="metadata" />
+      {/* ── HERO — video de fondo con texto superpuesto ── */}
+      <header className="pf-hero pf-hero-video-mode">
+        <video className="pf-hero-video" src="/videos/portafolio-hero.mp4"
+          autoPlay muted loop playsInline preload="auto" />
         <div className="pf-hero-shade" />
-        <div className="pf-glow" />
         <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
-          <div className="pf-hero-grid">
-            <div>
-              <span className="pf-eyebrow">Portafolio — {SITE.visibleName}</span>
-              <h1 className="pf-h1">
-                Creación<br /><span className="pf-ia-text">con IA.</span>
-              </h1>
-              <p className="pf-sub">
-                Comerciales, video de producto, UGC y storytelling producidos con IA generativa —
-                sobre <strong>5+ años de ejecución real</strong> para las marcas más grandes del Perú.
-              </p>
-            </div>
-
-            <div className="pf-showreel">
-              <span className="pf-showreel-badge">Showreel</span>
-              {isVideoFile(SHOWREEL.url) ? (
-                <LazyVideo src={SHOWREEL.url} controls />
-              ) : showreelSrc ? (
-                <iframe src={showreelSrc} loading="lazy" allowFullScreen scrolling="no"
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
-              ) : (
-                <div className="pf-ph">
-                  <span className="pf-ring"><PlayIcon /></span>
-                </div>
-              )}
-            </div>
-          </div>
+          <span className="pf-eyebrow">Portafolio — {SITE.visibleName}</span>
+          <h1 className="pf-h1">
+            Creación<br /><span className="pf-ia-text">con IA.</span>
+          </h1>
+          <p className="pf-sub">
+            Comerciales, video de producto, UGC y storytelling producidos con IA generativa —
+            sobre <strong>5+ años de ejecución real</strong> para las marcas más grandes del Perú.
+          </p>
 
           {/* stats */}
           <div className="pf-stats">
