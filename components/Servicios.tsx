@@ -17,6 +17,77 @@ function precioLinea(s: Servicio): { texto: string; definido: boolean } {
   return { texto: rango, definido: true };
 }
 
+// ── Glifos únicos por servicio ──────────────────────────────
+function ServicioIcon({ id }: { id: string }) {
+  const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  switch (id) {
+    case "contenido-ia": // stack de frames con play
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <rect x="3" y="7" width="14" height="14" rx="2.5" />
+          <path d="M7 4h13a1.5 1.5 0 0 1 1.5 1.5V18" opacity=".45" />
+          <path d="M8.5 11.5l4.5 2.5-4.5 2.5z" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case "comerciales-ia": // claqueta de cine
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <rect x="3" y="10" width="18" height="10" rx="2" />
+          <path d="M3.5 9.5l17-4.5 1 3.5-17.5 4.5z" />
+          <path d="M8 8.3l2.6 2.8M13 7l2.6 2.8" opacity=".6" />
+        </svg>
+      );
+    case "paginas-web": // navegador con cursor
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <rect x="3" y="4" width="18" height="15" rx="2.5" />
+          <path d="M3 8.5h18M6 6.3h.01M8.3 6.3h.01M10.6 6.3h.01" />
+          <path d="M12.5 12l6 2.2-2.7 1 1.6 2.8-1.6.9-1.6-2.8-2 2z" fill="currentColor" stroke="none" opacity=".9" />
+        </svg>
+      );
+    case "packaging": // caja 3D
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <path d="M12 3l8 4.2v9.6L12 21l-8-4.2V7.2z" />
+          <path d="M12 3v9M4 7.2l8 4.8 8-4.8" opacity=".6" />
+        </svg>
+      );
+    case "diseno-ia-btl": // marco con destello
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <rect x="3.5" y="3.5" width="17" height="17" rx="2.5" />
+          <path d="M12 7.5l1.2 2.8 2.8 1.2-2.8 1.2L12 15.5l-1.2-2.8L8 11.5l2.8-1.2z" fill="currentColor" stroke="none" />
+          <path d="M17 16.5h.01M7 7h.01" opacity=".7" />
+        </svg>
+      );
+    case "chatbot-ia": // burbuja con chispa
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4H6.5A2.5 2.5 0 0 1 4 13.5z" />
+          <path d="M12 7l.9 2.1L15 10l-2.1.9L12 13l-.9-2.1L9 10l2.1-.9z" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case "base-de-datos": // cilindro DB
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <ellipse cx="12" cy="5.5" rx="7.5" ry="2.8" />
+          <path d="M4.5 5.5v13c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-13" />
+          <path d="M4.5 12c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8" opacity=".6" />
+        </svg>
+      );
+    case "email-marketing": // sobre con rayo
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <rect x="3" y="5" width="18" height="14" rx="2.5" />
+          <path d="M3.5 7l8.5 6 8.5-6" />
+          <path d="M13.2 10.5l-2.4 3.4h2l-1 2.6 2.8-3.6h-2z" fill="currentColor" stroke="none" opacity=".9" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 // ── Tarjeta de servicio ─────────────────────────────────────
 function ServicioCard({ s, index, onOpen }: { s: Servicio; index: number; onOpen: (s: Servicio) => void }) {
   const precio = precioLinea(s);
@@ -32,9 +103,15 @@ function ServicioCard({ s, index, onOpen }: { s: Servicio; index: number; onOpen
       onClick={() => onOpen(s)}
       aria-label={`Ver detalle de ${s.title}`}
     >
+      {/* Capas decorativas */}
+      <span className="sv-ghost" aria-hidden="true">{s.n}</span>
+      <span className="sv-sweep" aria-hidden="true" />
+      <span className="sv-corner sv-corner-tl" aria-hidden="true" />
+      <span className="sv-corner sv-corner-br" aria-hidden="true" />
+
       <div className="sv-card-top">
+        <span className="sv-glyph"><ServicioIcon id={s.id} /></span>
         <span className="sv-cat">{s.categoria}</span>
-        <span className="sv-n">{s.n}</span>
       </div>
 
       <div className="sv-card-body">
