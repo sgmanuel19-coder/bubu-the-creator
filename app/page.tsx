@@ -53,10 +53,10 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  // Si el proyecto Vercel tiene SITE_MODE=sistemas-ia, redirige a esa landing.
-  // Configurar solo en el proyecto sistema-ia-sigma en el dashboard de Vercel.
+  // Si el proyecto Vercel tiene SITE_MODE=sistemas-ia (dominios antiguos del
+  // Sistema IA), redirige a /servicios — la landing dedicada fue absorbida ahí.
   if (process.env.SITE_MODE === "sistemas-ia") {
-    redirect("/sistemas-ia");
+    redirect("/servicios");
   }
 
   return (

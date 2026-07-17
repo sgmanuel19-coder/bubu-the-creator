@@ -34,8 +34,8 @@ const CAMINOS: Record<
     titulo: "Lo automatizo contigo",
     texto:
       "Un sistema de IA que atiende, califica y agenda a tus clientes por WhatsApp las 24 horas — la otra mitad del negocio, automatizada.",
-    cta: "Ver el Sistema IA",
-    href: "/sistemas-ia",
+    cta: "Ver servicios de automatización",
+    href: "/servicios",
   },
   boveda: {
     eyebrow: "Empieza gratis",

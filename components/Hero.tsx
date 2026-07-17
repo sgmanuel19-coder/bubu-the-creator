@@ -206,8 +206,8 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Bot IA Comercial — enlaza a su landing (/sistemas-ia) */}
-            <a href="/sistemas-ia"
+            {/* Bot IA Comercial — enlaza a los servicios de automatización */}
+            <a href="/servicios"
               className="flex-1 relative rounded-2xl border border-neon-purple/35 px-5 py-5 flex flex-col gap-3 overflow-hidden transition-transform hover:-translate-y-0.5"
               style={{
                 background: "rgba(16, 10, 20, 0.72)",

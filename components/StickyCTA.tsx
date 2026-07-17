@@ -2,15 +2,12 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import { SITE } from "@/lib/constants";
 
 export default function StickyCTA() {
-  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (pathname === "/sistemas-ia") return;
     const handleScroll = () => {
       setVisible(window.scrollY > 600);
     };
@@ -21,8 +18,6 @@ export default function StickyCTA() {
   const ctaHref = SITE.links.calendly.startsWith("[")
     ? "/contacto"
     : SITE.links.calendly;
-
-  if (pathname === "/sistemas-ia") return null;
 
   return (
     <AnimatePresence>

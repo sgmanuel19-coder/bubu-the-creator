@@ -9,7 +9,7 @@ GitHub: `sgmanuel19-coder/bubu-the-creator`.
 | Ruta | Qué es | Estado |
 |---|---|---|
 | `/` + `/casos`, `/servicios`, `/sobre-mi`, `/academy` | Landing de Resuelto Agency | Producción |
-| `/sistemas-ia` | Landing de Sistema IA (atención al cliente) | Producción |
+| `/sistemas-ia` | Redirect 308 → `/servicios` (landing absorbida por las tarjetas de automatización) | Redirect |
 | `/taller/*` | **RESUELTO Academy**: landing de venta + plataforma de cursos de la Masterclass de Creatividad Publicitaria IA | Producción |
 | `/ia-content-system/*` | Portal cliente-agencia (Supabase) | Deployado, Supabase caído |
 

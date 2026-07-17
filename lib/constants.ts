@@ -442,7 +442,7 @@ export const SITE = {
       name: "RESUELTO Automation",
       tagline: "La misma capacidad de IA que aplico al contenido, ahora en tus operaciones: chatbot IA 24/7 que atiende y califica leads, prospección automatizada y webs de alta conversión. Sistemas que trabajan incluso cuando tú no estás.",
       target: "Empresas, startups y consultoras que quieren dejar de perder tiempo en tareas manuales y generar oportunidades de forma automática.",
-      landingUrl: "/sistemas-ia",
+      landingUrl: "/servicios",
       items: [
         "Landing page y web con IA — diseñada y vibe-codeada para convertir",
         "Base de datos automatizada — scraping inteligente de prospectos a escala",

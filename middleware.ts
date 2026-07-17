@@ -5,7 +5,8 @@ import { createServerClient } from "@supabase/ssr";
 /**
  * Separación de proyectos Vercel por dominio.
  * - resueltoagencia.vercel.app → sirve RESUELTO landing en /
- * - Cualquier otro dominio (sistema-ia, etc.) → redirige / a /sistemas-ia
+ * - Cualquier otro dominio (sistema-ia, etc.) → redirige / a /servicios
+ *   (la landing dedicada /sistemas-ia fue absorbida por /servicios)
  *
  * ⚠️ NO modificar app/page.tsx para agregar redirect().
  *    La separación entre proyectos se maneja aquí, no en la página.
@@ -75,7 +76,7 @@ export async function middleware(request: NextRequest) {
   const isResuelto = RESUELTO_HOSTS.some((h) => host.includes(h));
 
   if (!isResuelto && pathname === "/") {
-    return NextResponse.redirect(new URL("/sistemas-ia", request.url));
+    return NextResponse.redirect(new URL("/servicios", request.url));
   }
 
   return NextResponse.next();
