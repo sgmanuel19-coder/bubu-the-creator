@@ -179,8 +179,8 @@ export const TRADITIONAL_CHAPTERS: Chapter[] = [
     title: "Comerciales",
     desc: "Producción comercial tradicional: grabación real con cámara, sin IA.",
     pieces: [
-      { url: null, label: "Comercial", client: "Tu pieza" },
-      { url: null, label: "Comercial", client: "Tu pieza" },
+      { url: "/videos/trad-comerciales-01.mp4", label: "Comercial", client: "Bubu The Creator", wide: true },
+      { url: "/videos/trad-comerciales-02.mp4", label: "Comercial", client: "Bubu The Creator", wide: true },
       { url: null, label: "Comercial", client: "Tu pieza" },
       { url: null, label: "Comercial", client: "Tu pieza" },
       { url: null, label: "Comercial", client: "Tu pieza" },
