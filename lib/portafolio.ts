@@ -201,15 +201,15 @@ export const TRADITIONAL_CHAPTERS: Chapter[] = [
   },
   {
     n: "03",
-    id: "trad-bcp",
-    title: "BCP",
-    desc: "Producción tradicional para BCP.",
+    id: "trad-io-bcp",
+    title: "iO del BCP",
+    desc: "Producción tradicional para iO del BCP.",
     pieces: [
-      { url: null, label: "BCP", client: "Tu pieza" },
-      { url: null, label: "BCP", client: "Tu pieza" },
-      { url: null, label: "BCP", client: "Tu pieza" },
-      { url: null, label: "BCP", client: "Tu pieza" },
-      { url: null, label: "BCP", client: "Tu pieza" },
+      { url: null, label: "iO del BCP", client: "Tu pieza" },
+      { url: null, label: "iO del BCP", client: "Tu pieza" },
+      { url: null, label: "iO del BCP", client: "Tu pieza" },
+      { url: null, label: "iO del BCP", client: "Tu pieza" },
+      { url: null, label: "iO del BCP", client: "Tu pieza" },
     ],
   },
   {
