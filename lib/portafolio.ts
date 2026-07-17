@@ -192,11 +192,13 @@ export const TRADITIONAL_CHAPTERS: Chapter[] = [
     title: "Coberturas",
     desc: "Cobertura de eventos y rodajes grabada y producida de forma tradicional.",
     pieces: [
-      { url: null, label: "Cobertura", client: "Tu pieza" },
-      { url: null, label: "Cobertura", client: "Tu pieza" },
-      { url: null, label: "Cobertura", client: "Tu pieza" },
-      { url: null, label: "Cobertura", client: "Tu pieza" },
-      { url: null, label: "Cobertura", client: "Tu pieza" },
+      { url: "/videos/trad-coberturas-01.mp4", label: "Cobertura", client: "Bubu The Creator" },
+      { url: "/videos/trad-coberturas-02.mp4", label: "Cobertura", client: "Bubu The Creator" },
+      { url: "/videos/trad-coberturas-03.mp4", label: "Cobertura", client: "Bubu The Creator" },
+      { url: "/videos/trad-coberturas-04.mp4", label: "Cobertura", client: "Bubu The Creator" },
+      { url: "/videos/trad-coberturas-05.mp4", label: "Cobertura", client: "Bubu The Creator" },
+      { url: "/videos/trad-coberturas-06.mp4", label: "Cobertura", client: "Bubu The Creator" },
+      { url: "/videos/trad-coberturas-07.mp4", label: "Cobertura", client: "Bubu The Creator" },
     ],
   },
   {
