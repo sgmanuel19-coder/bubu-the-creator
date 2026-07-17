@@ -683,19 +683,19 @@ export const SITE = {
     ],
     testimonials: [
       {
-        text: "El trabajo de Manuel impacta directamente en la construcción de autoridad digital y en la generación de nuevos negocios. Lo que se produce de forma audiovisual con él abre puertas que de otra manera costarían mucho más tiempo y recursos. Estamos genuinamente satisfechos.",
+        text: "El trabajo de Resuelto impacta directamente en la construcción de autoridad digital y en la generación de nuevos negocios. Lo que se produce de forma audiovisual con ellos abre puertas que de otra manera costarían mucho más tiempo y recursos. Estamos genuinamente satisfechos.",
         name: "Jefe General de Marketing",
         role: "Jefe General de Marketing",
         company: "WIN Internet",
       },
       {
-        text: "Me gusta mucho el trabajo que hace Manuel. Ayuda bastante a generar autoridad digital y a construir nuevas oportunidades de negocio a partir de lo que se va construyendo de forma audiovisual. Es un aporte real al posicionamiento de la marca en la región.",
+        text: "Me gusta mucho el trabajo que hace Resuelto. Ayuda bastante a generar autoridad digital y a construir nuevas oportunidades de negocio a partir de lo que se va construyendo de forma audiovisual. Es un aporte real al posicionamiento de la marca en la región.",
         name: "Jefe de Marketing Regional",
         role: "Jefe de Marketing Regional",
         company: "Livoltek",
       },
       {
-        text: "Manuel es una pieza clave dentro del equipo de contenidos. Tiene la capacidad de entender exactamente lo que queremos comunicar y ejecutarlo con la precisión correcta — siempre en el timing justo. No necesitas explicarle dos veces: lo resuelve.",
+        text: "Resuelto es una pieza clave dentro del equipo de contenidos. Tiene la capacidad de entender exactamente lo que queremos comunicar y ejecutarlo con la precisión correcta — siempre en el timing justo. No necesitas explicarle dos veces: lo resuelve.",
         name: "Jefe de Contenidos",
         role: "Jefe de Contenidos",
         company: "TBWA Perú",
