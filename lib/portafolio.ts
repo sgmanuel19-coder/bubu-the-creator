@@ -48,6 +48,9 @@ export const CHAPTERS: Chapter[] = [
     desc: "Spots y campañas generados con IA: nivel de producción cinematográfica sin rodaje ni set.",
     pieces: [
       { url: "/videos/comercial-01.mp4", label: "Comercial IA", client: "Bubu The Creator", wide: true },
+      { url: "/videos/comercial-04.mp4", label: "Comercial IA", client: "Bubu The Creator", wide: true },
+      { url: "/videos/comercial-05.mp4", label: "Comercial IA", client: "Bubu The Creator", wide: true },
+      { url: "/videos/comercial-06.mp4", label: "Comercial IA", client: "Bubu The Creator", wide: true },
     ],
   },
   {
@@ -102,12 +105,13 @@ export const CHAPTERS: Chapter[] = [
     n: "05",
     id: "content-ia",
     title: "Avatar IA",
-    desc: "Contenido continuo para redes producido con IA: formatos expertos, trends y sistemas de producción.",
+    desc: "Avatares generados con IA que presentan, explican y venden — una cara digital consistente para la marca, sin cámara ni actor.",
     pieces: [
-      { url: "https://www.instagram.com/reel/DW6m1y9E6hy/", label: "Contenido IA", client: "WIN Internet" },
-      { url: null, label: "Contenido IA", client: "Tu pieza reciente" },
-      { url: null, label: "Contenido IA", client: "Tu pieza reciente" },
-      { url: "https://www.youtube.com/watch?v=pKEcI6peLSA", label: "Automatizaciones IA", client: "Resuelto", wide: true },
+      { url: "/videos/avatar-01.mp4", label: "Avatar IA", client: "Bubu The Creator" },
+      { url: "/videos/avatar-02.mp4", label: "Avatar IA", client: "Bubu The Creator", wide: true },
+      { url: "/videos/avatar-03.mp4", label: "Avatar IA", client: "Bubu The Creator", wide: true },
+      { url: "/videos/avatar-04.mp4", label: "Avatar IA", client: "Bubu The Creator" },
+      { url: "/videos/avatar-05.mp4", label: "Avatar IA", client: "Bubu The Creator" },
     ],
   },
 ];
