@@ -278,34 +278,11 @@ export default function Portafolio() {
         </div>
       </section>
 
-      {/* ── CASOS DE ÉXITO — carrusel animado de imágenes ── */}
-      <section className="container-base" style={{ paddingTop: 70 }}>
-        <span className="pf-eyebrow">Casos de éxito</span>
-        <h2 className="pf-cases-title">Marcas que ya<br />producen con IA.</h2>
-      </section>
-      <div className="pf-filmstrip" aria-label="Casos de éxito — clic para agrandar">
-        <div className="pf-filmstrip-inner">
-          {[...CASE_IMAGES, ...CASE_IMAGES].map((img, i) => (
-            <button
-              type="button"
-              className="pf-fs-item"
-              key={i}
-              onClick={() => setOpenImage(img)}
-              aria-label={`Ver caso de éxito: ${img.label}`}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img.src as string} alt={img.label} loading="lazy" />
-              <span>{img.label}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Lightboxes */}
       {open && <Lightbox piece={open} onClose={() => setOpen(null)} />}
       {openImage && <ImageLightbox piece={openImage} onClose={() => setOpenImage(null)} />}
 
-      {/* ── ANTES DE LA IA — producción tradicional, con tabs ── */}
+      {/* ── ANTES DE LA IA — carrusel de casos + producción tradicional con tabs ── */}
       <section className="pf-archive">
         <div className="container-base">
           <span className="pf-eyebrow pf-eyebrow-cream">El archivo</span>
@@ -314,6 +291,25 @@ export default function Portafolio() {
             El criterio no salió de un prompt. Salió de producir para las marcas más exigentes del país —
             retail premium, FMCG, banca y cine — dentro de agencias globales top-tier.
           </p>
+
+          {/* Carrusel animado — casos de éxito, clic para agrandar */}
+          <div className="pf-filmstrip pf-filmstrip-archive" aria-label="Casos de éxito — clic para agrandar">
+            <div className="pf-filmstrip-inner">
+              {[...CASE_IMAGES, ...CASE_IMAGES].map((img, i) => (
+                <button
+                  type="button"
+                  className="pf-fs-item"
+                  key={i}
+                  onClick={() => setOpenImage(img)}
+                  aria-label={`Ver caso de éxito: ${img.label}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={img.src as string} alt={img.label} loading="lazy" />
+                  <span>{img.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
 
           <div className="pf-tabs pf-tabs-cream" role="tablist" aria-label="Categorías de producción tradicional">
             {TRADITIONAL_CHAPTERS.map((ch, i) => (

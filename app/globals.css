@@ -760,6 +760,7 @@ body {
 
 /* FILMSTRIP — imágenes reales desplazándose */
 .pf-filmstrip{ margin-top:90px;overflow:hidden;white-space:nowrap;border-top:1px solid var(--pf-line);border-bottom:1px solid var(--pf-line);padding:22px 0;background:rgba(20,18,9,.5); }
+.pf-filmstrip-archive{ margin-top:44px;margin-bottom:48px;border-color:rgba(244,240,222,.1); }
 .pf-filmstrip-inner{ display:inline-flex;gap:14px;animation:pfTick 45s linear infinite; }
 .pf-fs-item{ position:relative;width:min(420px,70vw);aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid rgba(244,240,222,.12);flex-shrink:0;padding:0;background:none;cursor:pointer;font-family:inherit;text-align:left;transition:border-color .3s; }
 .pf-fs-item:hover{ border-color:rgba(26,128,255,.4); }
