@@ -916,9 +916,6 @@ body {
 .sv-card:hover::after{ opacity:1; }
 .sv-card-big{ grid-column:span 3;background:linear-gradient(155deg,rgba(26,128,255,.09) 0%,#0e0d08 62%);border-color:rgba(26,128,255,.25); }
 /* número gigante fantasma */
-.sv-ghost{ position:absolute;top:-22px;right:2px;font-size:8.5rem;font-weight:800;line-height:1;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(26,128,255,.14);pointer-events:none;transition:transform .45s ease,-webkit-text-stroke-color .45s; }
-.sv-card-big .sv-ghost{ font-size:11rem;top:-32px; }
-.sv-card:hover .sv-ghost{ transform:translate(-6px,8px) scale(1.04);-webkit-text-stroke-color:rgba(26,128,255,.3); }
 /* barrido de luz al hover */
 .sv-sweep{ position:absolute;top:0;bottom:0;width:55%;left:-70%;background:linear-gradient(105deg,transparent 0%,rgba(244,240,222,.05) 45%,rgba(26,128,255,.08) 55%,transparent 100%);transform:skewX(-14deg);pointer-events:none;transition:none; }
 .sv-card:hover .sv-sweep{ left:130%;transition:left .8s ease; }
@@ -929,6 +926,10 @@ body {
 .sv-card:hover .sv-corner{ opacity:1; }
 /* chip del glifo */
 .sv-card-top{ display:flex;align-items:center;gap:12px;position:relative;z-index:1; }
+.sv-card-top-text{ display:flex;flex-direction:column;gap:6px; }
+.sv-index{ font-size:10.5px;font-weight:700;letter-spacing:.1em;color:var(--sv-muted);font-variant-numeric:tabular-nums; }
+.sv-index i{ font-style:normal;color:rgba(158,152,130,.55); }
+.sv-card:hover .sv-index{ color:#8fc0ff; }
 .sv-glyph{ width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#6fb0ff;border:1px solid rgba(26,128,255,.32);background:linear-gradient(150deg,rgba(26,128,255,.14) 0%,rgba(26,128,255,.03) 100%);box-shadow:inset 0 1px 0 rgba(244,240,222,.06),0 0 22px rgba(26,128,255,.1);transition:transform .35s,color .35s,box-shadow .35s;flex-shrink:0; }
 .sv-glyph svg{ width:26px;height:26px; }
 .sv-card:hover .sv-glyph{ transform:translateY(-2px) rotate(-3deg);color:#9cc8ff;box-shadow:inset 0 1px 0 rgba(244,240,222,.08),0 0 30px rgba(26,128,255,.22); }

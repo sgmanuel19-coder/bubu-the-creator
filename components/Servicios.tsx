@@ -104,14 +104,16 @@ function ServicioCard({ s, index, onOpen }: { s: Servicio; index: number; onOpen
       aria-label={`Ver detalle de ${s.title}`}
     >
       {/* Capas decorativas */}
-      <span className="sv-ghost" aria-hidden="true">{s.n}</span>
       <span className="sv-sweep" aria-hidden="true" />
       <span className="sv-corner sv-corner-tl" aria-hidden="true" />
       <span className="sv-corner sv-corner-br" aria-hidden="true" />
 
       <div className="sv-card-top">
         <span className="sv-glyph"><ServicioIcon id={s.id} /></span>
-        <span className="sv-cat">{s.categoria}</span>
+        <div className="sv-card-top-text">
+          <span className="sv-cat">{s.categoria}</span>
+          <span className="sv-index">{s.n}<i>/08</i></span>
+        </div>
       </div>
 
       <div className="sv-card-body">
