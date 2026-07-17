@@ -207,11 +207,12 @@ export const TRADITIONAL_CHAPTERS: Chapter[] = [
     title: "iO del BCP",
     desc: "Producción tradicional para iO del BCP.",
     pieces: [
-      { url: null, label: "iO del BCP", client: "Tu pieza" },
-      { url: null, label: "iO del BCP", client: "Tu pieza" },
-      { url: null, label: "iO del BCP", client: "Tu pieza" },
-      { url: null, label: "iO del BCP", client: "Tu pieza" },
-      { url: null, label: "iO del BCP", client: "Tu pieza" },
+      { url: "/videos/trad-io-bcp-01.mp4", label: "iO del BCP", client: "Bubu The Creator" },
+      { url: "/videos/trad-io-bcp-02.mp4", label: "iO del BCP", client: "Bubu The Creator" },
+      { url: "/videos/trad-io-bcp-03.mp4", label: "iO del BCP", client: "Bubu The Creator" },
+      { url: "/videos/trad-io-bcp-04.mp4", label: "iO del BCP", client: "Bubu The Creator" },
+      { url: "/videos/trad-io-bcp-05.mp4", label: "iO del BCP", client: "Bubu The Creator" },
+      { url: "/videos/trad-io-bcp-06.mp4", label: "iO del BCP", client: "Bubu The Creator" },
     ],
   },
   {
