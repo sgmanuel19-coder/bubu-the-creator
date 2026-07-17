@@ -191,7 +191,7 @@ export default function Portafolio() {
           autoPlay muted loop playsInline preload="auto" />
         <div className="pf-hero-shade" />
         <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
-          <span className="pf-eyebrow">Portafolio — {SITE.visibleName}</span>
+          <span className="pf-eyebrow">Portafolio — Resuelto Agency</span>
           <h1 className="pf-h1">
             Portafolio<br /><span className="pf-ia-text">Creativo.</span>
           </h1>
