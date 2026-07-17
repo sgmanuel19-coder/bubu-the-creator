@@ -44,7 +44,10 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   compress: true,
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'drive.google.com' },
+      { protocol: 'https', hostname: 'img.youtube.com' },
+    ],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 86400,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],

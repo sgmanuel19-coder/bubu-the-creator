@@ -34,12 +34,6 @@ export type Chapter = {
   pieces: Piece[];
 };
 
-// Video que resume el portafolio — va en el hero, al lado del título.
-export const SHOWREEL = {
-  url: "https://www.instagram.com/p/DZ3ZQ7qOAY0/",
-  handle: "@bubu_thecreator",
-};
-
 export const CHAPTERS: Chapter[] = [
   {
     n: "01",
@@ -152,21 +146,6 @@ export const DESIGN_IMAGES: ImagePiece[] = [
   { src: "/images/portfolio/design/design-11.jpg", label: "Diseño IA" },
 ];
 
-// Páginas web creadas — pega el link del sitio real (y opcionalmente un thumbnail).
-export type WebsitePiece = {
-  url: string | null;
-  label: string;
-  client?: string;
-  thumb?: string;
-};
-
-export const WEBSITES: WebsitePiece[] = [
-  { url: null, label: "Sitio web", client: "Tu proyecto" },
-  { url: null, label: "Sitio web", client: "Tu proyecto" },
-  { url: null, label: "Sitio web", client: "Tu proyecto" },
-  { url: null, label: "Sitio web", client: "Tu proyecto" },
-];
-
 // ============================================================
 // ANTES DE LA IA — producción tradicional (grabación real, sin IA)
 // Mismo mecanismo de pestañas que las categorías IA.
@@ -181,9 +160,6 @@ export const TRADITIONAL_CHAPTERS: Chapter[] = [
     pieces: [
       { url: "/videos/trad-comerciales-01.mp4", label: "Comercial", client: "Bubu The Creator", wide: true },
       { url: "/videos/trad-comerciales-02.mp4", label: "Comercial", client: "Bubu The Creator", wide: true },
-      { url: null, label: "Comercial", client: "Tu pieza" },
-      { url: null, label: "Comercial", client: "Tu pieza" },
-      { url: null, label: "Comercial", client: "Tu pieza" },
     ],
   },
   {

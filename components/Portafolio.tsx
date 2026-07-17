@@ -2,19 +2,23 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { SITE } from "@/lib/constants";
 import {
   CHAPTERS,
   TRADITIONAL_CHAPTERS,
   CASE_IMAGES,
   DESIGN_IMAGES,
-  WEBSITES,
   embedSrc,
   isVideoFile,
   autoThumb,
   type Piece,
   type ImagePiece,
 } from "@/lib/portafolio";
+
+// sizes tuned a la grilla densa de 5/4/3/2 columnas (ver breakpoints en globals.css)
+const GRID_SIZES = "(max-width:560px) 50vw, (max-width:900px) 33vw, (max-width:1100px) 25vw, 20vw";
+const FILMSTRIP_SIZES = "(max-width:900px) 70vw, 420px";
 
 const BLUE = "#1A80FF";
 
@@ -66,9 +70,8 @@ function GalleryCard({
         <video src={`${piece.url}#t=0.1`} muted playsInline preload="metadata"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
       ) : thumb ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={thumb} alt={`${piece.label} — ${piece.client}`} loading="lazy"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        <Image src={thumb} alt={`${piece.label} — ${piece.client}`} fill sizes={GRID_SIZES}
+          style={{ objectFit: "cover" }} />
       ) : clickable ? (
         <div className="pf-card-grad" />
       ) : null}
@@ -97,9 +100,8 @@ function ImageCard({ img, index, onOpen }: { img: ImagePiece; index: number; onO
       aria-label={clickable ? `Ver: ${img.label}` : "Espacio disponible"}
     >
       {clickable ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={img.src as string} alt={img.label} loading="lazy"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        <Image src={img.src as string} alt={img.label} fill sizes={GRID_SIZES}
+          style={{ objectFit: "cover" }} />
       ) : (
         <div className="pf-card-grad" />
       )}
@@ -191,7 +193,7 @@ export default function Portafolio() {
         <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
           <span className="pf-eyebrow">Portafolio — {SITE.visibleName}</span>
           <h1 className="pf-h1">
-            Creación<br /><span className="pf-ia-text">con IA.</span>
+            Portafolio<br /><span className="pf-ia-text">Creativo.</span>
           </h1>
           <p className="pf-sub">
             Comerciales, video de producto, UGC y storytelling producidos con IA generativa —
@@ -303,8 +305,8 @@ export default function Portafolio() {
                   onClick={() => setOpenImage(img)}
                   aria-label={`Ver caso de éxito: ${img.label}`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img.src as string} alt={img.label} loading="lazy" />
+                  <Image src={img.src as string} alt={img.label} fill sizes={FILMSTRIP_SIZES}
+                    style={{ objectFit: "cover" }} />
                   <span>{img.label}</span>
                 </button>
               ))}
@@ -346,45 +348,6 @@ export default function Portafolio() {
               <i key={ind.key}>{ind.icon} {ind.label}</i>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── PÁGINAS WEB CREADAS ── */}
-      <section className="container-base pf-gallery">
-        <div className="pf-gal-head">
-          <div>
-            <span className="pf-eyebrow">Web design</span>
-            <h2>Páginas web<br />que he creado.</h2>
-          </div>
-        </div>
-
-        <div className="pf-sites-grid">
-          {WEBSITES.map((site, i) => {
-            const clickable = Boolean(site.url);
-            if (clickable) {
-              return (
-                <a key={i} className="pf-site" href={site.url as string} target="_blank" rel="noopener noreferrer">
-                  {site.thumb ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={site.thumb} alt={site.label} loading="lazy" />
-                  ) : (
-                    <div className="pf-site-ph">🌐</div>
-                  )}
-                  <div className="pf-site-tag">
-                    <b>{site.label}</b>
-                    {site.client && <span>{site.client}</span>}
-                  </div>
-                  <span className="pf-site-visit">Visitar →</span>
-                </a>
-              );
-            }
-            return (
-              <div key={i} className="pf-site pf-site-empty">
-                <div className="pf-site-ph">+ agregar</div>
-                <div className="pf-site-tag"><b>{site.label}</b></div>
-              </div>
-            );
-          })}
         </div>
       </section>
 
