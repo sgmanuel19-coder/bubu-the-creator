@@ -139,11 +139,17 @@ export const CASE_IMAGES: ImagePiece[] = [
 
 // Piezas de diseño gráfico generadas con IA — pega la ruta de imagen en /public/images/...
 export const DESIGN_IMAGES: ImagePiece[] = [
-  { src: null, label: "Diseño IA" },
-  { src: null, label: "Diseño IA" },
-  { src: null, label: "Diseño IA" },
-  { src: null, label: "Diseño IA" },
-  { src: null, label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-01.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-02.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-03.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-04.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-05.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-06.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-07.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-08.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-09.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-10.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-11.jpg", label: "Diseño IA" },
 ];
 
 // Páginas web creadas — pega el link del sitio real (y opcionalmente un thumbnail).
