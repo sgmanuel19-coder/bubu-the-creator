@@ -116,6 +116,85 @@ export const CHAPTERS: Chapter[] = [
   },
 ];
 
+// ============================================================
+// IMÁGENES — diseño IA, casos de éxito y sitios web
+// ============================================================
+
+export type ImagePiece = {
+  src: string | null;
+  label: string;
+  client?: string;
+};
+
+// Imágenes de casos de éxito — cada imagen ya trae el texto del caso incrustado.
+// Carrusel animado, clic para agrandar.
+export const CASE_IMAGES: ImagePiece[] = [
+  { src: "/images/portfolio/slide-01.png", label: "WIN Internet" },
+  { src: "/images/portfolio/slide-02.png", label: "Mañana Me Caso" },
+  { src: "/images/portfolio/slide-03.png", label: "Livoltek" },
+  { src: "/images/portfolio/slide-04.png", label: "Redondos" },
+  { src: "/images/portfolio/slide-05.png", label: "Wong Cencosud" },
+  { src: "/images/portfolio/slide-06.png", label: "Marcas" },
+];
+
+// Piezas de diseño gráfico generadas con IA — pega la ruta de imagen en /public/images/...
+export const DESIGN_IMAGES: ImagePiece[] = [
+  { src: null, label: "Diseño IA" },
+  { src: null, label: "Diseño IA" },
+  { src: null, label: "Diseño IA" },
+  { src: null, label: "Diseño IA" },
+  { src: null, label: "Diseño IA" },
+];
+
+// Páginas web creadas — pega el link del sitio real (y opcionalmente un thumbnail).
+export type WebsitePiece = {
+  url: string | null;
+  label: string;
+  client?: string;
+  thumb?: string;
+};
+
+export const WEBSITES: WebsitePiece[] = [
+  { url: null, label: "Sitio web", client: "Tu proyecto" },
+  { url: null, label: "Sitio web", client: "Tu proyecto" },
+  { url: null, label: "Sitio web", client: "Tu proyecto" },
+  { url: null, label: "Sitio web", client: "Tu proyecto" },
+];
+
+// ============================================================
+// ANTES DE LA IA — producción tradicional (grabación real, sin IA)
+// Mismo mecanismo de pestañas que las categorías IA.
+// ============================================================
+
+export const TRADITIONAL_CHAPTERS: Chapter[] = [
+  {
+    n: "01",
+    id: "trad-comerciales",
+    title: "Comerciales",
+    desc: "Producción comercial tradicional: grabación real con cámara, sin IA.",
+    pieces: [
+      { url: null, label: "Comercial", client: "Tu pieza" },
+      { url: null, label: "Comercial", client: "Tu pieza" },
+      { url: null, label: "Comercial", client: "Tu pieza" },
+      { url: null, label: "Comercial", client: "Tu pieza" },
+      { url: null, label: "Comercial", client: "Tu pieza" },
+    ],
+  },
+  {
+    n: "02",
+    id: "trad-contenido",
+    title: "Contenido",
+    desc: "Contenido para redes grabado y producido de forma tradicional.",
+    pieces: [
+      { url: null, label: "Contenido", client: "Tu pieza" },
+      { url: null, label: "Contenido", client: "Tu pieza" },
+      { url: null, label: "Contenido", client: "Tu pieza" },
+      { url: null, label: "Contenido", client: "Tu pieza" },
+      { url: null, label: "Contenido", client: "Tu pieza" },
+    ],
+  },
+];
+
 // True si la url es un archivo de video propio (se muestra SOLO el video).
 export function isVideoFile(url: string | null): boolean {
   if (!url) return false;

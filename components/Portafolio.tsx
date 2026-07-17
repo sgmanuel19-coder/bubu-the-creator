@@ -3,40 +3,21 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SITE } from "@/lib/constants";
-import { CHAPTERS, embedSrc, isVideoFile, autoThumb, type Piece } from "@/lib/portafolio";
+import {
+  CHAPTERS,
+  TRADITIONAL_CHAPTERS,
+  CASE_IMAGES,
+  DESIGN_IMAGES,
+  WEBSITES,
+  embedSrc,
+  isVideoFile,
+  autoThumb,
+  type Piece,
+  type ImagePiece,
+} from "@/lib/portafolio";
 
 const BLUE = "#1A80FF";
-const CREAM = "#F4F0DE";
-const CREAM_DIM = "#D4CFA8";
-const MUTED = "#9E9882";
-const LINE = "rgba(244,240,222,.08)";
 
-type PfCase = {
-  slug: string;
-  image?: string;
-  client: string;
-  sector: string;
-  era: string;
-  problem: string;
-  solution: string;
-  result: string;
-  status?: string;
-  iaCategories?: readonly string[];
-};
-
-// Imágenes reales del trabajo — filmstrip y fondos.
-const WORK_IMAGES = [
-  { src: "/images/portfolio/slide-01.png", label: "WIN Internet" },
-  { src: "/images/portfolio/slide-02.png", label: "Mañana Me Caso" },
-  { src: "/images/portfolio/slide-03.png", label: "Livoltek" },
-  { src: "/images/portfolio/slide-04.png", label: "Redondos" },
-  { src: "/images/portfolio/slide-05.png", label: "Wong Cencosud" },
-  { src: "/images/portfolio/slide-06.png", label: "Marcas" },
-];
-
-const allCases = SITE.proof.cases as unknown as PfCase[];
-const iaCases = allCases.filter((c) => c.era === "ia");
-const oldCases = allCases.filter((c) => c.era === "tradicional");
 const brands = SITE.authority.logos.map((l) => l.name);
 
 const PlayIcon = () => (
@@ -45,8 +26,25 @@ const PlayIcon = () => (
   </svg>
 );
 
-// ── Tarjeta de la galería (miniatura + play, reproduce al clic) ──
-function GalleryCard({ piece, index, onOpen }: { piece: Piece; index: number; onOpen: (p: Piece) => void }) {
+const ZoomIcon = () => (
+  <svg viewBox="0 0 24 24" style={{ width: 18, height: 18, fill: "none", stroke: BLUE, strokeWidth: 2 }}>
+    <circle cx="11" cy="11" r="7" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </svg>
+);
+
+// ── Tarjeta de video (miniatura + play, reproduce al clic) ──
+function GalleryCard({
+  piece,
+  index,
+  onOpen,
+  iaBadge = true,
+}: {
+  piece: Piece;
+  index: number;
+  onOpen: (p: Piece) => void;
+  iaBadge?: boolean;
+}) {
   const thumb = autoThumb(piece);
   const isFile = isVideoFile(piece.url);
   const clickable = Boolean(piece.url);
@@ -63,7 +61,7 @@ function GalleryCard({ piece, index, onOpen }: { piece: Piece; index: number; on
       onClick={() => clickable && onOpen(piece)}
       aria-label={clickable ? `Reproducir: ${piece.label} — ${piece.client}` : "Espacio disponible"}
     >
-      <span className="pf-ia">Hecho con IA</span>
+      {iaBadge && <span className="pf-ia">Hecho con IA</span>}
       {isFile ? (
         <video src={`${piece.url}#t=0.1`} muted playsInline preload="metadata"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
@@ -83,7 +81,38 @@ function GalleryCard({ piece, index, onOpen }: { piece: Piece; index: number; on
   );
 }
 
-// ── Lightbox: reproduce la pieza en grande ──────────────────
+// ── Tarjeta de imagen (diseño / caso de éxito) — clic para agrandar ──
+function ImageCard({ img, index, onOpen }: { img: ImagePiece; index: number; onOpen: (p: ImagePiece) => void }) {
+  const clickable = Boolean(img.src);
+
+  return (
+    <motion.button
+      type="button"
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.4, delay: (index % 5) * 0.05 }}
+      className={`pf-card pf-dcard${clickable ? "" : " pf-card-empty"}`}
+      onClick={() => clickable && onOpen(img)}
+      aria-label={clickable ? `Ver: ${img.label}` : "Espacio disponible"}
+    >
+      {clickable ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={img.src as string} alt={img.label} loading="lazy"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      ) : (
+        <div className="pf-card-grad" />
+      )}
+      <span className="pf-card-play"><ZoomIcon /></span>
+      <div className="pf-tag">
+        <b>{img.label}</b>
+        {!clickable && <span>+ agregar</span>}
+      </div>
+    </motion.button>
+  );
+}
+
+// ── Lightbox de video: reproduce la pieza en grande ──────────
 function Lightbox({ piece, onClose }: { piece: Piece; onClose: () => void }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -120,10 +149,37 @@ function Lightbox({ piece, onClose }: { piece: Piece; onClose: () => void }) {
   );
 }
 
+// ── Lightbox de imagen: agranda la pieza gráfica ─────────────
+function ImageLightbox({ piece, onClose }: { piece: ImagePiece; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div className="pf-lightbox" onClick={onClose} role="dialog" aria-modal="true" aria-label={piece.label}>
+      <button className="pf-lb-close" onClick={onClose} aria-label="Cerrar">✕</button>
+      <div className="pf-lb-image-wrap" onClick={(e) => e.stopPropagation()}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={piece.src as string} alt={piece.label} className="pf-lb-image" />
+      </div>
+    </div>
+  );
+}
+
 export default function Portafolio() {
   const [tab, setTab] = useState(0);
+  const [tradTab, setTradTab] = useState(0);
   const [open, setOpen] = useState<Piece | null>(null);
+  const [openImage, setOpenImage] = useState<ImagePiece | null>(null);
+
   const active = CHAPTERS[tab];
+  const activeTrad = TRADITIONAL_CHAPTERS[tradTab];
 
   return (
     <div className="pf">
@@ -171,7 +227,7 @@ export default function Portafolio() {
         </div>
       </div>
 
-      {/* ── GALERÍA CON TABS ── */}
+      {/* ── GALERÍA CON TABS — trabajo hecho con IA ── */}
       <section className="container-base pf-gallery" id="trabajo">
         <div className="pf-gal-head">
           <div>
@@ -181,7 +237,6 @@ export default function Portafolio() {
           <p className="pf-gal-desc" key={active.id}>{active.desc}</p>
         </div>
 
-        {/* Tab bar */}
         <div className="pf-tabs" role="tablist" aria-label="Categorías del portafolio">
           {CHAPTERS.map((ch, i) => (
             <button
@@ -197,7 +252,6 @@ export default function Portafolio() {
           ))}
         </div>
 
-        {/* Grilla densa de miniaturas — menos columnas cuando hay pocas piezas */}
         <div
           className={`pf-gal-grid${active.pieces.length === 1 ? " pf-gal-grid-solo" : active.pieces.length === 2 ? " pf-gal-grid-duo" : ""}`}
           key={active.id}
@@ -208,62 +262,50 @@ export default function Portafolio() {
         </div>
       </section>
 
-      {/* Lightbox */}
-      {open && <Lightbox piece={open} onClose={() => setOpen(null)} />}
+      {/* ── DISEÑO GRÁFICO IA ── */}
+      <section className="container-base pf-gallery">
+        <div className="pf-gal-head">
+          <div>
+            <span className="pf-eyebrow">Diseño gráfico IA</span>
+            <h2>Piezas gráficas<br />generadas con IA.</h2>
+          </div>
+        </div>
 
-      {/* ── FILMSTRIP — trabajo real desplazándose ── */}
-      <div className="pf-filmstrip" aria-hidden="true">
+        <div className="pf-gal-grid pf-design-grid">
+          {DESIGN_IMAGES.map((img, i) => (
+            <ImageCard key={i} img={img} index={i} onOpen={setOpenImage} />
+          ))}
+        </div>
+      </section>
+
+      {/* ── CASOS DE ÉXITO — carrusel animado de imágenes ── */}
+      <section className="container-base" style={{ paddingTop: 70 }}>
+        <span className="pf-eyebrow">Casos de éxito</span>
+        <h2 className="pf-cases-title">Marcas que ya<br />producen con IA.</h2>
+      </section>
+      <div className="pf-filmstrip" aria-label="Casos de éxito — clic para agrandar">
         <div className="pf-filmstrip-inner">
-          {[...WORK_IMAGES, ...WORK_IMAGES].map((img, i) => (
-            <div className="pf-fs-item" key={i}>
+          {[...CASE_IMAGES, ...CASE_IMAGES].map((img, i) => (
+            <button
+              type="button"
+              className="pf-fs-item"
+              key={i}
+              onClick={() => setOpenImage(img)}
+              aria-label={`Ver caso de éxito: ${img.label}`}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img.src} alt={img.label} loading="lazy" />
+              <img src={img.src as string} alt={img.label} loading="lazy" />
               <span>{img.label}</span>
-            </div>
+            </button>
           ))}
         </div>
       </div>
 
-      {/* ── CASOS DE ÉXITO POR MARCA ── */}
-      <section className="container-base pf-cases">
-        <span className="pf-eyebrow">Casos de éxito</span>
-        <h2 className="pf-cases-title">Marcas que ya<br />producen con IA.</h2>
-        {iaCases.map((c) => (
-          <motion.div key={c.slug} className="pf-case"
-            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.5 }}>
-            <div className="left">
-              {c.image && (
-                <>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="pf-case-img" src={c.image} alt={c.client} loading="lazy" />
-                  <div className="pf-case-shade" />
-                </>
-              )}
-              <div style={{ position: "relative", zIndex: 2 }}>
-                <div className="brand">{c.client}</div>
-                <div className="sector">{c.sector}</div>
-              </div>
-              {c.status === "activo" && (
-                <div className="metric" style={{ position: "relative", zIndex: 2 }}>
-                  <b>Cliente activo</b><span>sistema de IA en operación</span>
-                </div>
-              )}
-            </div>
-            <div className="right">
-              <div className="row"><b>Reto</b><p>{c.problem}</p></div>
-              <div className="row"><b>Solución con IA</b><p>{c.solution}</p></div>
-              {c.iaCategories && (
-                <div className="pills">
-                  {c.iaCategories.map((t) => <i key={t}>{t.replace(/-/g, " ")}</i>)}
-                </div>
-              )}
-            </div>
-          </motion.div>
-        ))}
-      </section>
+      {/* Lightboxes */}
+      {open && <Lightbox piece={open} onClose={() => setOpen(null)} />}
+      {openImage && <ImageLightbox piece={openImage} onClose={() => setOpenImage(null)} />}
 
-      {/* ── ANTES DE LA IA ── */}
+      {/* ── ANTES DE LA IA — producción tradicional, con tabs ── */}
       <section className="pf-archive">
         <div className="container-base">
           <span className="pf-eyebrow pf-eyebrow-cream">El archivo</span>
@@ -273,22 +315,27 @@ export default function Portafolio() {
             retail premium, FMCG, banca y cine — dentro de agencias globales top-tier.
           </p>
 
-          <div className="pf-old-grid">
-            {oldCases.map((c) => (
-              <div className="pf-old" key={c.slug}>
-                {c.image && (
-                  <div className="pf-old-img">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={c.image} alt={c.client} loading="lazy" />
-                  </div>
-                )}
-                <div className="pf-old-body">
-                  <span className="yr">{c.sector}</span>
-                  <h3>{c.client}</h3>
-                  <p>{c.solution}</p>
-                  <div className="res">{c.result}</div>
-                </div>
-              </div>
+          <div className="pf-tabs pf-tabs-cream" role="tablist" aria-label="Categorías de producción tradicional">
+            {TRADITIONAL_CHAPTERS.map((ch, i) => (
+              <button
+                key={ch.id}
+                role="tab"
+                aria-selected={tradTab === i}
+                className={`pf-tab${tradTab === i ? " on" : ""}`}
+                onClick={() => setTradTab(i)}
+              >
+                <span className="n">{ch.n}</span>
+                {ch.title}
+              </button>
+            ))}
+          </div>
+
+          <div
+            className={`pf-gal-grid${activeTrad.pieces.length === 1 ? " pf-gal-grid-solo" : activeTrad.pieces.length === 2 ? " pf-gal-grid-duo" : ""}`}
+            key={activeTrad.id}
+          >
+            {activeTrad.pieces.map((p, i) => (
+              <GalleryCard key={`${activeTrad.id}-${i}`} piece={p} index={i} onOpen={setOpen} iaBadge={false} />
             ))}
           </div>
 
@@ -303,6 +350,45 @@ export default function Portafolio() {
               <i key={ind.key}>{ind.icon} {ind.label}</i>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── PÁGINAS WEB CREADAS ── */}
+      <section className="container-base pf-gallery">
+        <div className="pf-gal-head">
+          <div>
+            <span className="pf-eyebrow">Web design</span>
+            <h2>Páginas web<br />que he creado.</h2>
+          </div>
+        </div>
+
+        <div className="pf-sites-grid">
+          {WEBSITES.map((site, i) => {
+            const clickable = Boolean(site.url);
+            if (clickable) {
+              return (
+                <a key={i} className="pf-site" href={site.url as string} target="_blank" rel="noopener noreferrer">
+                  {site.thumb ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={site.thumb} alt={site.label} loading="lazy" />
+                  ) : (
+                    <div className="pf-site-ph">🌐</div>
+                  )}
+                  <div className="pf-site-tag">
+                    <b>{site.label}</b>
+                    {site.client && <span>{site.client}</span>}
+                  </div>
+                  <span className="pf-site-visit">Visitar →</span>
+                </a>
+              );
+            }
+            return (
+              <div key={i} className="pf-site pf-site-empty">
+                <div className="pf-site-ph">+ agregar</div>
+                <div className="pf-site-tag"><b>{site.label}</b></div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
