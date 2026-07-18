@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HomeContent from "@/components/Home";
 
-const PuenteOfertas = dynamic(() => import("@/components/PuenteOfertas"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
 const webPageSchema = {
@@ -60,13 +59,6 @@ export default function Home() {
       />
       <Navbar />
       <HomeContent />
-      {/* Puente de coherencia: la agencia es la prueba del método;
-          la academy lo enseña y la bóveda lo demuestra gratis */}
-      <PuenteOfertas
-        titulo="El mismo sistema que uso con mis clientes, enseñado paso a paso"
-        subtitulo="Si todavía no es momento de delegarlo, apréndelo: el método completo está en la Academy — y puedes probarlo gratis en la bóveda."
-        caminos={["academy", "boveda"]}
-      />
       <Footer />
     </main>
   );
