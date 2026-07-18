@@ -18,7 +18,7 @@ function precioLinea(s: Servicio): { texto: string; definido: boolean } {
 }
 
 // ── Glifos únicos por servicio ──────────────────────────────
-function ServicioIcon({ id }: { id: string }) {
+export function ServicioIcon({ id }: { id: string }) {
   const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   switch (id) {
     case "contenido-ia": // stack de frames con play

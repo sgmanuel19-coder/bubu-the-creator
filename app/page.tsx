@@ -2,52 +2,45 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import FAQ from "@/components/FAQ";
+import HomeContent from "@/components/Home";
 
-const Problem      = dynamic(() => import("@/components/Problem"));
-const Comparison   = dynamic(() => import("@/components/Comparison"));
-const IAfrentes    = dynamic(() => import("@/components/IAfrentes"));
-const Authority    = dynamic(() => import("@/components/Authority"));
-const PricingTiers = dynamic(() => import("@/components/PricingTiers"));
 const PuenteOfertas = dynamic(() => import("@/components/PuenteOfertas"));
-const FinalCTA     = dynamic(() => import("@/components/FinalCTA"));
-const Footer       = dynamic(() => import("@/components/Footer"));
+const Footer = dynamic(() => import("@/components/Footer"));
 
 const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "@id": "https://resueltoagency.com/#webpage",
   "url": "https://resueltoagency.com",
-  "name": "RESUELTO — Creación de Contenido con IA para Empresas B2B",
-  "description": "RESUELTO es una agencia de creación de contenido con IA en Lima, Perú. Videos con nivel cinematográfico generados con IA y automatización inteligente para empresas técnicas e industriales B2B — el nivel de una producción tradicional, en días y a una fracción del costo. Clientes activos: WIN Internet, Livoltek, Wellmax.",
+  "name": "RESUELTO — Producción con IA, Diseño, Web y Automatización",
+  "description": "RESUELTO es una agencia de producción con IA en Lima, Perú: comerciales de nivel televisión, contenido de marca, páginas web, packaging, diseño y automatización comercial — dirigidos con 5+ años de criterio en agencias globales. Clientes activos: WIN Internet, Livoltek, Wellmax.",
   "inLanguage": "es-PE",
-  "dateModified": "2026-06-11",
+  "dateModified": "2026-07-17",
   "isPartOf": { "@id": "https://resueltoagency.com/#website" },
   "publisher": { "@id": "https://resueltoagency.com/#organization" },
 };
 
 export const metadata: Metadata = {
-  title: "RESUELTO — Creación de Contenido con IA para Empresas B2B · Perú",
-  description: "Agencia de creación de contenido con IA. Videos con nivel cinematográfico generados con IA para empresas B2B — el nivel de una producción tradicional de $5,000–$50,000, entregado en días a una fracción del costo.",
+  title: "RESUELTO — Producción con IA, Diseño, Web y Automatización · Perú",
+  description: "Comerciales de nivel televisión, contenido de marca, páginas web y automatización comercial — generados con IA, dirigidos con 5+ años de criterio real. Portafolio real, cotización cerrada, entrega en semanas.",
   keywords: [
-    "creación de contenido con IA",
-    "videos con IA para empresas",
-    "producción de video con IA Peru",
+    "producción con IA",
+    "comerciales con IA",
     "agencia contenido IA Lima",
     "video IA publicitario",
-    "contenido B2B con IA",
-    "automatización con IA empresas",
+    "diseño con IA",
+    "páginas web Perú",
+    "automatización comercial con IA",
+    "chatbot IA whatsapp",
     "videos cinematográficos IA",
-    "agencia marketing B2B Lima",
-    "alternativa producción audiovisual",
+    "agencia creativa Lima",
   ],
   alternates: {
     canonical: "https://resueltoagency.com",
   },
   openGraph: {
-    title: "RESUELTO — Creación de Contenido con IA para Empresas B2B",
-    description: "Videos con nivel cinematográfico generados con IA y automatización inteligente para empresas técnicas e industriales. En días, a una fracción del costo de una producción tradicional.",
+    title: "RESUELTO — Producción con IA, Diseño, Web y Automatización",
+    description: "Comerciales de nivel televisión, contenido de marca, páginas web y automatización comercial — generados con IA, dirigidos con 5+ años de criterio real.",
     url: "https://resueltoagency.com",
   },
 };
@@ -66,12 +59,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
       <Navbar />
-      <Hero />
-      <Problem />
-      <Comparison />
-      <IAfrentes />
-      <Authority />
-      <PricingTiers />
+      <HomeContent />
       {/* Puente de coherencia: la agencia es la prueba del método;
           la academy lo enseña y la bóveda lo demuestra gratis */}
       <PuenteOfertas
@@ -79,8 +67,6 @@ export default function Home() {
         subtitulo="Si todavía no es momento de delegarlo, apréndelo: el método completo está en la Academy — y puedes probarlo gratis en la bóveda."
         caminos={["academy", "boveda"]}
       />
-      <FAQ />
-      <FinalCTA />
       <Footer />
     </main>
   );
