@@ -88,48 +88,64 @@ export function ServicioIcon({ id }: { id: string }) {
   }
 }
 
-// ── Tarjeta de servicio ─────────────────────────────────────
-function ServicioCard({ s, index, onOpen }: { s: Servicio; index: number; onOpen: (s: Servicio) => void }) {
+// ── Panel del acordeón horizontal ───────────────────────────
+// Cerrado: columna delgada con glifo + título vertical + número.
+// Al hover/focus se expande (flex) y revela el contenido completo.
+function ServicioPanel({
+  s,
+  active,
+  onActivate,
+  onOpen,
+}: {
+  s: Servicio;
+  active: boolean;
+  onActivate: () => void;
+  onOpen: (s: Servicio) => void;
+}) {
   const precio = precioLinea(s);
 
   return (
-    <motion.button
+    <button
       type="button"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.45, delay: (index % 3) * 0.07 }}
-      className={`sv-card${s.destacado ? " sv-card-big" : ""}`}
+      className={`sv-panel${active ? " on" : ""}`}
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
       onClick={() => onOpen(s)}
+      aria-expanded={active}
       aria-label={`Ver detalle de ${s.title}`}
     >
-      {/* Capas decorativas */}
-      <span className="sv-sweep" aria-hidden="true" />
-      <span className="sv-corner sv-corner-tl" aria-hidden="true" />
-      <span className="sv-corner sv-corner-br" aria-hidden="true" />
+      <span className="sv-panel-tex" aria-hidden="true" />
+      <span className="sv-panel-glow" aria-hidden="true" />
 
-      <div className="sv-card-top">
-        <span className="sv-glyph"><ServicioIcon id={s.id} /></span>
-        <div className="sv-card-top-text">
-          <span className="sv-cat">{s.categoria}</span>
-          <span className="sv-index">{s.n}<i>/08</i></span>
-        </div>
-      </div>
+      {/* Estado cerrado — título vertical */}
+      <span className="sv-panel-closed" aria-hidden={active}>
+        <span className="sv-glyph sv-glyph-sm"><ServicioIcon id={s.id} /></span>
+        <span className="sv-panel-vtitle">{s.title}</span>
+        <span className="sv-panel-vnum">{s.n}</span>
+      </span>
 
-      <div className="sv-card-body">
-        <h3>{s.title}</h3>
-        <p>{s.tagline}</p>
-      </div>
-
-      <div className="sv-tags">
-        {s.tags.map((t) => <i key={t}>{t}</i>)}
-      </div>
-
-      <div className="sv-card-foot">
-        <span className={`sv-precio${precio.definido ? "" : " sv-precio-tbd"}`}>{precio.texto}</span>
-        <span className="sv-arrow">Ver detalle →</span>
-      </div>
-    </motion.button>
+      {/* Estado abierto — contenido completo */}
+      <span className="sv-panel-open" aria-hidden={!active}>
+        <span className="sv-panel-open-top">
+          <span className="sv-glyph"><ServicioIcon id={s.id} /></span>
+          <span>
+            <span className="sv-cat">{s.categoria}</span>
+            <span className="sv-index">{s.n}<i>/08</i></span>
+          </span>
+        </span>
+        <span className="sv-panel-open-body">
+          <b>{s.title}</b>
+          <span className="sv-panel-tagline">{s.tagline}</span>
+          <span className="sv-tags">
+            {s.tags.map((t) => <i key={t}>{t}</i>)}
+          </span>
+        </span>
+        <span className="sv-panel-open-foot">
+          <span className={`sv-precio${precio.definido ? "" : " sv-precio-tbd"}`}>{precio.texto}</span>
+          <span className="sv-arrow">Ver detalle →</span>
+        </span>
+      </span>
+    </button>
   );
 }
 
@@ -224,6 +240,7 @@ function ServicioModal({ s, onClose }: { s: Servicio; onClose: () => void }) {
 
 export default function Servicios() {
   const [open, setOpen] = useState<Servicio | null>(null);
+  const [active, setActive] = useState(0);
 
   return (
     <div className="sv">
@@ -242,13 +259,20 @@ export default function Servicios() {
         </div>
       </header>
 
-      {/* ── GRILLA DE SERVICIOS ── */}
+      {/* ── ACORDEÓN HORIZONTAL DE SERVICIOS ── */}
       <section className="container-base sv-grid-wrap">
-        <div className="sv-grid">
+        <div className="sv-acc">
           {SERVICIOS.map((s, i) => (
-            <ServicioCard key={s.id} s={s} index={i} onOpen={setOpen} />
+            <ServicioPanel
+              key={s.id}
+              s={s}
+              active={active === i}
+              onActivate={() => setActive(i)}
+              onOpen={setOpen}
+            />
           ))}
         </div>
+        <p className="sv-acc-hint" aria-hidden="true">Pasa el mouse por cada panel — clic para ver el detalle completo</p>
       </section>
 
       {/* Modal */}
