@@ -9,7 +9,7 @@ import { SITE } from "@/lib/constants";
 
 const navLinks = [
   { label: "Inicio", href: "/" },
-  { label: "Sobre mí", href: "/sobre-mi" },
+  { label: "Sobre nosotros", href: "/sobre-mi" },
   { label: "Portafolio", href: "/casos" },
   { label: "Servicios", href: "/servicios" },
   // Academy apunta al portal de la masterclass (landing + plataforma).
