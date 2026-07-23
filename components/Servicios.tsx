@@ -83,6 +83,50 @@ export function ServicioIcon({ id }: { id: string }) {
           <path d="M13.2 10.5l-2.4 3.4h2l-1 2.6 2.8-3.6h-2z" fill="currentColor" stroke="none" opacity=".9" />
         </svg>
       );
+    case "estrategia-crecimiento": // curva ascendente con diana
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <path d="M3 18.5c3.5 0 4.5-4 7-7.5s4.5-4 7.5-4" />
+          <path d="M14.5 7h3.5v3.5" />
+          <circle cx="7.5" cy="16.5" r="1.6" fill="currentColor" stroke="none" opacity=".85" />
+          <path d="M3 21h18" opacity=".45" />
+        </svg>
+      );
+    case "campanas-integrales": // nodos irradiando desde un centro
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none" />
+          <circle cx="12" cy="12" r="6.2" opacity=".55" />
+          <circle cx="12" cy="12" r="9.6" opacity=".28" />
+          <circle cx="18.2" cy="12" r="1.5" fill="currentColor" stroke="none" />
+          <circle cx="12" cy="5.8" r="1.5" fill="currentColor" stroke="none" />
+          <circle cx="7.6" cy="16.4" r="1.5" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case "consultoria-marketing": // brújula / dirección
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <circle cx="12" cy="12" r="8.6" />
+          <path d="M15.4 8.6l-2 5.4-5.4 2 2-5.4z" fill="currentColor" stroke="none" opacity=".9" />
+          <path d="M12 2.6v1.8M12 19.6v1.8M2.6 12h1.8M19.6 12h1.8" opacity=".5" />
+        </svg>
+      );
+    case "eventos-corporativos": // escenario con foco
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <path d="M4 20h16" />
+          <path d="M6.5 20V9.5h11V20" />
+          <path d="M12 9.5V6" />
+          <circle cx="12" cy="4.2" r="1.8" fill="currentColor" stroke="none" />
+          <path d="M9 20v-4.5h6V20" opacity=".55" />
+        </svg>
+      );
+    case "produccion-musical": // onda de audio
+      return (
+        <svg viewBox="0 0 24 24" {...p}>
+          <path d="M3 12v0M6.2 8.6v6.8M9.4 5.4v13.2M12.6 9.4v5.2M15.8 6.6v10.8M19 10v4M21.8 11.4v1.2" />
+        </svg>
+      );
     default:
       return null;
   }
@@ -244,6 +288,13 @@ function ServicioModal({ s, onClose }: { s: Servicio; onClose: () => void }) {
   );
 }
 
+// Reparte los servicios en dos filas equilibradas para el acordeón.
+const SPLIT = Math.ceil(SERVICIOS.length / 2);
+const ROWS = [
+  { start: 0, items: SERVICIOS.slice(0, SPLIT) },
+  { start: SPLIT, items: SERVICIOS.slice(SPLIT) },
+];
+
 export default function Servicios() {
   const [open, setOpen] = useState<Servicio | null>(null);
   const [active, setActive] = useState(0);
@@ -259,24 +310,38 @@ export default function Servicios() {
             Todo lo que tu marca<br /><span className="sv-grad">necesita para crecer.</span>
           </h1>
           <p className="sv-sub">
-            Producción con IA, diseño, web y automatización comercial — ocho servicios,
-            un mismo estándar: <strong>nivel de agencia global, velocidad de IA.</strong>
+            Estrategia, producción con IA, diseño, web y automatización comercial —
+            {" "}{SERVICIOS.length} servicios, un mismo estándar:{" "}
+            <strong>nivel de agencia global, velocidad de IA.</strong>
           </p>
         </div>
       </header>
 
-      {/* ── ACORDEÓN HORIZONTAL DE SERVICIOS ── */}
+      {/* ── ACORDEÓN DE SERVICIOS ──
+          Se reparte en dos filas: 13 paneles en una sola cinta no dejarían
+          espacio para que el activo se expanda. La fila que NO contiene el
+          panel activo reparte su ancho en partes iguales (clase "idle"). */}
       <section className="container-base sv-grid-wrap">
         <div className="sv-acc">
-          {SERVICIOS.map((s, i) => (
-            <ServicioPanel
-              key={s.id}
-              s={s}
-              active={active === i}
-              onActivate={() => setActive(i)}
-              onOpen={setOpen}
-            />
-          ))}
+          {ROWS.map((row, r) => {
+            const hasActive = active >= row.start && active < row.start + row.items.length;
+            return (
+              <div className={`sv-acc-row${hasActive ? "" : " idle"}`} key={r}>
+                {row.items.map((s, i) => {
+                  const idx = row.start + i;
+                  return (
+                    <ServicioPanel
+                      key={s.id}
+                      s={s}
+                      active={active === idx}
+                      onActivate={() => setActive(idx)}
+                      onOpen={setOpen}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
         <p className="sv-acc-hint sv-hint-desktop" aria-hidden="true">Pasa el mouse por cada panel — clic para ver el detalle completo</p>
         <p className="sv-acc-hint sv-hint-mobile" aria-hidden="true">Toca un servicio para desplegarlo — vuelve a tocar para ver el detalle</p>

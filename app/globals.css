@@ -906,8 +906,11 @@ body {
 
 /* GRILLA */
 .sv-grid-wrap{ padding-top:60px;padding-bottom:20px; }
-/* ── ACORDEÓN HORIZONTAL ─────────────────────────────────── */
-.sv-acc{ display:flex;gap:10px;height:560px; }
+/* ── ACORDEÓN HORIZONTAL (dos filas) ─────────────────────── */
+.sv-acc{ display:flex;flex-direction:column;gap:10px; }
+.sv-acc-row{ display:flex;gap:10px;height:352px; }
+/* la fila sin panel activo reparte su ancho en partes iguales */
+.sv-acc-row.idle .sv-panel{ flex-grow:1; }
 /* Ancho base por flex-basis (96px), NO por flex-grow: los paneles
    colapsados existen aunque la transición de grow no complete. Solo el
    panel activo tiene grow:1 y se lleva todo el espacio libre → se expande.
@@ -1012,6 +1015,9 @@ body {
    Mantiene la misma mecánica que el desktop, adaptada a scroll vertical. */
 @media (max-width:900px){
   .sv-acc{ flex-direction:column;height:auto;gap:10px; }
+  /* las filas se disuelven: los paneles pasan a ser hijos directos de la
+     columna, para que el acordeón vertical funcione como una sola lista */
+  .sv-acc-row{ display:contents; }
   .sv-acc .sv-panel{ flex:none !important;min-width:0;width:100%; }
   /* fila cerrada: glifo + título horizontal + número, en línea */
   .sv-acc .sv-panel-closed{ position:static;flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;padding:18px 20px;opacity:1;transition:none; }
