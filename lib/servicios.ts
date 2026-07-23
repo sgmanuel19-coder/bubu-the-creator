@@ -11,6 +11,9 @@ export type Servicio = {
   n: string;
   id: string;
   categoria: "Producción IA" | "Diseño" | "Web" | "Automatización";
+  // Acento propio del servicio, en RGB suelto para componer rgba() en CSS.
+  // Paleta curada: tonos medios (nada neón) que funcionan sobre el fondo oscuro.
+  accentRgb: string;
   title: string;
   tagline: string; // frase corta de la tarjeta
   desc: string; // párrafo de apertura del detalle
@@ -26,6 +29,7 @@ export const SERVICIOS: Servicio[] = [
   {
     n: "01",
     id: "contenido-ia",
+    accentRgb: "26,128,255",
     categoria: "Producción IA",
     title: "Contenido IA",
     tagline: "Presencia de marca sostenida en redes — videos, carruseles e imágenes con línea visual unificada.",
@@ -57,6 +61,7 @@ export const SERVICIOS: Servicio[] = [
   {
     n: "02",
     id: "comerciales-ia",
+    accentRgb: "99,110,250",
     categoria: "Producción IA",
     title: "Comerciales IA",
     tagline: "Producción tipo TV: spot dirigido plano por plano, con cinemática de alta gama.",
@@ -91,6 +96,7 @@ export const SERVICIOS: Servicio[] = [
   {
     n: "03",
     id: "paginas-web",
+    accentRgb: "0,169,196",
     categoria: "Web",
     title: "Páginas Web",
     tagline: "Sitios que venden: diseño premium, rápido y pensado para convertir.",
@@ -114,6 +120,7 @@ export const SERVICIOS: Servicio[] = [
   {
     n: "04",
     id: "packaging",
+    accentRgb: "217,164,65",
     categoria: "Diseño",
     title: "Packaging",
     tagline: "Empaques que se hacen notar en góndola y en cámara.",
@@ -136,6 +143,7 @@ export const SERVICIOS: Servicio[] = [
   {
     n: "05",
     id: "diseno-ia-btl",
+    accentRgb: "199,125,187",
     categoria: "Diseño",
     title: "Diseño IA / BTL",
     tagline: "Key visuals, gráficas de campaña y material BTL generados con IA.",
@@ -158,6 +166,7 @@ export const SERVICIOS: Servicio[] = [
   {
     n: "06",
     id: "chatbot-ia",
+    accentRgb: "139,108,255",
     categoria: "Automatización",
     title: "Super Agente Chatbot",
     tagline: "Un agente IA que atiende, responde y vende por ti — 24/7, en WhatsApp y web.",
@@ -180,6 +189,7 @@ export const SERVICIOS: Servicio[] = [
   {
     n: "07",
     id: "base-de-datos",
+    accentRgb: "46,158,107",
     categoria: "Automatización",
     title: "Construcción de Base de Datos",
     tagline: "Convierte cada contacto en un dato ordenado y accionable.",
@@ -202,6 +212,7 @@ export const SERVICIOS: Servicio[] = [
   {
     n: "08",
     id: "email-marketing",
+    accentRgb: "224,112,92",
     categoria: "Automatización",
     title: "Email Marketing",
     tagline: "Secuencias automatizadas que venden mientras duermes.",

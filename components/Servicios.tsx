@@ -108,14 +108,20 @@ function ServicioPanel({
     <button
       type="button"
       className={`sv-panel${active ? " on" : ""}`}
+      style={{ ["--sv-a" as string]: s.accentRgb }}
       onMouseEnter={onActivate}
       onFocus={onActivate}
-      onClick={() => onOpen(s)}
+      // Unificado desktop/móvil: si el panel ya está abierto, el clic abre el
+      // detalle; si está cerrado, primero lo despliega. En desktop el hover ya
+      // lo dejó activo, así que el clic abre el detalle directo.
+      onClick={() => (active ? onOpen(s) : onActivate())}
       aria-expanded={active}
       aria-label={`Ver detalle de ${s.title}`}
     >
       <span className="sv-panel-tex" aria-hidden="true" />
       <span className="sv-panel-glow" aria-hidden="true" />
+      <span className="sv-panel-ghost" aria-hidden="true"><ServicioIcon id={s.id} /></span>
+      <span className="sv-panel-bar" aria-hidden="true" />
 
       {/* Estado cerrado — título vertical */}
       <span className="sv-panel-closed" aria-hidden={active}>
@@ -272,7 +278,8 @@ export default function Servicios() {
             />
           ))}
         </div>
-        <p className="sv-acc-hint" aria-hidden="true">Pasa el mouse por cada panel — clic para ver el detalle completo</p>
+        <p className="sv-acc-hint sv-hint-desktop" aria-hidden="true">Pasa el mouse por cada panel — clic para ver el detalle completo</p>
+        <p className="sv-acc-hint sv-hint-mobile" aria-hidden="true">Toca un servicio para desplegarlo — vuelve a tocar para ver el detalle</p>
       </section>
 
       {/* Modal */}

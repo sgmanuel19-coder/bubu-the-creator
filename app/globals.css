@@ -912,11 +912,20 @@ body {
    colapsados existen aunque la transición de grow no complete. Solo el
    panel activo tiene grow:1 y se lleva todo el espacio libre → se expande.
    Robusto: en el peor caso (grow congelado) sigue viéndose la cinta. */
-.sv-panel{ position:relative;flex:0 1 108px;min-width:68px;border-radius:18px;border:1px solid var(--sv-line);background:linear-gradient(165deg,#141209 0%,#0e0d08 100%);overflow:hidden;cursor:pointer;font-family:inherit;text-align:left;padding:0;transition:flex-grow .7s cubic-bezier(.16,1,.3,1),border-color .4s,box-shadow .4s; }
-.sv-panel.on{ flex-grow:1;border-color:rgba(26,128,255,.55);box-shadow:0 22px 52px rgba(0,0,0,.55),0 0 38px rgba(26,128,255,.14); }
+/* --sv-a = acento RGB del servicio (inline por panel); azul marca de fallback */
+.sv-panel{ --sv-a:26,128,255;position:relative;flex:0 1 108px;min-width:68px;border-radius:18px;border:1px solid var(--sv-line);background:linear-gradient(165deg,rgba(var(--sv-a),.07) 0%,#100f09 55%,#0e0d08 100%);overflow:hidden;cursor:pointer;font-family:inherit;text-align:left;padding:0;transition:flex-grow .7s cubic-bezier(.16,1,.3,1),border-color .4s,box-shadow .4s,background .5s; }
+.sv-panel:hover{ border-color:rgba(var(--sv-a),.4); }
+.sv-panel.on{ flex-grow:1;background:linear-gradient(165deg,rgba(var(--sv-a),.16) 0%,rgba(var(--sv-a),.04) 45%,#0e0d08 100%);border-color:rgba(var(--sv-a),.55);box-shadow:0 22px 52px rgba(0,0,0,.55),0 0 40px rgba(var(--sv-a),.16); }
 .sv-panel-tex{ position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(rgba(244,240,222,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(244,240,222,.022) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse at 80% 8%,#000 0%,transparent 65%); }
-.sv-panel-glow{ position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(26,128,255,.14) 0%,transparent 70%);opacity:0;transition:opacity .5s;pointer-events:none; }
+.sv-panel-glow{ position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(var(--sv-a),.22) 0%,transparent 70%);opacity:0;transition:opacity .5s;pointer-events:none; }
 .sv-panel.on .sv-panel-glow{ opacity:1; }
+/* barra de acento superior — se llena al activarse */
+.sv-panel-bar{ position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgb(var(--sv-a)),rgba(var(--sv-a),.15));transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.16,1,.3,1);z-index:3; }
+.sv-panel.on .sv-panel-bar{ transform:scaleX(1); }
+/* glifo gigante de marca de agua — profundidad */
+.sv-panel-ghost{ position:absolute;right:-26px;bottom:-30px;width:190px;height:190px;color:rgba(var(--sv-a),.07);pointer-events:none;transition:opacity .5s,transform .6s ease,color .5s;opacity:0;transform:scale(.9) rotate(-6deg); }
+.sv-panel-ghost svg{ width:100%;height:100%; }
+.sv-panel.on .sv-panel-ghost{ opacity:1;transform:scale(1) rotate(0deg);color:rgba(var(--sv-a),.1); }
 
 /* estado cerrado — glifo arriba, título horizontal legible abajo */
 .sv-panel-closed{ position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22px 12px;opacity:1;transition:opacity .3s ease .15s; }
@@ -934,21 +943,23 @@ body {
 .sv-panel-open-body b{ font-size:clamp(1.4rem,2.6vw,2rem);font-weight:800;letter-spacing:-.02em;color:var(--sv-cream);line-height:1.06;text-wrap:balance; }
 .sv-panel-tagline{ font-size:13.5px;line-height:1.6;color:var(--sv-muted);font-weight:300;max-width:400px; }
 .sv-panel-open-foot{ margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:18px;border-top:1px solid var(--sv-line); }
-.sv-panel.on .sv-arrow{ opacity:1;color:#8fc0ff; }
+.sv-panel.on .sv-arrow{ opacity:1;color:rgb(var(--sv-a,26,128,255)); }
 .sv-acc-hint{ margin-top:16px;text-align:center;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(158,152,130,.55); }
+.sv-hint-mobile{ display:none; }
 
 /* piezas compartidas */
 .sv-index{ font-size:10.5px;font-weight:700;letter-spacing:.1em;color:var(--sv-muted);font-variant-numeric:tabular-nums; }
 .sv-index i{ font-style:normal;color:rgba(158,152,130,.55); }
-.sv-glyph{ width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#6fb0ff;border:1px solid rgba(26,128,255,.32);background:linear-gradient(150deg,rgba(26,128,255,.14) 0%,rgba(26,128,255,.03) 100%);box-shadow:inset 0 1px 0 rgba(244,240,222,.06),0 0 22px rgba(26,128,255,.1);transition:transform .35s,color .35s,box-shadow .35s;flex-shrink:0; }
+.sv-glyph{ width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:rgb(var(--sv-a,26,128,255));border:1px solid rgba(var(--sv-a,26,128,255),.35);background:linear-gradient(150deg,rgba(var(--sv-a,26,128,255),.16) 0%,rgba(var(--sv-a,26,128,255),.03) 100%);box-shadow:inset 0 1px 0 rgba(244,240,222,.06),0 0 22px rgba(var(--sv-a,26,128,255),.12);transition:transform .35s,color .35s,box-shadow .35s,border-color .35s;flex-shrink:0; }
 .sv-glyph svg{ width:26px;height:26px; }
 .sv-glyph-sm{ width:42px;height:42px;border-radius:12px; }
 .sv-glyph-sm svg{ width:21px;height:21px; }
-.sv-panel.on .sv-glyph{ color:#9cc8ff; }
-.sv-cat{ font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:5px 11px;border-radius:99px;border:1px solid rgba(26,128,255,.35);color:#8fc0ff;background:rgba(26,128,255,.08); }
+.sv-panel:hover .sv-glyph{ transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(244,240,222,.08),0 0 30px rgba(var(--sv-a),.26); }
+.sv-panel.on .sv-glyph{ border-color:rgba(var(--sv-a),.6);box-shadow:inset 0 1px 0 rgba(244,240,222,.08),0 0 34px rgba(var(--sv-a),.3); }
+.sv-cat{ font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:5px 11px;border-radius:99px;border:1px solid rgba(var(--sv-a,26,128,255),.4);color:rgb(var(--sv-a,26,128,255));background:rgba(var(--sv-a,26,128,255),.1); }
 .sv-tags{ display:flex;gap:7px;flex-wrap:wrap; }
-.sv-tags i{ font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:99px;border:1px solid rgba(244,240,222,.12);color:var(--sv-cream-dim); }
-.sv-precio{ font-size:15px;font-weight:800;color:var(--sv-blue);letter-spacing:-.01em; }
+.sv-tags i{ font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:99px;border:1px solid rgba(var(--sv-a,244,240,222),.22);color:var(--sv-cream-dim); }
+.sv-precio{ font-size:15px;font-weight:800;color:rgb(var(--sv-a,26,128,255));letter-spacing:-.01em; }
 .sv-precio-tbd{ color:var(--sv-muted);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase; }
 .sv-arrow{ font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sv-cream-dim);opacity:.7;transition:opacity .25s,color .25s; }
 
@@ -997,14 +1008,25 @@ body {
 
 /* Acordeón → columna en pantallas sin hover fino o angostas:
    todos los paneles quedan desplegados, apilados */
+/* MÓVIL/TABLET — acordeón VERTICAL: filas compactas, tap para desplegar.
+   Mantiene la misma mecánica que el desktop, adaptada a scroll vertical. */
 @media (max-width:900px){
-  .sv-acc{ flex-direction:column;height:auto;gap:12px; }
-  .sv-acc .sv-panel{ flex:none !important;min-height:0; }
-  .sv-acc .sv-panel-closed{ display:none; }
-  .sv-acc .sv-panel-open{ position:static !important;opacity:1 !important;transform:none !important;pointer-events:auto;padding:26px 24px;transition:none; }
+  .sv-acc{ flex-direction:column;height:auto;gap:10px; }
+  .sv-acc .sv-panel{ flex:none !important;min-width:0;width:100%; }
+  /* fila cerrada: glifo + título horizontal + número, en línea */
+  .sv-acc .sv-panel-closed{ position:static;flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;padding:18px 20px;opacity:1;transition:none; }
+  .sv-acc .sv-panel.on .sv-panel-closed{ display:none; }
+  .sv-acc .sv-panel-vtitle{ flex:1;text-align:left;justify-content:flex-start;font-size:15px; }
+  .sv-acc .sv-panel-vnum{ margin-left:auto; }
+  /* contenido desplegado solo en el panel activo */
+  .sv-acc .sv-panel-open{ position:static;opacity:1;transform:none;pointer-events:auto;padding:24px 20px;transition:none;display:none; }
+  .sv-acc .sv-panel.on .sv-panel-open{ display:flex; }
   .sv-acc .sv-panel-open-body{ min-width:0;margin-top:20px; }
   .sv-acc .sv-panel-open-body b{ white-space:normal; }
-  .sv-acc-hint{ display:none; }
+  .sv-acc .sv-panel-ghost{ width:130px;height:130px;right:-18px;bottom:-20px; }
+  .sv-acc-hint{ margin-top:14px; }
+  .sv-hint-desktop{ display:none; }
+  .sv-hint-mobile{ display:block; }
 }
 @media (max-width:700px){
   .sv-m-list{ grid-template-columns:1fr; }
