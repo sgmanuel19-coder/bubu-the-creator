@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SITE } from "@/lib/constants";
-import { SOCIOS, MANIFIESTO, PILARES, TRAYECTORIA, type Socio } from "@/lib/nosotros";
+import { SOCIOS, MANIFIESTO, type Socio } from "@/lib/nosotros";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -30,43 +30,53 @@ function LineReveal({ children, delay = 0 }: { children: React.ReactNode; delay?
   );
 }
 
-/* ── Tarjeta de socio ─────────────────────────────────────── */
-function SocioCard({ s, index }: { s: Socio; index: number }) {
+/* ── Ficha de socio — expediente editorial ────────────────── */
+function SocioFicha({ s, index }: { s: Socio; index: number }) {
   return (
     <motion.article
-      className="ns-socio"
+      className="ns-ficha"
       style={{ ["--ns-a" as string]: s.accentRgb }}
-      initial={{ opacity: 0, y: 34 }}
+      initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-70px" }}
-      transition={{ duration: 0.75, delay: index * 0.12, ease: EASE }}
+      transition={{ duration: 0.7, delay: index * 0.1, ease: EASE }}
     >
-      {/* Retrato / placeholder */}
-      <div className="ns-foto">
+      {/* índice */}
+      <span className="ns-ficha-n">{s.n}<i>/0{SOCIOS.length}</i></span>
+
+      {/* retrato — recuadro técnico */}
+      <div className="ns-ficha-foto">
         {s.photo ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={s.photo} alt={s.nombre} loading="lazy" />
         ) : (
-          <div className="ns-foto-ph" aria-label={`Foto de ${s.nombre} pendiente`}>
-            <span className="ns-foto-ini">{s.iniciales}</span>
-            <span className="ns-foto-nota">Foto pendiente</span>
+          <div className="ns-ficha-ph" aria-label={`Foto de ${s.nombre} pendiente`}>
+            <span className="x" aria-hidden="true" />
+            <span className="ini">{s.iniciales}</span>
           </div>
         )}
-        <span className="ns-foto-shade" aria-hidden="true" />
-        <span className="ns-foto-n" aria-hidden="true">{s.n}</span>
+        <span className="ns-ficha-corner tl" aria-hidden="true" />
+        <span className="ns-ficha-corner br" aria-hidden="true" />
       </div>
 
-      {/* Datos */}
-      <div className="ns-socio-body">
+      {/* datos */}
+      <div className="ns-ficha-datos">
         <h3>{s.nombre}</h3>
-        <p className="ns-rol">{s.rol}</p>
-        <p className="ns-bio">{s.bio}</p>
-        <div className="ns-focos">
-          {s.focos.map((f) => <i key={f}>{f}</i>)}
+        <span className="ns-ficha-linea" aria-hidden="true" />
+        <p className="ns-ficha-roles">
+          {s.roles.map((r, i) => (
+            <span key={r}>
+              {r}
+              {i < s.roles.length - 1 && <i aria-hidden="true"> / </i>}
+            </span>
+          ))}
+        </p>
+        <p className="ns-ficha-bio">{s.bio}</p>
+        <div className="ns-ficha-marcas">
+          <span className="lbl">Marcas & proyectos</span>
+          <p>{s.marcas}</p>
         </div>
       </div>
-
-      <span className="ns-socio-bar" aria-hidden="true" />
     </motion.article>
   );
 }
@@ -74,33 +84,37 @@ function SocioCard({ s, index }: { s: Socio; index: number }) {
 export default function Nosotros() {
   return (
     <div className="ns">
-      {/* ── HERO ── */}
+      {/* ── HERO — minimal, tipografía protagonista ── */}
       <header className="ns-hero">
-        <div className="ns-glow" />
-        <div className="ns-grid-tex" aria-hidden="true" />
+        <span className="ns-hero-cross ns-cross-1" aria-hidden="true">+</span>
+        <span className="ns-hero-cross ns-cross-2" aria-hidden="true">+</span>
         <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
-          <motion.span
-            className="ns-eyebrow"
+          <motion.div
+            className="ns-meta-row"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            Sobre nosotros — Resuelto Agency
-          </motion.span>
+            <span>Resuelto Agency</span>
+            <span className="dash" aria-hidden="true" />
+            <span>Sobre nosotros</span>
+            <span className="dash" aria-hidden="true" />
+            <span>Lima, Perú</span>
+          </motion.div>
 
           <h1 className="ns-h1">
-            <LineReveal delay={0.2}>Tres socios.</LineReveal>
-            <LineReveal delay={0.32}><span className="ns-grad">Un solo estándar.</span></LineReveal>
+            <LineReveal delay={0.2}>¿Tienes una idea?</LineReveal>
+            <LineReveal delay={0.34}><em>Nosotros lo resolvemos.</em></LineReveal>
           </h1>
 
           <motion.p
             className="ns-sub"
-            initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.85, delay: 0.6, ease: EASE }}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.65, ease: EASE }}
           >
-            Estrategia, producción con IA y tecnología. El ciclo completo de una marca,
-            cubierto por gente que se formó donde el error se paga caro.
+            Tres socios fundadores. Dirección creativa, arte IA, estrategia, eventos y sonido —
+            el ciclo completo de una marca, bajo un mismo techo.
           </motion.p>
         </div>
       </header>
@@ -109,7 +123,7 @@ export default function Nosotros() {
       <section className="container-base ns-section">
         <div className="ns-manifiesto">
           <div className="ns-manifiesto-side">
-            <span className="ns-eyebrow">Por qué existimos</span>
+            <span className="ns-label">Por qué existimos</span>
           </div>
           <div className="ns-manifiesto-text">
             {MANIFIESTO.map((p, i) => (
@@ -128,111 +142,39 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* ── LOS SOCIOS ── */}
-      <section className="container-base ns-section ns-equipo">
-        <div className="ns-section-head">
-          <div>
-            <span className="ns-eyebrow">El equipo</span>
-            <h2>
-              <LineReveal>Quiénes están</LineReveal>
-              <LineReveal delay={0.1}>detrás de cada pieza.</LineReveal>
-            </h2>
-          </div>
-          <p>
-            Cada socio dirige un pilar del negocio. No tercerizamos el criterio:
-            el que te atiende es el que ejecuta.
-          </p>
-        </div>
-
-        <div className="ns-socios">
-          {SOCIOS.map((s, i) => <SocioCard key={s.id} s={s} index={i} />)}
-        </div>
-      </section>
-
-      {/* ── PILARES ── */}
-      <section className="ns-pilares">
-        <div className="container-base">
-          <span className="ns-eyebrow">Cómo nos dividimos el trabajo</span>
-          <div className="ns-pilares-grid">
-            {PILARES.map((p, i) => (
-              <motion.div
-                className="ns-pilar"
-                key={p.n}
-                initial={{ opacity: 0, y: 26 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.65, delay: i * 0.1, ease: EASE }}
-              >
-                <span className="n">{p.n}</span>
-                <h3>{p.title}</h3>
-                <p>{p.text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── TRAYECTORIA ── */}
-      <section className="container-base ns-section">
-        <div className="ns-section-head">
-          <div>
-            <span className="ns-eyebrow">De dónde viene el criterio</span>
-            <h2>
-              <LineReveal>No lo aprendimos</LineReveal>
-              <LineReveal delay={0.1}><span className="ns-grad">en un curso.</span></LineReveal>
-            </h2>
-          </div>
-        </div>
-
-        <ol className="ns-tl">
-          {TRAYECTORIA.map((t, i) => (
-            <motion.li
-              key={t.company}
-              initial={{ opacity: 0, x: -18 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.55, delay: i * 0.07, ease: EASE }}
-            >
-              <span className="ns-tl-year">{t.year}</span>
-              <span className="ns-tl-dot" aria-hidden="true" />
-              <span className="ns-tl-body">
-                <b>{t.company}</b>
-                <span>{t.text}</span>
-              </span>
-            </motion.li>
-          ))}
-        </ol>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="ns-cta">
-        <div className="ns-glow-cta" />
-        <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
+      {/* ── LOS SOCIOS — expediente ── */}
+      <section className="container-base ns-section ns-equipo" id="equipo">
+        <div className="ns-equipo-head">
+          <span className="ns-label">Los socios fundadores</span>
           <h2>
-            <LineReveal>Trabajemos</LineReveal>
-            <LineReveal delay={0.12}><span className="ns-grad">juntos.</span></LineReveal>
+            <LineReveal>El equipo detrás</LineReveal>
+            <LineReveal delay={0.1}>de cada entrega.</LineReveal>
           </h2>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
-          >
-            Cuéntanos qué necesita tu marca. Respondemos en el día con una propuesta cerrada.
-          </motion.p>
-          <motion.a
-            className="ns-btn"
-            href={waLink("¡Hola! Quiero conversar con Resuelto sobre un proyecto.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.45, ease: EASE }}
-          >
-            Hablemos por WhatsApp <i>→</i>
-          </motion.a>
         </div>
+
+        <div className="ns-fichas">
+          {SOCIOS.map((s, i) => <SocioFicha key={s.id} s={s} index={i} />)}
+        </div>
+      </section>
+
+      {/* ── CTA — minimal ── */}
+      <section className="container-base ns-cta">
+        <span className="ns-label">Siguiente paso</span>
+        <h2>
+          <LineReveal>Cuéntanos tu idea.</LineReveal>
+        </h2>
+        <motion.a
+          className="ns-cta-link"
+          href={waLink("¡Hola! Tengo una idea y quiero conversarla con Resuelto.")}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
+        >
+          Hablemos por WhatsApp <i aria-hidden="true">→</i>
+        </motion.a>
       </section>
     </div>
   );
