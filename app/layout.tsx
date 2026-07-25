@@ -3,6 +3,7 @@ import { Poppins, Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/constants";
 import LandingChrome from "@/components/LandingChrome";
+import BeamsBackground from "@/components/ui/beams-background";
 import { Analytics } from "@vercel/analytics/react";
 
 const poppins = Poppins({
@@ -173,6 +174,7 @@ export default function RootLayout({
         >
           Saltar al contenido
         </a>
+        <BeamsBackground intensity="medium" />
         <LandingChrome />
         {children}
         <Analytics />

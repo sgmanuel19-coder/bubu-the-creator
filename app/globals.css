@@ -829,7 +829,7 @@ body {
 .pf-cases-title{ font-size:clamp(2rem,5.5vw,3.6rem);font-weight:800;letter-spacing:-.025em;margin-top:20px;color:var(--pf-cream);line-height:1.02; }
 
 /* ANTES DE LA IA */
-.pf-archive{ margin-top:110px;padding:100px 0;position:relative;background:linear-gradient(180deg,var(--bg) 0%,#12100A 18%,#12100A 82%,var(--bg) 100%); }
+.pf-archive{ margin-top:110px;padding:100px 0;position:relative;background:linear-gradient(180deg,rgba(13,12,8,.35) 0%,rgba(18,16,10,.62) 18%,rgba(18,16,10,.62) 82%,rgba(13,12,8,.35) 100%); }
 .pf-archive::before{ content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(244,240,222,.014) 0 1px,transparent 1px 5px); }
 .pf-eyebrow-cream{ color:var(--pf-cream-dim); }
 .pf-eyebrow-cream::before{ background:var(--pf-cream-dim); }
@@ -1124,7 +1124,7 @@ body {
 .hm-prin p{ font-size:13px;line-height:1.62;color:var(--hm-muted);font-weight:300; }
 
 /* VIEJA ERA vs NUEVA ERA */
-.hm-eras{ margin-top:120px;padding:100px 0;position:relative;background:linear-gradient(180deg,var(--bg) 0%,#12100A 18%,#12100A 82%,var(--bg) 100%); }
+.hm-eras{ margin-top:120px;padding:100px 0;position:relative;background:linear-gradient(180deg,rgba(13,12,8,.35) 0%,rgba(18,16,10,.62) 18%,rgba(18,16,10,.62) 82%,rgba(13,12,8,.35) 100%); }
 .hm-eras::before{ content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(244,240,222,.014) 0 1px,transparent 1px 5px); }
 .hm-eras .container-base{ position:relative;z-index:1; }
 .hm-eras-grid{ display:grid;grid-template-columns:1fr auto 1fr;gap:26px;margin-top:40px;align-items:stretch; }
@@ -1277,6 +1277,29 @@ body {
   .ns-ficha{ grid-template-columns:1fr;gap:20px; }
   .ns-ficha-foto{ max-width:200px; }
   .ns-ficha-n{ padding-top:0; }
+}
+
+/* ============================================================
+   FONDO DE HACES ANIMADOS — capa global detrás de todo el sitio
+   Se monta una sola vez en el layout. pointer-events:none para no
+   interferir con el cursor personalizado ni con los clics.
+   ============================================================ */
+.beams-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  /* Base cálida de marca + halo estático (visible con reduced-motion
+     y mientras el canvas pinta el primer frame) */
+  background:
+    radial-gradient(120% 80% at 15% 0%, rgba(26,128,255,.10) 0%, transparent 55%),
+    radial-gradient(100% 70% at 85% 100%, rgba(26,128,255,.07) 0%, transparent 60%),
+    var(--bg);
+}
+.beams-bg-canvas{ position:absolute;inset:0;filter:blur(12px);opacity:.9; }
+/* Velo que asienta los haces sobre la base cálida y protege la lectura */
+.beams-bg-veil{ position:absolute;inset:0;background:rgba(13,12,8,.5); }
+/* Todo el contenido va por encima de la capa de fondo */
+body > main, body > div:not(.beams-bg){ position:relative;z-index:1; }
+@media (prefers-reduced-motion:reduce){
+  .beams-bg-canvas{ display:none; }
 }
 
 /* ============================================================
