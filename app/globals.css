@@ -1279,3 +1279,77 @@ body {
   .ns-ficha-n{ padding-top:0; }
 }
 
+/* ============================================================
+   BOTÓN DE DEGRADADO ANIMADO — CTA unificado de todo el sitio
+   Técnica @property (degradado radial + borde animados) recoloreada
+   a la paleta Resuelto (azul #1A80FF + crema). Aplica a las 4 clases
+   de CTA primario: .hm-btn .sv-btn .pf-btn .btn-glow
+   ============================================================ */
+@property --gb-pos-x   { syntax: '<percentage>'; initial-value: 50%;  inherits: false; }
+@property --gb-pos-y   { syntax: '<percentage>'; initial-value: 118%; inherits: false; }
+@property --gb-spread-x{ syntax: '<percentage>'; initial-value: 150%; inherits: false; }
+@property --gb-spread-y{ syntax: '<percentage>'; initial-value: 180%; inherits: false; }
+@property --gb-color-1 { syntax: '<color>'; initial-value: #3B9BFF; inherits: false; }
+@property --gb-color-2 { syntax: '<color>'; initial-value: #1A80FF; inherits: false; }
+@property --gb-color-3 { syntax: '<color>'; initial-value: #135FC4; inherits: false; }
+@property --gb-color-4 { syntax: '<color>'; initial-value: #0C3E86; inherits: false; }
+@property --gb-color-5 { syntax: '<color>'; initial-value: #07172B; inherits: false; }
+@property --gb-border-angle { syntax: '<angle>'; initial-value: 20deg; inherits: true; }
+@property --gb-border-1 { syntax: '<color>'; initial-value: hsla(210,90%,85%,.22); inherits: true; }
+@property --gb-border-2 { syntax: '<color>'; initial-value: hsla(210,85%,55%,.7);  inherits: true; }
+@property --gb-stop-1  { syntax: '<percentage>'; initial-value: 28%;  inherits: false; }
+@property --gb-stop-2  { syntax: '<percentage>'; initial-value: 54%;  inherits: false; }
+@property --gb-stop-3  { syntax: '<percentage>'; initial-value: 72%;  inherits: false; }
+@property --gb-stop-4  { syntax: '<percentage>'; initial-value: 87%;  inherits: false; }
+@property --gb-stop-5  { syntax: '<percentage>'; initial-value: 100%; inherits: false; }
+
+.btn-glow, .hm-btn, .sv-btn, .pf-btn{
+  position:relative;
+  border:none;
+  color:#fff;
+  background:radial-gradient(
+    var(--gb-spread-x) var(--gb-spread-y) at var(--gb-pos-x) var(--gb-pos-y),
+    var(--gb-color-1) var(--gb-stop-1),
+    var(--gb-color-2) var(--gb-stop-2),
+    var(--gb-color-3) var(--gb-stop-3),
+    var(--gb-color-4) var(--gb-stop-4),
+    var(--gb-color-5) var(--gb-stop-5));
+  box-shadow:0 10px 30px rgba(4,12,24,.45), 0 0 0 rgba(26,128,255,0);
+  transition:--gb-pos-x .5s,--gb-pos-y .5s,--gb-spread-x .5s,--gb-spread-y .5s,
+    --gb-color-1 .5s,--gb-color-2 .5s,--gb-color-3 .5s,--gb-color-4 .5s,--gb-color-5 .5s,
+    --gb-border-angle .5s,--gb-border-1 .5s,--gb-border-2 .5s,
+    --gb-stop-1 .5s,--gb-stop-2 .5s,--gb-stop-3 .5s,--gb-stop-4 .5s,--gb-stop-5 .5s,
+    box-shadow .4s ease, transform .3s ease;
+}
+/* borde animado (reemplaza el brillo ::before que tenían hm-btn/btn-glow) */
+.btn-glow::before, .hm-btn::before, .sv-btn::before, .pf-btn::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(var(--gb-border-angle),var(--gb-border-1),var(--gb-border-2));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite:exclude;
+  pointer-events:none;transform:none;opacity:1;
+}
+/* hover: el degradado "florece" (posición y colores más brillantes) */
+.btn-glow:hover, .hm-btn:hover, .sv-btn:hover, .pf-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 40px rgba(4,12,24,.5), 0 0 46px rgba(26,128,255,.4);
+  background:radial-gradient(
+    var(--gb-spread-x) var(--gb-spread-y) at var(--gb-pos-x) var(--gb-pos-y),
+    var(--gb-color-1) var(--gb-stop-1),
+    var(--gb-color-2) var(--gb-stop-2),
+    var(--gb-color-3) var(--gb-stop-3),
+    var(--gb-color-4) var(--gb-stop-4),
+    var(--gb-color-5) var(--gb-stop-5));
+  --gb-pos-x:0%; --gb-pos-y:91%; --gb-spread-x:122%; --gb-spread-y:104%;
+  --gb-color-1:#7CC0FF; --gb-color-2:#3B9BFF; --gb-color-3:#1A80FF; --gb-color-4:#0C3E86; --gb-color-5:#040E1C;
+  --gb-border-angle:190deg; --gb-border-1:hsla(200,95%,94%,.16); --gb-border-2:hsla(205,95%,82%,.72);
+  --gb-stop-1:0%; --gb-stop-2:9%; --gb-stop-3:22%; --gb-stop-4:71%; --gb-stop-5:86%;
+}
+/* neutraliza el barrido de brillo que hm-btn/btn-glow movían en ::before */
+.btn-glow:hover::before, .hm-btn:hover::before{ transform:none; }
+@media (prefers-reduced-motion:reduce){
+  .btn-glow, .hm-btn, .sv-btn, .pf-btn{ transition:box-shadow .3s, transform .3s; }
+}
+
