@@ -1297,7 +1297,11 @@ body {
 /* Velo que asienta los haces sobre la base cálida y protege la lectura */
 .beams-bg-veil{ position:absolute;inset:0;background:rgba(13,12,8,.5); }
 /* Todo el contenido va por encima de la capa de fondo */
-body > main, body > div:not(.beams-bg){ position:relative;z-index:1; }
+/* Solo <main> (el contenido real de cada página). NUNCA un selector
+   amplio tipo "body > div" — ahí vive el cursor custom (CursorTrail,
+   fixed + z-index altísimo) y cualquier regla que lo toque lo saca de
+   su sitio: eso fue justo el bug que hizo "desaparecer" el mouse. */
+body > main{ position:relative;z-index:1; }
 @media (prefers-reduced-motion:reduce){
   .beams-bg-canvas{ display:none; }
 }
