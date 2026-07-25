@@ -1302,6 +1302,12 @@ body {
    fixed + z-index altísimo) y cualquier regla que lo toque lo saca de
    su sitio: eso fue justo el bug que hizo "desaparecer" el mouse. */
 body > main{ position:relative;z-index:1; }
+/* El glow es un recurso de marketing (Home, Portafolio, Servicios,
+   Sobre nosotros). En las apps funcionales — la Academy (.taller-root)
+   y el panel de clientes (.ics-root), donde hay video de curso, tablas
+   y formularios — se apaga: distraería en vez de sumar. */
+body:has(.taller-root) .beams-bg,
+body:has(.ics-root) .beams-bg{ display:none; }
 @media (prefers-reduced-motion:reduce){
   .beams-bg-canvas{ display:none; }
 }
