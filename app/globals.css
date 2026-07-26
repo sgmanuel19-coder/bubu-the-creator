@@ -115,13 +115,6 @@ body {
   background-clip: text;
 }
 
-.text-gradient-cyber {
-  background: linear-gradient(90deg, #1A80FF 0%, #EEEBD4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 /* ─────────────────────────────────────────────
    BUTTONS
 ───────────────────────────────────────────── */
@@ -216,16 +209,6 @@ body {
     rgba(77,159,255,0.25) 100%);
   transition: background 0.4s ease, filter 0.4s ease;
 }
-.holo-border > * { border-radius: calc(1.25rem - 1px); }
-
-.holo-border-hover:hover {
-  background: linear-gradient(135deg,
-    rgba(26,128,255,0.55) 0%,
-    rgba(10,77,170,0.30) 50%,
-    rgba(77,159,255,0.55) 100%);
-  filter: drop-shadow(0 0 16px rgba(26,128,255,0.35))
-          drop-shadow(0 0 24px rgba(10,77,170,0.25));
-}
 
 /* ─────────────────────────────────────────────
    CARD STYLES
@@ -233,41 +216,6 @@ body {
 .card-shimmer {
   position: relative;
   overflow: hidden;
-}
-.card-shimmer::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -75%;
-  width: 50%;
-  height: 200%;
-  background: linear-gradient(105deg,
-    transparent 0%,
-    rgba(26,128,255,0.05) 40%,
-    rgba(26,128,255,0.09) 50%,
-    rgba(26,128,255,0.05) 60%,
-    transparent 100%);
-  transform: skewX(-10deg);
-  transition: left 0s;
-  pointer-events: none;
-}
-.card-shimmer:hover::after {
-  left: 125%;
-  transition: left 0.65s ease;
-}
-
-.card-interactive {
-  border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(255,255,255,0.02);
-  border-radius: 1.25rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-}
-.card-interactive:hover {
-  border-color: rgba(26,128,255,0.28);
-  background: rgba(26,128,255,0.04);
-  box-shadow:
-    0 0 20px rgba(26,128,255,0.10),
-    0 0 1px rgba(26,128,255,0.3) inset;
 }
 
 /* Purple variant for alternating cards */
@@ -290,22 +238,6 @@ body {
   filter: blur(90px);
   pointer-events: none;
   animation: aurora 9s ease-in-out infinite alternate;
-}
-.aurora-bg::before {
-  width: 600px; height: 500px;
-  top: -100px; right: -60px;
-  background: radial-gradient(ellipse, rgba(10,77,170,0.22) 0%, transparent 70%);
-}
-.aurora-bg::after {
-  width: 500px; height: 420px;
-  bottom: -100px; left: -60px;
-  background: radial-gradient(ellipse, rgba(26,128,255,0.16) 0%, transparent 70%);
-  animation-delay: 4s;
-}
-@keyframes aurora {
-  0%   { transform: translate(0,0)      scale(1);    }
-  50%  { transform: translate(30px,-20px) scale(1.1); }
-  100% { transform: translate(-15px,12px) scale(0.95); }
 }
 
 /* ─────────────────────────────────────────────
@@ -350,26 +282,6 @@ body {
   height: 12px;
   border-style: solid;
   transition: border-color 0.3s ease, width 0.3s ease, height 0.3s ease;
-}
-.hud-corners::before {
-  top: 8px; left: 8px;
-  border-width: 1.5px 0 0 1.5px;
-  border-color: rgba(26,128,255,0.35);
-  border-radius: 2px 0 0 0;
-}
-.hud-corners::after {
-  bottom: 8px; right: 8px;
-  border-width: 0 1.5px 1.5px 0;
-  border-color: rgba(77,159,255,0.35);
-  border-radius: 0 0 2px 0;
-}
-.hud-corners:hover::before {
-  border-color: rgba(26,128,255,0.85);
-  width: 18px; height: 18px;
-}
-.hud-corners:hover::after {
-  border-color: rgba(77,159,255,0.85);
-  width: 18px; height: 18px;
 }
 
 /* ─────────────────────────────────────────────
@@ -424,7 +336,6 @@ body {
 @layer utilities {
   .section-padding  { @apply py-20 lg:py-28; }
   .container-base   { @apply max-w-7xl mx-auto px-6 lg:px-8; }
-  .card-base        { @apply card-interactive card-shimmer; }
 }
 
 /* ─────────────────────────────────────────────
@@ -725,10 +636,6 @@ body {
   transition: border-color 0.4s ease;
   pointer-events: none;
 }
-.brand-corners::before { top: 16px; left: 16px; border-width: 1px 0 0 1px; border-radius: 2px 0 0 0; }
-.brand-corners::after  { bottom: 16px; right: 16px; border-width: 0 1px 1px 0; border-radius: 0 0 2px 0; }
-.brand-corners:hover::before,
-.brand-corners:hover::after { border-color: rgba(26,128,255,0.7); }
 
 /* ============================================================
    PORTAFOLIO (/casos) — estilos scoped bajo .pf
@@ -823,7 +730,6 @@ body {
 
 /* DISEÑO GRÁFICO IA — tarjetas cuadradas */
 .pf-dcard{ aspect-ratio:1/1 !important; }
-
 
 /* CASOS DE ÉXITO — título del carrusel de imágenes */
 .pf-cases-title{ font-size:clamp(2rem,5.5vw,3.6rem);font-weight:800;letter-spacing:-.025em;margin-top:20px;color:var(--pf-cream);line-height:1.02; }

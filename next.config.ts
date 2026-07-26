@@ -57,10 +57,7 @@ const nextConfig: NextConfig = {
     optimizePackageImports: [
       'framer-motion',
       'lucide-react',
-      'three',
-      '@react-three/fiber',
-      '@react-three/drei',
-      'lodash',
+      'date-fns',
     ],
   },
   async redirects() {
