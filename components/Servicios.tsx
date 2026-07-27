@@ -180,7 +180,7 @@ function ServicioPanel({
           <span className="sv-glyph"><ServicioIcon id={s.id} /></span>
           <span>
             <span className="sv-cat">{s.categoria}</span>
-            <span className="sv-index">{s.n}<i>/08</i></span>
+            <span className="sv-index">{s.n}<i>/{String(SERVICIOS.length).padStart(2, "0")}</i></span>
           </span>
         </span>
         <span className="sv-panel-open-body">
@@ -230,7 +230,18 @@ function ServicioModal({ s, onClose }: { s: Servicio; onClose: () => void }) {
             <span className="sv-n">{s.n}</span>
           </div>
           <h2>{s.title}</h2>
+          <p className="sv-m-problema">{s.problema}</p>
           <p className="sv-m-desc">{s.desc}</p>
+        </div>
+
+        {/* Lo que te llevas — va ANTES del precio: primero el valor, después la cifra */}
+        <div className="sv-m-sec">
+          <span className="sv-m-label">Lo que te llevas</span>
+          <ul className="sv-m-list sv-m-list-res">
+            {s.resultado.map((item) => (
+              <li key={item}><i>→</i>{item}</li>
+            ))}
+          </ul>
         </div>
 
         {/* Precio */}
@@ -263,6 +274,14 @@ function ServicioModal({ s, onClose }: { s: Servicio; onClose: () => void }) {
                 </div>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Para quién es */}
+        {s.paraQuien && (
+          <div className="sv-m-sec">
+            <span className="sv-m-label">Para quién es</span>
+            <p className="sv-m-paraquien">{s.paraQuien}</p>
           </div>
         )}
 

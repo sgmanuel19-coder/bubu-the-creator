@@ -880,6 +880,9 @@ body {
 .sv-m-meta{ display:flex;align-items:center;justify-content:space-between;margin-bottom:16px; }
 .sv-m-meta .sv-n{ font-size:2rem;font-weight:800;line-height:1;color:transparent;-webkit-text-stroke:1.2px rgba(26,128,255,.45);letter-spacing:-.02em; }
 .sv-m-head h2{ font-size:clamp(1.8rem,4.5vw,2.6rem);font-weight:800;letter-spacing:-.025em;color:var(--sv-cream);line-height:1.02; }
+/* Tensión de apertura: el problema que el servicio resuelve. Va antes del
+   qué-hacemos para que el detalle abra en el mundo del cliente, no en el nuestro. */
+.sv-m-problema{ margin-top:18px;padding-left:16px;border-left:2px solid rgba(26,128,255,.5);font-size:14.5px;line-height:1.72;color:var(--sv-cream);font-weight:400; }
 .sv-m-desc{ margin-top:14px;font-size:14.5px;line-height:1.7;color:var(--sv-cream-dim);font-weight:300; }
 .sv-m-precio{ border-radius:14px;border:1px solid rgba(26,128,255,.35);background:rgba(26,128,255,.08);padding:18px 22px; }
 .sv-m-precio b{ display:block;font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;color:var(--sv-blue);letter-spacing:-.02em; }
@@ -890,6 +893,12 @@ body {
 .sv-m-list{ list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px; }
 .sv-m-list li{ font-size:13px;line-height:1.55;color:var(--sv-cream-dim);font-weight:300;display:flex;gap:9px;align-items:flex-start; }
 .sv-m-list li i{ font-style:normal;color:var(--sv-blue);font-size:11px;margin-top:2px;flex-shrink:0; }
+/* "Lo que te llevas": una sola columna y texto en crema pleno — es el bloque
+   de valor, tiene que pesar más que la lista de entregables. */
+.sv-m-list-res{ grid-template-columns:1fr;gap:11px; }
+.sv-m-list-res li{ font-size:14px;color:var(--sv-cream);font-weight:400; }
+.sv-m-list-res li i{ font-size:13px;margin-top:1px; }
+.sv-m-paraquien{ font-size:13.5px;line-height:1.65;color:var(--sv-cream-dim);font-weight:300;border:1px solid var(--sv-line);border-radius:12px;padding:16px 18px;background:rgba(244,240,222,.02); }
 .sv-m-pasos{ display:grid;grid-template-columns:repeat(3,1fr);gap:12px; }
 .sv-m-paso{ border:1px solid var(--sv-line);border-radius:12px;padding:16px;background:rgba(244,240,222,.02); }
 .sv-m-paso .num{ display:block;font-size:11px;font-weight:700;color:var(--sv-blue);letter-spacing:.1em;margin-bottom:8px; }
