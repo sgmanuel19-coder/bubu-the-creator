@@ -45,6 +45,7 @@ export const CHAPTERS: Chapter[] = [
       { url: "/videos/comercial-04.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
       { url: "/videos/comercial-05.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
       { url: "/videos/comercial-06.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
+      { url: "/videos/comercial-07.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
     ],
   },
   {
