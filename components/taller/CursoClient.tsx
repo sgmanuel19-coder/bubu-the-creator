@@ -11,6 +11,7 @@ import {
 import { trackTaller } from "@/lib/taller/analytics";
 import VentaCTA from "@/components/taller/VentaCTA";
 import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
+import ReproductorYouTube from "@/components/taller/ReproductorYouTube";
 
 function ProgressRing({ pct }: { pct: number }) {
   const r = 16;
@@ -81,15 +82,22 @@ export default function CursoClient({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [curso.slug, desbloqueado]);
 
+  // Abrir ya NO marca como vista: eso convertía el XP en un contador de
+  // clics. La marca la dispara el reproductor al 80% de reproducción.
+  function marcarCompletada(leccion: Leccion) {
+    if (vistas[leccion.youtubeId]) return;
+    setVista(leccion.youtubeId, true);
+    setVistas((v) => ({ ...v, [leccion.youtubeId]: true }));
+    trackTaller("taller_leccion_completada", { curso: curso.slug, leccion: leccion.titulo });
+  }
+
   function abrirLeccion(leccion: Leccion) {
     setActual(leccion);
     setUltimaLeccion(leccion.youtubeId);
-    if (!vistas[leccion.youtubeId]) {
-      setVista(leccion.youtubeId, true);
-      setVistas((v) => ({ ...v, [leccion.youtubeId]: true }));
-    }
     trackTaller("taller_leccion_vista", { curso: curso.slug, leccion: leccion.titulo });
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // En móvil la lista va debajo del video, así que hay que subir. En
+    // desktop la lista vive al costado y el reproductor ya está a la vista.
+    if (window.innerWidth < 1024) window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function toggleVista(leccion: Leccion) {
@@ -114,7 +122,7 @@ export default function CursoClient({
       : 0;
 
   return (
-    <main className="mx-auto max-w-5xl px-5 py-10">
+    <main className="mx-auto max-w-7xl px-5 py-10">
       <a
         href="/taller/curso"
         className="text-sm transition-opacity hover:opacity-80"
@@ -155,27 +163,31 @@ export default function CursoClient({
         </div>
       )}
 
+      {/* Reproductor a la izquierda y lista de módulos al costado (estilo
+          Skool). En móvil se apila: primero el video, después la lista. */}
+      <div className="mt-6 lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-8">
       {/* Reproductor: sólo con sesión se carga el video real */}
       {desbloqueado && actual ? (
-        <div className="mt-6">
-          <div
-            className="relative w-full overflow-hidden rounded-2xl border"
-            style={{ aspectRatio: "16 / 9", borderColor: "rgba(244,240,222,0.12)" }}
-          >
-            <iframe
-              key={actual.youtubeId}
-              src={`https://www.youtube-nocookie.com/embed/${actual.youtubeId}?rel=0&modestbranding=1`}
-              title={actual.titulo}
-              allow="encrypted-media; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 h-full w-full"
-            />
+        <div>
+          <ReproductorYouTube
+            youtubeId={actual.youtubeId}
+            titulo={actual.titulo}
+            onCompletado={() => marcarCompletada(actual)}
+          />
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-sm font-medium">▶ {actual.titulo}</p>
+            {cargado && (
+              <span className="text-xs" style={{ color: "var(--muted)" }}>
+                {vistas[actual.youtubeId]
+                  ? "✓ Completada"
+                  : "Se marca sola al llegar al 80%"}
+              </span>
+            )}
           </div>
-          <p className="mt-3 text-sm font-medium">▶ {actual.titulo}</p>
         </div>
       ) : (
         <div
-          className="mt-6 flex flex-col items-center justify-center gap-2 rounded-2xl border px-6 py-16 text-center"
+          className="flex flex-col items-center justify-center gap-2 rounded-2xl border px-6 py-16 text-center"
           style={{
             aspectRatio: "16 / 9",
             borderColor: "rgba(244,240,222,0.12)",
@@ -196,8 +208,8 @@ export default function CursoClient({
         </div>
       )}
 
-      {/* Módulos */}
-      <div className="mt-10 space-y-4">
+      {/* Módulos: columna lateral con scroll propio en desktop */}
+      <aside className="mt-8 space-y-3 lg:sticky lg:top-6 lg:mt-0 lg:max-h-[calc(100vh-3rem)] lg:space-y-2 lg:overflow-y-auto lg:pr-1">
         {curso.modulos.map((modulo, i) => {
           const conVideo = modulo.lecciones.filter((l) => l.youtubeId);
           const vistasModulo = conVideo.filter((l) => vistas[l.youtubeId]).length;
@@ -211,7 +223,7 @@ export default function CursoClient({
                 opacity: modulo.disponible ? 1 : 0.55,
               }}
             >
-              <div className="flex items-center justify-between gap-4 px-5 py-4">
+              <div className="flex items-center justify-between gap-3 px-4 py-3.5">
                 <div>
                   <p
                     className="text-[11px] uppercase tracking-[0.2em]"
@@ -225,7 +237,8 @@ export default function CursoClient({
                     )}
                   </p>
                   <h2 className="mt-1 font-semibold">{modulo.titulo}</h2>
-                  <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
+                  {/* En la columna lateral la descripción no cabe: solo móvil. */}
+                  <p className="mt-1 text-sm lg:hidden" style={{ color: "var(--muted)" }}>
                     {modulo.descripcion}
                   </p>
                 </div>
@@ -289,7 +302,7 @@ export default function CursoClient({
                           type="button"
                           disabled={!abrible}
                           onClick={() => abrirLeccion(leccion)}
-                          className="flex w-full items-center justify-between gap-4 px-4 py-3 text-left text-sm transition-colors disabled:cursor-not-allowed"
+                          className="flex w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left text-[13px] leading-snug transition-colors disabled:cursor-not-allowed"
                           style={{ color: abrible ? "var(--cream)" : "var(--muted)" }}
                         >
                           <span>
@@ -312,6 +325,7 @@ export default function CursoClient({
             </section>
           );
         })}
+      </aside>
       </div>
 
       {/* Recursos del curso (abren su página de detalle en la bóveda) */}

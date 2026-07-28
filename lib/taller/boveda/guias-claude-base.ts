@@ -109,6 +109,27 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "Las 5 skills con las que empezaría hoy",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Skill", "Para qué la instalas primero", "Qué NO esperar de ella"],
+          filas: [
+            ["Documentos (Word/PDF)", "Propuestas comerciales y cotizaciones con formato profesional en minutos", "Que redacte el argumento de venta por ti: el criterio sigue siendo tuyo"],
+            ["Hojas de cálculo (Excel)", "La grilla de contenido mensual y el control de facturación", "Que decida qué fórmula usar sin que le digas qué necesitas calcular"],
+            ["Presentaciones (PowerPoint)", "Decks de propuesta para clientes, con tu identidad de marca", "Diseño de nivel agencia sin que definas tú la paleta y la estructura"],
+            ["Diseño web", "Landings y componentes cuando necesitas algo rápido y funcional", "Que reemplace una decisión de UX que requiere pensar en el usuario real"],
+            ["Auditoría (vercel-optimize u otra)", "Revisar un proyecto ya desplegado antes de tocarlo", "Que arregle lo que encuentra: te dice qué está mal, tú decides qué corregir"],
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Instálalas en ese orden, una por semana, y úsalas en trabajo real de cliente antes de sumar la siguiente. Cinco skills bien usadas valen más que veinte instaladas sin tocar.",
+        },
+      ],
+    },
   ],
 
   // ── Ahorro de tokens en Claude Code ────────────────────────────
@@ -186,6 +207,20 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
         {
           tipo: "cita",
           texto: "No necesitas más tokens. Necesitas dejar de quemarlos.",
+        },
+      ],
+    },
+    {
+      titulo: "Los 3 errores que más gastan sin que lo notes",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Error", "Por qué gasta de más", "Corrección"],
+          filas: [
+            ["Pegar un documento entero cuando solo necesitas una parte", "Claude carga el documento completo aunque uses cinco líneas", "Copia solo el fragmento relevante, o dile «lee solo la sección X del archivo»"],
+            ["Pedir «revisa todo el proyecto» de rutina", "Explora archivo por archivo sin saber qué buscas", "Dile específicamente qué archivo y qué está buscando"],
+            ["No cerrar sesiones que ya terminaron", "El historial completo se relee en cada mensaje nuevo, aunque no lo uses", "/clear apenas termines una tarea, no al final del día"],
+          ],
         },
       ],
     },
@@ -272,6 +307,24 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
           tipo: "nota",
           texto:
             "Revisa tu documento una vez al mes. Una memoria con precios viejos o una oferta que ya no existe es peor que ninguna: Claude va a responder con seguridad… cosas que ya no son ciertas.",
+        },
+      ],
+    },
+    {
+      titulo: "Memoria de marca vs. memoria de proyecto",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Si trabajas para varios clientes, no mezcles la memoria. Cada marca tiene su propio documento y su propia carpeta o Proyecto. Un solo documento gigante con todos tus clientes adentro produce mezclas: el tono de uno se cuela en el guion de otro, y nadie lo nota hasta que el cliente sí.",
+        },
+        {
+          tipo: "lista",
+          items: [
+            "Una carpeta por cliente, con su CLAUDE.md o su Proyecto de Claude adentro.",
+            "El documento de memoria vive junto a las plantillas del sistema (hoja de personaje, ADN comunicacional) — no separado.",
+            "Si trabajas la misma marca en Claude Code y en la app, que ambos lean el mismo documento base, aunque el formato del archivo cambie.",
+          ],
         },
       ],
     },
@@ -376,6 +429,20 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "Los 3 comandos con los que se equivocan más",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Comando", "Confusión típica", "Aclaración"],
+          filas: [
+            ["/clear vs /compact", "Creer que hacen lo mismo", "/clear borra todo; /compact resume y sigue. Usa /compact solo cuando de verdad necesitas la sesión larga; si ya terminaste la tarea, /clear es más limpio"],
+            ["Escape", "No usarlo por miedo a «romper algo»", "Interrumpir a tiempo nunca rompe nada — es más seguro que dejar que termine mal y tener que deshacer"],
+            ["/model", "Cambiarlo una vez y olvidarse", "Revísalo al empezar cada tipo de tarea distinta: no es una preferencia fija, es una decisión por trabajo"],
+          ],
+        },
+      ],
+    },
   ],
 
   // ── Prompts que dirigen ────────────────────────────────────────
@@ -458,6 +525,25 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "Tres prompts reales, antes y después",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Antes (prompt de fan)", "Después (prompt de director)"],
+          filas: [
+            ["«Hazme un reel increíble para mi marca de ropa»", "«Guion de 15s, formato Before-After-Bridge, para ropa deportiva mujer 25-35. Gancho: contradice la creencia de que hacer ejercicio necesita ropa cara. Sin emojis, sin ‘descubre’»"],
+            ["«Escribe un titular que venda mucho»", "«5 titulares usando la fórmula del aviso (‘nunca X antes de Y’), para gente que ya perdió dinero con otro proveedor. Máximo 8 palabras cada uno»"],
+            ["«Mejóralo»", "«El titular 2 funciona, pero acórtalo a 6 palabras y quita el adjetivo ‘revolucionario’»"],
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "La columna de la derecha no es más larga porque sí: cada palabra ahí es una decisión que ya tomaste. La columna de la izquierda delega esa decisión al modelo, y el modelo la resuelve con el promedio de internet.",
+        },
+      ],
+    },
   ],
 
   // ── Semana en Google Calendar ──────────────────────────────────
@@ -509,6 +595,20 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
             "Bloques de producción con entregable: «grabar 3 reels» es un bloque; «trabajar en contenido» es una expresión de deseo.",
             "Deja aire: un 20% de la semana sin asignar absorbe lo inesperado sin romper el resto.",
             "El viernes, cierre de 5 minutos: qué se cumplió, qué no y por qué — ese dato alimenta el prompt del domingo siguiente.",
+          ],
+        },
+      ],
+    },
+    {
+      titulo: "Errores que rompen el sistema",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Error", "Qué pasa", "Corrección"],
+          filas: [
+            ["Ejecutar sin revisar el plan en texto primero", "Un mal cálculo de tiempo termina creado en tu calendario real, y deshacerlo cuesta más que planificarlo bien", "Siempre Prompt 1, revisar, y recién después Prompt 2"],
+            ["No decirle tus horarios fijos reales", "Te agenda trabajo profundo encima de una reunión que olvidaste mencionar", "Antes de pedir el plan, confírmale que revise el calendario existente"],
+            ["Planificar la semana ideal en vez de la real", "El plan se rompe el martes y dejas de confiar en el sistema", "Usa tus tiempos históricos, no los que te gustaría tener"],
           ],
         },
       ],
@@ -598,6 +698,26 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "El plan de tu primera semana",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Día", "Qué haces", "Qué buscas descubrir"],
+          filas: [
+            ["Día 1", "Los 3 ejercicios de arriba, en la app web", "Cómo se siente dirigir en vez de preguntar"],
+            ["Día 2-3", "Créale un Proyecto a tu marca y sube tu ADN comunicacional", "Que deje de repetir lo genérico"],
+            ["Día 4-5", "Pídele una tarea real de tu semana, de principio a fin", "Dónde todavía tienes que corregir mucho"],
+            ["Día 6-7", "Si sientes el límite del chat, instala Claude Code para una tarea concreta", "Si de verdad necesitas construcción o si el chat ya te alcanza"],
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "No te saltes al día 6 si el día 1 todavía no te convence. El orden importa más que la velocidad: quien domina la conversación aprovecha diez veces mejor Claude Code cuando le toca.",
+        },
+      ],
+    },
   ],
 
   // ── Plugins de Claude ──────────────────────────────────────────
@@ -678,6 +798,22 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "Un ejemplo de instalación real",
+      bloques: [
+        {
+          tipo: "copiable",
+          etiqueta: "Prompt · evalúa un plugin de marketing",
+          contenido:
+            "Quiero instalar un plugin de marketing en Claude Code.\n\n1. Búscalo en el marketplace oficial y muéstrame qué trae adentro (skills, comandos, agentes).\n2. Instálalo.\n3. Dame la lista de lo que puedo pedirle esta semana con mi negocio real: [describe tu negocio en una línea].\n\nDespués de usarlo con una tarea real, pregúntame si lo dejamos o lo desinstalamos.",
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Guarda en tu documento de memoria (mira esa guía en esta bóveda) qué plugins tienes activos y para qué sirve cada uno. En seis meses no vas a recordar por qué instalaste la mitad.",
+        },
+      ],
+    },
   ],
 
   // ── Diseña hablando ────────────────────────────────────────────
@@ -736,6 +872,20 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
         {
           tipo: "cita",
           texto: "La herramienta te da velocidad. La dirección de arte te da identidad. Sin la segunda, la primera solo produce más de lo mismo, más rápido.",
+        },
+      ],
+    },
+    {
+      titulo: "Los 3 detalles que delatan un diseño de IA",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Detalle delator", "Por qué aparece", "Cómo pedirlo distinto"],
+          filas: [
+            ["Gradiente morado-azul en el fondo", "Es el default más común en los datasets de entrenamiento", "Especifica tu paleta exacta en hex, nunca dejes «colores modernos» al criterio del modelo"],
+            ["Tarjetas con sombra y glow en todo", "Patrón sobreusado en templates genéricos", "Pide explícitamente «sin sombras de glow, bordes planos»"],
+            ["Iconos genéricos de stock", "Se generan sin referencia de tu identidad visual", "Sube tu logo y tus piezas anteriores como referencia antes de pedir el diseño"],
+          ],
         },
       ],
     },
@@ -813,6 +963,21 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "Ejemplos concretos de tu semana",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Tarea", "Nivel correcto", "Por qué"],
+          filas: [
+            ["Acortar un titular a 8 palabras", "Bajo", "Una instrucción, un resultado, sin ambigüedad"],
+            ["Guion de reel de 30 segundos", "Medio", "Varias piezas (gancho, estructura, cierre) pero de tamaño manejable"],
+            ["Estrategia completa de campaña para un cliente nuevo", "Alto", "Cruza insight, concepto, formato y canal — varias decisiones conectadas"],
+            ["Auditoría completa de la bóveda o migración de contenido", "Máximo", "Volumen grande, muchas piezas que deben quedar coherentes entre sí"],
+          ],
+        },
+      ],
+    },
   ],
 
   // ── Más comandos de Claude Code ──────────────────────────────────
@@ -871,6 +1036,21 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "Cuándo cada comando te salva de verdad",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Situación real", "Comando que la resuelve"],
+          filas: [
+            ["Tienes tres piezas de contenido distintas que producir hoy y quieres que avancen en paralelo", "/agents — un subagente por pieza, corriendo a la vez"],
+            ["Algo no responde como antes y no sabes si es tu instalación", "/doctor — antes de sospechar de tu prompt, descarta el problema técnico"],
+            ["Cerraste la laptop a media tarea y quieres seguir donde quedaste", "/resume — evita reexplicar todo desde cero"],
+            ["Ya confías en una rutina que repites cada semana y el permiso constante te frena", "/permissions — ajusta una vez, no confirmes cada vez"],
+          ],
+        },
+      ],
+    },
   ],
 
   // ── Terminal o app ────────────────────────────────────────────────
@@ -914,6 +1094,25 @@ export const SECCIONES_CLAUDE_BASE: Record<string, SeccionRecurso[]> = {
         {
           tipo: "cita",
           texto: "La herramienta correcta es la que no te hace pensar en la herramienta — solo en lo que estás produciendo.",
+        },
+      ],
+    },
+    {
+      titulo: "Señales concretas de que ya te tocó pasar a terminal",
+      bloques: [
+        {
+          tipo: "lista",
+          items: [
+            "Necesitas que Claude trabaje sobre varios archivos de un proyecto real, no sobre un pedido suelto.",
+            "Quieres conectar herramientas externas (MCP) como bases de datos, calendarios o repositorios.",
+            "Te encuentras copiando y pegando el mismo contexto en cada chat de la app: eso ya pide un CLAUDE.md que se lee solo.",
+            "Necesitas que una tarea corra en segundo plano mientras haces otra cosa.",
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Si ninguna de estas cuatro te suena familiar todavía, quédate en la app. Pasar a terminal antes de necesitarlo solo agrega fricción sin ningún beneficio real.",
         },
       ],
     },

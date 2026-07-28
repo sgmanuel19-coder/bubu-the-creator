@@ -5,6 +5,8 @@
 // todo se responde aquí mismo, en el navegador del alumno.
 // ============================================================
 
+import { TALLER } from "@/lib/taller/content";
+
 export type Entrada = {
   id: string;
   // Palabras que activan esta respuesta (en minúsculas, sin tildes).
@@ -21,9 +23,9 @@ export const CONOCIMIENTO: Entrada[] = [
   },
   {
     id: "biblia",
-    claves: ["biblia", "60 documentos", "60 docs", "documentos"],
+    claves: ["biblia", "59 documentos", "60 documentos", "59 docs", "documentos"],
     respuesta:
-      "La Biblia Publicitaria son los 60 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta el sistema de Manuel. La recibes COMPLETA con tu compra (es el bono estrella) y aprendes a usarla en la PARTE 2. La encuentras en la sección Recursos, aquí abajo.",
+      "La Biblia Publicitaria son los 59 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta el sistema de Manuel. La recibes COMPLETA con tu compra (es el bono estrella) y aprendes a usarla en la PARTE 2. La encuentras en la sección Recursos, aquí abajo.",
   },
   {
     id: "herramientas",
@@ -212,7 +214,7 @@ export const CONOCIMIENTO_VENTAS: Entrada[] = [
     id: "v-incluye",
     claves: ["que incluye", "que me llevo", "que trae", "que viene", "que recibo", "contenido"],
     respuesta:
-      "Recibes la masterclass completa en módulos, la Biblia Publicitaria completa (60 documentos, el bono estrella), la baraja de GPTs de mi proceso, todas las plantillas del sistema, la comunidad con soporte por 30 días y una llamada grupal de seguimiento al día 14. La versión en vivo suma la sesión Q&A y la revisión de tu primer proyecto conmigo.",
+      "Recibes la masterclass completa en módulos, la Biblia Publicitaria completa (59 documentos, el bono estrella), la baraja de GPTs de mi proceso, todas las plantillas del sistema, la comunidad con soporte por 30 días y una llamada grupal de seguimiento al día 14. La versión en vivo suma la sesión Q&A y la revisión de tu primer proyecto conmigo.",
   },
   {
     id: "v-garantia",
@@ -252,9 +254,9 @@ export const CONOCIMIENTO_VENTAS: Entrada[] = [
   },
   {
     id: "v-biblia",
-    claves: ["biblia", "60 documentos", "60 docs", "documentos"],
+    claves: ["biblia", "59 documentos", "60 documentos", "59 docs", "documentos"],
     respuesta:
-      "La Biblia Publicitaria son los 60 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema. Te la llevas COMPLETA con tu compra. Es el bono estrella: por sí sola justifica el precio.",
+      "La Biblia Publicitaria son los 59 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema. Te la llevas COMPLETA con tu compra. Es el bono estrella: por sí sola justifica el precio.",
   },
   {
     id: "v-comercial",
@@ -294,6 +296,89 @@ function buscar(base: Entrada[], q: string): Entrada | null {
   return mejor;
 }
 
+// ── Conocimiento derivado del catálogo real ───────────────────
+// Se genera solo desde TALLER.cursos: cada curso, módulo o lección que
+// se suba a content.ts queda respondible sin escribir nada aquí.
+// SOLO se usa en modo "curso": en modo "ventas" no se revela el detalle
+// de módulos (regla de posicionamiento de la landing).
+
+const VACIAS = new Set([
+  "de", "la", "el", "los", "las", "tu", "tus", "un", "una", "y", "o", "al",
+  "del", "en", "con", "para", "por", "que", "como", "lo", "se", "es", "mas",
+  "modulo", "parte", "curso", "clase",
+]);
+
+// Quita el prefijo "Módulo 3 — " o "PARTE 1 — " para que el número no
+// se convierta en palabra clave (haría match con cualquier pregunta).
+function sinPrefijo(titulo: string): string {
+  return titulo.replace(/^\s*(m[oó]dulo|parte)\s*\d+\s*[—–-]?\s*/i, "");
+}
+
+function palabrasClave(titulo: string): string[] {
+  const limpio = sinPrefijo(titulo);
+  const base = normalizar(limpio);
+  const sueltas = base
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter((p) => p.length > 3 && !VACIAS.has(p));
+  return [...new Set([base, ...sueltas])].filter(Boolean);
+}
+
+let cacheCatalogo: Entrada[] | null = null;
+
+export function conocimientoDelCatalogo(): Entrada[] {
+  if (cacheCatalogo) return cacheCatalogo;
+
+  const entradas: Entrada[] = [];
+  const cursos = TALLER.cursos.filter((c) => c.disponible);
+
+  // Índice general: qué cursos existen y qué tan grandes son.
+  entradas.push({
+    id: "catalogo",
+    claves: [
+      "que cursos", "cursos hay", "catalogo", "classroom", "que clases",
+      "cuantos modulos", "cuantas lecciones", "temario", "contenido del curso",
+    ],
+    respuesta:
+      "Esto es lo que hay en tu Classroom ahora mismo:\n\n" +
+      cursos
+        .map((c) => {
+          const mods = c.modulos.filter((m) => m.disponible);
+          const lecs = mods.flatMap((m) => m.lecciones).length;
+          return `• ${c.titulo} — ${mods.length} módulos, ${lecs} lecciones`;
+        })
+        .join("\n") +
+      "\n\nEntra a Cursos en el menú de arriba para abrirlos.",
+  });
+
+  for (const curso of cursos) {
+    const mods = curso.modulos.filter((m) => m.disponible);
+
+    entradas.push({
+      id: `curso-${curso.slug}`,
+      claves: [...palabrasClave(curso.titulo), curso.slug.replace(/-/g, " ")],
+      respuesta:
+        `${curso.titulo}\n\n${curso.descripcion}\n\nMódulos:\n` +
+        mods.map((m) => `• ${m.titulo}`).join("\n"),
+    });
+
+    for (const modulo of mods) {
+      entradas.push({
+        id: `modulo-${curso.slug}-${normalizar(sinPrefijo(modulo.titulo)).replace(/\s+/g, "-")}`,
+        claves: palabrasClave(modulo.titulo),
+        respuesta:
+          `${modulo.titulo} — de ${curso.titulo}.\n\n${modulo.descripcion}\n\nLecciones:\n` +
+          modulo.lecciones
+            .map((l) => `• ${l.titulo}${l.youtubeId ? "" : " · disponible pronto"}`)
+            .join("\n"),
+      });
+    }
+  }
+
+  cacheCatalogo = entradas;
+  return entradas;
+}
+
 // modo "ventas" → responde desde la landing (info para decidir la compra).
 // modo "curso"  → responde a profundidad (solo para alumnos, adentro).
 export function responder(
@@ -302,7 +387,10 @@ export function responder(
 ): { respuesta: string; id: string } {
   const q = normalizar(pregunta);
   const base = modo === "ventas" ? CONOCIMIENTO_VENTAS : CONOCIMIENTO;
-  const mejor = buscar(base, q);
+  // Primero la libreta escrita a mano (respuestas curadas), y solo si
+  // ninguna aplica se consulta el catálogo real de cursos.
+  const mejor =
+    buscar(base, q) ?? (modo === "curso" ? buscar(conocimientoDelCatalogo(), q) : null);
   if (mejor) return { respuesta: mejor.respuesta, id: mejor.id };
   if (modo === "ventas") {
     return {
@@ -338,7 +426,7 @@ export const CONSEJOS: Record<"arranque" | "progreso" | "avanzado" | "completo",
   arranque: [
     "Empieza por la PARTE 0 y no te saltes el ACTO 1. La estrategia es el paso que las agencias cobran más caro — y es lo que hace que tu contenido no se vea genérico.",
     "Antes de tu primera lección, elige una marca o producto real (tuyo o de alguien que conozcas). Todo lo que aprendas, aplícalo sobre ese caso: aprender produciendo vale el doble.",
-    "Descarga la Biblia Publicitaria apenas esté disponible en Recursos: son los 60 documentos que alimentan el sistema, y vas a usarlos desde la PARTE 2.",
+    "Descarga la Biblia Publicitaria apenas esté disponible en Recursos: son los 59 documentos que alimentan el sistema, y vas a usarlos desde la PARTE 2.",
   ],
   progreso: [
     "Ritmo sugerido: una parte por día. En una semana tienes el sistema completo y tu primer spot producido.",

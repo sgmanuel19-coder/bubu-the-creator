@@ -183,8 +183,9 @@ export default function Portafolio() {
     <div className="pf">
       {/* ── HERO — video de fondo con texto superpuesto ── */}
       <header className="pf-hero pf-hero-video-mode">
-        <video className="pf-hero-video" src="/videos/portafolio-hero.mp4"
-          autoPlay muted loop playsInline preload="auto" />
+        <video className="pf-hero-video" src="/videos/portafolio-hero-v2.mp4"
+          poster="/images/portfolio/posters/portafolio-hero.jpg"
+          autoPlay muted loop playsInline preload="metadata" />
         <div className="pf-hero-shade" />
         <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
           <span className="pf-eyebrow">Portafolio — Resuelto Agency</span>

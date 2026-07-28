@@ -83,6 +83,26 @@ export const SECCIONES_CLAUDE_PRO: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "Cuándo NO usar este estudio",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Situación", "Qué usar en vez"],
+          filas: [
+            ["Spot de marca con dirección cinematográfica", "Higgsfield + Kling/Seedance: ese territorio necesita ojo de director, no código"],
+            ["Una sola pieza sin necesidad de repetirse", "El costo de montar la plantilla no se justifica para algo que usas una vez"],
+            ["Voz para entrega final a cliente", "ElevenLabs: Voicebox rinde para iterar barato, no para el archivo definitivo"],
+            ["Necesitas resultado hoy y nunca tocaste Remotion", "La primera configuración toma una tarde; si el plazo es de horas, no es el momento de aprenderlo"],
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Este estudio gana en lo repetible y programático. Para la pieza única que necesita dirección de arte, tu stack de siempre sigue siendo el correcto.",
+        },
+      ],
+    },
   ],
 
   // ── Saca información de internet ───────────────────────────────
@@ -152,6 +172,29 @@ export const SECCIONES_CLAUDE_PRO: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "De la extracción al insight (conectando con tu Cerebro)",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Esta técnica es exactamente la que describe la guía de insight de esta bóveda, llevada a escala. La guía dice: reúne al menos 200 reseñas, busca las quejas que se repiten con palabras distintas, presta atención a las metáforas. El MCP de Apify hace esa recolección en minutos en vez de tardes.",
+        },
+        {
+          tipo: "pasos",
+          items: [
+            { titulo: "1. Extrae en volumen", detalle: "Reseñas, comentarios, posts de la categoría — no solo de tu marca." },
+            { titulo: "2. Pide el lenguaje literal, no el resumen", detalle: "Un resumen borra exactamente las metáforas que necesitas para el copy." },
+            { titulo: "3. Clasifica con el protocolo del DOC 00", detalle: "Dato → observación → hipótesis → insight. Si le pides directamente «dame insights», el modelo se queda en el segundo nivel." },
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Sin este cruce, la extracción es solo un Excel con más filas. Con él, es la técnica de excavación de insight funcionando a escala.",
+        },
+      ],
+    },
   ],
 
   // ── Claude Code desde el teléfono ──────────────────────────────
@@ -216,6 +259,26 @@ export const SECCIONES_CLAUDE_PRO: Record<string, SeccionRecurso[]> = {
         {
           tipo: "cita",
           texto: "La libertad no viene de que la IA trabaje sola — viene de haberle dejado instrucciones tan claras que no te necesite para lo pequeño.",
+        },
+      ],
+    },
+    {
+      titulo: "Un día real usando esto",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Hora", "Qué haces", "Qué corre en la nube"],
+          filas: [
+            ["8:00 AM", "Lanzas la tanda de generación de la semana antes de salir", "Higgsfield produce las 20 variantes de un cliente"],
+            ["10:30 AM", "Revisas desde el teléfono entre reuniones", "Ya hay 8 listas; apruebas 6 y pides regenerar 2"],
+            ["1:00 PM", "Otra revisión rápida", "El lote terminó; queda organizado en la carpeta que definiste"],
+            ["6:00 PM", "Te sientas a producir con criterio fino", "Ya tienes el material crudo listo, sin haber perdido la mañana esperando"],
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "El valor no es «trabajar menos» — es que el tiempo de espera de la máquina deja de ser tiempo tuyo. Lo que antes era mirar una barra de progreso ahora es una notificación que revisas cuando puedes.",
         },
       ],
     },
@@ -300,6 +363,24 @@ export const SECCIONES_CLAUDE_PRO: Record<string, SeccionRecurso[]> = {
         {
           tipo: "cita",
           texto: "El cerebro responde; los conectores ejecutan. Saber y actuar son permisos distintos — y esa separación es tu seguridad.",
+        },
+      ],
+    },
+    {
+      titulo: "Las 3 preguntas que justifican montarlo",
+      bloques: [
+        {
+          tipo: "lista",
+          items: [
+            "«¿Cuánto facturé este mes por cliente y cómo se compara con el anterior?» — cruza facturación y clientes, dos fuentes que hoy viven separadas.",
+            "«¿Qué clientes están por renovar y cuál fue su última interacción?» — cruza contratos y WhatsApp/CRM.",
+            "«¿Qué contenido rindió mejor este trimestre y qué tienen en común?» — cruza métricas de redes con tu propia clasificación de temas.",
+          ],
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "Si tus preguntas reales de negocio se parecen a estas tres, el cerebro externo te ahorra horas cada semana. Si tus preguntas viven cómodas dentro de una sola hoja de cálculo, todavía no lo necesitas — móntalo cuando el dolor de cruzar fuentes ya sea real, no antes.",
         },
       ],
     },
@@ -425,6 +506,26 @@ export const SECCIONES_CLAUDE_PRO: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "Ejemplo completo: de video ajeno a guion propio",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Etapa", "Lo que salió del video ajeno", "Lo que se llenó con marca propia"],
+          filas: [
+            ["Gancho", "Contradicción: «Todo el mundo te dice X, y es mentira»", "«Todo el mundo te dice que necesitas ads para vender, y en mi primer año no gasté ni un sol»"],
+            ["Promesa", "«Te voy a mostrar cómo lo hice sin gastar nada»", "«Te muestro exactamente los 3 pasos que usé, con capturas reales»"],
+            ["Estructura", "Contexto (5s) → giro (10s) → prueba (10s) → recompensa (5s)", "Misma proporción, con la historia real del negocio del alumno"],
+            ["Cierre", "CTA a comentarios: «cuéntame tu caso»", "CTA al DM: «escríbeme AYUDA y te paso el paso a paso»"],
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Nota lo que NO cambió: la proporción de tiempos y el tipo de gancho. Lo que sí cambió: cada palabra. Esa es la línea exacta entre estudiar la estructura y copiar el contenido.",
+        },
+      ],
+    },
   ],
 
   // ── Tu web sin agencia ─────────────────────────────────────────
@@ -499,6 +600,21 @@ export const SECCIONES_CLAUDE_PRO: Record<string, SeccionRecurso[]> = {
         {
           tipo: "cita",
           texto: "La agencia no te cobraba por el código. Te cobraba por decidir. Ahora decides tú — con un equipo que ejecuta al instante.",
+        },
+      ],
+    },
+    {
+      titulo: "Los 5 errores que delatan una web hecha sin brief",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Error", "Por qué pasa", "Cómo se evita"],
+          filas: [
+            ["El hero no dice qué se vende", "Se saltó la Fase 1 y se fue directo a pedir «algo bonito»", "El blueprint obliga a escribir el mensaje del hero antes de diseñarlo"],
+            ["Hay tres CTA distintos compitiendo", "No se definió LA acción única desde el principio", "La pregunta 1 del brief existe justo para esto"],
+            ["Se ve genérica, como salida de una plantilla", "Faltaron referencias visuales concretas en el brief", "Pide 2 referencias reales y describe qué te gusta de cada una, no «moderno y profesional»"],
+            ["Nadie completa el formulario", "El mensaje no responde la objeción real del visitante", "Vuelve a la pregunta 4 del brief: las objeciones típicas, antes de tocar el diseño"],
+          ],
         },
       ],
     },

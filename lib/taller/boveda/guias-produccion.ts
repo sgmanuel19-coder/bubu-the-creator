@@ -349,6 +349,43 @@ export const SECCIONES_PRODUCCION: Record<string, SeccionRecurso[]> = {
         },
       ],
     },
+    {
+      titulo: "Un prompt completo, de muestra",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Esto es el nivel de detalle de cada uno de los 50 — no una descripción vaga, sino la receta técnica exacta que produce el resultado.",
+        },
+        {
+          tipo: "copiable",
+          etiqueta: "Muestra · retrato de producto premium",
+          contenido:
+            "Producto en primer plano, fondo desenfocado en tono carbón profundo.\nLENTE: 85mm, apertura f/1.8, el producto ocupa el 60% del cuadro.\nLUZ: key light lateral a 45°, ratio 3:1 con fill suave, rim light frío detrás para separar del fondo.\nPALETA: tonos cálidos en el producto, fondo desaturado en frío para contraste.\nATMÓSFERA: leve neblina de estudio para suavizar sombras duras.\nACABADO: grano fino de película, sin viñeteado agresivo, contraste medio-alto.",
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "Lo que cambias por marca: la paleta y el tono de la luz (cálido vs frío según la identidad). Lo que NO tocas: la relación de lente y apertura — eso es lo que da la sensación de «producción cara» y es independiente de la marca.",
+        },
+      ],
+    },
+    {
+      titulo: "Cómo están organizados los 50",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Categoría", "Cuántos", "Para qué campaña"],
+          filas: [
+            ["Retrato y personaje", "12", "Testimoniales, vocero de marca, contenido con rostro"],
+            ["Producto en estudio", "10", "E-commerce, packshots, catálogo"],
+            ["Escena industrial y B2B", "8", "Servicios, manufactura, tecnología"],
+            ["Lifestyle y cotidiano", "12", "UGC, contenido de marca personal, redes"],
+            ["Arquitectura y espacio", "8", "Inmobiliaria, eventos, hospitality"],
+          ],
+        },
+      ],
+    },
   ],
 
   // ── PREMIUM · Plantilla maestra de campaña (interior) ──────────
@@ -374,6 +411,39 @@ export const SECCIONES_PRODUCCION: Record<string, SeccionRecurso[]> = {
           tipo: "nota",
           texto:
             "El error a evitar: saltarte las etapas de pensamiento para llegar rápido a los guiones. La plantilla funciona PORQUE te obliga a decidir como director creativo antes de tocar cualquier herramienta. Si la llenas en 10 minutos, la llenaste mal.",
+        },
+      ],
+    },
+    {
+      titulo: "Las 4 etapas, con un caso llenado",
+      bloques: [
+        {
+          tipo: "tabla",
+          columnas: ["Etapa", "Pregunta guía", "Ejemplo llenado (marca de suplementos)"],
+          filas: [
+            ["1. Brief", "¿Qué necesita el negocio y quién es el cliente real?", "Aumentar ventas del producto B en el trimestre. Cliente: mujeres 28-40 que ya hacen ejercicio pero abandonan suplementos por sabor"],
+            ["2. Insight", "¿Qué verdad no dicha hay detrás del comportamiento?", "No dejan el suplemento por falta de disciplina — lo dejan porque cada toma se siente como una obligación más, no como un cuidado"],
+            ["3. Big Idea / concepto", "¿Cómo se convierte eso en territorio de marca?", "El suplemento no es una tarea de la rutina: es el único momento del día que es solo para ti"],
+            ["4. Estructura y hooks", "¿Qué formato y qué gancho lo llevan a pieza?", "Testimonial narrativo, gancho de pregunta de identificación: «¿Eres de las que dejaron el suplemento a la semana?»"],
+          ],
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "Nota cómo cada etapa se apoya en la anterior: sin el insight de la etapa 2, la Big Idea de la etapa 3 hubiera sido genérica («siéntete mejor contigo»). El insight específico es lo que hace que el concepto sea imposible de copiar por un competidor.",
+        },
+      ],
+    },
+    {
+      titulo: "Errores comunes al llenarla",
+      bloques: [
+        {
+          tipo: "lista",
+          items: [
+            "Escribir el insight en la voz de la marca en vez de la voz del consumidor: «queremos que se sientan cuidadas» no es insight, es deseo de marca.",
+            "Saltar directo a la etapa 4 porque ya tienes una idea de video: si no puedes trazarla hasta el insight, no sabes si es la idea correcta o solo la primera que se te ocurrió.",
+            "Llenar la plantilla solo, sin el brief real del cliente: la plantilla organiza el pensamiento, pero necesita información real para producir algo específico.",
+          ],
         },
       ],
     },

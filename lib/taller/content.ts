@@ -66,10 +66,10 @@ const MODULOS_MASTERCLASS: Modulo[] = [
   {
     titulo: "PARTE 2 — EL SISTEMA: Cerebro Creativo IA",
     descripcion:
-      "La Biblia de 60 documentos, el ADN de marca, el Prompt Maestro, Claude Code y Obsidian, skills, agentes y MCP — con demo del Cerebro razonando en vivo.",
+      "La Biblia de 59 documentos, el ADN de marca, el Prompt Maestro, Claude Code y Obsidian, skills, agentes y MCP — con demo del Cerebro razonando en vivo.",
     disponible: true,
     lecciones: [
-      { titulo: "La Biblia Publicitaria: los 60 documentos", duracion: "", youtubeId: "" },
+      { titulo: "La Biblia Publicitaria: los 59 documentos", duracion: "", youtubeId: "" },
       { titulo: "El ADN de marca y el Prompt Maestro", duracion: "", youtubeId: "" },
       { titulo: "Claude Code y Obsidian como centro de operaciones", duracion: "", youtubeId: "" },
       { titulo: "Skills, agentes y MCP", duracion: "", youtubeId: "" },
@@ -115,19 +115,202 @@ const MODULOS_MASTERCLASS: Modulo[] = [
   },
 ];
 
+// ── Módulos del curso bonus StorySelling Pro (Estrategia CAT) ──
+// Se van cargando conforme Manuel sube cada video a YouTube en modo
+// "No listado". Un objeto por Módulo del curso; si un módulo tiene
+// varios videos, se agregan como lecciones dentro del mismo.
+const MODULOS_STORYSELLING: Modulo[] = [
+  {
+    titulo: "Módulo 1 — Introducción",
+    descripcion:
+      "Qué es la Estrategia CAT y por qué cambia la forma en que produces contenido.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Introducción", duracion: "1:57", youtubeId: "j2r1E_MzEG0" },
+    ],
+  },
+  {
+    titulo: "Módulo 2 — El problema que resuelve",
+    descripcion:
+      "Por qué el contenido cuesta tanto producir y qué es exactamente lo que la Estrategia CAT viene a arreglar.",
+    disponible: true,
+    lecciones: [
+      { titulo: "El problema que resuelve", duracion: "4:08", youtubeId: "afjEC3xhwFw" },
+    ],
+  },
+  {
+    titulo: "Módulo 3 — Explicación del método",
+    descripcion:
+      "El método CAT paso a paso: cómo se aplica y en qué orden.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Explicación del método · Parte 1", duracion: "0:36", youtubeId: "HqsJ77Z3jG0" },
+      { titulo: "Explicación del método · Parte 2", duracion: "2:48", youtubeId: "lHE84SRs0rU" },
+      { titulo: "Explicación del método · Parte 3", duracion: "1:49", youtubeId: "w_5L2QWBoPY" },
+      { titulo: "Explicación del método · Parte 4", duracion: "1:42", youtubeId: "E9tCb7Nr5yk" },
+      { titulo: "Explicación del método · Parte 5", duracion: "2:23", youtubeId: "I79ZfIqKcdg" },
+    ],
+  },
+  {
+    titulo: "Módulo 4 — Cómo combinar las piezas",
+    descripcion:
+      "Cómo se arma el contenido juntando las piezas del método en una sola ejecución.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Cómo combinar las piezas · Parte 1", duracion: "0:35", youtubeId: "C0tCt54fqDs" },
+      { titulo: "Cómo combinar las piezas · Parte 2", duracion: "2:00", youtubeId: "8lY4nKG683Q" },
+      { titulo: "Cómo combinar las piezas · Parte 3", duracion: "1:43", youtubeId: "Arvr4n4CZ7I" },
+      { titulo: "Cómo combinar las piezas · Parte 4", duracion: "3:11", youtubeId: "UORYcrK_d-s" },
+      { titulo: "Cómo combinar las piezas · Parte 5", duracion: "2:59", youtubeId: "JTD38ef8foU" },
+    ],
+  },
+  {
+    titulo: "Módulo 5 — Ejemplos prácticos",
+    descripcion:
+      "El método aplicado a casos reales, de principio a fin.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Ejemplos prácticos", duracion: "6:39", youtubeId: "I_WBplrq484" },
+    ],
+  },
+  {
+    titulo: "Módulo 6 — Aplicación a tu negocio",
+    descripcion:
+      "Cómo bajar el método a tu propio negocio y dejarlo funcionando.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Aplicación a tu negocio · Parte 1", duracion: "3:56", youtubeId: "3AqwyRq5VnE" },
+      { titulo: "Aplicación a tu negocio · Parte 2", duracion: "11:17", youtubeId: "LTVSmV8soak" },
+    ],
+  },
+  {
+    titulo: "Módulo 7 — Reconocimiento",
+    descripcion:
+      "Cómo reconocer el método funcionando en el contenido que ya consumes.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Reconocimiento", duracion: "2:59", youtubeId: "gjvmoLaIpuo" },
+    ],
+  },
+  {
+    titulo: "Módulo 8 — Graba y edita tu contenido",
+    descripcion:
+      "La parte de producción: cómo grabar y cómo editar para que el método se note en pantalla.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Grabar tu contenido · Parte 1", duracion: "0:51", youtubeId: "Yon-Q4AnEw4" },
+      { titulo: "Grabar tu contenido · Parte 2", duracion: "1:33", youtubeId: "fOpY99l92Yo" },
+      { titulo: "Edita tu contenido · Parte 1", duracion: "3:11", youtubeId: "ynoU1Ljc2Iw" },
+      { titulo: "Edita tu contenido · Parte 2", duracion: "10:52", youtubeId: "1n3xLNe2mEY" },
+      { titulo: "Edita tu contenido · Parte 3", duracion: "10:59", youtubeId: "iH4yZD0YU2c" },
+      { titulo: "Edita tu contenido · Parte 4", duracion: "3:56", youtubeId: "mzRXL-qpQFU" },
+      { titulo: "Edita tu contenido · Parte 5", duracion: "10:36", youtubeId: "iHA2a8Kx_JA" },
+      { titulo: "Edita tu contenido · Parte 6", duracion: "1:47", youtubeId: "6OGUWRT9raA" },
+      { titulo: "Edita tu contenido · Parte 7", duracion: "1:53", youtubeId: "E5GGXKL7Cu0" },
+      { titulo: "Edita tu contenido · Parte 8", duracion: "5:50", youtubeId: "U7di4hkkOfg" },
+      { titulo: "Edita tu contenido · Parte 9", duracion: "10:51", youtubeId: "T4_cQvWmKxU" },
+    ],
+  },
+  {
+    titulo: "Módulo 9 — Cierre",
+    descripcion:
+      "El resumen del método y qué hacer a partir de aquí.",
+    disponible: true,
+    lecciones: [
+      { titulo: "Cierre", duracion: "11:23", youtubeId: "i_UyvIx_QeE" },
+    ],
+  },
+];
+
+// ── La Biblia Publicitaria ────────────────────────────────────
+// Los PDFs viven en private/biblia (FUERA de /public, que es público por
+// URL). Se entregan por /api/taller/descarga, que valida el nivel
+// "grabado" antes de mandar el archivo.
+// Nota: van del DOC 00 al DOC 59 pero el DOC 10 no existe → son 59.
+function urlBiblia(archivo: string): string {
+  return `/api/taller/descarga/biblia/${encodeURIComponent(archivo)}`;
+}
+
+const BIBLIA_DOCS: string[] = [
+  "DOC 00 - El Protocolo de Pensamiento del Director Creativo.pdf",
+  "DOC 01 - Análisis de Brief Publicitario.pdf",
+  "DOC 02 - Buyer Persona Profundo.pdf",
+  "DOC 03 - Customer Journey Map Publicitario.pdf",
+  "DOC 04 - Value Proposition Design.pdf",
+  "DOC 05 - Oferta Irresistible.pdf",
+  "DOC 06 - Propuesta Comercial y Pitch.pdf",
+  "DOC 07 - Estrategia de Precios y Psicología del Precio.pdf",
+  "DOC 08 - Tipos de Embudos de Venta Publicitarios.pdf",
+  "DOC 09 - Tipos de Insight.pdf",
+  "DOC 11 - El Concepto Creativo.pdf",
+  "DOC 12 - La Big Idea Publicitaria.pdf",
+  "DOC 13 - Retóricas Publicitarias e Ideación.pdf",
+  "DOC 14 - Tipos de Estructuras Narrativas Publicitarias.pdf",
+  "DOC 15 - Técnicas de Redacción Creativa Publicitaria.pdf",
+  "DOC 16 - Tipos y Estilos de Hooks Publicitarios.pdf",
+  "DOC 17 - Tipos y Estilos de Escritura Creativa Publicitaria.pdf",
+  "DOC 18 - Tipos y Estilos de CTA Publicitario.pdf",
+  "DOC 19 - Stories Publicitarias.pdf",
+  "DOC 20 - Carruseles Virales.pdf",
+  "DOC 21 - Reels y Videos Cortos Publicitarios.pdf",
+  "DOC 22 - Email Marketing Publicitario.pdf",
+  "DOC 23 - Spot Publicitario de TV y Video de Alto Presupuesto.pdf",
+  "DOC 24 - OOH y Print Publicitario.pdf",
+  "DOC 25 - Radio y Audio Advertising.pdf",
+  "DOC 26 - Publicidad Experiencial y Activaciones.pdf",
+  "DOC 27 - Técnicas de Conceptualización Visual.pdf",
+  "DOC 28 - Cómo Piensa un Director de Arte Nivel Cannes.pdf",
+  "DOC 29 - Producción Publicitaria.pdf",
+  "DOC 30 - Arquitectura de Campaña Estratégica.pdf",
+  "DOC 31 - Brand Voice y Tono de Comunicación.pdf",
+  "DOC 32 - Evaluación y Aprobación de Creatividades.pdf",
+  "DOC 33 - Prompt Engineering Publicitario para IA.pdf",
+  "DOC 34 - Guiones de Storytelling por Formato.pdf",
+  "DOC 35 - Estilos y Géneros de Storytelling Publicitario.pdf",
+  "DOC 36 - Tipos de Estrategias Comunicacionales.pdf",
+  "DOC 37 - Tipos de Estrategias de Contenido.pdf",
+  "DOC 38 - Tipos de Estrategias Comerciales con Enfoque Publicitario.pdf",
+  "DOC 39 - Investigación Previa a la Campaña.pdf",
+  "DOC 40 - Estrategia de Medios y Canales.pdf",
+  "DOC 41 - Métricas y KPIs Publicitarios.pdf",
+  "DOC 42 - Marketing de Influencers y UGC.pdf",
+  "DOC 43 - Landing Pages y Destinos de Campaña.pdf",
+  "DOC 44 - Flujo Creativo Integrado con IA.pdf",
+  "DOC 45 - Creación de Video Publicitario con Kling.pdf",
+  "DOC 46 - Creación de Contenido con Seedance.pdf",
+  "DOC 47 - Efectos Visuales y Concepto con Higgsfield.pdf",
+  "DOC 48 - Creación Creativa con Nano Banana.pdf",
+  "DOC 49 - Generación de Imagen Publicitaria con IA.pdf",
+  "DOC 50 - Audio y Voz con IA para Publicidad.pdf",
+  "DOC 51 - Meta Ads (Facebook + Instagram).pdf",
+  "DOC 52 - Google Ads y SEM.pdf",
+  "DOC 53 - TikTok Ads.pdf",
+  "DOC 54 - LinkedIn Ads.pdf",
+  "DOC 55 - YouTube Advertising.pdf",
+  "DOC 56 - SEO de Contenido Publicitario.pdf",
+  "DOC 57 - Canales Complementarios.pdf",
+  "DOC 58 - Grillas, Calendarios y Planificación de Contenido.pdf",
+  "DOC 59 - Media Plan Integrado y Planning Estratégico.pdf",
+];
+
 const RECURSOS_MASTERCLASS: Recurso[] = [
   {
     slug: "biblia-publicitaria",
-    titulo: "La Biblia Publicitaria (60 PDFs)",
+    titulo: "La Biblia Publicitaria (59 PDFs)",
     descripcion:
-      "Los 60 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema.",
-    disponible: false,
+      "Los 59 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema.",
+    disponible: true,
     contenido: [
-      "La Biblia Publicitaria es el corazón del Cerebro Creativo IA: 60 documentos que condensan el oficio del director creativo — insights, retóricas, estructuras narrativas, hooks, tipos de campaña y más.",
+      "La Biblia Publicitaria es el corazón del Cerebro Creativo IA: 59 documentos que condensan el oficio del director creativo — insights, retóricas, estructuras narrativas, hooks, tipos de campaña, producción con IA y pauta.",
       "Descárgala completa y cárgala en tu Cerebro Creativo tal como se muestra en la PARTE 2. Es el material que hace que la IA razone como un creativo senior dentro de tu marca.",
+      "Puedes bajar el paquete entero o solo el documento que necesitas: abajo están los 59, en orden.",
     ],
     descargas: [
-      // { nombre: "Biblia Publicitaria — 60 PDFs (.zip)", url: "https://..." },
+      { nombre: "Biblia Publicitaria completa — 59 PDFs (.zip)", url: urlBiblia("Biblia-Publicitaria-RESUELTO.zip") },
+      ...BIBLIA_DOCS.map((archivo) => ({
+        nombre: archivo.replace(/\.pdf$/, "").replace(" - ", " · "),
+        url: urlBiblia(archivo),
+      })),
     ],
   },
   {
@@ -135,9 +318,10 @@ const RECURSOS_MASTERCLASS: Recurso[] = [
     titulo: "La baraja de GPTs de mi proceso",
     descripcion:
       "Links de acceso a las 4 piezas de mi flujo real: CinePromt, Storyboard, UGC y Seedance Director.",
-    disponible: false,
+    disponible: true,
     contenido: [
-      "Las 4 piezas del flujo de producción. Requieren una cuenta de ChatGPT de pago. Ábrelas y guárdalas en tus favoritos.",
+      "Las 4 piezas del flujo de producción: CinePromt, Storyboard, UGC y Seedance Director. Requieren una cuenta de ChatGPT de pago.",
+      "⚠️ Los links directos a cada GPT se están subiendo — en cuanto estén, aparecen aquí abajo listos para abrir. Mientras tanto, escríbeme por WhatsApp y te los paso directo.",
     ],
     descargas: [
       // { nombre: "CinePromt", url: "https://chatgpt.com/g/..." },
@@ -150,7 +334,7 @@ const RECURSOS_MASTERCLASS: Recurso[] = [
     slug: "plantillas-sistema",
     titulo: "Plantillas del sistema",
     descripcion: "Hoja de personaje, ADN de marca y biblioteca de prompts.",
-    disponible: false,
+    disponible: true,
     contenido: [
       "Las plantillas base del sistema. La hoja de personaje resuelve la consistencia; el ADN de marca alimenta al Cerebro; la biblioteca de prompts acelera cada generación.",
     ],
@@ -161,7 +345,7 @@ const RECURSOS_MASTERCLASS: Recurso[] = [
     titulo: "Checklist «parece agencia»",
     descripcion:
       "Los detalles de acabado de edición que separan «video de IA» de pieza publicitaria.",
-    disponible: false,
+    disponible: true,
     contenido: [
       "Antes de publicar cualquier pieza, pásala por este checklist de acabado. Son los detalles que hacen que un video se vea profesional y no «hecho con IA».",
     ],
@@ -1116,9 +1300,193 @@ const BOVEDA_CONTENIDO: RecursoBoveda[] = [
 // SOLO se importa desde páginas/rutas del servidor: si un componente
 // cliente importara la bóveda completa, todo el contenido de pago se
 // filtraría en el JS del navegador.
+// ── Creatividad publicitaria (el oficio antes de la herramienta) ─
+// Salen del Cerebro de Aprendizaje. Van GRATIS a propósito: son la
+// vitrina del método y la entrada SEO al embudo. Sus guías a fondo
+// viven en lib/taller/boveda/guias-creatividad.ts.
+const BOVEDA_CREATIVIDAD: RecursoBoveda[] = [
+  {
+    slug: "insight-los-6-tipos",
+    titulo: "El insight: los 6 tipos y cómo excavarlos",
+    descripcion:
+      "El dato no es el insight. Los cuatro niveles que separan un número de una verdad humana, y los seis lugares donde de verdad se busca.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    gratis: true,
+    tags: ["insight", "estrategia", "dirección creativa"],
+  },
+  {
+    slug: "del-insight-al-concepto",
+    titulo: "Del insight al concepto · los 5 tipos que existen",
+    descripcion:
+      "Concepto, idea y ejecución no son lo mismo, y confundirlos es por lo que una campaña se cae en la segunda pieza.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    gratis: true,
+    tags: ["concepto", "ideación", "campaña"],
+  },
+  {
+    slug: "la-big-idea",
+    titulo: "La Big Idea · los 5 tipos y cómo saber si la tuya es grande",
+    descripcion:
+      "Arriba del concepto hay otro piso. Qué distingue una idea que dura décadas de una que se agota en la segunda temporada.",
+    tipo: "guia",
+    nivel: "avanzado",
+    disponible: true,
+    gratis: true,
+    tags: ["big idea", "marca", "estrategia"],
+  },
+  {
+    slug: "retorica-publicitaria",
+    titulo: "Retórica publicitaria · las 12 figuras del oficio",
+    descripcion:
+      "Sin retórica no hay concepto. Los doce mecanismos que hacen que lo dicho signifique más de lo que las palabras dicen.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    gratis: true,
+    tags: ["retórica", "ideación", "copy"],
+  },
+  {
+    slug: "estructuras-narrativas",
+    titulo: "Las 10 estructuras narrativas publicitarias",
+    descripcion:
+      "El orden en que entregas la información decide si te ven completo. Las diez estructuras, con su «cuándo NO usarla».",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    gratis: true,
+    tags: ["guion", "narrativa", "spot"],
+  },
+  {
+    slug: "formulas-de-headline",
+    titulo: "Las 8 fórmulas de headline que no fallan",
+    descripcion:
+      "Antes de elegir fórmula hay que saber si escribes respuesta directa o marca: las reglas se contradicen y mezclarlas mata las dos.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    gratis: true,
+    tags: ["copy", "headline", "redacción"],
+  },
+  {
+    slug: "generos-del-storytelling",
+    titulo: "Los 10 géneros del storytelling publicitario",
+    descripcion:
+      "El género es un contrato emocional: define casting, música, edición, color y hasta el lente. Elegirlo mal es el error invisible.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    gratis: true,
+    tags: ["storytelling", "género", "producción"],
+  },
+  {
+    slug: "arquitectura-de-campana",
+    titulo: "Arquitectura de campaña · Hero, Hub y Help",
+    descripcion:
+      "Lo que hace que veinte piezas se sientan como una sola cosa. Las tres velocidades del contenido y la matriz que las ordena.",
+    tipo: "guia",
+    nivel: "avanzado",
+    disponible: true,
+    gratis: true,
+    tags: ["campaña", "estrategia", "contenido"],
+  },
+];
+
+// ── Producción con Higgsfield (documentación del fabricante) ────
+// Escritas desde el blog oficial de Higgsfield y bajadas al flujo real
+// de RESUELTO. Van con candado: son el «cómo se hace» que compra el
+// alumno, no la vitrina. Guías en lib/taller/boveda/guias-higgsfield.ts.
+const BOVEDA_HIGGSFIELD: RecursoBoveda[] = [
+  {
+    slug: "control-de-camara-ia",
+    titulo: "Control de cámara, ángulos y lente en video IA",
+    descripcion:
+      "Por qué «dolly lento» te da algo distinto en cada corrida, y qué se fija como parámetro para que una toma sea repetible.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    tags: ["cámara", "higgsfield", "dirección", "video"],
+  },
+  {
+    slug: "manos-y-caras-ia",
+    titulo: "Manos y caras: por qué la IA las rompe y cómo evitarlo",
+    descripcion:
+      "Las dos cosas que el espectador detecta más rápido. Por qué fallan de forma estructural y los cinco arreglos que sí funcionan.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    tags: ["consistencia", "soul id", "errores", "higgsfield"],
+  },
+  {
+    slug: "video-de-producto-sin-estudio",
+    titulo: "Video de producto sin estudio, sin cámara y sin equipo",
+    descripcion:
+      "Los formatos de anuncio que existen, cuál va con cada producto, y el flujo completo que arranca desde la URL del producto.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    tags: ["producto", "ugc", "anuncios", "higgsfield"],
+  },
+  {
+    slug: "motion-design-con-ia",
+    titulo: "Motion design con IA · placas, datos y cierres de marca",
+    descripcion:
+      "El motion es estructura, no escena: tiempos, jerarquía y tipografía. Dónde rinde y por qué no se resuelve con video generativo.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    tags: ["motion", "infografía", "marca", "higgsfield"],
+  },
+  {
+    slug: "higgsfield-en-after-effects",
+    titulo: "Higgsfield dentro de After Effects y Premiere",
+    descripcion:
+      "Generar, quitar fondo, reencuadrar y escalar sobre tu propia línea de tiempo. Se acabó el ida y vuelta con el navegador.",
+    tipo: "guia",
+    nivel: "avanzado",
+    disponible: true,
+    tags: ["after effects", "premiere", "postproducción", "higgsfield"],
+  },
+  {
+    slug: "higgsfield-en-figma",
+    titulo: "Consistencia visual de marca en Figma con Higgsfield",
+    descripcion:
+      "Relight, color grading, expand y angles: las herramientas que meten en cintura las imágenes que te manda el cliente.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    tags: ["figma", "diseño", "consistencia", "higgsfield"],
+  },
+  {
+    slug: "produccion-por-lotes",
+    titulo: "Producción por lotes · de un clip a cincuenta",
+    descripcion:
+      "Cuando el cuello de botella deja de ser la calidad de una pieza y pasa a ser el throughput. Qué usar para generar en volumen.",
+    tipo: "guia",
+    nivel: "avanzado",
+    disponible: true,
+    tags: ["lotes", "escala", "pauta", "producción"],
+  },
+  {
+    slug: "higgsfield-mcp-con-claude",
+    titulo: "Higgsfield MCP con Claude · el plan baja a producción solo",
+    descripcion:
+      "Claude piensa y Higgsfield produce, en la misma conversación. La extensión natural del Cerebro Creativo.",
+    tipo: "proyecto",
+    nivel: "avanzado",
+    disponible: true,
+    tags: ["mcp", "claude", "higgsfield", "flujo"],
+  },
+];
+
 export const BOVEDA_BASE: RecursoBoveda[] = [
   ...BOVEDA_PREMIUM,
   ...BOVEDA_MASTERCLASS,
+  ...BOVEDA_CREATIVIDAD,
+  ...BOVEDA_HIGGSFIELD,
   ...BOVEDA_COMUNIDAD,
   ...BOVEDA_META_ADS,
   ...BOVEDA_PRODUCCION,
@@ -1183,7 +1551,7 @@ export const TALLER = {
       capas: [
         "Estrategia creativa: qué contar, a quién y por qué",
         "El Cerebro Creativo IA — el proceso que lo cambia todo",
-        "La Biblia Publicitaria: 60 documentos de oficio",
+        "La Biblia Publicitaria: 59 documentos de oficio",
         "Dirección de arte, storyboard y consistencia",
         "Producción cinematográfica y edición con IA",
         "Empaquetarlo y cobrarlo — proyectos desde $2,000",
@@ -1235,7 +1603,7 @@ export const TALLER = {
     stack: [
       { item: "Masterclass completa en módulos", valor: "$497" },
       {
-        item: "La Biblia Publicitaria completa: los 60 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema",
+        item: "La Biblia Publicitaria completa: los 59 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema",
         valor: "$497",
         estrella: true,
       },
@@ -1271,7 +1639,7 @@ export const TALLER = {
         valorTotal: "$1,682",
         beneficios: [
           "Las 6 partes completas en módulos de 15-25 min",
-          "La Biblia Publicitaria completa (60 documentos)",
+          "La Biblia Publicitaria completa (59 documentos)",
           "La baraja de GPTs de mi proceso",
           "Todas las plantillas del sistema",
           "Comunidad + soporte WhatsApp 30 días",
@@ -1385,15 +1753,15 @@ export const TALLER = {
       recursos: RECURSOS_MASTERCLASS,
     },
     {
-      // Plantilla del próximo curso. Cámbiala cuando subas tu curso
-      // complementario, o pon disponible: false mientras tanto.
-      slug: "proximo-curso",
-      titulo: "Nuevo curso complementario",
+      // Curso bonus incluido en la compra. Se llena con los módulos y sus
+      // IDs de YouTube (no listado) conforme se suban.
+      slug: "storyselling-pro",
+      titulo: "StorySelling Pro: Estrategia CAT para creación de contenido Express",
       descripcion:
-        "Un curso corto para llevar tu sistema aún más lejos. Muy pronto en tu Classroom.",
+        "El método CAT para crear contenido que vende sin partir de cero cada vez: de la idea al guion en minutos.",
       portada: { emoji: "🎁", color: "rgba(244,240,222,0.10)" },
-      disponible: false,
-      modulos: [],
+      disponible: true,
+      modulos: MODULOS_STORYSELLING,
       recursos: [],
     },
   ] as Curso[],

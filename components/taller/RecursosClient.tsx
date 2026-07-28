@@ -132,29 +132,10 @@ function TarjetaBoveda({
     );
   }
 
-  // Repos: abren GitHub en pestaña nueva.
-  if (recurso.tipo === "repo" && recurso.linkExterno) {
-    return (
-      <a
-        href={recurso.linkExterno}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex flex-col rounded-2xl border p-5 transition-transform hover:-translate-y-0.5"
-        style={{ borderColor: "rgba(244,240,222,0.12)", background: "var(--surface)" }}
-      >
-        <Badges recurso={recurso} />
-        <p className="mt-3 font-mono text-sm font-semibold">{recurso.titulo}</p>
-        <p className="mt-1 flex-1 text-sm" style={{ color: "var(--muted)" }}>
-          {recurso.descripcion}
-        </p>
-        <p className="mt-3 text-xs font-medium" style={{ color: "var(--green)" }}>
-          Abrir en GitHub ↗
-        </p>
-      </a>
-    );
-  }
-
-  // Normales: página de detalle, con candado para no-alumnos.
+  // Normales (incluidos los repos): página de detalle, con candado para
+  // no-alumnos. Los repos NO saltan directo a GitHub — así se ve la ficha
+  // que explica qué es, cómo se instala y cuándo usarlo antes de salir
+  // del portal. El link a GitHub vive dentro de esa página de detalle.
   // Las gratis están abiertas para todos (imán público).
   const abierta = desbloqueado || Boolean(recurso.gratis);
   const nDescargas = recurso.nDescargas;

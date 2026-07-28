@@ -8,6 +8,8 @@ export type TallerEvento =
   | "taller_login"
   | "taller_registro"
   | "taller_leccion_vista"
+  // abierta ≠ completada: "completada" la dispara el reproductor al 80%
+  | "taller_leccion_completada"
   | "taller_cta_venta"
   | "taller_cta_comprar"
   | "taller_recurso"

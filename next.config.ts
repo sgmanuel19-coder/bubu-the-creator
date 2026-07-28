@@ -8,7 +8,9 @@ import type { NextConfig } from "next";
 const devEval = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
 
 const csp = [
-  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${devEval} blob: https://connect.facebook.net https://va.vercel-scripts.com`,
+  // www.youtube.com: la IFrame API del reproductor del portal, que sirve
+  // para marcar una lección como vista solo cuando de verdad se reprodujo.
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${devEval} blob: https://connect.facebook.net https://va.vercel-scripts.com https://www.youtube.com`,
   "worker-src 'self' blob:",
   "frame-src https://www.instagram.com https://www.youtube.com https://www.youtube-nocookie.com https://www.tiktok.com https://drive.google.com",
   "frame-ancestors 'self'",
@@ -59,6 +61,12 @@ const nextConfig: NextConfig = {
       'lucide-react',
       'date-fns',
     ],
+  },
+  // Los PDFs de la Biblia viven fuera de /public (no deben ser accesibles
+  // por URL directa). Next no los "ve" porque nadie los importa, así que
+  // hay que incluirlos a mano en el bundle de la ruta de descarga.
+  outputFileTracingIncludes: {
+    '/api/taller/descarga/[...ruta]': ['./private/biblia/**'],
   },
   async redirects() {
     return [
