@@ -822,9 +822,14 @@ body {
    panel activo tiene grow:1 y se lleva todo el espacio libre → se expande.
    Robusto: en el peor caso (grow congelado) sigue viéndose la cinta. */
 /* --sv-a = acento RGB del servicio (inline por panel); azul marca de fallback */
-.sv-panel{ --sv-a:26,128,255;position:relative;flex:0 1 108px;min-width:68px;border-radius:18px;border:1px solid var(--sv-line);background:linear-gradient(165deg,rgba(var(--sv-a),.07) 0%,#100f09 55%,#0e0d08 100%);overflow:hidden;cursor:pointer;font-family:inherit;text-align:left;padding:0;transition:flex-grow .7s cubic-bezier(.16,1,.3,1),border-color .4s,box-shadow .4s,background .5s; }
+.sv-panel{ --sv-a:26,128,255;position:relative;flex:0 1 108px;min-width:68px;border-radius:18px;border:1px solid var(--sv-line);background:linear-gradient(165deg,rgba(var(--sv-a),.07) 0%,#100f09 55%,#0e0d08 100%);overflow:hidden;cursor:pointer;font-family:inherit;text-align:left;padding:0;transition:flex-grow .7s cubic-bezier(.16,1,.3,1),border-color .4s,box-shadow .4s; }
+/* El degradado del estado activo va en una capa aparte y se revela con opacity
+   (compuesta en GPU). Antes se animaba `background` directamente, lo que obliga
+   a re-rasterizar el degradado del panel en cada frame de la expansión. */
+.sv-panel::before{ content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s;background:linear-gradient(165deg,rgba(var(--sv-a),.16) 0%,rgba(var(--sv-a),.04) 45%,#0e0d08 100%); }
+.sv-panel.on::before{ opacity:1; }
 .sv-panel:hover{ border-color:rgba(var(--sv-a),.4); }
-.sv-panel.on{ flex-grow:1;background:linear-gradient(165deg,rgba(var(--sv-a),.16) 0%,rgba(var(--sv-a),.04) 45%,#0e0d08 100%);border-color:rgba(var(--sv-a),.55);box-shadow:0 22px 52px rgba(0,0,0,.55),0 0 40px rgba(var(--sv-a),.16); }
+.sv-panel.on{ flex-grow:1;border-color:rgba(var(--sv-a),.55);box-shadow:0 22px 52px rgba(0,0,0,.55),0 0 40px rgba(var(--sv-a),.16); }
 .sv-panel-tex{ position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(rgba(244,240,222,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(244,240,222,.022) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse at 80% 8%,#000 0%,transparent 65%); }
 .sv-panel-glow{ position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(var(--sv-a),.22) 0%,transparent 70%);opacity:0;transition:opacity .5s;pointer-events:none; }
 .sv-panel.on .sv-panel-glow{ opacity:1; }
@@ -1208,7 +1213,10 @@ body {
     radial-gradient(100% 70% at 85% 100%, rgba(26,128,255,.07) 0%, transparent 60%),
     var(--bg);
 }
-.beams-bg-canvas{ position:absolute;inset:0;filter:blur(12px);opacity:.9; }
+/* Sin filter:blur() — era un blur gaussiano de viewport completo repintado en
+   cada frame del canvas. El suavizado ahora sale gratis del reescalado del
+   canvas (RENDER_SCALE 0.28 → tamaño completo) en beams-background.tsx. */
+.beams-bg-canvas{ position:absolute;inset:0;opacity:.9; }
 /* Velo que asienta los haces sobre la base cálida y protege la lectura */
 .beams-bg-veil{ position:absolute;inset:0;background:rgba(13,12,8,.5); }
 /* Todo el contenido va por encima de la capa de fondo */

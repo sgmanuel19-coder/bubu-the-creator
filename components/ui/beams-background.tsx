@@ -77,8 +77,11 @@ export default function BeamsBackground({
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return; // el degradado estático del CSS ya cubre este caso
 
-    // Render a resolución reducida: el blur hace que no se note y baja mucho el costo.
-    const RENDER_SCALE = 0.55;
+    // Render a resolución muy reducida: al escalar el canvas a tamaño completo,
+    // el propio reescalado suaviza los haces. Eso reemplaza al `filter:blur(12px)`
+    // que tenía el CSS, que era un blur gaussiano sobre TODO el viewport en cada
+    // frame — carísimo, y obligaba a recomponer la página entera contra esa capa.
+    const RENDER_SCALE = 0.28;
     let w = 0;
     let h = 0;
     let running = true;
