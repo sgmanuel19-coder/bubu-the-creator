@@ -252,6 +252,12 @@ export function autoThumb(piece: Piece): string | null {
   if (dv) return `https://drive.google.com/thumbnail?id=${dv}&sz=w800`;
   const yt = youtubeId(piece.url);
   if (yt) return `https://img.youtube.com/vi/${yt}/hqdefault.jpg`;
+  // mp4 propio: usamos un póster generado (mismo nombre, .jpg). Antes la
+  // miniatura era un <video preload="metadata">, y con ~30 tarjetas en pantalla
+  // eso disparaba 30 descargas parciales de video solo para pintar un frame.
+  if (piece.url && piece.url.startsWith("/videos/")) {
+    return `/images/portfolio/posters/${piece.url.split("/").pop()!.replace(/\.mp4$/i, ".jpg")}`;
+  }
   return null;
 }
 

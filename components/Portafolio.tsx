@@ -50,7 +50,6 @@ function GalleryCard({
   iaBadge?: boolean;
 }) {
   const thumb = autoThumb(piece);
-  const isFile = isVideoFile(piece.url);
   const clickable = Boolean(piece.url);
 
   return (
@@ -66,12 +65,9 @@ function GalleryCard({
       aria-label={clickable ? `Reproducir: ${piece.label} — ${piece.client}` : "Espacio disponible"}
     >
       {iaBadge && <span className="pf-ia">Hecho con IA</span>}
-      {isFile ? (
-        <video src={`${piece.url}#t=0.1`} muted playsInline preload="metadata"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-      ) : thumb ? (
+      {thumb ? (
         <Image src={thumb} alt={`${piece.label} — ${piece.client}`} fill sizes={GRID_SIZES}
-          style={{ objectFit: "cover" }} />
+          style={{ objectFit: "cover" }} loading="lazy" />
       ) : clickable ? (
         <div className="pf-card-grad" />
       ) : null}
