@@ -77,14 +77,27 @@ export default function BeamsBackground({
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return; // el degradado estático del CSS ya cubre este caso
 
-    // Render a resolución muy reducida: al escalar el canvas a tamaño completo,
-    // el propio reescalado suaviza los haces. Eso reemplaza al `filter:blur(12px)`
-    // que tenía el CSS, que era un blur gaussiano sobre TODO el viewport en cada
-    // frame — carísimo, y obligaba a recomponer la página entera contra esa capa.
-    const RENDER_SCALE = 0.28;
+    // Render a resolución reducida y luego escalado a tamaño completo: el propio
+    // reescalado aporta suavizado. Reemplaza al `filter:blur(12px)` del CSS, que
+    // era un blur gaussiano sobre TODO el viewport en cada frame y obligaba a
+    // recomponer la página entera contra esa capa.
+    const RENDER_SCALE = 0.45;
+    // El fondo es un desplazamiento lento: a 30fps es indistinguible de 60 y
+    // libera la mitad del tiempo de hilo principal para la UI (el acordeón de
+    // /servicios competía con esto por cada frame).
+    const FRAME_MS = 1000 / 30;
+    let lastFrame = 0;
     let w = 0;
     let h = 0;
     let running = true;
+
+    // Canvas auxiliar: los haces se dibujan aquí SIN filtro y después se vuelca
+    // el resultado con un ÚNICO blur. Antes `ctx.filter` quedaba activo en el
+    // contexto durante los 18 fillRect, así que se ejecutaban 18 blurs
+    // gaussianos por frame — en CPU, en el hilo principal, a 60fps.
+    const off = document.createElement("canvas");
+    const octx = off.getContext("2d", { alpha: true });
+    if (!octx) return;
 
     const resize = () => {
       w = window.innerWidth;
@@ -95,6 +108,9 @@ export default function BeamsBackground({
       canvas.style.height = `${h}px`;
       // setTransform (no scale) — evita que la escala se acumule en cada resize
       ctx.setTransform(RENDER_SCALE, 0, 0, RENDER_SCALE, 0, 0);
+
+      off.width = canvas.width;
+      off.height = canvas.height;
 
       const total = window.innerWidth < 768 ? 9 : 18;
       beamsRef.current = Array.from({ length: total }, () => createBeam(w, h));
@@ -117,6 +133,7 @@ export default function BeamsBackground({
     };
 
     const drawBeam = (beam: Beam) => {
+      const ctx = octx;
       ctx.save();
       ctx.translate(beam.x, beam.y);
       ctx.rotate((beam.angle * Math.PI) / 180);
@@ -137,10 +154,19 @@ export default function BeamsBackground({
       ctx.restore();
     };
 
-    const animate = () => {
+    const animate = (now: number) => {
       if (!running) return;
-      ctx.clearRect(0, 0, canvas.width / RENDER_SCALE, canvas.height / RENDER_SCALE);
-      ctx.filter = "blur(30px)";
+
+      if (now - lastFrame < FRAME_MS) {
+        rafRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrame = now;
+
+      // 1. Haces al canvas auxiliar, sin filtro (18 fills baratos)
+      octx.setTransform(1, 0, 0, 1, 0, 0);
+      octx.clearRect(0, 0, off.width, off.height);
+      octx.setTransform(RENDER_SCALE, 0, 0, RENDER_SCALE, 0, 0);
 
       const total = beamsRef.current.length;
       beamsRef.current.forEach((beam, i) => {
@@ -149,6 +175,16 @@ export default function BeamsBackground({
         if (beam.y + beam.length < -100) resetBeam(beam, i, total);
         drawBeam(beam);
       });
+
+      // 2. Un solo blur, sobre el resultado ya compuesto
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Radio chico a propósito: el costo del blur de canvas 2D crece rápido con
+      // el radio (medido: 18 haces a blur 4 ≈ 4ms/frame vs ≈19ms a blur 10).
+      // Los haces ya salen suaves del degradado y del reescalado del canvas.
+      ctx.filter = "blur(4px)";
+      ctx.drawImage(off, 0, 0);
+      ctx.filter = "none";
 
       rafRef.current = requestAnimationFrame(animate);
     };
@@ -165,7 +201,7 @@ export default function BeamsBackground({
     };
     document.addEventListener("visibilitychange", onVisibility);
 
-    animate();
+    animate(performance.now());
 
     return () => {
       running = false;
