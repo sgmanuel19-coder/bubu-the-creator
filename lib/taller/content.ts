@@ -58,6 +58,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Qué es un director creativo", duracion: "", youtubeId: "Ie2UY-CvntU" },
       { titulo: "El proceso de creación", duracion: "", youtubeId: "BVpTDEDIdJ8" },
       { titulo: "El insight", duracion: "", youtubeId: "I33SFo6_bDM" },
+      { titulo: "Tipos de insights", duracion: "", youtubeId: "GGKqk1Ia0Ag" },
     ],
   },
   {
