@@ -54,6 +54,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     disponible: true,
     lecciones: [
       { titulo: "Conceptos básicos", duracion: "", youtubeId: "PAuFCWbNpmo" },
+      { titulo: "La IA amplifica, tú diriges", duracion: "", youtubeId: "GErCgANzB6Q" },
     ],
   },
   {
