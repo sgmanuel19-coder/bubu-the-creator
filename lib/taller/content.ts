@@ -63,6 +63,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Retóricas publicitarias", duracion: "", youtubeId: "MvzDV0vD4PE" },
       { titulo: "Estructuras narrativas", duracion: "", youtubeId: "ojwjVl6WDik" },
       { titulo: "Géneros de storytelling", duracion: "", youtubeId: "3l4uybim6w8" },
+      { titulo: "Cierre", duracion: "", youtubeId: "loc3LYxreLE" },
     ],
   },
   {
