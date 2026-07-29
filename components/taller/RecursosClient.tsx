@@ -102,11 +102,11 @@ function Badges({ recurso }: { recurso: RecursoTarjeta }) {
 
 function TarjetaBoveda({
   recurso,
-  desbloqueado,
+  abierta,
   premiumDesbloqueado,
 }: {
   recurso: RecursoTarjeta;
-  desbloqueado: boolean;
+  abierta: boolean; // ya resuelto por el padre según el nivel que este recurso exige
   premiumDesbloqueado: boolean;
 }) {
   // Premium: lleva a su página de detalle (ahí vive la bandeja de pago,
@@ -137,7 +137,7 @@ function TarjetaBoveda({
   // que explica qué es, cómo se instala y cuándo usarlo antes de salir
   // del portal. El link a GitHub vive dentro de esa página de detalle.
   // Las gratis están abiertas para todos (imán público).
-  const abierta = desbloqueado || Boolean(recurso.gratis);
+  const desbloqueadoFinal = abierta || Boolean(recurso.gratis);
   const nDescargas = recurso.nDescargas;
   return (
     <a
@@ -146,7 +146,7 @@ function TarjetaBoveda({
       style={{
         borderColor: recurso.gratis ? "rgba(26,128,255,0.35)" : "rgba(244,240,222,0.12)",
         background: "var(--surface)",
-        opacity: abierta && recurso.disponible ? 1 : 0.8,
+        opacity: desbloqueadoFinal && recurso.disponible ? 1 : 0.8,
       }}
     >
       <Badges recurso={recurso} />
@@ -156,7 +156,7 @@ function TarjetaBoveda({
         </p>
       )}
       <p className={recurso.cursoRelacionado ? "mt-1 font-semibold" : "mt-3 font-semibold"}>
-        {recurso.gratis ? "📖" : abierta ? "📂" : "🔒"} {recurso.titulo}
+        {recurso.gratis ? "📖" : desbloqueadoFinal ? "📂" : "🔒"} {recurso.titulo}
       </p>
       <p className="mt-1 flex-1 text-sm" style={{ color: "var(--muted)" }}>
         {recurso.descripcion}
@@ -164,7 +164,7 @@ function TarjetaBoveda({
       <p className="mt-3 text-xs font-medium" style={{ color: "var(--green)" }}>
         {recurso.gratis
           ? "Leer gratis →"
-          : abierta
+          : desbloqueadoFinal
             ? `Abrir${nDescargas ? ` · ${nDescargas} descargable${nDescargas > 1 ? "s" : ""}` : ""} →`
             : "🔒 Desbloquea para abrir"}
       </p>
@@ -178,8 +178,8 @@ export default function RecursosClient({
   niveles,
 }: {
   recursos: RecursoTarjeta[]; // versión tarjeta (sin contenido real)
-  desbloqueado: boolean; // acceso a los recursos normales (grabado | todo)
-  niveles: string[]; // niveles activos de la sesión (para premium y tiers)
+  desbloqueado: boolean; // tiene al menos el nivel "boveda" (o superior) → oculta el banner
+  niveles: string[]; // niveles activos YA expandidos por la escalera (boveda/grabado/vivo)
 }) {
   const todos = recursos;
   const tieneNivel = (n: string) => niveles.includes("todo") || niveles.includes(n);
@@ -218,24 +218,24 @@ export default function RecursosClient({
         </div>
       )}
 
-      {/* ── ¿Qué incluye cada acceso? (Acceso total destacado) ── */}
+      {/* ── ¿Qué incluye cada acceso? (el más completo, destacado) ── */}
       <section className="mt-8">
         <p className="text-sm font-bold">¿Qué incluye cada acceso?</p>
         <div className="mt-3 grid gap-3 sm:grid-cols-3">
           {NIVELES_VENTA.map((t) => {
-            const esTodo = t.nivel === "todo";
+            const destacado = t.nivel === "vivo";
             const yaLoTiene = tieneNivel(t.nivel);
             return (
               <div
                 key={t.nivel}
                 className="flex flex-col rounded-2xl border p-5"
                 style={{
-                  borderColor: esTodo ? "rgba(255,209,102,0.5)" : "rgba(244,240,222,0.12)",
+                  borderColor: destacado ? "rgba(255,209,102,0.5)" : "rgba(244,240,222,0.12)",
                   background: "var(--surface)",
                 }}
               >
-                <p className="font-bold" style={esTodo ? { color: "#FFD166" } : undefined}>
-                  {esTodo ? "💎 " : ""}
+                <p className="font-bold" style={destacado ? { color: "#FFD166" } : undefined}>
+                  {destacado ? "💎 " : ""}
                   {t.nombre}
                 </p>
                 <p className="mt-1 text-lg font-extrabold">{t.precio}</p>
@@ -256,7 +256,7 @@ export default function RecursosClient({
                     onClick={() => setTierAbierto(tierAbierto === t.nivel ? null : t.nivel)}
                     className="mt-3 rounded-xl px-4 py-2.5 text-xs font-bold transition-opacity hover:opacity-90"
                     style={
-                      esTodo
+                      destacado
                         ? { background: "#FFD166", color: "#0D0C08" }
                         : { background: "var(--green)", color: "#fff" }
                     }
@@ -320,7 +320,7 @@ export default function RecursosClient({
             <TarjetaBoveda
               key={r.slug}
               recurso={r}
-              desbloqueado={desbloqueado}
+              abierta={tieneNivel(r.cursoRelacionado === "Masterclass" ? "grabado" : "boveda")}
               premiumDesbloqueado={tieneNivel(r.slug)}
             />
           ))}

@@ -37,7 +37,7 @@ export const CONOCIMIENTO: Entrada[] = [
     id: "precio",
     claves: ["precio", "cuanto cuesta", "costo", "cuotas", "pagar el curso", "vale"],
     respuesta:
-      "El curso grabado cuesta $120 (S/450): acceso inmediato y de por vida. La masterclass en vivo cuesta $250 (S/950): cohorte con fecha fija, ~4.5 horas, Q&A, revisión de tu proyecto, e incluye el grabado de por vida. Ambos con cuotas disponibles. Para dimensionarlo: un proyecto con este sistema se ofrece a empresas desde $2,000 — aprenderlo cuesta menos del 10% de eso.",
+      "El curso grabado cuesta $150 (S/560): acceso inmediato y de por vida, con el curso bonus StorySelling Pro y toda la bóveda de documentos incluidos. La masterclass en vivo cuesta $250 (S/950): cohorte con fecha fija, ~4.5 horas, Q&A, revisión de tu proyecto, e incluye el grabado de por vida. Ambos con cuotas disponibles. Para dimensionarlo: un proyecto con este sistema se ofrece a empresas desde $2,000 — aprenderlo cuesta menos del 10% de eso.",
   },
   {
     id: "garantia",
@@ -149,9 +149,9 @@ export const CONOCIMIENTO: Entrada[] = [
   },
   {
     id: "upgrade",
-    claves: ["upgrade", "subir al vivo", "cambiar al vivo", "130"],
+    claves: ["upgrade", "subir al vivo", "cambiar al vivo", "100"],
     respuesta:
-      "Si compraste el grabado y quieres subir a la cohorte en vivo, el upgrade cuesta solo $130 más (la diferencia). Ganas la sesión en vivo, el Q&A y la revisión de tu primer proyecto con Manuel.",
+      "Si compraste el grabado y quieres subir a la cohorte en vivo, el upgrade cuesta solo $100 más (la diferencia). Ganas la sesión en vivo, el Q&A y la revisión de tu primer proyecto con Manuel.",
   },
   {
     id: "comunidad",
@@ -194,21 +194,21 @@ export const CONOCIMIENTO_VENTAS: Entrada[] = [
   },
   {
     id: "v-niveles",
-    claves: ["niveles", "acceso total", "que acceso", "tipos de acceso", "solo el vivo", "solo grabado", "desbloquear todo"],
+    claves: ["niveles", "acceso total", "que acceso", "tipos de acceso", "solo el vivo", "solo grabado", "desbloquear todo", "boveda", "solo documentos"],
     respuesta:
-      "Hay tres accesos: Cursos grabados (la masterclass completa a tu ritmo + recursos del curso), Cohorte en vivo (las sesiones en vivo con la comunidad), y el Acceso total 💎 que abre TODO el portal: cursos, en vivo y cada recurso premium de la bóveda — incluidos los que se publiquen después. Los ves comparados en la pestaña Recursos, arriba de la bóveda.",
+      "Hay tres accesos, y cada uno de arriba incluye todo el de abajo: Bóveda de documentos ($50, solo guías y plantillas, sin las clases), Cursos grabados ($150, la masterclass completa + el bonus StorySelling Pro + toda la bóveda) y Cohorte en vivo ($250, las sesiones en vivo + todo lo del grabado). Los ves comparados en la pestaña Recursos, arriba de la bóveda.",
   },
   {
     id: "v-premium",
     claves: ["premium", "recurso de paga", "pack de prompts", "plantilla maestra", "desbloquear recurso", "clave", "contraseña del recurso"],
     respuesta:
-      "Los recursos premium 💎 de la bóveda se compran individual: abres el recurso, ves qué incluye y la bandeja de pago con Yape/Plin o transferencia. Pagas, mandas tu captura por WhatsApp y Manuel te envía tu acceso — un link que abres y quedas dentro, directo en tu recurso. Si tienes el Acceso total, ya están todos incluidos.",
+      "Los prompts cinematográficos y la plantilla maestra de campaña ya no se compran sueltos: están incluidos en el acceso Bóveda de documentos ($50), junto con toda la guía de la bóveda. Si ya tienes Bóveda, Cursos grabados o el en vivo, ya los tienes desbloqueados.",
   },
   {
     id: "v-precio",
     claves: ["precio", "cuanto cuesta", "cuanto vale", "costo", "cuotas", "vale", "pagar"],
     respuesta:
-      "Hay dos formas de entrar: el curso grabado a $120 (S/450), acceso inmediato y de por vida; y la masterclass en vivo a $250 (S/950), que es una cohorte con fecha fija de ~4.5 horas, con Q&A y revisión de tu proyecto, e incluye el grabado de por vida. Ambos con cuotas. Para dimensionarlo: un proyecto con este sistema se ofrece a empresas desde $2,000 — aprenderlo cuesta menos del 10% de eso. Baja a la sección de precios para elegir.",
+      "Hay tres formas de entrar: la Bóveda de documentos a $50, solo guías y plantillas, sin video; el curso grabado a $150 (S/560), con las clases + el bonus StorySelling Pro + toda la bóveda, acceso inmediato y de por vida; y la masterclass en vivo a $250 (S/950), una cohorte con fecha fija de ~4.5 horas con Q&A y revisión de tu proyecto, que incluye todo lo del grabado. Cuotas disponibles en grabado y vivo. Para dimensionarlo: un proyecto con este sistema se ofrece a empresas desde $2,000 — aprenderlo cuesta menos del 10% de eso. Baja a la sección de precios para elegir.",
   },
   {
     id: "v-incluye",
@@ -232,7 +232,7 @@ export const CONOCIMIENTO_VENTAS: Entrada[] = [
     id: "v-vivo-vs-grabado",
     claves: ["vivo o grabado", "diferencia", "cual elijo", "cual me conviene", "vivo vs", "grabado vs"],
     respuesta:
-      "El grabado ($120) es el mismo contenido para verlo a tu ritmo, cuando quieras, de por vida. El vivo ($250) es una cohorte con fecha fija donde lo vemos juntos en ~4.5 horas, con sesión de preguntas en directo y revisión grupal de TU proyecto — y además te llevas el grabado de por vida. Si quieres acompañamiento y feedback directo, el vivo; si prefieres ir solo a tu ritmo, el grabado.",
+      "El grabado ($150) es el mismo contenido para verlo a tu ritmo, cuando quieras, de por vida. El vivo ($250) es una cohorte con fecha fija donde lo vemos juntos en ~4.5 horas, con sesión de preguntas en directo y revisión grupal de TU proyecto — y además te llevas el grabado de por vida. Si quieres acompañamiento y feedback directo, el vivo; si prefieres ir solo a tu ritmo, el grabado.",
   },
   {
     id: "v-herramientas",
@@ -266,9 +266,9 @@ export const CONOCIMIENTO_VENTAS: Entrada[] = [
   },
   {
     id: "v-upgrade",
-    claves: ["upgrade", "subir al vivo", "del grabado al vivo", "cambiar al vivo", "130"],
+    claves: ["upgrade", "subir al vivo", "del grabado al vivo", "cambiar al vivo", "100"],
     respuesta:
-      "Si compras el grabado y luego quieres el acompañamiento en vivo, subes a la cohorte por solo $130 más (la diferencia). Ganas la sesión de Q&A y la revisión de tu primer proyecto conmigo.",
+      "Si compras el grabado y luego quieres el acompañamiento en vivo, subes a la cohorte por solo $100 más (la diferencia). Ganas la sesión de Q&A y la revisión de tu primer proyecto conmigo.",
   },
 ];
 

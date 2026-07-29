@@ -438,11 +438,16 @@ export const PAGOS = {
   ],
 };
 
-// ── Niveles de acceso vendibles (tarjeta Acceso total + franja) ─
-// El nivel "todo" abre TODO el portal (cursos + en vivo + todos los
-// premium). Ajusta precios aquí; las contraseñas van en Vercel.
+// ── Niveles de acceso vendibles (franja de la bóveda) ───────────
+// Escalera: "boveda" < "grabado" < "vivo" (implementada en
+// lib/taller/session.ts → HEREDA). Cada nivel superior desbloquea también
+// los de abajo, así que el precio y el copy deben reflejar eso: "grabado"
+// SIEMPRE incluye todo lo de "boveda", y "vivo" incluye todo lo de
+// "grabado". El nivel "todo" (acceso maestro) sigue existiendo para tu
+// propia clave interna, pero ya no se vende como producto aparte — con
+// "vivo" ya se cubre el portal completo.
 export type NivelVenta = {
-  nivel: "todo" | "grabado" | "vivo";
+  nivel: "boveda" | "grabado" | "vivo";
   nombre: string;
   precio: string;
   descripcion: string;
@@ -451,28 +456,28 @@ export type NivelVenta = {
 
 export const NIVELES_VENTA: NivelVenta[] = [
   {
-    nivel: "todo",
-    nombre: "Acceso total",
-    precio: "S/497", // ← PLACEHOLDER: define tu precio real
+    nivel: "boveda",
+    nombre: "Bóveda de documentos",
+    precio: "$50",
     descripcion:
-      "Todo el portal, para siempre: la masterclass completa, los en vivo y cada recurso premium de la bóveda — los de hoy y los que se sumen.",
+      "Solo los documentos: todas las guías, plantillas y proyectos de la bóveda — incluidos los dos que antes se vendían aparte. Sin las clases en video.",
     incluye: [
-      "Masterclass grabada completa (6 partes)",
-      "Acceso a las sesiones en vivo",
-      "TODOS los recursos premium de la bóveda",
-      "Todo lo premium que se publique después",
+      "Toda la bóveda de guías, plantillas y proyectos",
+      "Los prompts cinematográficos y la plantilla maestra de campaña (antes de pago)",
+      "Actualizaciones: lo nuevo que se publique también entra",
     ],
   },
   {
     nivel: "grabado",
     nombre: "Cursos grabados",
-    precio: "$120",
+    precio: "$150",
     descripcion:
-      "La masterclass completa a tu ritmo + los recursos del curso en la bóveda.",
+      "La masterclass completa a tu ritmo + el curso bonus StorySelling Pro, con toda la bóveda de documentos incluida.",
     incluye: [
       "Masterclass grabada completa (6 partes)",
-      "Biblia, plantillas y recursos del curso",
-      "Acceso de por vida a las actualizaciones del grabado",
+      "Curso bonus: StorySelling Pro (Estrategia CAT)",
+      "Toda la bóveda de documentos incluida",
+      "Acceso de por vida a las actualizaciones",
     ],
   },
   {
@@ -480,16 +485,20 @@ export const NIVELES_VENTA: NivelVenta[] = [
     nombre: "Cohorte en vivo",
     precio: "$250",
     descripcion:
-      "Las sesiones en vivo de la cohorte actual, con acceso al chat de la comunidad.",
+      "Las sesiones en vivo de la cohorte actual, con todo el curso grabado y la bóveda completa incluidos.",
     incluye: [
-      "Sesiones en vivo de la cohorte",
-      "Chat en vivo de la comunidad",
-      "Acceso durante toda la cohorte",
+      "Sesiones en vivo de la cohorte + chat de comunidad",
+      "Todo el curso grabado incluido (clases + bonus)",
+      "Toda la bóveda de documentos incluida",
     ],
   },
 ];
 
-// ── Premium (vitrina para todos; ajusta precios aquí) ──────────
+// ── Antes premium, hoy dentro del nivel "boveda" ($50) ──────────
+// Hasta hace poco estos 2 se vendían sueltos por WhatsApp (S/97 y S/147).
+// Ahora son recursos normales de la bóveda: los desbloquea el nivel
+// "boveda" como a cualquier otro. El campo `premium` queda disponible en
+// el tipo por si algún día quieres volver a vender algo suelto.
 const BOVEDA_PREMIUM: RecursoBoveda[] = [
   {
     slug: "pack-prompts-cinematograficos",
@@ -499,12 +508,11 @@ const BOVEDA_PREMIUM: RecursoBoveda[] = [
     tipo: "plantilla",
     nivel: "intermedio",
     disponible: true,
-    premium: { precio: "S/97" },
     tags: ["prompts", "cine", "imagen"],
     contenido: [
       "Cada prompt de este pack salió de producción real para clientes: encuadre, óptica, esquema de luz y paleta ya calibrados para que el resultado se vea a pieza publicitaria y no a «imagen de IA».",
       "Están organizados por tipo de plano y por género de campaña, con notas de cuándo usar cada uno y qué variar para tu marca.",
-      "Al escribirme por WhatsApp te lo envío directo y te ayudo a elegir por dónde empezar según lo que produces.",
+      "Con tu nivel Bóveda desbloqueado, escríbeme por WhatsApp y te lo mando directo — te ayudo a elegir por dónde empezar según lo que produces.",
     ],
   },
   {
@@ -515,12 +523,11 @@ const BOVEDA_PREMIUM: RecursoBoveda[] = [
     tipo: "plantilla",
     nivel: "avanzado",
     disponible: true,
-    premium: { precio: "S/147" },
     tags: ["campaña", "estrategia", "guiones"],
     contenido: [
       "Es la misma plantilla que uso con mis clientes activos: cada sección te obliga a decidir como director creativo antes de tocar cualquier herramienta de IA.",
       "Incluye el orden exacto de las 4 etapas, los espacios para el insight y la Big Idea, y la salida lista para alimentar tu Cerebro Creativo.",
-      "Te la entrego por WhatsApp con un video corto de cómo la lleno yo, paso a paso.",
+      "Con tu nivel Bóveda desbloqueado, escríbeme por WhatsApp y te la mando directo, con un video corto de cómo la lleno yo, paso a paso.",
     ],
   },
 ];
@@ -1639,15 +1646,16 @@ export const TALLER = {
     productos: {
       grabado: {
         nombre: "Curso grabado",
-        precio: "$120",
-        precioLocal: "S/450",
+        precio: "$150",
+        precioLocal: "S/560",
         nota: "acceso inmediato · de por vida, con actualizaciones · cuotas disponibles",
         valorTotal: "$1,682",
         beneficios: [
           "Las 6 partes completas en módulos de 15-25 min",
+          "Curso bonus: StorySelling Pro (Estrategia CAT)",
+          "Toda la bóveda de documentos y plantillas incluida",
           "La Biblia Publicitaria completa (59 documentos)",
           "La baraja de GPTs de mi proceso",
-          "Todas las plantillas del sistema",
           "Comunidad + soporte WhatsApp 30 días",
           "Llamada grupal de seguimiento (día 14)",
         ],

@@ -68,7 +68,7 @@ function StickyCompra() {
         style={{ background: "var(--green)", color: "#fff" }}
       >
         <span>Elegir mi acceso</span>
-        <span className="text-xs font-normal opacity-90">$120 · $250 →</span>
+        <span className="text-xs font-normal opacity-90">$150 · $250 →</span>
       </a>
     </div>
   );

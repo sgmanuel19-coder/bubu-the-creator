@@ -45,12 +45,16 @@ export default async function RecursoPage({
   if (!recurso) notFound();
   const algunNivel = await estaDesbloqueado();
   // Gratis → abierta para todos (imán público). Premium pide su propio
-  // nivel (o "todo"); los normales, el acceso de cursos.
+  // nivel (mecanismo disponible por si vuelves a vender algo suelto). Los
+  // 4 recursos propios de la masterclass piden "grabado" (son parte del
+  // stack de valor del curso); el resto de la bóveda pide "boveda".
   const desbloqueado = recurso.gratis
     ? true
     : recurso.premium
       ? await estaDesbloqueado(recurso.slug)
-      : await estaDesbloqueado("grabado");
+      : await estaDesbloqueado(
+          recurso.cursoRelacionado === "Masterclass" ? "grabado" : "boveda",
+        );
 
   // REGLA DE ORO: las props de un client component se serializan al
   // navegador aunque no se rendericen. Sin el nivel correcto, el recurso
