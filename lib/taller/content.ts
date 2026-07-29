@@ -98,9 +98,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       "El caso Wellmax completo, el personaje de marca de WIN, galería de referencias y cómo adaptar el sistema a tu caso.",
     disponible: true,
     lecciones: [
-      { titulo: "Caso Wellmax: la campaña completa", duracion: "", youtubeId: "" },
-      { titulo: "Caso WIN: personaje de marca", duracion: "", youtubeId: "" },
-      { titulo: "Galería y adaptación a tu caso", duracion: "", youtubeId: "" },
+      { titulo: "Caso Smart System", duracion: "", youtubeId: "-Omg9T43gN0" },
     ],
   },
   {
