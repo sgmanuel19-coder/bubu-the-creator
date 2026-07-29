@@ -72,11 +72,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       "La Biblia de 59 documentos, el ADN de marca, el Prompt Maestro, Claude Code y Obsidian, skills, agentes y MCP — con demo del Cerebro razonando en vivo.",
     disponible: true,
     lecciones: [
-      { titulo: "La Biblia Publicitaria: los 59 documentos", duracion: "", youtubeId: "" },
-      { titulo: "El ADN de marca y el Prompt Maestro", duracion: "", youtubeId: "" },
-      { titulo: "Claude Code y Obsidian como centro de operaciones", duracion: "", youtubeId: "" },
-      { titulo: "Skills, agentes y MCP", duracion: "", youtubeId: "" },
-      { titulo: "Demo: el Cerebro Creativo razonando una campaña", duracion: "", youtubeId: "" },
+      { titulo: "El sistema", duracion: "", youtubeId: "fS8WtkGSvd8" },
     ],
   },
   {
