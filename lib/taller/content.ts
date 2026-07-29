@@ -111,6 +111,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     disponible: true,
     lecciones: [
       { titulo: "Cobrar", duracion: "", youtubeId: "7Z_scucjzr4" },
+      { titulo: "Cierre", duracion: "", youtubeId: "dLLDKMScKpc" },
     ],
   },
 ];
