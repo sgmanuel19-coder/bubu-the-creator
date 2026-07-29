@@ -16,6 +16,7 @@ export type Modulo = {
   descripcion: string;
   disponible: boolean;
   lecciones: Leccion[];
+  pptUrl?: string; // link a la presentación del módulo (Google Slides, etc.)
 };
 export type Recurso = {
   slug: string; // para la página de detalle /taller/recursos/<slug>
@@ -65,6 +66,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Géneros de storytelling", duracion: "", youtubeId: "3l4uybim6w8" },
       { titulo: "Cierre", duracion: "", youtubeId: "loc3LYxreLE" },
     ],
+    pptUrl: "https://docs.google.com/presentation/d/1HS2vd-B0fVuPhkUl7YlGc5Bccdb_4tcHK53a7GlMUG4/edit?usp=sharing",
   },
   {
     titulo: "PARTE 2 — EL SISTEMA: Cerebro Creativo IA",
@@ -79,6 +81,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Claude Code y Obsidian", duracion: "", youtubeId: "PhCin3wuCCU" },
       { titulo: "Cierre", duracion: "", youtubeId: "Sg4WPVVA2go" },
     ],
+    pptUrl: "https://docs.google.com/presentation/d/1EeYAlNUuW9Q5zgFgfM6Tn9mJUeuEJi7X4klFuGFbkks/edit?usp=sharing",
   },
   {
     titulo: "PARTE 3 — CREAR: producción con IA",
@@ -91,6 +94,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Introducción a Higgsfield.ai", duracion: "", youtubeId: "HRs0ef7VPQA" },
       { titulo: "Mi stack de GPTs", duracion: "", youtubeId: "UplIh_Wfh8c" },
     ],
+    pptUrl: "https://docs.google.com/presentation/d/1nyp6R1LKkMJaCRynxYFBsDVMXKdm65sMzgqMkQVrP_A/edit?usp=sharing",
   },
   {
     titulo: "PARTE 4 — CASOS: marcas reales",
@@ -103,6 +107,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Caso WIN", duracion: "", youtubeId: "EXOMRegCiyA" },
       { titulo: "Más ejemplos IA", duracion: "", youtubeId: "cbHNkDv5gm0" },
     ],
+    pptUrl: "https://docs.google.com/presentation/d/169gOJfWmDO63tImlVxfLCzv31u8YF-c0uYun9_lJ3jA/edit?usp=sharing",
   },
   {
     titulo: "PARTE 5 — COBRAR: el negocio",

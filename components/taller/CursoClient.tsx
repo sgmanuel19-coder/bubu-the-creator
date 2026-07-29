@@ -322,6 +322,23 @@ export default function CursoClient({
                   })}
                 </ul>
               )}
+
+              {modulo.disponible && modulo.pptUrl && desbloqueado && (
+                <div
+                  className="border-t px-4 py-3"
+                  style={{ borderColor: "rgba(244,240,222,0.08)" }}
+                >
+                  <a
+                    href={modulo.pptUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-xs font-medium transition-opacity hover:opacity-80"
+                    style={{ color: "var(--green)" }}
+                  >
+                    📊 Ver la presentación de este módulo →
+                  </a>
+                </div>
+              )}
             </section>
           );
         })}
