@@ -99,6 +99,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     disponible: true,
     lecciones: [
       { titulo: "Caso Smart System", duracion: "", youtubeId: "-Omg9T43gN0" },
+      { titulo: "Caso Wellmax", duracion: "", youtubeId: "8SfS27Wb-YA" },
     ],
   },
   {
