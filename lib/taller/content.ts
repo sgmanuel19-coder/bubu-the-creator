@@ -48,7 +48,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     ],
   },
   {
-    titulo: "PARTE 1 — PENSAR: el pensamiento del director creativo",
+    titulo: "PARTE 1 — PENSAR: Antes de la IA, piensa como un director creativo",
     descripcion:
       "El protocolo del director creativo, las 4 etapas, el insight y sus 6 tipos, la Big Idea, retóricas, 10 estructuras narrativas, fórmulas de headline y 9 hooks, géneros de storytelling y tipos de campaña.",
     disponible: true,
