@@ -31,7 +31,7 @@ export const CONOCIMIENTO: Entrada[] = [
     id: "herramientas",
     claves: ["herramientas", "que necesito", "requisitos", "higgsfield", "claude code", "chatgpt", "pagar", "stack", "programas"],
     respuesta:
-      "Necesitas como mínimo: el plan básico de Higgsfield, el plan básico de Claude Code y una cuenta de ChatGPT de pago para la baraja de GPTs. En la PARTE 3 (módulo del arsenal) está la lista completa del stack con precios y el orden en que conviene contratar cada cosa. Si ya pagas alguna herramienta de IA, vas con ventaja.",
+      "Son cuatro: el plan básico de Higgsfield, el plan básico de Claude Code, una cuenta de ChatGPT de pago para la baraja de GPTs, y CapCut + Canva para edición y diseño (Pro recomendado). En la PARTE 5 tienes el desglose completo con precios: todo junto cuesta menos que una cena de negocios al mes, y un solo cliente lo paga por un año. Si ya pagas alguna herramienta de IA, vas con ventaja.",
   },
   {
     id: "precio",
@@ -238,7 +238,7 @@ export const CONOCIMIENTO_VENTAS: Entrada[] = [
     id: "v-herramientas",
     claves: ["herramientas", "que necesito", "requisitos", "higgsfield", "claude", "chatgpt", "programas", "stack"],
     respuesta:
-      "Para aplicar el sistema necesitas, como mínimo, el plan básico de Higgsfield, el plan básico de Claude Code y una cuenta de ChatGPT de pago para la baraja de GPTs. Dentro te doy la lista completa con precios y el orden en que conviene contratar cada cosa. Si ya pagas alguna herramienta de IA, vas con ventaja.",
+      "Son cuatro: el plan básico de Higgsfield, el plan básico de Claude Code, una cuenta de ChatGPT de pago para la baraja de GPTs, y CapCut + Canva para edición y diseño (Pro recomendado). Todo junto cuesta menos que una cena de negocios al mes, y un solo cliente lo paga por un año. Dentro te doy la lista completa con precios y el orden en que conviene contratar cada cosa. Si ya pagas alguna herramienta de IA, vas con ventaja.",
   },
   {
     id: "v-acceso",

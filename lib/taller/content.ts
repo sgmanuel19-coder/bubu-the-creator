@@ -1573,7 +1573,7 @@ export const TALLER = {
 
     // Comparativo animado: producción tradicional vs. tu sistema.
     versus: [
-      { metrica: "Costo por campaña", tradicional: "$5,000 – $50,000", sistema: "Una fracción", barraTrad: 100, barraSis: 8 },
+      { metrica: "Costo por campaña", tradicional: "Hasta S/50,000", sistema: "Una fracción", barraTrad: 100, barraSis: 8 },
       { metrica: "Tiempo de producción", tradicional: "4 – 6 semanas", sistema: "Días", barraTrad: 100, barraSis: 12 },
       { metrica: "Equipo necesario", tradicional: "Productora completa", sistema: "Tú + tu laptop", barraTrad: 100, barraSis: 10 },
     ],
@@ -1587,27 +1587,44 @@ export const TALLER = {
       ],
     },
 
+    // Las 5 partes reales del programa (mismo orden y nombre que los
+    // decks y que el classroom). Antes la landing mostraba solo 3 actos
+    // y dejaba fuera EL SISTEMA (el diferenciador) y CASOS (la prueba).
     actos: [
       {
-        numero: "ACTO 1",
+        numero: "PARTE 1",
         titulo: "PENSAR",
         subtitulo: "Antes de la IA, piensa como un director creativo",
         texto:
-          "El Cerebro Creativo IA: el proceso para razonar una campaña como un director con 20 años de oficio antes de generar nada. Insight, concepto, Big Idea, estructura narrativa, hooks y guion que venden — el mismo trabajo, aplicado a tu negocio.",
+          "El oficio que va antes de generar nada: cómo se excava un insight de verdad (y sus 6 tipos), cómo pasa a concepto y a Big Idea, las retóricas publicitarias, las 10 estructuras narrativas, las fórmulas de headline y los 9 hooks. Es el trabajo que las agencias cobran más caro, aplicado a tu negocio.",
       },
       {
-        numero: "ACTO 2",
+        numero: "PARTE 2",
+        titulo: "EL SISTEMA",
+        subtitulo: "El Cerebro Creativo IA — lo que no vas a encontrar en otro curso",
+        texto:
+          "Aquí construyes el mecanismo: la Biblia Publicitaria (59 documentos que le enseñan el oficio a la IA), el ADN de tu marca y el Prompt Maestro que los une, viviendo en Claude Code y Obsidian. Deja de escribir prompts sueltos: tienes un director creativo que ya conoce tu negocio y responde con criterio.",
+      },
+      {
+        numero: "PARTE 3",
         titulo: "CREAR",
         subtitulo: "La estrategia, hecha pieza terminada",
         texto:
-          "Con el guion listo, produces la campaña completa con IA: prompt semiótico para dirigir la imagen, consistencia de personaje con hoja de personaje, animación con Higgsfield, Kling y Seedance, y montaje final en CapCut — explicado en general y mostrado con resultados reales de campañas que ya hice. El objetivo no es coleccionar herramientas: es que la pieza salga con nivel de agencia.",
+          "Con el guion listo produces la campaña completa: prompt semiótico para dirigir la imagen, hoja de personaje para que la marca no cambie de toma a toma, storyboard, animación con Higgsfield, Kling y Seedance, y montaje final en CapCut. El objetivo no es coleccionar herramientas: es que la pieza salga con nivel de agencia.",
       },
       {
-        numero: "ACTO 3",
+        numero: "PARTE 4",
+        titulo: "CASOS",
+        subtitulo: "Marcas reales, de principio a fin",
+        texto:
+          "El sistema completo desarmado en campañas que ya cobré: Smart System, Wellmax y el personaje de marca de WIN — del pedido del cliente al video entregado, paso por paso. Cierra con el método más rápido: tomar un formato que ya funciona, leerle el esqueleto y adaptarlo a tu marca.",
+      },
+      {
+        numero: "PARTE 5",
         titulo: "COBRAR",
         subtitulo: "El negocio",
         texto:
-          "Casos reales con marcas que pagaron por esto, tu propuesta de valor, tu oferta irresistible y cuánto cobrar: un proyecto con este sistema se ofrece a empresas desde $2,000.",
+          "Tu propuesta de valor con la fórmula exacta, los 6 componentes de una oferta irresistible, el precio como señal (por qué cobrar barato te abarata), el pitch de 60 segundos y tu plan de 30 días. Un proyecto con este sistema se ofrece a empresas desde $2,000.",
       },
     ],
 
@@ -1668,8 +1685,8 @@ export const TALLER = {
         nota: "acceso inmediato · de por vida, con actualizaciones · cuotas disponibles",
         valorTotal: "$1,682",
         beneficios: [
-          "Las 6 partes completas en módulos de 15-25 min",
-          "Curso bonus: StorySelling Pro (Estrategia CAT)",
+          "Las 6 partes completas: 28 clases en módulos cortos",
+          "Curso bonus: StorySelling Pro (28 clases más, 2h04)",
           "Toda la bóveda de documentos y plantillas incluida",
           "La Biblia Publicitaria completa (59 documentos)",
           "La baraja de GPTs de mi proceso",
@@ -1734,7 +1751,7 @@ export const TALLER = {
       },
       {
         q: "¿Qué herramientas necesito pagar?",
-        a: "Como mínimo, el plan básico de Higgsfield y el plan básico de Claude Code, más una cuenta de ChatGPT de pago para la baraja de GPTs. Dentro de la masterclass te doy la lista completa del stack, con precios y el orden en que conviene contratar cada cosa. Si ya pagas alguna herramienta de IA, vas con ventaja.",
+        a: "Cuatro: el plan básico de Higgsfield, el plan básico de Claude Code, una cuenta de ChatGPT de pago para la baraja de GPTs, y CapCut + Canva para edición y diseño (Pro recomendado). Todo junto cuesta menos que una cena de negocios al mes, y un solo cliente lo paga por un año. Dentro de la masterclass te doy la lista completa con precios y el orden en que conviene contratar cada cosa. Si ya pagas alguna herramienta de IA, vas con ventaja.",
       },
       {
         q: "¿Esto sirve si ya tengo una agencia o marca?",
@@ -1762,12 +1779,17 @@ export const TALLER = {
     descripcion:
       "La transmisión se activa aquí mismo el día de la cohorte. Entra unos minutos antes con esta misma contraseña, y ven con una marca o producto en mente: lo vamos a trabajar en vivo.",
     // Agenda del día — se muestra junto al stream. Déjala [] para ocultarla.
+    // Las 5 partes del deck real (1 Pensar · 2 El Sistema · 3 Crear ·
+    // 4 Casos · 5 Cobrar) + apertura. Los minutos son proporcionales al
+    // peso de cada deck y suman ~4h30, que es lo que promete el producto.
     agenda: [
-      "ACTO 1 · PENSAR — Estrategia y Cerebro Creativo IA (80 min)",
+      "Apertura — el resultado primero y las bases (15 min)",
+      "PARTE 1 · PENSAR — Insight, concepto y guion de director creativo (70 min)",
       "Pausa (10 min)",
-      "ACTO 2 · CREAR — Producción completa (90 min)",
-      "ACTO 3 · COBRAR — Casos y negocio (40 min)",
-      "Cierre — Q&A + revisión de proyectos (20 min)",
+      "PARTE 2 · EL SISTEMA — Biblia, ADN de marca y Prompt Maestro (45 min)",
+      "PARTE 3 · CREAR — Producción completa con IA (75 min)",
+      "PARTE 4 · CASOS — Wellmax, WIN y el método de adaptación (30 min)",
+      "PARTE 5 · COBRAR — Propuesta, oferta y precio (25 min)",
     ] as string[],
   },
 

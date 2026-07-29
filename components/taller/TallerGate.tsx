@@ -469,12 +469,16 @@ export default function TallerGate() {
         {/* ── Iceberg: lo que se ve vs. el sistema debajo ── */}
         <IcebergSistema />
 
-        {/* ── Los 3 actos ── */}
+        {/* ── Las 5 partes del programa ── */}
         <section className="mt-20">
           <h2 className="text-center text-2xl font-bold">
-            La masterclass completa, en tres actos
+            La masterclass completa, parte por parte
           </h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <p className="mx-auto mt-2 max-w-xl text-center text-sm" style={{ color: "var(--muted)" }}>
+            Pensar → construir el sistema → producir → verlo aplicado en marcas
+            reales → cobrarlo. En ese orden, por algo.
+          </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {gate.actos.map((acto) => (
               <div key={acto.numero} className="rounded-3xl border p-6" style={cardStyle}>
                 <p
