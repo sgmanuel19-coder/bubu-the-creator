@@ -41,12 +41,10 @@ const MODULOS_MASTERCLASS: Modulo[] = [
   {
     titulo: "PARTE 0 — Bienvenida y las bases",
     descripcion:
-      "El resultado primero, las 3 máquinas del sistema (Claude, Higgsfield y CapCut) y el mapa completo de lo que viene.",
+      "Introducción, bienvenida y presentación: el resultado primero, las 3 máquinas del sistema (Claude, Higgsfield y CapCut) y el mapa completo de lo que viene.",
     disponible: true,
     lecciones: [
-      { titulo: "El resultado primero: lo que vas a poder producir", duracion: "", youtubeId: "" },
-      { titulo: "Las 3 máquinas: Claude, Higgsfield y CapCut", duracion: "", youtubeId: "" },
-      { titulo: "El mapa de la masterclass", duracion: "", youtubeId: "" },
+      { titulo: "Introducción, bienvenida y presentación", duracion: "", youtubeId: "dxmIy6DqSWs" },
     ],
   },
   {
