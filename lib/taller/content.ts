@@ -89,6 +89,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Crear", duracion: "", youtubeId: "-UVwYnMClyQ" },
       { titulo: "Prompt semiótico", duracion: "", youtubeId: "bh-Mj7lxSb8" },
       { titulo: "Introducción a Higgsfield.ai", duracion: "", youtubeId: "HRs0ef7VPQA" },
+      { titulo: "Mi stack de GPTs", duracion: "", youtubeId: "UplIh_Wfh8c" },
     ],
   },
   {
