@@ -73,7 +73,14 @@ export default function ReproductorYouTube({
   titulo: string;
   onCompletado: () => void;
 }) {
-  const contenedor = useRef<HTMLDivElement>(null);
+  // Este wrapper es el único nodo que React administra. YT.Player()
+  // REEMPLAZA el elemento que le pasamos por su propio iframe sin avisarle
+  // a React — si le pasáramos un div con key={youtubeId} (como antes),
+  // React intentaría luego hacer removeChild sobre un nodo que YT ya
+  // sacó del DOM, y el `throw` resultante tumbaba toda la página al
+  // cambiar de lección. Por eso el nodo que le entregamos a YT.Player se
+  // crea y se destruye a mano, fuera de la reconciliación de React.
+  const wrapper = useRef<HTMLDivElement>(null);
   const avisado = useRef(false);
   const [conApi, setConApi] = useState(true);
 
@@ -91,12 +98,14 @@ export default function ReproductorYouTube({
 
     cargarApi().then((YT) => {
       if (!vivo) return;
-      if (!YT || !contenedor.current) {
+      if (!YT || !wrapper.current) {
         setConApi(false);
         return;
       }
       setConApi(true);
-      player = new YT.Player(contenedor.current, {
+      const nodo = document.createElement("div");
+      wrapper.current.appendChild(nodo);
+      player = new YT.Player(nodo, {
         videoId: youtubeId,
         host: "https://www.youtube-nocookie.com",
         playerVars: { rel: 0, modestbranding: 1 },
@@ -126,6 +135,7 @@ export default function ReproductorYouTube({
       } catch {
         // el nodo ya se fue con el desmontaje
       }
+      if (wrapper.current) wrapper.current.innerHTML = "";
     };
     // onCompletado se recrea en cada render del padre: fijamos el efecto
     // al video para no reinstalar el player en cada tecla.
@@ -138,7 +148,7 @@ export default function ReproductorYouTube({
       style={{ aspectRatio: "16 / 9", borderColor: "rgba(244,240,222,0.12)" }}
     >
       {conApi ? (
-        <div key={youtubeId} ref={contenedor} className="absolute inset-0 h-full w-full" />
+        <div ref={wrapper} className="absolute inset-0 h-full w-full" />
       ) : (
         <iframe
           key={youtubeId}
