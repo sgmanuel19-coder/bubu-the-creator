@@ -62,6 +62,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Del insight al concepto", duracion: "", youtubeId: "lZ_I28591ls" },
       { titulo: "Retóricas publicitarias", duracion: "", youtubeId: "MvzDV0vD4PE" },
       { titulo: "Estructuras narrativas", duracion: "", youtubeId: "ojwjVl6WDik" },
+      { titulo: "Géneros de storytelling", duracion: "", youtubeId: "3l4uybim6w8" },
     ],
   },
   {
