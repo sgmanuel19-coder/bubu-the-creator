@@ -110,10 +110,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       "Tu propuesta de valor, tu oferta irresistible, cuánto cobrar, el pitch de 60 segundos y tu plan de 30 días.",
     disponible: true,
     lecciones: [
-      { titulo: "Propuesta de valor y oferta irresistible", duracion: "", youtubeId: "" },
-      { titulo: "Cuánto cobrar: rangos reales de mercado", duracion: "", youtubeId: "" },
-      { titulo: "El pitch de 60 segundos", duracion: "", youtubeId: "" },
-      { titulo: "Tu plan de 30 días", duracion: "", youtubeId: "" },
+      { titulo: "Cobrar", duracion: "", youtubeId: "7Z_scucjzr4" },
     ],
   },
 ];
