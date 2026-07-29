@@ -86,7 +86,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
   {
     titulo: "PARTE 3 — CREAR: producción con IA",
     descripcion:
-      "Prompt engineering, Higgsfield a fondo, Kling y Seedance, audio y voz IA, la baraja de GPTs, consistencia con hoja de personaje, y ensamblaje y montaje en CapCut.",
+      "Prompt semiótico, Higgsfield a fondo (Kling, Seedance y consistencia con hoja de personaje), la baraja de GPTs y ensamblaje final en CapCut — explicado en general y mostrado con resultados reales de mi trabajo comercial.",
     disponible: true,
     lecciones: [
       { titulo: "Crear", duracion: "", youtubeId: "-UVwYnMClyQ" },
@@ -1600,7 +1600,7 @@ export const TALLER = {
         titulo: "CREAR",
         subtitulo: "La estrategia, hecha pieza terminada",
         texto:
-          "Con el guion listo, produces la campaña completa: storyboard, imágenes con dirección de arte y consistencia de marca, animación, voz y montaje final — todo con IA, sin cámara ni productora. Vas a tocar Higgsfield, Kling, Seedance y CapCut en el camino, pero el objetivo no es aprender herramientas sueltas: es que la pieza salga con nivel de agencia.",
+          "Con el guion listo, produces la campaña completa con IA: prompt semiótico para dirigir la imagen, consistencia de personaje con hoja de personaje, animación con Higgsfield, Kling y Seedance, y montaje final en CapCut — explicado en general y mostrado con resultados reales de campañas que ya hice. El objetivo no es coleccionar herramientas: es que la pieza salga con nivel de agencia.",
       },
       {
         numero: "ACTO 3",

@@ -79,7 +79,7 @@ export const CONOCIMIENTO: Entrada[] = [
     id: "storyboard",
     claves: ["storyboard", "escenas", "planos", "desglose visual"],
     respuesta:
-      "El storyboard convierte tu guion en el desglose visual completo: escenas, planos, ritmo y narrativa ANTES de generar una sola imagen. Se trabaja en la PARTE 3 con el GPT de storyboards de la baraja del proceso de Manuel. Pensar en escenas primero te ahorra horas de generaciones desperdiciadas.",
+      "El storyboard convierte tu guion en el desglose visual completo: escenas, planos, ritmo y narrativa ANTES de generar una sola imagen. Te lo explico en la PARTE 3, con resultados reales de campañas mías, y tienes el GPT de storyboards de la baraja del proceso para aplicarlo. Pensar en escenas primero te ahorra horas de generaciones desperdiciadas.",
   },
   {
     id: "frames",
