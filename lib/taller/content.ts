@@ -1546,9 +1546,9 @@ export const TALLER = {
   // ── Landing de venta ─────────────────────────────────────────
   gate: {
     headline:
-      "No te enseño a usar la IA. Te enseño a que la IA piense como un director creativo con 20 años de experiencia en tu negocio.",
+      "Antes de la IA, piensa como director creativo. Después, produce la campaña completa tú solo.",
     subheadline:
-      "La masterclass del Cerebro Creativo IA: genera estrategia, conceptos y guiones publicitarios con criterio de agencia, y produce la campaña completa con calidad de cine. Sin cámara, sin productora.",
+      "La Masterclass de Creatividad Publicitaria IA: el proceso real de un director creativo — insight, concepto y guion — y la producción completa con IA hasta el video final. Sin cámara, sin productora, sin equipo de rodaje. Empiezas desde cero si hace falta.",
     // Video de venta (VSL) — ID de YouTube oculto. Si lo dejas "" se
     // muestra un recuadro con marcador de posición ("Aquí va tu VSL").
     vslYoutubeId: "",
@@ -1581,9 +1581,9 @@ export const TALLER = {
     dolor: {
       titulo: "El problema no eres tú",
       parrafos: [
-        "Ya viste los tutoriales. Ya probaste las herramientas. Y el resultado es el mismo de todos: videos bonitos que no dicen nada y no venden nada.",
-        "El problema no eres tú ni las herramientas. Es que te saltaste el paso que las agencias cobran más caro: la estrategia creativa. El pensamiento que decide qué contar, a quién y por qué va a funcionar, antes de generar un solo frame. Ese trabajo lo hacen directores creativos con 20 años de oficio, y las grandes agencias lo siguen haciendo a la antigua: brief, reuniones, semanas de espera y presupuestos de cinco cifras.",
-        "Yo construí un proceso que mete ese oficio dentro de la IA. Se llama Cerebro Creativo, lo inventé yo, y no lo vas a encontrar en ningún otro curso.",
+        "Ya generaste videos con IA. Se ven bien. Y no venden nada — porque nadie decidió qué decir, a quién decírselo, ni por qué debería importarle a alguien.",
+        "Ese paso no es una herramienta más: es el trabajo que hace un director creativo antes de tocar una cámara. Es lo que las agencias cobran más caro, y es justo lo que la mayoría de cursos de «IA para contenido» se saltan — te enseñan a generar, no a pensar.",
+        "Yo construí un proceso para meter ese oficio dentro de tu flujo con IA. Se llama Cerebro Creativo, lo inventé yo, y es lo primero que aprendes — antes de generar un solo frame.",
       ],
     },
 
@@ -1591,16 +1591,16 @@ export const TALLER = {
       {
         numero: "ACTO 1",
         titulo: "PENSAR",
-        subtitulo: "Lo que nadie más enseña",
+        subtitulo: "Antes de la IA, piensa como un director creativo",
         texto:
-          "El Cerebro Creativo IA: el proceso para que la IA piense como un director creativo con 20 años de experiencia en tu negocio. Estrategia, insights, conceptos de campaña, Big Ideas, estructuras narrativas, hooks y guiones que venden.",
+          "El Cerebro Creativo IA: el proceso para razonar una campaña como un director con 20 años de oficio antes de generar nada. Insight, concepto, Big Idea, estructura narrativa, hooks y guion que venden — el mismo trabajo, aplicado a tu negocio.",
       },
       {
         numero: "ACTO 2",
         titulo: "CREAR",
-        subtitulo: "Producción con calidad de cine",
+        subtitulo: "La estrategia, hecha pieza terminada",
         texto:
-          "Producción cinematográfica completa: prompting profesional, storyboard escena por escena, hoja de personaje para consistencia total, frames de cine con CinePromt, animación con Seedance Director, Kling y Seedance, UGC con IA y edición final en CapCut.",
+          "Con el guion listo, produces la campaña completa: storyboard, imágenes con dirección de arte y consistencia de marca, animación, voz y montaje final — todo con IA, sin cámara ni productora. Vas a tocar Higgsfield, Kling, Seedance y CapCut en el camino, pero el objetivo no es aprender herramientas sueltas: es que la pieza salga con nivel de agencia.",
       },
       {
         numero: "ACTO 3",
@@ -1644,6 +1644,23 @@ export const TALLER = {
       "Un proyecto de contenido publicitario con este sistema lo ofrezco a empresas desde $2,000. Hoy aprendes el sistema completo por menos del 10% de eso.",
 
     productos: {
+      boveda: {
+        nombre: "Bóveda de documentos",
+        precio: "$50",
+        precioLocal: "S/190",
+        nota: "sin las clases en video · acceso de por vida, con actualizaciones",
+        valorTotal: "",
+        beneficios: [
+          "Todas las guías, plantillas y proyectos de la bóveda",
+          "Los prompts cinematográficos y la plantilla maestra de campaña (antes de pago)",
+          "Actualizaciones: lo nuevo que se publique también entra",
+        ],
+        garantia:
+          "48 horas de garantía: si sientes que no es para ti, te devuelvo el dinero completo.",
+        cta: "Quiero la bóveda",
+        mensajeWhatsApp:
+          "Hola Manuel, quiero comprar el acceso a la Bóveda de documentos de la Masterclass de Creatividad Publicitaria IA",
+      },
       grabado: {
         nombre: "Curso grabado",
         precio: "$150",
@@ -1703,6 +1720,14 @@ export const TALLER = {
     testimonios: [] as { texto: string; nombre: string }[],
 
     faq: [
+      {
+        q: "¿Es un curso de herramientas de IA (Higgsfield, Claude Code, CapCut)?",
+        a: "No. Vas a usarlas para producir, pero el curso no es un tutorial de esas plataformas — es el proceso estratégico que decide qué producir y por qué, antes de tocarlas. Te explico lo necesario de cada herramienta sobre la marcha, para que puedas aplicar el sistema aunque nunca las hayas usado.",
+      },
+      {
+        q: "¿Cuál elijo: la bóveda, el grabado o el vivo?",
+        a: "Si solo quieres las guías y plantillas para aplicar el sistema por tu cuenta, la Bóveda ($50) alcanza. Si quieres las clases completas paso a paso, el curso grabado ($150) — incluye la bóveda. Si además quieres verlo conmigo en vivo, con Q&A y revisión de tu proyecto, el vivo ($250) — incluye todo lo anterior.",
+      },
       {
         q: "¿Necesito saber de publicidad?",
         a: "No. El sistema incluye la parte estratégica; empiezas desde cero.",
