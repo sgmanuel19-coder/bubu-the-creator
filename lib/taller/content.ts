@@ -73,6 +73,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     disponible: true,
     lecciones: [
       { titulo: "El sistema", duracion: "", youtubeId: "fS8WtkGSvd8" },
+      { titulo: "Biblia publicitaria", duracion: "", youtubeId: "v0Lc-Jom4Gg" },
     ],
   },
   {
