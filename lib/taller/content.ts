@@ -86,12 +86,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       "Prompt engineering, Higgsfield a fondo, Kling y Seedance, audio y voz IA, la baraja de GPTs, consistencia con hoja de personaje, y ensamblaje y montaje en CapCut.",
     disponible: true,
     lecciones: [
-      { titulo: "Prompt engineering profesional", duracion: "", youtubeId: "" },
-      { titulo: "Higgsfield a fondo (Nano Banana Pro, GPT Image 2)", duracion: "", youtubeId: "" },
-      { titulo: "Storyboard y hoja de personaje: consistencia total", duracion: "", youtubeId: "" },
-      { titulo: "Animación con Kling y Seedance (Seedance Director)", duracion: "", youtubeId: "" },
-      { titulo: "Audio, voz IA y UGC", duracion: "", youtubeId: "" },
-      { titulo: "Ensamblaje y montaje en CapCut", duracion: "", youtubeId: "" },
+      { titulo: "Crear", duracion: "", youtubeId: "-UVwYnMClyQ" },
     ],
   },
   {
