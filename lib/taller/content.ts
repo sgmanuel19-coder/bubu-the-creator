@@ -60,6 +60,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "El insight", duracion: "", youtubeId: "I33SFo6_bDM" },
       { titulo: "Tipos de insights", duracion: "", youtubeId: "GGKqk1Ia0Ag" },
       { titulo: "Del insight al concepto", duracion: "", youtubeId: "lZ_I28591ls" },
+      { titulo: "Retóricas publicitarias", duracion: "", youtubeId: "MvzDV0vD4PE" },
     ],
   },
   {
