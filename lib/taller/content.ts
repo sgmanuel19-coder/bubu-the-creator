@@ -57,6 +57,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "La IA amplifica, tú diriges", duracion: "", youtubeId: "GErCgANzB6Q" },
       { titulo: "Qué es un director creativo", duracion: "", youtubeId: "Ie2UY-CvntU" },
       { titulo: "El proceso de creación", duracion: "", youtubeId: "BVpTDEDIdJ8" },
+      { titulo: "El insight", duracion: "", youtubeId: "I33SFo6_bDM" },
     ],
   },
   {
