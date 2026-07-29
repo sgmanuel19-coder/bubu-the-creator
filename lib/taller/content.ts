@@ -76,6 +76,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Biblia publicitaria", duracion: "", youtubeId: "v0Lc-Jom4Gg" },
       { titulo: "ADN de marca", duracion: "", youtubeId: "_ifX6QY1XhE" },
       { titulo: "Prompt maestro", duracion: "", youtubeId: "6l7YycR5X50" },
+      { titulo: "Claude Code y Obsidian", duracion: "", youtubeId: "PhCin3wuCCU" },
     ],
   },
   {
