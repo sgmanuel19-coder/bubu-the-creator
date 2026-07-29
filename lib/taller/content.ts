@@ -87,6 +87,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     disponible: true,
     lecciones: [
       { titulo: "Crear", duracion: "", youtubeId: "-UVwYnMClyQ" },
+      { titulo: "Prompt semiótico", duracion: "", youtubeId: "bh-Mj7lxSb8" },
     ],
   },
   {
