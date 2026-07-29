@@ -41,11 +41,10 @@ const MODULOS_MASTERCLASS: Modulo[] = [
   {
     titulo: "PARTE 0 — Bienvenida y las bases",
     descripcion:
-      "Introducción, bienvenida y presentación, y los conceptos básicos del sistema: el resultado primero, las 3 máquinas del sistema (Claude, Higgsfield y CapCut) y el mapa completo de lo que viene.",
+      "Introducción, bienvenida y presentación: el resultado primero, las 3 máquinas del sistema (Claude, Higgsfield y CapCut) y el mapa completo de lo que viene.",
     disponible: true,
     lecciones: [
       { titulo: "Introducción, bienvenida y presentación", duracion: "", youtubeId: "dxmIy6DqSWs" },
-      { titulo: "Conceptos básicos", duracion: "", youtubeId: "PAuFCWbNpmo" },
     ],
   },
   {
@@ -54,12 +53,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       "El protocolo del director creativo, las 4 etapas, el insight y sus 6 tipos, la Big Idea, retóricas, 10 estructuras narrativas, fórmulas de headline y 9 hooks, géneros de storytelling y tipos de campaña.",
     disponible: true,
     lecciones: [
-      { titulo: "El protocolo del director creativo y las 4 etapas", duracion: "", youtubeId: "" },
-      { titulo: "El insight y sus 6 tipos", duracion: "", youtubeId: "" },
-      { titulo: "Big Idea y retóricas publicitarias", duracion: "", youtubeId: "" },
-      { titulo: "Las 10 estructuras narrativas", duracion: "", youtubeId: "" },
-      { titulo: "Fórmulas de headline y los 9 hooks", duracion: "", youtubeId: "" },
-      { titulo: "Géneros de storytelling y tipos de campaña — el mapa completo", duracion: "", youtubeId: "" },
+      { titulo: "Conceptos básicos", duracion: "", youtubeId: "PAuFCWbNpmo" },
     ],
   },
   {
