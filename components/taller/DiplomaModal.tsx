@@ -18,18 +18,47 @@ function hoyEnEspanol(): string {
   });
 }
 
+// Carga una imagen y la reduce a un canvas chico antes de dársela a
+// addImage(). jsPDF embebe la imagen a su resolución NATIVA sin
+// reescalarla nunca, sin importar el tamaño en mm que le pidas — con el
+// logo real (3240×3240px) eso generaba un PDF de 21 MB por un sello de
+// 11mm. 300px de lado alcanza y sobra para verse nítido impreso.
+const LADO_MAX = 300;
+
+function cargarImagenChica(src: string): Promise<{ url: string; w: number; h: number } | null> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      if (img.width <= 0 || img.height <= 0) return resolve(null);
+      const escala = Math.min(1, LADO_MAX / Math.max(img.width, img.height));
+      const w = Math.round(img.width * escala);
+      const h = Math.round(img.height * escala);
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return resolve(null);
+      ctx.drawImage(img, 0, 0, w, h);
+      resolve({ url: canvas.toDataURL("image/png"), w, h });
+    };
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
+}
+
 async function generarPdf(nombre: string, curso: string) {
   const { jsPDF } = await import("jspdf");
   const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
   const W = doc.internal.pageSize.getWidth();
   const H = doc.internal.pageSize.getHeight();
+  const CX = W / 2;
 
   const CREMA: [number, number, number] = [244, 240, 222];
   const CARBON: [number, number, number] = [61, 61, 61];
   const AZUL: [number, number, number] = [26, 128, 255];
   const MUTED: [number, number, number] = [140, 132, 108];
 
-  // Fondo crema + borde
+  // Fondo + borde doble
   doc.setFillColor(...CREMA);
   doc.rect(0, 0, W, H, "F");
   doc.setDrawColor(...AZUL);
@@ -38,74 +67,119 @@ async function generarPdf(nombre: string, curso: string) {
   doc.setLineWidth(0.3);
   doc.rect(11, 11, W - 22, H - 22);
 
-  // Logo (si falla la carga, sigue sin el logo — nunca rompe la descarga)
-  try {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    await new Promise<void>((resolve) => {
-      img.onload = () => resolve();
-      img.onerror = () => resolve();
-      img.src = "/images/logo-mark.png";
-    });
-    if (img.width > 0) {
-      const logoAltura = 14;
-      const logoAncho = (img.width / img.height) * logoAltura;
-      doc.addImage(img, "PNG", W / 2 - logoAncho / 2, 18, logoAncho, logoAltura);
-    }
-  } catch {
-    // sin logo, el diploma igual se genera
-  }
-
+  // ── Encabezado ──
   doc.setTextColor(...MUTED);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
-  doc.text("RESUELTO ACADEMY", W / 2, 42, { align: "center" });
+  doc.text("RESUELTO ACADEMY", CX, 26, { align: "center" });
+  doc.setDrawColor(...AZUL);
+  doc.setLineWidth(0.4);
+  doc.line(CX - 12, 30, CX + 12, 30);
 
   doc.setTextColor(...CARBON);
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(28);
-  doc.text("DIPLOMA DE PARTICIPACIÓN", W / 2, 58, { align: "center" });
+  doc.setFontSize(30);
+  doc.text("DIPLOMA DE PARTICIPACIÓN", CX, 46, { align: "center" });
 
+  // Filete ornamental (línea—rombo—línea) para no dejar el título "solo"
+  doc.setDrawColor(...AZUL);
+  doc.setLineWidth(0.3);
+  doc.line(CX - 45, 52, CX - 4, 52);
+  doc.line(CX + 4, 52, CX + 45, 52);
+  doc.setFillColor(...AZUL);
+  doc.triangle(CX - 2, 52, CX + 2, 52, CX, 49, "F");
+  doc.triangle(CX - 2, 52, CX + 2, 52, CX, 55, "F");
+
+  // ── Cuerpo ──
+  doc.setTextColor(...CARBON);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(13);
-  doc.text("Se otorga el presente diploma a", W / 2, 78, { align: "center" });
+  doc.text("Se otorga el presente diploma a", CX, 66, { align: "center" });
 
   doc.setTextColor(...AZUL);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(30);
-  doc.text(nombre, W / 2, 96, { align: "center" });
-  // línea bajo el nombre
+  doc.text(nombre, CX, 84, { align: "center" });
   const anchoNombre = doc.getTextWidth(nombre);
   doc.setDrawColor(...AZUL);
   doc.setLineWidth(0.5);
-  doc.line(W / 2 - anchoNombre / 2 - 6, 101, W / 2 + anchoNombre / 2 + 6, 101);
+  doc.line(CX - anchoNombre / 2 - 6, 89, CX + anchoNombre / 2 + 6, 89);
 
   doc.setTextColor(...CARBON);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(13);
-  doc.text("por completar exitosamente", W / 2, 114, { align: "center" });
+  doc.text("por haber completado exitosamente", CX, 102, { align: "center" });
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(17);
-  const cursoLineas = doc.splitTextToSize(curso, W - 80);
-  doc.text(cursoLineas, W / 2, 124, { align: "center" });
+  doc.setFontSize(18);
+  const cursoLineas: string[] = doc.splitTextToSize(curso, W - 90);
+  doc.text(cursoLineas, CX, 113, { align: "center" });
+  const finCurso = 113 + (cursoLineas.length - 1) * 7.5;
 
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
+  // Bajada descriptiva — llena el aire entre el título y el pie, y suma
+  // contexto de marca sin repetir el nombre del curso.
+  doc.setFont("helvetica", "italic");
+  doc.setFontSize(11);
   doc.setTextColor(...MUTED);
-  doc.text(hoyEnEspanol(), W / 2, H - 22, { align: "center" });
+  const bajada =
+    "Un programa de RESUELTO ACADEMY sobre creatividad publicitaria dirigida con Inteligencia Artificial.";
+  doc.text(bajada, CX, finCurso + 12, { align: "center" });
 
-  // Firma
+  // ── Sello (círculo con el logo) — esquina inferior derecha ──
+  const selloX = W - 42;
+  const selloY = H - 42;
+  const selloR = 17;
+  doc.setDrawColor(...AZUL);
+  doc.setLineWidth(0.9);
+  doc.circle(selloX, selloY, selloR, "S");
+  doc.setLineWidth(0.3);
+  doc.circle(selloX, selloY, selloR - 2.5, "S");
+
+  const logo = await cargarImagenChica("/images/logo-mark.png");
+  if (logo) {
+    const altura = 11;
+    const ancho = (logo.w / logo.h) * altura;
+    doc.addImage(logo.url, "PNG", selloX - ancho / 2, selloY - altura / 2 - 3, ancho, altura);
+  }
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(7);
+  doc.setTextColor(...AZUL);
+  doc.text("ACADEMY", selloX, selloY + (logo ? 9 : 2), { align: "center" });
+
+  // ── Pie: fecha (izq.) y firma (centro) en columnas — nunca se cruzan
+  // con el sello ni entre sí, a diferencia de la versión anterior que
+  // apilaba todo centrado y terminaba con la fecha encima de la firma. ──
+  const filaLinea = H - 34;
+  const filaTitulo = H - 28;
+  const filaSub = H - 23;
+
+  const colFecha = 78;
   doc.setDrawColor(...CARBON);
   doc.setLineWidth(0.3);
-  doc.line(W / 2 - 35, H - 34, W / 2 + 35, H - 34);
+  doc.line(colFecha - 26, filaLinea, colFecha + 26, filaLinea);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(10.5);
+  doc.setTextColor(...CARBON);
+  doc.text(hoyEnEspanol(), colFecha, filaTitulo, { align: "center" });
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8.5);
+  doc.setTextColor(...MUTED);
+  doc.text("Fecha de emisión", colFecha, filaSub, { align: "center" });
+
+  const colFirma = 178;
+  doc.setDrawColor(...CARBON);
+  doc.line(colFirma - 30, filaLinea, colFirma + 30, filaLinea);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
   doc.setTextColor(...CARBON);
-  doc.text("Manuel Severo", W / 2, H - 28, { align: "center" });
+  doc.text("Manuel Severo", colFirma, filaTitulo, { align: "center" });
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(9);
+  doc.setFontSize(8.5);
   doc.setTextColor(...MUTED);
-  doc.text("Fundador, RESUELTO Agency", W / 2, H - 23.5, { align: "center" });
+  doc.text("Fundador, RESUELTO Agency", colFirma, filaSub, { align: "center" });
+
+  doc.setFontSize(8);
+  doc.setTextColor(...MUTED);
+  doc.text("resueltoagency.com", CX, H - 13, { align: "center" });
 
   doc.save(`Diploma - ${curso} - ${nombre}.pdf`);
 }
