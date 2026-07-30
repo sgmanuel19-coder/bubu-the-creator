@@ -1736,6 +1736,16 @@ export const TALLER = {
     credenciales:
       "Dictado por Manuel Severo — ex TBWA Perú y Fahrenheit DDB. +2,000 piezas producidas para marcas como Wong, BCP, Cencosud y Redondos. Validado: el primer taller privado se vendió a $250.",
 
+    // Tarjeta "Quién te enseña" — foto + historia en primera persona.
+    // No repite las credenciales de arriba: es el POR QUÉ, no el currículum.
+    instructor: {
+      foto: "/images/equipo/manuel.jpg",
+      nombre: "Manuel Severo",
+      rol: "Fundador de RESUELTO Agency · Creador del Cerebro Creativo IA",
+      historia:
+        "Llevo años produciendo publicidad para marcas que no perdonan un error: si la pieza no vende, no hay excusa. Cuando la IA generativa llegó, no me puse a aprender prompts sueltos — le enseñé el mismo oficio que ya aplicaba con clientes reales. Este sistema no es una teoría que armé para vender un curso: es literalmente cómo trabajo hoy, todos los días, en RESUELTO.",
+    },
+
     paraQuien:
       "¿Vives de crear contenido o quieres vivir de eso? Esto es para ti. Creativos, community managers, editores y freelancers que quieren cobrar por producir contenido con IA; dueños de agencias chicas y emprendedores con marca propia. ¿Solo tienes curiosidad por la IA? No lo es.",
 

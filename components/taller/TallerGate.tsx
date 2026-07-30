@@ -535,6 +535,29 @@ export default function TallerGate() {
           </div>
         )}
 
+        {/* ── Quién te enseña (autoridad, no repite credenciales) ── */}
+        <section className="mx-auto mt-20 max-w-3xl">
+          <div
+            className="flex flex-col items-center gap-6 rounded-3xl border p-6 text-center sm:flex-row sm:p-8 sm:text-left"
+            style={cardStyle}
+          >
+            <img
+              src={gate.instructor.foto}
+              alt={gate.instructor.nombre}
+              className="h-28 w-28 shrink-0 rounded-2xl object-cover sm:h-32 sm:w-32"
+            />
+            <div>
+              <h2 className="text-lg font-bold">{gate.instructor.nombre}</h2>
+              <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--green)" }}>
+                {gate.instructor.rol}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                {gate.instructor.historia}
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* ── Dolor ── */}
         <section className="mx-auto mt-20 max-w-3xl">
           <h2 className="text-center text-2xl font-bold">{gate.dolor.titulo}</h2>

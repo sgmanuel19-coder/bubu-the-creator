@@ -12,6 +12,7 @@ import { trackTaller } from "@/lib/taller/analytics";
 import VentaCTA from "@/components/taller/VentaCTA";
 import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 import ReproductorYouTube from "@/components/taller/ReproductorYouTube";
+import DiplomaModal from "@/components/taller/DiplomaModal";
 
 function ProgressRing({ pct }: { pct: number }) {
   const r = 16;
@@ -60,6 +61,7 @@ export default function CursoClient({
   const [actual, setActual] = useState<Leccion | null>(desbloqueado ? primera : null);
   const [vistas, setVistas] = useState<Record<string, boolean>>({});
   const [cargado, setCargado] = useState(false);
+  const [diplomaAbierto, setDiplomaAbierto] = useState(false);
 
   const idsDelCurso = new Set(
     curso.modulos.flatMap((m) => m.lecciones.map((l) => l.youtubeId)).filter(Boolean),
@@ -156,6 +158,27 @@ export default function CursoClient({
           </div>
         )}
       </div>
+
+      {desbloqueado && cargado && todasConVideo.length > 0 && pctGeneral === 100 && (
+        <div
+          className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-5 py-4"
+          style={{ borderColor: "rgba(26,128,255,0.5)", background: "rgba(26,128,255,0.08)" }}
+        >
+          <p className="text-sm font-semibold">🎓 ¡Completaste el curso! Ya puedes sacar tu diploma.</p>
+          <button
+            type="button"
+            onClick={() => setDiplomaAbierto(true)}
+            className="rounded-xl px-4 py-2 text-xs font-bold transition-opacity hover:opacity-90"
+            style={{ background: "var(--green)", color: "#fff" }}
+          >
+            Ver mi diploma →
+          </button>
+        </div>
+      )}
+
+      {diplomaAbierto && (
+        <DiplomaModal cursoTitulo={curso.titulo} onClose={() => setDiplomaAbierto(false)} />
+      )}
 
       {!desbloqueado && (
         <div className="mt-6">

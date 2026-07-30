@@ -17,7 +17,9 @@ export type TallerEvento =
   | "taller_calendario"
   | "taller_asistente"
   | "taller_pago"
-  | "taller_desbloqueo";
+  | "taller_desbloqueo"
+  | "taller_diploma_abrir"
+  | "taller_diploma_descarga";
 
 export function trackTaller(
   evento: TallerEvento,
