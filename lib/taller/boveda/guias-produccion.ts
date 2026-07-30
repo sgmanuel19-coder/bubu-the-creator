@@ -323,6 +323,166 @@ export const SECCIONES_PRODUCCION: Record<string, SeccionRecurso[]> = {
     },
   ],
 
+  // ── Cuánto demora un render ────────────────────────────────────
+  "cuanto-demora-un-render": [
+    {
+      titulo: "Por qué esto importa más de lo que parece",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Nadie te cobra por saber cuánto demora un render. Te cobran — o te descuentan — por prometer una entrega el viernes y entregarla el lunes. En producción con IA el error de cálculo más caro no es artístico: es de agenda. Le dijiste al cliente «te lo tengo mañana», hiciste la cuenta con la última vez que generaste un clip, y esa vez habías generado en 720p un martes a las diez de la mañana. El día de la entrega estás en 1080p, es domingo en la noche, y el mismo trabajo te tomó cuatro veces más.",
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "Dirección creativa también es esto: saber cuánto cuesta en horas lo que estás decidiendo en el brief. Un director que promete 12 tomas para pasado mañana sin saber estos números no está dirigiendo, está apostando.",
+        },
+      ],
+    },
+    {
+      titulo: "Los tiempos reales, modelo por modelo",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Esta tabla es la medición que Higgsfield publicó sobre sus propias generaciones: la mediana de 30 días para un clip de 8 segundos en 720p, con la cola de espera separada del render en sí. No es el mejor caso a las 4am con los servidores vacíos — es tráfico normal. Léela así: la columna «Cola» no la controlas, la columna «Render» sí.",
+        },
+        {
+          tipo: "tabla",
+          columnas: ["Modelo", "Cola", "Render", "Total"],
+          filas: [
+            ["Kling (720p, 8s)", "~10 s", "~77 s", "~1.5 min"],
+            ["WAN (promedio)", "~4 s", "~85 s", "~1.5 min"],
+            ["Veo (1080p, 8s)", "~3 s", "~127 s", "~2 min"],
+            ["Seedance (720p, 8s)", "~10–34 s", "~206 s", "~3.5–4 min"],
+          ],
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "El dato que a mí me cambió la planificación: Seedance demora casi el triple que Kling para el MISMO clip. No es que Seedance esté lento — está haciendo otra cosa (por eso es el que uso cuando la escena lleva voz sincronizada). Pero si estoy explorando dirección visual y tiro diez pruebas en Seedance, acabo de gastar cuarenta minutos donde Kling me hubiera dado la misma respuesta creativa en quince.",
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Regla que saqué de esto: explorar en Kling, cerrar en Seedance. Igual que en imagen exploro en Nano y cierro en Banana Pro. El modelo caro (en créditos o en minutos) nunca se usa para borradores.",
+        },
+      ],
+    },
+    {
+      titulo: "La resolución es el multiplicador que nadie mira",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Si un render está demorando más de lo que esperabas, revisa la resolución ANTES de asumir que el servidor está saturado. Es, por lejos, la variable que más pesa — más que el largo del clip, más que el modelo que elegiste.",
+        },
+        {
+          tipo: "tabla",
+          columnas: ["Resolución", "Render de un clip Kling de 8s"],
+          filas: [
+            ["720p", "~77 s"],
+            ["1080p", "~191 s (unas 2.5 veces más)"],
+            ["4K", "~170 s"],
+          ],
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "La razón es aritmética simple: 1080p son unos 2.1 millones de píxeles por cuadro; 4K son unos 8.3 millones, casi cuatro veces más. Cada píxel lo tiene que resolver el modelo. Subir de resolución no es mover un slider, es pedirle al motor varias veces el mismo trabajo.",
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Sí, el 4K de la tabla marca menos que el 1080p. No es error de tipeo — el 4K pasa por una ruta de upscale distinta, no por el mismo render nativo. Lo importante es el salto 720p → 1080p, que es el que vas a hacer todos los días.",
+        },
+      ],
+    },
+    {
+      titulo: "El largo del clip: la única variable que se comporta",
+      bloques: [
+        {
+          tipo: "lista",
+          items: [
+            "Kling en 720p: 5 segundos ≈ 60 s · 8 segundos ≈ 77 s · 15 segundos ≈ 130 s.",
+            "Seedance en 1080p: 4 segundos ≈ 226 s · 15 segundos ≈ 307 s.",
+            "La regla gruesa: el doble de largo, el doble de tiempo. Escala casi lineal.",
+          ],
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "Esta es la buena noticia de toda la medición: el largo es la variable que puedes presupuestar con confianza real, porque no se mueve con las condiciones del servidor. La cola sí se mueve. El largo no. Así que cuando armes el cronograma de una pieza, calcula sobre segundos totales de material, no sobre «cantidad de clips».",
+        },
+      ],
+    },
+    {
+      titulo: "Cómo armo un día de producción con estos números",
+      bloques: [
+        {
+          tipo: "pasos",
+          items: [
+            {
+              titulo: "Primero los frames, siempre",
+              detalle:
+                "La regla sagrada no cambia: la imagen se aprueba antes de animar. Corregir una imagen son segundos; corregir un video generado es el render entero de nuevo. Todo lo de esta guía asume que los frames YA están aprobados.",
+            },
+            {
+              titulo: "Prueba toda la pieza en 720p",
+              detalle:
+                "Composición, movimiento de cámara y ritmo se validan perfecto en 720p. Nadie aprueba un concepto por la resolución. Esta pasada es la que decide qué tomas sobreviven.",
+            },
+            {
+              titulo: "Cuenta segundos, no clips",
+              detalle:
+                "Suma los segundos de las tomas que sobrevivieron y aplica la tabla. 12 tomas de 8 segundos en Kling 720p ≈ 15 minutos de render puro. Las mismas 12 en Seedance ≈ 45 minutos. Ese número va al cronograma, no tu intuición.",
+            },
+            {
+              titulo: "Recién ahí sube a 1080p, y solo lo aprobado",
+              detalle:
+                "Multiplica por 2.5 el tiempo del paso anterior para la pasada final. Si eso no entra en tu día, la conversación con el cliente es HOY, no el día de la entrega.",
+            },
+            {
+              titulo: "Deja colchón para la cola",
+              detalle:
+                "La cola engorda en el horario pico (aprox. 01:00–08:00 UTC, que es la noche en América). Si tu batch no tiene deadline duro, córrelo fuera de esa ventana. Si lo tiene, súmale margen y no lo negocies.",
+            },
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Si estás en un plan con chats en paralelo (Plus da 3, Ultra da 10), el cálculo cambia por completo: diez clips de Seedance en secuencia son ~40 minutos; los mismos diez en paralelo se acercan al tiempo de UNO. Antes de pagar el plan más caro, haz esta cuenta con tu volumen real de la semana — es la única forma honesta de saber si te conviene.",
+        },
+      ],
+    },
+    {
+      titulo: "Los cuatro números que le das al cliente",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Cuando cotizas una pieza, el tiempo de máquina es solo una parte. Lo que le prometes al cliente se arma con cuatro bloques, y solo uno de ellos aparece en esta guía:",
+        },
+        {
+          tipo: "lista",
+          items: [
+            "Pensamiento — insight, concepto, guion y storyboard. No lo hace la máquina y es lo que de verdad cobras.",
+            "Frames — generación y aprobación de la imagen inicial de cada toma en Higgsfield.",
+            "Render — esto: segundos de material × modelo × resolución, con colchón para la cola.",
+            "Montaje — voz en ElevenLabs, presentador en HeyGen si aplica, y el armado con ritmo en CapCut.",
+          ],
+        },
+        {
+          tipo: "cita",
+          texto:
+            "El cliente no te paga por esperar el render. Te paga porque tú sabías cuánto iba a demorar antes de prometerlo.",
+        },
+      ],
+    },
+  ],
+
   // ── PREMIUM · Pack de prompts cinematográficos (interior) ──────
   "pack-prompts-cinematograficos": [
     {
