@@ -106,6 +106,11 @@ export default function ReproductorYouTube({
       const nodo = document.createElement("div");
       wrapper.current.appendChild(nodo);
       player = new YT.Player(nodo, {
+        // Sin width/height, el iframe que genera la API sale a su tamaño
+        // por defecto (640×390) centrado dentro del contenedor — se veía
+        // chico con barras negras a los lados. "100%" lo estira al wrapper.
+        width: "100%",
+        height: "100%",
         videoId: youtubeId,
         host: "https://www.youtube-nocookie.com",
         playerVars: { rel: 0, modestbranding: 1 },

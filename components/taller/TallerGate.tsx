@@ -344,6 +344,27 @@ export default function TallerGate() {
     });
   }, []);
 
+  // Galería "Míralo en acción": clic abre el video grande en un modal en
+  // vez de reproducirlo diminuto dentro de la tarjeta de la grilla.
+  const ejemplos =
+    gate.videosEjemplo.length > 0
+      ? gate.videosEjemplo
+      : [
+          { titulo: "Ejemplo próximamente", youtubeId: "" },
+          { titulo: "Ejemplo próximamente", youtubeId: "" },
+          { titulo: "Ejemplo próximamente", youtubeId: "" },
+        ];
+  const [videoAbierto, setVideoAbierto] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (videoAbierto === null) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setVideoAbierto(null);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [videoAbierto]);
+
   return (
     <>
       <main className="mx-auto max-w-5xl px-5 pb-20">
@@ -415,55 +436,104 @@ export default function TallerGate() {
             Piezas producidas de punta a punta con este sistema — sin cámara ni productora.
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {(gate.videosEjemplo.length > 0
-              ? gate.videosEjemplo
-              : [
-                  { titulo: "Ejemplo próximamente", youtubeId: "" },
-                  { titulo: "Ejemplo próximamente", youtubeId: "" },
-                  { titulo: "Ejemplo próximamente", youtubeId: "" },
-                ]
-            ).map((v, i) => (
-              <div
-                key={`${i}-${v.titulo}`}
-                className="overflow-hidden rounded-2xl border"
-                style={cardStyle}
-              >
-                <div
-                  className="relative w-full"
-                  style={{ aspectRatio: "16 / 9", background: "var(--bg)" }}
+            {ejemplos.map((v, i) => {
+              const tieneVideo = Boolean(v.youtubeId) || Boolean("driveId" in v && v.driveId);
+              const poster = v.youtubeId
+                ? `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`
+                : "driveId" in v && v.driveId
+                  ? `https://drive.google.com/thumbnail?id=${v.driveId}&sz=w800`
+                  : null;
+              return (
+                <button
+                  key={`${i}-${v.titulo}`}
+                  type="button"
+                  disabled={!tieneVideo}
+                  onClick={() => setVideoAbierto(i)}
+                  className="overflow-hidden rounded-2xl border text-left transition-transform hover:-translate-y-0.5 disabled:cursor-default disabled:hover:translate-y-0"
+                  style={cardStyle}
                 >
-                  {v.youtubeId ? (
-                    <iframe
-                      src={`https://www.youtube-nocookie.com/embed/${v.youtubeId}?rel=0&modestbranding=1`}
-                      title={v.titulo}
-                      loading="lazy"
-                      allow="encrypted-media; picture-in-picture"
-                      allowFullScreen
-                      className="absolute inset-0 h-full w-full"
-                    />
-                  ) : "driveId" in v && v.driveId ? (
-                    <iframe
-                      src={`https://drive.google.com/file/d/${v.driveId}/preview`}
-                      title={v.titulo}
-                      loading="lazy"
-                      allow="autoplay"
-                      allowFullScreen
-                      className="absolute inset-0 h-full w-full"
-                    />
-                  ) : (
-                    <div
-                      className="absolute inset-0 flex items-center justify-center text-3xl"
-                      style={{ color: "var(--muted)" }}
-                    >
-                      ▶
-                    </div>
-                  )}
-                </div>
-                <p className="px-4 py-3 text-sm font-medium">{v.titulo}</p>
-              </div>
-            ))}
+                  <div
+                    className="relative w-full"
+                    style={{ aspectRatio: "16 / 9", background: "var(--bg)" }}
+                  >
+                    {poster ? (
+                      <>
+                        <img
+                          src={poster}
+                          alt={v.titulo}
+                          loading="lazy"
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors hover:bg-black/40">
+                          <span
+                            className="flex h-14 w-14 items-center justify-center rounded-full text-2xl"
+                            style={{ background: "var(--green)", color: "#fff" }}
+                          >
+                            ▶
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <div
+                        className="absolute inset-0 flex items-center justify-center text-3xl"
+                        style={{ color: "var(--muted)" }}
+                      >
+                        ▶
+                      </div>
+                    )}
+                  </div>
+                  <p className="px-4 py-3 text-sm font-medium">{v.titulo}</p>
+                </button>
+              );
+            })}
           </div>
         </section>
+
+        {/* ── Modal del video (clic en una tarjeta de arriba) ── */}
+        {videoAbierto !== null && ejemplos[videoAbierto] && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+            onClick={() => setVideoAbierto(null)}
+          >
+            <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                onClick={() => setVideoAbierto(null)}
+                aria-label="Cerrar"
+                className="absolute -top-10 right-0 text-2xl text-white transition-opacity hover:opacity-70"
+              >
+                ✕
+              </button>
+              <div
+                className="w-full overflow-hidden rounded-2xl"
+                style={{ aspectRatio: "16 / 9", background: "#000" }}
+              >
+                {ejemplos[videoAbierto].youtubeId ? (
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${ejemplos[videoAbierto].youtubeId}?rel=0&modestbranding=1&autoplay=1`}
+                    title={ejemplos[videoAbierto].titulo}
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowFullScreen
+                    className="h-full w-full"
+                  />
+                ) : (
+                  (() => {
+                    const actual = ejemplos[videoAbierto];
+                    return "driveId" in actual && actual.driveId ? (
+                      <iframe
+                        src={`https://drive.google.com/file/d/${actual.driveId}/preview`}
+                        title={actual.titulo}
+                        allow="autoplay"
+                        allowFullScreen
+                        className="h-full w-full"
+                      />
+                    ) : null;
+                  })()
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* ── Dolor ── */}
         <section className="mx-auto mt-20 max-w-3xl">

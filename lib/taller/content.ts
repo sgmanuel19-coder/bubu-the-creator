@@ -1830,6 +1830,18 @@ export const TALLER = {
       modulos: MODULOS_STORYSELLING,
       recursos: [],
     },
+    {
+      // Bloqueado a propósito: todavía no hay contenido grabado. Cuando
+      // esté listo, cambia disponible a true y llena modulos/recursos.
+      slug: "ia-en-accion",
+      titulo: "IA en Acción",
+      descripcion:
+        "Tutoriales creando piezas con IA, paso a paso.",
+      portada: { emoji: "⚡", color: "rgba(255,209,102,0.15)" },
+      disponible: false,
+      modulos: [],
+      recursos: [],
+    },
   ] as Curso[],
 
   // ── Backend post-compra (dentro de la plataforma) ────────────
