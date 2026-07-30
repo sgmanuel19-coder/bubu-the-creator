@@ -458,7 +458,7 @@ export const NIVELES_VENTA: NivelVenta[] = [
   {
     nivel: "boveda",
     nombre: "Bóveda de documentos",
-    precio: "$50",
+    precio: "$25",
     descripcion:
       "Solo los documentos: todas las guías, plantillas y proyectos de la bóveda — incluidos los dos que antes se vendían aparte. Sin las clases en video.",
     incluye: [
@@ -470,7 +470,7 @@ export const NIVELES_VENTA: NivelVenta[] = [
   {
     nivel: "grabado",
     nombre: "Cursos grabados",
-    precio: "$150",
+    precio: "$120",
     descripcion:
       "La masterclass completa a tu ritmo + el curso bonus StorySelling Pro, con toda la bóveda de documentos incluida.",
     incluye: [
@@ -1546,7 +1546,7 @@ export const TALLER = {
   // ── Landing de venta ─────────────────────────────────────────
   gate: {
     headline:
-      "Antes de la IA, piensa como director creativo. Después, produce la campaña completa tú solo.",
+      "Deja de generar al azar. En 7 días aprendes a pensar y dirigir la IA como un director creativo.",
     subheadline:
       "La Masterclass de Creatividad Publicitaria IA: el proceso real de un director creativo — insight, concepto y guion — y la producción completa con IA hasta el video final. Sin cámara, sin productora, sin equipo de rodaje. Empiezas desde cero si hace falta.",
     // Video de venta (VSL) — ID de YouTube oculto. Si lo dejas "" se
@@ -1554,9 +1554,17 @@ export const TALLER = {
     vslYoutubeId: "",
     // Videos de ejemplo (galería "Míralo en acción"). Agrega piezas que
     // hayas producido con el sistema. [] muestra marcadores de posición.
-    videosEjemplo: [] as { titulo: string; youtubeId: string }[],
+    // driveId = ID del archivo de Google Drive (compartido "Cualquiera con
+    // el enlace"); youtubeId tiene prioridad si ambos están presentes.
+    videosEjemplo: [
+      { titulo: "Ejemplo 1", youtubeId: "", driveId: "1d03L84gglfzdu5j5JqzYmx2JUPnMEL_B" },
+      { titulo: "Ejemplo 2", youtubeId: "", driveId: "1VWYG-tRzJpZYa3c6b8FdtgV-FkGMqaIv" },
+      { titulo: "Ejemplo 3", youtubeId: "", driveId: "1tozakeM6avmDrvTPMwRZWCjagOIbHm2Y" },
+    ] as { titulo: string; youtubeId: string; driveId?: string }[],
     // Prueba social, ej. "+15 alumnos en la primera cohorte". "" lo oculta.
     alumnos: "",
+    // Tamaño real del programa grabado (se muestra bajo el CTA principal).
+    duracion: "28 clases en 6 partes · ~6 horas de masterclass grabada",
 
     // Visual "iceberg": la punta que todos ven vs. el sistema debajo.
     iceberg: {
@@ -1647,10 +1655,6 @@ export const TALLER = {
       },
       { item: "Comunidad de alumnos + soporte por WhatsApp por 30 días", valor: "$97" },
       {
-        item: "Llamada grupal de seguimiento a los 14 días: revisamos tus avances",
-        valor: "$97",
-      },
-      {
         item: "Solo en vivo: sesión Q&A en directo + revisión grupal de tu primer proyecto",
         valor: "$150",
         soloVivo: true,
@@ -1663,8 +1667,8 @@ export const TALLER = {
     productos: {
       boveda: {
         nombre: "Bóveda de documentos",
-        precio: "$50",
-        precioLocal: "S/190",
+        precio: "$25",
+        precioLocal: "S/95",
         nota: "sin las clases en video · acceso de por vida, con actualizaciones",
         valorTotal: "",
         beneficios: [
@@ -1673,28 +1677,29 @@ export const TALLER = {
           "Actualizaciones: lo nuevo que se publique también entra",
         ],
         garantia:
-          "48 horas de garantía: si sientes que no es para ti, te devuelvo el dinero completo.",
+          "Te garantizo que lo que enseño es real: es lo que aplico hoy para trabajar con marcas grandes.",
+        garantiaLink: "https://www.resueltoagency.com/casos",
         cta: "Quiero la bóveda",
         mensajeWhatsApp:
           "Hola Manuel, quiero comprar el acceso a la Bóveda de documentos de la Masterclass de Creatividad Publicitaria IA",
       },
       grabado: {
         nombre: "Curso grabado",
-        precio: "$150",
-        precioLocal: "S/560",
+        precio: "$120",
+        precioLocal: "S/450",
         nota: "acceso inmediato · de por vida, con actualizaciones · cuotas disponibles",
-        valorTotal: "$1,682",
+        valorTotal: "$1,585",
         beneficios: [
-          "Las 6 partes completas: 28 clases en módulos cortos",
+          "Las 6 partes completas: 28 clases, ~6 horas en total",
           "Curso bonus: StorySelling Pro (28 clases más, 2h04)",
           "Toda la bóveda de documentos y plantillas incluida",
           "La Biblia Publicitaria completa (59 documentos)",
           "La baraja de GPTs de mi proceso",
           "Comunidad + soporte WhatsApp 30 días",
-          "Llamada grupal de seguimiento (día 14)",
         ],
         garantia:
-          "7 días de garantía: si entras, lo ves y sientes que no es para ti, te devuelvo el dinero completo. Sin formularios raros ni preguntas incómodas.",
+          "Te garantizo que lo que enseño es real: es lo que aplico hoy para trabajar con marcas grandes.",
+        garantiaLink: "https://www.resueltoagency.com/casos",
         cta: "Quiero el sistema completo",
         // Link de checkout de Hotmart. "" → el botón cae a WhatsApp.
         hotmartUrl: "",
@@ -1706,7 +1711,7 @@ export const TALLER = {
         precio: "$250",
         precioLocal: "S/950",
         nota: "cohorte con fecha fija · incluye el grabado de por vida · cuotas disponibles",
-        valorTotal: "$1,832",
+        valorTotal: "$1,735",
         // Precio fundador — "" lo oculta. Ej: "Precio fundador cohorte 1: $197 — solo primeros 10"
         precioFundador: "",
         // Fecha de la próxima cohorte — "" lo oculta.
@@ -1720,7 +1725,8 @@ export const TALLER = {
           "Revisión grupal de tu primer proyecto",
         ],
         garantia:
-          "Asiste a la masterclass, aplica el sistema, y si en 7 días no produces tu primer spot con IA, te devuelvo el 100%.",
+          "Te garantizo que lo que enseño es real: es lo que aplico hoy para trabajar con marcas grandes.",
+        garantiaLink: "https://www.resueltoagency.com/casos",
         cta: "Quiero mi cupo en vivo",
         mensajeWhatsApp:
           "Hola Manuel, quiero info de la Masterclass de Creatividad Publicitaria IA en vivo",
@@ -1743,7 +1749,7 @@ export const TALLER = {
       },
       {
         q: "¿Cuál elijo: la bóveda, el grabado o el vivo?",
-        a: "Si solo quieres las guías y plantillas para aplicar el sistema por tu cuenta, la Bóveda ($50) alcanza. Si quieres las clases completas paso a paso, el curso grabado ($150) — incluye la bóveda. Si además quieres verlo conmigo en vivo, con Q&A y revisión de tu proyecto, el vivo ($250) — incluye todo lo anterior.",
+        a: "Si solo quieres las guías y plantillas para aplicar el sistema por tu cuenta, la Bóveda ($25) alcanza. Si quieres las clases completas paso a paso, el curso grabado ($120) — incluye la bóveda. Si además quieres verlo conmigo en vivo, con Q&A y revisión de tu proyecto, el vivo ($250) — incluye todo lo anterior.",
       },
       {
         q: "¿Necesito saber de publicidad?",
@@ -1795,7 +1801,6 @@ export const TALLER = {
 
   // ── Próximas sesiones (Calendar) ─────────────────────────────
   // fecha en formato ISO con zona Lima: "2026-08-05T19:00:00-05:00"
-  // Incluye aquí también la llamada de seguimiento del día 14.
   sesiones: [] as { titulo: string; fecha: string; duracionMin: number }[],
 
   // ── CLASSROOM: catálogo de cursos (estilo Skool) ─────────────

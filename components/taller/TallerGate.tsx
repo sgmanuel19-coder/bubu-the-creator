@@ -73,7 +73,7 @@ function StickyCompra() {
         style={{ background: "var(--green)", color: "#fff" }}
       >
         <span>Elegir mi acceso</span>
-        <span className="text-xs font-normal opacity-90">$50 · $150 · $250 →</span>
+        <span className="text-xs font-normal opacity-90">$25 · $120 · $250 →</span>
       </a>
     </div>
   );
@@ -313,6 +313,20 @@ function ProductoCard({ tipo }: { tipo: "boveda" | "grabado" | "vivo" }) {
       </a>
       <p className="mt-4 text-xs leading-relaxed" style={{ color: "var(--muted)" }}>
         🛡 {p.garantia}
+        {p.garantiaLink && (
+          <>
+            {" "}
+            <a
+              href={p.garantiaLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold underline"
+              style={{ color: "var(--green)" }}
+            >
+              Ver mi portafolio →
+            </a>
+          </>
+        )}
       </p>
     </div>
   );
@@ -345,16 +359,18 @@ export default function TallerGate() {
             {gate.subheadline}
           </p>
 
-          {/* Video de presentación (VSL). Sin ID muestra un marcador. */}
-          <div
-            className="relative mx-auto mt-8 w-full max-w-3xl overflow-hidden rounded-2xl border"
-            style={{
-              aspectRatio: "16 / 9",
-              borderColor: "rgba(244,240,222,0.12)",
-              background: "var(--surface)",
-            }}
-          >
-            {gate.vslYoutubeId ? (
+          {/* Video de presentación (VSL). Sin ID, no se muestra nada (antes
+              dejaba un marcador con instrucciones internas visible al
+              público — oculto hasta que subas el video real). */}
+          {gate.vslYoutubeId && (
+            <div
+              className="relative mx-auto mt-8 w-full max-w-3xl overflow-hidden rounded-2xl border"
+              style={{
+                aspectRatio: "16 / 9",
+                borderColor: "rgba(244,240,222,0.12)",
+                background: "var(--surface)",
+              }}
+            >
               <iframe
                 src={`https://www.youtube-nocookie.com/embed/${gate.vslYoutubeId}?rel=0&modestbranding=1`}
                 title="Presentación de la masterclass"
@@ -362,16 +378,8 @@ export default function TallerGate() {
                 allowFullScreen
                 className="absolute inset-0 h-full w-full"
               />
-            ) : (
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-6 text-center">
-                <span className="text-4xl">▶</span>
-                <p className="text-sm font-semibold">Aquí va tu video de presentación (VSL)</p>
-                <p className="text-xs" style={{ color: "var(--muted)" }}>
-                  Súbelo oculto a YouTube y pega su ID en gate.vslYoutubeId
-                </p>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
 
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
@@ -382,8 +390,13 @@ export default function TallerGate() {
               Ver la oferta completa ↓
             </a>
           </div>
+          {gate.duracion && (
+            <p className="mt-4 text-sm font-medium" style={{ color: "var(--muted)" }}>
+              📚 {gate.duracion}
+            </p>
+          )}
           {gate.alumnos && (
-            <p className="mt-4 text-sm font-medium" style={{ color: "var(--green)" }}>
+            <p className="mt-2 text-sm font-medium" style={{ color: "var(--green)" }}>
               {gate.alumnos}
             </p>
           )}
@@ -425,6 +438,15 @@ export default function TallerGate() {
                       title={v.titulo}
                       loading="lazy"
                       allow="encrypted-media; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full"
+                    />
+                  ) : "driveId" in v && v.driveId ? (
+                    <iframe
+                      src={`https://drive.google.com/file/d/${v.driveId}/preview`}
+                      title={v.titulo}
+                      loading="lazy"
+                      allow="autoplay"
                       allowFullScreen
                       className="absolute inset-0 h-full w-full"
                     />
