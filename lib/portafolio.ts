@@ -46,6 +46,10 @@ export const CHAPTERS: Chapter[] = [
       { url: "/videos/comercial-05.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
       { url: "/videos/comercial-06.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
       { url: "/videos/comercial-07.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
+      // 4:3 de origen (1920x1440): va en slot 16/9, que recorta arriba y abajo.
+      { url: "/videos/comercial-08.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
+      // Vertical de origen (1440x2560): slot 9/16, calza exacto.
+      { url: "/videos/comercial-09.mp4", label: "Comercial IA", client: "Resuelto Agency" },
     ],
   },
   {
