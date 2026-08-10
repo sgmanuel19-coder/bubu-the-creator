@@ -101,6 +101,7 @@ export const CHAPTERS: Chapter[] = [
       { url: "/videos/story-11.mp4", label: "Storytelling IA", client: "Resuelto Agency" },
       { url: "/videos/story-12.mp4", label: "Storytelling IA", client: "Resuelto Agency" },
       { url: "/videos/story-13.mp4", label: "Storytelling IA", client: "Resuelto Agency" },
+      { url: "/videos/story-14.mp4", label: "Storytelling IA", client: "Resuelto Agency" },
     ],
   },
   {
@@ -114,6 +115,7 @@ export const CHAPTERS: Chapter[] = [
       { url: "/videos/avatar-03.mp4", label: "Avatar IA", client: "Resuelto Agency", wide: true },
       { url: "/videos/avatar-04.mp4", label: "Avatar IA", client: "Resuelto Agency" },
       { url: "/videos/avatar-05.mp4", label: "Avatar IA", client: "Resuelto Agency" },
+      { url: "/videos/avatar-06.mp4", label: "Avatar IA", client: "Resuelto Agency", wide: true },
     ],
   },
 ];
