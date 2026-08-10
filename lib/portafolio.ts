@@ -52,6 +52,7 @@ export const CHAPTERS: Chapter[] = [
       // miniatura no recorta nada. El video real se ve completo en el lightbox.
       { url: "/videos/comercial-08.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
       { url: "/videos/comercial-09.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
+      { url: "/videos/comercial-10.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
     ],
   },
   {
