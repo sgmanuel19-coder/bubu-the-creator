@@ -156,6 +156,9 @@ export const DESIGN_IMAGES: ImagePiece[] = [
   { src: "/images/portfolio/design/design-09.jpg", label: "Diseño IA" },
   { src: "/images/portfolio/design/design-10.jpg", label: "Diseño IA" },
   { src: "/images/portfolio/design/design-11.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-12.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-13.jpg", label: "Diseño IA" },
+  { src: "/images/portfolio/design/design-14.jpg", label: "Diseño IA" },
 ];
 
 // ============================================================
