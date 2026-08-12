@@ -80,6 +80,7 @@ export const CHAPTERS: Chapter[] = [
       { url: "/videos/ugc-03.mp4", label: "UGC IA", client: "Resuelto Agency" },
       { url: "/videos/ugc-04.mp4", label: "UGC IA", client: "Resuelto Agency" },
       { url: "/videos/ugc-05.mp4", label: "UGC IA", client: "Resuelto Agency" },
+      { url: "/videos/ugc-06.mp4", label: "UGC IA", client: "Resuelto Agency" },
     ],
   },
   {
