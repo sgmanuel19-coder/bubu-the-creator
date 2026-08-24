@@ -50,6 +50,13 @@ export type Noticia = {
   seccion: Seccion;
   /** Cuántas señales del oficio encontró el clasificador. */
   puntaje: number;
+  /**
+   * Otros medios que publicaron la misma nota. Antes se tiraban a la
+   * basura; son la mejor señal de importancia que tiene un agregador
+   * (es el "More:" de Techmeme). Que tres medios cubran algo dice
+   * más que cualquier peso que le asignemos a mano a una fuente.
+   */
+  tambienEn: { fuente: Fuente; url: string }[];
 };
 
 export type Portada = {
@@ -187,6 +194,7 @@ function parsearFeed(xml: string, fuente: Fuente): Noticia[] {
       fuente,
       seccion: fuente.seccionBase,
       puntaje: 0,
+      tambienEn: [],
     });
   }
 
@@ -272,7 +280,7 @@ function clasificar(noticia: Noticia): Noticia | null {
 async function traerFuente(fuente: Fuente, forzar = false): Promise<Noticia[]> {
   const respuesta = await fetch(fuente.url, {
     headers: {
-      "User-Agent": "Mozilla/5.0 (compatible; ResueltoRadar/1.0; +https://resueltoagency.com/noticias)",
+      "User-Agent": "Mozilla/5.0 (compatible; ResueltoRadar/1.0; +https://www.resueltoagency.com/noticias)",
       Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
     },
     // `cache: "no-store"` y `next.revalidate` son excluyentes: hay
@@ -294,16 +302,89 @@ export function huellaDe(titulo: string): string {
   return normalizar(titulo).replace(/[^a-z0-9]/g, "").slice(0, 55);
 }
 
-/** Quita repetidos: la misma nota rebotada por dos medios. */
-function deduplicar(noticias: Noticia[]): Noticia[] {
-  const vistos = new Set<string>();
+/**
+ * Palabras que no distinguen una noticia de otra. Sin esta lista, dos
+ * notas se parecen solo por compartir "para", "sobre" y "inteligencia
+ * artificial", que están en la mitad del portal.
+ */
+const PALABRAS_VACIAS = new Set([
+  "para", "como", "esta", "este", "esto", "esos", "esas", "pero", "porque",
+  "cuando", "donde", "desde", "hasta", "sobre", "entre", "sino", "aunque",
+  "todo", "toda", "todos", "todas", "otro", "otra", "otros", "otras",
+  "mas", "menos", "muy", "tambien", "solo", "solo", "asi", "ahora", "hoy",
+  "ano", "anos", "dia", "dias", "vez", "veces", "puede", "pueden", "hace",
+  "hacer", "tiene", "tienen", "estan", "estar", "ser", "son", "sus", "con",
+  "sin", "por", "que", "los", "las", "del", "una", "uno", "the", "and",
+  "for", "with", "that", "this", "from", "have", "has", "its", "you",
+  "your", "will", "can", "new", "says", "said", "how", "why", "what",
+  "inteligencia", "artificial", "intelligence",
+]);
+
+/** Palabras con peso propio de un titular, ya normalizadas. */
+function tokens(titulo: string): Set<string> {
+  return new Set(
+    normalizar(titulo)
+      .replace(/[^a-z0-9\s]/g, " ")
+      .split(/\s+/)
+      .filter((t) => t.length >= 4 && !PALABRAS_VACIAS.has(t)),
+  );
+}
+
+/**
+ * ¿Son la misma noticia contada por dos redacciones?
+ *
+ * Comparar los titulares letra por letra NO sirve: se probó y daba cero
+ * racimos, porque dos medios jamás titulan igual. Lo que sí se repite
+ * son las palabras con carga —nombres de producto, empresas, verbos del
+ * hecho—, así que se mide cuánto se solapan.
+ *
+ * Pide DOS condiciones a la vez: al menos 3 palabras en común (que dos
+ * notas compartan "whatsapp" y "google" es casualidad; tres ya no) y
+ * que sean casi la mitad del vocabulario de ambas. Con una sola de las
+ * dos se juntaban notas distintas del mismo tema.
+ */
+function mismaNoticia(a: Set<string>, b: Set<string>): boolean {
+  let comunes = 0;
+  for (const t of a) if (b.has(t)) comunes++;
+  if (comunes < 3) return false;
+  return comunes / (a.size + b.size - comunes) >= 0.45;
+}
+
+/**
+ * Agrupa la misma nota rebotada por varios medios.
+ *
+ * Antes esto se llamaba deduplicar y BORRABA las repetidas. Ahora las
+ * cuelga de la primera en `tambienEn`: el racimo se muestra al lector
+ * y alimenta el puntaje. La lista entra ordenada por fecha, así que la
+ * que manda es la más reciente.
+ */
+function agrupar(noticias: Noticia[]): Noticia[] {
+  const cabezas: { noticia: Noticia; tokens: Set<string> }[] = [];
   const salida: Noticia[] = [];
+
   for (const n of noticias) {
-    const huella = huellaDe(n.titulo);
-    if (!huella || vistos.has(huella)) continue;
-    vistos.add(huella);
-    salida.push(n);
+    const suyos = tokens(n.titulo);
+    if (suyos.size === 0) continue;
+
+    const cabeza = cabezas.find((c) => mismaNoticia(c.tokens, suyos));
+    if (!cabeza) {
+      cabezas.push({ noticia: n, tokens: suyos });
+      salida.push(n);
+      continue;
+    }
+    const principal = cabeza.noticia;
+
+    // Un mismo medio republicando no cuenta como cobertura extra.
+    const yaEsta =
+      principal.fuente.id === n.fuente.id ||
+      principal.tambienEn.some((o) => o.fuente.id === n.fuente.id);
+    if (!yaEsta) principal.tambienEn.push({ fuente: n.fuente, url: n.url });
+
+    // Si la que manda no traía imagen y la repetida sí, se la queda.
+    // Sale gratis y ataca de frente la escasez de imágenes en los RSS.
+    if (!principal.imagen && n.imagen) principal.imagen = n.imagen;
   }
+
   return salida;
 }
 
@@ -330,7 +411,7 @@ export async function obtenerPortada(
     }
   });
 
-  const noticias = deduplicar(
+  const noticias = agrupar(
     crudas
       .map(clasificar)
       .filter((n): n is Noticia => n !== null)
@@ -350,9 +431,13 @@ export async function obtenerPortada(
   // español que el comentario de abajo daba por hecho y el código
   // no tenía. Una nota en inglés llega a portada solo si le gana
   // de lejos a todo lo que hay en español.
+  // La cobertura pesa fuerte (+6 por medio extra): que tres redacciones
+  // distintas publiquen lo mismo es mejor evidencia de que la nota
+  // importa que el peso que le pusimos a mano a cada fuente.
   const puntuar = (n: Noticia) =>
     n.fuente.peso * 2 +
     n.puntaje * 3 +
+    n.tambienEn.length * 6 +
     (n.imagen ? 8 : 0) -
     (n.fuente.idioma === "en" ? 10 : 0) -
     (Date.now() - n.fecha.getTime()) / 10_800_000;
@@ -372,6 +457,8 @@ export async function obtenerPortada(
   console.log(
     `[radar] ${crudas.length} crudas → ${noticias.length} publicables · ` +
       `fuentes ${vivas}/${FUENTES.length} · ` +
+      `racimos ${noticias.filter((n) => n.tambienEn.length > 0).length} ` +
+      `(+${noticias.reduce((a, n) => a + n.tambienEn.length, 0)} rebotes) · ` +
       `ES:${noticias.filter((n) => n.fuente.idioma === "es").length} ` +
       `EN:${noticias.filter((n) => n.fuente.idioma === "en").length} · ` +
       (Object.keys(TERMINOS_SECCION) as Seccion[])

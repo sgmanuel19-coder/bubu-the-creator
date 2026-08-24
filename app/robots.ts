@@ -22,6 +22,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/trap-bot',
       },
     ],
-    sitemap: 'https://resueltoagency.com/sitemap.xml',
+    sitemap: 'https://www.resueltoagency.com/sitemap.xml',
   };
 }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import TiempoRelativo from "@/components/noticias/TiempoRelativo";
 import { SECCIONES, type Seccion } from "@/lib/noticias/fuentes";
 import type { Noticia, Portada } from "@/lib/noticias/feed";
 
@@ -10,28 +11,12 @@ import type { Noticia, Portada } from "@/lib/noticias/feed";
 // fuente original. Nunca se reproduce el artículo completo.
 // ============================================================
 
-const fmtFecha = new Intl.DateTimeFormat("es-PE", {
-  day: "numeric",
-  month: "short",
-  timeZone: "America/Lima",
-});
-
-const fmtHora = new Intl.DateTimeFormat("es-PE", {
-  hour: "2-digit",
-  minute: "2-digit",
-  timeZone: "America/Lima",
-});
-
 const fmtLargo = new Intl.DateTimeFormat("es-PE", {
   day: "numeric",
   month: "long",
   year: "numeric",
   timeZone: "America/Lima",
 });
-
-function sello(fecha: Date): string {
-  return `${fmtFecha.format(fecha)} · ${fmtHora.format(fecha)}`;
-}
 
 /** "Producción" → "produccion": ids de ancla sin tildes ni espacios. */
 function anclaDe(seccion: Seccion): string {
@@ -110,9 +95,12 @@ function Portadilla({ noticia, alto }: { noticia: Noticia; alto: string }) {
   if (noticia.imagen) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
+      // El alt lleva el titular, no está vacío. En un portal de noticias
+      // la foto ES la nota: un alt="" la declara decorativa y renuncia a
+      // Google Imágenes y a que un lector de pantalla sepa qué se ilustra.
       <img
         src={noticia.imagen}
-        alt=""
+        alt={noticia.titulo}
         loading="lazy"
         referrerPolicy="no-referrer"
         className={`w-full ${alto} object-cover transition-transform duration-700 group-hover:scale-[1.03]`}
@@ -148,20 +136,49 @@ function PieFuente({ noticia }: { noticia: Noticia }) {
         </span>
       )}
       <span aria-hidden>·</span>
-      <time dateTime={noticia.fecha.toISOString()}>{sello(noticia.fecha)}</time>
+      <TiempoRelativo iso={noticia.fecha.toISOString()} />
     </div>
+  );
+}
+
+/**
+ * El racimo: qué otros medios publicaron lo mismo.
+ *
+ * Es el "More:" de Techmeme y es la señal más honesta que tiene un
+ * agregador — que tres redacciones distintas cubran algo dice más que
+ * cualquier peso editorial que le pongamos a una fuente. Estos datos
+ * ya se calculaban para descartar repetidos; ahora se muestran.
+ */
+function TambienEn({ noticia }: { noticia: Noticia }) {
+  if (noticia.tambienEn.length === 0) return null;
+  return (
+    <p className="text-xs leading-relaxed text-muted/80">
+      <span className="text-muted/60">También en </span>
+      {noticia.tambienEn.map((otro, i) => (
+        <span key={otro.fuente.id + otro.url}>
+          {i > 0 && <span className="text-muted/40">, </span>}
+          <a
+            href={otro.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative z-10 text-cream/70 underline decoration-white/20 underline-offset-2 transition-colors hover:text-brand-blue hover:decoration-brand-blue/50"
+          >
+            {otro.fuente.corto}
+          </a>
+        </span>
+      ))}
+    </p>
   );
 }
 
 // ── Nota principal ────────────────────────────────────────────
 function NotaPrincipal({ noticia }: { noticia: Noticia }) {
   return (
-    <a
-      href={noticia.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group grid gap-6 overflow-hidden rounded-2xl border border-white/8 bg-surface transition-colors duration-300 hover:border-brand-blue/35 md:grid-cols-[1.15fr_1fr] md:gap-0"
-    >
+    // No es un <a> envolvente: el bloque "También en" lleva sus propios
+    // enlaces y anidar enlaces es HTML inválido. El titular es el enlace
+    // y su ::after invisible cubre la tarjeta para que siga clickeable
+    // entera; lo que deba quedar por encima usa `relative z-10`.
+    <article className="group relative grid gap-6 overflow-hidden rounded-2xl border border-white/8 bg-surface transition-colors duration-300 hover:border-brand-blue/35 md:grid-cols-[1.15fr_1fr] md:gap-0">
       <div className="overflow-hidden md:order-2">
         <Portadilla noticia={noticia} alto="h-56 sm:h-72 md:h-full md:min-h-[22rem]" />
       </div>
@@ -169,7 +186,14 @@ function NotaPrincipal({ noticia }: { noticia: Noticia }) {
       <div className="flex flex-col justify-center gap-4 px-6 pb-7 md:order-1 md:px-9 md:py-10">
         <EtiquetaSeccion seccion={noticia.seccion} />
         <h2 className="font-display text-2xl font-bold leading-[1.15] text-cream sm:text-3xl md:text-[2.1rem]">
-          {noticia.titulo}
+          <a
+            href={noticia.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="after:absolute after:inset-0 after:content-['']"
+          >
+            {noticia.titulo}
+          </a>
         </h2>
         {noticia.extracto && (
           <p className="text-[0.95rem] leading-relaxed text-muted line-clamp-3">
@@ -177,55 +201,62 @@ function NotaPrincipal({ noticia }: { noticia: Noticia }) {
           </p>
         )}
         <PieFuente noticia={noticia} />
+        <TambienEn noticia={noticia} />
         <span className="mt-1 inline-flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-brand-blue">
           Leer en {noticia.fuente.corto}
           <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
         </span>
       </div>
-    </a>
+    </article>
   );
 }
 
 // ── Tarjeta de grilla ─────────────────────────────────────────
 function Tarjeta({ noticia }: { noticia: Noticia }) {
   return (
-    <a
-      href={noticia.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex flex-col overflow-hidden rounded-xl border border-white/8 bg-surface transition-colors duration-300 hover:border-brand-blue/30"
-    >
+    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-white/8 bg-surface transition-colors duration-300 hover:border-brand-blue/30">
       <div className="overflow-hidden">
         <Portadilla noticia={noticia} alto="h-40" />
       </div>
       <div className="flex flex-1 flex-col gap-2.5 p-5">
         <EtiquetaSeccion seccion={noticia.seccion} />
         <h3 className="font-display text-base font-semibold leading-snug text-cream transition-colors group-hover:text-white line-clamp-3">
-          {noticia.titulo}
+          <a
+            href={noticia.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="after:absolute after:inset-0 after:content-['']"
+          >
+            {noticia.titulo}
+          </a>
         </h3>
-        <div className="mt-auto pt-1">
+        <div className="mt-auto flex flex-col gap-1.5 pt-1">
           <PieFuente noticia={noticia} />
+          <TambienEn noticia={noticia} />
         </div>
       </div>
-    </a>
+    </article>
   );
 }
 
 // ── Fila compacta (bloques por sección) ───────────────────────
 function Fila({ noticia }: { noticia: Noticia }) {
   return (
-    <a
-      href={noticia.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex gap-4 border-b border-white/6 py-4 last:border-b-0"
-    >
+    <article className="group relative flex gap-4 border-b border-white/6 py-4 last:border-b-0">
       <div className="min-w-0 flex-1">
         <h4 className="font-display text-[0.95rem] font-semibold leading-snug text-cream transition-colors group-hover:text-brand-blue line-clamp-2">
-          {noticia.titulo}
+          <a
+            href={noticia.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="after:absolute after:inset-0 after:content-['']"
+          >
+            {noticia.titulo}
+          </a>
         </h4>
-        <div className="mt-1.5">
+        <div className="mt-1.5 flex flex-col gap-1">
           <PieFuente noticia={noticia} />
+          <TambienEn noticia={noticia} />
         </div>
       </div>
       {noticia.imagen && (
@@ -233,14 +264,14 @@ function Fila({ noticia }: { noticia: Noticia }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={noticia.imagen}
-            alt=""
+            alt={noticia.titulo}
             loading="lazy"
             referrerPolicy="no-referrer"
             className="h-16 w-24 object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
       )}
-    </a>
+    </article>
   );
 }
 

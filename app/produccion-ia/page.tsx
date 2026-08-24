@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: "Producción audiovisual con IA para empresas — RESUELTO",
   description:
     "Sistema audiovisual con dirección de agencia global y motores de IA. Nivel televisión, entregado en semanas, con precio cerrado. Criterio forjado en TBWA y Fahrenheit DDB.",
-  alternates: { canonical: "https://resueltoagency.com/produccion-ia" },
+  alternates: { canonical: "https://www.resueltoagency.com/produccion-ia" },
   openGraph: {
     title: "Tu empresa vale más de lo que comunica — RESUELTO",
     description:
       "Producción audiovisual con IA para empresas técnicas e industriales. Semanas, no meses. Precio cerrado.",
-    url: "https://resueltoagency.com/produccion-ia",
+    url: "https://www.resueltoagency.com/produccion-ia",
   },
 };
 

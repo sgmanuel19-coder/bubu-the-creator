@@ -9,14 +9,14 @@ const Footer = dynamic(() => import("@/components/Footer"));
 const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "@id": "https://resueltoagency.com/#webpage",
-  "url": "https://resueltoagency.com",
+  "@id": "https://www.resueltoagency.com/#webpage",
+  "url": "https://www.resueltoagency.com",
   "name": "RESUELTO — Producción con IA, Diseño, Web y Automatización",
   "description": "RESUELTO es una agencia de producción con IA en Lima, Perú: comerciales de nivel televisión, contenido de marca, páginas web, packaging, diseño y automatización comercial — dirigidos con 5+ años de criterio en agencias globales. Clientes activos: WIN Internet, Livoltek, Wellmax.",
   "inLanguage": "es-PE",
   "dateModified": "2026-07-17",
-  "isPartOf": { "@id": "https://resueltoagency.com/#website" },
-  "publisher": { "@id": "https://resueltoagency.com/#organization" },
+  "isPartOf": { "@id": "https://www.resueltoagency.com/#website" },
+  "publisher": { "@id": "https://www.resueltoagency.com/#organization" },
 };
 
 export const metadata: Metadata = {
@@ -35,12 +35,12 @@ export const metadata: Metadata = {
     "agencia creativa Lima",
   ],
   alternates: {
-    canonical: "https://resueltoagency.com",
+    canonical: "https://www.resueltoagency.com",
   },
   openGraph: {
     title: "RESUELTO — Producción con IA, Diseño, Web y Automatización",
     description: "Comerciales de nivel televisión, contenido de marca, páginas web y automatización comercial — generados con IA, dirigidos con 5+ años de criterio real.",
-    url: "https://resueltoagency.com",
+    url: "https://www.resueltoagency.com",
   },
 };
 

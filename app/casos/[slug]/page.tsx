@@ -24,11 +24,11 @@ export async function generateMetadata({
   return {
     title: `${caso.client} — Caso de Éxito · ${SITE.brandName}`,
     description: caso.result,
-    alternates: { canonical: `https://resueltoagency.com/casos/${caso.slug}` },
+    alternates: { canonical: `https://www.resueltoagency.com/casos/${caso.slug}` },
     openGraph: {
       title: `${caso.client} · Caso RESUELTO`,
       description: caso.result,
-      url: `https://resueltoagency.com/casos/${caso.slug}`,
+      url: `https://www.resueltoagency.com/casos/${caso.slug}`,
       siteName: SITE.brandName,
       locale: "es_PE",
       type: "website",

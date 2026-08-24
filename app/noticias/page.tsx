@@ -9,12 +9,21 @@ import type { Metadata } from "next";
 // Fuente de verdad del número: REVALIDAR_SEGUNDOS en lib/noticias/feed.ts
 export const revalidate = 21600;
 
-// La marca visible es "La noticIA"; el título de búsqueda además explica
-// de qué va, para no perder tráfico de quien busca el tema y no el nombre.
+// Título: la palabra clave PRIMERO y la marca al final.
+//
+// El anterior media 70 caracteres ("La noticIA — noticias de inteligencia
+// artificial aplicada | RESUELTO") y Google corta cerca de los 60: se
+// perdía el "| RESUELTO" y, peor, gastaba el arranque —la posición que
+// más pesa— en un nombre de marca que todavía no busca nadie. Google ya
+// muestra el dominio encima del título, así que repetir la marca ahí es
+// tirar caracteres.
+//
+// La descripción tenía 183 caracteres y se cortaba a los ~160, dejando
+// "medicina y ciencia" fuera de la vista.
 export const metadata: Metadata = {
-  title: `La noticIA — noticias de inteligencia artificial aplicada | ${SITE.brandName}`,
+  title: "Noticias de inteligencia artificial aplicada | La noticIA",
   description:
-    "Inteligencia artificial aplicada, actualizada todos los días: producción de imagen y video, agentes y herramientas, proyectos hechos con IA, negocio y marketing, medicina y ciencia.",
+    "Noticias de IA que puedes usar: producción de imagen y video, agentes y herramientas, proyectos reales y negocio. Se actualiza todos los días.",
   keywords: [
     "noticias inteligencia artificial",
     "noticias IA español",
@@ -24,21 +33,69 @@ export const metadata: Metadata = {
     "IA marketing",
     "proyectos hechos con IA",
   ],
-  alternates: { canonical: "https://resueltoagency.com/noticias" },
+  alternates: {
+    canonical: "https://www.resueltoagency.com/noticias",
+    // Declara el feed propio en el <head>: es como los lectores de RSS
+    // y otros agregadores lo descubren solos.
+    types: {
+      "application/rss+xml": [
+        { url: "https://www.resueltoagency.com/noticias/feed.xml", title: "La noticIA" },
+      ],
+    },
+  },
   openGraph: {
     type: "website",
     title: `La noticIA — ${SITE.brandName}`,
     description:
       "No todo lo que pasa en IA: solo lo que se puede usar, construir o vender. Se actualiza todos los días.",
-    url: "https://resueltoagency.com/noticias",
+    url: "https://www.resueltoagency.com/noticias",
   },
 };
 
 export default async function NoticiasPage() {
   const portada = await obtenerPortada();
 
+  // Datos estructurados. Hasta ahora la página solo heredaba el marcado
+  // de la agencia (Organization, WebSite): para Google esto era una
+  // página cualquiera, no un listado de noticias. El ItemList le dice
+  // qué es y en qué orden va, que es lo que leen los buscadores y los
+  // asistentes cuando arman una respuesta.
+  const datos = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "La noticIA",
+    description:
+      "Inteligencia artificial aplicada: lo que se puede usar, construir o vender.",
+    url: "https://www.resueltoagency.com/noticias",
+    inLanguage: "es",
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE.brandName,
+      url: "https://www.resueltoagency.com",
+    },
+    dateModified: portada.actualizado.toISOString(),
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: portada.todas.length,
+      itemListElement: portada.todas.slice(0, 40).map((n, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: n.url,
+        name: n.titulo,
+      })),
+    },
+  };
+
   // El Radar es su propia vertical: lleva cabecera y pie propios, sin el
   // menú de ventas de la agencia. Vive en este dominio por SEO (hereda la
   // autoridad ya construida), pero se lee como un portal aparte.
-  return <Radar portada={portada} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(datos) }}
+      />
+      <Radar portada={portada} />
+    </>
+  );
 }

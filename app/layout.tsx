@@ -27,7 +27,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const BASE_URL = "https://resueltoagency.com";
+const BASE_URL = "https://www.resueltoagency.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -93,12 +93,12 @@ export const metadata: Metadata = {
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://resueltoagency.com/#organization",
+  "@id": "https://www.resueltoagency.com/#organization",
   "name": "RESUELTO",
-  "url": "https://resueltoagency.com",
+  "url": "https://www.resueltoagency.com",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://resueltoagency.com/images/logo-mark.png",
+    "url": "https://www.resueltoagency.com/images/logo-mark.png",
     "width": 512,
     "height": 512,
   },
@@ -124,10 +124,10 @@ const orgSchema = {
   ],
   "founder": {
     "@type": "Person",
-    "@id": "https://resueltoagency.com/#founder",
+    "@id": "https://www.resueltoagency.com/#founder",
     "name": "Manuel Severo",
     "jobTitle": "Fundador y Director",
-    "url": "https://resueltoagency.com/sobre-mi",
+    "url": "https://www.resueltoagency.com/sobre-mi",
     "sameAs": [
       "https://www.linkedin.com/in/manuel-severo",
       "https://www.instagram.com/bubu_thecreator",
@@ -138,12 +138,12 @@ const orgSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": "https://resueltoagency.com/#website",
-  "url": "https://resueltoagency.com",
+  "@id": "https://www.resueltoagency.com/#website",
+  "url": "https://www.resueltoagency.com",
   "name": "RESUELTO — Creación de Contenido con IA",
   "inLanguage": "es-PE",
   "publisher": {
-    "@id": "https://resueltoagency.com/#organization",
+    "@id": "https://www.resueltoagency.com/#organization",
   },
 };
 

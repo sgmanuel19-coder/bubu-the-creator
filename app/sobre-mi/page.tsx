@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: `Sobre nosotros — ${SITE.brandName}`,
   description:
     "Tres socios, un solo estándar: estrategia, producción con IA y tecnología. El criterio se forjó en Fahrenheit DDB, Quanticofilms y TBWA Perú produciendo para Wong, BCP y Cencosud.",
-  alternates: { canonical: "https://resueltoagency.com/sobre-mi" },
+  alternates: { canonical: "https://www.resueltoagency.com/sobre-mi" },
   openGraph: {
     title: `Sobre nosotros — ${SITE.brandName}`,
     description:
       "Tres socios, un solo estándar: estrategia, producción con IA y tecnología. Criterio de agencia global, velocidad de IA.",
-    url: "https://resueltoagency.com/sobre-mi",
+    url: "https://www.resueltoagency.com/sobre-mi",
   },
 };
 
