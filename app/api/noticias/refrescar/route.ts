@@ -1,3 +1,5 @@
+import { timingSafeEqual } from "node:crypto";
+
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 
@@ -32,6 +34,24 @@ export const dynamic = "force-dynamic";
 /** 25 fuentes RSS en paralelo: con 10 s por defecto no alcanza. */
 export const maxDuration = 60;
 
+/**
+ * Compara en tiempo constante.
+ *
+ * `a !== b` corta en el primer carácter distinto, así que cuánto tarda
+ * en responder filtra información sobre el secreto. Contra Vercel y por
+ * red es impracticable de explotar, pero comparar bien cuesta cinco
+ * líneas y quita la duda.
+ */
+function autorizado(cabecera: string | null, secreto: string): boolean {
+  if (!cabecera) return false;
+  const recibido = Buffer.from(cabecera);
+  const esperado = Buffer.from(`Bearer ${secreto}`);
+  // timingSafeEqual exige la misma longitud; comparar las longitudes
+  // por separado no filtra nada útil.
+  if (recibido.length !== esperado.length) return false;
+  return timingSafeEqual(recibido, esperado);
+}
+
 export async function GET(request: Request) {
   const secreto = process.env.CRON_SECRET;
 
@@ -45,7 +65,7 @@ export async function GET(request: Request) {
       { status: 503 },
     );
   }
-  if (request.headers.get("authorization") !== `Bearer ${secreto}`) {
+  if (!autorizado(request.headers.get("authorization"), secreto)) {
     return NextResponse.json({ error: "no autorizado" }, { status: 401 });
   }
 

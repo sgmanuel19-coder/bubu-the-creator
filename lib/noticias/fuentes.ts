@@ -67,8 +67,8 @@ export const SECCIONES: Record<
     descripcion:
       "Lo que cambia cómo se produce: generadores de video e imagen, voces sintéticas, edición y efectos. Actualizado todos los días.",
     intro: [
-      "Acá entra lo que toca el trabajo de quien produce: generadores de video e imagen, clonación de voz, edición, efectos y todo lo que se mete en una línea de tiempo. Si una herramienta cambia cuántas horas te toma un entregable, aparece en esta página.",
-      "Es la sección con más movimiento del portal, y también la más ruidosa: cada semana sale un modelo que promete reemplazar una cámara. Filtramos los anuncios que no vienen con algo que ya se pueda usar.",
+      "Si una herramienta cambia cuántas horas te toma un entregable, está acá. Generadores de video e imagen, clonación de voz, edición, efectos, todo lo que termina metido en una línea de tiempo.",
+      "También es la más ruidosa. Cada semana sale un modelo que promete reemplazar una cámara y a la semana siguiente nadie se acuerda. Los anuncios que no vienen con algo que ya se pueda abrir y probar se quedan fuera.",
     ],
   },
   Herramientas: {
@@ -79,8 +79,8 @@ export const SECCIONES: Record<
     descripcion:
       "Agentes, asistentes, automatización y las herramientas que se instalan y se usan. Novedades de IA aplicada, todos los días.",
     intro: [
-      "Agentes, asistentes, automatizaciones y las piezas sueltas que se conectan entre sí. Lo que se instala, se configura y queda trabajando: no la promesa de laboratorio, sino la versión que ya se puede descargar.",
-      "Mucho de esto llega en inglés primero. Cuando la nota viene de un medio en inglés la marcamos con una etiqueta EN antes del clic, para que nadie caiga en un artículo que no puede leer.",
+      "Agentes, asistentes, automatizaciones y las piezas sueltas que se conectan entre sí. La regla es simple: si ya se puede descargar y configurar, entra. Si todavía es una demo con lista de espera, esperamos.",
+      "Mucho de esto sale en inglés primero. Cuando la nota viene de un medio en inglés lleva una etiqueta EN a la vista, para que nadie haga clic y aterrice en algo que no puede leer.",
     ],
   },
   "Hecho con IA": {
@@ -91,8 +91,8 @@ export const SECCIONES: Record<
     descripcion:
       "Proyectos, inventos y campañas que alguien construyó con IA, y cómo lo hizo. Casos reales, no demos de laboratorio.",
     intro: [
-      "La sección de los que ya lo hicieron. Proyectos terminados, campañas que salieron al aire, inventos que funcionan: cosas construidas por alguien, con nombre y resultado, no demos grabadas en una oficina.",
-      "Es la sección más flaca del portal y no lo escondemos: la prensa en español publica poco del tipo \"alguien construyó esto y así lo hizo\". Cuando aparece, entra acá.",
+      "La sección de los que ya lo hicieron. Proyectos terminados, campañas que salieron al aire, inventos que funcionan. Con nombre del que lo hizo y con resultado, no una demo grabada en una oficina.",
+      "Es la más flaca del portal y no tiene sentido disimularlo. La prensa en español casi no publica del tipo \"alguien construyó esto y así lo hizo\". Cuando aparece algo, va acá.",
     ],
   },
   Negocio: {
@@ -115,8 +115,8 @@ export const SECCIONES: Record<
     descripcion:
       "Diagnóstico, investigación, clima, energía y educación. Hacia dónde va la inteligencia artificial fuera de las pantallas.",
     intro: [
-      "IA aplicada fuera de la pantalla: diagnóstico médico, investigación, clima, energía, educación y accesibilidad. Es la sección que mira más lejos, con cosas que ya están pasando en hospitales y laboratorios.",
-      "No publicamos papers ni benchmarks. Si el resultado todavía no salió del laboratorio, todavía no es noticia acá.",
+      "IA aplicada fuera de la pantalla. Diagnóstico médico, investigación, clima, energía, educación, accesibilidad. Cosas que ya están pasando en hospitales y universidades, no dentro de una app.",
+      "Papers y benchmarks no entran. Si el resultado todavía no salió del laboratorio, todavía no es noticia.",
     ],
   },
 };

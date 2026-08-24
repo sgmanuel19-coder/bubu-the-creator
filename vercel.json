@@ -6,6 +6,10 @@
     {
       "path": "/api/noticias/refrescar",
       "schedule": "0 10 * * *"
+    },
+    {
+      "path": "/api/noticias/newsletter",
+      "schedule": "30 13 * * *"
     }
   ],
   "rewrites": [

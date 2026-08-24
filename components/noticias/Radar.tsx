@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import Suscribirse from "@/components/noticias/Suscribirse";
 import TiempoRelativo from "@/components/noticias/TiempoRelativo";
 import { SECCIONES, slugDeSeccion, type Seccion } from "@/lib/noticias/fuentes";
 import type { Noticia, Portada } from "@/lib/noticias/feed";
@@ -65,6 +66,16 @@ export function Cabecera({ secciones }: { secciones: Seccion[] }) {
         </nav>
 
         <div className="flex shrink-0 items-center gap-4">
+          <a
+            href="/noticias/buscar"
+            aria-label="Buscar en el archivo"
+            className="text-muted transition-colors hover:text-cream"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" strokeLinecap="round" />
+            </svg>
+          </a>
           <a
             href="/taller"
             className="font-display text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand-blue transition-opacity hover:opacity-75"
@@ -173,6 +184,38 @@ function PieFuente({ noticia }: { noticia: Noticia }) {
  * cualquier peso editorial que le pongamos a una fuente. Estos datos
  * ya se calculaban para descartar repetidos; ahora se muestran.
  */
+/**
+ * Compartir por WhatsApp.
+ *
+ * En LATAM compartir es WhatsApp, no Twitter. `wa.me` funciona en
+ * teléfono y en escritorio sin script ninguno.
+ *
+ * Lleva `relative z-10` porque la tarjeta tiene una capa invisible que
+ * la hace clickeable entera: sin eso, este botón quedaría debajo y el
+ * clic abriría la nota en vez de compartirla.
+ */
+function Compartir({ noticia }: { noticia: Noticia }) {
+  const texto = encodeURIComponent(`${noticia.titulo}
+
+${noticia.url}
+
+vía La noticIA · resueltoagency.com/noticias`);
+  return (
+    <a
+      href={`https://wa.me/?text=${texto}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Compartir por WhatsApp: ${noticia.titulo}`}
+      className="relative z-10 inline-flex items-center gap-1 text-xs text-muted/70 transition-colors hover:text-brand-blue"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden className="h-3.5 w-3.5" fill="currentColor">
+        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.55-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29Z" />
+      </svg>
+      Compartir
+    </a>
+  );
+}
+
 function TambienEn({ noticia }: { noticia: Noticia }) {
   if (noticia.tambienEn.length === 0) return null;
   return (
@@ -224,7 +267,10 @@ function NotaPrincipal({ noticia }: { noticia: Noticia }) {
             {noticia.extracto}
           </p>
         )}
-        <PieFuente noticia={noticia} />
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <PieFuente noticia={noticia} />
+          <Compartir noticia={noticia} />
+        </div>
         <TambienEn noticia={noticia} />
         <span className="mt-1 inline-flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-brand-blue">
           Leer en {noticia.fuente.corto}
@@ -379,6 +425,14 @@ export default function Radar({ portada }: { portada: Portada }) {
               </section>
             )}
 
+            {/* ── Newsletter ──
+                Va acá y no al final: el lector ya vio de qué va el
+                portal y todavía no se fue a hacer clic a otro sitio.
+                Al final del scroll ya no queda casi nadie. */}
+            <section className="pt-14">
+              <Suscribirse origen="portada" />
+            </section>
+
             {/* ── Puerta a Plataformas ──
                 Kling, Seedance y compañía salen una vez al mes: con la
                 ventana de 7 días de esta portada casi nunca se ven. Esa
@@ -474,6 +528,35 @@ export default function Radar({ portada }: { portada: Portada }) {
               </a>
             </div>
           </div>
+
+          {/* Mapa del portal en el pie. Antes el pie era idéntico en las
+              siete páginas; esto lo hace útil y de paso reparte enlaces
+              internos desde abajo, que es donde termina quien leyó todo. */}
+          <nav className="mt-10 border-t border-white/8 pt-8">
+            <h3 className="font-display text-sm font-bold uppercase tracking-[0.2em] text-cream">
+              Todo el portal
+            </h3>
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+              {(Object.keys(SECCIONES) as Seccion[]).map((s) => (
+                <a
+                  key={s}
+                  href={`/noticias/${SECCIONES[s].slug}`}
+                  className="transition-colors hover:text-brand-blue"
+                >
+                  {s}
+                </a>
+              ))}
+              <a href="/noticias/plataformas" className="transition-colors hover:text-brand-blue">
+                Plataformas
+              </a>
+              <a href="/noticias/buscar" className="transition-colors hover:text-brand-blue">
+                Buscar en el archivo
+              </a>
+              <a href="/noticias/feed.xml" className="transition-colors hover:text-brand-blue">
+                RSS
+              </a>
+            </div>
+          </nav>
 
           {/* Marca madre: discreta, sin arrastrar el menú de la agencia. */}
           <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/8 pt-6 sm:flex-row sm:items-center">
