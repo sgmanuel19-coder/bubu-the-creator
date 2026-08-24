@@ -11,7 +11,7 @@ import ValorGrafico from "@/components/taller/ValorGrafico";
 
 // Un clic de compra dispara ambos sistemas de medición:
 // Vercel Analytics (funnel propio) + Pixel de Meta (optimización de pauta).
-function clickComprar(producto: "boveda" | "grabado" | "vivo") {
+function clickComprar(producto: "boveda" | "grabado" | "vivo" | "mentoria") {
   trackTaller("taller_cta_comprar", { producto });
   trackMeta("InitiateCheckout", {
     content_name: `Masterclass Creatividad Publicitaria IA — ${producto}`,
@@ -49,6 +49,11 @@ function urlBoveda() {
   return waLink(TALLER.gate.productos.boveda.mensajeWhatsApp);
 }
 
+// CTA de la mentoría: siempre WhatsApp — sin precio público, se cotiza por conversación.
+function urlMentoria() {
+  return waLink(TALLER.gate.productos.mentoria.mensajeWhatsApp);
+}
+
 // ── CTA fijo en móvil (aparece tras pasar el hero) ────────────
 function StickyCompra() {
   const [visible, setVisible] = useState(false);
@@ -73,7 +78,7 @@ function StickyCompra() {
         style={{ background: "var(--green)", color: "#fff" }}
       >
         <span>Elegir mi acceso</span>
-        <span className="text-xs font-normal opacity-90">$25 · $120 · $250 →</span>
+        <span className="text-xs font-normal opacity-90">$25 · $200 · $500 →</span>
       </a>
     </div>
   );
@@ -220,12 +225,19 @@ function RegistroCard() {
   );
 }
 
-// ── Tarjeta de producto (bóveda / grabado / vivo) ─────────────
-function ProductoCard({ tipo }: { tipo: "boveda" | "grabado" | "vivo" }) {
+// ── Tarjeta de producto (bóveda / grabado / vivo / mentoría) ──
+function ProductoCard({ tipo }: { tipo: "boveda" | "grabado" | "vivo" | "mentoria" }) {
   const p = TALLER.gate.productos[tipo];
   const esVivo = tipo === "vivo";
   const vivo = TALLER.gate.productos.vivo;
-  const href = tipo === "vivo" ? urlVivo() : tipo === "grabado" ? urlGrabado() : urlBoveda();
+  const href =
+    tipo === "vivo"
+      ? urlVivo()
+      : tipo === "grabado"
+        ? urlGrabado()
+        : tipo === "mentoria"
+          ? urlMentoria()
+          : urlBoveda();
   return (
     <div
       className="flex flex-col rounded-3xl border p-6 sm:p-8"
@@ -248,12 +260,18 @@ function ProductoCard({ tipo }: { tipo: "boveda" | "grabado" | "vivo" }) {
         </span>
       )}
       <h3 className="text-lg font-bold">{p.nombre}</h3>
-      <p className="mt-3">
-        <span className="text-4xl font-bold">{p.precio}</span>{" "}
-        <span className="text-sm" style={{ color: "var(--muted)" }}>
-          ({p.precioLocal})
-        </span>
-      </p>
+      {p.precio ? (
+        <p className="mt-3">
+          <span className="text-4xl font-bold">{p.precio}</span>{" "}
+          <span className="text-sm" style={{ color: "var(--muted)" }}>
+            ({p.precioLocal})
+          </span>
+        </p>
+      ) : (
+        <p className="mt-3 text-2xl font-bold uppercase tracking-wide" style={{ color: "var(--muted)" }}>
+          A cotizar
+        </p>
+      )}
       <p className="mt-1 text-xs" style={{ color: "var(--muted)" }}>
         {p.nota}
       </p>
@@ -676,13 +694,14 @@ export default function TallerGate() {
         <section id="precios" className="mt-20 scroll-mt-24">
           <h2 className="text-center text-2xl font-bold">Elige cómo entrar</h2>
           <p className="mx-auto mt-2 max-w-lg text-center text-sm" style={{ color: "var(--muted)" }}>
-            Cada nivel incluye todo el de la izquierda: el vivo trae el grabado, y el grabado
-            trae la bóveda completa.
+            Cada nivel incluye todo el anterior: el vivo trae el grabado, el grabado trae la
+            bóveda completa, y la mentoría se construye sobre el mismo sistema.
           </p>
-          <div className="mx-auto mt-8 grid max-w-5xl gap-5 md:grid-cols-3">
+          <div className="mx-auto mt-8 grid max-w-6xl gap-5 md:grid-cols-2 lg:grid-cols-4">
             <ProductoCard tipo="boveda" />
             <ProductoCard tipo="grabado" />
             <ProductoCard tipo="vivo" />
+            <ProductoCard tipo="mentoria" />
           </div>
         </section>
 
@@ -745,7 +764,7 @@ export default function TallerGate() {
               className="w-full rounded-xl px-7 py-3.5 text-sm font-semibold transition-opacity hover:opacity-90 sm:w-auto"
               style={{ background: "var(--green)", color: "#fff" }}
             >
-              {gate.productos.vivo.cta} ({gate.productos.vivo.precio}) →
+              Avísame de la próxima fecha en vivo →
             </a>
             <a
               href={urlGrabado()}

@@ -194,9 +194,9 @@ export const SECCIONES_PRODUCCION: Record<string, SeccionRecurso[]> = {
               "Escenas realistas donde el movimiento tiene que sentirse VERDAD. El plano que parece rodado.",
             ],
             [
-              "Seedance 2.0",
-              "Sincronización audiovisual: voz, música y sonido alineados con la imagen",
-              "Cuando la pieza lleva alguien hablando, o el audio y el video deben respirar juntos.",
+              "Seedance 2.5",
+              "Sincronización audiovisual: voz, música y sonido alineados con la imagen, con edición por región",
+              "Cuando la pieza lleva alguien hablando, o el audio y el video deben respirar juntos — y cuando vas a necesitar corregir un detalle sin regenerar todo.",
             ],
           ],
         },
@@ -204,6 +204,37 @@ export const SECCIONES_PRODUCCION: Record<string, SeccionRecurso[]> = {
           tipo: "nota",
           texto:
             "Y la regla que gobierna a ambos, heredada de la guía de Higgsfield: LA IMAGEN PRIMERO. El frame inicial se genera y aprueba antes de animar nada. Un video generado desde una imagen mediocre es una imagen mediocre… en movimiento.",
+        },
+      ],
+    },
+    {
+      titulo: "Seedance 2.5: lo que cambió frente a 2.0",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Con 2.0 corregías un fallo puntual —una cara que salió mal en un cuadro, un objeto fuera de lugar— regenerando el clip completo. 2.5 edita por región: marcas la zona exacta, la corriges, y el resto del clip aprobado queda intacto. Sumado a que ahora acepta hasta 50 referencias en una sola generación (antes eran muchas menos) y genera el audio en la MISMA pasada que la imagen —ambiente, foley y música ya sincronizados, sin pase aparte—, el motor resuelve en una corrida lo que antes tomaba tres o cuatro regeneraciones completas.",
+        },
+        {
+          tipo: "tabla",
+          columnas: ["Control", "Antes (2.0)", "Ahora (2.5)"],
+          filas: [
+            ["Corregir un detalle", "Regenerar el clip entero", "Edición por región: solo esa zona"],
+            ["Referencias por generación", "Pocas", "Hasta 50 — personaje, producto y locación a la vez"],
+            ["Audio", "Pase aparte para sincronizar", "Se genera junto con el video, ya sincronizado"],
+            ["Look (época, luz, física)", "Se describía en el prompt y el modelo interpretaba", "Selectores directos: era, género, iluminación, física, lente, tono emocional"],
+            ["Duración de un clip", "Más corta", "Hasta 30 segundos en una sola toma continua"],
+          ],
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "Los selectores son el cambio que más se siente en el día a día: elegir década, ángulo de luz o tipo de física como parámetro directo saca esa decisión del prompt (donde el modelo tenía que adivinar) y la vuelve un ajuste explícito, igual que ya trabajas la cámara en Cinema Studio. Menos regeneraciones por interpretación equivocada, más control real.",
+        },
+        {
+          tipo: "nota",
+          texto:
+            "La resolución nativa de Seedance 2.5 llega hasta 1080p, con upscale a 4K encima — no genera 4K de fábrica. Si una pieza hero necesita máxima resolución nativa sin pasar por upscale, vale la pena probar también 2.0 antes de decidir. Para todo lo demás (que es la mayoría de tu producción), 2.5 gana por control, edición y audio en una sola pasada.",
         },
       ],
     },
@@ -239,7 +270,7 @@ export const SECCIONES_PRODUCCION: Record<string, SeccionRecurso[]> = {
           items: [
             { titulo: "Guion y storyboard", detalle: "La pieza se piensa en papel: qué tomas la componen, qué dice cada una. (Las estructuras narrativas de esta bóveda aplican íntegras.)" },
             { titulo: "Frames en Higgsfield", detalle: "El frame inicial de cada toma, con el prompt cinematográfico y la hoja de personaje. Se aprueban TODOS antes de animar." },
-            { titulo: "Animación en Kling o Seedance", detalle: "Cada frame aprobado se anima con su prompt de escena. Kling para el movimiento realista; Seedance para lo que lleva voz." },
+            { titulo: "Animación en Kling o Seedance", detalle: "Cada frame aprobado se anima con su prompt de escena. Kling para el movimiento realista; Seedance 2.5 para lo que lleva voz." },
             { titulo: "Voz y presentadores", detalle: "El voiceover en ElevenLabs; el talking-head en HeyGen si aplica (guía aparte en esta bóveda)." },
             { titulo: "Montaje en CapCut", detalle: "Las tomas se vuelven pieza con las reglas de ritmo. Y antes de exportar: checklist «parece agencia»." },
           ],

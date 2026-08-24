@@ -12,6 +12,9 @@ const TABS = [
   { href: "/taller/calendario", label: "Calendario" },
   { href: "/taller/recursos", label: "Recursos" },
   { href: "/taller/novedades", label: "Novedades" },
+  // Sale del portal hacia La noticIA, que es su propia vertical con
+  // cabecera propia. La flecha avisa que se cambia de territorio.
+  { href: "/noticias", label: "La noticIA ↗" },
 ];
 
 export default function PortalNav({ desbloqueado = false }: { desbloqueado?: boolean }) {

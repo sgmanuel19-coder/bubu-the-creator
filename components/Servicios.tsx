@@ -333,6 +333,18 @@ export default function Servicios() {
             {" "}{SERVICIOS.length} servicios, un mismo estándar:{" "}
             <strong>nivel de agencia global, velocidad de IA.</strong>
           </p>
+
+          <div className="sv-range">
+            <div className="sv-range-bar" />
+            <div className="sv-range-labels">
+              <div><b>$2,000</b><span>El punto de entrada</span></div>
+              <div className="end"><b>+$10,000</b><span>Campañas completas y producción recurrente</span></div>
+            </div>
+            <p className="sv-range-note">
+              Mientras más complejo tu proyecto —más piezas, más comerciales, producción recurrente
+              todo el mes— más se acerca a <b>+$10,000</b>. Así se cotiza cada servicio de producción.
+            </p>
+          </div>
         </div>
       </header>
 

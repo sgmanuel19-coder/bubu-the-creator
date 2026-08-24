@@ -191,51 +191,76 @@ export default function Home() {
             entregadas en semanas, con precio cerrado.
           </motion.p>
 
-          <motion.div
-            className="hm-cta-row"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.15, ease: EASE }}
-          >
-            <Magnetic>
-              <a className="hm-btn" href="/casos">Ver el trabajo <i>→</i></a>
-            </Magnetic>
-            <Magnetic>
-              <a className="hm-btn-outline" href={waLink("¡Hola! Quiero cotizar un proyecto con Resuelto.")} target="_blank" rel="noopener noreferrer">
-                Hablar por WhatsApp
-              </a>
-            </Magnetic>
-          </motion.div>
+        </motion.div>
 
-          {/* Credenciales con count-up */}
-          <motion.div
-            className="hm-cred"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.4 }}
-          >
-            <span><b><Counter to={5} suffix="M+" /></b> vistas generadas</span>
-            <i />
-            <span><b><Counter to={20} suffix="+" /></b> marcas</span>
-            <i />
-            <span><b><Counter to={2000} suffix="+" /></b> piezas</span>
-            <i />
-            <span className="hm-cred-ag">TBWA · Fahrenheit DDB</span>
-          </motion.div>
+      </header>
+
+      {/* ── VSL — Video Sales Letter ── */}
+      <section className="container-base hm-section hm-vsl-section">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.9, ease: EASE }}
+          className="hm-vsl-wrap"
+        >
+          <div className="hm-vsl-frame">
+            <iframe
+              src="https://www.youtube.com/embed/30bVmigalKQ?rel=0&modestbranding=1&cc_load_policy=0"
+              title="Resuelto — Video de presentación"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="hm-cta-row"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
+        >
+          <Magnetic>
+            <a className="hm-btn" href="/casos">Ver el trabajo <i>→</i></a>
+          </Magnetic>
+          <Magnetic>
+            <a className="hm-btn-outline" href={waLink("Hola, vi su página web y quisiera agendar una llamada para cotizar mi proyecto.")} target="_blank" rel="noopener noreferrer">
+              Hablar por WhatsApp
+            </a>
+          </Magnetic>
+        </motion.div>
+
+        {/* Credenciales con count-up */}
+        <motion.div
+          className="hm-cred"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
+          <span><b><Counter to={5} suffix="M+" /></b> vistas generadas</span>
+          <i />
+          <span><b><Counter to={20} suffix="+" /></b> marcas</span>
+          <i />
+          <span><b><Counter to={2000} suffix="+" /></b> piezas</span>
+          <i />
+          <span className="hm-cred-ag">TBWA · Fahrenheit DDB</span>
         </motion.div>
 
         {/* Scroll cue */}
         <motion.div
           className="hm-scrollcue"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.9, duration: 0.8 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.8 }}
           aria-hidden="true"
         >
           <span>scroll</span>
           <span className="hm-scrollcue-line" />
         </motion.div>
-      </header>
+      </section>
 
       {/* ── MARQUEE CINÉTICO — statement tipográfico ── */}
       <div className="hm-kinetic" aria-hidden="true">
@@ -453,7 +478,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.45, ease: EASE }}
           >
             <Magnetic>
-              <a className="hm-btn hm-btn-lg" href={waLink("¡Hola! Quiero cotizar un proyecto con Resuelto.")} target="_blank" rel="noopener noreferrer">
+              <a className="hm-btn hm-btn-lg" href={waLink("Hola, vi su página web y quisiera agendar una llamada para cotizar mi proyecto.")} target="_blank" rel="noopener noreferrer">
                 Hablemos por WhatsApp <i>→</i>
               </a>
             </Magnetic>

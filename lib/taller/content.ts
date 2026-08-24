@@ -470,7 +470,7 @@ export const NIVELES_VENTA: NivelVenta[] = [
   {
     nivel: "grabado",
     nombre: "Cursos grabados",
-    precio: "$120",
+    precio: "$200",
     descripcion:
       "La masterclass completa a tu ritmo + el curso bonus StorySelling Pro, con toda la bóveda de documentos incluida.",
     incluye: [
@@ -483,7 +483,7 @@ export const NIVELES_VENTA: NivelVenta[] = [
   {
     nivel: "vivo",
     nombre: "Cohorte en vivo",
-    precio: "$250",
+    precio: "$500",
     descripcion:
       "Las sesiones en vivo de la cohorte actual, con todo el curso grabado y la bóveda completa incluidos.",
     incluye: [
@@ -1201,13 +1201,13 @@ const BOVEDA_PRODUCCION: RecursoBoveda[] = [
     slug: "de-imagen-a-video",
     titulo: "De imagen a video · Kling y Seedance dirigidos con intención",
     descripcion:
-      "Los dos motores de video de máxima calidad del stack: Kling 3.0 para movimiento realista y Seedance 2.0 cuando la pieza lleva voz y audio sincronizado.",
+      "Los dos motores de video de máxima calidad del stack: Kling 3.0 para movimiento realista y Seedance 2.5 —ya con edición por región, 50 referencias y audio nativo— cuando la pieza lleva voz y audio sincronizado.",
     tipo: "guia",
     nivel: "intermedio",
     disponible: true,
-    tags: ["kling", "seedance", "video"],
+    tags: ["kling", "seedance", "seedance 2.5", "video"],
     contenido: [
-      "El salto de calidad en video IA no está en generar más — está en dirigir mejor. Kling 3.0 es mi elección cuando la escena pide física creíble: caminatas, telas, agua, cámara en movimiento. Seedance 2.0 entra cuando el video necesita voz o audio sincronizado con la imagen.",
+      "El salto de calidad en video IA no está en generar más — está en dirigir mejor. Kling 3.0 es mi elección cuando la escena pide física creíble: caminatas, telas, agua, cámara en movimiento. Seedance 2.5 entra cuando el video necesita voz o audio sincronizado con la imagen — y desde su salto de versión, además corrige un detalle puntual sin regenerar el clip entero.",
       "El prompt de video se escribe como una escena de guion: quién hace qué, cómo se mueve la cámara, qué pasa al inicio y qué pasa al final de los segundos que dura. «Mujer caminando» es una lotería; una escena descrita con intención es una toma.",
       "Regla de producción: la imagen primero. Genera y aprueba el frame inicial en Higgsfield, y recién ahí anímalo. Corregir una imagen cuesta segundos; corregir un video generado, cuesta el render entero.",
     ],
@@ -1417,11 +1417,11 @@ const BOVEDA_HIGGSFIELD: RecursoBoveda[] = [
     slug: "control-de-camara-ia",
     titulo: "Control de cámara, ángulos y lente en video IA",
     descripcion:
-      "Por qué «dolly lento» te da algo distinto en cada corrida, y qué se fija como parámetro para que una toma sea repetible.",
+      "Por qué «dolly lento» te da algo distinto en cada corrida, y qué se fija como parámetro para que una toma sea repetible — actualizado con los controles de Cinema Studio 4.0: Tempo, Emotion Wheel y época.",
     tipo: "guia",
     nivel: "intermedio",
     disponible: true,
-    tags: ["cámara", "higgsfield", "dirección", "video"],
+    tags: ["cámara", "higgsfield", "dirección", "video", "cinema studio"],
   },
   {
     slug: "manos-y-caras-ia",
@@ -1639,24 +1639,24 @@ export const TALLER = {
     // Stack de valor — el orden importa: la Biblia va primero después
     // de la masterclass (bono estrella).
     stack: [
-      { item: "Masterclass completa en módulos", valor: "$497" },
+      { item: "Masterclass completa en módulos", valor: "$600" },
       {
         item: "La Biblia Publicitaria completa: los 59 documentos que le enseñan a la IA todo el oficio del director creativo — el mismo material que alimenta mi sistema",
-        valor: "$497",
+        valor: "$600",
         estrella: true,
       },
       {
         item: "La baraja de GPTs de mi proceso: CinePromt, Storyboard, UGC y Seedance Director",
-        valor: "$297",
+        valor: "$300",
       },
       {
         item: "Plantillas: hoja de personaje, ADN de marca y biblioteca de prompts",
-        valor: "$197",
+        valor: "$200",
       },
-      { item: "Comunidad de alumnos + soporte por WhatsApp por 30 días", valor: "$97" },
+      { item: "Comunidad de alumnos + soporte por WhatsApp por 30 días", valor: "$100" },
       {
         item: "Solo en vivo: sesión Q&A en directo + revisión grupal de tu primer proyecto",
-        valor: "$150",
+        valor: "$200",
         soloVivo: true,
       },
     ],
@@ -1685,10 +1685,10 @@ export const TALLER = {
       },
       grabado: {
         nombre: "Curso grabado",
-        precio: "$120",
-        precioLocal: "S/450",
+        precio: "$200",
+        precioLocal: "S/760",
         nota: "acceso inmediato · de por vida, con actualizaciones · cuotas disponibles",
-        valorTotal: "$1,585",
+        valorTotal: "$1,800",
         beneficios: [
           "Las 6 partes completas: 28 clases, ~6 horas en total",
           "Curso bonus: StorySelling Pro (28 clases más, 2h04)",
@@ -1708,10 +1708,10 @@ export const TALLER = {
       },
       vivo: {
         nombre: "Masterclass en vivo",
-        precio: "$250",
-        precioLocal: "S/950",
-        nota: "cohorte con fecha fija · incluye el grabado de por vida · cuotas disponibles",
-        valorTotal: "$1,735",
+        precio: "$500",
+        precioLocal: "S/1,900",
+        nota: "cohorte grupal · incluye el grabado de por vida · cuotas disponibles",
+        valorTotal: "$2,000",
         // Precio fundador — "" lo oculta. Ej: "Precio fundador cohorte 1: $197 — solo primeros 10"
         precioFundador: "",
         // Fecha de la próxima cohorte — "" lo oculta.
@@ -1727,9 +1727,28 @@ export const TALLER = {
         garantia:
           "Te garantizo que lo que enseño es real: es lo que aplico hoy para trabajar con marcas grandes.",
         garantiaLink: "https://www.resueltoagency.com/casos",
-        cta: "Quiero mi cupo en vivo",
+        cta: "Próxima fecha aún no disponible",
         mensajeWhatsApp:
-          "Hola Manuel, quiero info de la Masterclass de Creatividad Publicitaria IA en vivo",
+          "Hola Manuel, quiero que me avisen de la próxima fecha de la Masterclass en vivo",
+      },
+      mentoria: {
+        nombre: "Mentoría para empresas",
+        precio: "",
+        precioLocal: "",
+        nota: "individual 1 a 1 o grupal para tu equipo · contenido adaptado a tu especialidad",
+        valorTotal: "",
+        beneficios: [
+          "Todo lo del curso grabado, de por vida",
+          "Sesiones en vivo adaptadas a tu marca o a tu equipo",
+          "Fechas a tu medida, cuando la necesites",
+          "Individual 1 a 1 o grupal para varias personas de tu empresa",
+        ],
+        garantia:
+          "Te garantizo que lo que enseño es real: es lo que aplico hoy para trabajar con marcas grandes.",
+        garantiaLink: "https://www.resueltoagency.com/casos",
+        cta: "Cotizar mi mentoría",
+        mensajeWhatsApp:
+          "Hola Manuel, quiero información sobre la mentoría individual o grupal empresarial de la Masterclass de Creatividad Publicitaria IA",
       },
     },
 
@@ -1759,7 +1778,7 @@ export const TALLER = {
       },
       {
         q: "¿Cuál elijo: la bóveda, el grabado o el vivo?",
-        a: "Si solo quieres las guías y plantillas para aplicar el sistema por tu cuenta, la Bóveda ($25) alcanza. Si quieres las clases completas paso a paso, el curso grabado ($120) — incluye la bóveda. Si además quieres verlo conmigo en vivo, con Q&A y revisión de tu proyecto, el vivo ($250) — incluye todo lo anterior.",
+        a: "Si solo quieres las guías y plantillas para aplicar el sistema por tu cuenta, la Bóveda ($25) alcanza. Si quieres las clases completas paso a paso, el curso grabado ($200) — incluye la bóveda. Si además quieres verlo conmigo en vivo, con Q&A y revisión de tu proyecto, el vivo ($500) — incluye todo lo anterior.",
       },
       {
         q: "¿Necesito saber de publicidad?",

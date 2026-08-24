@@ -93,6 +93,45 @@ export const SECCIONES_HIGGSFIELD: Record<string, SeccionRecurso[]> = {
       ],
     },
     {
+      titulo: "Cinema Studio 4.0: los controles nuevos",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Cinema Studio subió de versión y el salto no es cosmético: pasa de clips de hasta 15 segundos a hasta 30, de 9 referencias a 50, y suma tres controles que antes no existían — Tempo, Emotion Wheel y selector de Época. Si armaste tu flujo con la versión anterior, vale la pena revisar qué cambia.",
+        },
+        {
+          tipo: "tabla",
+          columnas: ["Control", "Antes (3.5)", "Ahora (4.0)"],
+          filas: [
+            ["Duración del clip", "Hasta 15 segundos", "Hasta 30 segundos — un arco de personaje completo en una sola toma"],
+            ["Referencias por generación", "Hasta 9", "Hasta 50 — fija cara, forma de producto o estilo antes de generar el primer cuadro"],
+            ["Ritmo de montaje", "Se dejaba al prompt", "Tempo como control directo: Chaotic, Dynamic, Calm o Single Shot"],
+            ["Movimientos de cámara", "9 preajustes", "30+ preajustes, incluidos POV, brazo robótico y toma aérea"],
+            ["Tipo de cámara", "3 opciones", "4 opciones: Moderna, cámara DV, 35mm y 8mm — con grano y textura de época"],
+            ["Actuación del personaje", "No existía", "Emotion Wheel: etiquetas por @mención con 8+ emociones (ira, alegría, miedo, confianza)"],
+            ["Época del plano", "No existía", "Selector de década: el grano, el color y el lente se ajustan solos"],
+            ["Continuar un clip", "No existía", "Forward/Backward Extend: subes un video y lo extiendes hacia adelante o hacia atrás sin generar de cero"],
+          ],
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "Tempo es el que más cambia el día a día: antes el ritmo de corte quedaba a criterio del modelo, ahora lo eliges tú. Dynamic es el que más vas a usar en publicidad — corte con impulso hacia adelante sin volverse caótico, el mismo ritmo de la mayoría de comerciales y música. Chaotic sirve para acción o para el gancho de los primeros 3 segundos cuando quieres desorientar a propósito. Single Shot elimina el montaje entero: una sola toma continua de principio a fin, la opción más difícil de ejecutar bien y la más inmersiva cuando funciona.",
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "Emotion Wheel resuelve algo que antes tenías que describir con palabras y esperar que el modelo interpretara bien: etiquetas al personaje con @nombre_del_personaje + la emoción (Alegría, Ira, Miedo, Confianza, Sorpresa, Tristeza, Asco, Esperanza) y el modelo construye la expresión y el lenguaje corporal a partir de eso. Es la misma lógica que ya usas para fijar cámara y luz como parámetro en vez de dejarlos en el prompt — ahora se extiende a la actuación.",
+        },
+        {
+          tipo: "nota",
+          texto:
+            "El selector de Época no es un filtro de color encima del video: ajusta grano, respuesta de color y carácter de lente juntos, coherente con la década elegida. Combínalo con el tipo de cámara (35mm para look de película, 8mm para textura de video casero) cuando un cliente pida una estética retro específica — te ahorra armar ese look a mano en edición.",
+        },
+      ],
+    },
+    {
       titulo: "Auditoría rápida antes de generar",
       bloques: [
         {

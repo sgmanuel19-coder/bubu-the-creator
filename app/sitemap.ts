@@ -21,6 +21,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...guiasGratis,
     {
+      // El radar se regenera solo cada día: es la ruta más fresca del sitio.
+      url: 'https://www.resueltoagency.com/noticias',
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
       url: 'https://resueltoagency.com',
       lastModified: new Date('2026-06-11'),
       changeFrequency: 'monthly',

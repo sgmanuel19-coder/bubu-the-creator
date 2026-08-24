@@ -52,11 +52,14 @@ body {
 @media (hover: hover) and (pointer: fine) {
   * { cursor: none !important; }
   input, textarea { cursor: text !important; }
-  .ics-root, .ics-root *, .taller-root, .taller-root * { cursor: auto !important; }
+  .ics-root, .ics-root *, .taller-root, .taller-root *,
+  .noticias-root, .noticias-root * { cursor: auto !important; }
   .ics-root button, .ics-root a, .ics-root select,
   .ics-root [role="button"], .ics-root label,
   .taller-root button, .taller-root a, .taller-root select,
-  .taller-root [role="button"], .taller-root label { cursor: pointer !important; }
+  .taller-root [role="button"], .taller-root label,
+  .noticias-root button, .noticias-root a, .noticias-root select,
+  .noticias-root [role="button"], .noticias-root label { cursor: pointer !important; }
   .ics-root input, .ics-root textarea,
   .taller-root input, .taller-root textarea { cursor: text !important; }
 }
@@ -810,6 +813,17 @@ body {
 .sv-sub{ max-width:560px;margin-top:24px;color:var(--sv-muted);font-size:16px;line-height:1.65;font-weight:300; }
 .sv-sub strong{ color:var(--sv-cream);font-weight:500; }
 
+/* RANGO DE INVERSIÓN — explica que el precio sube con la complejidad,
+   antes de que el visitante vea el precio de cada tarjeta. */
+.sv-range{ max-width:640px;margin-top:44px; }
+.sv-range-bar{ height:4px;border-radius:3px;background:linear-gradient(90deg,rgba(26,128,255,.16),var(--sv-blue)); }
+.sv-range-labels{ display:flex;justify-content:space-between;gap:20px;margin-top:14px; }
+.sv-range-labels b{ display:block;font-size:22px;font-weight:800;letter-spacing:-.01em;color:var(--sv-cream);font-variant-numeric:tabular-nums; }
+.sv-range-labels span{ display:block;margin-top:4px;font-size:11.5px;color:var(--sv-muted);font-weight:300;letter-spacing:.01em; }
+.sv-range-labels .end{ text-align:right; }
+.sv-range-note{ margin-top:16px;font-size:14px;line-height:1.6;color:var(--sv-cream-dim);font-weight:300; }
+.sv-range-note b{ color:var(--sv-blue);font-weight:700; }
+
 /* GRILLA */
 .sv-grid-wrap{ padding-top:60px;padding-bottom:20px; }
 /* ── ACORDEÓN HORIZONTAL (dos filas) ─────────────────────── */
@@ -983,7 +997,7 @@ body {
 @keyframes hmGrain{ 0%{transform:translate(0,0)} 25%{transform:translate(-38px,22px)} 50%{transform:translate(24px,-30px)} 75%{transform:translate(-14px,-18px)} 100%{transform:translate(0,0)} }
 
 /* HERO — manifiesto */
-.hm-hero{ position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:150px 0 90px;overflow:hidden; }
+.hm-hero{ position:relative;min-height:auto;display:flex;flex-direction:column;justify-content:center;padding:150px 0 60px;overflow:hidden; }
 .hm-glow{ position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px); }
 .hm-glow-1{ top:-120px;right:-160px;width:640px;height:480px;background:radial-gradient(ellipse,rgba(26,128,255,.16) 0%,transparent 70%);animation:hmDrift 14s ease-in-out infinite alternate; }
 .hm-glow-2{ bottom:-80px;left:-140px;width:480px;height:360px;background:radial-gradient(ellipse,rgba(244,240,222,.05) 0%,transparent 70%);animation:hmDrift 18s ease-in-out infinite alternate-reverse; }
@@ -1012,7 +1026,7 @@ body {
 .hm-cred b{ color:var(--hm-cream);font-weight:800;font-size:15px;letter-spacing:0;font-variant-numeric:tabular-nums;margin-right:4px; }
 .hm-cred i{ width:4px;height:4px;border-radius:50%;background:rgba(26,128,255,.6); }
 .hm-cred-ag{ color:rgba(158,152,130,.75); }
-.hm-scrollcue{ position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:2; }
+.hm-scrollcue{ display:flex;flex-direction:column;align-items:center;gap:10px;margin:28px auto 0;z-index:2; }
 .hm-scrollcue span:first-child{ font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:rgba(158,152,130,.7); }
 .hm-scrollcue-line{ width:1px;height:44px;background:linear-gradient(to bottom,rgba(26,128,255,.7),transparent);overflow:hidden;position:relative; }
 .hm-scrollcue-line::after{ content:"";position:absolute;top:-40%;left:0;width:100%;height:40%;background:var(--hm-cream);animation:hmScrollDot 1.8s ease-in-out infinite; }
@@ -1034,6 +1048,172 @@ body {
 .hm-section-head{ display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap; }
 .hm-section-head h2{ font-size:clamp(1.9rem,4.8vw,3.3rem);font-weight:800;letter-spacing:-.025em;margin-top:20px;color:var(--hm-cream);line-height:1.06; }
 .hm-section-head p{ max-width:380px;color:var(--hm-muted);font-size:14px;line-height:1.6;font-weight:300; }
+
+/* VSL — Video Sales Letter */
+.hm-vsl-section{ padding-top:0;padding-bottom:4rem;text-align:center; }
+.hm-vsl-wrap{ max-width:900px;margin:0 auto; }
+.hm-vsl-frame{ position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 0 0 1px rgba(244,240,222,0.1),0 32px 80px rgba(0,0,0,0.5); }
+.hm-vsl-frame iframe{ position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px; }
+.hm-vsl-section .hm-cta-row{ justify-content:center; }
+.hm-vsl-section .hm-cred{ justify-content:center; }
+.hm-vsl-section .hm-scrollcue{ margin:20px auto 0; }
+
+/* ══════════════════════════════════════════════════════════
+   LANDING PAGADA (/produccion-ia) — un solo destino, cero fugas
+   ══════════════════════════════════════════════════════════ */
+.lp-hero{ position:relative;padding:130px 0 20px;overflow:hidden;text-align:center; }
+.lp-h1{ font-size:clamp(2.3rem,6.2vw,4.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.03;color:var(--hm-cream);margin-top:22px; }
+.lp-sub{ max-width:640px;margin:26px auto 0;color:var(--hm-muted);font-size:clamp(15px,1.7vw,17.5px);line-height:1.65;font-weight:300; }
+.lp-sub strong{ color:var(--hm-cream);font-weight:500; }
+.lp-vsl-wrap{ max-width:900px;margin:48px auto 0; }
+.lp-cred{ justify-content:center;margin-top:34px; }
+
+/* Bloques CTA repetidos */
+.lp-cta-block{ display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:38px; }
+.lp-cta-sub{ font-size:12.5px;color:rgba(158,152,130,.8);letter-spacing:.02em; }
+
+/* Barra de logos */
+.lp-logos{ padding:56px 0 10px;border-top:1px solid rgba(244,240,222,.07);margin-top:70px; }
+.lp-logos-label{ text-align:center;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(158,152,130,.65);margin-bottom:26px; }
+.lp-logos-row{ display:flex;flex-wrap:wrap;justify-content:center;gap:14px 34px; }
+.lp-logo-item{ font-family:var(--font-poppins),sans-serif;font-size:13.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:rgba(244,240,222,.42);transition:color .3s; }
+.lp-logo-item:hover{ color:rgba(244,240,222,.8); }
+
+/* Encabezados de sección */
+.lp-head{ max-width:720px;margin:0 auto 50px;text-align:center; }
+.lp-head h2{ font-size:clamp(1.8rem,4.4vw,3rem);font-weight:800;letter-spacing:-.025em;line-height:1.07;color:var(--hm-cream);margin-top:18px; }
+.lp-head-sub{ margin-top:18px;color:var(--hm-muted);font-size:15px;line-height:1.65;font-weight:300; }
+
+/* Problema */
+.lp-prob-grid{ display:grid;grid-template-columns:repeat(2,1fr);gap:20px; }
+.lp-prob{ padding:30px 28px;border:1px solid rgba(244,240,222,.1);border-radius:14px;background:rgba(255,255,255,.015); }
+.lp-prob h3{ font-size:16px;font-weight:700;color:var(--hm-cream);letter-spacing:-.01em;margin-bottom:12px; }
+.lp-prob p{ font-size:14px;line-height:1.68;color:var(--hm-muted);font-weight:300; }
+.lp-closing{ max-width:680px;margin:44px auto 0;text-align:center;font-size:16.5px;line-height:1.7;color:var(--hm-muted);font-weight:300; }
+.lp-closing strong{ color:var(--hm-cream);font-weight:600;display:block;margin-top:8px; }
+
+/* Casos */
+.lp-casos{ display:grid;grid-template-columns:repeat(3,1fr);gap:18px; }
+.lp-caso{ position:relative;overflow:hidden;padding:26px 26px 28px;border:1px solid rgba(244,240,222,.1);border-radius:16px;background:linear-gradient(160deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.008) 55%);transition:border-color .4s,transform .4s; }
+.lp-caso:hover{ border-color:rgba(26,128,255,.45);transform:translateY(-5px); }
+/* Halo azul que se enciende al hover — da vida sin cargar imágenes. */
+.lp-caso-glow{ position:absolute;top:-70px;right:-70px;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(26,128,255,.28),transparent 68%);opacity:0;transition:opacity .45s;pointer-events:none; }
+.lp-caso:hover .lp-caso-glow{ opacity:1; }
+.lp-caso-top{ display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;position:relative;z-index:1; }
+.lp-caso-sector{ font-size:9.5px;letter-spacing:.19em;text-transform:uppercase;color:rgba(26,128,255,.9);font-weight:700; }
+.lp-caso-n{ font-size:11px;font-weight:800;color:rgba(244,240,222,.2);letter-spacing:.06em; }
+.lp-caso-cliente{ position:relative;z-index:1;font-size:clamp(21px,2.3vw,26px);font-weight:800;color:var(--hm-cream);letter-spacing:-.03em;line-height:1.1; }
+/* La métrica es el ancla visual de la tarjeta: es lo primero que se lee. */
+.lp-caso-metrica{ position:relative;z-index:1;margin-top:12px;font-size:16px;font-weight:700;line-height:1.35;background:linear-gradient(92deg,#1a80ff,#7db4ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent; }
+.lp-caso-trabajo{ position:relative;z-index:1;margin-top:16px;padding-top:16px;border-top:1px solid rgba(244,240,222,.09);font-size:13px;line-height:1.65;color:var(--hm-muted);font-weight:300; }
+.lp-caso-resultado{ position:relative;z-index:1;margin-top:13px;font-size:12.5px;line-height:1.55;color:rgba(244,240,222,.62);font-weight:400; }
+
+/* Método */
+.lp-metodo{ display:grid;grid-template-columns:repeat(3,1fr);gap:24px; }
+.lp-metodo-item{ padding:32px 26px;border-top:1px solid rgba(26,128,255,.3); }
+.lp-metodo-n{ display:block;font-size:12px;letter-spacing:.24em;color:rgba(26,128,255,.9);font-weight:700;margin-bottom:16px; }
+.lp-metodo-item h3{ font-size:18px;font-weight:700;color:var(--hm-cream);margin-bottom:12px;letter-spacing:-.015em; }
+.lp-metodo-item p{ font-size:14px;line-height:1.68;color:var(--hm-muted);font-weight:300; }
+
+/* Quién dirige */
+/* Una sola columna, acotada para que la bio no quede en líneas largas
+   e incómodas de leer. El collage de marcas va debajo, a todo el ancho. */
+.lp-autor{ max-width:760px;margin:0 auto; }
+.lp-autor-nombre{ font-size:24px;font-weight:800;color:var(--hm-cream);letter-spacing:-.02em; }
+.lp-autor-rol{ font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(26,128,255,.85);font-weight:600;margin:6px 0 22px; }
+.lp-autor-bio p{ font-size:14.5px;line-height:1.72;color:var(--hm-muted);font-weight:300;margin-bottom:16px; }
+.lp-autor-bio strong{ color:var(--hm-cream);font-weight:500; }
+/* Collage de marcas */
+.lp-marcas{ margin:52px auto 0;max-width:1100px;border-radius:16px;overflow:hidden;border:1px solid rgba(244,240,222,.1);box-shadow:0 26px 70px rgba(0,0,0,.45); }
+.lp-marcas-img{ width:100%;height:auto;display:block; }
+
+/* FAQ */
+.lp-faq{ max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:16px; }
+.lp-faq-item{ padding:26px 28px;border:1px solid rgba(244,240,222,.1);border-radius:13px;background:rgba(255,255,255,.015); }
+.lp-faq-item h3{ font-size:16px;font-weight:700;color:var(--hm-cream);margin-bottom:11px;letter-spacing:-.01em; }
+.lp-faq-item p{ font-size:14px;line-height:1.7;color:var(--hm-muted);font-weight:300; }
+
+/* Cierre */
+.lp-final{ position:relative;padding:110px 0 120px;margin-top:90px;text-align:center;border-top:1px solid rgba(244,240,222,.07);background:radial-gradient(ellipse at 50% 0%,rgba(26,128,255,.07),transparent 62%); }
+.lp-final h2{ font-size:clamp(2rem,5.2vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;color:var(--hm-cream); }
+.lp-final > .container-base > p{ max-width:520px;margin:22px auto 0;color:var(--hm-muted);font-size:15.5px;line-height:1.65;font-weight:300; }
+
+/* ── PORTAFOLIO EN VIDEO — pestañas + carrusel ── */
+.lp-pf-tabs{ display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:22px; }
+.lp-pf-tab{ display:inline-flex;align-items:center;gap:9px;padding:11px 20px;border-radius:100px;border:1px solid rgba(244,240,222,.14);background:rgba(255,255,255,.02);color:var(--hm-muted);font-size:13.5px;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:all .3s; }
+.lp-pf-tab:hover{ border-color:rgba(26,128,255,.4);color:var(--hm-cream); }
+.lp-pf-tab.is-active{ background:var(--hm-blue);border-color:var(--hm-blue);color:#fff;box-shadow:0 0 26px rgba(26,128,255,.32); }
+.lp-pf-tab-n{ font-size:10.5px;font-weight:700;opacity:.6;padding:2px 7px;border-radius:100px;background:rgba(0,0,0,.22); }
+.lp-pf-desc{ text-align:center;max-width:560px;margin:0 auto 30px;font-size:14px;line-height:1.6;color:var(--hm-muted);font-weight:300; }
+
+.lp-pf-carousel-wrap{ position:relative; }
+.lp-pf-scroller{ overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;padding:4px 0; }
+.lp-pf-scroller::-webkit-scrollbar{ display:none; }
+.lp-pf-track{ display:flex;gap:16px;width:max-content; }
+.lp-pf-card{ position:relative;flex-shrink:0;height:360px;border-radius:14px;overflow:hidden;scroll-snap-align:start;background:rgba(255,255,255,.03);border:1px solid rgba(244,240,222,.1); }
+.lp-pf-card.is-wide{ aspect-ratio:16/9; }
+.lp-pf-card.is-tall{ aspect-ratio:9/16; }
+.lp-pf-media{ width:100%;height:100%;object-fit:cover;display:block; }
+.lp-pf-thumb{ position:relative;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;display:block; }
+.lp-pf-thumb::after{ content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.62) 0%,transparent 42%);transition:opacity .3s; }
+.lp-pf-thumb:hover::after{ opacity:.7; }
+.lp-pf-play{ position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:54px;height:54px;border-radius:50%;background:rgba(26,128,255,.92);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 26px rgba(26,128,255,.45);transition:transform .3s,background .3s; }
+.lp-pf-thumb:hover .lp-pf-play{ transform:translate(-50%,-50%) scale(1.12);background:var(--hm-blue); }
+.lp-pf-label{ position:absolute;left:14px;bottom:13px;z-index:2;font-size:11.5px;font-weight:600;letter-spacing:.05em;color:var(--hm-cream);text-transform:uppercase; }
+.lp-pf-arrow{ position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid rgba(244,240,222,.16);background:rgba(10,10,12,.88);backdrop-filter:blur(10px);color:var(--hm-cream);font-size:17px;cursor:pointer;transition:all .3s; }
+.lp-pf-arrow:hover{ background:var(--hm-blue);border-color:var(--hm-blue); }
+.lp-pf-arrow-l{ left:-14px; }
+.lp-pf-arrow-r{ right:-14px; }
+.lp-pf-hint{ text-align:center;margin-top:20px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(158,152,130,.6); }
+
+/* Entre 900px y 1180px las tarjetas de cliente a 3 columnas quedan
+   demasiado angostas para el nombre de marca: pasan a 2. */
+@media (min-width:901px) and (max-width:1180px){
+  .lp-casos{ grid-template-columns:repeat(2,1fr); }
+}
+
+/* Testimonios */
+.lp-testi-grid{ display:grid;grid-template-columns:repeat(3,1fr);gap:20px; }
+.lp-testi{ position:relative;padding:34px 28px 28px;border:1px solid rgba(244,240,222,.1);border-radius:14px;background:rgba(255,255,255,.015);display:flex;flex-direction:column;transition:border-color .35s,background .35s; }
+.lp-testi:hover{ border-color:rgba(26,128,255,.32);background:rgba(26,128,255,.03); }
+.lp-testi-mark{ position:absolute;top:10px;left:22px;font-size:56px;line-height:1;font-weight:800;color:rgba(26,128,255,.28);font-family:Georgia,serif; }
+.lp-testi-quote{ position:relative;z-index:1;font-size:14.5px;line-height:1.72;color:var(--hm-cream);font-weight:300;font-style:italic;flex:1; }
+.lp-testi-foot{ margin-top:24px;padding-top:18px;border-top:1px solid rgba(244,240,222,.09); }
+.lp-testi-autor{ font-size:14px;font-weight:700;color:var(--hm-cream);letter-spacing:-.01em; }
+.lp-testi-cargo{ font-size:12px;font-weight:600;color:rgba(26,128,255,.9);margin-top:3px; }
+.lp-testi-sector{ font-size:11px;color:rgba(158,152,130,.75);margin-top:6px;line-height:1.45; }
+
+/* Ficha del director — foto + credenciales */
+.lp-autor-head{ display:flex;align-items:center;gap:20px;margin-bottom:26px; }
+.lp-autor-foto{ flex-shrink:0;width:104px;height:104px;border-radius:50%;overflow:hidden;border:2px solid rgba(26,128,255,.4);box-shadow:0 0 32px rgba(26,128,255,.22); }
+.lp-autor-img{ width:100%;height:100%;object-fit:cover;display:block; }
+.lp-autor-tags{ display:flex;flex-wrap:wrap;gap:7px;margin-top:11px; }
+.lp-autor-tags span{ font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:4px 10px;border-radius:100px;border:1px solid rgba(244,240,222,.14);color:rgba(244,240,222,.6); }
+
+/* Footer mínimo */
+.lp-footer{ padding:34px 0 24px;border-top:1px solid rgba(244,240,222,.07); }
+.lp-footer-top{ display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap; }
+.lp-footer-brand{ font-family:var(--font-poppins),sans-serif;font-weight:600;letter-spacing:.4em;font-size:12px;color:var(--hm-cream);text-transform:uppercase; }
+.lp-footer-legal{ font-size:11.5px;color:rgba(158,152,130,.7); }
+.lp-footer-docs{ margin-top:20px;opacity:.75; }
+
+@media (max-width:900px){
+  .lp-hero{ padding:110px 0 10px; }
+  .lp-prob-grid,.lp-casos,.lp-metodo{ grid-template-columns:1fr; }
+  .lp-caso-cliente{ font-size:23px; }
+  .lp-marcas{ margin-top:36px;border-radius:12px; }
+  .lp-logos{ margin-top:52px; }
+  .lp-final{ padding:80px 0 90px;margin-top:64px; }
+  .lp-footer .container-base{ flex-direction:column;text-align:center; }
+  /* Carrusel: sin flechas (se desliza con el dedo) y tarjetas más bajas. */
+  .lp-pf-arrow{ display:none; }
+  .lp-pf-card{ height:290px; }
+  .lp-pf-card.is-wide{ max-width:86vw; }
+  .lp-pf-tab{ padding:9px 15px;font-size:12.5px; }
+  .lp-autor-head{ gap:16px; }
+  .lp-autor-foto{ width:84px;height:84px; }
+  .lp-testi-grid{ grid-template-columns:1fr; }
+}
 
 /* LOS 4 PRINCIPIOS — tarjetas con borde conic al hover */
 .hm-prin-grid{ display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px; }
@@ -1317,3 +1497,9 @@ body:has(.ics-root) .beams-bg{ display:none; }
   .btn-glow, .hm-btn, .sv-btn, .pf-btn{ transition:box-shadow .3s, transform .3s; }
 }
 
+
+
+/* ── Footer legal (bloques desplegables) ─────────────────────── */
+.legal-block > summary::-webkit-details-marker { display: none; }
+.legal-block > summary::marker { content: ""; }
+.legal-block[open] > summary .legal-block__chevron { transform: rotate(180deg); }

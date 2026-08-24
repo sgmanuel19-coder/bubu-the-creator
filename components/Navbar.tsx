@@ -14,6 +14,9 @@ const navLinks = [
   { label: "Servicios", href: "/servicios" },
   // Academy apunta al portal de la masterclass (landing + plataforma).
   { label: "Academy", href: "/taller" },
+  // La noticIA: portal de noticias con cabecera propia (otra vertical), pero
+  // con entrada desde el menú principal además del menú de la Academy.
+  { label: "La noticIA", href: "/noticias" },
 ];
 
 export default function Navbar({ minimal = false }: { minimal?: boolean }) {

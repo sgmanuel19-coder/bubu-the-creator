@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/constants";
+import LegalNotice from "@/components/LegalNotice";
 
 const socialLinks = [
   { label: "LinkedIn", href: SITE.links.linkedin, icon: "in" },
@@ -45,6 +46,9 @@ export default function Footer() {
             © {SITE.year} {SITE.brandName}. Todos los derechos reservados.
           </p>
         </div>
+
+        {/* Legal — colapsado por defecto */}
+        <LegalNotice />
       </div>
     </footer>
   );

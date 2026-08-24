@@ -37,7 +37,7 @@ export const CONOCIMIENTO: Entrada[] = [
     id: "precio",
     claves: ["precio", "cuanto cuesta", "costo", "cuotas", "pagar el curso", "vale"],
     respuesta:
-      "El curso grabado cuesta $120 (S/450): acceso inmediato y de por vida, con el curso bonus StorySelling Pro y toda la bóveda de documentos incluidos. La masterclass en vivo cuesta $250 (S/950): cohorte con fecha fija, ~4.5 horas, Q&A, revisión de tu proyecto, e incluye el grabado de por vida. Ambos con cuotas disponibles. Para dimensionarlo: un proyecto con este sistema se ofrece a empresas desde $2,000 — aprenderlo cuesta menos del 10% de eso.",
+      "El curso grabado cuesta $200 (S/760): acceso inmediato y de por vida, con el curso bonus StorySelling Pro y toda la bóveda de documentos incluidos. La masterclass en vivo cuesta $500 (S/1,900): cohorte grupal (próxima fecha aún sin confirmar), ~4.5 horas, Q&A, revisión de tu proyecto, e incluye el grabado de por vida. Ambos con cuotas disponibles. Para dimensionarlo: un proyecto con este sistema se ofrece a empresas desde $2,000 — aprenderlo cuesta menos del 10% de eso.",
   },
   {
     id: "garantia",
@@ -145,7 +145,7 @@ export const CONOCIMIENTO: Entrada[] = [
     id: "vivo",
     claves: ["en vivo", "cohorte", "fecha", "cuando es", "masterclass en vivo", "cupos"],
     respuesta:
-      "La masterclass en vivo es por cohortes con fecha fija: ~4.5 horas, grupos de 15-20 personas, con sesión Q&A y revisión grupal de tu primer proyecto. Incluye el grabado de por vida. La fecha de la próxima cohorte aparece en la página «En vivo» del portal — y mi consejo: entra 10 minutos antes y ven con una marca o producto en mente.",
+      "La masterclass en vivo es por cohortes grupales: ~4.5 horas, grupos de 15-20 personas, con sesión Q&A y revisión grupal de tu primer proyecto. Incluye el grabado de por vida. La próxima fecha todavía no está confirmada — cuando se defina, aparece en la página «En vivo» del portal — y mi consejo: entra 10 minutos antes y ven con una marca o producto en mente.",
   },
   {
     id: "upgrade",
@@ -196,7 +196,7 @@ export const CONOCIMIENTO_VENTAS: Entrada[] = [
     id: "v-niveles",
     claves: ["niveles", "acceso total", "que acceso", "tipos de acceso", "solo el vivo", "solo grabado", "desbloquear todo", "boveda", "solo documentos"],
     respuesta:
-      "Hay tres accesos, y cada uno de arriba incluye todo el de abajo: Bóveda de documentos ($25, solo guías y plantillas, sin las clases), Cursos grabados ($120, la masterclass completa + el bonus StorySelling Pro + toda la bóveda) y Cohorte en vivo ($250, las sesiones en vivo + todo lo del grabado). Los ves comparados en la pestaña Recursos, arriba de la bóveda.",
+      "Hay tres accesos, y cada uno de arriba incluye todo el de abajo: Bóveda de documentos ($25, solo guías y plantillas, sin las clases), Cursos grabados ($200, la masterclass completa + el bonus StorySelling Pro + toda la bóveda) y Cohorte en vivo ($500, las sesiones en vivo + todo lo del grabado). Los ves comparados en la pestaña Recursos, arriba de la bóveda.",
   },
   {
     id: "v-premium",
@@ -208,7 +208,7 @@ export const CONOCIMIENTO_VENTAS: Entrada[] = [
     id: "v-precio",
     claves: ["precio", "cuanto cuesta", "cuanto vale", "costo", "cuotas", "vale", "pagar"],
     respuesta:
-      "Hay tres formas de entrar: la Bóveda de documentos a $25, solo guías y plantillas, sin video; el curso grabado a $120 (S/450), con las clases + el bonus StorySelling Pro + toda la bóveda, acceso inmediato y de por vida; y la masterclass en vivo a $250 (S/950), una cohorte con fecha fija de ~4.5 horas con Q&A y revisión de tu proyecto, que incluye todo lo del grabado. Cuotas disponibles en grabado y vivo. Para dimensionarlo: un proyecto con este sistema se ofrece a empresas desde $2,000 — aprenderlo cuesta menos del 10% de eso. Baja a la sección de precios para elegir.",
+      "Hay tres formas de entrar: la Bóveda de documentos a $25, solo guías y plantillas, sin video; el curso grabado a $200 (S/760), con las clases + el bonus StorySelling Pro + toda la bóveda, acceso inmediato y de por vida; y la masterclass en vivo a $500 (S/1,900), una cohorte grupal (próxima fecha aún sin confirmar) de ~4.5 horas con Q&A y revisión de tu proyecto, que incluye todo lo del grabado. Cuotas disponibles en grabado y vivo. Para dimensionarlo: un proyecto con este sistema se ofrece a empresas desde $2,000 — aprenderlo cuesta menos del 10% de eso. Baja a la sección de precios para elegir.",
   },
   {
     id: "v-incluye",
@@ -232,7 +232,7 @@ export const CONOCIMIENTO_VENTAS: Entrada[] = [
     id: "v-vivo-vs-grabado",
     claves: ["vivo o grabado", "diferencia", "cual elijo", "cual me conviene", "vivo vs", "grabado vs"],
     respuesta:
-      "El grabado ($120) es el mismo contenido para verlo a tu ritmo, cuando quieras, de por vida. El vivo ($250) es una cohorte con fecha fija donde lo vemos juntos en ~4.5 horas, con sesión de preguntas en directo y revisión grupal de TU proyecto — y además te llevas el grabado de por vida. Si quieres acompañamiento y feedback directo, el vivo; si prefieres ir solo a tu ritmo, el grabado.",
+      "El grabado ($200) es el mismo contenido para verlo a tu ritmo, cuando quieras, de por vida. El vivo ($500) es una cohorte grupal (próxima fecha aún sin confirmar) donde lo vemos juntos en ~4.5 horas, con sesión de preguntas en directo y revisión grupal de TU proyecto — y además te llevas el grabado de por vida. Si quieres acompañamiento y feedback directo, el vivo; si prefieres ir solo a tu ritmo, el grabado.",
   },
   {
     id: "v-herramientas",
