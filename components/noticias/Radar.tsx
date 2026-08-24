@@ -73,6 +73,29 @@ export function Cabecera({ secciones }: { secciones: Seccion[] }) {
           </a>
         </div>
       </div>
+
+      {/* Segunda fila solo para móvil.
+          El menú de arriba es `hidden md:flex`, así que en teléfono no
+          había NINGUNA forma de llegar a las secciones — y el teléfono
+          es donde entra la mayoría. Va como tira deslizable para no
+          comerse la pantalla ni obligar a un menú desplegable. */}
+      <nav className="flex gap-5 overflow-x-auto border-t border-white/8 px-5 py-2.5 md:hidden [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {secciones.map((s) => (
+          <a
+            key={s}
+            href={`/noticias/${slugDeSeccion(s)}`}
+            className="shrink-0 font-display text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted transition-colors hover:text-cream"
+          >
+            {s}
+          </a>
+        ))}
+        <a
+          href="/noticias/plataformas"
+          className="shrink-0 font-display text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-brand-blue"
+        >
+          Plataformas
+        </a>
+      </nav>
     </header>
   );
 }

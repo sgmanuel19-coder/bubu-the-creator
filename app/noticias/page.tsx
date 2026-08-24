@@ -1,4 +1,5 @@
 import Radar from "@/components/noticias/Radar";
+import { jsonLd } from "@/lib/jsonld";
 import { obtenerPortada } from "@/lib/noticias/feed";
 import { SITE } from "@/lib/constants";
 import type { Metadata } from "next";
@@ -93,7 +94,7 @@ export default async function NoticiasPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(datos) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(datos) }}
       />
       <Radar portada={portada} />
     </>

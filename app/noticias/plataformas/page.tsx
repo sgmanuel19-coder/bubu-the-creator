@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Cabecera } from "@/components/noticias/Radar";
 import TiempoRelativo from "@/components/noticias/TiempoRelativo";
 import { SECCIONES, type Seccion } from "@/lib/noticias/fuentes";
+import { jsonLd } from "@/lib/jsonld";
 import { notasDePlataformas, PLATAFORMAS } from "@/lib/noticias/plataformas";
 
 // ============================================================
@@ -82,7 +83,7 @@ export default async function PlataformasPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(datos) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(datos) }}
       />
       {/* relative z-10: el BeamsBackground del layout es `fixed z-0` y
           sin esto el velo tapa el contenido. */}

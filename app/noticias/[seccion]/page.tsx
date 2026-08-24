@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Cabecera, Fila, Tarjeta } from "@/components/noticias/Radar";
+import { jsonLd } from "@/lib/jsonld";
 import { obtenerPortada } from "@/lib/noticias/feed";
 import { SECCIONES, seccionDeSlug, type Seccion } from "@/lib/noticias/fuentes";
 
@@ -118,7 +119,7 @@ export default async function SeccionPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(datos) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(datos) }}
       />
       {/* relative z-10: mismo motivo que en la portada — el BeamsBackground
           del layout es `fixed z-0` y sin esto el velo tapa el contenido. */}
