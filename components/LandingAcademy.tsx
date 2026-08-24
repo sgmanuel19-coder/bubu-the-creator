@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
+import LandingPortafolio from "@/components/LandingPortafolio";
 import { NIVELES_VENTA, TALLER } from "@/lib/taller/content";
 
 // ============================================================
@@ -49,6 +51,39 @@ function CtaBlock({ label, sub }: { label: string; sub?: string }) {
   );
 }
 
+/**
+ * Miniatura de la tarjeta.
+ *
+ * Todas las imágenes salen del portafolio real de Manuel, así que cada
+ * bloque de "qué vas a aprender" muestra el resultado en vez de
+ * describirlo. Los estilos van en línea a propósito: globals.css no
+ * tiene una clase para esto y no vamos a inventar clases nuevas solo
+ * para dos secciones.
+ */
+function Mini({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        aspectRatio: "16 / 10",
+        borderRadius: 12,
+        overflow: "hidden",
+        marginBottom: "1.05rem",
+        background: "rgba(255,255,255,0.04)",
+      }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 700px) 100vw, 360px"
+        style={{ objectFit: "cover" }}
+      />
+    </div>
+  );
+}
+
 /* ── Contenido ── */
 
 const PROBLEMAS = [
@@ -70,26 +105,31 @@ const PARTES = [
   {
     n: "01",
     title: "Pensar",
+    img: "/images/portfolio/posters/story-03.jpg",
     text: "El protocolo del director creativo: insight, concepto, Big Idea, retórica y las estructuras narrativas que sostienen una campaña.",
   },
   {
     n: "02",
     title: "El sistema",
+    img: "/images/portfolio/design/design-03.jpg",
     text: "Dónde vive el Cerebro Creativo y cómo se instala. Los GPTs de mi proceso, las plantillas y el día a día real de trabajo.",
   },
   {
     n: "03",
     title: "Crear",
+    img: "/images/portfolio/posters/comercial-01.jpg",
     text: "Producción completa con IA hasta el video final. Sin cámara, sin productora y sin equipo de rodaje.",
   },
   {
     n: "04",
     title: "Casos",
+    img: "/images/portfolio/posters/producto-02.jpg",
     text: "Campañas que produje y entregué, abiertas de principio a fin: el brief, lo que se descartó y la pieza que salió al aire.",
   },
   {
     n: "05",
     title: "Cobrar",
+    img: "/images/portfolio/posters/ugc-02.jpg",
     text: "Cómo se arma la oferta, qué se cobra y cómo se presenta para que el precio no sea la conversación.",
   },
 ];
@@ -97,26 +137,32 @@ const PARTES = [
 const LLEVAS = [
   {
     label: "La Biblia Publicitaria",
+    img: "/images/portfolio/design/design-06.jpg",
     text: "Cincuenta y nueve documentos: el cuerpo de conocimiento con el que trabajo. Es el bono que más pesa y no se vende aparte.",
   },
   {
     label: "Las plantillas del sistema",
+    img: "/images/portfolio/design/design-09.jpg",
     text: "Los formatos que uso para bajar un brief a insight, concepto y guion sin empezar de cero cada vez.",
   },
   {
     label: "Los casos reales",
+    img: "/images/portfolio/posters/comercial-06.jpg",
     text: "Campañas producidas y cobradas, con el proceso a la vista. Incluye lo que no funcionó.",
   },
   {
     label: "IA en Acción",
+    img: "/images/portfolio/posters/avatar-02.jpg",
     text: "Tutoriales de herramienta paso a paso: Seedance, Kling, personajes consistentes, edición y casos de clientes.",
   },
   {
     label: "La comunidad",
+    img: "/images/portfolio/posters/story-07.jpg",
     text: "El grupo donde se comparte lo que va saliendo y se resuelven los proyectos de cada quien.",
   },
   {
     label: "Actualizaciones de por vida",
+    img: "/images/portfolio/posters/producto-05.jpg",
     text: "Las herramientas cambian cada mes. Lo que se agregue después también entra, sin pagar de nuevo.",
   },
 ];
@@ -290,6 +336,24 @@ export default function LandingAcademy() {
         </div>
       </section>
 
+      {/* ── PORTAFOLIO — la prueba va temprano ──
+          Mismo carrusel que la landing de producción, con otro
+          encuadre: allá es "esto hacemos", acá es "esto vas a poder
+          hacer tú". Es la respuesta a la única duda que importa en un
+          curso: ¿de verdad se llega a esto? */}
+      <LandingPortafolio
+        eyebrow="A esto vas a llegar"
+        titulo="Piezas como estas, hechas por ti."
+        bajada="Todo lo que ves acá lo produje con las herramientas y el método que enseño. Sin rodaje, sin set y sin equipo."
+      />
+
+      <div className="container-base">
+        <CtaBlock
+          label="Quiero aprender a hacer esto"
+          sub="Te respondo yo el mismo día."
+        />
+      </div>
+
       {/* ── EL PROBLEMA ── */}
       <section className="container-base hm-section">
         <div className="lp-head">
@@ -352,6 +416,7 @@ export default function LandingAcademy() {
               viewport={{ once: true, margin: "-70px" }}
               transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
             >
+              <Mini src={m.img} alt={`${m.title} — pieza del portafolio de RESUELTO`} />
               <span className="lp-metodo-n">{m.n}</span>
               <h3>{m.title}</h3>
               <p>{m.text}</p>
@@ -377,6 +442,7 @@ export default function LandingAcademy() {
               viewport={{ once: true, margin: "-70px" }}
               transition={{ duration: 0.7, delay: i * 0.07, ease: EASE }}
             >
+              <Mini src={b.img} alt={b.label} />
               <h3>{b.label}</h3>
               <p>{b.text}</p>
             </motion.div>
@@ -388,14 +454,80 @@ export default function LandingAcademy() {
       <section className="container-base hm-section">
         <div className="lp-head">
           <span className="hm-eyebrow">Quién te enseña</span>
-          <h2>Manuel Severo.</h2>
-          <p className="lp-head-sub">
-            Pasé por TBWA y por Fahrenheit DDB, con más de dos mil piezas para marcas
-            como Wong, BCP, Cencosud y Redondos. Hoy dirijo Resuelto, mi agencia,
-            donde produzco campañas con IA para clientes que pagan por esto. No te voy
-            a enseñar teoría: te voy a enseñar lo que uso esta semana.
-          </p>
+          <h2>No es un curso de alguien que solo enseña.</h2>
         </div>
+
+        <div className="lp-autor">
+          <motion.div
+            className="lp-autor-bio"
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-70px" }}
+            transition={{ duration: 0.8, ease: EASE }}
+          >
+            <div className="lp-autor-head">
+              <div className="lp-autor-foto">
+                <Image
+                  src="/images/equipo/manuel.jpg"
+                  alt="Manuel Severo, director creativo y profesor de RESUELTO Academy"
+                  width={130}
+                  height={130}
+                  className="lp-autor-img"
+                />
+              </div>
+              <div>
+                <p className="lp-autor-nombre">Manuel Severo</p>
+                <p className="lp-autor-rol">Director creativo — RESUELTO</p>
+                <p className="lp-autor-tags">
+                  <span>TBWA</span>
+                  <span>Fahrenheit DDB</span>
+                  <span>2,000+ piezas</span>
+                  <span>Dirección Creativa IA</span>
+                </p>
+              </div>
+            </div>
+            <p>
+              Pasé años dentro de agencias donde una pieza mal pensada no llega ni a la
+              reunión. Ahí aprendí lo que ningún tutorial enseña: cómo se decide qué
+              contar antes de que exista una sola imagen.
+            </p>
+            <p>
+              Hoy dirijo Resuelto, mi propia agencia, y produzco campañas con IA para
+              clientes que pagan por esto todos los meses. Lo que vas a ver en la
+              masterclass no es una teoría que armé para vender un curso:{" "}
+              <strong>es el proceso con el que trabajo esta semana</strong>.
+            </p>
+            <p>
+              Por eso las clases se actualizan. Las herramientas cambian cada mes y el
+              material también, sin que pagues de nuevo.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Collage de marcas. Va después de la bio a propósito: primero
+            la cara, después la prueba de que otros ya confiaron. */}
+        <motion.figure
+          className="lp-marcas"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-70px" }}
+          transition={{ duration: 0.8, ease: EASE }}
+        >
+          <Image
+            src="/images/portfolio/slide-06.png"
+            alt="Marcas que ya confiaron en RESUELTO: BCP, San Fernando, Holcim, BYD, Interbank, Costa, Footloose, I-RUN, Boogie y más"
+            width={1621}
+            height={902}
+            sizes="(max-width: 900px) 100vw, 1100px"
+            className="lp-marcas-img"
+          />
+        </motion.figure>
+
+        {/* Pico de confianza: acaban de ver la cara y las marcas. */}
+        <CtaBlock
+          label="Hablar directamente con Manuel"
+          sub="Te responde él, el mismo día y sin intermediarios."
+        />
       </section>
 
       {/* ── PRECIOS ── */}

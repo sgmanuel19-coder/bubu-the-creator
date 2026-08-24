@@ -23,7 +23,25 @@ const OCULTAS = new Set<string>([
   "/videos/comercial-07.mp4",
 ]);
 
-export default function LandingPortafolio() {
+/**
+ * Cabecera opcional.
+ *
+ * El mismo carrusel sirve en las dos landings, pero el encuadre cambia:
+ * en /produccion-ia es "esto es lo que hacemos" y en /masterclass es
+ * "esto es lo que vas a poder hacer". Los valores por defecto son los
+ * de siempre, así que /produccion-ia no cambia en nada.
+ */
+type Props = {
+  eyebrow?: string;
+  titulo?: string;
+  bajada?: string;
+};
+
+export default function LandingPortafolio({
+  eyebrow = "Portafolio",
+  titulo = "Trabajo reciente producido con IA.",
+  bajada = "Piezas generadas con IA y dirigidas por nosotros. Sin rodaje, sin set, sin cast.",
+}: Props = {}) {
   const [activo, setActivo] = useState(0);
   const [playing, setPlaying] = useState<string | null>(null);
   const scroller = useRef<HTMLDivElement>(null);
@@ -40,11 +58,9 @@ export default function LandingPortafolio() {
   return (
     <section className="container-base hm-section lp-pf">
       <div className="lp-head">
-        <span className="hm-eyebrow">Portafolio</span>
-        <h2>Trabajo reciente producido con IA.</h2>
-        <p className="lp-head-sub">
-          Piezas generadas con IA y dirigidas por nosotros. Sin rodaje, sin set, sin cast.
-        </p>
+        <span className="hm-eyebrow">{eyebrow}</span>
+        <h2>{titulo}</h2>
+        <p className="lp-head-sub">{bajada}</p>
       </div>
 
       {/* Pestañas de categoría */}
