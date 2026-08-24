@@ -237,6 +237,94 @@ function urlBiblia(archivo: string): string {
   return `/api/taller/descarga/biblia/${encodeURIComponent(archivo)}`;
 }
 
+// ── IA en Acción: los tutoriales de herramienta ──────────────
+// La Masterclass enseña a DECIDIR; este curso enseña a EJECUTAR.
+// Por eso viven separados y no mezclados en el mismo temario.
+//
+// Todos arrancan con `disponible: false` y `youtubeId: ""`. La UI
+// filtra los módulos no disponibles (ver CursoClient), así que la
+// estructura completa puede vivir acá sin que se vea nada roto:
+// enciende cada módulo poniendo su ID de YouTube y `disponible: true`.
+//
+// Orden de grabación acordado con Manuel — los tres primeros son los
+// que él numeró 1, 2 y 3:
+//   1. Seedance 2.5 · prompteo multishot
+//   2. Seedance 2.0 · plano x plano
+//   3. (el VSL, que no es tutorial y va en la landing)
+const MODULOS_IA_EN_ACCION: Modulo[] = [
+  {
+    titulo: "MÓDULO 0 — Empezar",
+    descripcion:
+      "Cómo razona un modelo, por qué el mismo prompt da resultados distintos y qué hace cada herramienta del stack. La base que evita perder horas después.",
+    disponible: false,
+    lecciones: [
+      { titulo: "Conceptos básicos: cómo piensa la IA y cómo se le habla", duracion: "", youtubeId: "" },
+      { titulo: "El stack completo: qué hace cada herramienta y cuándo usarla", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "MÓDULO 1 — Seedance: el comercial completo",
+    descripcion:
+      "Los dos métodos para sacar un comercial de Seedance. El primero es rápido y sirve para explorar; el segundo es lento y es el que se entrega a un cliente.",
+    disponible: false,
+    lecciones: [
+      { titulo: "Método 1 · Prompteo multishot en Seedance 2.5", duracion: "", youtubeId: "" },
+      { titulo: "Método 2 · Construcción plano x plano con smart system (Seedance 2.0)", duracion: "", youtubeId: "" },
+      { titulo: "Cinematográfico de verdad: Kling 3.0 + Seedance 2.0 y 2.5", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "MÓDULO 2 — Personajes que se repiten",
+    descripcion:
+      "El problema que rompe casi todas las campañas con IA: que el personaje cambie de cara entre plano y plano. Cómo fijarlo y cómo clonarte a ti mismo.",
+    disponible: false,
+    lecciones: [
+      { titulo: "Personaje consistente y clon", duracion: "", youtubeId: "" },
+      { titulo: "UGC: el influencer que no existe", duracion: "", youtubeId: "" },
+      { titulo: "Foto de producto y foto profesional con influencer IA", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "MÓDULO 3 — Edición",
+    descripcion:
+      "Lo generado no es la pieza. La edición es donde un montón de clips sueltos se convierte en algo que se puede cobrar.",
+    disponible: false,
+    lecciones: [
+      { titulo: "Edición nivel básico", duracion: "", youtubeId: "" },
+      { titulo: "Edición nivel intermedio", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "MÓDULO 4 — Casos reales, de principio a fin",
+    descripcion:
+      "Dos entregas de clientes que están pagando ahora mismo, sin recortes: el brief, lo que se descartó y la grilla terminada.",
+    disponible: false,
+    lecciones: [
+      { titulo: "Cómo hice la grilla de Wellmax del mes 2 con Kling y Seedance", duracion: "", youtubeId: "" },
+      { titulo: "La grilla de contenido de WIN Internet", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "MÓDULO 5 — Claude Code",
+    descripcion:
+      "La herramienta que no es de video y que igual cambia el negocio: automatizar lo repetitivo y publicar una landing sin depender de nadie.",
+    disponible: false,
+    lecciones: [
+      { titulo: "Introducción a Claude Code", duracion: "", youtubeId: "" },
+      { titulo: "Una landing page con Claude Code y Vercel", duracion: "", youtubeId: "" },
+    ],
+  },
+  {
+    titulo: "MÓDULO 6 — Cobrarlo",
+    descripcion:
+      "Saber hacerlo no es lo mismo que saber venderlo. Cómo se arma la oferta, qué se cobra y cómo se presenta.",
+    disponible: false,
+    lecciones: [
+      { titulo: "Desarrollando tu oferta IA", duracion: "", youtubeId: "" },
+    ],
+  },
+];
+
 const BIBLIA_DOCS: string[] = [
   "DOC 00 - El Protocolo de Pensamiento del Director Creativo.pdf",
   "DOC 01 - Análisis de Brief Publicitario.pdf",
@@ -1860,15 +1948,18 @@ export const TALLER = {
       recursos: [],
     },
     {
-      // Bloqueado a propósito: todavía no hay contenido grabado. Cuando
-      // esté listo, cambia disponible a true y llena modulos/recursos.
+      // El temario ya está armado (MODULOS_IA_EN_ACCION). Sigue en
+      // `disponible: false` porque todavía no hay ni un video subido y
+      // la página del curso hace notFound() si no está disponible.
+      // Para encenderlo: pon el youtubeId de las lecciones grabadas,
+      // marca ESE módulo como disponible y cambia esto a true.
       slug: "ia-en-accion",
       titulo: "IA en Acción",
       descripcion:
-        "Tutoriales creando piezas con IA, paso a paso.",
+        "Tutoriales creando piezas con IA, paso a paso: Seedance, Kling, personajes consistentes, edición y casos reales de clientes.",
       portada: { emoji: "⚡", color: "rgba(255,209,102,0.15)" },
       disponible: false,
-      modulos: [],
+      modulos: MODULOS_IA_EN_ACCION,
       recursos: [],
     },
   ] as Curso[],
