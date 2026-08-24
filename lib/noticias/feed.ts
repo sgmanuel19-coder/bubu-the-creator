@@ -216,7 +216,13 @@ function compilar(terminos: string[]): RegExp {
   const partes = terminos.map((t) => {
     const cuerpo = escaparRegex(t);
     const abre = /^[a-z0-9]/.test(t) ? "\\b" : "";
-    const cierra = /[a-z0-9]$/.test(t) ? "\\b" : "";
+    // Cierra con `(?![a-z])`, no con `\b`. Los nombres de herramienta
+    // llegan pegados a su versión —"Kling2.5", "Veo3", "Sora2",
+    // "Wan3.0"— y `\b` los rechaza, porque el dígito también cuenta
+    // como carácter de palabra: se perdían menciones reales de IA en
+    // todo el portal. Prohibir solo la letra deja pasar la versión y
+    // sigue descartando "klingon" o "said" para "ai".
+    const cierra = /[a-z0-9]$/.test(t) ? "(?![a-z])" : "";
     return `${abre}${cuerpo}${cierra}`;
   });
   return new RegExp(`(?:${partes.join("|")})`, "g");

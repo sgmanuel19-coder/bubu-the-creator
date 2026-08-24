@@ -42,6 +42,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...seccionesNoticias,
     {
+      // No respeta la ventana de 7 días: lee del archivo, así que
+      // acumula en vez de rotar. Cambia más lento que las secciones.
+      url: 'https://www.resueltoagency.com/noticias/plataformas',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: 'https://www.resueltoagency.com',
       lastModified: new Date('2026-06-11'),
       changeFrequency: 'monthly',

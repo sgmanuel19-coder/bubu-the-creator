@@ -56,6 +56,12 @@ export function Cabecera({ secciones }: { secciones: Seccion[] }) {
               {s}
             </a>
           ))}
+          <a
+            href="/noticias/plataformas"
+            className="font-display text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted transition-colors hover:text-cream"
+          >
+            Plataformas
+          </a>
         </nav>
 
         <div className="flex shrink-0 items-center gap-4">
@@ -349,6 +355,32 @@ export default function Radar({ portada }: { portada: Portada }) {
                 </div>
               </section>
             )}
+
+            {/* ── Puerta a Plataformas ──
+                Kling, Seedance y compañía salen una vez al mes: con la
+                ventana de 7 días de esta portada casi nunca se ven. Esa
+                página lee del archivo y no caduca. */}
+            <section className="pt-14">
+              <a
+                href="/noticias/plataformas"
+                className="group flex flex-col gap-3 rounded-xl border border-brand-blue/25 bg-brand-blue/[0.04] p-6 transition-colors hover:border-brand-blue/50 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div>
+                  <h2 className="font-display text-lg font-bold text-cream sm:text-xl">
+                    Kling, Seedance, Higgsfield y las demás
+                  </h2>
+                  <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-muted">
+                    Las herramientas sacan versión cada varias semanas, no todos
+                    los días. Acá no caducan: lo último de cada una, sin ventana
+                    de tiempo.
+                  </p>
+                </div>
+                <span className="inline-flex shrink-0 items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-brand-blue">
+                  Ver plataformas
+                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </span>
+              </a>
+            </section>
 
             {/* ── Bloques por sección ── */}
             {secciones.map(({ seccion, noticias }) => (
