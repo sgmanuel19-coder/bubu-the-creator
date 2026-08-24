@@ -289,6 +289,14 @@ async function traerFuente(fuente: Fuente, forzar = false): Promise<Noticia[]> {
       "User-Agent": "Mozilla/5.0 (compatible; ResueltoRadar/1.0; +https://www.resueltoagency.com/noticias)",
       Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
     },
+    // 8 segundos y se corta. NO es un detalle: sin esto, un feed que se
+    // cuelga bloquea el Promise.allSettled entero y arrastra a todo lo
+    // que dependa de él. Ya pasó — roastbrief devolvió un 524 de
+    // Cloudflare y tumbó el build en Vercel, donde cada página tiene 60
+    // segundos y corre con un solo worker. Un feed que no contesta en 8
+    // segundos está caído para esta pasada, y el portal sale igual con
+    // las otras 34 fuentes.
+    signal: AbortSignal.timeout(8_000),
     // `cache: "no-store"` y `next.revalidate` son excluyentes: hay
     // que mandar uno u otro, nunca los dos.
     ...(forzar
