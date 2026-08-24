@@ -35,29 +35,104 @@ export type Seccion =
   | "Negocio"
   | "Frontera";
 
-/** Qué promete cada sección al lector. Se pinta en la portada. */
-export const SECCIONES: Record<Seccion, { bajada: string; color: string }> = {
+/**
+ * Qué promete cada sección al lector, y su ficha para buscadores.
+ *
+ * `slug`, `titulo`, `descripcion` e `intro` existen porque cada sección
+ * tiene su propia página en /noticias/<slug>. La portada sola no compite
+ * por "noticias de inteligencia artificial" contra El País o Xataka: es
+ * 95% titulares ajenos y enlaces que salen. Las páginas por sección dan
+ * superficie indexable, enlaces internos y cola larga ganable.
+ *
+ * El `intro` es lo único de esta casa que hay en cada página: sin texto
+ * propio serían listas de enlaces, que es exactamente lo que Google
+ * considera contenido delgado.
+ */
+export const SECCIONES: Record<
+  Seccion,
+  {
+    bajada: string;
+    color: string;
+    slug: string;
+    titulo: string;
+    descripcion: string;
+    intro: string[];
+  }
+> = {
   Producción: {
     bajada: "Imagen, video, voz y edición — lo que cambia cómo produces",
     color: "#1A80FF",
+    slug: "produccion",
+    titulo: "Noticias de IA para video, imagen y edición",
+    descripcion:
+      "Lo que cambia cómo se produce: generadores de video e imagen, voces sintéticas, edición y efectos. Actualizado todos los días.",
+    intro: [
+      "Acá entra lo que toca el trabajo de quien produce: generadores de video e imagen, clonación de voz, edición, efectos y todo lo que se mete en una línea de tiempo. Si una herramienta cambia cuántas horas te toma un entregable, aparece en esta página.",
+      "Es la sección con más movimiento del portal, y también la más ruidosa: cada semana sale un modelo que promete reemplazar una cámara. Filtramos los anuncios que no vienen con algo que ya se pueda usar.",
+    ],
   },
   Herramientas: {
     bajada: "Agentes, Claude, Codex y automatización — lo que instalas y usas",
     color: "#4D9FFF",
+    slug: "herramientas",
+    titulo: "Herramientas y agentes de IA: novedades",
+    descripcion:
+      "Agentes, asistentes, automatización y las herramientas que se instalan y se usan. Novedades de IA aplicada, todos los días.",
+    intro: [
+      "Agentes, asistentes, automatizaciones y las piezas sueltas que se conectan entre sí. Lo que se instala, se configura y queda trabajando: no la promesa de laboratorio, sino la versión que ya se puede descargar.",
+      "Mucho de esto llega en inglés primero. Cuando la nota viene de un medio en inglés la marcamos con una etiqueta EN antes del clic, para que nadie caiga en un artículo que no puede leer.",
+    ],
   },
   "Hecho con IA": {
     bajada: "Proyectos, inventos y campañas que alguien construyó — y cómo lo hizo",
     color: "#7BC47F",
+    slug: "hecho-con-ia",
+    titulo: "Proyectos hechos con IA: casos y cómo se hicieron",
+    descripcion:
+      "Proyectos, inventos y campañas que alguien construyó con IA, y cómo lo hizo. Casos reales, no demos de laboratorio.",
+    intro: [
+      "La sección de los que ya lo hicieron. Proyectos terminados, campañas que salieron al aire, inventos que funcionan: cosas construidas por alguien, con nombre y resultado, no demos grabadas en una oficina.",
+      "Es la sección más flaca del portal y no lo escondemos: la prensa en español publica poco del tipo \"alguien construyó esto y así lo hizo\". Cuando aparece, entra acá.",
+    ],
   },
   Negocio: {
     bajada: "Agencias, marcas, campañas y dinero — lo que cambia cuánto cobras",
     color: "#E0A93C",
+    slug: "negocio",
+    titulo: "IA en publicidad, marketing y negocio",
+    descripcion:
+      "Agencias, marcas, campañas, precios y empleo. Lo que la IA cambia en cuánto se cobra y cómo se vende. Actualizado a diario.",
+    intro: [
+      "Lo que le pasa al oficio, no a la tecnología: qué están haciendo las agencias y las marcas, qué campañas salieron, qué se está cobrando y qué dejó de pagarse. También lo legal, que en publicidad llega rápido: derechos de autor, demandas y reglas nuevas.",
+      "Acá no entran rondas de inversión ni valoraciones de laboratorios. Que una empresa levante mil millones no le cambia el día a nadie que factura.",
+    ],
   },
   Frontera: {
     bajada: "Medicina, ciencia y el mundo real — hacia dónde va todo esto",
     color: "#C9A0DC",
+    slug: "frontera",
+    titulo: "IA en medicina, ciencia y el mundo real",
+    descripcion:
+      "Diagnóstico, investigación, clima, energía y educación. Hacia dónde va la inteligencia artificial fuera de las pantallas.",
+    intro: [
+      "IA aplicada fuera de la pantalla: diagnóstico médico, investigación, clima, energía, educación y accesibilidad. Es la sección que mira más lejos, con cosas que ya están pasando en hospitales y laboratorios.",
+      "No publicamos papers ni benchmarks. Si el resultado todavía no salió del laboratorio, todavía no es noticia acá.",
+    ],
   },
 };
+
+/** "Producción" → "produccion". El slug es la URL de su página. */
+export function slugDeSeccion(seccion: Seccion): string {
+  return SECCIONES[seccion].slug;
+}
+
+/** El camino inverso: de la URL a la sección, o null si no existe. */
+export function seccionDeSlug(slug: string): Seccion | null {
+  const entrada = (Object.entries(SECCIONES) as [Seccion, { slug: string }][]).find(
+    ([, v]) => v.slug === slug,
+  );
+  return entrada ? entrada[0] : null;
+}
 
 export type TipoFuente = "ia" | "publicidad" | "creativo";
 export type Idioma = "es" | "en";
@@ -356,6 +431,138 @@ export const FUENTES: Fuente[] = [
     seccionBase: "Producción",
     peso: 7,
   },
+  // ── Plataformas de IA generativa, VFX y trabajo creativo ────
+  // Pedido explícito: cobertura a fondo de Kling, Seedance, Higgsfield,
+  // Artlist y compañía, más el trabajo que la gente hace con ellas. La
+  // prensa en español las menciona de pasada; estos medios las cubren
+  // lanzamiento por lanzamiento. Van en inglés, con la etiqueta EN.
+  {
+    id: "the-decoder",
+    nombre: "The Decoder",
+    corto: "The Decoder",
+    url: "https://the-decoder.com/feed/",
+    tipo: "ia",
+    idioma: "en",
+    sitio: "the-decoder.com",
+    seccionBase: "Herramientas",
+    peso: 8,
+  },
+  {
+    id: "fxguide",
+    nombre: "fxguide",
+    corto: "fxguide",
+    url: "https://www.fxguide.com/feed/",
+    tipo: "creativo",
+    idioma: "en",
+    sitio: "fxguide.com",
+    seccionBase: "Producción",
+    peso: 7,
+  },
+  {
+    id: "creativebloq",
+    nombre: "Creative Bloq",
+    corto: "Creative Bloq",
+    url: "https://www.creativebloq.com/feeds.xml",
+    tipo: "creativo",
+    idioma: "en",
+    sitio: "creativebloq.com",
+    seccionBase: "Producción",
+    peso: 7,
+  },
+  {
+    // Trabajo terminado, no anuncios: alimenta "Hecho con IA", que es
+    // la sección más flaca del portal.
+    id: "motionographer",
+    nombre: "Motionographer",
+    corto: "Motionographer",
+    url: "https://motionographer.com/feed/",
+    tipo: "creativo",
+    idioma: "en",
+    sitio: "motionographer.com",
+    seccionBase: "Hecho con IA",
+    peso: 6,
+  },
+  {
+    id: "venturebeat-ia",
+    nombre: "VentureBeat · AI",
+    corto: "VentureBeat",
+    url: "https://venturebeat.com/category/ai/feed/",
+    tipo: "ia",
+    idioma: "en",
+    sitio: "venturebeat.com",
+    seccionBase: "Herramientas",
+    peso: 7,
+  },
+  {
+    id: "adweek",
+    nombre: "Adweek",
+    corto: "Adweek",
+    url: "https://www.adweek.com/feed/",
+    tipo: "publicidad",
+    idioma: "en",
+    sitio: "adweek.com",
+    seccionBase: "Negocio",
+    peso: 8,
+  },
+  {
+    // OJO: devuelve 403 desde algunas redes (igual que
+    // marketing4ecommerce, que sí funciona en el build de Vercel). Si se
+    // cae, el portal la ignora y sigue: es prensa publicitaria española
+    // fuerte y vale el intento.
+    id: "marketingdirecto",
+    nombre: "Marketing Directo",
+    corto: "Marketing Directo",
+    url: "https://www.marketingdirecto.com/feed",
+    tipo: "publicidad",
+    idioma: "es",
+    sitio: "marketingdirecto.com",
+    seccionBase: "Negocio",
+    peso: 8,
+  },
+
+  {
+    // La fuente primaria de Sora. Los medios la cubren un dia despues y
+    // a veces no la cubren: para novedades de producto, el anuncio
+    // original llega antes. Feed enorme (1100+ items), pero
+    // MAX_POR_FUENTE y la ventana de 7 dias lo acotan solo.
+    id: "openai-news",
+    nombre: "OpenAI",
+    corto: "OpenAI",
+    url: "https://openai.com/news/rss.xml",
+    tipo: "ia",
+    idioma: "en",
+    sitio: "openai.com",
+    seccionBase: "Herramientas",
+    peso: 8,
+  },
+  {
+    // Herramientas de produccion y post: cubre los generadores de video
+    // lanzamiento por lanzamiento, que es justo lo que la prensa en
+    // espanol menciona de pasada.
+    id: "provideocoalition",
+    nombre: "ProVideo Coalition",
+    corto: "ProVideo",
+    url: "https://www.provideocoalition.com/feed/",
+    tipo: "creativo",
+    idioma: "en",
+    sitio: "provideocoalition.com",
+    seccionBase: "Producción",
+    peso: 7,
+  },
+  {
+    // Trabajo de artistas CG y quien usa estas herramientas de verdad.
+    // Va a "Hecho con IA", la seccion mas flaca del portal.
+    id: "80lv",
+    nombre: "80 Level",
+    corto: "80 Level",
+    url: "https://80.lv/feed",
+    tipo: "creativo",
+    idioma: "en",
+    sitio: "80.lv",
+    seccionBase: "Hecho con IA",
+    peso: 6,
+  },
+
   {
     id: "ieee-spectrum-ia",
     nombre: "IEEE Spectrum · AI",
@@ -395,6 +602,15 @@ export const TERMINOS_IA = [
   "midjourney", "stable diffusion", "copilot", "llama", "mistral",
   "kling", "seedance", "higgsfield", "elevenlabs", "heygen", "runway",
   "nano banana", "veo", "flux", "sora", "grok", "perplexity", "deepseek",
+  // Plataformas del oficio. Sin sus nombres acá, una nota sobre Seedance
+  // o Artlist no se reconoce como IA y se cae aunque hable de eso.
+  // "leonardo ai" va con apellido a propósito: "leonardo" a secas
+  // matchearía cualquier nota sobre alguien que se llame Leonardo.
+  "artlist", "omni", "luma", "dream machine", "pika", "hailuo", "minimax",
+  "vidu", "pixverse", "hunyuan", "seedream", "moonvalley", "topaz",
+  "magnific", "freepik", "leonardo ai", "ideogram", "recraft", "krea",
+  "descript", "opus clip", "suno", "udio", "hedra", "synthesia",
+  "firefly", "wan",
   "deepfake", "sintetico", "sintetica", "automatizado", "automatizada",
   // Refuerzo para las fuentes en inglés ("ai" y "llm" ya cubren mucho).
   "generative", "neural", "deep learning", "diffusion", "text to video",
@@ -411,6 +627,13 @@ export const TERMINOS_SECCION: Record<Seccion, string[]> = {
     "sonido", "musica", "audio", "arte", "artista", "artistas",
     "ilustracion", "diseno", "disenador", "montaje", "rodaje", "guion",
     "efectos", "vfx", "capcut", "photoshop", "figma", "premiere", "3d",
+    // Los generadores de imagen, video y voz son herramientas de
+    // producción: repetirlos acá evita que caigan en otra sección.
+    "kling", "seedance", "higgsfield", "runway", "luma", "pika", "hailuo",
+    "veo", "sora", "midjourney", "flux", "artlist", "elevenlabs", "heygen",
+    "suno", "udio", "topaz", "magnific", "freepik", "ideogram", "recraft",
+    "krea", "descript", "firefly", "synthesia", "hedra", "nano banana",
+    "seedream", "davinci", "after effects",
     // Inglés (No Film School, PetaPixel, befores & afters).
     "film", "filmmaker", "filmmakers", "filmmaking", "footage", "camera",
     "cameras", "lens", "photo", "photos", "photography", "photographer",
@@ -459,6 +682,11 @@ export const TERMINOS_SECCION: Record<Seccion, string[]> = {
     "demanda", "juicio", "regulacion", "normativa", "ley", "licencia",
     "creadores", "influencer", "influencers", "tiktok", "instagram",
     "youtube", "meta", "reels",
+    // Vocabulario del oficio publicitario: sin esto, una nota sobre un
+    // spot hecho con IA no se reconocía como Negocio.
+    "spot", "comercial", "creatividad publicitaria", "branded content",
+    "cannes lions", "cannes", "festival de publicidad", "brief",
+    "anunciante", "anunciantes", "activacion", "posicionamiento",
     // Inglés.
     "advertising", "advertiser", "advertisers", "ad campaign", "brand",
     "brands", "agency", "agencies", "client", "clients", "revenue",

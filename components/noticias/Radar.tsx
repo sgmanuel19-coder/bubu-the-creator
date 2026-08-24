@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import TiempoRelativo from "@/components/noticias/TiempoRelativo";
-import { SECCIONES, type Seccion } from "@/lib/noticias/fuentes";
+import { SECCIONES, slugDeSeccion, type Seccion } from "@/lib/noticias/fuentes";
 import type { Noticia, Portada } from "@/lib/noticias/feed";
 
 // ============================================================
@@ -18,17 +18,9 @@ const fmtLargo = new Intl.DateTimeFormat("es-PE", {
   timeZone: "America/Lima",
 });
 
-/** "Producción" → "produccion": ids de ancla sin tildes ni espacios. */
-function anclaDe(seccion: Seccion): string {
-  return seccion
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/\s+/g, "-");
-}
-
 // ── Cabecera propia del portal ────────────────────────────────
-function Cabecera({ secciones }: { secciones: Seccion[] }) {
+// Se exporta para que las páginas de sección usen la misma.
+export function Cabecera({ secciones }: { secciones: Seccion[] }) {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-bg/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
@@ -52,10 +44,13 @@ function Cabecera({ secciones }: { secciones: Seccion[] }) {
         </a>
 
         <nav className="hidden items-center gap-6 md:flex">
+          {/* Enlaces de verdad, no anclas: son la estructura interna que
+              antes no existía (33 enlaces salían del sitio y 8 se quedaban)
+              y le dan a cada sección una URL que Google puede indexar. */}
           {secciones.map((s) => (
             <a
               key={s}
-              href={`#${anclaDe(s)}`}
+              href={`/noticias/${slugDeSeccion(s)}`}
               className="font-display text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted transition-colors hover:text-cream"
             >
               {s}
@@ -76,7 +71,7 @@ function Cabecera({ secciones }: { secciones: Seccion[] }) {
   );
 }
 
-function EtiquetaSeccion({ seccion, className = "" }: { seccion: Seccion; className?: string }) {
+export function EtiquetaSeccion({ seccion, className = "" }: { seccion: Seccion; className?: string }) {
   return (
     <span
       className={`inline-flex items-center gap-1.5 text-[0.65rem] font-display font-semibold uppercase tracking-[0.18em] ${className}`}
@@ -212,7 +207,7 @@ function NotaPrincipal({ noticia }: { noticia: Noticia }) {
 }
 
 // ── Tarjeta de grilla ─────────────────────────────────────────
-function Tarjeta({ noticia }: { noticia: Noticia }) {
+export function Tarjeta({ noticia }: { noticia: Noticia }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-xl border border-white/8 bg-surface transition-colors duration-300 hover:border-brand-blue/30">
       <div className="overflow-hidden">
@@ -240,7 +235,7 @@ function Tarjeta({ noticia }: { noticia: Noticia }) {
 }
 
 // ── Fila compacta (bloques por sección) ───────────────────────
-function Fila({ noticia }: { noticia: Noticia }) {
+export function Fila({ noticia }: { noticia: Noticia }) {
   return (
     <article className="group relative flex gap-4 border-b border-white/6 py-4 last:border-b-0">
       <div className="min-w-0 flex-1">
@@ -357,13 +352,18 @@ export default function Radar({ portada }: { portada: Portada }) {
 
             {/* ── Bloques por sección ── */}
             {secciones.map(({ seccion, noticias }) => (
-              <section key={seccion} id={anclaDe(seccion)} className="scroll-mt-20 pt-16">
+              <section key={seccion} id={SECCIONES[seccion].slug} className="scroll-mt-20 pt-16">
                 <div
                   className="mb-5 border-l-2 pl-4"
                   style={{ borderColor: SECCIONES[seccion].color }}
                 >
                   <h2 className="font-display text-xl font-bold text-cream sm:text-2xl">
-                    {seccion}
+                    <a
+                      href={`/noticias/${SECCIONES[seccion].slug}`}
+                      className="transition-colors hover:text-brand-blue"
+                    >
+                      {seccion}
+                    </a>
                   </h2>
                   <p className="mt-1 text-sm text-muted">{SECCIONES[seccion].bajada}</p>
                 </div>
@@ -372,6 +372,12 @@ export default function Radar({ portada }: { portada: Portada }) {
                     <Fila key={n.id} noticia={n} />
                   ))}
                 </div>
+                <a
+                  href={`/noticias/${SECCIONES[seccion].slug}`}
+                  className="mt-4 inline-flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-muted transition-colors hover:text-brand-blue"
+                >
+                  Todo en {seccion} <span aria-hidden>→</span>
+                </a>
               </section>
             ))}
           </>
