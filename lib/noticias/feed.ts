@@ -462,7 +462,17 @@ export async function obtenerPortada(
 
   // Destacadas: primero las que mejor puntúan (con el sesgo al español
   // y a las que traen imagen), no simplemente las más recientes.
-  const destacadas = [...sinPrincipal].sort((a, b) => puntuar(b) - puntuar(a)).slice(0, 4);
+  // "Lo último" es literal: las 4 MÁS RECIENTES, no las que mejor puntúan.
+  //
+  // Antes iba ordenado por puntaje y el título mentía — una nota de hace
+  // 37 horas se sentaba encima de una de hace 2 y el portal se veía
+  // parado aunque acabara de refrescarse. La jerarquía por calidad ya la
+  // cubre `principal`, que sí se elige por puntaje; esta franja es para
+  // responder "¿qué hay de nuevo?".
+  //
+  // `sinPrincipal` ya viene ordenado por fecha descendente, así que
+  // basta con cortar los primeros cuatro.
+  const destacadas = sinPrincipal.slice(0, 4);
   const usadasArriba = new Set(destacadas.map((n) => n.id));
   const resto = sinPrincipal.filter((n) => !usadasArriba.has(n.id)).slice(0, 40);
 
