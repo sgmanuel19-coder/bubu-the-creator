@@ -699,16 +699,31 @@ export default function LandingEnergia() {
         <section className="border-b border-cream/10 px-6 py-24 md:py-32">
           <div className="container-base mx-auto max-w-5xl">
             <Head n="04 · Clientes" title="Lo que dicen los que ya trabajan así." />
-            <div className="grid gap-5 md:grid-cols-2">
-              {TESTIMONIOS.map((t) => (
+            {/* Baraja superpuesta: las tarjetas se pisan entre sí y cada una
+                está algo girada, como fichas dejadas sobre una mesa. Al pasar
+                el mouse, la de encima se endereza y sube por delante del resto.
+                En móvil el solape es vertical, porque a lo ancho no cabe. */}
+            <div className="group/baraja flex flex-col items-center md:flex-row md:justify-center">
+              {TESTIMONIOS.map((t, i) => (
                 <motion.figure
                   key={t.company}
-                  className="group rounded-2xl border border-cream/10 bg-surface p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/40"
+                  /* Al entrar a la baraja, todas se difuminan y retroceden; la
+                     apuntada se endereza, crece y sube al frente. El `!` es
+                     necesario para que el estado propio gane sobre el del
+                     grupo, que en Tailwind se emite después. */
+                  className={`relative w-full max-w-sm rounded-2xl border border-cream/10 bg-surface p-8 shadow-[0_18px_50px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out group-hover/baraja:scale-[.97] group-hover/baraja:opacity-45 group-hover/baraja:blur-[3px] hover:z-30 hover:!scale-105 hover:!opacity-100 hover:!blur-0 hover:-translate-y-4 hover:rotate-0 hover:border-brand-blue/60 hover:shadow-[0_30px_80px_rgba(0,0,0,0.75),0_0_60px_rgba(26,128,255,0.18)] ${
+                    /* El solape mide menos que el padding de la tarjeta (p-8 = 32px),
+                       así se pisan los bordes pero nunca el texto. */
+                    i > 0 ? "-mt-6 md:-ml-7 md:mt-0" : ""
+                  } ${
+                    ["md:rotate-[-3deg]", "md:rotate-[1.5deg]", "md:rotate-[-1.5deg]"][i % 3]
+                  }`}
+                  style={{ zIndex: TESTIMONIOS.length - i }}
                   {...fadeUp}
                 >
                   <span
                     aria-hidden="true"
-                    className="block font-display text-5xl leading-none text-brand-blue/40 transition-colors group-hover:text-brand-blue/70"
+                    className="block font-display text-5xl leading-none text-brand-blue/40 transition-colors duration-500"
                   >
                     &ldquo;
                   </span>
