@@ -314,22 +314,22 @@ const BLOQUE_1 = [
     icono: Videocaso,
     d: "Un proyecto real contado como caso: el problema del cliente, tu solución técnica, el resultado medible. Grabado en campo y completado con IA para todo lo que no se puede filmar.",
     v: "/videos/web/trad-comerciales-02.mp4",
-    etiqueta: "Videocaso",
+    etiqueta: "Videocaso · Livoltek",
   },
   {
     t: "1 versión corta de 30 segundos",
     icono: Vertical,
     d: "Corte del mismo videocaso con gancho en los primeros 3 segundos. En vertical y horizontal — lista para LinkedIn, pauta, WhatsApp comercial y las pantallas de tu stand.",
     v: "/videos/web/story-03.mp4",
+    etiqueta: "Vertical · Wellmax",
     vertical: true,
-    etiqueta: "Storytelling IA",
   },
   {
     t: "8 imágenes profesionales con IA",
     icono: ImagenIA,
     d: "Tu producto en contextos que no se pueden fotografiar: el equipo instalado, el corte técnico por dentro, la escala real en obra, el entorno de operación. Alta resolución, para catálogo, fichas y propuestas.",
-    v: "/videos/web/producto-05.mp4",
-    etiqueta: "Video producto IA",
+    v: "/videos/web/producto-02.mp4",
+    etiqueta: "Producto generado con IA",
     vertical: true,
   },
 ];
@@ -339,33 +339,27 @@ const BLOQUE_2 = [
     t: "1 video de feria o evento",
     icono: Stand,
     d: "Registro del stand, las ponencias y las reuniones, editado como pieza recap que puedes mandar la misma semana.",
-    v: "/videos/web/trad-coberturas-02.mp4",
-    etiqueta: "Cobertura real",
-    vertical: true,
   },
   {
     t: "Hasta 3 stories en vivo",
     icono: EnVivo,
     d: "Cobertura en tiempo real durante el evento, publicada el mismo día. Los que no fueron ven que estuviste.",
-    v: "/videos/web/trad-wong-03.mp4",
+    v: "/videos/web/story-12.mp4",
+    etiqueta: "Registro en obra",
     vertical: true,
-    etiqueta: "Cobertura real",
   },
   {
     t: "Hasta 3 entrevistas a profesionales",
     icono: Entrevista,
     d: "A tu gerente, tus ingenieros o los especialistas que te visitan. Preguntas dirigidas, no improvisadas. Se entregan como 3 videos independientes.",
-    v: "/videos/web/trad-coberturas-06.mp4",
-    etiqueta: "Cobertura real",
+    v: "/videos/web/story-04.mp4",
+    etiqueta: "Vocero técnico",
     vertical: true,
   },
   {
     t: "Más de 15 fotografías profesionales",
     icono: Foto,
     d: "Banco fotográfico editado: stand, equipo, producto, retratos corporativos y momentos de reunión.",
-    v: "/videos/web/trad-coberturas-05.mp4",
-    etiqueta: "Cobertura real",
-    vertical: true,
   },
 ];
 
@@ -576,10 +570,6 @@ export default function LandingEnergia() {
 
       {/* ── PROBLEMA ─────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-cream/10 px-6 py-24 md:py-32">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <LoopVideo src="/videos/web/problem-section-bg.mp4" className="opacity-15" />
-          <div className="absolute inset-0 bg-bg/85" />
-        </div>
         <div className="container-base relative mx-auto max-w-5xl">
           <Head
             n="01 · El problema"
@@ -754,36 +744,25 @@ export default function LandingEnergia() {
           <Head
             n="04 · Muestra"
             title="Así se ve el material."
-            sub="Piezas producidas por Resuelto. Verticales, comerciales, producto y coberturas — el mismo tipo de material que recibirías cada mes."
+            sub="Piezas producidas por Resuelto para clientes de energía e industria: voceros técnicos, producto generado con IA y registro en obra."
           />
         </div>
 
-        <div className="space-y-4">
-          <Cinta
-            clips={[
-              "/videos/web/trad-comerciales-02.mp4",
-              "/videos/web/comercial-05.mp4",
-              "/videos/web/producto-01.mp4",
-              "/videos/web/comercial-01.mp4",
-              "/videos/web/trad-comerciales-01.mp4",
-              "/videos/web/comercial-07.mp4",
-            ]}
-          />
-          <Cinta
-            invertida
-            clips={[
-              "/videos/web/story-06.mp4",
-              "/videos/web/producto-03.mp4",
-              "/videos/web/story-02.mp4",
-              "/videos/web/trad-redondos-03.mp4",
-              "/videos/web/story-07.mp4",
-              "/videos/web/producto-04.mp4",
-              "/videos/web/story-13.mp4",
-              "/videos/web/story-12.mp4",
-            ]}
-            vertical
-          />
-        </div>
+        {/* Una sola fila, y solo material del rubro. Antes eran dos cintas
+            rellenadas con lo que hubiera: un comercial de ollas, un cóctel y
+            un partido de fútbol no le dicen nada a un gerente de energía. */}
+        <Cinta
+          vertical
+          clips={[
+            "/videos/web/story-04.mp4",
+            "/videos/web/producto-02.mp4",
+            "/videos/web/story-07.mp4",
+            "/videos/web/producto-05.mp4",
+            "/videos/web/story-12.mp4",
+            "/videos/web/producto-07.mp4",
+            "/videos/web/story-03.mp4",
+          ]}
+        />
       </section>
 
       {/* ── INVERSIÓN ──────────────────────────────────────
@@ -990,7 +969,7 @@ export default function LandingEnergia() {
       {/* ── CIERRE ───────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 py-28 md:py-40">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <LoopVideo src="/videos/web/final-cta-bg.mp4" className="opacity-20" />
+          <LoopVideo src="/videos/web/trad-comerciales-02.mp4" className="opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-b from-bg via-bg/85 to-bg" />
         </div>
         <div
