@@ -28,6 +28,19 @@ const waLink = () => `${SITE.links.whatsapp}?text=${encodeURIComponent(WA_MSG)}`
    con cambiar este ID — no hay que tocar nada más. */
 const VSL_ID = "30bVmigalKQ";
 
+/* Clips verificados uno por uno del rubro energía e industria. Las etiquetas de
+   `lib/portafolio.ts` no dicen de qué trata cada video, así que esta lista se
+   armó extrayendo fotogramas y mirándolos. No agregar nada sin hacer lo mismo. */
+const MUESTRA = [
+  "/videos/web/story-04.mp4",
+  "/videos/web/producto-02.mp4",
+  "/videos/web/story-07.mp4",
+  "/videos/web/producto-05.mp4",
+  "/videos/web/story-12.mp4",
+  "/videos/web/producto-07.mp4",
+  "/videos/web/story-03.mp4",
+];
+
 /* ── Animación de entrada estándar de la página ── */
 const fadeUp = {
   initial: { opacity: 0, y: 26 },
@@ -42,7 +55,7 @@ const fadeUp = {
 /* ── Encabezado de sección ── */
 function Head({ n, title, sub }: { n: string; title: React.ReactNode; sub?: string }) {
   return (
-    <motion.div className="mb-12 md:mb-16" {...fadeUp}>
+    <motion.div className="mb-10 md:mb-14" {...fadeUp}>
       <span className="mb-4 block font-brand text-xs uppercase tracking-[0.28em] text-brand-blue">
         {n}
       </span>
@@ -122,7 +135,6 @@ function VslConPortada() {
         fill
         sizes="(max-width: 900px) 100vw, 900px"
         className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-        priority
       />
       <span className="absolute inset-0 bg-gradient-to-t from-bg/75 via-bg/20 to-bg/10" />
       <span className="absolute inset-0 flex items-center justify-center">
@@ -137,38 +149,10 @@ function VslConPortada() {
   );
 }
 
-/* ── Columna de bloque dentro de la tarjeta de precio. Lee los MISMOS arrays
-   que la sección del sistema, para que nunca se desincronicen: si mañana
-   cambia un entregable, cambia en los dos sitios a la vez. ── */
-function ResumenBloque({
-  n,
-  titulo,
-  items,
-}: {
-  n: string;
-  titulo: string;
-  items: string[];
-}) {
-  return (
-    <div className="p-7 md:p-8">
-      <p className="font-brand text-[11px] uppercase tracking-[0.22em] text-brand-blue">{n}</p>
-      <h3 className="mt-1.5 font-display text-base font-bold text-cream md:text-lg">{titulo}</h3>
-      <ul className="mt-4 space-y-2">
-        {items.map((i) => (
-          <li key={i} className="flex gap-2.5 font-body text-sm leading-snug text-muted">
-            <span className="text-brand-blue" aria-hidden="true">·</span>
-            {i}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 /* ── Testimonios.
-   Se leen de `SITE.proof.testimonials`, que es la misma fuente que ya usa el
-   resto del sitio. No se copian ni se reescriben aquí: si mañana se corrige una
-   cita en constants.ts, se corrige también en esta landing.
+   Se leen de `SITE.proof.testimonials`, la misma fuente que ya usa el resto del
+   sitio. No se copian ni se reescriben aquí: si mañana se corrige una cita en
+   constants.ts, se corrige también en esta landing.
 
    Livoltek va primero a propósito — es el único del sector energía y el que más
    le dice algo a quien recibe el correo. */
@@ -180,8 +164,8 @@ const TESTIMONIOS = [...SITE.proof.testimonials].sort((a, b) => {
   return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
 });
 
-/* ── Cinta infinita de clips. La lista se duplica para que el bucle no
-   muestre un corte. Son TRES copias, no dos: con dos, en un monitor ancho el
+/* ── Cinta infinita de clips. La lista se repite para que el bucle no muestre
+   un corte. Son TRES copias, no dos: con dos, en un monitor ancho el
    desplazamiento deja un hueco visible al final del ciclo. ── */
 function Cinta({
   clips,
@@ -223,9 +207,11 @@ function Cinta({
   );
 }
 
-/* ── Fila de entregable: texto a la izquierda, clip real a la derecha.
-   El clip es la prueba: en una landing de agencia audiovisual, describir el
-   entregable con palabras y no mostrarlo es el peor argumento posible. ── */
+/* ── Fila de entregable, en versión compacta.
+   El clip va al costado como prueba: en una landing de agencia audiovisual,
+   describir el entregable con palabras y no mostrarlo es el peor argumento
+   posible. La `etiqueta` dice qué es REALMENTE ese clip, para que un comercial
+   no pase por un videocaso solo porque está al lado del texto. ── */
 function Entregable({
   t,
   d,
@@ -233,47 +219,36 @@ function Entregable({
   vertical,
   icono: Icono,
   etiqueta,
-  pendiente,
 }: {
   t: string;
   d: string;
   v?: string;
   vertical?: boolean;
   icono?: (p: { className?: string }) => JSX.Element;
-  /* Qué es REALMENTE el clip que se muestra al costado, según el catálogo de
-     `lib/portafolio.ts`. Va a la vista: un comercial no puede pasar por un
-     videocaso solo porque esté al lado del texto que lo describe. */
   etiqueta?: string;
-  /* true cuando todavía no existe material de ese entregable y el clip es solo
-     una referencia de estilo. */
-  pendiente?: boolean;
 }) {
   return (
-    <div className="group flex flex-col gap-6 bg-surface p-7 transition-colors hover:bg-surface-2 md:flex-row md:items-center md:gap-8 md:p-8">
-      <div className="flex flex-1 gap-4">
-        {Icono && (
-          <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-brand-blue/25 bg-brand-blue/10 text-brand-blue transition-transform group-hover:scale-105">
-            <Icono className="h-[22px] w-[22px]" />
-          </span>
-        )}
-        <div>
-          <h4 className="font-display text-base font-semibold text-cream md:text-lg">{t}</h4>
-          <p className="mt-2.5 font-body text-sm leading-relaxed text-muted md:text-base">{d}</p>
-        </div>
+    <div className="group flex gap-4 border-t border-cream/10 p-5 transition-colors duration-300 first:border-t-0 hover:bg-surface-2 md:p-6">
+      {Icono && (
+        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-brand-blue/25 bg-brand-blue/10 text-brand-blue transition-transform duration-300 group-hover:scale-105">
+          <Icono className="h-[18px] w-[18px]" />
+        </span>
+      )}
+
+      <div className="min-w-0 flex-1">
+        <h4 className="font-display text-[15px] font-semibold leading-snug text-cream">{t}</h4>
+        <p className="mt-1.5 font-body text-[13px] leading-relaxed text-muted">{d}</p>
       </div>
+
       {v && (
-        <figure className={`shrink-0 ${vertical ? "w-32 md:w-36" : "w-full md:w-64"}`}>
-          <div className="overflow-hidden rounded-xl border border-cream/10 transition-all duration-500 group-hover:-translate-y-1 group-hover:border-brand-blue/40">
+        <figure className={`shrink-0 ${vertical ? "w-16 md:w-20" : "w-24 md:w-28"}`}>
+          <div className="overflow-hidden rounded-lg border border-cream/10 transition-all duration-500 group-hover:-translate-y-1 group-hover:border-brand-blue/40">
             <div className={vertical ? "aspect-[9/16]" : "aspect-video"}>
               <LoopVideo src={v} vertical={vertical} />
             </div>
           </div>
           {etiqueta && (
-            <figcaption
-              className={`mt-2 font-body text-[11px] leading-snug ${
-                pendiente ? "text-brand-blue/80" : "text-muted/70"
-              }`}
-            >
+            <figcaption className="mt-1.5 font-body text-[10px] leading-tight text-muted/70">
               {etiqueta}
             </figcaption>
           )}
@@ -285,49 +260,26 @@ function Entregable({
 
 /* ── Contenido ─────────────────────────────────────────────── */
 
-const PROBLEMAS = [
-  {
-    t: "Vendes con el catálogo del fabricante",
-    icono: Catalogo,
-    d: "Los mismos renders y las mismas fichas que usan los otros distribuidores de tu marca. Nada en ese material explica por qué el proyecto debería ser tuyo y no de ellos.",
-  },
-  {
-    t: "Tus mejores instalaciones no tienen registro",
-    icono: SinRegistro,
-    d: "La planta quedó operando, el cliente quedó contento, y no te llevaste ni una toma. Cuando llega la siguiente licitación no tienes nada que mostrar.",
-  },
-  {
-    t: "La feria se acaba y no queda nada",
-    icono: FeriaVacia,
-    d: "Pagaste stand, pasajes, traslado de equipos y viáticos del equipo comercial. Tres días después no hay ni un video, ni una entrevista, ni un banco de fotos que justifique esa inversión.",
-  },
-  {
-    t: "Lo técnico se muere en la reunión",
-    icono: Reunion,
-    d: "Tu solución es mejor y sabes sustentarla. Pero quien firma no es el ingeniero: es el gerente, el dueño o el comité. Y lo que no se entiende rápido, no se aprueba.",
-  },
-];
-
 const BLOQUE_1 = [
   {
     t: "1 videocaso de 2 minutos",
+    d: "Tu proyecto contado como caso: el reto del cliente, tu solución técnica, el resultado medible. Grabado en campo y potenciado con IA.",
     icono: Videocaso,
-    d: "Un proyecto real contado como caso: el problema del cliente, tu solución técnica, el resultado medible. Grabado en campo y completado con IA para todo lo que no se puede filmar.",
     v: "/videos/web/trad-comerciales-02.mp4",
     etiqueta: "Videocaso · Livoltek",
   },
   {
     t: "1 versión corta de 30 segundos",
+    d: "Corte con gancho en los primeros 3 segundos, en vertical y horizontal. Para LinkedIn, pauta, WhatsApp comercial y las pantallas de tu stand.",
     icono: Vertical,
-    d: "Corte del mismo videocaso con gancho en los primeros 3 segundos. En vertical y horizontal — lista para LinkedIn, pauta, WhatsApp comercial y las pantallas de tu stand.",
     v: "/videos/web/story-03.mp4",
     etiqueta: "Vertical · Wellmax",
     vertical: true,
   },
   {
     t: "8 imágenes profesionales con IA",
+    d: "Tu equipo en contextos que no se pueden fotografiar: instalado, en corte técnico, a escala real. Para catálogo, fichas y propuestas.",
     icono: ImagenIA,
-    d: "Tu producto en contextos que no se pueden fotografiar: el equipo instalado, el corte técnico por dentro, la escala real en obra, el entorno de operación. Alta resolución, para catálogo, fichas y propuestas.",
     v: "/videos/web/producto-02.mp4",
     etiqueta: "Producto generado con IA",
     vertical: true,
@@ -337,29 +289,52 @@ const BLOQUE_1 = [
 const BLOQUE_2 = [
   {
     t: "1 video de feria o evento",
+    d: "Registro del stand, las ponencias y las reuniones, editado como pieza recap que puedes enviar la misma semana.",
     icono: Stand,
-    d: "Registro del stand, las ponencias y las reuniones, editado como pieza recap que puedes mandar la misma semana.",
   },
   {
     t: "Hasta 3 stories en vivo",
-    icono: EnVivo,
     d: "Cobertura en tiempo real durante el evento, publicada el mismo día. Los que no fueron ven que estuviste.",
+    icono: EnVivo,
     v: "/videos/web/story-12.mp4",
     etiqueta: "Registro en obra",
     vertical: true,
   },
   {
     t: "Hasta 3 entrevistas a profesionales",
+    d: "A tu gerente, tus ingenieros o los especialistas que te visitan. Preguntas dirigidas, no improvisadas.",
     icono: Entrevista,
-    d: "A tu gerente, tus ingenieros o los especialistas que te visitan. Preguntas dirigidas, no improvisadas. Se entregan como 3 videos independientes.",
     v: "/videos/web/story-04.mp4",
     etiqueta: "Vocero técnico",
     vertical: true,
   },
   {
     t: "Más de 15 fotografías profesionales",
-    icono: Foto,
     d: "Banco fotográfico editado: stand, equipo, producto, retratos corporativos y momentos de reunión.",
+    icono: Foto,
+  },
+];
+
+const PROBLEMAS = [
+  {
+    t: "Vendes con el catálogo del fabricante",
+    d: "Los mismos renders y fichas que usan los otros distribuidores de tu marca. Nada ahí explica por qué el proyecto debería ser tuyo.",
+    icono: Catalogo,
+  },
+  {
+    t: "Tus mejores instalaciones no tienen registro",
+    d: "La planta quedó operando y no te llevaste ni una toma. Cuando llega la siguiente licitación no tienes nada que mostrar.",
+    icono: SinRegistro,
+  },
+  {
+    t: "La feria se acaba y no queda nada",
+    d: "Pagaste stand, pasajes y viáticos. Tres días después no hay un video, ni una entrevista, ni un banco de fotos.",
+    icono: FeriaVacia,
+  },
+  {
+    t: "Lo técnico se muere en la reunión",
+    d: "Tu solución es mejor y sabes sustentarla. Pero quien firma no es el ingeniero, y lo que no se entiende rápido no se aprueba.",
+    icono: Reunion,
   },
 ];
 
@@ -390,10 +365,52 @@ const PASOS = [
   },
 ];
 
+/* Detalle operativo del servicio. Reemplaza a la tarjeta de precio: el monto
+   cambia según alcance, sector y ciudad, así que publicarlo cerraba
+   conversaciones antes de empezarlas. */
+const DETALLE = [
+  {
+    t: "Dirección estratégica y creativa",
+    d: "No recibes un proveedor que ejecuta pedidos. Definimos qué proyecto contar, con qué ángulo y para qué momento comercial.",
+  },
+  {
+    t: "Preproducción completa",
+    d: "Guion, storyboard, plan de rodaje, coordinación de accesos y permisos de seguridad con tu área de operaciones.",
+  },
+  {
+    t: "Producción en campo",
+    d: "Cámara profesional más equipo de celular para zonas restringidas. Equipo reducido, sin frenar tu operación.",
+  },
+  {
+    t: "Postproducción integral",
+    d: "Edición, generación de piezas con IA, corrección de color, sonido y musicalización.",
+  },
+  {
+    t: "Entrega por formato y uso",
+    d: "Carpeta organizada: horizontal para web y presentaciones, vertical para redes y pauta, cortes para WhatsApp comercial.",
+  },
+  {
+    t: "Ajustes definidos",
+    d: "Una ronda en estrategia y guion, hasta dos ajustes por pieza terminada. El alcance se cierra al inicio.",
+  },
+  {
+    t: "Cobertura y traslados",
+    d: "Lima Metropolitana incluida. Para obras, plantas o ferias fuera de Lima o del país, se cotizan pasajes y viáticos aparte.",
+  },
+  {
+    t: "Uso declarado de IA",
+    d: "Siempre te decimos qué elemento es generado. Nunca presentamos una simulación como si fuera registro real de tu obra.",
+  },
+];
+
 const FAQ = [
   {
+    q: "¿Cuánto cuesta?",
+    a: "Depende del alcance: cuántas piezas al mes, si hay ferias en el calendario, cuántas sedes u obras hay que cubrir y en qué ciudad. Por eso no publicamos una tarifa fija — en el diagnóstico de 20 minutos definimos el alcance real y te enviamos la propuesta con el monto cerrado.",
+  },
+  {
     q: "¿Se nota que hay IA?",
-    a: "No, porque no se usa para simular la realidad sino para mostrar lo que la cámara no alcanza: el interior de un equipo, un corte técnico, una instalación a escala. Lo que es registro real se graba. Y siempre te decimos qué elemento es generado — nunca presentamos una simulación como si fuera una foto de tu obra.",
+    a: "No, porque no se usa para simular la realidad sino para mostrar lo que la cámara no alcanza y para elevar lo que sí se grabó. Lo que es registro real se graba. Y siempre te decimos qué elemento es generado — nunca presentamos una simulación como si fuera una foto de tu obra.",
   },
   {
     q: "¿Y si estoy fuera de Lima?",
@@ -406,10 +423,6 @@ const FAQ = [
   {
     q: "¿Y si este mes no tengo ninguna feria?",
     a: "El bloque de coberturas se ejecuta como jornada en tu planta, obra o showroom, con los mismos entregables: 1 video, 3 entrevistas y más de 15 fotos. No pierdes el mes.",
-  },
-  {
-    q: "¿Cuántos cambios incluye?",
-    a: "Una ronda en estrategia y guion, y hasta dos ajustes por pieza terminada. Se define el alcance al inicio para que nadie descubra sorpresas al final.",
   },
   {
     q: "¿Por qué el mínimo de 3 meses?",
@@ -434,10 +447,7 @@ export default function LandingEnergia() {
       `}</style>
 
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-cream/10 px-6 pb-24 pt-32 md:pb-32 md:pt-40">
-        {/* Halo azul de marca, sutil */}
-        {/* Fondo en movimiento. Va detrás de un velo fuerte: tiene que dar
-            textura, no competir con el titular. */}
+      <section className="relative overflow-hidden px-6 pb-16 pt-32 md:pb-20 md:pt-40">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <LoopVideo src="/videos/web/hero-bg.mp4" className="opacity-25" />
           <div className="absolute inset-0 bg-gradient-to-b from-bg/70 via-bg/85 to-bg" />
@@ -446,6 +456,7 @@ export default function LandingEnergia() {
           aria-hidden="true"
           className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-brand-blue/15 blur-[140px]"
         />
+
         <div className="container-base relative mx-auto max-w-5xl">
           <motion.p
             className="mb-6 font-brand text-xs uppercase tracking-[0.28em] text-brand-blue"
@@ -462,11 +473,11 @@ export default function LandingEnergia() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE, delay: 0.08 }}
           >
-            Lo mejor que haces
+            Convertimos proyectos
             <br />
-            no se ve.
+            en casos de éxito
             <br />
-            <span className="text-brand-blue">Nosotros lo hacemos ver.</span>
+            <span className="text-brand-blue">que venden por ti.</span>
           </motion.h1>
 
           <motion.p
@@ -475,10 +486,9 @@ export default function LandingEnergia() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE, delay: 0.18 }}
           >
-            Tableros cerrados, plantas que no se detienen, obras a 3,000 metros. Ahí está
-            tu mejor argumento de venta, y no existe en ningún video tuyo — por eso terminas
-            vendiendo con el catálogo del fabricante, igual que los otros seis distribuidores
-            de tu marca. IA Visual System cambia eso todos los meses.
+            Videocasos y piezas comerciales potenciadas con IA que ponen al frente tus
+            capacidades reales, tus resultados medibles y el impacto de lo que ejecutas.
+            Con el alcance que una ficha técnica y un PDF nunca te van a dar.
           </motion.p>
 
           <motion.div
@@ -497,54 +507,80 @@ export default function LandingEnergia() {
             transition={{ duration: 1, ease: EASE, delay: 0.4 }}
           >
             Clientes activos:{" "}
-            <span className="text-cream">WIN Internet · Livoltek · Wellmax · Smart System Perú</span>
+            <span className="text-cream">
+              WIN Internet · Livoltek · Wellmax · Smart System Perú
+            </span>
           </motion.p>
         </div>
       </section>
 
-      {/* ── A QUIÉN LE HABLAMOS ──────────────────────────────
-          La landing llega por correo frío a una lista muy concreta. Esta banda
-          existe para que el lector se reconozca en los primeros segundos y no
-          crea que le llegó una oferta genérica de agencia. ── */}
-      <section className="border-b border-cream/10 bg-surface px-6 py-14 md:py-16">
-        <div className="container-base mx-auto max-w-5xl">
-          <motion.p
-            className="mb-8 text-center font-brand text-[11px] uppercase tracking-[0.3em] text-muted"
-            {...fadeUp}
-          >
-            Trabajamos con
-          </motion.p>
-          <motion.div className="flex flex-wrap justify-center gap-3" {...fadeUp}>
-            {[
-              { t: "Distribuidores e importadores", I: Inversor },
-              { t: "Energía solar y almacenamiento", I: PanelSolar },
-              { t: "Medición inteligente", I: Medidor },
-              { t: "EPC e ingeniería", I: TorreElectrica },
-              { t: "Integradores e instaladores", I: Casco },
-              { t: "Fabricantes con canal en LATAM", I: Bateria },
-            ].map(({ t, I }) => (
-              <span
-                key={t}
-                className="group/chip inline-flex cursor-default items-center gap-2.5 rounded-full border border-cream/15 px-5 py-2.5 font-body text-sm text-cream transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-blue/60 hover:bg-brand-blue/10"
-              >
-                <I className="h-[18px] w-[18px] shrink-0 text-brand-blue transition-transform duration-300 group-hover/chip:scale-125" />
-                {t}
-              </span>
-            ))}
-          </motion.div>
-          <motion.p
-            className="mx-auto mt-8 max-w-2xl text-center font-body text-sm leading-relaxed text-muted"
-            {...fadeUp}
-          >
-            Si tu empresa vende equipos técnicos que alguien tiene que instalar, operar y
-            mantener, hablamos tu idioma. No hacemos moda, ni restaurantes, ni retail.
+      {/* ── MUESTRA COMO BANNER ──────────────────────────────
+          Va pegada al hero, sin encabezado: es lo mejor que hay para mostrar y
+          tiene que verse antes de que el visitante lea un solo argumento. ── */}
+      <section className="border-b border-cream/10 pb-20 md:pb-24">
+        <Cinta vertical clips={MUESTRA} />
+        <motion.p
+          className="container-base mx-auto mt-8 max-w-5xl px-6 text-center font-body text-sm text-muted"
+          {...fadeUp}
+        >
+          Piezas producidas por Resuelto para clientes de energía e industria: voceros
+          técnicos, producto generado con IA y registro en obra.
+        </motion.p>
+      </section>
+
+      {/* ── EL SISTEMA ───────────────────────────────────── */}
+      <section className="border-b border-cream/10 px-6 py-20 md:py-28">
+        <div className="container-base mx-auto max-w-6xl">
+          <Head
+            n="01 · El sistema"
+            title="Dos bloques, todos los meses."
+            sub="Uno construye tu autoridad y te sirve todo el año. El otro convierte cada feria y cada obra en material que puedes usar la misma semana."
+          />
+
+          <div className="grid gap-5 lg:grid-cols-2">
+            <motion.div
+              className="overflow-hidden rounded-2xl border border-cream/10 bg-surface"
+              {...fadeUp}
+            >
+              <div className="border-b border-cream/10 bg-brand-blue/[0.06] px-5 py-4 md:px-6">
+                <span className="font-brand text-[11px] uppercase tracking-[0.22em] text-brand-blue">
+                  Bloque 1
+                </span>
+                <h3 className="mt-1 font-display text-lg font-bold text-cream">
+                  La pieza de autoridad
+                </h3>
+              </div>
+              {BLOQUE_1.map((x) => (
+                <Entregable key={x.t} {...x} />
+              ))}
+            </motion.div>
+
+            <motion.div
+              className="overflow-hidden rounded-2xl border border-cream/10 bg-surface"
+              {...fadeUp}
+            >
+              <div className="border-b border-cream/10 bg-brand-blue/[0.06] px-5 py-4 md:px-6">
+                <span className="font-brand text-[11px] uppercase tracking-[0.22em] text-brand-blue">
+                  Bloque 2
+                </span>
+                <h3 className="mt-1 font-display text-lg font-bold text-cream">
+                  Coberturas Resuelto
+                </h3>
+              </div>
+              {BLOQUE_2.map((x) => (
+                <Entregable key={x.t} {...x} />
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.p className="mt-6 font-body text-sm text-muted" {...fadeUp}>
+            Incluye dirección estratégica y creativa, una sesión mensual de revisión con tu
+            equipo, y el banco de assets organizado y entregado.
           </motion.p>
         </div>
       </section>
 
-      {/* ── VSL ──────────────────────────────────────────────
-          Va inmediatamente después del hero: el visitante llega desde un
-          correo frío y decide en segundos si esto le habla a él o no. ── */}
+      {/* ── VSL ──────────────────────────────────────────── */}
       <section className="border-b border-cream/10 px-6 py-20 md:py-28">
         <div className="container-base mx-auto max-w-4xl">
           <motion.p
@@ -562,133 +598,96 @@ export default function LandingEnergia() {
             className="mx-auto mt-7 max-w-xl text-center font-body text-sm leading-relaxed text-muted"
             {...fadeUp}
           >
-            Cómo se construye una pieza que mezcla grabación real con IA, y por qué
-            eso cambia lo que puedes mostrarle a un cliente técnico.
+            Cómo se construye una pieza que mezcla grabación real con IA, y por qué eso
+            cambia lo que puedes mostrarle a un cliente técnico.
           </motion.p>
         </div>
       </section>
 
-      {/* ── PROBLEMA ─────────────────────────────────────── */}
+      {/* ── EL MÉTODO ────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-cream/10 px-6 py-24 md:py-32">
-        <div className="container-base relative mx-auto max-w-5xl">
-          <Head
-            n="01 · El problema"
-            title="No es que no tengas qué mostrar. Es que nadie lo ha construido."
-          />
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10 sm:grid-cols-2">
-            {PROBLEMAS.map((p, i) => (
-              <motion.div
-                key={p.t}
-                className="group bg-surface p-7 transition-colors duration-300 hover:bg-surface-2 md:p-9"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0, margin: "-60px" }}
-                transition={{ duration: 0.6, ease: EASE, delay: i * 0.07 }}
-              >
-                <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-cream/12 text-muted transition-all duration-300 group-hover:-translate-y-1 group-hover:border-brand-blue/40 group-hover:text-brand-blue">
-                  <p.icono className="h-6 w-6" />
-                </span>
-                <h3 className="font-display text-lg font-semibold text-cream transition-colors group-hover:text-brand-blue md:text-xl">{p.t}</h3>
-                <p className="mt-3 font-body text-sm leading-relaxed text-muted md:text-base">{p.d}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── IDEA CENTRAL ─────────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-cream/10 px-6 py-28 md:py-36">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute right-0 top-1/2 h-[28rem] w-[28rem] -translate-y-1/2 translate-x-1/3 rounded-full bg-brand-blue/10 blur-[120px]"
         />
         <div className="container-base relative mx-auto max-w-4xl text-center">
           <motion.p className="font-brand text-xs uppercase tracking-[0.28em] text-brand-blue" {...fadeUp}>
-            02 · La idea
+            02 · El método
           </motion.p>
           <motion.h2
             className="mt-6 font-display text-3xl font-bold leading-[1.12] tracking-tight text-cream md:text-6xl"
             {...fadeUp}
           >
-            Hacemos ver lo que
+            Tus tomas reales,
             <br />
-            <span className="text-brand-blue">no se puede filmar.</span>
+            <span className="text-brand-blue">potenciadas con IA.</span>
           </motion.h2>
           <motion.p className="mx-auto mt-8 max-w-2xl font-body text-base leading-relaxed text-muted md:text-lg" {...fadeUp}>
-            Una productora tradicional te dirá que eso no se puede grabar, y tiene razón:
-            no hay cámara que entre a un tablero energizado ni presupuesto que justifique
-            subir un equipo completo a una obra remota por tres tomas.
+            Grabamos tu operación como es: tu planta, tu obra, tu equipo, tu producto
+            instalado. Eso es lo que da verdad a la pieza y no se reemplaza con nada.
           </motion.p>
           <motion.p className="mx-auto mt-5 max-w-2xl font-body text-base leading-relaxed text-cream md:text-lg" {...fadeUp}>
-            Nosotros grabamos lo que sí se puede y generamos con IA lo que no: el corte por
-            dentro del equipo, la red bajo el asfalto, la instalación a escala real. Todo en
-            una sola pieza, sin que se note la costura.
+            Después complementamos ese material con contenido generativo con IA — el corte
+            por dentro del equipo, la escala real de la instalación, el plano que ninguna
+            cámara podía tomar. El resultado es <strong className="font-semibold">una sola pieza,
+            de un impacto que ninguna de las dos técnicas alcanza por separado</strong>, y que
+            deja tus mejores capacidades al frente.
           </motion.p>
 
-          {/* El método dibujado. Un diagrama propio explica la mezcla mejor que
-              dos clips sueltos, y no depende de tener el material perfecto. */}
+          {/* El método dibujado. Un diagrama propio lo explica mejor que un
+              párrafo más, y no depende de tener el material perfecto. */}
           <motion.div className="mx-auto mt-14 max-w-xl" {...fadeUp}>
             <MetodoVisual className="w-full" />
           </motion.div>
         </div>
       </section>
 
-      {/* ── EL SISTEMA ───────────────────────────────────── */}
-      <section className="border-b border-cream/10 px-6 py-24 md:py-32">
+      {/* ── EL PROBLEMA ──────────────────────────────────── */}
+      <section className="border-b border-cream/10 px-6 py-20 md:py-28">
         <div className="container-base mx-auto max-w-5xl">
           <Head
-            n="03 · El sistema"
-            title="Dos bloques, todos los meses."
-            sub="Uno construye tu autoridad y te sirve todo el año. El otro convierte cada feria y cada obra en material que puedes usar la misma semana."
+            n="03 · Por qué pasa"
+            title="Cuatro formas de perder un proyecto que ya te habías ganado."
           />
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10 sm:grid-cols-2">
+            {PROBLEMAS.map((p, i) => (
+              <motion.div
+                key={p.t}
+                className="group relative overflow-hidden bg-surface p-7 transition-colors duration-300 hover:bg-surface-2 md:p-9"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0, margin: "-60px" }}
+                transition={{ duration: 0.6, ease: EASE, delay: i * 0.07 }}
+              >
+                {/* Numeral enorme al fondo: da jerarquía sin ocupar espacio */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-2 -top-6 font-display text-[7rem] font-bold leading-none text-cream/[0.04] transition-colors duration-500 group-hover:text-brand-blue/10"
+                >
+                  0{i + 1}
+                </span>
 
-          {/* Bloque 1 */}
-          <motion.div className="mb-12" {...fadeUp}>
-            <div className="mb-6 flex items-baseline gap-4">
-              <span className="font-brand text-xs uppercase tracking-[0.22em] text-brand-blue">
-                Bloque 1
-              </span>
-              <h3 className="font-display text-xl font-bold text-cream md:text-2xl">
-                La pieza de autoridad
-              </h3>
-            </div>
-            <div className="space-y-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10">
-              {BLOQUE_1.map((x) => (
-                <Entregable key={x.t} {...x} />
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Bloque 2 */}
-          <motion.div {...fadeUp}>
-            <div className="mb-6 flex items-baseline gap-4">
-              <span className="font-brand text-xs uppercase tracking-[0.22em] text-brand-blue">
-                Bloque 2
-              </span>
-              <h3 className="font-display text-xl font-bold text-cream md:text-2xl">
-                Coberturas Resuelto
-              </h3>
-            </div>
-            <div className="space-y-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10">
-              {BLOQUE_2.map((x) => (
-                <Entregable key={x.t} {...x} />
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.p className="mt-8 font-body text-sm text-muted" {...fadeUp}>
-            Incluye dirección estratégica y creativa, una sesión mensual de revisión con tu
-            equipo, y el banco de assets organizado y entregado.
-          </motion.p>
+                <span className="relative mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-cream/12 text-muted transition-all duration-300 group-hover:-translate-y-1 group-hover:border-brand-blue/40 group-hover:text-brand-blue">
+                  <p.icono className="h-6 w-6" />
+                </span>
+                <h3 className="relative font-display text-lg font-semibold text-cream transition-colors group-hover:text-brand-blue md:text-xl">
+                  {p.t}
+                </h3>
+                <p className="relative mt-3 font-body text-sm leading-relaxed text-muted md:text-base">
+                  {p.d}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── TESTIMONIOS ──────────────────────────────────────
-          Solo se pinta si hay citas reales cargadas. ── */}
+      {/* ── TESTIMONIOS ──────────────────────────────────── */}
       {TESTIMONIOS.length > 0 && (
-        <section className="border-b border-cream/10 px-6 py-24 md:py-32">
+        <section className="border-b border-cream/10 px-6 py-20 md:py-28">
           <div className="container-base mx-auto max-w-5xl">
             <Head n="04 · Clientes" title="Lo que dicen los que ya trabajan así." />
+
             {/* Baraja superpuesta: las tarjetas se pisan entre sí y cada una
                 está algo girada, como fichas dejadas sobre una mesa. Al pasar
                 el mouse, la de encima se endereza y sube por delante del resto.
@@ -735,136 +734,49 @@ export default function LandingEnergia() {
         </section>
       )}
 
-      {/* ── MUESTRA ──────────────────────────────────────────
-          Antes de pedir dinero, mostrar trabajo. Dos filas de clips reales
-          moviéndose en direcciones opuestas: se lee como una mesa de montaje
-          y demuestra volumen de producción sin tener que afirmarlo. ── */}
-      <section className="overflow-hidden border-b border-cream/10 py-24 md:py-32">
-        <div className="container-base mx-auto max-w-5xl px-6">
-          <Head
-            n="04 · Muestra"
-            title="Así se ve el material."
-            sub="Piezas producidas por Resuelto para clientes de energía e industria: voceros técnicos, producto generado con IA y registro en obra."
-          />
-        </div>
-
-        {/* Una sola fila, y solo material del rubro. Antes eran dos cintas
-            rellenadas con lo que hubiera: un comercial de ollas, un cóctel y
-            un partido de fútbol no le dicen nada a un gerente de energía. */}
-        <Cinta
-          vertical
-          clips={[
-            "/videos/web/story-04.mp4",
-            "/videos/web/producto-02.mp4",
-            "/videos/web/story-07.mp4",
-            "/videos/web/producto-05.mp4",
-            "/videos/web/story-12.mp4",
-            "/videos/web/producto-07.mp4",
-            "/videos/web/story-03.mp4",
-          ]}
-        />
-      </section>
-
-      {/* ── INVERSIÓN ──────────────────────────────────────
-          La duda que aparecía antes era si el precio cubría un bloque o los
-          dos. Por eso los bloques se muestran aquí otra vez, sumándose de
-          forma literal con un "+", y el precio aparece DESPUÉS de la suma. ── */}
-      <section className="border-b border-cream/10 px-6 py-24 md:py-32">
-        <div className="container-base mx-auto max-w-4xl">
-          <Head
-            n="05 · Inversión"
-            title="Un precio. Los dos bloques."
-            sub="No es un plan por bloque ni un menú por pieza: lo de abajo entra completo, todos los meses, por el mismo monto."
-          />
-
-          <motion.div
-            className="overflow-hidden rounded-2xl border border-brand-blue/30 bg-surface-2"
+      {/* ── A QUIÉN LE HABLAMOS ──────────────────────────────
+          Baja de posición: reconocer al lector ayuda, pero después de haberle
+          mostrado el trabajo y el sistema. ── */}
+      <section className="border-b border-cream/10 bg-surface px-6 py-14 md:py-16">
+        <div className="container-base mx-auto max-w-5xl">
+          <motion.p
+            className="mb-8 text-center font-brand text-[11px] uppercase tracking-[0.3em] text-muted"
             {...fadeUp}
           >
-            {/* La suma */}
-            <div className="grid md:grid-cols-[1fr_auto_1fr]">
-              <ResumenBloque
-                n="Bloque 1"
-                titulo="La pieza de autoridad"
-                items={BLOQUE_1.map((x) => x.t)}
-              />
-
-              <div className="flex items-center justify-center border-y border-cream/10 py-4 md:border-x md:border-y-0 md:px-6">
-                <span
-                  className="font-display text-3xl font-bold text-brand-blue"
-                  aria-label="más"
-                >
-                  +
-                </span>
-              </div>
-
-              <ResumenBloque
-                n="Bloque 2"
-                titulo="Coberturas Resuelto"
-                items={BLOQUE_2.map((x) => x.t)}
-              />
-            </div>
-
-            {/* El resultado de la suma */}
-            <div className="border-t border-brand-blue/25 bg-brand-blue/[0.07] p-8 md:p-10">
-              <p className="font-brand text-xs uppercase tracking-[0.22em] text-brand-blue">
-                Todo lo anterior, cada mes
-              </p>
-              <p className="mt-3 font-display text-4xl font-bold text-cream md:text-6xl">
-                USD 4,200
-                <span className="ml-2 align-middle font-body text-base font-normal text-muted md:text-lg">
-                  + IGV / mes
-                </span>
-              </p>
-              <p className="mt-3 font-body text-base text-muted">
-                Permanencia mínima de 3 meses. Pago mensual adelantado.
-              </p>
-
-              <div className="mt-7 space-y-2.5 border-t border-cream/10 pt-7">
-                {[
-                  "Dirección estratégica y creativa incluida",
-                  "Lima Metropolitana incluida",
-                  "Fuera de Lima o del Perú: pasajes y viáticos cotizados aparte",
-                ].map((l) => (
-                  <p key={l} className="flex gap-3 font-body text-sm text-cream md:text-base">
-                    <span className="text-brand-blue" aria-hidden="true">
-                      —
-                    </span>
-                    {l}
-                  </p>
-                ))}
-              </div>
-            </div>
+            Trabajamos con
+          </motion.p>
+          <motion.div className="flex flex-wrap justify-center gap-3" {...fadeUp}>
+            {[
+              { t: "Distribuidores e importadores", I: Inversor },
+              { t: "Energía solar y almacenamiento", I: PanelSolar },
+              { t: "Medición inteligente", I: Medidor },
+              { t: "EPC e ingeniería", I: TorreElectrica },
+              { t: "Integradores e instaladores", I: Casco },
+              { t: "Fabricantes con canal en LATAM", I: Bateria },
+            ].map(({ t, I }) => (
+              <span
+                key={t}
+                className="group/chip inline-flex cursor-default items-center gap-2.5 rounded-full border border-cream/15 px-5 py-2.5 font-body text-sm text-cream transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-blue/60 hover:bg-brand-blue/10"
+              >
+                <I className="h-[18px] w-[18px] shrink-0 text-brand-blue transition-transform duration-300 group-hover/chip:scale-125" />
+                {t}
+              </span>
+            ))}
           </motion.div>
-
-          {/* Salida para quien no quiere el sistema completo: sin esto, el que
-              solo necesita cubrir una feria se va sin escribir. */}
-          <motion.div
-            className="mt-6 rounded-2xl border border-cream/12 bg-surface p-7 md:p-8"
+          <motion.p
+            className="mx-auto mt-8 max-w-2xl text-center font-body text-sm leading-relaxed text-muted"
             {...fadeUp}
           >
-            <h3 className="font-display text-lg font-semibold text-cream">
-              ¿Solo necesitas uno de los dos?
-            </h3>
-            <p className="mt-2.5 font-body text-sm leading-relaxed text-muted md:text-base">
-              Cada bloque se puede contratar por separado y se cotiza según el alcance —
-              una feria puntual, un videocaso para una licitación, un banco de imágenes
-              para el catálogo. Escríbenos qué necesitas y lo cotizamos aparte.
-            </p>
-          </motion.div>
-
-          <motion.p className="mt-6 font-body text-sm leading-relaxed text-muted" {...fadeUp}>
-            Para comparar: un solo video institucional con productora tradicional cuesta lo
-            mismo o más, y se entrega una vez. Esto es un sistema corriendo todo el
-            trimestre.
+            Si tu empresa vende equipos técnicos que alguien tiene que instalar, operar y
+            mantener, hablamos tu idioma. No hacemos moda, ni restaurantes, ni retail.
           </motion.p>
         </div>
       </section>
 
       {/* ── PROCESO ──────────────────────────────────────── */}
-      <section className="border-b border-cream/10 px-6 py-24 md:py-32">
+      <section className="border-b border-cream/10 px-6 py-20 md:py-28">
         <div className="container-base mx-auto max-w-5xl">
-          <Head n="06 · Cómo funciona" title="Cuatro etapas. Sin misterio." />
+          <Head n="05 · Cómo funciona" title="Cuatro etapas. Sin misterio." />
 
           <motion.div className="mb-12 hidden sm:block" {...fadeUp}>
             <ProcesoVisual className="w-full max-w-3xl" />
@@ -893,9 +805,9 @@ export default function LandingEnergia() {
       </section>
 
       {/* ── FILTRO ───────────────────────────────────────── */}
-      <section className="border-b border-cream/10 px-6 py-24 md:py-32">
+      <section className="border-b border-cream/10 px-6 py-20 md:py-28">
         <div className="container-base mx-auto max-w-5xl">
-          <Head n="07 · Filtro" title="Esto no es para todos." />
+          <Head n="06 · Filtro" title="Esto no es para todos." />
           <div className="grid gap-8 md:grid-cols-2">
             <motion.div className="rounded-2xl border border-brand-blue/25 bg-surface p-8" {...fadeUp}>
               <h3 className="font-display text-lg font-bold text-brand-blue">Sí es para ti si</h3>
@@ -941,8 +853,58 @@ export default function LandingEnergia() {
         </div>
       </section>
 
+      {/* ── EL SERVICIO EN DETALLE ───────────────────────────
+          Reemplaza a la tarjeta de precio. El monto cambia por alcance, sector
+          y ciudad, así que publicarlo cerraba conversaciones antes de
+          empezarlas: aquí se explica qué entra, y el número sale del
+          diagnóstico. ── */}
+      <section className="border-b border-cream/10 px-6 py-20 md:py-28">
+        <div className="container-base mx-auto max-w-5xl">
+          <Head
+            n="07 · El servicio en detalle"
+            title="Qué entra, exactamente."
+            sub="Un servicio mensual con permanencia mínima de tres meses, dirigido de punta a punta. Esto es lo que incluye más allá de los entregables."
+          />
+
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10 sm:grid-cols-2">
+            {DETALLE.map((d) => (
+              <motion.div key={d.t} className="group bg-surface p-6 transition-colors duration-300 hover:bg-surface-2 md:p-7" {...fadeUp}>
+                <h3 className="flex items-start gap-3 font-display text-base font-semibold text-cream">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue transition-transform duration-300 group-hover:scale-125" />
+                  {d.t}
+                </h3>
+                <p className="mt-2.5 pl-7 font-body text-sm leading-relaxed text-muted">{d.d}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            className="mt-6 rounded-2xl border border-brand-blue/30 bg-surface-2 p-8 md:p-10"
+            {...fadeUp}
+          >
+            <h3 className="font-display text-xl font-bold text-cream md:text-2xl">
+              La inversión se define por alcance.
+            </h3>
+            <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-muted">
+              No publicamos una tarifa fija porque no la hay: cambia según cuántas piezas
+              necesitas al mes, si hay ferias en tu calendario, cuántas sedes u obras hay
+              que cubrir y en qué ciudad están. Cada bloque también se puede contratar por
+              separado — una feria puntual, un videocaso para una licitación, un banco de
+              imágenes para el catálogo.
+            </p>
+            <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-cream">
+              En el diagnóstico de 20 minutos definimos el alcance real y te enviamos la
+              propuesta con el monto cerrado. Sin sorpresas después.
+            </p>
+            <div className="mt-8">
+              <Cta label="Pedir mi propuesta" />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── FAQ ──────────────────────────────────────────── */}
-      <section className="border-b border-cream/10 px-6 py-24 md:py-32">
+      <section className="border-b border-cream/10 px-6 py-20 md:py-28">
         <div className="container-base mx-auto max-w-3xl">
           <Head n="08 · Preguntas" title="Lo que siempre preguntan." />
           <div className="space-y-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10">
@@ -986,10 +948,9 @@ export default function LandingEnergia() {
             ya está siendo cotizado.
           </motion.h2>
           <motion.p className="mx-auto mt-6 max-w-xl font-body text-base leading-relaxed text-muted md:text-lg" {...fadeUp}>
-            Y quien lo gane no va a ser necesariamente el que tenga el mejor equipo, sino
-            el que lo sepa demostrar. Agenda 20 minutos: revisamos cuál de tus
-            instalaciones vale la pena contar y te entregamos el mapa de piezas —
-            trabajemos juntos o no.
+            Y quien lo gane no va a ser necesariamente el que tenga el mejor equipo, sino el
+            que lo sepa demostrar. Agenda 20 minutos: revisamos cuál de tus instalaciones
+            vale la pena contar y te entregamos el mapa de piezas — trabajemos juntos o no.
           </motion.p>
           <motion.div className="mt-10 flex justify-center" {...fadeUp}>
             <Cta />

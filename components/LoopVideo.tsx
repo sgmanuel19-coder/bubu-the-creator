@@ -40,14 +40,8 @@ export default function LoopVideo({
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setCargar(true);
-          /* play() rechaza si el navegador aún bloquea la reproducción; no es
-             un error que deba romper nada, el póster queda visible. */
-          el.play().catch(() => {});
-        } else {
-          el.pause();
-        }
+        if (entry.isIntersecting) setCargar(true);
+        else el.pause();
       },
       { rootMargin: "300px 0px" },
     );
@@ -56,6 +50,24 @@ export default function LoopVideo({
     return () => io.disconnect();
   }, [reducido]);
 
+  /* Este efecto corre DESPUÉS de que el <source> ya está en el DOM.
+     Añadir un <source> a un <video> que el navegador ya renderizó no dispara
+     ninguna descarga por sí solo: hay que pedirle explícitamente que relea sus
+     fuentes con load(). Sin esto el marco se queda vacío cuando play() no
+     arranca —autoplay bloqueado, pestaña oculta, ahorro de datos— porque nunca
+     se llegó a decodificar ni el primer fotograma. */
+  useEffect(() => {
+    if (!cargar) return;
+    const el = ref.current;
+    if (!el) return;
+
+    el.load();
+    /* play() rechaza si el navegador todavía bloquea la reproducción. No es un
+       error que deba romper nada: con load() ya hecho, el primer fotograma
+       queda pintado igual. */
+    el.play().catch(() => {});
+  }, [cargar]);
+
   return (
     <video
       ref={ref}
@@ -63,7 +75,12 @@ export default function LoopVideo({
       muted
       loop
       playsInline
-      preload="none"
+      /* "metadata" y no "none": el <source> solo se monta cuando el clip se
+         acerca al viewport, así que aquí ya no hay riesgo de descargar de más.
+         Con "none" el marco se queda en negro si la reproducción no arranca
+         —autoplay bloqueado, ahorro de datos, pestaña en segundo plano— y el
+         visitante ve una caja vacía en lugar del primer fotograma. */
+      preload="metadata"
       aria-hidden="true"
       className={`h-full w-full object-cover ${className}`}
       style={vertical ? { aspectRatio: "9 / 16" } : undefined}
