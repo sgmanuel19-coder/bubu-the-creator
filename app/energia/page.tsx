@@ -7,12 +7,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "IA Visual System — Sistema audiovisual para el sector energía | RESUELTO",
   description:
-    "Videocaso, cobertura de ferias e imágenes con IA para distribuidores, EPC e instaladores de energía en Perú, Colombia y Chile. USD 4,200 + IGV al mes.",
+    "Convertimos tus proyectos en casos de éxito: videocasos, coberturas de feria e imágenes potenciadas con IA para distribuidores, EPC e integradores de energía en Perú, Colombia y Chile.",
   alternates: { canonical: "https://www.resueltoagency.com/energia" },
   openGraph: {
-    title: "Todos venden el mismo inversor. Gana el que mejor lo explica.",
+    title: "Convertimos proyectos en casos de éxito que venden por ti.",
     description:
-      "IA Visual System: el sistema audiovisual mensual para el canal de energía. Videocaso, coberturas de feria, entrevistas e imágenes con IA.",
+      "IA Visual System: videocasos y piezas comerciales potenciadas con IA para el canal de energía. Tus capacidades, tus resultados y tu impacto, contados como se merecen.",
     url: "https://www.resueltoagency.com/energia",
   },
 };
