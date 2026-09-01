@@ -175,6 +175,8 @@ export const TRADITIONAL_CHAPTERS: Chapter[] = [
     pieces: [
       { url: "/videos/trad-comerciales-01.mp4", label: "Comercial", client: "Resuelto Agency", wide: true },
       { url: "/videos/trad-comerciales-02.mp4", label: "Comercial", client: "Resuelto Agency", wide: true },
+      { url: "/videos/trad-comerciales-03.mp4", label: "Comercial", client: "Resuelto Agency", wide: true },
+      { url: "/videos/trad-comerciales-04.mp4", label: "Comercial", client: "Resuelto Agency", wide: true },
     ],
   },
   {
