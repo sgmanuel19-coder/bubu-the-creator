@@ -36,23 +36,26 @@ export type Chapter = {
 
 export const CHAPTERS: Chapter[] = [
   {
+    // El capítulo se agrupa por `client`: cada marca distinta arma su propia
+    // fila con su encabezado, en el orden en que aparecen acá.
     n: "01",
     id: "comerciales-ia",
     title: "Comerciales IA",
     desc: "Spots y campañas generados con IA: nivel de producción cinematográfica sin rodaje ni set.",
     pieces: [
-      { url: "/videos/comercial-01.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
-      { url: "/videos/comercial-04.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
-      { url: "/videos/comercial-05.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
-      { url: "/videos/comercial-06.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
-      { url: "/videos/comercial-07.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
-      // Estos dos no son 16:9 de origen (08 es 4:3, 09 es vertical). Van en slot
-      // 16/9 como el resto del capítulo para que la grilla no quede despareja, y
-      // su póster ya viene compuesto a 16:9 con relleno desenfocado — así la
-      // miniatura no recorta nada. El video real se ve completo en el lightbox.
-      { url: "/videos/comercial-08.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
-      { url: "/videos/comercial-09.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
-      { url: "/videos/comercial-10.mp4", label: "Comercial IA", client: "Resuelto Agency", wide: true },
+      { url: "/videos/comercial-04.mp4", label: "Comercial IA", client: "WIN Internet", wide: true },
+      { url: "/videos/comercial-05.mp4", label: "Comercial IA", client: "WIN Internet", wide: true },
+      { url: "/videos/comercial-06.mp4", label: "Comercial IA", client: "WIN Internet", wide: true },
+      { url: "/videos/comercial-07.mp4", label: "Comercial IA", client: "WIN Internet", wide: true },
+      // Vertical de origen; su póster ya viene compuesto a 16:9 con relleno
+      // desenfocado, así la miniatura no recorta nada.
+      { url: "/videos/comercial-09.mp4", label: "Comercial IA", client: "WIN Internet", wide: true },
+      { url: "/videos/comercial-01.mp4", label: "Comercial IA", client: "Smart System Perú", wide: true },
+      // 4:3 de origen, póster y clip compuestos a 16:9 con relleno desenfocado.
+      { url: "/videos/comercial-11.mp4", label: "Comercial IA", client: "Red Wing", wide: true },
+      // 08 también es 4:3 de origen, mismo tratamiento.
+      { url: "/videos/comercial-08.mp4", label: "Comercial IA", client: "Call It Spring", wide: true },
+      { url: "/videos/comercial-10.mp4", label: "Comercial IA", client: "Samsung", wide: true },
     ],
   },
   {
@@ -118,6 +121,10 @@ export const CHAPTERS: Chapter[] = [
       { url: "/videos/avatar-04.mp4", label: "Avatar IA", client: "Resuelto Agency" },
       { url: "/videos/avatar-05.mp4", label: "Avatar IA", client: "Resuelto Agency" },
       { url: "/videos/avatar-06.mp4", label: "Avatar IA", client: "Resuelto Agency", wide: true },
+      // 4:3 de origen. Va en slot 16/9 como el resto del capítulo, y tanto su
+      // póster como su clip ya vienen compuestos a 16:9 con relleno
+      // desenfocado — así la grilla no le recorta la cara.
+      { url: "/videos/avatar-07.mp4", label: "Avatar IA", client: "Resuelto Agency", wide: true },
     ],
   },
 ];
@@ -297,4 +304,13 @@ export function embedSrc(url: string | null): string | null {
     return url.replace(/\/?$/, "/") + "embed/";
   }
   return null;
+}
+
+// Clip liviano en bucle para la tarjeta de la galería (el "gif" que se ve en la grilla).
+// Se generan con ffmpeg a 480px de lado largo, 8s, sin audio → ~135 KB promedio,
+// contra los ~7 MB del master. Sin esto, autoreproducir la grilla entera
+// significaría descargar decenas de megas por capítulo.
+export function previewSrc(piece: Piece): string | null {
+  if (!piece.url || !piece.url.startsWith("/videos/")) return null;
+  return `/videos/preview/${piece.url.split("/").pop()}`;
 }

@@ -33,6 +33,9 @@ export type Servicio = {
   paraQuien?: string;
   factores?: string[]; // qué mueve la inversión
   precio: { desde: string; hasta?: string; nota?: string } | null;
+  // Herramientas reales con las que se ejecuta el servicio. No son
+  // entregables: es la cinta de "con qué está hecho" que corre en el detalle.
+  stack?: string[];
   tags: string[];
   destacado?: boolean; // tarjeta grande en la grilla
 };
@@ -78,7 +81,10 @@ export const SERVICIOS: Servicio[] = [
       "Nivel de realismo requerido",
       "Cantidad de líneas de producto a cubrir",
     ],
-    precio: { desde: "$2,800", hasta: "$10,000", nota: "paquete completo de 12 piezas: 6 videos + 3 carruseles + 3 imágenes · sube según volumen mensual" },
+    // Sin monto publicado, como el resto del catálogo: el alcance lo define
+    // el brief. Antes: desde $2,800 hasta $10,000 (paquete de 12 piezas).
+    precio: null,
+    stack: ["Higgsfield", "Nano Banana Pro", "Kling 3.0", "Seedance 2.0", "ElevenLabs", "HeyGen", "Suno", "CapCut Pro", "Meta Business Suite"],
     tags: ["Videos", "Carruseles", "Imágenes de marca", "Grilla mensual"],
     destacado: true,
   },
@@ -124,7 +130,10 @@ export const SERVICIOS: Servicio[] = [
       "Música original y diseño sonoro",
       "VFX y acabado avanzado",
     ],
-    precio: { desde: "$2,000", hasta: "$10,000", nota: "proyecto cerrado según brief — vs. $10,000 – $100,000+ de un comercial tradicional" },
+    // Sin monto publicado, como el resto del catálogo.
+    // Antes: desde $2,000 hasta $10,000 (proyecto cerrado según brief).
+    precio: null,
+    stack: ["Higgsfield", "Kling 3.0", "Seedance 2.0", "Nano Banana Pro", "ElevenLabs", "Suno", "CapCut Pro", "DaVinci Resolve"],
     tags: ["Spot TV", "Cinemática 4K", "Plano por plano", "Proyecto cerrado"],
     destacado: true,
   },
@@ -133,17 +142,18 @@ export const SERVICIOS: Servicio[] = [
     id: "paginas-web",
     accentRgb: "0,169,196",
     categoria: "Web",
-    title: "Desarrollo Web, SEO y SEM",
-    tagline: "Una web que carga rápido, aparece en Google y termina en una conversación de venta.",
+    title: "Desarrollo Web, SEO, SEM y Marketplace",
+    tagline: "Que te encuentren donde ya te están buscando: en Google, en tu web y en el marketplace donde compran.",
     problema:
-      "O tu web existe y nadie llega, o llegan y no escriben. En ambos casos estás pagando hosting por un folleto: se ve bien, no vende, y cada mes que pasa tu competencia se queda con las búsquedas que deberían ser tuyas.",
-    desc: "Construimos el sitio con estándar visual de agencia, lo optimizamos para posicionar orgánicamente y activamos campañas de búsqueda pagada para que entre tráfico calificado desde la primera semana. El objetivo no es que la web se vea bien: es que la gente que ya está buscando lo que vendes te encuentre y te escriba.",
+      "O tu web existe y nadie llega, o llegan y no escriben. En ambos casos estás pagando hosting por un folleto: se ve bien, no vende, y cada mes que pasa tu competencia se queda con las búsquedas que deberían ser tuyas. Y si vendes producto, el problema se duplica: tu ficha en Mercado Libre o Falabella compite contra veinte iguales, se lleva todo el que sale primero, y ahí tampoco apareces.",
+    desc: "Construimos el sitio con estándar visual de agencia, lo optimizamos para posicionar orgánicamente y activamos campañas de búsqueda pagada para que entre tráfico calificado desde la primera semana. Y si vendes producto, llevamos el mismo trabajo a los marketplaces, donde la intención de compra ya está: ficha optimizada para el buscador interno, fotos que ganan el clic y campañas dentro de la plataforma. El objetivo no es que la web se vea bien: es que la gente que ya está buscando lo que vendes te encuentre y te compre.",
     resultado: [
       "Un sitio que carga en menos de dos segundos en celular",
       "Presencia orgánica en las búsquedas que traen clientes, no visitas vacías",
       "Tráfico calificado entrando desde Google Ads desde el primer mes",
-      "Cada visita con un camino claro hacia WhatsApp o formulario",
-      "Reportes donde ves de dónde vino cada contacto",
+      "Fichas de producto en la primera pantalla del marketplace, no en la página cuatro",
+      "Cada visita con un camino claro hacia WhatsApp, formulario o carrito",
+      "Reportes donde ves de dónde vino cada contacto y cada venta",
     ],
     incluye: [
       "Diseño y desarrollo completo, publicado en tu dominio",
@@ -152,25 +162,30 @@ export const SERVICIOS: Servicio[] = [
       "SEO técnico y on-page (estructura, metadatos, indexación)",
       "Investigación de palabras clave y contenido optimizado",
       "Campañas SEM en Google Ads con seguimiento de conversiones",
+      "Publicación y optimización de fichas en marketplaces (Mercado Libre, Falabella, Ripley, Amazon)",
+      "Fotos, títulos y descripciones de producto escritos para el buscador interno de cada marketplace",
+      "Campañas de Product Ads dentro del marketplace con seguimiento de ventas",
       "Textos orientados a conversión y contacto directo por WhatsApp",
       "Reportes mensuales de posicionamiento y rendimiento",
     ],
     proceso: [
       { paso: "Estrategia y estructura", texto: "Objetivo del sitio, arquitectura de contenido e investigación de las palabras clave que de verdad traen clientes." },
       { paso: "Diseño, desarrollo y SEO", texto: "Construcción visual y técnica con el posicionamiento incorporado desde el código, no parchado después." },
-      { paso: "Lanzamiento y SEM", texto: "Publicación, campañas de búsqueda activas, medición de conversiones y optimización mes a mes." },
+      { paso: "Lanzamiento, SEM y marketplace", texto: "Publicación, campañas de búsqueda activas, fichas de producto en los marketplaces que te convienen, medición de conversiones y optimización mes a mes." },
     ],
     paraQuien:
-      "Negocios cuyos clientes buscan en Google antes de comprar: servicios profesionales, B2B, retail especializado, inmobiliaria, salud, educación.",
+      "Negocios cuyos clientes buscan antes de comprar: servicios profesionales, B2B, retail especializado, inmobiliaria, salud, educación. Y marcas de producto que ya venden —o quieren empezar a vender— en Mercado Libre, Falabella o Amazon.",
     factores: [
       "Número de páginas y secciones del sitio",
       "Catálogo o e-commerce vs. sitio institucional",
       "Integraciones (CRM, pasarela de pago, reservas)",
       "Alcance del trabajo de SEO y competencia del sector",
       "Presupuesto y número de campañas SEM a gestionar",
+      "Cantidad de fichas de producto y marketplaces a gestionar",
     ],
     precio: null,
-    tags: ["Landing pages", "Sitios corporativos", "SEO", "Google Ads"],
+    stack: ["Next.js", "Tailwind CSS", "Vercel", "Google Search Console", "Google Ads", "Google Analytics 4", "Mercado Libre", "Falabella Seller"],
+    tags: ["Landing pages", "Sitios corporativos", "SEO", "Google Ads", "Marketplace"],
   },
   {
     n: "04",
@@ -210,6 +225,7 @@ export const SERVICIOS: Servicio[] = [
       "Cantidad y nivel de acabado de los mockups",
     ],
     precio: null,
+    stack: ["Adobe Illustrator", "Adobe Photoshop", "Nano Banana Pro", "Higgsfield", "Figma"],
     tags: ["Diseño de empaque", "Mockups", "Etiquetas", "Línea de producto"],
   },
   {
@@ -251,6 +267,7 @@ export const SERVICIOS: Servicio[] = [
       "Piezas de gran formato o producción física BTL",
     ],
     precio: null,
+    stack: ["Nano Banana Pro", "Higgsfield", "Adobe Photoshop", "Adobe Illustrator", "Figma"],
     tags: ["Key visual", "Campañas", "BTL", "Vía pública"],
   },
   {
@@ -292,6 +309,7 @@ export const SERVICIOS: Servicio[] = [
       "Nivel de automatización de la venta (informar vs. cerrar)",
     ],
     precio: null,
+    stack: ["n8n", "Claude API", "WhatsApp Business API", "Supabase", "Railway", "Google Calendar"],
     tags: ["WhatsApp", "Atención 24/7", "Ventas", "IA entrenada"],
   },
   {
@@ -332,6 +350,7 @@ export const SERVICIOS: Servicio[] = [
       "Complejidad de las reglas de segmentación",
     ],
     precio: null,
+    stack: ["Apollo", "Google Sheets", "Supabase", "n8n", "Notion"],
     tags: ["Leads", "CRM", "Segmentación", "Integración"],
   },
   {
@@ -373,6 +392,7 @@ export const SERVICIOS: Servicio[] = [
       "Gestión mensual continua o montaje de una sola vez",
     ],
     precio: null,
+    stack: ["n8n", "Gmail API", "Notion", "Google Sheets"],
     tags: ["Secuencias", "Automatización", "Segmentación", "Reportes"],
   },
   {
@@ -416,6 +436,7 @@ export const SERVICIOS: Servicio[] = [
       "Acompañamiento en la ejecución posterior",
     ],
     precio: null,
+    stack: ["Notion", "Meta Ads", "Google Analytics 4", "Looker Studio"],
     tags: ["Go-To-Market", "Sales marketing", "Embudo", "Posicionamiento"],
   },
   {
@@ -458,6 +479,7 @@ export const SERVICIOS: Servicio[] = [
       "Nivel de medición e integración de datos",
     ],
     precio: null,
+    stack: ["Meta Ads", "Google Ads", "TikTok Ads", "Notion", "Looker Studio", "Higgsfield"],
     tags: ["360°", "Pauta", "Multicanal", "Medición"],
   },
   {
@@ -499,6 +521,7 @@ export const SERVICIOS: Servicio[] = [
       "Nivel de involucramiento en la ejecución",
     ],
     precio: null,
+    stack: ["Notion", "Google Analytics 4", "Looker Studio", "Meta Ads"],
     tags: ["Auditoría", "Asesoría", "Sesiones", "Dirección"],
   },
   {
@@ -540,6 +563,7 @@ export const SERVICIOS: Servicio[] = [
       "Cantidad de piezas editadas post-evento",
     ],
     precio: null,
+    stack: ["Notion", "CapCut Pro", "Adobe Premiere", "ElevenLabs"],
     tags: ["Concepto", "Ambientación", "Cobertura", "After movie"],
   },
   {
@@ -583,6 +607,7 @@ export const SERVICIOS: Servicio[] = [
       "Alcance de la cesión de derechos",
     ],
     precio: null,
+    stack: ["Suno", "ElevenLabs", "Ableton Live", "Adobe Audition"],
     tags: ["Jingles", "Sound logo", "Score", "Mezcla"],
   },
 ];

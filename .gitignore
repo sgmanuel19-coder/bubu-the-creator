@@ -7,3 +7,6 @@ out
 .env*.local
 
 .vercel
+
+# Borradores de trabajo, no forman parte del sitio
+_scratch/

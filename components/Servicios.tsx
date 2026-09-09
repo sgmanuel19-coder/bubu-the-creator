@@ -295,6 +295,26 @@ function ServicioModal({ s, onClose }: { s: Servicio; onClose: () => void }) {
           </div>
         )}
 
+        {/* Stack — cinta que corre. No son entregables: es con qué está
+            hecho el servicio. Se repite tres veces y la animación recorre
+            un tercio, así el bucle no deja hueco ni corte visible. */}
+        {s.stack && s.stack.length > 0 && (
+          <div className="sv-m-sec">
+            <span className="sv-m-label">El stack detrás</span>
+            <div className="sv-stack">
+              <div className="sv-stack-track">
+                {[0, 1, 2].map((rep) =>
+                  s.stack!.map((h) => (
+                    <span key={`${rep}-${h}`} className="sv-stack-item" aria-hidden={rep > 0}>
+                      {h}
+                    </span>
+                  ))
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* CTA */}
         <div className="sv-m-cta">
           <a className="sv-btn" href={waLink(s.title)} target="_blank" rel="noopener noreferrer">

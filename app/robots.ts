@@ -15,11 +15,19 @@ export default function robots(): MetadataRoute.Robots {
       },
       // Permitir todo lo demás: GPTBot, ChatGPT-User, anthropic-ai, Claude-Web,
       // OAI-SearchBot, PerplexityBot, Google-Extended, Googlebot, Bingbot.
-      // /trap-bot es un honeypot — nunca debe indexarse.
+      // Los disallow son rutas sin valor de búsqueda: portal privado,
+      // administración, endpoints y el honeypot. Gastan crawl budget.
       {
         userAgent: '*',
         allow: '/',
-        disallow: '/trap-bot',
+        disallow: [
+          '/trap-bot',
+          '/ia-content-system',
+          '/taller/admin',
+          '/noticias/baja',
+          '/noticias/buscar',
+          '/api/',
+        ],
       },
     ],
     sitemap: 'https://www.resueltoagency.com/sitemap.xml',

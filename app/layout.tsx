@@ -5,6 +5,11 @@ import { SITE } from "@/lib/constants";
 import LandingChrome from "@/components/LandingChrome";
 import BeamsBackground from "@/components/ui/beams-background";
 import { Analytics } from "@vercel/analytics/react";
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoScript,
+} from "@/components/GoogleTagManager";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -71,7 +76,12 @@ export const metadata: Metadata = {
     images: ["/opengraph-image"],
   },
   verification: {
-    google: "EOLyAFsuuXHf1BIxB1N6Z2mJpf0Py09NkeO6-QYRqGw",
+    // Dos propiedades de Search Console verificadas contra el mismo sitio.
+    // La primera ya estaba activa: quitarla desverificaría esa propiedad.
+    google: [
+      "EOLyAFsuuXHf1BIxB1N6Z2mJpf0Py09NkeO6-QYRqGw",
+      "qTqu-d6Nrf6pTcf4riM7137dqlupMmxtwRpk80QUyBc",
+    ],
   },
   icons: {
     icon: "/images/logo-mark.png",
@@ -164,10 +174,13 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        <GoogleTagManager />
+        <GoogleAnalytics />
       </head>
       <body
         className={`${poppins.variable} ${montserrat.variable} ${inter.variable} bg-bg text-cream antialiased`}
       >
+        <GoogleTagManagerNoScript />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-neon-green focus:text-bg focus:rounded focus:font-semibold focus:text-sm"

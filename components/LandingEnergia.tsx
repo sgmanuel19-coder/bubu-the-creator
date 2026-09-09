@@ -4,6 +4,14 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { SITE } from "@/lib/constants";
+import { SERVICIOS } from "@/lib/servicios";
+import {
+  SquishyServices,
+  FondoCirculos,
+  FondoBloques,
+  FondoCapas,
+  type SquishyItem,
+} from "@/components/ui/squishy-services";
 import LoopVideo from "@/components/LoopVideo";
 import MetodoVisual from "@/components/MetodoVisual";
 import ProcesoVisual from "@/components/ProcesoVisual";
@@ -27,6 +35,50 @@ const waLink = () => `${SITE.links.whatsapp}?text=${encodeURIComponent(WA_MSG)}`
    grabado. Cuando exista una versión específica para el sector energía basta
    con cambiar este ID — no hay que tocar nada más. */
 const VSL_ID = "30bVmigalKQ";
+
+/* Los tres servicios de la salida al catálogo. La bajada sale del catálogo
+   real (`lib/servicios.ts`) para no duplicar copy; el título es corto a
+   propósito porque en la tarjeta va en tipografía grande. Sin precios: acá
+   la tarjeta invita a ver el servicio, no a comparar montos. */
+const SERVICIOS_CARDS: SquishyItem[] = [
+  {
+    etiqueta: "Web",
+    titulo: "Sitio web",
+    descripcion:
+      SERVICIOS.find((s) => s.id === "paginas-web")?.tagline ?? "",
+    cta: "Ver servicio",
+    href: "/servicios",
+    /* Crema de marca. Es el único fondo claro, por eso lleva tono "claro":
+       la tarjeta invierte texto, botón y figuras sola. */
+    fondo: "bg-[#E8E2C4]",
+    tono: "claro",
+    Fondo: FondoCirculos,
+  },
+  {
+    etiqueta: "Campañas",
+    titulo: "Campañas integrales",
+    descripcion:
+      SERVICIOS.find((s) => s.id === "campanas-integrales")?.tagline ?? "",
+    cta: "Ver servicio",
+    href: "/servicios",
+    fondo: "bg-[#4A3A24]",
+    tono: "oscuro",
+    Fondo: FondoBloques,
+  },
+  {
+    etiqueta: "Diseño",
+    titulo: "Diseño",
+    descripcion:
+      SERVICIOS.find((s) => s.id === "diseno-ia-btl")?.tagline ?? "",
+    cta: "Ver servicio",
+    href: "/servicios",
+    /* Azul de marca (#1A80FF) bajado un paso: en su tono original el texto
+       crema quedaba en 3,3:1 y así pasa 5:1. */
+    fondo: "bg-[#1668D6]",
+    tono: "oscuro",
+    Fondo: FondoCapas,
+  },
+];
 
 /* Clips verificados uno por uno del rubro energía e industria. Las etiquetas de
    `lib/portafolio.ts` no dicen de qué trata cada video, así que esta lista se
@@ -449,8 +501,21 @@ export default function LandingEnergia() {
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 pb-16 pt-32 md:pb-20 md:pt-40">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <LoopVideo src="/videos/web/hero-bg.mp4" className="opacity-25" />
-          <div className="absolute inset-0 bg-gradient-to-b from-bg/70 via-bg/85 to-bg" />
+          {/* Reel propio de minería, data center y solar. Va comprimido a
+              960×720 / CRF 33 (2,2 MB) y el póster pinta el primer fotograma
+              mientras carga.
+              El metraje es oscuro de origen (data center, solar al atardecer),
+              así que se sube brillo y contraste en CSS en vez de dejarlo a la
+              opacidad: bajarle el velo sin corregir el clip lo dejaba sucio. */}
+          <LoopVideo
+            src="/videos/web/hero-energia.mp4"
+            poster="/images/hero-energia-poster.jpg"
+            className="opacity-70 brightness-125 contrast-110 saturate-110"
+          />
+          {/* El degradado ya no tapa: solo funde el pie de la sección con el
+              fondo y deja una capa mínima arriba para que el titular no pierda
+              contraste sobre las tomas más claras (la del tajo abierto). */}
+          <div className="absolute inset-0 bg-gradient-to-b from-bg/35 via-bg/55 to-bg" />
         </div>
         <div
           aria-hidden="true"
@@ -901,6 +966,39 @@ export default function LandingEnergia() {
             </div>
           </motion.div>
         </div>
+      </section>
+
+      {/* ── MÁS SERVICIOS ────────────────────────────────────
+          Salida lateral para quien llegó por el canal de energía pero
+          necesita otra cosa: en vez de perderlo, lo mandamos al catálogo
+          completo. Va deliberadamente compacta — no debe competir con el
+          CTA del diagnóstico, que es el objetivo de esta landing. ── */}
+      <section className="border-b border-cream/10 px-6 py-16 md:py-20">
+        <div className="container-base mx-auto max-w-5xl">
+          <motion.div className="mb-8 flex flex-wrap items-end justify-between gap-5" {...fadeUp}>
+            <div>
+              <span className="font-brand text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-blue">
+                Más servicios
+              </span>
+              <h3 className="mt-3 font-display text-2xl font-bold leading-tight text-cream md:text-3xl">
+                Resuelto no es solo video.
+              </h3>
+            </div>
+            <a
+              href="/servicios"
+              className="group/mas inline-flex items-center gap-2 rounded-full border border-cream/20 px-5 py-2.5 font-brand text-[11px] font-semibold uppercase tracking-wider text-cream transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-blue hover:bg-brand-blue/10 hover:text-brand-blue"
+            >
+              Ver los {SERVICIOS.length}
+              <span aria-hidden="true" className="transition-transform duration-300 group-hover/mas:translate-x-1">
+                →
+              </span>
+            </a>
+          </motion.div>
+        </div>
+
+        <motion.div className="mt-2" {...fadeUp}>
+          <SquishyServices items={SERVICIOS_CARDS} />
+        </motion.div>
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────── */}

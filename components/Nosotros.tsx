@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SITE } from "@/lib/constants";
-import { SOCIOS, MANIFIESTO, type Socio } from "@/lib/nosotros";
+import { SOCIOS_VISIBLES, MANIFIESTO, type Socio } from "@/lib/nosotros";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -42,7 +42,7 @@ function SocioFicha({ s, index }: { s: Socio; index: number }) {
       transition={{ duration: 0.7, delay: index * 0.1, ease: EASE }}
     >
       {/* índice */}
-      <span className="ns-ficha-n">{s.n}<i>/0{SOCIOS.length}</i></span>
+      <span className="ns-ficha-n">{s.n}<i>/0{SOCIOS_VISIBLES.length}</i></span>
 
       {/* retrato — recuadro técnico */}
       <div className="ns-ficha-foto">
@@ -153,7 +153,7 @@ export default function Nosotros() {
         </div>
 
         <div className="ns-fichas">
-          {SOCIOS.map((s, i) => <SocioFicha key={s.id} s={s} index={i} />)}
+          {SOCIOS_VISIBLES.map((s, i) => <SocioFicha key={s.id} s={s} index={i} />)}
         </div>
       </section>
 

@@ -1,5 +1,16 @@
 "use client";
 
+/* ── Capas ────────────────────────────────────────────────────────────
+   El cursor va deliberadamente por encima de TODO (2147483644-647, el
+   tope de z-index). No es una capa de UI más: como el sitio esconde el
+   cursor nativo con `* { cursor: none }`, cualquier elemento que quede
+   por encima deja al visitante sin ningún puntero visible.
+
+   Eso pasaba con el banner de cookies, que estaba en z-index 9999 — el
+   mismo que tenía la punta del cursor. Al empatar ganaba el banner por
+   orden en el DOM, y sobre el banner no se veía el mouse. Si mañana se
+   agrega otro elemento flotante, no hace falta tocar esto. */
+
 import { useEffect, useRef } from "react";
 
 export default function CursorTrail() {
@@ -57,7 +68,8 @@ export default function CursorTrail() {
         background: radial-gradient(circle, ${color} 0%, transparent 100%);
         box-shadow: 0 0 ${size * 2}px ${glow1}, 0 0 ${size * 4}px ${glow2};
         pointer-events: none;
-        z-index: 9996;
+        /* Ver nota de capas abajo: el cursor va por encima de toda la UI. */
+        z-index: 2147483644;
         transform: translate(${x - size / 2}px, ${y - size / 2}px) scale(1);
         transition: transform ${duration}ms cubic-bezier(0.1,0.8,0.2,1), opacity ${duration}ms ease, width ${duration}ms ease, height ${duration}ms ease;
         will-change: transform, opacity;
@@ -137,7 +149,7 @@ export default function CursorTrail() {
       {/* 1. Logo cursor — arrow-shaped, replaces system cursor */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] opacity-0"
+        className="fixed top-0 left-0 pointer-events-none z-[2147483647] opacity-0"
         style={{
           willChange: "transform",
           transition: "opacity 0.2s ease",
@@ -160,7 +172,7 @@ export default function CursorTrail() {
       {/* 2. Lagging ring — cycles green→purple via CSS */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9998] opacity-0"
+        className="fixed top-0 left-0 pointer-events-none z-[2147483646] opacity-0"
         style={{
           width: 28,
           height: 28,
@@ -174,7 +186,7 @@ export default function CursorTrail() {
       {/* 3. Large blurry glow orb — neon purple */}
       <div
         ref={glowRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9997] opacity-0"
+        className="fixed top-0 left-0 pointer-events-none z-[2147483645] opacity-0"
         style={{
           width: 90,
           height: 90,

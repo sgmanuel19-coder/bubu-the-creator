@@ -10,9 +10,12 @@ const devEval = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
 const csp = [
   // www.youtube.com: la IFrame API del reproductor del portal, que sirve
   // para marcar una lección como vista solo cuando de verdad se reprodujo.
-  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${devEval} blob: https://connect.facebook.net https://va.vercel-scripts.com https://www.youtube.com`,
+  // www.googletagmanager.com: contenedor GTM-NSGQG23V, que a su vez carga
+  // GA4 desde ese mismo host. www.google-analytics.com cubre el gtag directo.
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${devEval} blob: https://connect.facebook.net https://va.vercel-scripts.com https://www.youtube.com https://www.googletagmanager.com https://www.google-analytics.com`,
   "worker-src 'self' blob:",
-  "frame-src https://www.instagram.com https://www.youtube.com https://www.youtube-nocookie.com https://www.tiktok.com https://drive.google.com",
+  // googletagmanager.com en frame-src: el <noscript> de GTM es un iframe.
+  "frame-src https://www.instagram.com https://www.youtube.com https://www.youtube-nocookie.com https://www.tiktok.com https://drive.google.com https://www.googletagmanager.com",
   "frame-ancestors 'self'",
   "object-src 'none'",
   "base-uri 'self'",

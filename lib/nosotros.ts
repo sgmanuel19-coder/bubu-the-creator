@@ -15,6 +15,9 @@ export type Socio = {
   photo: string | null;
   bio: string;
   marcas: string;
+  // Oculta al socio del sitio sin borrar su ficha. Para volver a mostrarlo,
+  // basta con quitar la línea `oculto: true` de su entrada.
+  oculto?: boolean;
 };
 
 export const SOCIOS: Socio[] = [
@@ -52,6 +55,10 @@ export const SOCIOS: Socio[] = [
     marcas: "Havas · Hexing Group · Tinbet · Novum Solar · Niko International · y muchas más",
   },
 ];
+
+// Lo que realmente se pinta en /sobre-mi. El conteo del índice ("01 / 0N")
+// sale de acá, así que se ajusta solo al ocultar o mostrar a alguien.
+export const SOCIOS_VISIBLES = SOCIOS.filter((s) => !s.oculto);
 
 // Tesis de la agencia.
 export const MANIFIESTO = [
