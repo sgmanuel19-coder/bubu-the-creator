@@ -8,6 +8,7 @@ import {
   useMotionValue,
   useSpring,
   useMotionValueEvent,
+  useReducedMotion,
   type MotionValue,
 } from "framer-motion";
 
@@ -62,6 +63,10 @@ export function FlythroughIntro({ piezas, className }: Props) {
   const [montado, setMontado] = React.useState(false);
   React.useEffect(() => setMontado(true), []);
   const liviano = useLiviano();
+  /* Con movimiento reducido el CSS deja el vuelo como una grilla quieta.
+     Los clips seguian reproduciendose adentro, que es justo lo que la
+     preferencia pide evitar: aca quedan en el poster. */
+  const quieto = useReducedMotion() === true;
 
   /* En liviano las piezas van más separadas en profundidad: la banda visible
      es la misma, así que entran menos a la vez (≈11 en vez de ≈15) y con
@@ -113,6 +118,7 @@ export function FlythroughIntro({ piezas, className }: Props) {
               periodo={periodo}
               progreso={scrollYProgress}
               liviano={liviano}
+              quieto={quieto}
             />
           ))}
         </motion.div>
@@ -131,6 +137,7 @@ function Pieza({
   periodo,
   progreso,
   liviano,
+  quieto,
 }: {
   nombre: string;
   indice: number;
@@ -139,6 +146,7 @@ function Pieza({
   periodo: number;
   progreso: MotionValue<number>;
   liviano: boolean;
+  quieto: boolean;
 }) {
   /* Profundidad cíclica. Antes cada pieza cruzaba una sola vez, y como el
      recorrido termina cuando sale la última, sobre el final ya no quedaban
@@ -186,12 +194,12 @@ function Pieza({
   const bandaVideo = liviano ? -650 : -1450;
   const evaluar = React.useCallback(
     (v: number) => {
-      const conVideo = v > bandaVideo && v < Z_CERCA;
+      const conVideo = !quieto && v > bandaVideo && v < Z_CERCA;
       setVisible((prev) => (prev === conVideo ? prev : conVideo));
       const dentro = v > -2100 && v < Z_CERCA + 100;
       setEnCuadro((prev) => (prev === dentro ? prev : dentro));
     },
-    [bandaVideo]
+    [bandaVideo, quieto]
   );
 
   useMotionValueEvent(z, "change", evaluar);

@@ -1929,6 +1929,8 @@ body:has(.ics-root) .beams-bg{ display:none; }
   .pf-fly{ height:auto; }
   .pf-fly .fly-sticky{ position:static;height:auto;padding:20px 0 50px; }
   .pf-fly .fly-camara{ position:static;perspective:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:0 16px; }
-  .pf-fly .fly-pieza{ position:static;transform:none !important;opacity:1 !important;filter:none !important;margin:0;width:clamp(180px,30vw,300px); }
+  /* `visibility` tambien se fuerza: en el vuelo las piezas fuera de cuadro
+     se ocultan para no pintarlas, y aca todas forman parte de la grilla. */
+  .pf-fly .fly-pieza{ position:static;transform:none !important;opacity:1 !important;filter:none !important;visibility:visible !important;margin:0;width:clamp(180px,30vw,300px); }
   .pf-fly .fly-vineta{ display:none; }
 }
