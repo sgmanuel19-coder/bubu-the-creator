@@ -14,11 +14,9 @@ import {
 } from "@/components/ui/squishy-services";
 import LoopVideo from "@/components/LoopVideo";
 import MetodoVisual from "@/components/MetodoVisual";
-import ProcesoVisual from "@/components/ProcesoVisual";
 import {
   PanelSolar, Inversor, Bateria, Medidor, TorreElectrica, Casco,
   Videocaso, Vertical, ImagenIA, Stand, EnVivo, Entrevista, Foto,
-  Diagnostico, Guion, Camara, Entrega,
   Catalogo, SinRegistro, FeriaVacia, Reunion, Check, Cruz,
 } from "@/components/IconosEnergia";
 
@@ -390,83 +388,18 @@ const PROBLEMAS = [
   },
 ];
 
-const PASOS = [
-  {
-    n: "01",
-    icono: Diagnostico,
-    t: "Diagnóstico visual",
-    d: "20 minutos. Qué proyecto vale la pena contar, quién es tu vocero, qué se puede y qué no se puede filmar. Sales con un mapa de piezas, cierres o no cierres.",
-  },
-  {
-    n: "02",
-    icono: Guion,
-    t: "Preproducción",
-    d: "Guion, plan de rodaje, coordinación de accesos y permisos de seguridad. Definimos qué se resuelve con cámara y qué con IA.",
-  },
-  {
-    n: "03",
-    icono: Camara,
-    t: "Producción",
-    d: "Grabación en campo y en feria, entrevistas, fotos. Equipo reducido para no interferir con tu operación ni con tus clientes.",
-  },
-  {
-    n: "04",
-    icono: Entrega,
-    t: "Entrega",
-    d: "Edición, generación de piezas con IA, color y sonido. Recibes una carpeta organizada por formato y por uso, no un link suelto.",
-  },
-];
-
-/* Detalle operativo del servicio. Reemplaza a la tarjeta de precio: el monto
-   cambia según alcance, sector y ciudad, así que publicarlo cerraba
-   conversaciones antes de empezarlas. */
-const DETALLE = [
-  {
-    t: "Dirección estratégica y creativa",
-    d: "No recibes un proveedor que ejecuta pedidos. Definimos qué proyecto contar, con qué ángulo y para qué momento comercial.",
-  },
-  {
-    t: "Preproducción completa",
-    d: "Guion, storyboard, plan de rodaje, coordinación de accesos y permisos de seguridad con tu área de operaciones.",
-  },
-  {
-    t: "Producción en campo",
-    d: "Cámara profesional más equipo de celular para zonas restringidas. Equipo reducido, sin frenar tu operación.",
-  },
-  {
-    t: "Postproducción integral",
-    d: "Edición, generación de piezas con IA, corrección de color, sonido y musicalización.",
-  },
-  {
-    t: "Entrega por formato y uso",
-    d: "Carpeta organizada: horizontal para web y presentaciones, vertical para redes y pauta, cortes para WhatsApp comercial.",
-  },
-  {
-    t: "Ajustes definidos",
-    d: "Una ronda en estrategia y guion, hasta dos ajustes por pieza terminada. El alcance se cierra al inicio.",
-  },
-  {
-    t: "Cobertura y traslados",
-    d: "Lima Metropolitana incluida. Para obras, plantas o ferias fuera de Lima o del país, se cotizan pasajes y viáticos aparte.",
-  },
-  {
-    t: "Uso declarado de IA",
-    d: "Siempre te decimos qué elemento es generado. Nunca presentamos una simulación como si fuera registro real de tu obra.",
-  },
-];
-
 const FAQ = [
   {
     q: "¿Cuánto cuesta?",
-    a: "Depende del alcance: cuántas piezas al mes, si hay ferias en el calendario, cuántas sedes u obras hay que cubrir y en qué ciudad. Por eso no publicamos una tarifa fija — en el diagnóstico de 20 minutos definimos el alcance real y te enviamos la propuesta con el monto cerrado.",
+    a: "Depende del alcance: piezas al mes, ferias en el calendario, sedes u obras a cubrir y ciudad. En el diagnóstico de 20 minutos te enviamos la propuesta con el monto cerrado.",
   },
   {
     q: "¿Se nota que hay IA?",
-    a: "No, porque no se usa para simular la realidad sino para mostrar lo que la cámara no alcanza y para elevar lo que sí se grabó. Lo que es registro real se graba. Y siempre te decimos qué elemento es generado — nunca presentamos una simulación como si fuera una foto de tu obra.",
+    a: "No se usa para simular la realidad, sino para mostrar lo que la cámara no alcanza. Lo que es registro real se graba. Y siempre te decimos qué elemento es generado: nunca presentamos una simulación como si fuera una foto de tu obra.",
   },
   {
     q: "¿Y si estoy fuera de Lima?",
-    a: "El servicio se entrega igual. Lima Metropolitana está incluida; para obras, plantas o ferias fuera de Lima, o fuera del Perú, se cotizan los pasajes y viáticos aparte. Trabajamos con clientes en Perú, Colombia y Chile.",
+    a: "Lima Metropolitana está incluida. Fuera de Lima o del país se cotizan pasajes y viáticos aparte. Trabajamos en Perú, Colombia y Chile.",
   },
   {
     q: "¿Qué necesitan de mi lado?",
@@ -478,7 +411,7 @@ const FAQ = [
   },
   {
     q: "¿Por qué el mínimo de 3 meses?",
-    a: "Porque un video suelto se agota en seis semanas. El primer mes se construye la base, el segundo se afina el tono y el tercero ya sabemos qué funciona con tu mercado. Menos de eso es gastar, no invertir.",
+    a: "Un video suelto se agota en seis semanas. El primer mes construimos la base, el segundo afinamos el tono y el tercero ya sabemos qué funciona en tu mercado.",
   },
 ];
 
@@ -552,8 +485,8 @@ export default function LandingEnergia() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.18 }}
           >
             Videocasos y piezas comerciales potenciadas con IA que ponen al frente tus
-            capacidades reales, tus resultados medibles y el impacto de lo que ejecutas.
-            Con el alcance que una ficha técnica y un PDF nunca te van a dar.
+            capacidades reales y tus resultados medibles. El alcance que una ficha técnica
+            no te da.
           </motion.p>
 
           <motion.div
@@ -588,8 +521,8 @@ export default function LandingEnergia() {
           className="container-base mx-auto mt-8 max-w-5xl px-6 text-center font-body text-sm text-muted"
           {...fadeUp}
         >
-          Piezas producidas por Resuelto para clientes de energía e industria: voceros
-          técnicos, producto generado con IA y registro en obra.
+          Piezas para clientes de energía e industria: voceros técnicos, producto generado
+          con IA y registro en obra.
         </motion.p>
       </section>
 
@@ -599,7 +532,7 @@ export default function LandingEnergia() {
           <Head
             n="01 · El sistema"
             title="Dos bloques, todos los meses."
-            sub="Uno construye tu autoridad y te sirve todo el año. El otro convierte cada feria y cada obra en material que puedes usar la misma semana."
+            sub="Uno construye tu autoridad todo el año. El otro convierte cada feria y cada obra en material que usas la misma semana."
           />
 
           <div className="grid gap-5 lg:grid-cols-2">
@@ -639,8 +572,8 @@ export default function LandingEnergia() {
           </div>
 
           <motion.p className="mt-6 font-body text-sm text-muted" {...fadeUp}>
-            Incluye dirección estratégica y creativa, una sesión mensual de revisión con tu
-            equipo, y el banco de assets organizado y entregado.
+            Incluye dirección estratégica y creativa, preproducción, postproducción y
+            ajustes definidos por pieza. Todo entregado organizado por formato y por uso.
           </motion.p>
         </div>
       </section>
@@ -663,8 +596,7 @@ export default function LandingEnergia() {
             className="mx-auto mt-7 max-w-xl text-center font-body text-sm leading-relaxed text-muted"
             {...fadeUp}
           >
-            Cómo se construye una pieza que mezcla grabación real con IA, y por qué eso
-            cambia lo que puedes mostrarle a un cliente técnico.
+            Cómo se construye una pieza que mezcla grabación real con IA.
           </motion.p>
         </div>
       </section>
@@ -688,15 +620,11 @@ export default function LandingEnergia() {
             <span className="text-brand-blue">potenciadas con IA.</span>
           </motion.h2>
           <motion.p className="mx-auto mt-8 max-w-2xl font-body text-base leading-relaxed text-muted md:text-lg" {...fadeUp}>
-            Grabamos tu operación como es: tu planta, tu obra, tu equipo, tu producto
-            instalado. Eso es lo que da verdad a la pieza y no se reemplaza con nada.
-          </motion.p>
-          <motion.p className="mx-auto mt-5 max-w-2xl font-body text-base leading-relaxed text-cream md:text-lg" {...fadeUp}>
-            Después complementamos ese material con contenido generativo con IA — el corte
-            por dentro del equipo, la escala real de la instalación, el plano que ninguna
-            cámara podía tomar. El resultado es <strong className="font-semibold">una sola pieza,
-            de un impacto que ninguna de las dos técnicas alcanza por separado</strong>, y que
-            deja tus mejores capacidades al frente.
+            Grabamos tu operación como es —tu planta, tu obra, tu equipo, tu producto
+            instalado— y eso{" "}
+            <strong className="font-semibold text-cream">se complementa con IA generativa</strong>:
+            el corte por dentro del equipo, la escala real, el plano que ninguna cámara
+            podía tomar.
           </motion.p>
 
           {/* El método dibujado. Un diagrama propio lo explica mejor que un
@@ -832,47 +760,49 @@ export default function LandingEnergia() {
             className="mx-auto mt-8 max-w-2xl text-center font-body text-sm leading-relaxed text-muted"
             {...fadeUp}
           >
-            Si tu empresa vende equipos técnicos que alguien tiene que instalar, operar y
-            mantener, hablamos tu idioma. No hacemos moda, ni restaurantes, ni retail.
+            Si vendes equipos técnicos que alguien tiene que instalar y mantener, hablamos
+            tu idioma. No hacemos moda, ni restaurantes, ni retail.
           </motion.p>
         </div>
       </section>
 
-      {/* ── PROCESO ──────────────────────────────────────── */}
-      <section className="border-b border-cream/10 px-6 py-20 md:py-28">
+      {/* ── MÁS SERVICIOS ────────────────────────────────────
+          Salida lateral para quien llegó por el canal de energía pero
+          necesita otra cosa: en vez de perderlo, lo mandamos al catálogo
+          completo. Va antes del filtro y del cierre: quien no encaja con el
+          servicio de energía encuentra la salida sin llegar al final. ── */}
+      <section className="border-b border-cream/10 px-6 py-16 md:py-20">
         <div className="container-base mx-auto max-w-5xl">
-          <Head n="05 · Cómo funciona" title="Cuatro etapas. Sin misterio." />
-
-          <motion.div className="mb-12 hidden sm:block" {...fadeUp}>
-            <ProcesoVisual className="w-full max-w-3xl" />
+          <motion.div className="mb-8 flex flex-wrap items-end justify-between gap-5" {...fadeUp}>
+            <div>
+              <span className="font-brand text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-blue">
+                Más servicios
+              </span>
+              <h3 className="mt-3 font-display text-2xl font-bold leading-tight text-cream md:text-3xl">
+                Resuelto no es solo video.
+              </h3>
+            </div>
+            <a
+              href="/servicios"
+              className="group/mas inline-flex items-center gap-2 rounded-full border border-cream/20 px-5 py-2.5 font-brand text-[11px] font-semibold uppercase tracking-wider text-cream transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-blue hover:bg-brand-blue/10 hover:text-brand-blue"
+            >
+              Ver los {SERVICIOS.length}
+              <span aria-hidden="true" className="transition-transform duration-300 group-hover/mas:translate-x-1">
+                →
+              </span>
+            </a>
           </motion.div>
-
-          <div className="grid gap-8 sm:grid-cols-2">
-            {PASOS.map((p, i) => (
-              <motion.div
-                key={p.n}
-                className="group border-l border-cream/15 pl-6 transition-colors duration-300 hover:border-brand-blue"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0, margin: "-60px" }}
-                transition={{ duration: 0.6, ease: EASE, delay: i * 0.08 }}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="font-display text-3xl font-bold text-brand-blue/40">{p.n}</span>
-                  <p.icono className="h-6 w-6 text-brand-blue transition-transform duration-300 group-hover:scale-110" />
-                </div>
-                <h3 className="mt-2 font-display text-lg font-semibold text-cream md:text-xl">{p.t}</h3>
-                <p className="mt-2.5 font-body text-sm leading-relaxed text-muted md:text-base">{p.d}</p>
-              </motion.div>
-            ))}
-          </div>
         </div>
+
+        <motion.div className="mt-2" {...fadeUp}>
+          <SquishyServices items={SERVICIOS_CARDS} />
+        </motion.div>
       </section>
 
       {/* ── FILTRO ───────────────────────────────────────── */}
       <section className="border-b border-cream/10 px-6 py-20 md:py-28">
         <div className="container-base mx-auto max-w-5xl">
-          <Head n="06 · Filtro" title="Esto no es para todos." />
+          <Head n="05 · Filtro" title="Esto no es para todos." />
           <div className="grid gap-8 md:grid-cols-2">
             <motion.div className="rounded-2xl border border-brand-blue/25 bg-surface p-8" {...fadeUp}>
               <h3 className="font-display text-lg font-bold text-brand-blue">Sí es para ti si</h3>
@@ -918,48 +848,23 @@ export default function LandingEnergia() {
         </div>
       </section>
 
-      {/* ── EL SERVICIO EN DETALLE ───────────────────────────
-          Reemplaza a la tarjeta de precio. El monto cambia por alcance, sector
-          y ciudad, así que publicarlo cerraba conversaciones antes de
-          empezarlas: aquí se explica qué entra, y el número sale del
-          diagnóstico. ── */}
+      {/* ── LA INVERSIÓN ─────────────────────────────────────
+          Sin tarifa publicada: el monto cambia por alcance, sector y ciudad, y
+          publicarlo cerraba conversaciones antes de empezarlas. ── */}
       <section className="border-b border-cream/10 px-6 py-20 md:py-28">
         <div className="container-base mx-auto max-w-5xl">
-          <Head
-            n="07 · El servicio en detalle"
-            title="Qué entra, exactamente."
-            sub="Un servicio mensual con permanencia mínima de tres meses, dirigido de punta a punta. Esto es lo que incluye más allá de los entregables."
-          />
-
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10 sm:grid-cols-2">
-            {DETALLE.map((d) => (
-              <motion.div key={d.t} className="group bg-surface p-6 transition-colors duration-300 hover:bg-surface-2 md:p-7" {...fadeUp}>
-                <h3 className="flex items-start gap-3 font-display text-base font-semibold text-cream">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue transition-transform duration-300 group-hover:scale-125" />
-                  {d.t}
-                </h3>
-                <p className="mt-2.5 pl-7 font-body text-sm leading-relaxed text-muted">{d.d}</p>
-              </motion.div>
-            ))}
-          </div>
-
           <motion.div
-            className="mt-6 rounded-2xl border border-brand-blue/30 bg-surface-2 p-8 md:p-10"
+            className="rounded-2xl border border-brand-blue/30 bg-surface-2 p-8 md:p-10"
             {...fadeUp}
           >
             <h3 className="font-display text-xl font-bold text-cream md:text-2xl">
               La inversión se define por alcance.
             </h3>
             <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-muted">
-              No publicamos una tarifa fija porque no la hay: cambia según cuántas piezas
-              necesitas al mes, si hay ferias en tu calendario, cuántas sedes u obras hay
-              que cubrir y en qué ciudad están. Cada bloque también se puede contratar por
-              separado — una feria puntual, un videocaso para una licitación, un banco de
-              imágenes para el catálogo.
-            </p>
-            <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-cream">
-              En el diagnóstico de 20 minutos definimos el alcance real y te enviamos la
-              propuesta con el monto cerrado. Sin sorpresas después.
+              Cambia según cuántas piezas necesitas al mes, si hay ferias en tu calendario y
+              cuántas sedes u obras hay que cubrir. Cada bloque también se contrata por
+              separado. En el diagnóstico cerramos el alcance y te llega la propuesta con el
+              monto.
             </p>
             <div className="mt-8">
               <Cta label="Pedir mi propuesta" />
@@ -968,43 +873,10 @@ export default function LandingEnergia() {
         </div>
       </section>
 
-      {/* ── MÁS SERVICIOS ────────────────────────────────────
-          Salida lateral para quien llegó por el canal de energía pero
-          necesita otra cosa: en vez de perderlo, lo mandamos al catálogo
-          completo. Va deliberadamente compacta — no debe competir con el
-          CTA del diagnóstico, que es el objetivo de esta landing. ── */}
-      <section className="border-b border-cream/10 px-6 py-16 md:py-20">
-        <div className="container-base mx-auto max-w-5xl">
-          <motion.div className="mb-8 flex flex-wrap items-end justify-between gap-5" {...fadeUp}>
-            <div>
-              <span className="font-brand text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-blue">
-                Más servicios
-              </span>
-              <h3 className="mt-3 font-display text-2xl font-bold leading-tight text-cream md:text-3xl">
-                Resuelto no es solo video.
-              </h3>
-            </div>
-            <a
-              href="/servicios"
-              className="group/mas inline-flex items-center gap-2 rounded-full border border-cream/20 px-5 py-2.5 font-brand text-[11px] font-semibold uppercase tracking-wider text-cream transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-blue hover:bg-brand-blue/10 hover:text-brand-blue"
-            >
-              Ver los {SERVICIOS.length}
-              <span aria-hidden="true" className="transition-transform duration-300 group-hover/mas:translate-x-1">
-                →
-              </span>
-            </a>
-          </motion.div>
-        </div>
-
-        <motion.div className="mt-2" {...fadeUp}>
-          <SquishyServices items={SERVICIOS_CARDS} />
-        </motion.div>
-      </section>
-
       {/* ── FAQ ──────────────────────────────────────────── */}
       <section className="border-b border-cream/10 px-6 py-20 md:py-28">
         <div className="container-base mx-auto max-w-3xl">
-          <Head n="08 · Preguntas" title="Lo que siempre preguntan." />
+          <Head n="06 · Preguntas" title="Lo que siempre preguntan." />
           <div className="space-y-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10">
             {FAQ.map((f) => (
               <details key={f.q} className="group bg-surface">
@@ -1046,9 +918,8 @@ export default function LandingEnergia() {
             ya está siendo cotizado.
           </motion.h2>
           <motion.p className="mx-auto mt-6 max-w-xl font-body text-base leading-relaxed text-muted md:text-lg" {...fadeUp}>
-            Y quien lo gane no va a ser necesariamente el que tenga el mejor equipo, sino el
-            que lo sepa demostrar. Agenda 20 minutos: revisamos cuál de tus instalaciones
-            vale la pena contar y te entregamos el mapa de piezas — trabajemos juntos o no.
+            No lo gana el que tiene el mejor equipo, sino el que lo sabe demostrar. Agenda
+            20 minutos: sales con el mapa de piezas, trabajemos juntos o no.
           </motion.p>
           <motion.div className="mt-10 flex justify-center" {...fadeUp}>
             <Cta />
