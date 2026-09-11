@@ -357,6 +357,44 @@ const MODULOS_IA_EN_ACCION: Modulo[] = [
   },
 ];
 
+// ── Empieza aquí: la entrada del portal ──────────────────────
+// Un solo módulo escrito. Para agregar una pieza, una línea acá y su
+// recurso en BOVEDA_EMPIEZA_AQUI + sus secciones en guias-empieza-aqui.ts.
+const MODULOS_EMPIEZA_AQUI: Modulo[] = [
+  {
+    titulo: "Antes de empezar",
+    descripcion:
+      "Cuatro lecturas cortas para saber qué tienes delante, en qué orden usarlo y qué vas a poder hacer al salir. Léelas antes de tocar cualquier curso.",
+    disponible: true,
+    lecciones: [
+      {
+        titulo: "Bienvenida: qué es esto y para quién",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "bienvenida",
+      },
+      {
+        titulo: "Por dónde empezar: la ruta en orden",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "por-donde-empezar",
+      },
+      {
+        titulo: "Qué vas a poder hacer al terminar",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "que-vas-a-poder-hacer",
+      },
+      {
+        titulo: "Cómo está organizado el portal",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "como-esta-organizado",
+      },
+    ],
+  },
+];
+
 const BIBLIA_DOCS: string[] = [
   "DOC 00 - El Protocolo de Pensamiento del Director Creativo.pdf",
   "DOC 01 - Análisis de Brief Publicitario.pdf",
@@ -1632,6 +1670,75 @@ const BOVEDA_HIGGSFIELD: RecursoBoveda[] = [
   },
 ];
 
+// ── EMPIEZA AQUÍ · la entrada del portal ────────────────────────
+// Las cuatro piezas de bienvenida. Van `gratis: true` a propósito:
+// también funcionan como vitrina pública de cómo está armado esto.
+// Para agregar una pieza nueva: escribe sus secciones en
+// lib/taller/boveda/guias-empieza-aqui.ts, copia un objeto de acá y
+// agrega su línea a MODULOS_EMPIEZA_AQUI.
+const BOVEDA_EMPIEZA_AQUI: RecursoBoveda[] = [
+  {
+    slug: "bienvenida",
+    titulo: "Bienvenida · qué es esto y para quién",
+    descripcion:
+      "De qué se trata realmente lo que tienes delante, para quién es y para quién no, y qué promete en concreto.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    gratis: true,
+    cursoRelacionado: "Empieza aquí",
+    tags: ["bienvenida", "orientación"],
+    contenido: [
+      "Dos minutos de lectura para saber qué tienes delante antes de empezar a consumir material.",
+    ],
+  },
+  {
+    slug: "por-donde-empezar",
+    titulo: "Por dónde empezar · la ruta en orden",
+    descripcion:
+      "La primera semana día por día, qué hacer si ya sabes generar y los cuatro errores que hacen perder tiempo al arrancar.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    gratis: true,
+    cursoRelacionado: "Empieza aquí",
+    tags: ["ruta", "orientación"],
+    contenido: [
+      "El orden correcto es aburrido y funciona: primero decides, después ejecutas. Invertirlo es la forma más rápida de producir mucho y avanzar poco.",
+    ],
+  },
+  {
+    slug: "que-vas-a-poder-hacer",
+    titulo: "Qué vas a poder hacer al terminar",
+    descripcion:
+      "Las cinco capacidades concretas que se llevan, cómo saber que las tienes, y lo que esto no te va a dar.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    gratis: true,
+    cursoRelacionado: "Empieza aquí",
+    tags: ["resultados", "orientación"],
+    contenido: [
+      "El antes y el después, dicho en capacidades concretas y no en promesas de venta.",
+    ],
+  },
+  {
+    slug: "como-esta-organizado",
+    titulo: "Cómo está organizado el portal",
+    descripcion:
+      "Las zonas del portal y para qué sirve cada una, qué hay en cada curso, cómo crece esto y qué hacer si te trabas.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    gratis: true,
+    cursoRelacionado: "Empieza aquí",
+    tags: ["portal", "orientación"],
+    contenido: [
+      "El mapa: cursos, bóveda, en vivo, calendario y novedades. Cuándo entrar a cada uno.",
+    ],
+  },
+];
+
 // ── IA EN ACCIÓN · los artículos escritos ───────────────────────
 // El curso IA en Acción se entrega en tres formatos: artículo escrito,
 // video con cámara y video de solo pantalla. Estos son los ARTÍCULOS —
@@ -1732,6 +1839,7 @@ const BOVEDA_IA_EN_ACCION: RecursoBoveda[] = [
 ];
 
 export const BOVEDA_BASE: RecursoBoveda[] = [
+  ...BOVEDA_EMPIEZA_AQUI,
   ...BOVEDA_IA_EN_ACCION,
   ...BOVEDA_PREMIUM,
   ...BOVEDA_MASTERCLASS,
@@ -2073,6 +2181,19 @@ export const TALLER = {
   // Cada curso tiene su tarjeta en /taller/curso y su página propia
   // en /taller/curso/<slug>. Ver la nota de arriba para agregar uno.
   cursos: [
+    {
+      // Primera tarjeta del catálogo: la entrada. Cuatro lecturas de
+      // orientación, sin video. Está abierta a crecer (ver comentario
+      // en guias-empieza-aqui.ts).
+      slug: "empieza-aqui",
+      titulo: "Empieza aquí",
+      descripcion:
+        "Qué tienes delante, por dónde empezar y qué vas a poder hacer al terminar. Cuatro lecturas cortas antes de tocar cualquier curso.",
+      portada: { emoji: "🚀", color: "rgba(244,240,222,0.14)" },
+      disponible: true,
+      modulos: MODULOS_EMPIEZA_AQUI,
+      recursos: [],
+    },
     {
       slug: "masterclass",
       titulo: "Masterclass de Creatividad Publicitaria IA",
