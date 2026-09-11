@@ -9,6 +9,7 @@ import { SECCIONES_HIGGSFIELD } from "@/lib/taller/boveda/guias-higgsfield";
 import { SECCIONES_MASTERCLASS } from "@/lib/taller/boveda/guias-masterclass";
 import { SECCIONES_REPOS_SKILLS } from "@/lib/taller/boveda/guias-repos-skills";
 import { SECCIONES_REPOS_DATOS } from "@/lib/taller/boveda/guias-repos-datos";
+import { SECCIONES_IA_EN_ACCION } from "@/lib/taller/boveda/guias-ia-en-accion";
 
 // Une todas las guías a fondo de la bóveda (slug → secciones).
 // content.ts las adjunta a cada recurso al ensamblar BOVEDA.
@@ -26,4 +27,5 @@ export const SECCIONES_BOVEDA: Record<string, SeccionRecurso[]> = {
   ...SECCIONES_MASTERCLASS,
   ...SECCIONES_REPOS_SKILLS,
   ...SECCIONES_REPOS_DATOS,
+  ...SECCIONES_IA_EN_ACCION,
 };

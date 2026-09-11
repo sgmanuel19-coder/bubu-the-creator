@@ -480,7 +480,24 @@ export type BloqueRecurso =
   // nota: advertencia honesta / tip destacado
   | { tipo: "nota"; texto: string }
   // cita: frase de cierre
-  | { tipo: "cita"; texto: string };
+  | { tipo: "cita"; texto: string }
+  // ── imagen: referencia visual o pantallazo de un paso ──────────
+  // `src` VACÍO es intencional: el artículo se escribe completo y deja
+  // el hueco descrito. La UI pinta un recuadro con el `alt` para que se
+  // vea exactamente qué imagen falta y dónde va. Cuando subas el archivo
+  // a /public/images/ia-en-accion/, rellena `src` y el hueco desaparece.
+  | {
+      tipo: "imagen";
+      src?: string;
+      alt: string; // qué muestra la imagen (también es el alt de SEO)
+      pie?: string; // pie de foto visible bajo la imagen
+      captura?: boolean; // true = pantallazo de un paso · false = referencial
+    }
+  // video: la PIEZA resultante dentro del artículo (no Manuel hablando).
+  // youtubeId vacío = hueco descrito, igual que la imagen.
+  | { tipo: "video"; youtubeId?: string; titulo: string; pie?: string }
+  // enlace: salida a una herramienta, repo o recurso externo
+  | { tipo: "enlace"; url: string; texto: string; nota?: string };
 
 export type SeccionRecurso = {
   titulo: string; // ej. "El problema" (el número se pinta solo)
@@ -1583,7 +1600,107 @@ const BOVEDA_HIGGSFIELD: RecursoBoveda[] = [
   },
 ];
 
+// ── IA EN ACCIÓN · los artículos escritos ───────────────────────
+// El curso IA en Acción se entrega en tres formatos: artículo escrito,
+// video con cámara y video de solo pantalla. Estos son los ARTÍCULOS —
+// lo que Manuel puede publicar sin grabar nada.
+// Sus secciones viven en lib/taller/boveda/guias-ia-en-accion.ts y
+// llevan huecos de imagen descritos (se ven como recuadro amarillo en
+// la página hasta que se suba el archivo a /public/images/ia-en-accion/).
+//
+// Los dos primeros van `gratis: true`: son el imán público que indexa
+// en Google y demuestra el método. El resto, con candado.
+const BOVEDA_IA_EN_ACCION: RecursoBoveda[] = [
+  {
+    slug: "conceptos-basicos-ia",
+    titulo: "Conceptos básicos · cómo piensa un modelo y cómo se le habla",
+    descripcion:
+      "Por qué el mismo prompt da resultados distintos cada vez, qué lee realmente el modelo y las cuatro palancas que sí cambian lo que sale.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    gratis: true,
+    cursoRelacionado: "IA en Acción",
+    tags: ["fundamentos", "prompt", "imagen"],
+    contenido: [
+      "Lo primero del curso y lo que más tiempo ahorra después. No es teoría de IA: es entender por qué tu resultado cambia entre corrida y corrida, y qué partes del prompt son las que realmente mueven la aguja.",
+    ],
+  },
+  {
+    slug: "el-stack-completo",
+    titulo: "El stack completo · qué hace cada herramienta y cuándo usarla",
+    descripcion:
+      "Las herramientas con las que produzco piezas que se cobran: Higgsfield, Kling, Seedance, ElevenLabs, HeyGen y CapCut. Para qué sirve cada una y cuándo NO usarla.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    gratis: true,
+    cursoRelacionado: "IA en Acción",
+    tags: ["stack", "higgsfield", "kling", "seedance", "producción"],
+    contenido: [
+      "El mapa del flujo completo, con la decisión de qué herramienta entra en qué momento. Incluye lo que probé y dejé fuera, y por qué.",
+    ],
+  },
+  {
+    slug: "clon-y-ugc",
+    titulo: "Clon y UGC · el vocero que no existe",
+    descripcion:
+      "Cómo se arma un vocero generado que aguanta: la grabación base, el guion de 20 segundos y los cinco errores que lo delatan al instante.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    cursoRelacionado: "IA en Acción",
+    tags: ["ugc", "vocero", "heygen", "elevenlabs"],
+    contenido: [
+      "Un vocero generado sirve para dos cosas concretas: que una marca tenga a alguien hablando sin casting ni jornada, y probar diez versiones de un mensaje antes de producirlo en serio.",
+    ],
+  },
+  {
+    slug: "foto-de-producto-ia",
+    titulo: "Foto de producto con IA · el set completo desde una sola foto",
+    descripcion:
+      "Los cinco planos que pide un catálogo, generados desde una foto real del producto. Con el prompt de luz y la corrección de logo que siempre hace falta.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    cursoRelacionado: "IA en Acción",
+    tags: ["producto", "higgsfield", "catálogo", "fotografía"],
+    contenido: [
+      "El producto de la foto tiene que ser EL producto. Por eso esto casi nunca se genera desde cero: se parte de una foto real y la IA construye el entorno, la luz y el acabado.",
+    ],
+  },
+  {
+    slug: "fotos-profesionales-ia",
+    titulo: "Fotos profesionales con IA · retratos de equipo que combinan entre sí",
+    descripcion:
+      "Retratos corporativos para LinkedIn, web y propuestas. El bloque fijo que hace que las seis fotos del equipo parezcan del mismo día y del mismo estudio.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    cursoRelacionado: "IA en Acción",
+    tags: ["retrato", "corporativo", "higgsfield", "fotografía"],
+    contenido: [
+      "La sesión de fotos que la empresa siempre posterga, resuelta en una tarde con una foto decente de cada persona. Lo difícil no es cada retrato: es que todos parezcan del mismo set.",
+    ],
+  },
+  {
+    slug: "errores-que-delatan-ia",
+    titulo: "Los errores que delatan una imagen IA · y cómo los tapo",
+    descripcion:
+      "El checklist que corro antes de entregar cualquier pieza: manos, ojos, texto, sombras, reflejos y patrones repetidos. La lista de lo que me devolvieron alguna vez.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    cursoRelacionado: "IA en Acción",
+    tags: ["control de calidad", "acabado", "entrega"],
+    contenido: [
+      "Generar algo que impresiona lo hace cualquiera. Entregar una pieza que aguante que la miren de cerca es la única razón por la que a alguien le pagan por esto.",
+    ],
+  },
+];
+
 export const BOVEDA_BASE: RecursoBoveda[] = [
+  ...BOVEDA_IA_EN_ACCION,
   ...BOVEDA_PREMIUM,
   ...BOVEDA_MASTERCLASS,
   ...BOVEDA_CREATIVIDAD,

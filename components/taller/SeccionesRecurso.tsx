@@ -152,7 +152,113 @@ function Bloque({ bloque }: { bloque: BloqueRecurso }) {
           «{bloque.texto}»
         </blockquote>
       );
+
+    case "imagen":
+      // Sin src todavía: se pinta el hueco con la descripción exacta de
+      // qué imagen va ahí. Así el artículo se publica completo de texto y
+      // las imágenes se van rellenando después sin tocar la redacción.
+      if (!bloque.src) return <HuecoMedia bloque={bloque} />;
+      return (
+        <figure className="space-y-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={bloque.src}
+            alt={bloque.alt}
+            loading="lazy"
+            className="w-full rounded-xl border"
+            style={{ borderColor: "rgba(244,240,222,0.12)" }}
+          />
+          {bloque.pie && (
+            <figcaption className="text-xs leading-relaxed" style={{ color: "var(--muted)" }}>
+              {bloque.pie}
+            </figcaption>
+          )}
+        </figure>
+      );
+
+    case "video":
+      if (!bloque.youtubeId) return <HuecoMedia bloque={bloque} />;
+      return (
+        <figure className="space-y-2">
+          <div
+            className="overflow-hidden rounded-xl border"
+            style={{ borderColor: "rgba(244,240,222,0.12)", aspectRatio: "16 / 9" }}
+          >
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${bloque.youtubeId}`}
+              title={bloque.titulo}
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          </div>
+          {bloque.pie && (
+            <figcaption className="text-xs leading-relaxed" style={{ color: "var(--muted)" }}>
+              {bloque.pie}
+            </figcaption>
+          )}
+        </figure>
+      );
+
+    case "enlace":
+      return (
+        <a
+          href={bloque.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-start gap-3 rounded-xl border px-4 py-3 transition-opacity hover:opacity-80"
+          style={{ borderColor: "rgba(26,128,255,0.35)", background: "rgba(26,128,255,0.06)" }}
+        >
+          <span style={{ color: "var(--green)" }}>↗</span>
+          <span>
+            <span className="block text-sm font-semibold" style={{ color: "var(--cream)" }}>
+              {bloque.texto}
+            </span>
+            {bloque.nota && (
+              <span className="mt-0.5 block text-xs leading-relaxed" style={{ color: "var(--muted)" }}>
+                {bloque.nota}
+              </span>
+            )}
+          </span>
+        </a>
+      );
   }
+}
+
+// Recuadro que ocupa el lugar de una imagen o un video que todavía no se
+// subió, describiendo exactamente qué va ahí. Es visible a propósito:
+// sirve de checklist de producción dentro del propio artículo.
+function HuecoMedia({
+  bloque,
+}: {
+  bloque: Extract<BloqueRecurso, { tipo: "imagen" | "video" }>;
+}) {
+  const esVideo = bloque.tipo === "video";
+  const etiqueta = esVideo
+    ? "Falta video"
+    : bloque.captura
+      ? "Falta captura de pantalla"
+      : "Falta imagen de referencia";
+  const descripcion = esVideo ? bloque.titulo : bloque.alt;
+
+  return (
+    <div
+      className="rounded-xl border border-dashed px-4 py-5"
+      style={{ borderColor: "rgba(255,209,102,0.45)", background: "rgba(255,209,102,0.05)" }}
+    >
+      <p className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "#FFD166" }}>
+        {esVideo ? "▶" : "🖼"} {etiqueta}
+      </p>
+      <p className="mt-1.5 text-sm leading-relaxed" style={{ color: "var(--cream)" }}>
+        {descripcion}
+      </p>
+      {bloque.pie && (
+        <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--muted)" }}>
+          Pie: {bloque.pie}
+        </p>
+      )}
+    </div>
+  );
 }
 
 export default function SeccionesRecurso({ secciones }: { secciones: SeccionRecurso[] }) {
