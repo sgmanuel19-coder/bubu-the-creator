@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { type Curso, type Leccion } from "@/lib/taller/content";
+import { type Curso, type Leccion, idProgreso } from "@/lib/taller/content";
 import {
   getVistas,
   setVista,
@@ -43,9 +43,13 @@ function ProgressRing({ pct }: { pct: number }) {
 export default function CursoClient({
   curso,
   desbloqueado,
+  slugsGratis = [],
 }: {
   curso: Curso;
   desbloqueado: boolean;
+  // Slugs de artículos públicos: sus lecciones se muestran abiertas sin
+  // sesión en vez de con candado (lo calcula la página, server-side).
+  slugsGratis?: string[];
 }) {
   const primera = (): Leccion | null => {
     for (const m of curso.modulos) {
@@ -63,7 +67,7 @@ export default function CursoClient({
   const [diplomaAbierto, setDiplomaAbierto] = useState(false);
 
   const idsDelCurso = new Set(
-    curso.modulos.flatMap((m) => m.lecciones.map((l) => l.youtubeId)).filter(Boolean),
+    curso.modulos.flatMap((m) => m.lecciones.map(idProgreso)).filter(Boolean),
   );
 
   useEffect(() => {
@@ -86,9 +90,10 @@ export default function CursoClient({
   // Abrir ya NO marca como vista: eso convertía el XP en un contador de
   // clics. La marca la dispara el reproductor al 80% de reproducción.
   function marcarCompletada(leccion: Leccion) {
-    if (vistas[leccion.youtubeId]) return;
-    setVista(leccion.youtubeId, true);
-    setVistas((v) => ({ ...v, [leccion.youtubeId]: true }));
+    const id = idProgreso(leccion);
+    if (!id || vistas[id]) return;
+    setVista(id, true);
+    setVistas((v) => ({ ...v, [id]: true }));
     trackTaller("taller_leccion_completada", { curso: curso.slug, leccion: leccion.titulo });
   }
 
@@ -102,24 +107,27 @@ export default function CursoClient({
   }
 
   function toggleVista(leccion: Leccion) {
-    const nueva = !vistas[leccion.youtubeId];
-    setVista(leccion.youtubeId, nueva);
+    const id = idProgreso(leccion);
+    if (!id) return;
+    const nueva = !vistas[id];
+    setVista(id, nueva);
     setVistas((v) => {
       const copia = { ...v };
-      if (nueva) copia[leccion.youtubeId] = true;
-      else delete copia[leccion.youtubeId];
+      if (nueva) copia[id] = true;
+      else delete copia[id];
       return copia;
     });
   }
 
-  const todasConVideo = curso.modulos
+  // Lecciones que cuentan para el progreso: con video o con artículo.
+  const todasConContenido = curso.modulos
     .filter((m) => m.disponible)
     .flatMap((m) => m.lecciones)
-    .filter((l) => l.youtubeId);
-  const totalVistas = todasConVideo.filter((l) => vistas[l.youtubeId]).length;
+    .filter((l) => idProgreso(l));
+  const totalVistas = todasConContenido.filter((l) => vistas[idProgreso(l)]).length;
   const pctGeneral =
-    todasConVideo.length > 0
-      ? Math.round((totalVistas / todasConVideo.length) * 100)
+    todasConContenido.length > 0
+      ? Math.round((totalVistas / todasConContenido.length) * 100)
       : 0;
 
   return (
@@ -139,7 +147,7 @@ export default function CursoClient({
             {curso.descripcion}
           </p>
         </div>
-        {desbloqueado && cargado && todasConVideo.length > 0 && (
+        {desbloqueado && cargado && todasConContenido.length > 0 && (
           <div className="min-w-[180px]">
             <div className="flex items-center justify-between text-xs" style={{ color: "var(--muted)" }}>
               <span>Tu avance</span>
@@ -158,7 +166,7 @@ export default function CursoClient({
         )}
       </div>
 
-      {desbloqueado && cargado && todasConVideo.length > 0 && pctGeneral === 100 && (
+      {desbloqueado && cargado && todasConContenido.length > 0 && pctGeneral === 100 && (
         <div
           className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-5 py-4"
           style={{ borderColor: "rgba(26,128,255,0.5)", background: "rgba(26,128,255,0.08)" }}
@@ -246,8 +254,8 @@ export default function CursoClient({
       {/* Módulos: columna lateral con scroll propio en desktop */}
       <aside className="mt-8 space-y-3 lg:sticky lg:top-6 lg:mt-0 lg:max-h-[calc(100vh-3rem)] lg:space-y-2 lg:overflow-y-auto lg:pr-1">
         {curso.modulos.map((modulo, i) => {
-          const conVideo = modulo.lecciones.filter((l) => l.youtubeId);
-          const vistasModulo = conVideo.filter((l) => vistas[l.youtubeId]).length;
+          const conContenido = modulo.lecciones.filter((l) => idProgreso(l));
+          const vistasModulo = conContenido.filter((l) => vistas[idProgreso(l)]).length;
           return (
             <section
               key={modulo.titulo}
@@ -265,9 +273,9 @@ export default function CursoClient({
                     style={{ color: "var(--green)" }}
                   >
                     Módulo {i + 1}
-                    {desbloqueado && cargado && modulo.disponible && conVideo.length > 0 && (
+                    {desbloqueado && cargado && modulo.disponible && conContenido.length > 0 && (
                       <span style={{ color: "var(--muted)" }}>
-                        {" "}· {vistasModulo}/{conVideo.length} vistas
+                        {" "}· {vistasModulo}/{conContenido.length} completadas
                       </span>
                     )}
                   </p>
@@ -284,8 +292,8 @@ export default function CursoClient({
                   >
                     🔒 Próximamente
                   </span>
-                ) : desbloqueado && cargado && conVideo.length > 0 ? (
-                  <ProgressRing pct={Math.round((vistasModulo / conVideo.length) * 100)} />
+                ) : desbloqueado && cargado && conContenido.length > 0 ? (
+                  <ProgressRing pct={Math.round((vistasModulo / conContenido.length) * 100)} />
                 ) : !desbloqueado ? (
                   <span className="shrink-0 text-lg" aria-label="Bloqueado">
                     🔒
@@ -300,11 +308,15 @@ export default function CursoClient({
                 >
                   {modulo.lecciones.map((leccion) => {
                     const tieneVideo = leccion.youtubeId !== "";
+                    const id = idProgreso(leccion);
                     const activa =
                       desbloqueado && tieneVideo && actual?.youtubeId === leccion.youtubeId;
-                    const vista = desbloqueado && cargado && tieneVideo && !!vistas[leccion.youtubeId];
+                    const vista = desbloqueado && cargado && id !== "" && !!vistas[id];
                     // Sin sesión, ninguna lección es abrible.
                     const abrible = desbloqueado && tieneVideo;
+                    // Artículo público: se lee sin sesión, así que no lleva candado.
+                    const abiertaSinSesion =
+                      !tieneVideo && !!leccion.recursoSlug && slugsGratis.includes(leccion.recursoSlug);
                     return (
                       <li
                         key={leccion.titulo}
@@ -316,7 +328,7 @@ export default function CursoClient({
                         {desbloqueado ? (
                           <button
                             type="button"
-                            disabled={!tieneVideo}
+                            disabled={id === ""}
                             onClick={() => toggleVista(leccion)}
                             aria-label={vista ? "Marcar como no vista" : "Marcar como vista"}
                             className="ml-4 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] disabled:opacity-30"
@@ -329,8 +341,11 @@ export default function CursoClient({
                             ✓
                           </button>
                         ) : (
-                          <span className="ml-4 shrink-0 text-sm" aria-label="Bloqueado">
-                            🔒
+                          <span
+                            className="ml-4 shrink-0 text-sm"
+                            aria-label={abiertaSinSesion ? "Lectura abierta" : "Bloqueado"}
+                          >
+                            {abiertaSinSesion ? "📖" : "🔒"}
                           </span>
                         )}
                         {/* Lección escrita: abre su artículo. Va con <a> y

@@ -21,6 +21,15 @@ export default function PortalNav({ desbloqueado = false }: { desbloqueado?: boo
   const pathname = usePathname();
   const [login, setLogin] = useState(false);
 
+  // "En vivo" solo aparece cuando hay algo que ver: un stream con ID, una
+  // fecha de cohorte, o una sesión futura en el calendario. Una pestaña
+  // vacía resta más de lo que suma.
+  const hayEnVivo =
+    TALLER.enVivo.youtubeId !== "" ||
+    TALLER.enVivo.proximaFecha !== "" ||
+    TALLER.sesiones.some((s) => new Date(s.fecha).getTime() >= Date.now() - 24 * 3600 * 1000);
+  const tabs = TABS.filter((t) => t.href !== "/taller/en-vivo" || hayEnVivo);
+
   return (
     <header
       className="sticky top-0 z-40 border-b backdrop-blur-md"
@@ -60,7 +69,7 @@ export default function PortalNav({ desbloqueado = false }: { desbloqueado?: boo
         </div>
 
         <nav className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-2 pt-3 sm:gap-2">
-          {TABS.map((tab) => {
+          {tabs.map((tab) => {
             const active =
               tab.href === "/taller"
                 ? pathname === "/taller"

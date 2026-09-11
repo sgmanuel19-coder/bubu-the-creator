@@ -3,6 +3,7 @@ import PortalNav from "@/components/taller/PortalNav";
 import CursoClient from "@/components/taller/CursoClient";
 import { TALLER, buscarCurso } from "@/lib/taller/content";
 import { estaDesbloqueado } from "@/lib/taller/session";
+import { bovedaGlobal } from "@/lib/taller/boveda-server";
 
 // Página interna del portal: no se indexa (la landing /taller sí).
 export const metadata = { robots: { index: false, follow: false } };
@@ -27,7 +28,11 @@ export default async function CursoDetallePage({
   return (
     <>
       <PortalNav desbloqueado={algunNivel} />
-      <CursoClient curso={curso} desbloqueado={desbloqueado} />
+      <CursoClient
+        curso={curso}
+        desbloqueado={desbloqueado}
+        slugsGratis={bovedaGlobal().filter((r) => r.gratis).map((r) => r.slug)}
+      />
     </>
   );
 }

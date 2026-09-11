@@ -5,6 +5,7 @@ import { trackTaller } from "@/lib/taller/analytics";
 import BandejaPago from "@/components/taller/BandejaPago";
 import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 import SeccionesRecurso, { IndiceSecciones } from "@/components/taller/SeccionesRecurso";
+import BotonLeido from "@/components/taller/BotonLeido";
 
 export default function RecursoDetalle({
   recurso,
@@ -72,7 +73,10 @@ export default function RecursoDetalle({
       {/* Guía a fondo: completa con el nivel correcto; sin él, solo el
           índice de títulos (el server nunca manda el contenido real) */}
       {desbloqueado && recurso.secciones && recurso.secciones.length > 0 && (
-        <SeccionesRecurso secciones={recurso.secciones} />
+        <>
+          <SeccionesRecurso secciones={recurso.secciones} />
+          <BotonLeido slug={recurso.slug} titulo={recurso.titulo} />
+        </>
       )}
 
       {/* CTA de las guías gratis: la bóveda demuestra, la masterclass vende */}

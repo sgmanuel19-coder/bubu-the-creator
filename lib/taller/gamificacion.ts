@@ -1,11 +1,11 @@
 // ============================================================
 // GAMIFICACIÓN — 100% offline, calculada desde el progreso local.
-// XP por lección vista, niveles con nombre, y logros por hitos.
+// XP por lección vista o artículo leído, niveles con nombre, y logros por hitos.
 // Estilo videojuego pero premium (se pinta en GamificacionHeader).
 // El ranking entre alumnos (leaderboard) llega con la base de datos.
 // ============================================================
 
-import { TALLER, leccionesConVideoGlobal } from "@/lib/taller/content";
+import { TALLER, idProgreso, leccionesConContenidoGlobal } from "@/lib/taller/content";
 
 export const XP_POR_LECCION = 10;
 
@@ -35,7 +35,7 @@ export type Gamificacion = {
 };
 
 export function calcularGamificacion(vistas: Record<string, boolean>): Gamificacion {
-  const idsValidos = new Set(leccionesConVideoGlobal().map((l) => l.youtubeId));
+  const idsValidos = new Set(leccionesConContenidoGlobal().map(idProgreso));
   const vistasValidas = Object.keys(vistas).filter(
     (id) => vistas[id] && idsValidos.has(id),
   ).length;
@@ -54,17 +54,17 @@ export function calcularGamificacion(vistas: Record<string, boolean>): Gamificac
   const cursos = TALLER.cursos.filter((c) => c.disponible);
   const moduloCompleto = cursos.some((c) =>
     c.modulos.some((m) => {
-      const cv = m.lecciones.filter((l) => l.youtubeId);
-      return cv.length > 0 && cv.every((l) => vistas[l.youtubeId]);
+      const cv = m.lecciones.filter((l) => idProgreso(l));
+      return cv.length > 0 && cv.every((l) => vistas[idProgreso(l)]);
     }),
   );
   const cursoMedio = cursos.some((c) => {
-    const cv = c.modulos.flatMap((m) => m.lecciones).filter((l) => l.youtubeId);
-    return cv.length > 0 && cv.filter((l) => vistas[l.youtubeId]).length / cv.length >= 0.5;
+    const cv = c.modulos.flatMap((m) => m.lecciones).filter((l) => idProgreso(l));
+    return cv.length > 0 && cv.filter((l) => vistas[idProgreso(l)]).length / cv.length >= 0.5;
   });
   const cursoCompleto = cursos.some((c) => {
-    const cv = c.modulos.flatMap((m) => m.lecciones).filter((l) => l.youtubeId);
-    return cv.length > 0 && cv.every((l) => vistas[l.youtubeId]);
+    const cv = c.modulos.flatMap((m) => m.lecciones).filter((l) => idProgreso(l));
+    return cv.length > 0 && cv.every((l) => vistas[idProgreso(l)]);
   });
 
   const logros: Logro[] = [

@@ -591,6 +591,9 @@ export type RecursoBoveda = Recurso & {
   // Guía a fondo (secciones numeradas). Se define en lib/taller/boveda/
   // y se une aquí por slug. Sin sesión solo se muestra el índice.
   secciones?: SeccionRecurso[];
+  // Fecha de publicación en ISO ("2026-09-10"). Con esto la guía genera
+  // su entrada en Novedades sola (ver novedadesGlobales en boveda-server).
+  publicado?: string;
 };
 
 // ── Datos de pago (bandeja antes de WhatsApp) ───────────────────
@@ -1687,6 +1690,7 @@ const BOVEDA_EMPIEZA_AQUI: RecursoBoveda[] = [
     disponible: true,
     gratis: true,
     cursoRelacionado: "Empieza aquí",
+    publicado: "2026-09-11",
     tags: ["bienvenida", "orientación"],
     contenido: [
       "Dos minutos de lectura para saber qué tienes delante antes de empezar a consumir material.",
@@ -1702,6 +1706,7 @@ const BOVEDA_EMPIEZA_AQUI: RecursoBoveda[] = [
     disponible: true,
     gratis: true,
     cursoRelacionado: "Empieza aquí",
+    publicado: "2026-09-11",
     tags: ["ruta", "orientación"],
     contenido: [
       "El orden correcto es aburrido y funciona: primero decides, después ejecutas. Invertirlo es la forma más rápida de producir mucho y avanzar poco.",
@@ -1717,6 +1722,7 @@ const BOVEDA_EMPIEZA_AQUI: RecursoBoveda[] = [
     disponible: true,
     gratis: true,
     cursoRelacionado: "Empieza aquí",
+    publicado: "2026-09-11",
     tags: ["resultados", "orientación"],
     contenido: [
       "El antes y el después, dicho en capacidades concretas y no en promesas de venta.",
@@ -1732,6 +1738,7 @@ const BOVEDA_EMPIEZA_AQUI: RecursoBoveda[] = [
     disponible: true,
     gratis: true,
     cursoRelacionado: "Empieza aquí",
+    publicado: "2026-09-11",
     tags: ["portal", "orientación"],
     contenido: [
       "El mapa: cursos, bóveda, en vivo, calendario y novedades. Cuándo entrar a cada uno.",
@@ -1760,6 +1767,7 @@ const BOVEDA_IA_EN_ACCION: RecursoBoveda[] = [
     disponible: true,
     gratis: true,
     cursoRelacionado: "IA en Acción",
+    publicado: "2026-09-10",
     tags: ["fundamentos", "prompt", "imagen"],
     contenido: [
       "Lo primero del curso y lo que más tiempo ahorra después. No es teoría de IA: es entender por qué tu resultado cambia entre corrida y corrida, y qué partes del prompt son las que realmente mueven la aguja.",
@@ -1775,6 +1783,7 @@ const BOVEDA_IA_EN_ACCION: RecursoBoveda[] = [
     disponible: true,
     gratis: true,
     cursoRelacionado: "IA en Acción",
+    publicado: "2026-09-10",
     tags: ["stack", "higgsfield", "kling", "seedance", "producción"],
     contenido: [
       "El mapa del flujo completo, con la decisión de qué herramienta entra en qué momento. Incluye lo que probé y dejé fuera, y por qué.",
@@ -1789,6 +1798,7 @@ const BOVEDA_IA_EN_ACCION: RecursoBoveda[] = [
     nivel: "intermedio",
     disponible: true,
     cursoRelacionado: "IA en Acción",
+    publicado: "2026-09-10",
     tags: ["ugc", "vocero", "heygen", "elevenlabs"],
     contenido: [
       "Un vocero generado sirve para dos cosas concretas: que una marca tenga a alguien hablando sin casting ni jornada, y probar diez versiones de un mensaje antes de producirlo en serio.",
@@ -1803,6 +1813,7 @@ const BOVEDA_IA_EN_ACCION: RecursoBoveda[] = [
     nivel: "intermedio",
     disponible: true,
     cursoRelacionado: "IA en Acción",
+    publicado: "2026-09-10",
     tags: ["producto", "higgsfield", "catálogo", "fotografía"],
     contenido: [
       "El producto de la foto tiene que ser EL producto. Por eso esto casi nunca se genera desde cero: se parte de una foto real y la IA construye el entorno, la luz y el acabado.",
@@ -1817,6 +1828,7 @@ const BOVEDA_IA_EN_ACCION: RecursoBoveda[] = [
     nivel: "intermedio",
     disponible: true,
     cursoRelacionado: "IA en Acción",
+    publicado: "2026-09-10",
     tags: ["retrato", "corporativo", "higgsfield", "fotografía"],
     contenido: [
       "La sesión de fotos que la empresa siempre posterga, resuelta en una tarde con una foto decente de cada persona. Lo difícil no es cada retrato: es que todos parezcan del mismo set.",
@@ -1831,6 +1843,7 @@ const BOVEDA_IA_EN_ACCION: RecursoBoveda[] = [
     nivel: "intermedio",
     disponible: true,
     cursoRelacionado: "IA en Acción",
+    publicado: "2026-09-10",
     tags: ["control de calidad", "acabado", "entrega"],
     contenido: [
       "Generar algo que impresiona lo hace cualquiera. Entregar una pieza que aguante que la miren de cerca es la única razón por la que a alguien le pagan por esto.",
@@ -2275,4 +2288,24 @@ export function leccionesConVideoGlobal(): Leccion[] {
     .filter((m) => m.disponible)
     .flatMap((m) => m.lecciones)
     .filter((l) => l.youtubeId);
+}
+
+// Clave con la que una lección cuenta en el progreso y la gamificación:
+// su youtubeId si tiene video, o "leido:<slug>" si se entrega como
+// artículo escrito. "" = todavía sin contenido (pendiente de grabar).
+export function idProgreso(l: Leccion): string {
+  if (l.youtubeId) return l.youtubeId;
+  if (l.recursoSlug) return `leido:${l.recursoSlug}`;
+  return "";
+}
+
+// Todas las lecciones con contenido (video o artículo) de cursos y
+// módulos publicados. Es el universo que suma XP.
+export function leccionesConContenidoGlobal(): Leccion[] {
+  return TALLER.cursos
+    .filter((c) => c.disponible)
+    .flatMap((c) => c.modulos)
+    .filter((m) => m.disponible)
+    .flatMap((m) => m.lecciones)
+    .filter((l) => idProgreso(l) !== "");
 }
