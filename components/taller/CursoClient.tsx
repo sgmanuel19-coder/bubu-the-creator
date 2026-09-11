@@ -9,7 +9,6 @@ import {
   setUltimaLeccion,
 } from "@/lib/taller/progress";
 import { trackTaller } from "@/lib/taller/analytics";
-import VentaCTA from "@/components/taller/VentaCTA";
 import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 import ReproductorYouTube from "@/components/taller/ReproductorYouTube";
 import DiplomaModal from "@/components/taller/DiplomaModal";
@@ -217,12 +216,25 @@ export default function CursoClient({
             background: "var(--surface)",
           }}
         >
-          <span className="text-4xl">{desbloqueado ? "▶" : "🔒"}</span>
-          <p className="text-sm font-semibold">
-            {desbloqueado
-              ? "Los videos de este curso se publican pronto."
-              : "Contenido para alumnos"}
-          </p>
+          {/* Curso escrito (lecciones con recursoSlug y sin video): se
+              invita a leer, no se anuncian videos que no son el formato. */}
+          {(() => {
+            const esEscrito = curso.modulos.some(
+              (m) => m.disponible && m.lecciones.some((l) => l.recursoSlug && !l.youtubeId),
+            );
+            return (
+              <>
+                <span className="text-4xl">{!desbloqueado ? "🔒" : esEscrito ? "📄" : "▶"}</span>
+                <p className="text-sm font-semibold">
+                  {!desbloqueado
+                    ? "Contenido para alumnos"
+                    : esEscrito
+                      ? "Este curso se lee. Abre cualquier tema del temario."
+                      : "Los videos de este curso se publican pronto."}
+                </p>
+              </>
+            );
+          })()}
           {!desbloqueado && (
             <p className="text-xs" style={{ color: "var(--muted)" }}>
               Desbloquea con tu contraseña para reproducir las clases.
@@ -414,7 +426,6 @@ export default function CursoClient({
         </section>
       )}
 
-      {desbloqueado && <VentaCTA />}
     </main>
   );
 }

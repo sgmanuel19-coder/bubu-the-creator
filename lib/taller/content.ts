@@ -2232,31 +2232,6 @@ export const TALLER = {
       recursos: [],
     },
   ] as Curso[],
-
-  // ── Backend post-compra (dentro de la plataforma) ────────────
-  venta: {
-    titulo: "¿Quieres ir más rápido?",
-    texto:
-      "Ya tienes el sistema. Si quieres resultados sin armar todo solo, hay dos caminos:",
-    opciones: [
-      {
-        titulo: "Te lo dejo instalado",
-        texto:
-          "Implementación done-with-you: te monto el Cerebro Creativo en tu negocio en 2 semanas — Biblia instalada, el ADN de tu marca generado, Claude Code y Obsidian configurados, y 2 sesiones 1:1.",
-        cta: "Quiero la implementación",
-        mensajeWhatsApp:
-          "Hola Manuel, terminé la masterclass y quiero la implementación del Cerebro Creativo en mi negocio",
-      },
-      {
-        titulo: "Mi equipo lo produce por ti",
-        texto:
-          "Proyectos de contenido publicitario con este sistema, desde $2,000. Tú pones la marca, nosotros la campaña completa.",
-        cta: "Quiero cotizar un proyecto",
-        mensajeWhatsApp:
-          "Hola Manuel, quiero cotizar un proyecto de contenido publicitario para mi marca",
-      },
-    ],
-  },
 };
 
 // ── Helpers del Classroom ─────────────────────────────────────
