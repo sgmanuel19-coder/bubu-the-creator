@@ -92,11 +92,13 @@ function useCountdown(target: string) {
   };
 }
 
-function formatoLima(iso: string): string {
+// Las fechas se muestran en la zona horaria del alumno (como hace Skool);
+// si no está en Lima, se añade la hora de Lima como referencia.
+function formatoEn(iso: string, zona: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
   return new Intl.DateTimeFormat("es-PE", {
-    timeZone: "America/Lima",
+    timeZone: zona,
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -104,6 +106,24 @@ function formatoLima(iso: string): string {
     minute: "2-digit",
     hour12: true,
   }).format(d);
+}
+
+function horaEn(iso: string, zona: string): string {
+  return new Intl.DateTimeFormat("es-PE", {
+    timeZone: zona,
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(new Date(iso));
+}
+
+const ZONA_LIMA = "America/Lima";
+function zonaDelAlumno(): string {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || ZONA_LIMA;
+  } catch {
+    return ZONA_LIMA;
+  }
 }
 
 function linkGoogleCalendar(titulo: string, iso: string, duracionMin: number): string {
@@ -129,6 +149,10 @@ function ProximasSesiones() {
     (s) => new Date(s.fecha).getTime() > ahora,
   );
   if (futuras.length === 0) return null;
+  // Solo se llega aquí tras montar en el navegador, así que la zona es
+  // la del alumno y no hay desajuste con el render del servidor.
+  const zona = zonaDelAlumno();
+  const enLima = zona === ZONA_LIMA;
   return (
     <section className="mt-8">
       <h2 className="text-lg font-bold">Próximas sesiones</h2>
@@ -142,7 +166,9 @@ function ProximasSesiones() {
             <div>
               <p className="font-semibold">{s.titulo}</p>
               <p className="mt-0.5 text-sm capitalize" style={{ color: "var(--muted)" }}>
-                {formatoLima(s.fecha)} (Lima) · {s.duracionMin} min
+                {formatoEn(s.fecha, zona)}
+                {enLima ? " (Lima)" : ` (tu hora · ${horaEn(s.fecha, ZONA_LIMA)} en Lima)`}
+                {" "}· {s.duracionMin} min
               </p>
             </div>
             <a

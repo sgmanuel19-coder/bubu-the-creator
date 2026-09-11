@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { type Curso, type Leccion, idProgreso } from "@/lib/taller/content";
+import { NIVELES, calcularGamificacion } from "@/lib/taller/gamificacion";
 import {
   getVistas,
   setVista,
@@ -130,6 +131,10 @@ export default function CursoClient({
       ? Math.round((totalVistas / todasConContenido.length) * 100)
       : 0;
 
+  // Módulos que se abren por nivel de XP: el nivel sale del mismo
+  // progreso local que pinta GamificacionHeader.
+  const nivelActual = cargado ? calcularGamificacion(vistas).nivel : 1;
+
   return (
     <main className="mx-auto max-w-7xl px-5 py-10">
       <a
@@ -256,6 +261,11 @@ export default function CursoClient({
         {curso.modulos.map((modulo, i) => {
           const conContenido = modulo.lecciones.filter((l) => idProgreso(l));
           const vistasModulo = conContenido.filter((l) => vistas[idProgreso(l)]).length;
+          const nivelRequerido = modulo.requiereNivel ?? 0;
+          const nombreNivel = nivelRequerido > 0 ? (NIVELES[nivelRequerido - 1]?.nombre ?? "") : "";
+          // Con sesión y progreso cargado: el módulo se cierra hasta el nivel.
+          const bloqueadoPorNivel =
+            desbloqueado && cargado && nivelRequerido > 0 && nivelActual < nivelRequerido;
           return (
             <section
               key={modulo.titulo}
@@ -290,7 +300,15 @@ export default function CursoClient({
                     className="flex shrink-0 items-center gap-2 rounded-full border px-3 py-1 text-[11px] uppercase tracking-wider"
                     style={{ borderColor: "rgba(244,240,222,0.25)", color: "var(--muted)" }}
                   >
-                    🔒 Próximamente
+                    🔒 Próximamente{nombreNivel ? ` · nivel ${nombreNivel}` : ""}
+                  </span>
+                ) : bloqueadoPorNivel ? (
+                  <span
+                    className="flex shrink-0 items-center gap-2 rounded-full border px-3 py-1 text-[11px] uppercase tracking-wider"
+                    style={{ borderColor: "rgba(255,209,102,0.45)", color: "#FFD166" }}
+                    title={`Se abre al llegar al nivel ${nombreNivel}`}
+                  >
+                    🔒 Nivel {nombreNivel}
                   </span>
                 ) : desbloqueado && cargado && conContenido.length > 0 ? (
                   <ProgressRing pct={Math.round((vistasModulo / conContenido.length) * 100)} />
@@ -301,7 +319,17 @@ export default function CursoClient({
                 ) : null}
               </div>
 
-              {modulo.disponible && (
+              {modulo.disponible && bloqueadoPorNivel && (
+                <p
+                  className="border-t px-4 py-3 text-xs leading-relaxed"
+                  style={{ borderColor: "rgba(244,240,222,0.08)", color: "var(--muted)" }}
+                >
+                  Este módulo se abre al llegar al nivel {nombreNivel}. Cada lección
+                  completada o artículo leído suma XP: sigue con lo que ya está abierto.
+                </p>
+              )}
+
+              {modulo.disponible && !bloqueadoPorNivel && (
                 <ul
                   className="border-t"
                   style={{ borderColor: "rgba(244,240,222,0.08)" }}

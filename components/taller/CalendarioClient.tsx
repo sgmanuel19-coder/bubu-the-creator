@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { TALLER } from "@/lib/taller/content";
 import { trackTaller } from "@/lib/taller/analytics";
 import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
@@ -25,9 +25,13 @@ function limaYMD(iso: string): { y: number; m: number; d: number } | null {
   return { y: get("year"), m: get("month") - 1, d: get("day") };
 }
 
-function horaLima(iso: string): string {
+// La hora se muestra en la zona del alumno (como hace Skool); si no está
+// en Lima, se añade la hora de Lima como referencia. El día en la grilla
+// sigue ubicándose por Lima, que es la referencia del programa.
+const ZONA_LIMA = "America/Lima";
+function horaEn(iso: string, zona: string): string {
   return new Intl.DateTimeFormat("es-PE", {
-    timeZone: "America/Lima",
+    timeZone: zona,
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
@@ -51,6 +55,17 @@ function linkGoogleCalendar(titulo: string, iso: string, duracionMin: number): s
 export default function CalendarioClient({ desbloqueado }: { desbloqueado: boolean }) {
   // Mes inicial: el de hoy (o el de la próxima sesión si hay).
   const hoy = new Date();
+
+  // Zona horaria del alumno. Arranca en Lima para que el HTML del
+  // servidor y el del navegador coincidan, y se corrige al montar.
+  const [zona, setZona] = useState(ZONA_LIMA);
+  useEffect(() => {
+    try {
+      setZona(Intl.DateTimeFormat().resolvedOptions().timeZone || ZONA_LIMA);
+    } catch {
+      // navegador sin Intl completo: se queda en Lima
+    }
+  }, []);
   const [ver, setVer] = useState<{ y: number; m: number }>({
     y: hoy.getFullYear(),
     m: hoy.getMonth(),
@@ -207,7 +222,9 @@ export default function CalendarioClient({ desbloqueado }: { desbloqueado: boole
                 <div>
                   <p className="font-semibold">{s.titulo}</p>
                   <p className="mt-0.5 text-sm" style={{ color: "var(--muted)" }}>
-                    {p ? `${p.d} de ${MESES[p.m]}` : ""} · {horaLima(s.fecha)} (Lima) · {s.duracionMin} min
+                    {p ? `${p.d} de ${MESES[p.m]}` : ""} · {horaEn(s.fecha, zona)}
+                    {zona === ZONA_LIMA ? " (Lima)" : ` (tu hora · ${horaEn(s.fecha, ZONA_LIMA)} en Lima)`}
+                    {" "}· {s.duracionMin} min
                   </p>
                 </div>
                 {pasada ? (

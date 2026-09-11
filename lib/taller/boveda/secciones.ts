@@ -11,6 +11,7 @@ import { SECCIONES_REPOS_SKILLS } from "@/lib/taller/boveda/guias-repos-skills";
 import { SECCIONES_REPOS_DATOS } from "@/lib/taller/boveda/guias-repos-datos";
 import { SECCIONES_IA_EN_ACCION } from "@/lib/taller/boveda/guias-ia-en-accion";
 import { SECCIONES_EMPIEZA_AQUI } from "@/lib/taller/boveda/guias-empieza-aqui";
+import { AMPLIACIONES_IA_EN_ACCION } from "@/lib/taller/boveda/guias-ia-en-accion-ampliaciones";
 
 // Une todas las guías a fondo de la bóveda (slug → secciones).
 // content.ts las adjunta a cada recurso al ensamblar BOVEDA.
@@ -31,3 +32,9 @@ export const SECCIONES_BOVEDA: Record<string, SeccionRecurso[]> = {
   ...SECCIONES_IA_EN_ACCION,
   ...SECCIONES_EMPIEZA_AQUI,
 };
+
+// Paso a paso que IA en Acción añade a guías que ya existían: se suma
+// al FINAL de la guía original, no la reemplaza.
+for (const [slug, extra] of Object.entries(AMPLIACIONES_IA_EN_ACCION)) {
+  SECCIONES_BOVEDA[slug] = [...(SECCIONES_BOVEDA[slug] ?? []), ...extra];
+}

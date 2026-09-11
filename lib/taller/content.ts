@@ -26,6 +26,11 @@ export type Modulo = {
   disponible: boolean;
   lecciones: Leccion[];
   pptUrl?: string; // link a la presentación del módulo (Google Slides, etc.)
+  // Nivel de XP (1-6, ver NIVELES en gamificacion.ts) que hay que
+  // alcanzar para abrir el módulo. Sin esto se abre con la sesión.
+  // Convierte el XP en algo que se quiere, como los cursos por nivel
+  // de Skool. Solo aplica con `disponible: true`.
+  requiereNivel?: number;
 };
 export type Recurso = {
   slug: string; // para la página de detalle /taller/recursos/<slug>
@@ -342,8 +347,9 @@ const MODULOS_IA_EN_ACCION: Modulo[] = [
   {
     titulo: "PARTE C — Para ver (pantalla)",
     descripcion:
-      "Lo que vive del movimiento y la secuencia: la corrida completa en pantalla, sin cámara. Pendiente de grabar.",
+      "Lo que vive del movimiento y la secuencia: la corrida completa en pantalla, sin cámara. Se abre al llegar al nivel Guionista (siete lecciones completadas). Pendiente de grabar.",
     disponible: false,
+    requiereNivel: 3, // Guionista · 70 XP · 7 lecciones
     lecciones: [
       { titulo: "Seedance 2.5 · prompteo multishot (método rápido)", duracion: "", youtubeId: "" },
       { titulo: "Seedance 2.0 · plano x plano con smart system (método de entrega)", duracion: "", youtubeId: "" },
