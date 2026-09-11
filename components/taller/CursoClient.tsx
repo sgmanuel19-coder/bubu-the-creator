@@ -321,25 +321,40 @@ export default function CursoClient({
                             🔒
                           </span>
                         )}
-                        <button
-                          type="button"
-                          disabled={!abrible}
-                          onClick={() => abrirLeccion(leccion)}
-                          className="flex w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left text-[13px] leading-snug transition-colors disabled:cursor-not-allowed"
-                          style={{ color: abrible ? "var(--cream)" : "var(--muted)" }}
-                        >
-                          <span>
-                            {activa ? "▶ " : ""}
-                            {leccion.titulo}
-                            {desbloqueado && !tieneVideo && " · disponible pronto"}
-                          </span>
-                          <span
-                            className="shrink-0 tabular-nums"
-                            style={{ color: "var(--muted)" }}
+                        {/* Lección escrita: abre su artículo. Va con <a> y
+                            no <Link> por el Router Cache (ver CLAUDE.md). */}
+                        {leccion.recursoSlug && !tieneVideo ? (
+                          <a
+                            href={`/taller/recursos/${leccion.recursoSlug}`}
+                            className="flex w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left text-[13px] leading-snug transition-colors hover:opacity-80"
+                            style={{ color: "var(--cream)" }}
                           >
-                            {leccion.duracion}
-                          </span>
-                        </button>
+                            <span>📄 {leccion.titulo}</span>
+                            <span className="shrink-0" style={{ color: "var(--muted)" }}>
+                              {leccion.duracion}
+                            </span>
+                          </a>
+                        ) : (
+                          <button
+                            type="button"
+                            disabled={!abrible}
+                            onClick={() => abrirLeccion(leccion)}
+                            className="flex w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left text-[13px] leading-snug transition-colors disabled:cursor-not-allowed"
+                            style={{ color: abrible ? "var(--cream)" : "var(--muted)" }}
+                          >
+                            <span>
+                              {activa ? "▶ " : ""}
+                              {leccion.titulo}
+                              {desbloqueado && !tieneVideo && " · disponible pronto"}
+                            </span>
+                            <span
+                              className="shrink-0 tabular-nums"
+                              style={{ color: "var(--muted)" }}
+                            >
+                              {leccion.duracion}
+                            </span>
+                          </button>
+                        )}
                       </li>
                     );
                   })}

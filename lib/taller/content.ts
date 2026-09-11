@@ -10,7 +10,16 @@
 // ============================================================
 
 // ── Tipos del Classroom ──────────────────────────────────────
-export type Leccion = { titulo: string; duracion: string; youtubeId: string };
+// Una lección se entrega en video (youtubeId) o como artículo escrito
+// (recursoSlug → /taller/recursos/<slug>). Las dos cosas pueden convivir:
+// si un tema escrito recibe video después, se le pone el youtubeId y el
+// artículo se queda como material de apoyo.
+export type Leccion = {
+  titulo: string;
+  duracion: string;
+  youtubeId: string;
+  recursoSlug?: string;
+};
 export type Modulo = {
   titulo: string;
   descripcion: string;
@@ -246,81 +255,104 @@ function urlBiblia(archivo: string): string {
 // estructura completa puede vivir acá sin que se vea nada roto:
 // enciende cada módulo poniendo su ID de YouTube y `disponible: true`.
 //
-// Orden de grabación acordado con Manuel — los tres primeros son los
-// que él numeró 1, 2 y 3:
-//   1. Seedance 2.5 · prompteo multishot
-//   2. Seedance 2.0 · plano x plano
-//   3. (el VSL, que no es tutorial y va en la landing)
+// El curso se reparte en TRES formatos de entrega, y así están agrupados
+// los módulos:
+//   A. Artículo escrito  → ya publicado, se lee en /taller/recursos/<slug>
+//   B. Video con cámara  → pendiente de grabar (criterio de Manuel)
+//   C. Video de pantalla → pendiente de grabar (movimiento y secuencia)
+//
+// Un tema escrito puede recibir video después: se le pone el youtubeId a
+// su lección y el artículo se queda como material de apoyo. No se
+// reemplaza, se suma.
 const MODULOS_IA_EN_ACCION: Modulo[] = [
   {
-    titulo: "MÓDULO 0 — Empezar",
+    titulo: "PARTE A — Para leer",
     descripcion:
-      "Cómo razona un modelo, por qué el mismo prompt da resultados distintos y qué hace cada herramienta del stack. La base que evita perder horas después.",
-    disponible: false,
+      "Lo que es decisión, prompt, configuración o resultado: se consulta, se relee y se corrige sin regrabar. Cada tema abre su artículo completo con imágenes y prompts copiables.",
+    disponible: true,
     lecciones: [
-      { titulo: "Conceptos básicos: cómo piensa la IA y cómo se le habla", duracion: "", youtubeId: "" },
-      { titulo: "El stack completo: qué hace cada herramienta y cuándo usarla", duracion: "", youtubeId: "" },
+      {
+        titulo: "Conceptos básicos: cómo piensa un modelo y cómo se le habla",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "conceptos-basicos-ia",
+      },
+      {
+        titulo: "El stack completo: qué hace cada herramienta y cuándo usarla",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "el-stack-completo",
+      },
+      {
+        titulo: "Personaje consistente: la misma cara en toda la campaña",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "personaje-consistente",
+      },
+      {
+        titulo: "Clon y UGC: el vocero que no existe",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "clon-y-ugc",
+      },
+      {
+        titulo: "Foto de producto con IA: el set completo desde una sola foto",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "foto-de-producto-ia",
+      },
+      {
+        titulo: "Fotos profesionales con IA: retratos de equipo que combinan",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "fotos-profesionales-ia",
+      },
+      {
+        titulo: "Voz y locución con IA",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "voz-y-presentadores-ia",
+      },
+      {
+        titulo: "Los errores que delatan una imagen IA y cómo taparlos",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "errores-que-delatan-ia",
+      },
+      {
+        titulo: "Banco de prompts maestros",
+        duracion: "Artículo",
+        youtubeId: "",
+        recursoSlug: "pack-prompts-cinematograficos",
+      },
     ],
   },
   {
-    titulo: "MÓDULO 1 — Seedance: el comercial completo",
+    titulo: "PARTE B — Para ver (a cámara)",
     descripcion:
-      "Los dos métodos para sacar un comercial de Seedance. El primero es rápido y sirve para explorar; el segundo es lento y es el que se entrega a un cliente.",
+      "Lo que vive del criterio: por qué se descartó una idea, cómo se armó una entrega real y cómo se cobra. Pendiente de grabar.",
     disponible: false,
     lecciones: [
-      { titulo: "Método 1 · Prompteo multishot en Seedance 2.5", duracion: "", youtubeId: "" },
-      { titulo: "Método 2 · Construcción plano x plano con smart system (Seedance 2.0)", duracion: "", youtubeId: "" },
-      { titulo: "Cinematográfico de verdad: Kling 3.0 + Seedance 2.0 y 2.5", duracion: "", youtubeId: "" },
+      { titulo: "Cómo usar IA en Acción", duracion: "", youtubeId: "" },
+      { titulo: "Caso real: la grilla de Wellmax del mes 2", duracion: "", youtubeId: "" },
+      { titulo: "Caso real: la grilla de contenido de WIN Internet", duracion: "", youtubeId: "" },
+      { titulo: "Armar tu oferta y cobrarla", duracion: "", youtubeId: "" },
     ],
   },
   {
-    titulo: "MÓDULO 2 — Personajes que se repiten",
+    titulo: "PARTE C — Para ver (pantalla)",
     descripcion:
-      "El problema que rompe casi todas las campañas con IA: que el personaje cambie de cara entre plano y plano. Cómo fijarlo y cómo clonarte a ti mismo.",
+      "Lo que vive del movimiento y la secuencia: la corrida completa en pantalla, sin cámara. Pendiente de grabar.",
     disponible: false,
     lecciones: [
-      { titulo: "Personaje consistente y clon", duracion: "", youtubeId: "" },
-      { titulo: "UGC: el influencer que no existe", duracion: "", youtubeId: "" },
-      { titulo: "Foto de producto y foto profesional con influencer IA", duracion: "", youtubeId: "" },
-    ],
-  },
-  {
-    titulo: "MÓDULO 3 — Edición",
-    descripcion:
-      "Lo generado no es la pieza. La edición es donde un montón de clips sueltos se convierte en algo que se puede cobrar.",
-    disponible: false,
-    lecciones: [
+      { titulo: "Seedance 2.5 · prompteo multishot (método rápido)", duracion: "", youtubeId: "" },
+      { titulo: "Seedance 2.0 · plano x plano con smart system (método de entrega)", duracion: "", youtubeId: "" },
+      { titulo: "Cinematográfico de verdad: Kling 3.0 + Seedance", duracion: "", youtubeId: "" },
       { titulo: "Edición nivel básico", duracion: "", youtubeId: "" },
       { titulo: "Edición nivel intermedio", duracion: "", youtubeId: "" },
-    ],
-  },
-  {
-    titulo: "MÓDULO 4 — Casos reales, de principio a fin",
-    descripcion:
-      "Dos entregas de clientes que están pagando ahora mismo, sin recortes: el brief, lo que se descartó y la grilla terminada.",
-    disponible: false,
-    lecciones: [
-      { titulo: "Cómo hice la grilla de Wellmax del mes 2 con Kling y Seedance", duracion: "", youtubeId: "" },
-      { titulo: "La grilla de contenido de WIN Internet", duracion: "", youtubeId: "" },
-    ],
-  },
-  {
-    titulo: "MÓDULO 5 — Claude Code",
-    descripcion:
-      "La herramienta que no es de video y que igual cambia el negocio: automatizar lo repetitivo y publicar una landing sin depender de nadie.",
-    disponible: false,
-    lecciones: [
       { titulo: "Introducción a Claude Code", duracion: "", youtubeId: "" },
       { titulo: "Una landing page con Claude Code y Vercel", duracion: "", youtubeId: "" },
-    ],
-  },
-  {
-    titulo: "MÓDULO 6 — Cobrarlo",
-    descripcion:
-      "Saber hacerlo no es lo mismo que saber venderlo. Cómo se arma la oferta, qué se cobra y cómo se presenta.",
-    disponible: false,
-    lecciones: [
-      { titulo: "Desarrollando tu oferta IA", duracion: "", youtubeId: "" },
+      { titulo: "Upscale y acabado final", duracion: "", youtubeId: "" },
     ],
   },
 ];
@@ -2065,17 +2097,16 @@ export const TALLER = {
       recursos: [],
     },
     {
-      // El temario ya está armado (MODULOS_IA_EN_ACCION). Sigue en
-      // `disponible: false` porque todavía no hay ni un video subido y
-      // la página del curso hace notFound() si no está disponible.
-      // Para encenderlo: pon el youtubeId de las lecciones grabadas,
-      // marca ESE módulo como disponible y cambia esto a true.
+      // Encendido con la PARTE A (los artículos escritos) ya publicada.
+      // Las partes B y C quedan en `disponible: false` hasta que haya
+      // videos: se encienden poniendo el youtubeId de sus lecciones y
+      // marcando ese módulo como disponible.
       slug: "ia-en-accion",
       titulo: "IA en Acción",
       descripcion:
-        "Tutoriales creando piezas con IA, paso a paso: Seedance, Kling, personajes consistentes, edición y casos reales de clientes.",
+        "Cómo se producen las piezas, paso a paso: conceptos, stack, personajes consistentes, foto de producto, retratos y control de calidad. La parte escrita ya está disponible.",
       portada: { emoji: "⚡", color: "rgba(255,209,102,0.15)" },
-      disponible: false,
+      disponible: true,
       modulos: MODULOS_IA_EN_ACCION,
       recursos: [],
     },
