@@ -49,6 +49,9 @@ export type Curso = {
   disponible: boolean;
   modulos: Modulo[];
   recursos: Recurso[];
+  // Curso extra que viene con el acceso pero NO es parte de la malla.
+  // En el catálogo va en su propia sección, aparte de la ruta.
+  bonus?: boolean;
 };
 
 // ── Módulos de la masterclass: las 6 partes como capítulos ────
@@ -2233,6 +2236,7 @@ export const TALLER = {
         "El método CAT para crear contenido que vende sin partir de cero cada vez: de la idea al guion en minutos.",
       portada: { emoji: "🎁", color: "rgba(244,240,222,0.10)" },
       disponible: true,
+      bonus: true,
       modulos: MODULOS_STORYSELLING,
       recursos: [],
     },

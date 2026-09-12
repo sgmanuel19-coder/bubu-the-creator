@@ -153,7 +153,18 @@ export default function CursoClient({
 
       <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold sm:text-3xl">{curso.titulo}</h1>
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="text-2xl font-bold sm:text-3xl">{curso.titulo}</h1>
+            {/* Bonus: viene incluido pero no es parte de la malla. */}
+            {curso.bonus && (
+              <span
+                className="shrink-0 rounded-full border px-2.5 py-0.5 text-[10px] uppercase tracking-wider"
+                style={{ borderColor: "rgba(255,209,102,0.5)", color: "#FFD166" }}
+              >
+                ★ Bonus · fuera de la malla
+              </span>
+            )}
+          </div>
           <p className="mt-2 max-w-2xl text-sm" style={{ color: "var(--muted)" }}>
             {curso.descripcion}
           </p>
