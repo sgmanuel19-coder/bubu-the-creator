@@ -135,8 +135,14 @@ export default function CursoClient({
   // progreso local que pinta GamificacionHeader.
   const nivelActual = cargado ? calcularGamificacion(vistas).nivel : 1;
 
+  // Curso escrito: todo lo publicado son artículos, ni una lección con
+  // video. No se pinta reproductor — un recuadro vacío de media pantalla
+  // no aporta nada. El temario pasa a ser el contenido de la página.
+  const esCursoEscrito =
+    todasConContenido.length > 0 && todasConContenido.every((l) => !l.youtubeId);
+
   return (
-    <main className="mx-auto max-w-7xl px-5 py-10">
+    <main className={`mx-auto px-5 py-10 ${esCursoEscrito ? "max-w-4xl" : "max-w-7xl"}`}>
       <a
         href="/taller/curso"
         className="text-sm transition-opacity hover:opacity-80"
@@ -199,10 +205,18 @@ export default function CursoClient({
       )}
 
       {/* Reproductor a la izquierda y lista de módulos al costado (estilo
-          Skool). En móvil se apila: primero el video, después la lista. */}
-      <div className="mt-6 lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-8">
+          Skool). En móvil se apila: primero el video, después la lista.
+          En un curso escrito no hay columna de reproductor: el temario
+          ocupa la página entera. */}
+      <div
+        className={
+          esCursoEscrito
+            ? "mt-6"
+            : "mt-6 lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-8"
+        }
+      >
       {/* Reproductor: sólo con sesión se carga el video real */}
-      {desbloqueado && actual ? (
+      {esCursoEscrito ? null : desbloqueado && actual ? (
         <div>
           <ReproductorYouTube
             youtubeId={actual.youtubeId}
@@ -229,25 +243,14 @@ export default function CursoClient({
             background: "var(--surface)",
           }}
         >
-          {/* Curso escrito (lecciones con recursoSlug y sin video): se
-              invita a leer, no se anuncian videos que no son el formato. */}
-          {(() => {
-            const esEscrito = curso.modulos.some(
-              (m) => m.disponible && m.lecciones.some((l) => l.recursoSlug && !l.youtubeId),
-            );
-            return (
-              <>
-                <span className="text-4xl">{!desbloqueado ? "🔒" : esEscrito ? "📄" : "▶"}</span>
-                <p className="text-sm font-semibold">
-                  {!desbloqueado
-                    ? "Contenido para alumnos"
-                    : esEscrito
-                      ? "Este curso se lee. Abre cualquier tema del temario."
-                      : "Los videos de este curso se publican pronto."}
-                </p>
-              </>
-            );
-          })()}
+          {/* Solo se llega aquí en cursos con video: los escritos no
+              pintan reproductor. */}
+          <span className="text-4xl">{desbloqueado ? "▶" : "🔒"}</span>
+          <p className="text-sm font-semibold">
+            {desbloqueado
+              ? "Los videos de este curso se publican pronto."
+              : "Contenido para alumnos"}
+          </p>
           {!desbloqueado && (
             <p className="text-xs" style={{ color: "var(--muted)" }}>
               Desbloquea con tu contraseña para reproducir las clases.
@@ -256,8 +259,15 @@ export default function CursoClient({
         </div>
       )}
 
-      {/* Módulos: columna lateral con scroll propio en desktop */}
-      <aside className="mt-8 space-y-3 lg:sticky lg:top-6 lg:mt-0 lg:max-h-[calc(100vh-3rem)] lg:space-y-2 lg:overflow-y-auto lg:pr-1">
+      {/* Módulos: columna lateral con scroll propio en desktop. En un
+          curso escrito es el contenido principal, a ancho completo. */}
+      <aside
+        className={
+          esCursoEscrito
+            ? "space-y-3"
+            : "mt-8 space-y-3 lg:sticky lg:top-6 lg:mt-0 lg:max-h-[calc(100vh-3rem)] lg:space-y-2 lg:overflow-y-auto lg:pr-1"
+        }
+      >
         {curso.modulos.map((modulo, i) => {
           const conContenido = modulo.lecciones.filter((l) => idProgreso(l));
           const vistasModulo = conContenido.filter((l) => vistas[idProgreso(l)]).length;
@@ -290,8 +300,12 @@ export default function CursoClient({
                     )}
                   </p>
                   <h2 className="mt-1 font-semibold">{modulo.titulo}</h2>
-                  {/* En la columna lateral la descripción no cabe: solo móvil. */}
-                  <p className="mt-1 text-sm lg:hidden" style={{ color: "var(--muted)" }}>
+                  {/* En la columna lateral la descripción no cabe: solo móvil.
+                      En un curso escrito hay ancho de sobra y sí se muestra. */}
+                  <p
+                    className={esCursoEscrito ? "mt-1 text-sm" : "mt-1 text-sm lg:hidden"}
+                    style={{ color: "var(--muted)" }}
+                  >
                     {modulo.descripcion}
                   </p>
                 </div>

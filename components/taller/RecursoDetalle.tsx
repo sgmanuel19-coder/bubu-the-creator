@@ -1,34 +1,39 @@
 "use client";
 
-import { type RecursoBoveda } from "@/lib/taller/content";
+import { type RecursoBoveda, type Temario } from "@/lib/taller/content";
 import { trackTaller } from "@/lib/taller/analytics";
 import BandejaPago from "@/components/taller/BandejaPago";
 import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 import SeccionesRecurso, { IndiceSecciones } from "@/components/taller/SeccionesRecurso";
 import BotonLeido from "@/components/taller/BotonLeido";
+import TemarioCurso, { NavTemario } from "@/components/taller/TemarioCurso";
 
 export default function RecursoDetalle({
   recurso,
   desbloqueado,
   indiceTitulos,
+  temario,
 }: {
   recurso: RecursoBoveda;
   desbloqueado: boolean;
   // Bloqueado: la página server-side despoja secciones/descargas y solo
   // manda los títulos — el contenido real nunca viaja al navegador.
   indiceTitulos?: string[];
+  // Si el artículo es una lección de un curso, su temario viaja aquí y
+  // se muestra al costado: leer no debe sacarte del curso.
+  temario?: Temario;
 }) {
   const descargas = recurso.descargas ?? [];
   const esPremium = Boolean(recurso.premium);
 
-  return (
-    <main className="mx-auto max-w-3xl px-5 py-10">
+  const contenido = (
+    <>
       <a
-        href="/taller/recursos"
+        href={temario ? `/taller/curso/${temario.cursoSlug}` : "/taller/recursos"}
         className="text-sm transition-opacity hover:opacity-80"
         style={{ color: "var(--muted)" }}
       >
-        ← Toda la bóveda
+        ← {temario ? temario.cursoTitulo : "Toda la bóveda"}
       </a>
 
       <p className="mt-4 text-[11px] uppercase tracking-[0.2em]" style={{ color: "var(--green)" }}>
@@ -76,6 +81,7 @@ export default function RecursoDetalle({
         <>
           <SeccionesRecurso secciones={recurso.secciones} />
           <BotonLeido slug={recurso.slug} titulo={recurso.titulo} />
+          {temario && <NavTemario temario={temario} actual={recurso.slug} />}
         </>
       )}
 
@@ -182,6 +188,24 @@ export default function RecursoDetalle({
           )}
         </section>
       )}
+    </>
+  );
+
+  // Guía suelta de la bóveda: columna única, como siempre.
+  if (!temario) {
+    return <main className="mx-auto max-w-3xl px-5 py-10">{contenido}</main>;
+  }
+
+  // Lección de un curso: el artículo a la izquierda y el temario al
+  // costado (en móvil queda debajo, tras el contenido).
+  return (
+    <main className="mx-auto max-w-6xl px-5 py-10">
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:gap-10">
+        <div className="min-w-0">{contenido}</div>
+        <aside className="mt-10 lg:sticky lg:top-6 lg:mt-0">
+          <TemarioCurso temario={temario} actual={recurso.slug} />
+        </aside>
+      </div>
     </main>
   );
 }

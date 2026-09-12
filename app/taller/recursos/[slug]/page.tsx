@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import PortalNav from "@/components/taller/PortalNav";
 import RecursoDetalle from "@/components/taller/RecursoDetalle";
 import { bovedaGlobal, recursoBovedaPorSlug } from "@/lib/taller/boveda-server";
+import { temarioDeRecurso } from "@/lib/taller/content";
 import { estaDesbloqueado } from "@/lib/taller/session";
 
 export function generateStaticParams() {
@@ -73,6 +74,8 @@ export default async function RecursoPage({
         recurso={recursoSeguro}
         desbloqueado={desbloqueado}
         indiceTitulos={indiceTitulos}
+        // Solo títulos y slugs: ningún youtubeId viaja al navegador.
+        temario={temarioDeRecurso(slug)}
       />
     </>
   );

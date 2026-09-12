@@ -2258,6 +2258,42 @@ export function buscarCurso(slug: string): Curso | undefined {
   return TALLER.cursos.find((c) => c.slug === slug);
 }
 
+// ── Temario de un artículo ───────────────────────────────────────
+// Dentro de un artículo hay que seguir viendo el curso al que pertenece:
+// qué temas hay, cuál estás leyendo y cuál sigue. Esto devuelve ese
+// temario en forma SEGURA para el cliente — solo títulos y slugs, ningún
+// youtubeId viaja al navegador (ver la regla de oro de RecursoTarjeta).
+export type ItemTemario = { titulo: string; slug: string };
+export type ModuloTemario = { titulo: string; lecciones: ItemTemario[] };
+export type Temario = {
+  cursoTitulo: string;
+  cursoSlug: string;
+  modulos: ModuloTemario[];
+};
+
+export function temarioDeRecurso(slug: string): Temario | undefined {
+  for (const curso of TALLER.cursos) {
+    if (!curso.disponible) continue;
+    const pertenece = curso.modulos.some(
+      (m) => m.disponible && m.lecciones.some((l) => l.recursoSlug === slug),
+    );
+    if (!pertenece) continue;
+    const modulos = curso.modulos
+      .filter((m) => m.disponible)
+      .map((m) => ({
+        titulo: m.titulo,
+        lecciones: m.lecciones
+          .filter((l): l is Leccion & { recursoSlug: string } =>
+            Boolean(l.recursoSlug) && !l.youtubeId,
+          )
+          .map((l) => ({ titulo: l.titulo, slug: l.recursoSlug })),
+      }))
+      .filter((m) => m.lecciones.length > 0);
+    return { cursoTitulo: curso.titulo, cursoSlug: curso.slug, modulos };
+  }
+  return undefined;
+}
+
 // Busca un recurso por slug en todos los cursos (para su página de detalle).
 export function buscarRecurso(
   slug: string,
