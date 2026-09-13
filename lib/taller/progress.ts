@@ -40,6 +40,21 @@ export function setVista(youtubeId: string, vista: boolean) {
   safeSet(VISTAS_KEY, JSON.stringify(vistas));
 }
 
+// ── Ruta guiada ─────────────────────────────────────────────────
+// Con la ruta activa (por defecto), cada tema se abre al terminar el
+// anterior: obliga a pasar por todo en orden. El alumno puede apagarla
+// para ver el temario completo y saltar donde quiera; la preferencia se
+// guarda por dispositivo, igual que el progreso.
+const RUTA_KEY = "taller_ruta_v1";
+
+export function getModoRuta(): boolean {
+  return safeGet(RUTA_KEY) !== "0";
+}
+
+export function setModoRuta(activa: boolean) {
+  safeSet(RUTA_KEY, activa ? "1" : "0");
+}
+
 export function getUltimaLeccion(): string | null {
   return safeGet(ULTIMA_KEY);
 }

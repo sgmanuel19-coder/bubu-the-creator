@@ -2267,7 +2267,9 @@ export function buscarCurso(slug: string): Curso | undefined {
 // qué temas hay, cuál estás leyendo y cuál sigue. Esto devuelve ese
 // temario en forma SEGURA para el cliente — solo títulos y slugs, ningún
 // youtubeId viaja al navegador (ver la regla de oro de RecursoTarjeta).
-export type ItemTemario = { titulo: string; slug: string };
+// `gratis` = artículo público: la ruta guiada nunca lo cierra (es imán
+// de SEO y puerta de entrada, tiene que abrirse siempre).
+export type ItemTemario = { titulo: string; slug: string; gratis?: boolean };
 export type ModuloTemario = { titulo: string; lecciones: ItemTemario[] };
 export type Temario = {
   cursoTitulo: string;
@@ -2290,7 +2292,11 @@ export function temarioDeRecurso(slug: string): Temario | undefined {
           .filter((l): l is Leccion & { recursoSlug: string } =>
             Boolean(l.recursoSlug) && !l.youtubeId,
           )
-          .map((l) => ({ titulo: l.titulo, slug: l.recursoSlug })),
+          .map((l) => ({
+            titulo: l.titulo,
+            slug: l.recursoSlug,
+            gratis: BOVEDA_BASE.find((r) => r.slug === l.recursoSlug)?.gratis,
+          })),
       }))
       .filter((m) => m.lecciones.length > 0);
     return { cursoTitulo: curso.titulo, cursoSlug: curso.slug, modulos };

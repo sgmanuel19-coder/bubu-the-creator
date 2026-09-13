@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { type Curso, type Leccion, idProgreso } from "@/lib/taller/content";
 import { NIVELES, calcularGamificacion } from "@/lib/taller/gamificacion";
+import { ToggleRuta, useModoRuta } from "@/components/taller/TemarioCurso";
 import {
   getVistas,
   setVista,
@@ -134,12 +135,25 @@ export default function CursoClient({
   // Módulos que se abren por nivel de XP: el nivel sale del mismo
   // progreso local que pinta GamificacionHeader.
   const nivelActual = cargado ? calcularGamificacion(vistas).nivel : 1;
+  const { ruta: modoRuta } = useModoRuta();
 
   // Curso escrito: todo lo publicado son artículos, ni una lección con
   // video. No se pinta reproductor — un recuadro vacío de media pantalla
   // no aporta nada. El temario pasa a ser el contenido de la página.
   const esCursoEscrito =
     todasConContenido.length > 0 && todasConContenido.every((l) => !l.youtubeId);
+
+  // ── Ruta guiada ───────────────────────────────────────────────
+  // Con la ruta activa, un tema se cierra mientras quede alguno anterior
+  // sin terminar: obliga a pasar por todo en orden. Los artículos gratis
+  // nunca se cierran, y el alumno puede apagarla con "Ver todo".
+  const idxPendiente = todasConContenido.findIndex((l) => !vistas[idProgreso(l)]);
+  function cerradaPorRuta(leccion: Leccion): boolean {
+    if (!modoRuta || !cargado || idxPendiente < 0) return false;
+    if (leccion.recursoSlug && slugsGratis.includes(leccion.recursoSlug)) return false;
+    const i = todasConContenido.findIndex((x) => idProgreso(x) === idProgreso(leccion));
+    return i > idxPendiente;
+  }
 
   return (
     <main className={`mx-auto px-5 py-10 ${esCursoEscrito ? "max-w-4xl" : "max-w-7xl"}`}>
@@ -171,6 +185,9 @@ export default function CursoClient({
         </div>
         {desbloqueado && cargado && todasConContenido.length > 0 && (
           <div className="min-w-[180px]">
+            <div className="mb-2 flex justify-end">
+              <ToggleRuta />
+            </div>
             <div className="flex items-center justify-between text-xs" style={{ color: "var(--muted)" }}>
               <span>Tu avance</span>
               <span style={{ color: "var(--cream)" }}>{pctGeneral}%</span>
@@ -365,8 +382,11 @@ export default function CursoClient({
                     const activa =
                       desbloqueado && tieneVideo && actual?.youtubeId === leccion.youtubeId;
                     const vista = desbloqueado && cargado && id !== "" && !!vistas[id];
+                    // Ruta guiada: cerrada mientras quede un tema anterior
+                    // sin terminar (los gratis nunca se cierran).
+                    const cerrada = cerradaPorRuta(leccion);
                     // Sin sesión, ninguna lección es abrible.
-                    const abrible = desbloqueado && tieneVideo;
+                    const abrible = desbloqueado && tieneVideo && !cerrada;
                     // Artículo público: se lee sin sesión, así que no lleva candado.
                     const abiertaSinSesion =
                       !tieneVideo && !!leccion.recursoSlug && slugsGratis.includes(leccion.recursoSlug);
@@ -381,7 +401,7 @@ export default function CursoClient({
                         {desbloqueado ? (
                           <button
                             type="button"
-                            disabled={id === ""}
+                            disabled={id === "" || cerrada}
                             onClick={() => toggleVista(leccion)}
                             aria-label={vista ? "Marcar como no vista" : "Marcar como vista"}
                             className="ml-4 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] disabled:opacity-30"
@@ -407,9 +427,12 @@ export default function CursoClient({
                           <a
                             href={`/taller/recursos/${leccion.recursoSlug}`}
                             className="flex w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left text-[13px] leading-snug transition-colors hover:opacity-80"
-                            style={{ color: "var(--cream)" }}
+                            style={{ color: "var(--cream)", opacity: cerrada ? 0.45 : 1 }}
+                            title={cerrada ? "Se abre al terminar el tema anterior" : undefined}
                           >
-                            <span>📄 {leccion.titulo}</span>
+                            <span>
+                              {cerrada ? "🔒" : "📄"} {leccion.titulo}
+                            </span>
                             <span className="shrink-0" style={{ color: "var(--muted)" }}>
                               {leccion.duracion}
                             </span>
@@ -423,9 +446,10 @@ export default function CursoClient({
                             style={{ color: abrible ? "var(--cream)" : "var(--muted)" }}
                           >
                             <span>
-                              {activa ? "▶ " : ""}
+                              {activa ? "▶ " : cerrada ? "🔒 " : ""}
                               {leccion.titulo}
                               {desbloqueado && !tieneVideo && " · disponible pronto"}
+                              {cerrada && tieneVideo && " · termina el anterior"}
                             </span>
                             <span
                               className="shrink-0 tabular-nums"
