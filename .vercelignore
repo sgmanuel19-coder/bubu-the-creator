@@ -1,0 +1,12 @@
+# Se sube a Vercel solo lo que hace falta para construir y servir el sitio.
+# Nada de aquí lo importa el código (verificado con grep antes de excluirlo).
+#
+# OJO: private/ NO va aquí. Los PDFs de la Biblia viven fuera de /public
+# a propósito y la ruta de descarga los necesita (outputFileTracingIncludes
+# en next.config.ts los mete al bundle).
+
+docs/
+supabase/
+_scratch/
+projects/
+.claude/

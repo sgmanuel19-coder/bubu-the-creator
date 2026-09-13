@@ -41,6 +41,13 @@ const securityHeaders = [
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
   { key: 'Permissions-Policy', value: permissionsPolicy },
+  // frame-ancestors ya cubre navegadores modernos; esto es el respaldo
+  // para los viejos, que no leen CSP pero sí este header.
+  { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+  // Corta la referencia window.opener entre orígenes distintos. La variante
+  // "allow-popups" es a propósito: los CTA abren WhatsApp y Hotmart en
+  // pestaña nueva y con 'same-origin' a secas se romperían.
+  { key: 'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups' },
   { key: 'Content-Security-Policy', value: csp },
 ];
 
@@ -53,10 +60,24 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'drive.google.com' },
       { protocol: 'https', hostname: 'img.youtube.com' },
     ],
-    formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 86400,
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // Vercel factura transformaciones y escrituras de caché de imagen, y
+    // cada combinación formato × tamaño × quality es una distinta.
+    //
+    // Solo WebP: AVIF comprime ~20% mejor, pero obliga a transformar cada
+    // imagen dos veces y su encoder es bastante más lento. Con el volumen
+    // de /casos, ese 20% no paga el doble de transformaciones.
+    formats: ['image/webp'],
+    // 31 días en vez de 1. Con TTL de un día, una foto que no cambia nunca
+    // se volvía a transformar y a escribir en caché ~30 veces al mes.
+    minimumCacheTTL: 2678400,
+    // Menos breakpoints = menos variantes por imagen. 750/828 y 1080/1200
+    // eran pares casi idénticos: el ahorro de bytes no justificaba la
+    // variante extra.
+    deviceSizes: [640, 828, 1200, 1920],
+    imageSizes: [32, 64, 128, 256, 384],
+    // El código usa 75 (default) y 85. Declararlas evita que un quality
+    // nuevo suelto multiplique la caché sin que nadie se entere.
+    qualities: [75, 85],
   },
   experimental: {
     optimizePackageImports: [
