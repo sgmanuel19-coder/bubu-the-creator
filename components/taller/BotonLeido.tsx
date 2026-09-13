@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { TALLER } from "@/lib/taller/content";
-import { getVistas, setVista } from "@/lib/taller/progress";
+import { getVistas, setVista, EVENTO_LEIDO } from "@/lib/taller/progress";
 import { XP_POR_LECCION } from "@/lib/taller/gamificacion";
 import { trackTaller } from "@/lib/taller/analytics";
 
@@ -28,7 +28,14 @@ export default function BotonLeido({ slug, titulo }: { slug: string; titulo: str
   useEffect(() => {
     setLeido(!!getVistas()[id]);
     setCargado(true);
-  }, [id]);
+    // El lector paso a paso marca solo al terminar la clase: hay que
+    // reflejarlo aquí sin recargar la página.
+    const onLeido = (e: Event) => {
+      if ((e as CustomEvent<string>).detail === slug) setLeido(true);
+    };
+    window.addEventListener(EVENTO_LEIDO, onLeido);
+    return () => window.removeEventListener(EVENTO_LEIDO, onLeido);
+  }, [id, slug]);
 
   function toggle() {
     const nuevo = !leido;

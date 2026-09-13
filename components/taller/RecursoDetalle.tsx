@@ -83,12 +83,20 @@ export default function RecursoDetalle({
             // Ruta guiada: si te saltaste un tema, el contenido espera
             // detrás del aviso (con salida a "Leer igual").
             <PuertaRuta temario={temario} actual={recurso.slug}>
-              <SeccionesRecurso secciones={recurso.secciones} />
+              <SeccionesRecurso
+                secciones={recurso.secciones}
+                slug={recurso.slug}
+                gratis={recurso.gratis}
+              />
               <BotonLeido slug={recurso.slug} titulo={recurso.titulo} />
             </PuertaRuta>
           ) : (
             <>
-              <SeccionesRecurso secciones={recurso.secciones} />
+              <SeccionesRecurso
+                secciones={recurso.secciones}
+                slug={recurso.slug}
+                gratis={recurso.gratis}
+              />
               <BotonLeido slug={recurso.slug} titulo={recurso.titulo} />
             </>
           )}

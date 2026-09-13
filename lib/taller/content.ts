@@ -576,7 +576,18 @@ export type BloqueRecurso =
   // youtubeId vacío = hueco descrito, igual que la imagen.
   | { tipo: "video"; youtubeId?: string; titulo: string; pie?: string }
   // enlace: salida a una herramienta, repo o recurso externo
-  | { tipo: "enlace"; url: string; texto: string; nota?: string };
+  | { tipo: "enlace"; url: string; texto: string; nota?: string }
+  // ── pregunta: comprobación de lectura ──────────────────────────
+  // En el lector paso a paso, una sección con pregunta no deja avanzar
+  // hasta acertar: es lo que convierte la lectura en clase. En lectura
+  // corrida se muestra igual, como autoevaluación.
+  | {
+      tipo: "pregunta";
+      enunciado: string;
+      opciones: string[];
+      correcta: number; // índice de la opción correcta (base 0)
+      explicacion?: string; // por qué es esa, se revela al responder
+    };
 
 export type SeccionRecurso = {
   titulo: string; // ej. "El problema" (el número se pinta solo)

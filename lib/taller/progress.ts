@@ -55,6 +55,35 @@ export function setModoRuta(activa: boolean) {
   safeSet(RUTA_KEY, activa ? "1" : "0");
 }
 
+// Marca un artículo como leído y avisa a la página: el lector paso a
+// paso lo llama al terminar, y el botón "Lo leí" se pone al día sin
+// recargar.
+export const EVENTO_LEIDO = "taller:leido";
+
+export function marcarLeido(slug: string) {
+  setVista(`leido:${slug}`, true);
+  try {
+    window.dispatchEvent(new CustomEvent(EVENTO_LEIDO, { detail: slug }));
+  } catch {
+    // sin window (render en servidor): no hay a quién avisar
+  }
+}
+
+// ── Lector paso a paso ──────────────────────────────────────────
+// null = el alumno no ha elegido, y cada artículo aplica su default
+// (clase paso a paso en el material de alumno, lectura corrida en las
+// guías gratis, que son vitrina pública).
+const LECTOR_KEY = "taller_lector_v1";
+
+export function getModoPasos(): boolean | null {
+  const raw = safeGet(LECTOR_KEY);
+  return raw === null ? null : raw === "1";
+}
+
+export function setModoPasos(activo: boolean) {
+  safeSet(LECTOR_KEY, activo ? "1" : "0");
+}
+
 export function getUltimaLeccion(): string | null {
   return safeGet(ULTIMA_KEY);
 }

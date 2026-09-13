@@ -43,6 +43,18 @@ export const SECCIONES_IA_EN_ACCION: Record<string, SeccionRecurso[]> = {
           alt: "Grilla de 4 imágenes generadas con exactamente el mismo prompt, mostrando cuánto varían entre sí (misma escena, distinta cara, distinta luz).",
           pie: "El mismo prompt, cuatro corridas. Ninguna es igual a la otra.",
         },
+        {
+          tipo: "pregunta",
+          enunciado: "¿Por qué el mismo prompt te da una imagen distinta cada vez que lo corres?",
+          opciones: [
+            "Porque la plataforma guarda tu historial y evita repetirse",
+            "Porque cada generación arranca de un punto aleatorio y el modelo no recuerda la anterior",
+            "Porque el prompt está mal escrito y hay que afinarlo",
+          ],
+          correcta: 1,
+          explicacion:
+            "Por eso tu trabajo no es escribir el prompt perfecto una vez, sino reducir el margen de azar hasta que el resultado sea repetible.",
+        },
       ],
     },
     {
@@ -114,6 +126,15 @@ export const SECCIONES_IA_EN_ACCION: Record<string, SeccionRecurso[]> = {
           src: "",
           alt: "Comparación lado a lado del mismo sujeto: a la izquierda generado solo con descripción, a la derecha el mismo prompt con cámara y luz especificadas.",
           pie: "Izquierda: solo descripción. Derecha: mismo sujeto con cámara y luz dictadas.",
+        },
+        {
+          tipo: "pregunta",
+          enunciado:
+            "De las cuatro palancas, ¿cuál es la más subestimada y la que más rápido sube el nivel de una pieza?",
+          opciones: ["La descripción del sujeto", "La luz", "El modelo que elijas"],
+          correcta: 1,
+          explicacion:
+            "La descripción la escriben todos parecido, así que no diferencia. La luz decide si parece foto de agencia o foto de celular.",
         },
       ],
     },
@@ -257,6 +278,15 @@ export const SECCIONES_IA_EN_ACCION: Record<string, SeccionRecurso[]> = {
           youtubeId: "",
           titulo: "Comparación: la misma escena generada en Kling 3.0 y en Seedance 2.5, lado a lado.",
           pie: "La diferencia se ve en el movimiento, no en el frame congelado.",
+        },
+        {
+          tipo: "pregunta",
+          enunciado:
+            "La pieza lleva un vocero hablando, con el audio pegado a la imagen. ¿Con qué la produces?",
+          opciones: ["Kling 3.0", "Seedance 2.5", "Runway"],
+          correcta: 1,
+          explicacion:
+            "Seedance entra cuando hay voz o audio sincronizado; Kling, cuando la pieza vive del movimiento. Runway no está en el stack.",
         },
       ],
     },
@@ -421,6 +451,19 @@ export const SECCIONES_IA_EN_ACCION: Record<string, SeccionRecurso[]> = {
           tipo: "nota",
           texto:
             "Si el cliente no te puede dar una foto limpia de su producto, ese es el primer entregable — no el catálogo.",
+        },
+        {
+          tipo: "pregunta",
+          enunciado:
+            "El cliente no tiene ninguna foto limpia de su producto y quiere el catálogo para el viernes. ¿Qué haces primero?",
+          opciones: [
+            "Generar el producto desde cero con un prompt bien detallado",
+            "Conseguir o producir una foto limpia del producto real",
+            "Usar la foto de un producto parecido y cambiarle el logo",
+          ],
+          correcta: 1,
+          explicacion:
+            "El producto de la foto tiene que ser EL producto. Sin foto de origen, la foto de origen es el primer entregable.",
         },
       ],
     },
@@ -738,6 +781,19 @@ Paleta neutra, contraste medio.`,
           tipo: "parrafo",
           texto:
             "La sombra de contacto es la que más se olvida y la que más delata. Un producto sin esa sombrita pegada a la base parece recortado y pegado, aunque todo lo demás esté perfecto.",
+        },
+        {
+          tipo: "pregunta",
+          enunciado:
+            "La imagen del producto se ve impecable, pero parece recortada y pegada sobre el fondo. ¿Qué suele faltar?",
+          opciones: [
+            "Más resolución",
+            "La sombra de contacto justo debajo de la base",
+            "Un fondo más oscuro",
+          ],
+          correcta: 1,
+          explicacion:
+            "Es el detalle que más se olvida: sin esa sombra pegada a la base, el objeto flota aunque todo lo demás esté bien.",
         },
       ],
     },
