@@ -16,6 +16,12 @@ const BASE = 'https://www.resueltoagency.com';
  *  - /noticias/buscar    página funcional, sin contenido propio
  *  - /noticias/baja      baja del newsletter
  *  - /trap-bot           honeypot
+ *  - /masterclass        noindex a propósito (canibalizaría a /taller)
+ *  - /taller/curso       noindex: página interna del portal
+ *  - /taller/recursos    noindex: página interna del portal
+ *
+ * Pedir la indexación de una URL con noindex es una señal contradictoria:
+ * Google la reporta como error y le baja la confianza a todo el sitemap.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   // ── Portafolio: una URL por caso, con texto y resultado propios ──────────
@@ -80,12 +86,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.7,
     },
-    {
-      url: `${BASE}/masterclass`,
-      lastModified: new Date('2026-07-04'),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
 
     // ── Portal del taller (público con candado: la vista previa indexa) ────
     {
@@ -93,18 +93,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date('2026-07-09'),
       changeFrequency: 'weekly',
       priority: 0.9,
-    },
-    {
-      url: `${BASE}/taller/curso`,
-      lastModified: new Date('2026-07-09'),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${BASE}/taller/recursos`,
-      lastModified: new Date('2026-07-09'),
-      changeFrequency: 'weekly',
-      priority: 0.7,
     },
     ...guiasGratis,
 

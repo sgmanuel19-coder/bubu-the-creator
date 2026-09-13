@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     description:
       "El trabajo que decide si una pieza funciona ocurre antes de abrir cualquier herramienta. Eso se llama dirección creativa.",
     url: "https://www.resueltoagency.com/masterclass",
+    // Un openGraph propio NO hereda las imágenes del layout raíz: las
+    // sobrescribe. Sin esto la landing se comparte sin tarjeta visual.
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
 };
 

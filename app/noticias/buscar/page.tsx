@@ -42,9 +42,10 @@ async function buscar(q: string): Promise<{ filas: Fila[]; error: string | null 
   }
   try {
     const supabase = createSupabaseAdmin();
-    // Se escapan los comodines de PostgREST: sin esto, buscar "%"
+    // Se escapan los comodines de PostgREST: sin esto, buscar "%" o "*"
     // devuelve la tabla entera y una coma parte el filtro en dos.
-    const limpio = q.replace(/[%,()]/g, " ").trim();
+    // PostgREST traduce "*" a "%", así que también tiene que caer aquí.
+    const limpio = q.replace(/[%,()*]/g, " ").trim();
     if (!limpio) return { filas: [], error: null };
 
     const { data, error } = await supabase

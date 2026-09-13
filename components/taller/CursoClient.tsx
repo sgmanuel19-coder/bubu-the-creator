@@ -78,7 +78,7 @@ export default function CursoClient({
     const ultima = getUltimaLeccion();
     if (ultima && idsDelCurso.has(ultima)) {
       for (const m of curso.modulos) {
-        const l = m.lecciones.find((x) => x.youtubeId === ultima);
+        const l = m.lecciones.find((x) => idProgreso(x) === ultima);
         if (l) {
           setActual(l);
           break;
@@ -101,7 +101,7 @@ export default function CursoClient({
 
   function abrirLeccion(leccion: Leccion) {
     setActual(leccion);
-    setUltimaLeccion(leccion.youtubeId);
+    setUltimaLeccion(idProgreso(leccion));
     trackTaller("taller_leccion_vista", { curso: curso.slug, leccion: leccion.titulo });
     // En móvil la lista va debajo del video, así que hay que subir. En
     // desktop la lista vive al costado y el reproductor ya está a la vista.

@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     description:
       "Producción audiovisual con IA para empresas técnicas e industriales. Semanas, no meses. Precio cerrado.",
     url: "https://www.resueltoagency.com/produccion-ia",
+    // Un openGraph propio NO hereda las imágenes del layout raíz: las
+    // sobrescribe. Sin esto la landing se comparte sin tarjeta visual.
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
 };
 
