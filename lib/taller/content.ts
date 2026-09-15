@@ -106,6 +106,16 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Estructuras narrativas", duracion: "", youtubeId: "ojwjVl6WDik" },
       { titulo: "Géneros de storytelling", duracion: "", youtubeId: "3l4uybim6w8" },
       { titulo: "Cierre", duracion: "", youtubeId: "loc3LYxreLE" },
+      // Para leer: las guías de la bóveda que desarrollan cada clase.
+      { titulo: "El insight: los 6 tipos y cómo excavarlos", duracion: "Artículo", youtubeId: "", recursoSlug: "insight-los-6-tipos" },
+      { titulo: "Del insight al concepto: los 5 tipos que existen", duracion: "Artículo", youtubeId: "", recursoSlug: "del-insight-al-concepto" },
+      { titulo: "La Big Idea: los 5 tipos y cómo saber si la tuya es grande", duracion: "Artículo", youtubeId: "", recursoSlug: "la-big-idea" },
+      { titulo: "Retórica publicitaria: las 12 figuras del oficio", duracion: "Artículo", youtubeId: "", recursoSlug: "retorica-publicitaria" },
+      { titulo: "Las 10 estructuras narrativas publicitarias", duracion: "Artículo", youtubeId: "", recursoSlug: "estructuras-narrativas" },
+      { titulo: "Las 8 fórmulas de headline que no fallan", duracion: "Artículo", youtubeId: "", recursoSlug: "formulas-de-headline" },
+      { titulo: "Los 10 géneros del storytelling publicitario", duracion: "Artículo", youtubeId: "", recursoSlug: "generos-del-storytelling" },
+      { titulo: "Los 10 ganchos que detienen el scroll", duracion: "Artículo", youtubeId: "", recursoSlug: "los-10-ganchos" },
+      { titulo: "Estructuras que retienen: del gancho al CTA", duracion: "Artículo", youtubeId: "", recursoSlug: "estructuras-que-retienen" },
     ],
     pptUrl: "https://docs.google.com/presentation/d/1HS2vd-B0fVuPhkUl7YlGc5Bccdb_4tcHK53a7GlMUG4/edit?usp=sharing",
   },
@@ -122,6 +132,15 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Prompt maestro", duracion: "", youtubeId: "6l7YycR5X50" },
       { titulo: "Claude Code y Obsidian", duracion: "", youtubeId: "PhCin3wuCCU" },
       { titulo: "Cierre", duracion: "", youtubeId: "Sg4WPVVA2go" },
+      // Para leer: cómo se arma y se alimenta el Cerebro Creativo.
+      { titulo: "La Biblia Publicitaria: los 59 documentos, por bloque", duracion: "Artículo", youtubeId: "", recursoSlug: "biblia-publicitaria" },
+      { titulo: "Las plantillas del sistema y cómo se llenan", duracion: "Artículo", youtubeId: "", recursoSlug: "plantillas-sistema" },
+      { titulo: "La baraja de GPTs de mi proceso", duracion: "Artículo", youtubeId: "", recursoSlug: "baraja-gpts" },
+      { titulo: "Claude desde cero: tu primer día bien hecho", duracion: "Artículo", youtubeId: "", recursoSlug: "claude-desde-cero" },
+      { titulo: "Prompts que dirigen: háblale como director", duracion: "Artículo", youtubeId: "", recursoSlug: "prompts-que-dirigen" },
+      { titulo: "Memoria de Claude: que recuerde tu marca entre chats", duracion: "Artículo", youtubeId: "", recursoSlug: "memoria-de-claude" },
+      { titulo: "El estudio creativo que vive dentro de Claude", duracion: "Artículo", youtubeId: "", recursoSlug: "estudio-creativo-en-claude" },
+      { titulo: "El cerebro externo: una base de datos para tu operación", duracion: "Artículo", youtubeId: "", recursoSlug: "cerebro-externo-base-de-datos" },
     ],
     pptUrl: "https://docs.google.com/presentation/d/1EeYAlNUuW9Q5zgFgfM6Tn9mJUeuEJi7X4klFuGFbkks/edit?usp=sharing",
   },
@@ -136,6 +155,14 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Prompt semiótico", duracion: "", youtubeId: "bh-Mj7lxSb8" },
       { titulo: "Introducción a Higgsfield.ai", duracion: "", youtubeId: "HRs0ef7VPQA" },
       { titulo: "Mi stack de GPTs", duracion: "", youtubeId: "UplIh_Wfh8c" },
+      // Para leer: la producción a fondo, herramienta por herramienta.
+      { titulo: "Higgsfield desde cero: la máquina de imagen del sistema", duracion: "Artículo", youtubeId: "", recursoSlug: "higgsfield-desde-cero" },
+      { titulo: "De imagen a video: Kling y Seedance dirigidos", duracion: "Artículo", youtubeId: "", recursoSlug: "de-imagen-a-video" },
+      { titulo: "Control de cámara, ángulos y lente en video IA", duracion: "Artículo", youtubeId: "", recursoSlug: "control-de-camara-ia" },
+      { titulo: "Video de producto sin estudio, sin cámara y sin equipo", duracion: "Artículo", youtubeId: "", recursoSlug: "video-de-producto-sin-estudio" },
+      { titulo: "Manos y caras: por qué la IA las rompe y cómo evitarlo", duracion: "Artículo", youtubeId: "", recursoSlug: "manos-y-caras-ia" },
+      { titulo: "Edición con ritmo: las reglas de CapCut que separan amateur de pro", duracion: "Artículo", youtubeId: "", recursoSlug: "edicion-con-ritmo" },
+      { titulo: "Producción por lotes: de un clip a cincuenta", duracion: "Artículo", youtubeId: "", recursoSlug: "produccion-por-lotes" },
     ],
     pptUrl: "https://docs.google.com/presentation/d/1nyp6R1LKkMJaCRynxYFBsDVMXKdm65sMzgqMkQVrP_A/edit?usp=sharing",
   },
@@ -150,6 +177,12 @@ const MODULOS_MASTERCLASS: Modulo[] = [
       { titulo: "Caso Wellmax", duracion: "", youtubeId: "8SfS27Wb-YA" },
       { titulo: "Caso WIN", duracion: "", youtubeId: "EXOMRegCiyA" },
       { titulo: "Más ejemplos IA", duracion: "", youtubeId: "cbHNkDv5gm0" },
+      // Para leer: cómo se estructura una campaña y cómo se controla.
+      { titulo: "Arquitectura de campaña: Hero, Hub y Help", duracion: "Artículo", youtubeId: "", recursoSlug: "arquitectura-de-campana" },
+      { titulo: "De brief a guion en una tarde: la plantilla maestra", duracion: "Artículo", youtubeId: "", recursoSlug: "plantilla-maestra-campana" },
+      { titulo: "Matriz de contenido: Claude estudia tus redes y escribe la grilla", duracion: "Artículo", youtubeId: "", recursoSlug: "matriz-de-contenido" },
+      { titulo: "Desarma videos virales: la fórmula de cualquier hit", duracion: "Artículo", youtubeId: "", recursoSlug: "desarma-videos-virales" },
+      { titulo: "Checklist «parece agencia»: qué revisar antes de entregar", duracion: "Artículo", youtubeId: "", recursoSlug: "checklist-parece-agencia" },
     ],
     pptUrl: "https://docs.google.com/presentation/d/169gOJfWmDO63tImlVxfLCzv31u8YF-c0uYun9_lJ3jA/edit?usp=sharing",
   },
@@ -162,6 +195,15 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     lecciones: [
       { titulo: "Cobrar", duracion: "", youtubeId: "7Z_scucjzr4" },
       { titulo: "Cierre", duracion: "", youtubeId: "dLLDKMScKpc" },
+      // Para leer: la parte comercial completa. Los 5 primeros son
+      // nuevos y salen del Manual de Objeciones y el FAQ Comercial.
+      { titulo: "Las 12 preguntas de descubrimiento", duracion: "Artículo", youtubeId: "", recursoSlug: "preguntas-de-descubrimiento" },
+      { titulo: "De un DM a una llamada agendada", duracion: "Artículo", youtubeId: "", recursoSlug: "de-dm-a-llamada" },
+      { titulo: "El guion de la llamada, minuto por minuto", duracion: "Artículo", youtubeId: "", recursoSlug: "guion-de-la-llamada" },
+      { titulo: "Objeciones: el método VERA y las 10 más frecuentes", duracion: "Artículo", youtubeId: "", recursoSlug: "objeciones-metodo-vera" },
+      { titulo: "La propuesta y el precio", duracion: "Artículo", youtubeId: "", recursoSlug: "la-propuesta-y-el-precio" },
+      { titulo: "El embudo completo: del reel al DM al cliente", duracion: "Artículo", youtubeId: "", recursoSlug: "embudo-del-reel-al-cliente" },
+      { titulo: "Mide lo que vende: píxel, eventos y el número que importa", duracion: "Artículo", youtubeId: "", recursoSlug: "medir-lo-que-vende" },
     ],
   },
 ];
@@ -1721,6 +1763,90 @@ const BOVEDA_HIGGSFIELD: RecursoBoveda[] = [
   },
 ];
 
+// ── PARTE 5 · COBRAR: los artículos de la parte comercial ───────
+// La PARTE 5 de la Masterclass tiene 2 videos y ~6 minutos para el
+// tema que decide si esto es un negocio o un hobby. Estos cinco
+// artículos la completan. Salen del Manual Maestro de Objeciones
+// (método VERA) y del FAQ Comercial, en Obsidian, adaptados de vender
+// automatización a vender producción de contenido.
+const BOVEDA_COBRAR: RecursoBoveda[] = [
+  {
+    slug: "preguntas-de-descubrimiento",
+    titulo: "Las 12 preguntas de descubrimiento",
+    descripcion:
+      "Las doce cosas que tienes que saber antes de colgar la llamada, en el orden correcto, con las señales que separan un prospecto real de una pérdida de tiempo.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    cursoRelacionado: "Masterclass",
+    publicado: "2026-09-14",
+    tags: ["venta", "descubrimiento", "llamada"],
+    contenido: [
+      "El error que arruina más llamadas es presentarse demasiado. El descubrimiento existe para que el cliente diga en voz alta cuál es su problema y cuánto le cuesta: cuando eso sale de su boca, tu propuesta deja de ser un gasto.",
+    ],
+  },
+  {
+    slug: "de-dm-a-llamada",
+    titulo: "De un DM a una llamada agendada",
+    descripcion:
+      "Por qué mandar el precio por chat mata la venta, y la secuencia de cuatro mensajes que convierte un «¿cuánto cobras?» en una reunión en el calendario.",
+    tipo: "guia",
+    nivel: "principiante",
+    disponible: true,
+    cursoRelacionado: "Masterclass",
+    publicado: "2026-09-14",
+    tags: ["venta", "dm", "agenda"],
+    contenido: [
+      "El objetivo de un DM no es cerrar: es conseguir veinte minutos donde sí puedas preguntar. Todo lo que escribas se mide contra eso.",
+    ],
+  },
+  {
+    slug: "guion-de-la-llamada",
+    titulo: "El guion de la llamada, minuto por minuto",
+    descripcion:
+      "Los 30 minutos repartidos en bloques: apertura, descubrimiento, el puente a tu forma de trabajar, cómo se dice el precio y los tres cierres que funcionan.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    cursoRelacionado: "Masterclass",
+    publicado: "2026-09-14",
+    tags: ["venta", "guion", "cierre"],
+    contenido: [
+      "Una llamada sin estructura se vuelve una charla simpática que no termina en nada. El descubrimiento se lleva la mitad del tiempo y la presentación de lo que haces no pasa de cinco minutos.",
+    ],
+  },
+  {
+    slug: "objeciones-metodo-vera",
+    titulo: "Objeciones: el método VERA y las 10 que más vas a escuchar",
+    descripcion:
+      "Validar, Explorar, Reencuadrar, Avanzar. Con las diez objeciones reales de la venta de contenido, lo que significa cada una y la pregunta que separa la objeción del pretexto.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    cursoRelacionado: "Masterclass",
+    publicado: "2026-09-14",
+    tags: ["venta", "objeciones", "cierre"],
+    contenido: [
+      "El 80% de las objeciones no son la verdad profunda: son la primera defensa emocional del prospecto. Por eso nunca se responden con un argumento de venta inmediato.",
+    ],
+  },
+  {
+    slug: "la-propuesta-y-el-precio",
+    titulo: "La propuesta y el precio",
+    descripcion:
+      "La propuesta de una página que no se compara con nadie, por qué van tres opciones y no una, por qué cobrar barato te abarata, y el mínimo que tiene que estar por escrito.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    cursoRelacionado: "Masterclass",
+    publicado: "2026-09-14",
+    tags: ["venta", "precio", "propuesta"],
+    contenido: [
+      "Un presupuesto es una lista con un número al final e invita a comparar. Una propuesta cuenta el problema del cliente y lo que va a cambiar. Compiten en ligas distintas.",
+    ],
+  },
+];
+
 // ── EMPIEZA AQUÍ · la entrada del portal ────────────────────────
 // Las cuatro piezas de bienvenida. Van `gratis: true` a propósito:
 // también funcionan como vitrina pública de cómo está armado esto.
@@ -1901,6 +2027,7 @@ const BOVEDA_IA_EN_ACCION: RecursoBoveda[] = [
 
 export const BOVEDA_BASE: RecursoBoveda[] = [
   ...BOVEDA_EMPIEZA_AQUI,
+  ...BOVEDA_COBRAR,
   ...BOVEDA_IA_EN_ACCION,
   ...BOVEDA_PREMIUM,
   ...BOVEDA_MASTERCLASS,
