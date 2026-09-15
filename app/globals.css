@@ -1118,50 +1118,109 @@ body {
 .lp-metodo-item h3{ font-size:18px;font-weight:700;color:var(--hm-cream);margin-bottom:12px;letter-spacing:-.015em; }
 .lp-metodo-item p{ font-size:14px;line-height:1.68;color:var(--hm-muted);font-weight:300; }
 
-/* ── Embudo paso a paso (/empezar) ────────────────────────────────
-   La landing servida de a poco: un paso por pantalla, con barra de
-   avance arriba. Reusa .qz-op para las opciones y los tokens de la
-   landing para no inventar un segundo sistema visual. */
-.emb{ min-height:100vh;padding-bottom:64px; }
+/* ── Embudo de leads calificados · /empezar ───────────────────────
+   La landing servida por pasos. Cada paso se ancla en una pieza real
+   del portafolio, así se lee como landing y no como formulario:
+   layout a dos columnas (pieza | texto), mosaico de trabajo en el
+   gancho, y la cara antes del precio. */
+/* Tokens propios: /empezar no vive dentro de .hm, así que si no se
+   declaran acá el gradiente del titular queda inválido (background-image
+   none + color transparent = texto invisible) y los textos pierden la
+   jerarquía de grises. */
+.emb{ --hm-blue:#1A80FF; --hm-blue-soft:#7db6ff; --hm-cream:#F4F0DE; --hm-cream-dim:#D4CFA8; --hm-muted:#9E9882; --hm-line:rgba(244,240,222,.08); min-height:100vh;padding-bottom:56px;color:var(--hm-cream); }
 .emb-barra{ position:sticky;top:0;z-index:20;height:3px;background:rgba(244,240,222,.10); }
-.emb-barra-fill{ display:block;height:100%;background:#1A80FF;transition:width .5s cubic-bezier(.16,1,.3,1); }
-.emb-wrap{ padding-top:72px; }
-.emb-paso{ max-width:680px;margin:0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:18px; }
-.emb-h1{ font-size:clamp(34px,7vw,58px);font-weight:800;line-height:1.02;letter-spacing:-.035em;color:var(--hm-cream);margin:6px 0 0; }
-.emb-h2{ font-size:clamp(25px,4.4vw,36px);font-weight:800;line-height:1.14;letter-spacing:-.025em;color:var(--hm-cream);margin:6px 0 0;text-wrap:balance; }
-.emb-perfil{ font-size:clamp(28px,5vw,42px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:var(--hm-cream);margin:6px 0 0; }
-.emb-diag-tit{ font-size:17px;font-weight:600;color:rgba(26,128,255,.95); }
-.emb-sub{ font-size:16.5px;line-height:1.66;color:var(--hm-muted);font-weight:300;max-width:60ch; }
+.emb-barra-fill{ display:block;height:100%;background:#1A80FF;transition:width .55s cubic-bezier(.16,1,.3,1); }
+.emb-wrap{ padding-top:56px; }
+
+/* Gancho: mosaico de piezas + texto */
+.emb-hero{ display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);gap:52px;align-items:center;min-height:72vh; }
+.emb-hero-txt{ display:flex;flex-direction:column;align-items:flex-start;gap:16px; }
+.emb-mosaico{ display:grid;grid-template-columns:repeat(4,1fr);gap:9px; }
+.emb-mos-item{ display:block;overflow:hidden;border-radius:9px;aspect-ratio:2/3;border:1px solid rgba(244,240,222,.08); }
+.emb-mos-item img{ width:100%;height:100%;object-fit:cover;display:block; }
+.emb-mos-item:nth-child(3n){ transform:translateY(14px); }
+.emb-mos-item:nth-child(4n){ transform:translateY(-10px); }
+
+/* Paso a dos columnas */
+.emb-split{ display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1fr);gap:44px;align-items:center;min-height:62vh; }
+.emb-split-img{ margin:0;border-radius:14px;overflow:hidden;aspect-ratio:2/3;max-height:520px;border:1px solid rgba(244,240,222,.10); }
+.emb-split-img img{ width:100%;height:100%;object-fit:cover;display:block; }
+.emb-split-txt{ display:flex;flex-direction:column;align-items:flex-start;gap:15px; }
+.emb-full{ max-width:820px;margin:0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:17px; }
+
+/* Tipografía de los pasos */
+.emb-h1{ font-size:clamp(33px,5.4vw,56px);font-weight:800;line-height:1.02;letter-spacing:-.035em;color:var(--hm-cream);margin:4px 0 0; }
+.emb-h2{ font-size:clamp(24px,3.6vw,35px);font-weight:800;line-height:1.14;letter-spacing:-.025em;color:var(--hm-cream);margin:4px 0 0;text-wrap:balance; }
+.emb-perfil{ font-size:clamp(27px,4.4vw,40px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:var(--hm-cream);margin:4px 0 0; }
+.emb-diag-tit{ font-size:16.5px;font-weight:600;color:rgba(26,128,255,.95); }
+.emb-sub{ font-size:16px;line-height:1.66;color:var(--hm-muted);font-weight:300;max-width:52ch; }
+.emb-sub strong{ color:var(--hm-cream);font-weight:600; }
 .emb-txt{ font-size:15.5px;line-height:1.7;color:var(--hm-muted);font-weight:300;max-width:62ch; }
 .emb-txt strong{ color:var(--hm-cream);font-weight:600; }
 .emb-nota{ font-size:13.5px;color:var(--hm-muted);font-weight:300; }
-.emb-cred{ font-size:12.5px;line-height:1.6;color:rgba(244,240,222,.42);font-weight:300;max-width:58ch;margin-top:8px; }
-.emb-sub-lbl{ font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--hm-muted);font-weight:700;margin-top:12px; }
-.emb-cta{ margin-top:10px;padding:16px 30px;border:0;border-radius:11px;background:#1A80FF;color:#fff;font-size:15.5px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;transition:opacity .2s ease,transform .2s ease; }
+.emb-cred{ font-size:12px;line-height:1.6;color:rgba(244,240,222,.38);font-weight:300;max-width:54ch; }
+.emb-sub-lbl{ font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--hm-muted);font-weight:700;margin-top:8px; }
+
+/* Botones */
+.emb-cta{ margin-top:8px;padding:16px 30px;border:0;border-radius:11px;background:#1A80FF;color:#fff;font-size:15.5px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;transition:opacity .2s ease,transform .2s ease; }
 .emb-cta:hover{ opacity:.92;transform:translateY(-1px); }
 .emb-cta--pago{ font-size:17px;padding:18px 34px; }
-.emb-ops{ display:grid;gap:10px;width:100%;max-width:560px;margin-top:6px; }
-/* Diagnóstico */
+
+/* Opciones: tarjetas, no radios */
+.emb-ops{ display:grid;gap:10px;width:100%;margin-top:4px; }
+.emb-op{ width:100%;text-align:left;padding:16px 19px;border:1px solid rgba(244,240,222,.16);border-radius:11px;background:rgba(244,240,222,.02);color:var(--hm-cream);font-size:15px;font-weight:400;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;gap:3px;transition:border-color .2s ease,background .2s ease,transform .2s ease; }
+.emb-op:hover{ border-color:rgba(26,128,255,.75);background:rgba(26,128,255,.09);transform:translateX(4px); }
+.emb-op:focus-visible{ outline:2px solid rgba(26,128,255,.9);outline-offset:2px; }
+.emb-op i{ font-style:normal;font-size:12.5px;color:var(--hm-muted); }
+
+/* Ruta del diagnóstico */
 .emb-ruta{ list-style:none;padding:0;margin:0;display:grid;gap:11px;width:100%; }
-.emb-ruta li{ display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:15px;color:var(--hm-cream);font-weight:400; }
+.emb-ruta li{ display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:14.5px;line-height:1.55;color:var(--hm-cream);font-weight:400; }
 .emb-ruta-n{ width:22px;height:22px;border-radius:50%;background:rgba(26,128,255,.16);color:rgba(26,128,255,.95);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center; }
+
 /* Prueba */
-.emb-pf{ width:100%;margin:6px 0; }
-/* Stack y beneficios */
-.emb-stack,.emb-benef{ list-style:none;padding:0;margin:4px 0 0;display:grid;gap:12px;width:100%; }
-.emb-stack li,.emb-benef li{ display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start;font-size:15px;line-height:1.6;color:var(--hm-cream);font-weight:300; }
+.emb-pf{ width:100%;margin:4px 0; }
+.emb-marcas{ margin:8px 0 0;width:100%;border-radius:12px;overflow:hidden;border:1px solid rgba(244,240,222,.10); }
+.emb-marcas img{ width:100%;height:auto;display:block; }
+
+/* Stack con miniatura por ítem */
+.emb-stack{ list-style:none;padding:0;margin:4px 0 0;display:grid;gap:11px;width:100%; }
+.emb-stack li{ display:grid;grid-template-columns:64px 1fr auto;gap:15px;align-items:center;padding:11px;border:1px solid rgba(244,240,222,.10);border-radius:12px;background:rgba(244,240,222,.02); }
+.emb-stack li.es-estrella{ border-color:rgba(26,128,255,.45);background:rgba(26,128,255,.07); }
+.emb-stack-img{ display:block;width:64px;height:64px;border-radius:9px;overflow:hidden; }
+.emb-stack-img img{ width:100%;height:100%;object-fit:cover;display:block; }
+.emb-stack-txt{ font-size:14px;line-height:1.55;color:var(--hm-cream);font-weight:300; }
+.emb-estrella{ display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(26,128,255,.95);font-weight:700;margin-bottom:3px; }
+.emb-stack-val{ font-size:13.5px;font-weight:700;color:var(--hm-muted);font-variant-numeric:tabular-nums; }
 .emb-stack-check{ color:#4CC78A;font-weight:700;font-size:13px;line-height:1.7; }
+
 /* Objeción */
-.emb-obj{ width:100%;margin-top:8px;padding:20px 22px;border-left:3px solid rgba(26,128,255,.7);background:rgba(26,128,255,.06);border-radius:0 10px 10px 0;display:grid;gap:8px; }
+.emb-obj{ width:100%;margin-top:6px;padding:20px 22px;border-left:3px solid rgba(26,128,255,.7);background:rgba(26,128,255,.06);border-radius:0 11px 11px 0;display:grid;gap:8px; }
 .emb-obj-q{ font-size:16px;font-weight:700;color:var(--hm-cream); }
-/* Precio */
+
+/* Cierre: cara, precio y ruteo */
+.emb-cierre{ max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:15px; }
+.emb-cierre-cara{ display:flex;align-items:center;gap:15px;margin-bottom:6px; }
+.emb-cierre-cara img{ width:74px;height:74px;border-radius:50%;object-fit:cover;border:2px solid rgba(26,128,255,.5); }
+.emb-cierre-firma{ display:grid;gap:2px; }
+.emb-cierre-firma b{ font-size:15px;color:var(--hm-cream);font-weight:700; }
+.emb-cierre-firma i{ font-style:normal;font-size:13px;color:var(--hm-muted); }
+.emb-benef{ list-style:none;padding:0;margin:4px 0 0;display:grid;gap:10px;width:100%; }
+.emb-benef li{ display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start;font-size:15px;line-height:1.55;color:var(--hm-cream);font-weight:300; }
 .emb-precio-local{ font-size:13.5px;color:var(--hm-muted);font-weight:300; }
-.emb-ancla{ font-size:14px;line-height:1.65;color:rgba(244,240,222,.55);font-weight:300;max-width:60ch;margin-top:6px; }
-.emb-pago{ display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:8px; }
+.emb-ancla{ font-size:14px;line-height:1.65;color:rgba(244,240,222,.55);font-weight:300;max-width:60ch;margin-top:4px; }
+.emb-pago{ display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:6px; }
 .emb-wa{ font-size:14px;color:var(--hm-muted);text-decoration:underline;text-underline-offset:3px; }
 .emb-wa:hover{ color:var(--hm-cream); }
-/* Salida por correo */
-.emb-salida{ width:100%;margin-top:28px;padding-top:22px;border-top:1px solid rgba(244,240,222,.10); }
+
+/* Puerta del ticket alto: solo para el lead calificado */
+.emb-inco{ width:100%;margin-top:24px;padding:20px 22px;border:1px dashed rgba(255,209,102,.45);border-radius:12px;background:rgba(255,209,102,.05);display:grid;gap:7px; }
+.emb-inco-lbl{ font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#FFD166;font-weight:700; }
+.emb-inco-tit{ font-size:18px;font-weight:800;color:var(--hm-cream);letter-spacing:-.015em; }
+.emb-inco-cta{ justify-self:start;margin-top:5px;font-size:14.5px;font-weight:700;color:#FFD166;text-decoration:none;border-bottom:1px solid rgba(255,209,102,.45);padding-bottom:2px; }
+
+/* Salida por correo, fuera del camino */
+.emb-salida{ width:100%;margin-top:26px;padding-top:20px;border-top:1px solid rgba(244,240,222,.10); }
 .emb-salida-link{ background:none;border:0;padding:0;color:var(--hm-muted);font-size:13.5px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-family:inherit;text-align:left; }
 .emb-salida-link:hover{ color:var(--hm-cream); }
 .emb-form{ display:grid;gap:10px;max-width:460px; }
@@ -1171,20 +1230,94 @@ body {
 .emb-form-btn{ padding:12px 20px;border:0;border-radius:9px;background:rgba(26,128,255,.9);color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;justify-self:start; }
 .emb-error{ font-size:13px;color:#FF7A66; }
 .emb-ok{ font-size:14px;color:#4CC78A;font-weight:600; }
-/* Pie: atrás y el escape a la landing completa */
-.emb-pie{ max-width:680px;margin:44px auto 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding-top:20px;border-top:1px solid rgba(244,240,222,.08); }
+
+/* VSL en el gancho */
+.emb-vsl{ width:100%;max-width:520px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid rgba(26,128,255,.3);background:rgba(244,240,222,.03);margin:4px 0; }
+.emb-vsl iframe{ width:100%;height:100%;border:0;display:block; }
+.emb-vsl-hueco{ width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px; }
+.emb-vsl-hueco strong{ font-size:15px;color:var(--hm-cream); }
+.emb-vsl-hueco span{ font-size:11.5px;color:var(--hm-muted); }
+
+/* Marcas de donde sale el método */
+.emb-logos{ margin-top:38px;padding-top:24px;border-top:1px solid rgba(244,240,222,.08); }
+.emb-logos-lbl{ font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--hm-muted);font-weight:700;text-align:center; }
+.emb-logos-row{ display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:16px; }
+.emb-logos-row span{ font-size:13.5px;font-weight:600;color:rgba(244,240,222,.5);letter-spacing:.02em; }
+
+/* El ticket, en el diagnóstico */
+.emb-ticket{ font-size:15px;line-height:1.66;color:var(--hm-cream);font-weight:400;padding:14px 18px;border-left:3px solid rgba(26,128,255,.7);background:rgba(26,128,255,.07);border-radius:0 10px 10px 0;max-width:62ch; }
+
+/* Las cinco partes del método */
+.emb-partes{ display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;width:100%;margin:4px 0 12px; }
+.emb-parte{ border:1px solid rgba(244,240,222,.10);border-radius:13px;overflow:hidden;background:rgba(244,240,222,.02);display:flex;flex-direction:column; }
+.emb-parte figure{ margin:0;aspect-ratio:16/10;overflow:hidden; }
+.emb-parte figure img{ width:100%;height:100%;object-fit:cover;display:block; }
+.emb-parte-n{ font-size:11px;letter-spacing:.22em;color:rgba(26,128,255,.9);font-weight:700;padding:16px 17px 0; }
+.emb-parte h3{ font-size:17px;font-weight:700;color:var(--hm-cream);letter-spacing:-.015em;padding:7px 17px 0;margin:0; }
+.emb-parte > p:last-child{ font-size:13.5px;line-height:1.62;color:var(--hm-muted);font-weight:300;padding:8px 17px 18px;margin:0; }
+
+/* Los seis entregables */
+.emb-llevas{ display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;width:100%;margin:4px 0 12px; }
+.emb-lleva{ border:1px solid rgba(244,240,222,.10);border-radius:13px;overflow:hidden;background:rgba(244,240,222,.02);display:flex;flex-direction:column; }
+.emb-lleva.es-estrella{ border-color:rgba(26,128,255,.45);background:rgba(26,128,255,.07); }
+.emb-lleva figure{ margin:0;aspect-ratio:16/10;overflow:hidden; }
+.emb-lleva figure img{ width:100%;height:100%;object-fit:cover;display:block; }
+.emb-lleva h3{ font-size:15.5px;font-weight:700;color:var(--hm-cream);letter-spacing:-.01em;padding:15px 17px 0;margin:0; }
+.emb-lleva.es-estrella h3{ padding-top:4px; }
+.emb-lleva > p:last-child{ font-size:13.5px;line-height:1.62;color:var(--hm-muted);font-weight:300;padding:8px 17px 18px;margin:0; }
+.emb-lleva .emb-estrella{ padding:15px 17px 0;margin:0; }
+
+/* Quién enseña */
+.emb-autor{ display:grid;grid-template-columns:150px 1fr;gap:26px;align-items:start;width:100%;padding-bottom:26px;border-bottom:1px solid rgba(244,240,222,.10); }
+.emb-autor img{ width:150px;height:150px;border-radius:14px;object-fit:cover;border:1px solid rgba(26,128,255,.4); }
+.emb-autor-nombre{ font-size:21px;font-weight:800;color:var(--hm-cream);letter-spacing:-.02em; }
+.emb-autor-rol{ font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(26,128,255,.9);font-weight:600;margin:5px 0 13px; }
+
+/* FAQ */
+.emb-faq{ width:100%;display:grid;gap:9px;margin:4px 0 8px; }
+.emb-faq details{ border:1px solid rgba(244,240,222,.12);border-radius:11px;background:rgba(244,240,222,.02);overflow:hidden; }
+.emb-faq summary{ padding:15px 18px;font-size:14.5px;font-weight:600;color:var(--hm-cream);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:center; }
+.emb-faq summary::-webkit-details-marker{ display:none; }
+.emb-faq summary::after{ content:"+";color:rgba(26,128,255,.9);font-size:18px;font-weight:700;flex:none; }
+.emb-faq details[open] summary::after{ content:"–"; }
+.emb-faq details[open] summary{ border-bottom:1px solid rgba(244,240,222,.10); }
+.emb-faq details p{ padding:14px 18px 17px;margin:0;font-size:14px;line-height:1.68;color:var(--hm-muted);font-weight:300; }
+
+/* Bloque de precio dentro del cierre */
+.emb-precio{ width:100%;padding:26px 0 0;display:flex;flex-direction:column;align-items:flex-start;gap:13px;border-top:1px solid rgba(244,240,222,.10);margin-top:8px; }
+
+@media (max-width:760px){
+  .emb-autor{ grid-template-columns:1fr;gap:16px; }
+  .emb-autor img{ width:110px;height:110px; }
+  .emb-vsl{ max-width:100%; }
+}
+
+/* Pie */
+.emb-pie{ max-width:1100px;margin:40px auto 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding-top:18px;border-top:1px solid rgba(244,240,222,.08); }
 .emb-atras{ background:none;border:0;color:var(--hm-muted);font-size:13.5px;cursor:pointer;font-family:inherit;padding:0; }
 .emb-atras:hover{ color:var(--hm-cream); }
 .emb-todo{ font-size:13px;color:rgba(244,240,222,.45);text-decoration:underline;text-underline-offset:3px; }
 .emb-todo:hover{ color:var(--hm-cream); }
+
+@media (max-width:900px){
+  .emb-hero{ grid-template-columns:1fr;gap:30px;min-height:0; }
+  .emb-hero-txt{ order:-1; }
+  .emb-mosaico{ gap:7px; }
+  .emb-split{ grid-template-columns:1fr;gap:26px;min-height:0; }
+  .emb-split-img{ max-height:300px;aspect-ratio:16/10; }
+  .emb-split-txt{ order:-1; }
+}
 @media (max-width:640px){
-  .emb-wrap{ padding-top:44px; }
+  .emb-wrap{ padding-top:36px; }
   .emb-form-row{ grid-template-columns:1fr; }
-  .emb-pago{ gap:12px; }
   .emb-cta,.emb-cta--pago{ width:100%;text-align:center; }
+  .emb-stack li{ grid-template-columns:52px 1fr;gap:12px; }
+  .emb-stack-img{ width:52px;height:52px; }
+  .emb-stack-val{ display:none; }
+  .emb-mos-item:nth-child(3n),.emb-mos-item:nth-child(4n){ transform:none; }
 }
 @media (prefers-reduced-motion:reduce){
-  .emb-cta:hover{ transform:none; }
+  .emb-cta:hover,.emb-op:hover{ transform:none; }
   .emb-barra-fill{ transition:none; }
 }
 
