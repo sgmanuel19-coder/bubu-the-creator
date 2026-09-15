@@ -228,7 +228,8 @@ function RegistroCard() {
 // ── Tarjeta de producto (bóveda / grabado / vivo / mentoría) ──
 function ProductoCard({ tipo }: { tipo: "boveda" | "grabado" | "vivo" | "mentoria" }) {
   const p = TALLER.gate.productos[tipo];
-  const esVivo = tipo === "vivo";
+  // El destacado es el acceso completo, que es el único precio público.
+  const esVivo = tipo === "grabado";
   const vivo = TALLER.gate.productos.vivo;
   const href =
     tipo === "vivo"
@@ -649,14 +650,6 @@ export default function TallerGate() {
               >
                 <p className="text-sm leading-relaxed">
                   {s.estrella && "⭐ "}
-                  {s.soloVivo && (
-                    <span
-                      className="mr-2 rounded-full border px-2 py-0.5 text-[10px] uppercase tracking-wider"
-                      style={{ borderColor: "rgba(26,128,255,0.5)", color: "var(--green)" }}
-                    >
-                      Solo en vivo
-                    </span>
-                  )}
                   {s.item}
                 </p>
                 <span
@@ -692,15 +685,16 @@ export default function TallerGate() {
 
         {/* ── Precios ── */}
         <section id="precios" className="mt-20 scroll-mt-24">
-          <h2 className="text-center text-2xl font-bold">Elige cómo entrar</h2>
+          <h2 className="text-center text-2xl font-bold">Un solo precio</h2>
           <p className="mx-auto mt-2 max-w-lg text-center text-sm" style={{ color: "var(--muted)" }}>
-            Cada nivel incluye todo el anterior: el vivo trae el grabado, el grabado trae la
-            bóveda completa, y la mentoría se construye sobre el mismo sistema.
+            $99 al mes y tienes todo el portal abierto. Sin niveles, sin extras que comprar
+            aparte, y cancelas cuando quieras. Si es para tu equipo, se trabaja aparte.
           </p>
-          <div className="mx-auto mt-8 grid max-w-6xl gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <ProductoCard tipo="boveda" />
+          <div className="mx-auto mt-8 grid max-w-3xl gap-5 md:grid-cols-2">
+            {/* Un solo precio público ($99/mes) + el in-company, que se
+                cotiza. La bóveda y la sesión en vivo ya no son productos
+                sueltos: van incluidas en el acceso. */}
             <ProductoCard tipo="grabado" />
-            <ProductoCard tipo="vivo" />
             <ProductoCard tipo="mentoria" />
           </div>
         </section>

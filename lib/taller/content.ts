@@ -722,42 +722,27 @@ export type NivelVenta = {
   incluye: string[];
 };
 
+// UN SOLO PRECIO PÚBLICO (decidido 2026-09-14): $99 al mes da acceso a
+// todo. Los tres niveles técnicos (boveda < grabado < vivo) siguen
+// existiendo en auth.ts para la escalera de contraseñas, pero solo se
+// vende este. El nivel es "vivo" porque incluye la sesión mensual, y
+// "vivo" hereda grabado y bóveda: acceso completo.
+// La cohorte cerrada por empresa NO va en el catálogo: se vende por
+// llamada (ver gate.productos.mentoria).
 export const NIVELES_VENTA: NivelVenta[] = [
   {
-    nivel: "boveda",
-    nombre: "Bóveda de documentos",
-    precio: "$25",
-    descripcion:
-      "Solo los documentos: todas las guías, plantillas y proyectos de la bóveda — incluidos los dos que antes se vendían aparte. Sin las clases en video.",
-    incluye: [
-      "Toda la bóveda de guías, plantillas y proyectos",
-      "Los prompts cinematográficos y la plantilla maestra de campaña (antes de pago)",
-      "Actualizaciones: lo nuevo que se publique también entra",
-    ],
-  },
-  {
-    nivel: "grabado",
-    nombre: "Cursos grabados",
-    precio: "$200",
-    descripcion:
-      "La masterclass completa a tu ritmo + el curso bonus StorySelling Pro, con toda la bóveda de documentos incluida.",
-    incluye: [
-      "Masterclass grabada completa (6 partes)",
-      "Curso bonus: StorySelling Pro (Estrategia CAT)",
-      "Toda la bóveda de documentos incluida",
-      "Acceso de por vida a las actualizaciones",
-    ],
-  },
-  {
     nivel: "vivo",
-    nombre: "Cohorte en vivo",
-    precio: "$500",
+    nombre: "Acceso completo",
+    precio: "$99/mes",
     descripcion:
-      "Las sesiones en vivo de la cohorte actual, con todo el curso grabado y la bóveda completa incluidos.",
+      "Todo el portal abierto: las dos masterclass grabadas, los artículos, la bóveda entera y la sesión mensual de revisión de piezas. Cancelas cuando quieras.",
     incluye: [
-      "Sesiones en vivo de la cohorte + chat de comunidad",
-      "Todo el curso grabado incluido (clases + bonus)",
-      "Toda la bóveda de documentos incluida",
+      "Masterclass de Creatividad Publicitaria IA completa (6 partes)",
+      "IA en Acción y StorySelling Pro incluidos",
+      "Los 90+ recursos de la bóveda, con las guías a fondo",
+      "La Biblia Publicitaria: los 59 documentos",
+      "Sesión mensual en vivo de revisión de piezas",
+      "Todo lo que se publique mientras estés dentro",
     ],
   },
 ];
@@ -2078,10 +2063,9 @@ export const TALLER = {
 
   // ── Landing de venta ─────────────────────────────────────────
   gate: {
-    headline:
-      "Deja de generar al azar. En 7 días aprendes a pensar y dirigir la IA como un director creativo.",
+    headline: "Produce como una agencia. Cóbralo como una agencia.",
     subheadline:
-      "La Masterclass de Creatividad Publicitaria IA: el proceso real de un director creativo — insight, concepto y guion — y la producción completa con IA hasta el video final. Sin cámara, sin productora, sin equipo de rodaje. Empiezas desde cero si hace falta.",
+      "El sistema con el que dirijo el contenido publicitario de marcas que me pagan todos los meses: el criterio primero, la IA después. En YouTube aprendes a usar Higgsfield; acá aprendes qué pedirle, por qué, y cómo se lo cobras a una marca.",
     // Video de venta (VSL) — ID de YouTube oculto. Si lo dejas "" se
     // muestra un recuadro con marcador de posición ("Aquí va tu VSL").
     vslYoutubeId: "",
@@ -2095,9 +2079,12 @@ export const TALLER = {
       { titulo: "Ejemplo 3", youtubeId: "", driveId: "1tozakeM6avmDrvTPMwRZWCjagOIbHm2Y" },
     ] as { titulo: string; youtubeId: string; driveId?: string }[],
     // Prueba social, ej. "+15 alumnos en la primera cohorte". "" lo oculta.
-    alumnos: "",
+    // En lugar de un contador de alumnos (que hoy no diría nada), la
+    // prueba que ningún canal de IA puede copiar: marcas que pagan.
+    alumnos: "El sistema que produce hoy para Wellmax, WIN Internet y Livoltek",
     // Tamaño real del programa grabado (se muestra bajo el CTA principal).
-    duracion: "28 clases en 6 partes · ~6 horas de masterclass grabada",
+    duracion:
+      "56 clases grabadas · 50 lecturas del proceso · 90+ recursos en la bóveda · la Biblia de 59 documentos",
 
     // Visual "iceberg": la punta que todos ven vs. el sistema debajo.
     iceberg: {
@@ -2186,107 +2173,99 @@ export const TALLER = {
         item: "Plantillas: hoja de personaje, ADN de marca y biblioteca de prompts",
         valor: "$200",
       },
-      { item: "Comunidad de alumnos + soporte por WhatsApp por 30 días", valor: "$100" },
+      { item: "Comunidad de alumnos + soporte por WhatsApp", valor: "$100" },
       {
-        item: "Solo en vivo: sesión Q&A en directo + revisión grupal de tu primer proyecto",
+        item: "Sesión mensual en vivo: reviso piezas de los alumnos con criterio de director creativo",
         valor: "$200",
-        soloVivo: true,
       },
     ],
 
     ancla:
-      "Un proyecto de contenido publicitario con este sistema lo ofrezco a empresas desde $2,000. Hoy aprendes el sistema completo por menos del 10% de eso.",
+      "Un proyecto de contenido publicitario con este sistema lo cobro desde $2,000. El sistema completo, con todo lo que uso para producirlo, cuesta $99 al mes — y cancelas cuando quieras.",
 
     productos: {
+      // Las claves boveda y vivo se conservan porque el tipo y algunos
+      // enlaces las referencian, pero YA NO SE RENDERIZAN como tarjeta:
+      // el catálogo público muestra un solo precio (ver TallerGate).
       boveda: {
         nombre: "Bóveda de documentos",
-        precio: "$25",
-        precioLocal: "S/95",
-        nota: "sin las clases en video · acceso de por vida, con actualizaciones",
+        precio: "",
+        precioLocal: "",
+        nota: "incluida en el acceso completo",
         valorTotal: "",
-        beneficios: [
-          "Todas las guías, plantillas y proyectos de la bóveda",
-          "Los prompts cinematográficos y la plantilla maestra de campaña (antes de pago)",
-          "Actualizaciones: lo nuevo que se publique también entra",
-        ],
-        garantia:
-          "Te garantizo que lo que enseño es real: es lo que aplico hoy para trabajar con marcas grandes.",
+        beneficios: [],
+        garantia: "",
         garantiaLink: "https://www.resueltoagency.com/casos",
-        cta: "Quiero la bóveda",
+        cta: "",
         mensajeWhatsApp:
-          "Hola Manuel, quiero comprar el acceso a la Bóveda de documentos de la Masterclass de Creatividad Publicitaria IA",
+          "Hola Manuel, quiero información sobre el acceso a RESUELTO Academy",
       },
       grabado: {
-        nombre: "Curso grabado",
-        precio: "$200",
-        precioLocal: "S/760",
-        nota: "acceso inmediato · de por vida, con actualizaciones · cuotas disponibles",
+        nombre: "Acceso completo",
+        precio: "$99/mes",
+        precioLocal: "S/375",
+        nota: "acceso inmediato a todo · cancelas cuando quieras, sin penalidad",
         valorTotal: "$1,800",
         beneficios: [
-          "Las 6 partes completas: 28 clases, ~6 horas en total",
-          "Curso bonus: StorySelling Pro (28 clases más, 2h04)",
-          "Toda la bóveda de documentos y plantillas incluida",
-          "La Biblia Publicitaria completa (59 documentos)",
-          "La baraja de GPTs de mi proceso",
-          "Comunidad + soporte WhatsApp 30 días",
+          "Masterclass de Creatividad Publicitaria IA: 6 partes, 28 clases",
+          "IA en Acción: el proceso escrito, tema por tema",
+          "StorySelling Pro incluido (28 clases más)",
+          "La Biblia Publicitaria completa: 59 documentos",
+          "Los 90+ recursos de la bóveda y la baraja de GPTs de mi proceso",
+          "Sesión mensual en vivo: reviso piezas de los alumnos",
+          "Todo lo que publique mientras estés dentro",
         ],
+        // No es una garantía de devolución y no se llama así: es la
+        // credencial. Lo que reduce el riesgo es que cancelas cuando
+        // quieras — eso va en la nota del precio.
         garantia:
-          "Te garantizo que lo que enseño es real: es lo que aplico hoy para trabajar con marcas grandes.",
+          "Lo que enseño es lo que aplico hoy para Wellmax, WIN Internet y Livoltek. Un proyecto con este sistema lo cobro desde $2,000; puedes ver el trabajo antes de decidir.",
         garantiaLink: "https://www.resueltoagency.com/casos",
-        cta: "Quiero el sistema completo",
+        cta: "Entrar por $99 al mes",
         // Link de checkout de Hotmart. "" → el botón cae a WhatsApp.
         hotmartUrl: "",
         mensajeWhatsApp:
-          "Hola Manuel, quiero comprar el curso grabado de la Masterclass de Creatividad Publicitaria IA",
+          "Hola Manuel, quiero entrar a RESUELTO Academy con el acceso completo de $99 al mes",
       },
       vivo: {
-        nombre: "Masterclass en vivo",
-        precio: "$500",
-        precioLocal: "S/1,900",
-        nota: "cohorte grupal · incluye el grabado de por vida · cuotas disponibles",
-        valorTotal: "$2,000",
-        // Precio fundador — "" lo oculta. Ej: "Precio fundador cohorte 1: $197 — solo primeros 10"
-        precioFundador: "",
-        // Fecha de la próxima cohorte — "" lo oculta.
-        proximaCohorte: "",
-        // Cupos — "" lo oculta. Ej: "Quedan 12 de 20 cupos". Solo escasez REAL.
-        cupos: "",
-        beneficios: [
-          "Todo lo del curso grabado, de por vida",
-          "~4.5 horas en vivo con Manuel, grupo de 15-20 personas",
-          "Sesión Q&A en directo",
-          "Revisión grupal de tu primer proyecto",
-        ],
-        garantia:
-          "Te garantizo que lo que enseño es real: es lo que aplico hoy para trabajar con marcas grandes.",
-        garantiaLink: "https://www.resueltoagency.com/casos",
-        cta: "Próxima fecha aún no disponible",
-        mensajeWhatsApp:
-          "Hola Manuel, quiero que me avisen de la próxima fecha de la Masterclass en vivo",
-      },
-      mentoria: {
-        nombre: "Mentoría para empresas",
+        nombre: "Sesión mensual",
         precio: "",
         precioLocal: "",
-        nota: "individual 1 a 1 o grupal para tu equipo · contenido adaptado a tu especialidad",
+        nota: "incluida en el acceso completo",
+        valorTotal: "",
+        precioFundador: "",
+        proximaCohorte: "",
+        cupos: "",
+        beneficios: [],
+        garantia: "",
+        garantiaLink: "https://www.resueltoagency.com/casos",
+        cta: "",
+        mensajeWhatsApp:
+          "Hola Manuel, quiero información sobre la sesión mensual de revisión de piezas",
+      },
+      mentoria: {
+        nombre: "Programa in-company",
+        precio: "A cotizar",
+        precioLocal: "",
+        nota: "cohorte cerrada para tu empresa · su marca como caso de trabajo",
         valorTotal: "",
         beneficios: [
-          "Todo lo del curso grabado, de por vida",
-          "Sesiones en vivo adaptadas a tu marca o a tu equipo",
-          "Fechas a tu medida, cuando la necesites",
-          "Individual 1 a 1 o grupal para varias personas de tu empresa",
+          "El programa completo para 8 a 15 personas de tu equipo",
+          "Cuatro sesiones en vivo, con tu propia marca como caso",
+          "Fechas a la medida de tu operación",
+          "Reporte de avance del equipo para la gerencia",
         ],
         garantia:
-          "Te garantizo que lo que enseño es real: es lo que aplico hoy para trabajar con marcas grandes.",
+          "El mismo sistema con el que produzco para Wellmax, WIN Internet y Livoltek, instalado en tu equipo.",
         garantiaLink: "https://www.resueltoagency.com/casos",
-        cta: "Cotizar mi mentoría",
+        cta: "Conversar el programa para mi empresa",
         mensajeWhatsApp:
-          "Hola Manuel, quiero información sobre la mentoría individual o grupal empresarial de la Masterclass de Creatividad Publicitaria IA",
+          "Hola Manuel, quiero información sobre el programa in-company de RESUELTO Academy para mi equipo",
       },
     },
 
     credenciales:
-      "Dictado por Manuel Severo — ex TBWA Perú y Fahrenheit DDB. +2,000 piezas producidas para marcas como Wong, BCP, Cencosud y Redondos. Validado: el primer taller privado se vendió a $250.",
+      "Dictado por Manuel Severo — ex TBWA Perú y Fahrenheit DDB. +2,000 piezas producidas para marcas como Wong, BCP, Cencosud y Redondos. Hoy este mismo sistema produce el contenido de Wellmax, WIN Internet y Livoltek.",
 
     // Tarjeta "Quién te enseña" — foto + historia en primera persona.
     // No repite las credenciales de arriba: es el POR QUÉ, no el currículum.
@@ -2299,7 +2278,7 @@ export const TALLER = {
     },
 
     paraQuien:
-      "¿Vives de crear contenido o quieres vivir de eso? Esto es para ti. Creativos, community managers, editores y freelancers que quieren cobrar por producir contenido con IA; dueños de agencias chicas y emprendedores con marca propia. ¿Solo tienes curiosidad por la IA? No lo es.",
+      "Si ya produjiste con IA, te salió bonito y no te compró nadie, esto es para ti: el problema no era la herramienta, era el criterio. También si vendes algo bueno y tu contenido no se parece al nivel de lo que ofreces, o si produces por encargo y estás compitiendo por precio. Si lo que buscas es un tutorial de herramientas, en YouTube lo tienes gratis y te lo digo sin rodeos.",
 
     // Testimonios de alumnos reales. [] oculta la sección — no inventes.
     testimonios: [] as { texto: string; nombre: string }[],
@@ -2310,8 +2289,24 @@ export const TALLER = {
         a: "No. Vas a usarlas para producir, pero el curso no es un tutorial de esas plataformas — es el proceso estratégico que decide qué producir y por qué, antes de tocarlas. Te explico lo necesario de cada herramienta sobre la marcha, para que puedas aplicar el sistema aunque nunca las hayas usado.",
       },
       {
-        q: "¿Cuál elijo: la bóveda, el grabado o el vivo?",
-        a: "Si solo quieres las guías y plantillas para aplicar el sistema por tu cuenta, la Bóveda ($25) alcanza. Si quieres las clases completas paso a paso, el curso grabado ($200) — incluye la bóveda. Si además quieres verlo conmigo en vivo, con Q&A y revisión de tu proyecto, el vivo ($500) — incluye todo lo anterior.",
+        q: "¿Esto no lo encuentro gratis en YouTube?",
+        a: "Los tutoriales de herramientas, sí — y te lo digo yo. Lo que no está en YouTube es el criterio: cómo se piensa una pieza antes de generarla, cómo se arma un Cerebro Creativo con el oficio publicitario cargado adentro, y cómo se le cobra a una marca. Eso no lo puede grabar alguien que no tiene clientes que le paguen por hacerlo.",
+      },
+      {
+        q: "¿Hay un solo precio?",
+        a: "Sí: $99 al mes y tienes todo abierto — las dos masterclass, los artículos del proceso, la bóveda entera, la Biblia de 59 documentos y la sesión mensual en vivo. No hay niveles ni extras que comprar aparte.",
+      },
+      {
+        q: "¿Puedo cancelar?",
+        a: "Cuando quieras, sin penalidad ni llamada para retenerte. Pagas el mes que estás usando y listo. Por eso no te pido contrato ni permanencia: si el primer mes no te sirve, te vas.",
+      },
+      {
+        q: "¿Hay devolución de dinero?",
+        a: "No, y prefiero decirlo de frente en lugar de venderte una garantía que no pienso cumplir. Lo que hago es quitarte el riesgo por otro lado: puedes ver mi trabajo real antes de entrar, y cancelas el mes que quieras. Si a los 30 días no te sirvió, te costó $99 y no un curso completo.",
+      },
+      {
+        q: "¿Qué pasa cada mes? ¿Por qué es suscripción y no pago único?",
+        a: "Porque el material se mueve: cada mes entran guías nuevas a la bóveda, se publican artículos del proceso, y hay una sesión en vivo donde reviso piezas de los alumnos. Además el portal trae La noticIA, que se actualiza todos los días con lo que cambió en las herramientas. Un pago único te daría una foto; la suscripción te da el sistema mientras sigue vivo.",
       },
       {
         q: "¿Necesito saber de publicidad?",
@@ -2331,7 +2326,11 @@ export const TALLER = {
       },
       {
         q: "¿Cuánto tiempo tengo el acceso?",
-        a: "De por vida, con las actualizaciones del contenido.",
+        a: "Mientras tu suscripción esté activa tienes todo abierto, incluido lo que se publique nuevo. Si cancelas, dejas de entrar al portal — y puedes volver cuando quieras.",
+      },
+      {
+        q: "Quiero esto para mi equipo, no para mí solo.",
+        a: "Eso se trabaja aparte: una cohorte cerrada para tu empresa, con tu propia marca como caso y fechas a la medida de tu operación. Escríbeme y lo conversamos.",
       },
     ],
   },

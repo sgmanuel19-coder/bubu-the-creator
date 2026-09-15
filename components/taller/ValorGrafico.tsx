@@ -19,7 +19,6 @@ export default function ValorGrafico() {
     etiqueta: s.item.split(":")[0].split("—")[0].trim(),
     valor: parseValor(s.valor),
     estrella: !!s.estrella,
-    soloVivo: !!s.soloVivo,
   }));
   const total = items.reduce((n, i) => n + i.valor, 0);
   const max = Math.max(...items.map((i) => i.valor));
@@ -83,14 +82,6 @@ export default function ValorGrafico() {
               <span className="truncate">
                 {it.estrella && "⭐ "}
                 {it.etiqueta}
-                {it.soloVivo && (
-                  <span
-                    className="ml-2 rounded-full border px-2 py-0.5 text-[9px] uppercase tracking-wider"
-                    style={{ borderColor: "rgba(26,128,255,0.5)", color: "var(--green)" }}
-                  >
-                    Solo en vivo
-                  </span>
-                )}
               </span>
               <span className="shrink-0 font-semibold tabular-nums" style={{ color: "var(--muted)" }}>
                 ${it.valor}
