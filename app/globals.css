@@ -1118,6 +1118,61 @@ body {
 .lp-metodo-item h3{ font-size:18px;font-weight:700;color:var(--hm-cream);margin-bottom:12px;letter-spacing:-.015em; }
 .lp-metodo-item p{ font-size:14px;line-height:1.68;color:var(--hm-muted);font-weight:300; }
 
+/* ── Quiz de diagnóstico ──────────────────────────────────────────
+   Embudo de la landing: una pregunta por pantalla, resultado con
+   nombre y captura del lead. Reusa los tokens de la landing (azul
+   #1A80FF sobre carbón) para que no parezca un widget pegado. */
+.qz{ max-width:660px;margin:36px auto 0;border:1px solid rgba(26,128,255,.28);border-radius:16px;padding:30px 28px;background:rgba(26,128,255,.04); }
+.qz-barra{ display:flex;gap:6px;margin-bottom:26px; }
+.qz-seg{ height:3px;flex:1;border-radius:2px;background:rgba(244,240,222,.14);transition:background .35s ease; }
+.qz-seg.on{ background:rgba(26,128,255,.9); }
+.qz-num{ font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(26,128,255,.9);font-weight:700; }
+.qz-preg{ font-size:22px;font-weight:800;color:var(--hm-cream);letter-spacing:-.02em;margin:10px 0 6px;line-height:1.2; }
+.qz-ayuda{ font-size:13.5px;color:var(--hm-muted);font-weight:300;margin-bottom:20px; }
+.qz-ops{ display:grid;gap:10px; }
+.qz-op{ width:100%;text-align:left;padding:15px 18px;border:1px solid rgba(244,240,222,.16);border-radius:10px;background:transparent;color:var(--hm-cream);font-size:14.5px;font-weight:400;cursor:pointer;transition:border-color .2s ease,background .2s ease,transform .2s ease; }
+.qz-op:hover{ border-color:rgba(26,128,255,.7);background:rgba(26,128,255,.08);transform:translateX(3px); }
+.qz-op:focus-visible{ outline:2px solid rgba(26,128,255,.9);outline-offset:2px; }
+.qz-atras{ margin-top:18px;background:none;border:0;color:var(--hm-muted);font-size:13px;cursor:pointer;padding:4px 0; }
+.qz-atras:hover{ color:var(--hm-cream); }
+/* Resultado */
+.qz-perfil{ font-size:26px;font-weight:800;color:var(--hm-cream);letter-spacing:-.02em;margin:10px 0 4px;line-height:1.14; }
+.qz-res-tit{ font-size:16px;font-weight:600;color:rgba(26,128,255,.95);margin-bottom:12px; }
+.qz-res-txt{ font-size:14.5px;line-height:1.7;color:var(--hm-muted);font-weight:300; }
+.qz-sub{ font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--hm-muted);font-weight:700;margin:26px 0 12px; }
+.qz-ruta{ list-style:none;display:grid;gap:12px;padding:0;margin:0; }
+.qz-ruta li{ display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start; }
+.qz-ruta-n{ width:22px;height:22px;border-radius:50%;background:rgba(26,128,255,.16);color:rgba(26,128,255,.95);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center; }
+.qz-ruta b{ display:block;font-size:14.5px;font-weight:600;color:var(--hm-cream); }
+.qz-ruta i{ display:block;font-size:13px;font-style:normal;color:var(--hm-muted);font-weight:300;margin-top:2px; }
+/* Captura */
+.qz-form{ margin-top:28px;padding-top:24px;border-top:1px solid rgba(244,240,222,.12);display:grid;gap:12px; }
+.qz-form-tit{ font-size:14.5px;font-weight:600;color:var(--hm-cream); }
+.qz-form-row{ display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+.qz-form input{ width:100%;padding:13px 15px;border:1px solid rgba(244,240,222,.18);border-radius:9px;background:rgba(13,12,8,.5);color:var(--hm-cream);font-size:14px;font-family:inherit; }
+.qz-form input::placeholder{ color:rgba(244,240,222,.4); }
+.qz-form input:focus{ outline:none;border-color:rgba(26,128,255,.8); }
+.qz-enviar{ padding:14px 22px;border:0;border-radius:10px;background:#1A80FF;color:#fff;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .2s ease; }
+.qz-enviar:hover{ opacity:.9; }
+.qz-enviar:disabled{ opacity:.5;cursor:default; }
+.qz-error{ font-size:13px;color:#FF7A66; }
+.qz-legal{ font-size:12px;color:var(--hm-muted);font-weight:300; }
+.qz-ok{ margin-top:28px;padding-top:24px;border-top:1px solid rgba(244,240,222,.12); }
+.qz-ok-tit{ font-size:15px;font-weight:700;color:#4CC78A; }
+.qz-ok-txt{ font-size:13.5px;color:var(--hm-muted);font-weight:300;margin-top:4px; }
+.qz-cierre{ margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;gap:16px; }
+.qz-wa{ padding:13px 20px;border:1px solid rgba(26,128,255,.6);border-radius:10px;color:var(--hm-cream);font-size:14px;font-weight:600;text-decoration:none;transition:background .2s ease; }
+.qz-wa:hover{ background:rgba(26,128,255,.12); }
+@media (max-width:640px){
+  .qz{ padding:24px 20px;border-radius:14px; }
+  .qz-preg{ font-size:20px; }
+  .qz-perfil{ font-size:23px; }
+  .qz-form-row{ grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion:reduce){
+  .qz-op:hover{ transform:none; }
+}
+
 /* Quién dirige */
 /* Una sola columna, acotada para que la bio no quede en líneas largas
    e incómodas de leer. El collage de marcas va debajo, a todo el ancho. */

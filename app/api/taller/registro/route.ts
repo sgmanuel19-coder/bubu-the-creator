@@ -17,6 +17,11 @@ type Lead = {
   producto: string;
   fecha: string;
   origen: string;
+  // Solo cuando el lead viene del quiz de diagnóstico: el perfil que le
+  // salió y lo que respondió. Sirve para saber con qué abrir la
+  // conversación en vez de escribir un "hola" en frío.
+  diagnostico?: string;
+  respuestas?: string;
 };
 
 async function enviarAN8n(lead: Lead): Promise<boolean> {
@@ -41,14 +46,20 @@ async function enviarPorCorreo(lead: Lead): Promise<boolean> {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
-        _subject: `Nuevo registro a la masterclass: ${lead.nombre}`,
+        _subject: lead.diagnostico
+          ? `Quiz: ${lead.nombre} — ${lead.diagnostico}`
+          : `Nuevo registro a la masterclass: ${lead.nombre}`,
         _template: "table",
         Nombre: lead.nombre,
         Correo: lead.email,
         Compró: lead.producto,
+        ...(lead.diagnostico ? { Diagnóstico: lead.diagnostico } : {}),
+        ...(lead.respuestas ? { Respondió: lead.respuestas } : {}),
         Fecha: lead.fecha,
         Origen: lead.origen,
-        "Siguiente paso": "Responder a su correo con la contraseña de acceso.",
+        "Siguiente paso": lead.diagnostico
+          ? "Escribirle retomando su diagnóstico, no con un saludo en frío."
+          : "Responder a su correo con la contraseña de acceso.",
       }),
       signal: AbortSignal.timeout(10_000),
     });
@@ -67,12 +78,18 @@ export async function POST(request: Request) {
   let email = "";
   let producto = "";
   let honeypot = "";
+  let diagnostico = "";
+  let respuestas = "";
   try {
     const body = await request.json();
     nombre = typeof body?.nombre === "string" ? body.nombre.trim().slice(0, 120) : "";
     email = typeof body?.email === "string" ? body.email.trim().slice(0, 160) : "";
     producto = typeof body?.producto === "string" ? body.producto.trim().slice(0, 60) : "";
     honeypot = typeof body?.web === "string" ? body.web.trim() : "";
+    diagnostico =
+      typeof body?.diagnostico === "string" ? body.diagnostico.trim().slice(0, 120) : "";
+    respuestas =
+      typeof body?.respuestas === "string" ? body.respuestas.trim().slice(0, 600) : "";
   } catch {
     // body inválido → cae a la validación
   }
@@ -96,6 +113,8 @@ export async function POST(request: Request) {
     producto: producto || "no indicado",
     fecha: new Date().toISOString(),
     origen: "resueltoagency.com/taller",
+    ...(diagnostico ? { diagnostico } : {}),
+    ...(respuestas ? { respuestas } : {}),
   };
 
   if (await enviarAN8n(lead)) return NextResponse.json({ ok: true });

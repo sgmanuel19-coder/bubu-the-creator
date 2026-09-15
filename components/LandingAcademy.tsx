@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 import LandingPortafolio from "@/components/LandingPortafolio";
+import QuizDiagnostico from "@/components/QuizDiagnostico";
 import { NIVELES_VENTA, TALLER } from "@/lib/taller/content";
 
 // ============================================================
@@ -541,6 +542,13 @@ export default function LandingAcademy() {
           sub="Te responde él, el mismo día y sin intermediarios."
         />
       </section>
+
+      {/* ── DIAGNÓSTICO ──
+          Va justo antes del precio: el que llega hasta acá ya vio la cara
+          y las marcas, y el quiz lo hace reconocer su propio problema
+          antes de ver el número. Además captura al que no está listo
+          para escribir por WhatsApp, que antes se iba sin dejar rastro. */}
+      <QuizDiagnostico whatsapp={TALLER.whatsapp} />
 
       {/* ── PRECIOS ── */}
       <section className="container-base hm-section">
