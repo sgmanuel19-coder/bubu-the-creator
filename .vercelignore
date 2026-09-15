@@ -4,9 +4,15 @@
 # OJO: private/ NO va aquí. Los PDFs de la Biblia viven fuera de /public
 # a propósito y la ruta de descarga los necesita (outputFileTracingIncludes
 # en next.config.ts los mete al bundle).
+#
+# TODOS los patrones van ANCLADOS con "/" al inicio. Sin la barra, el
+# patrón borra cualquier carpeta con ese nombre a cualquier profundidad:
+# "supabase/" se llevaba también lib/ics/supabase/ y tumbaba el build en
+# Vercel con "Can't resolve '@/lib/ics/supabase/server'". El build local
+# no lo detecta nunca, porque .vercelignore solo se aplica al desplegar.
 
-docs/
-supabase/
-_scratch/
-projects/
-.claude/
+/docs/
+/supabase/
+/_scratch/
+/projects/
+/.claude/
