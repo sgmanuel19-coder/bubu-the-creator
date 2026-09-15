@@ -13,6 +13,7 @@ import { SECCIONES_IA_EN_ACCION } from "@/lib/taller/boveda/guias-ia-en-accion";
 import { SECCIONES_EMPIEZA_AQUI } from "@/lib/taller/boveda/guias-empieza-aqui";
 import { AMPLIACIONES_IA_EN_ACCION } from "@/lib/taller/boveda/guias-ia-en-accion-ampliaciones";
 import { SECCIONES_COBRAR } from "@/lib/taller/boveda/guias-masterclass-cobrar";
+import { AMPLIACIONES } from "@/lib/taller/boveda/guias-ampliaciones";
 
 // Une todas las guías a fondo de la bóveda (slug → secciones).
 // content.ts las adjunta a cada recurso al ensamblar BOVEDA.
@@ -35,8 +36,15 @@ export const SECCIONES_BOVEDA: Record<string, SeccionRecurso[]> = {
   ...SECCIONES_COBRAR,
 };
 
-// Paso a paso que IA en Acción añade a guías que ya existían: se suma
-// al FINAL de la guía original, no la reemplaza.
-for (const [slug, extra] of Object.entries(AMPLIACIONES_IA_EN_ACCION)) {
-  SECCIONES_BOVEDA[slug] = [...(SECCIONES_BOVEDA[slug] ?? []), ...extra];
+// Secciones que se SUMAN al final de una guía que ya existía, sin
+// reemplazar nada:
+//  · AMPLIACIONES_IA_EN_ACCION → el paso a paso que IA en Acción añade
+//    a tres guías de producción.
+//  · AMPLIACIONES → el detalle con que se alargan las guías que se
+//    habían quedado cortas (concepto, ejemplo desarrollado y
+//    comprobación de lectura).
+for (const grupo of [AMPLIACIONES_IA_EN_ACCION, AMPLIACIONES]) {
+  for (const [slug, extra] of Object.entries(grupo)) {
+    SECCIONES_BOVEDA[slug] = [...(SECCIONES_BOVEDA[slug] ?? []), ...extra];
+  }
 }
