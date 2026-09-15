@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { TALLER, type Curso } from "@/lib/taller/content";
+import { cursosDelCatalogo, type Curso } from "@/lib/taller/content";
 import { getVistas } from "@/lib/taller/progress";
 import GamificacionHeader from "@/components/taller/GamificacionHeader";
 import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
@@ -52,8 +52,10 @@ export default function CatalogoClient({ desbloqueado }: { desbloqueado: boolean
 
   // La malla es la ruta del programa; los bonus vienen incluidos pero no
   // forman parte de ella y por eso van en su propia sección.
-  const malla = TALLER.cursos.filter((c) => !c.bonus);
-  const bonus = TALLER.cursos.filter((c) => c.bonus);
+  // Los cursos largos llegan ya partidos en una tarjeta por parte.
+  const catalogo = cursosDelCatalogo();
+  const malla = catalogo.filter((c) => !c.bonus);
+  const bonus = catalogo.filter((c) => c.bonus);
 
   function tarjeta(curso: Curso) {
     const lecciones = contarLecciones(curso);
@@ -70,6 +72,15 @@ export default function CatalogoClient({ desbloqueado }: { desbloqueado: boolean
           {curso.portada.emoji}
         </div>
         <div className="flex flex-1 flex-col p-5">
+          {/* Tarjeta de una parte: se dice de qué programa sale. */}
+          {curso.parteDe && (
+            <p
+              className="mb-1 text-[10px] font-semibold uppercase tracking-[0.15em]"
+              style={{ color: "var(--green)" }}
+            >
+              {curso.parteDe.cursoTitulo} · {curso.parteDe.indice}/{curso.parteDe.total}
+            </p>
+          )}
           <div className="flex flex-wrap items-center gap-2">
             <h3 className="font-semibold">{curso.titulo}</h3>
             {esBonus && (
@@ -105,7 +116,9 @@ export default function CatalogoClient({ desbloqueado }: { desbloqueado: boolean
           {curso.disponible ? (
             <>
               <p className="mt-4 text-xs" style={{ color: "var(--muted)" }}>
-                {curso.modulos.length} módulos · {lecciones} lecciones
+                {curso.parteDe
+                  ? `${lecciones} ${lecciones === 1 ? "clase" : "clases"}`
+                  : `${curso.modulos.length} módulos · ${lecciones} lecciones`}
               </p>
               {!desbloqueado ? (
                 <p className="mt-2 text-xs font-medium" style={{ color: "var(--green)" }}>

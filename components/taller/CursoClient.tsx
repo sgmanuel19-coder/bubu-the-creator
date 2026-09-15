@@ -167,6 +167,12 @@ export default function CursoClient({
 
       <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
         <div>
+          {/* Parte de un curso largo: de dónde sale y cómo volver al todo. */}
+          {curso.parteDe && (
+            <p className="mb-1 text-[11px] uppercase tracking-[0.2em]" style={{ color: "var(--green)" }}>
+              {curso.parteDe.cursoTitulo} · Parte {curso.parteDe.indice} de {curso.parteDe.total}
+            </p>
+          )}
           <div className="flex flex-wrap items-center gap-3">
             <h1 className="text-2xl font-bold sm:text-3xl">{curso.titulo}</h1>
             {/* Bonus: viene incluido pero no es parte de la malla. */}
@@ -182,6 +188,15 @@ export default function CursoClient({
           <p className="mt-2 max-w-2xl text-sm" style={{ color: "var(--muted)" }}>
             {curso.descripcion}
           </p>
+          {curso.parteDe && (
+            <a
+              href={`/taller/curso/${curso.parteDe.cursoSlug}`}
+              className="mt-2 inline-block text-xs font-medium transition-opacity hover:opacity-80"
+              style={{ color: "var(--green)" }}
+            >
+              Ver el programa completo, sus recursos y el diploma →
+            </a>
+          )}
         </div>
         {desbloqueado && cargado && todasConContenido.length > 0 && (
           <div className="min-w-[180px]">
@@ -205,7 +220,8 @@ export default function CursoClient({
         )}
       </div>
 
-      {desbloqueado && cargado && todasConContenido.length > 0 && pctGeneral === 100 && (
+      {/* El diploma es del programa completo, no de una parte suelta. */}
+      {!curso.parteDe && desbloqueado && cargado && todasConContenido.length > 0 && pctGeneral === 100 && (
         <div
           className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-5 py-4"
           style={{ borderColor: "rgba(26,128,255,0.5)", background: "rgba(26,128,255,0.08)" }}
@@ -486,6 +502,38 @@ export default function CursoClient({
         })}
       </aside>
       </div>
+
+      {/* Navegación entre partes del mismo programa */}
+      {curso.parteDe && (curso.parteDe.anterior || curso.parteDe.siguiente) && (
+        <div className="mt-10 grid gap-3 sm:grid-cols-2">
+          {curso.parteDe.anterior ? (
+            <a
+              href={`/taller/curso/${curso.parteDe.anterior.slug}`}
+              className="rounded-2xl border px-4 py-3 transition-opacity hover:opacity-80"
+              style={{ borderColor: "rgba(244,240,222,0.12)", background: "var(--surface)" }}
+            >
+              <p className="text-[11px] uppercase tracking-wider" style={{ color: "var(--muted)" }}>
+                ← Parte anterior
+              </p>
+              <p className="mt-1 text-sm font-medium">{curso.parteDe.anterior.titulo}</p>
+            </a>
+          ) : (
+            <span />
+          )}
+          {curso.parteDe.siguiente && (
+            <a
+              href={`/taller/curso/${curso.parteDe.siguiente.slug}`}
+              className="rounded-2xl border px-4 py-3 text-right transition-opacity hover:opacity-80 sm:col-start-2"
+              style={{ borderColor: "rgba(26,128,255,0.4)", background: "var(--surface)" }}
+            >
+              <p className="text-[11px] uppercase tracking-wider" style={{ color: "var(--green)" }}>
+                Parte siguiente →
+              </p>
+              <p className="mt-1 text-sm font-medium">{curso.parteDe.siguiente.titulo}</p>
+            </a>
+          )}
+        </div>
+      )}
 
       {/* Recursos del curso (abren su página de detalle en la bóveda) */}
       {curso.recursos.length > 0 && (

@@ -26,6 +26,9 @@ export type Modulo = {
   disponible: boolean;
   lecciones: Leccion[];
   pptUrl?: string; // link a la presentación del módulo (Google Slides, etc.)
+  // Portada de la tarjeta cuando el módulo se muestra como tarjeta propia
+  // en el catálogo (ver `expandirModulos`). Sin esto hereda la del curso.
+  portada?: { emoji: string; color: string };
   // Nivel de XP (1-6, ver NIVELES en gamificacion.ts) que hay que
   // alcanzar para abrir el módulo. Sin esto se abre con la sesión.
   // Convierte el XP en algo que se quiere, como los cursos por nivel
@@ -52,6 +55,25 @@ export type Curso = {
   // Curso extra que viene con el acceso pero NO es parte de la malla.
   // En el catálogo va en su propia sección, aparte de la ruta.
   bonus?: boolean;
+  // Cursos largos (la Masterclass son 6 partes y 28 clases): en el
+  // catálogo se muestra UNA TARJETA POR MÓDULO en vez de una sola del
+  // curso entero. La página del curso completo sigue existiendo en
+  // /taller/curso/<slug> — cada parte enlaza a ella.
+  expandirModulos?: boolean;
+  // Nombre corto para las etiquetas de sus partes ("Masterclass"): el
+  // título completo no cabe en el eyebrow de una tarjeta.
+  nombreCorto?: string;
+  // Solo en los cursos "parte" que genera cursosDelCatalogo(): de qué
+  // curso salieron, en qué posición y cuáles son sus vecinas. No se
+  // escribe a mano.
+  parteDe?: {
+    cursoSlug: string;
+    cursoTitulo: string;
+    indice: number; // 1-based
+    total: number;
+    anterior?: { slug: string; titulo: string };
+    siguiente?: { slug: string; titulo: string };
+  };
 };
 
 // ── Módulos de la masterclass: las 6 partes como capítulos ────
@@ -61,6 +83,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     descripcion:
       "Introducción, bienvenida y presentación: el resultado primero, las 3 máquinas del sistema (Claude, Higgsfield y CapCut) y el mapa completo de lo que viene.",
     disponible: true,
+    portada: { emoji: "👋", color: "rgba(244,240,222,0.10)" },
     lecciones: [
       { titulo: "Introducción, bienvenida y presentación", duracion: "", youtubeId: "dxmIy6DqSWs" },
     ],
@@ -70,6 +93,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     descripcion:
       "El protocolo del director creativo, las 4 etapas, el insight y sus 6 tipos, la Big Idea, retóricas, 10 estructuras narrativas, fórmulas de headline y 9 hooks, géneros de storytelling y tipos de campaña.",
     disponible: true,
+    portada: { emoji: "🧠", color: "rgba(26,128,255,0.18)" },
     lecciones: [
       { titulo: "Conceptos básicos", duracion: "", youtubeId: "PAuFCWbNpmo" },
       { titulo: "La IA amplifica, tú diriges", duracion: "", youtubeId: "GErCgANzB6Q" },
@@ -90,6 +114,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     descripcion:
       "La Biblia de 59 documentos, el ADN de marca, el Prompt Maestro, Claude Code y Obsidian, skills, agentes y MCP — con demo del Cerebro razonando en vivo.",
     disponible: true,
+    portada: { emoji: "⚙️", color: "rgba(26,128,255,0.12)" },
     lecciones: [
       { titulo: "El sistema", duracion: "", youtubeId: "fS8WtkGSvd8" },
       { titulo: "Biblia publicitaria", duracion: "", youtubeId: "v0Lc-Jom4Gg" },
@@ -105,6 +130,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     descripcion:
       "Prompt semiótico, Higgsfield a fondo (Kling, Seedance y consistencia con hoja de personaje), la baraja de GPTs y ensamblaje final en CapCut — explicado en general y mostrado con resultados reales de mi trabajo comercial.",
     disponible: true,
+    portada: { emoji: "🎨", color: "rgba(255,209,102,0.15)" },
     lecciones: [
       { titulo: "Crear", duracion: "", youtubeId: "-UVwYnMClyQ" },
       { titulo: "Prompt semiótico", duracion: "", youtubeId: "bh-Mj7lxSb8" },
@@ -118,6 +144,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     descripcion:
       "El caso Wellmax completo, el personaje de marca de WIN, galería de referencias y cómo adaptar el sistema a tu caso.",
     disponible: true,
+    portada: { emoji: "📁", color: "rgba(76,199,138,0.14)" },
     lecciones: [
       { titulo: "Caso Smart System", duracion: "", youtubeId: "-Omg9T43gN0" },
       { titulo: "Caso Wellmax", duracion: "", youtubeId: "8SfS27Wb-YA" },
@@ -131,6 +158,7 @@ const MODULOS_MASTERCLASS: Modulo[] = [
     descripcion:
       "Tu propuesta de valor, tu oferta irresistible, cuánto cobrar, el pitch de 60 segundos y tu plan de 30 días.",
     disponible: true,
+    portada: { emoji: "💰", color: "rgba(255,209,102,0.22)" },
     lecciones: [
       { titulo: "Cobrar", duracion: "", youtubeId: "7Z_scucjzr4" },
       { titulo: "Cierre", duracion: "", youtubeId: "dLLDKMScKpc" },
@@ -2235,6 +2263,9 @@ export const TALLER = {
       // Portada de la tarjeta: emoji grande + color de fondo.
       portada: { emoji: "🎬", color: "rgba(26,128,255,0.18)" },
       disponible: true,
+      // 6 partes y 28 clases: en el catálogo va una tarjeta por parte.
+      expandirModulos: true,
+      nombreCorto: "Masterclass",
       modulos: MODULOS_MASTERCLASS,
       recursos: RECURSOS_MASTERCLASS,
     },
@@ -2269,8 +2300,68 @@ export const TALLER = {
 };
 
 // ── Helpers del Classroom ─────────────────────────────────────
+
+// ── Cursos largos partidos en tarjetas por parte ────────────────
+// La Masterclass son 6 partes y 28 clases: una sola tarjeta escondía
+// todo el programa. Con `expandirModulos: true`, el catálogo pinta una
+// tarjeta por parte, cada una con su página y su propio avance.
+// La página del curso completo (/taller/curso/masterclass) sigue
+// existiendo: ahí viven sus recursos y el diploma, y cada parte enlaza
+// a ella. El progreso y el XP siguen calculándose sobre TALLER.cursos,
+// así que partir el catálogo no duplica ni altera nada.
+const SEPARADOR_PARTE = "--p";
+
+export function slugDeParte(cursoSlug: string, indice: number): string {
+  return `${cursoSlug}${SEPARADOR_PARTE}${indice + 1}`;
+}
+
+function cursoDeParte(curso: Curso, indice: number): Curso {
+  const modulo = curso.modulos[indice];
+  return {
+    ...curso,
+    slug: slugDeParte(curso.slug, indice),
+    titulo: modulo.titulo,
+    descripcion: modulo.descripcion,
+    portada: modulo.portada ?? curso.portada,
+    modulos: [modulo],
+    recursos: [], // los recursos pertenecen al curso completo
+    expandirModulos: false,
+    parteDe: {
+      cursoSlug: curso.slug,
+      cursoTitulo: curso.nombreCorto ?? curso.titulo,
+      indice: indice + 1,
+      total: curso.modulos.length,
+      anterior:
+        indice > 0
+          ? { slug: slugDeParte(curso.slug, indice - 1), titulo: curso.modulos[indice - 1].titulo }
+          : undefined,
+      siguiente:
+        indice < curso.modulos.length - 1
+          ? { slug: slugDeParte(curso.slug, indice + 1), titulo: curso.modulos[indice + 1].titulo }
+          : undefined,
+    },
+  };
+}
+
+/** Lo que se lista en /taller/curso, con los cursos largos ya partidos. */
+export function cursosDelCatalogo(): Curso[] {
+  return TALLER.cursos.flatMap((c) =>
+    c.expandirModulos ? c.modulos.map((_, i) => cursoDeParte(c, i)) : [c],
+  );
+}
+
 export function buscarCurso(slug: string): Curso | undefined {
-  return TALLER.cursos.find((c) => c.slug === slug);
+  const directo = TALLER.cursos.find((c) => c.slug === slug);
+  if (directo) return directo;
+
+  // Slug de parte: "<curso>--p<N>" (N empieza en 1).
+  const corte = slug.lastIndexOf(SEPARADOR_PARTE);
+  if (corte < 0) return undefined;
+  const padre = TALLER.cursos.find((c) => c.slug === slug.slice(0, corte));
+  if (!padre?.expandirModulos) return undefined;
+  const n = Number(slug.slice(corte + SEPARADOR_PARTE.length));
+  if (!Number.isInteger(n) || n < 1 || n > padre.modulos.length) return undefined;
+  return cursoDeParte(padre, n - 1);
 }
 
 // ── Temario de un artículo ───────────────────────────────────────

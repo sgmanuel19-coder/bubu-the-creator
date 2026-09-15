@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import PortalNav from "@/components/taller/PortalNav";
 import CursoClient from "@/components/taller/CursoClient";
-import { TALLER, buscarCurso } from "@/lib/taller/content";
+import { TALLER, buscarCurso, slugDeParte } from "@/lib/taller/content";
 import { estaDesbloqueado } from "@/lib/taller/session";
 import { bovedaGlobal } from "@/lib/taller/boveda-server";
 
@@ -13,8 +13,16 @@ export const metadata = { robots: { index: false, follow: true } };
 const VIDEO_BLOQUEADO = "bloqueado";
 
 // Pre-renderiza una página por cada curso publicado del catálogo.
+// Una página por curso publicado y, en los cursos partidos por partes
+// (ver cursosDelCatalogo), una por parte además de la del curso completo.
 export function generateStaticParams() {
-  return TALLER.cursos.filter((c) => c.disponible).map((c) => ({ slug: c.slug }));
+  const cursos = TALLER.cursos.filter((c) => c.disponible);
+  return [
+    ...cursos.map((c) => ({ slug: c.slug })),
+    ...cursos
+      .filter((c) => c.expandirModulos)
+      .flatMap((c) => c.modulos.map((_, i) => ({ slug: slugDeParte(c.slug, i) }))),
+  ];
 }
 
 export default async function CursoDetallePage({
