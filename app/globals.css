@@ -1292,6 +1292,27 @@ body {
   .emb-vsl{ max-width:100%; }
 }
 
+/* Barra de avance: la acción, siempre a la vista.
+   En los pasos largos (la prueba, el método) el botón quedaba enterrado al
+   final del scroll y no se entendía que había que seguir presionando. */
+.emb-nav{ position:sticky;bottom:16px;z-index:20;max-width:1100px;margin:38px auto 0;padding:13px 14px 13px 22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;border:1px solid rgba(26,128,255,.28);border-radius:15px;background:rgba(14,13,10,.90);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 14px 40px rgba(0,0,0,.45); }
+.emb-nav-paso{ font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--hm-muted);font-weight:700;font-variant-numeric:tabular-nums;flex:none; }
+.emb-nav-cta{ padding:15px 28px;border:0;border-radius:11px;background:var(--hm-blue);color:#fff;font-size:15.5px;font-weight:700;letter-spacing:-.01em;cursor:pointer;font-family:inherit;line-height:1.2;transition:filter .18s ease,transform .18s ease;box-shadow:0 6px 22px rgba(26,128,255,.34); }
+.emb-nav-cta:hover{ filter:brightness(1.08);transform:translateY(-1px); }
+.emb-nav-cta:focus-visible{ outline:2px solid var(--hm-cream);outline-offset:3px; }
+.emb-nav-hint{ font-size:13.5px;color:var(--hm-blue-soft);font-weight:500;padding-right:8px; }
+
+@media (max-width:640px){
+  .emb-nav{ bottom:12px;padding:12px 13px;gap:9px;justify-content:center; }
+  .emb-nav-paso{ width:100%;text-align:center;font-size:10.5px; }
+  .emb-nav-cta{ width:100%;padding:15px 16px;font-size:15px; }
+  .emb-nav-hint{ padding:0 0 2px;text-align:center; }
+}
+@media (prefers-reduced-motion:reduce){
+  .emb-nav-cta{ transition:none; }
+  .emb-nav-cta:hover{ transform:none; }
+}
+
 /* Pie */
 .emb-pie{ max-width:1100px;margin:40px auto 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding-top:18px;border-top:1px solid rgba(244,240,222,.08); }
 .emb-atras{ background:none;border:0;color:var(--hm-muted);font-size:13.5px;cursor:pointer;font-family:inherit;padding:0; }

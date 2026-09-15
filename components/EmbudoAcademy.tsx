@@ -315,6 +315,26 @@ const ETIQUETAS: Record<string, string> = {
 
 const PASOS = 10;
 
+/**
+ * Barra de avance inferior: en los pasos largos (el método, los
+ * entregables) el botón quedaba al fondo del scroll y no se entendía que
+ * había que seguir. Ahora la acción está siempre a la vista y dice a
+ * dónde lleva. En los pasos de pregunta no hay botón — la acción es
+ * elegir — y la barra lo explica.
+ */
+const NAV: Record<number, { label: string } | { pregunta: true } | null> = {
+  0: null, // el hero tiene su propio botón grande
+  1: { pregunta: true },
+  2: { label: "Siguiente pregunta" },
+  3: { pregunta: true },
+  4: { label: "Última pregunta" },
+  5: { pregunta: true },
+  6: { label: "Ver la prueba" },
+  7: { label: "Ver cómo se aprende" },
+  8: { label: "Ver quién enseña y el precio" },
+  9: null, // el cierre: la acción es el pago, que ya es prominente
+};
+
 export default function EmbudoAcademy() {
   const [paso, setPaso] = useState(0);
   const [r1, setR1] = useState("");
@@ -454,7 +474,7 @@ export default function EmbudoAcademy() {
                   </div>
 
                   <button type="button" className="emb-cta" onClick={avanzar}>
-                    Empezar el diagnóstico
+                    Empezar el diagnóstico →
                   </button>
                   <p className="emb-nota">Tres preguntas · sin registro · 1 minuto</p>
                   <p className="emb-cred">{gate.credenciales}</p>
@@ -472,9 +492,6 @@ export default function EmbudoAcademy() {
                   <span className="hm-eyebrow">Lo que suele pasar</span>
                   <h2 className="emb-h2">{ESPEJO[r1].titulo}</h2>
                   <p className="emb-txt">{ESPEJO[r1].texto}</p>
-                  <button type="button" className="emb-cta" onClick={avanzar}>
-                    Sigue
-                  </button>
                 </Split>
                 <div className="emb-logos">
                   <p className="emb-logos-lbl">El método sale de campañas reales para estas marcas</p>
@@ -496,9 +513,6 @@ export default function EmbudoAcademy() {
                 <span className="hm-eyebrow">Tu problema, en concreto</span>
                 <h2 className="emb-h2">{prob.titulo}</h2>
                 <p className="emb-txt">{prob.texto}</p>
-                <button type="button" className="emb-cta" onClick={avanzar}>
-                  Falta una cosa más
-                </button>
               </Split>
             )}
 
@@ -522,9 +536,6 @@ export default function EmbudoAcademy() {
                     </li>
                   ))}
                 </ol>
-                <button type="button" className="emb-cta" onClick={avanzar}>
-                  Ver si esto funciona de verdad
-                </button>
               </Split>
             )}
 
@@ -554,9 +565,6 @@ export default function EmbudoAcademy() {
                   <strong>Wellmax</strong>, <strong>WIN Internet</strong> y{" "}
                   <strong>Livoltek</strong>. Un proyecto así lo cobro desde $2,000.
                 </p>
-                <button type="button" className="emb-cta" onClick={avanzar}>
-                  ¿Cómo se aprende?
-                </button>
               </div>
             )}
 
@@ -597,9 +605,6 @@ export default function EmbudoAcademy() {
                   ))}
                 </div>
 
-                <button type="button" className="emb-cta" onClick={avanzar}>
-                  ¿Quién enseña esto?
-                </button>
               </div>
             )}
 
@@ -747,6 +752,23 @@ export default function EmbudoAcademy() {
             )}
           </motion.div>
         </AnimatePresence>
+
+        {/* Acción siempre visible: en pasos largos el botón quedaba
+            enterrado al final del scroll. */}
+        {NAV[paso] && (
+          <div className="emb-nav">
+            <span className="emb-nav-paso">
+              Paso {paso + 1} de {PASOS}
+            </span>
+            {"pregunta" in NAV[paso]! ? (
+              <span className="emb-nav-hint">Elige una opción para continuar</span>
+            ) : (
+              <button type="button" className="emb-nav-cta" onClick={avanzar}>
+                {(NAV[paso] as { label: string }).label} →
+              </button>
+            )}
+          </div>
+        )}
 
         <div className="emb-pie">
           {paso > 0 && (
