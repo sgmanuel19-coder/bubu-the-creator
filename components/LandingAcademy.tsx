@@ -161,9 +161,9 @@ const LLEVAS = [
     text: "El grupo donde se comparte lo que va saliendo y se resuelven los proyectos de cada quien.",
   },
   {
-    label: "Actualizaciones de por vida",
+    label: "Todo lo que se publique mientras estés dentro",
     img: "/images/portfolio/posters/producto-05.jpg",
-    text: "Las herramientas cambian cada mes. Lo que se agregue después también entra, sin pagar de nuevo.",
+    text: "Las herramientas cambian cada mes, y el material también: guías nuevas, artículos del proceso y una sesión en vivo al mes donde reviso piezas de los alumnos.",
   },
 ];
 
@@ -182,7 +182,15 @@ const FAQ = [
   },
   {
     q: "¿Cuánto tiempo me toma?",
-    a: "El grabado va a tu ritmo y tienes acceso de por vida. La cohorte en vivo tiene fechas y por eso cuesta más.",
+    a: "Va a tu ritmo: son 56 clases grabadas y las lecturas del proceso, disponibles cuando quieras. Con una hora al día, en dos semanas ya estás produciendo.",
+  },
+  {
+    q: "¿Por qué es mensual y no un pago único?",
+    a: "Porque el material se mueve: cada mes entran guías nuevas, artículos del proceso y una sesión en vivo donde reviso piezas de los alumnos. Son $99 al mes y cancelas cuando quieras, sin penalidad ni llamada para retenerte.",
+  },
+  {
+    q: "¿Esto no está gratis en YouTube?",
+    a: "Los tutoriales de herramientas, sí — y te lo digo yo. Lo que no está es el criterio: cómo se piensa la pieza antes de generarla y cómo se le cobra a una marca. Eso no lo puede grabar alguien que no tiene clientes que le paguen por hacerlo.",
   },
   {
     q: "¿Y si las herramientas cambian?",
@@ -303,6 +311,10 @@ export default function LandingAcademy() {
             </span>
             <i />
             <span className="hm-cred-ag">TBWA · Fahrenheit DDB</span>
+            <i />
+            {/* La prueba que ningún canal de IA puede copiar: clientes
+                que pagan hoy con este mismo método. */}
+            <span className="hm-cred-ag">Hoy: Wellmax · WIN · Livoltek</span>
           </motion.div>
         </div>
       </header>
@@ -533,15 +545,15 @@ export default function LandingAcademy() {
       {/* ── PRECIOS ── */}
       <section className="container-base hm-section">
         <div className="lp-head">
-          <span className="hm-eyebrow">Tres formas de entrar</span>
-          <h2>Elige por dónde empiezas.</h2>
+          <span className="hm-eyebrow">Un solo precio</span>
+          <h2>Todo abierto por $99 al mes.</h2>
           <p className="lp-head-sub">
-            Un proyecto con mi agencia arranca en $2,000. Esto es el mismo método,
-            para que lo hagas tú.
+            Un proyecto con mi agencia arranca en $2,000. Esto es el mismo método
+            para que lo hagas tú, y cancelas cuando quieras.
           </p>
         </div>
 
-        <div className="lp-metodo">
+        <div className={`lp-metodo${NIVELES_VENTA.length === 1 ? " lp-metodo--uno" : ""}`}>
           {NIVELES_VENTA.map((n, i) => (
             <motion.div
               className="lp-metodo-item"
