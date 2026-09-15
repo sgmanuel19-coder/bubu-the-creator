@@ -1,13 +1,35 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function CookieConsentBanner() {
   const [visible, setVisible] = useState(false);
+  const caja = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem('cookie-consent');
     if (!stored) setVisible(true);
   }, []);
+
+  /* El banner se apoya en el borde inferior, donde tambien viven las barras
+     de accion fijas de las landings. Publica su altura para que esas barras
+     se corran hacia arriba mientras el visitante no haya decidido. */
+  useEffect(() => {
+    const raiz = document.documentElement;
+    if (!visible) {
+      raiz.style.removeProperty('--barra-cookies');
+      return;
+    }
+    const medir = () => {
+      const alto = caja.current?.offsetHeight ?? 0;
+      raiz.style.setProperty('--barra-cookies', `${alto}px`);
+    };
+    medir();
+    window.addEventListener('resize', medir);
+    return () => {
+      window.removeEventListener('resize', medir);
+      raiz.style.removeProperty('--barra-cookies');
+    };
+  }, [visible]);
 
   const respond = (decision: 'accepted' | 'rejected') => {
     localStorage.setItem('cookie-consent', decision);
@@ -21,6 +43,7 @@ export default function CookieConsentBanner() {
 
   return (
     <div
+      ref={caja}
       role="dialog"
       aria-label="Preferencias de cookies"
       style={{

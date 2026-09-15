@@ -1140,6 +1140,17 @@ body {
 .emb-mos-item img{ width:100%;height:100%;object-fit:cover;display:block; }
 .emb-mos-item:nth-child(3n){ transform:translateY(14px); }
 .emb-mos-item:nth-child(4n){ transform:translateY(-10px); }
+.emb-mos-item{ animation:emb-aparece 1.1s cubic-bezier(.16,1,.3,1) forwards; }
+
+/* La entrada de cada paso va en CSS y no en JS a proposito: el embudo es
+   la pieza a la que llega la pauta y el texto tiene que verse aunque el
+   frameloop de animacion no llegue a correr. */
+.emb-paso{ animation:emb-entra .45s cubic-bezier(.16,1,.3,1) forwards; }
+@keyframes emb-entra{ from{ opacity:0;transform:translateY(24px); } to{ opacity:1;transform:none; } }
+@keyframes emb-aparece{ from{ opacity:0; } to{ opacity:1; } }
+@media (prefers-reduced-motion:reduce){
+  .emb-paso,.emb-mos-item{ animation:none; }
+}
 
 /* Paso a dos columnas */
 .emb-split{ display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1fr);gap:44px;align-items:center;min-height:62vh; }
@@ -1295,18 +1306,32 @@ body {
 /* Barra de avance: la acción, siempre a la vista.
    En los pasos largos (la prueba, el método) el botón quedaba enterrado al
    final del scroll y no se entendía que había que seguir presionando. */
-.emb-nav{ position:sticky;bottom:16px;z-index:20;max-width:1100px;margin:38px auto 0;padding:13px 14px 13px 22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;border:1px solid rgba(26,128,255,.28);border-radius:15px;background:rgba(14,13,10,.90);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 14px 40px rgba(0,0,0,.45); }
+.emb-nav{ position:sticky;bottom:calc(16px + var(--barra-cookies, 0px));z-index:20;max-width:1100px;margin:38px auto 0;padding:13px 14px 13px 22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;border:1px solid rgba(26,128,255,.28);border-radius:15px;background:rgba(14,13,10,.90);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 14px 40px rgba(0,0,0,.45); }
 .emb-nav-paso{ font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--hm-muted);font-weight:700;font-variant-numeric:tabular-nums;flex:none; }
 .emb-nav-cta{ padding:15px 28px;border:0;border-radius:11px;background:var(--hm-blue);color:#fff;font-size:15.5px;font-weight:700;letter-spacing:-.01em;cursor:pointer;font-family:inherit;line-height:1.2;transition:filter .18s ease,transform .18s ease;box-shadow:0 6px 22px rgba(26,128,255,.34); }
 .emb-nav-cta:hover{ filter:brightness(1.08);transform:translateY(-1px); }
 .emb-nav-cta:focus-visible{ outline:2px solid var(--hm-cream);outline-offset:3px; }
 .emb-nav-hint{ font-size:13.5px;color:var(--hm-blue-soft);font-weight:500;padding-right:8px; }
+a.emb-nav-cta{ display:inline-block;text-decoration:none;text-align:center; }
+
+/* En los pasos de pregunta la accion son las propias opciones: ahi la barra
+   no se pega abajo ni roba pantalla, solo situa al lector. */
+.emb-nav--hint{ position:static;margin-top:24px;padding:14px 0 0;gap:6px 16px;justify-content:flex-start;border:0;border-top:1px solid rgba(244,240,222,.08);border-radius:0;background:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none; }
+
+/* En el cierre la barra lleva el precio y el pago, no el "siguiente". */
+.emb-nav--pago{ border-color:rgba(26,128,255,.45); }
+.emb-nav-precio{ font-size:13.5px;color:var(--hm-cream-dim);font-weight:300;line-height:1.4; }
+.emb-nav-precio b{ color:var(--hm-cream);font-weight:800;font-size:16px; }
 
 @media (max-width:640px){
-  .emb-nav{ bottom:12px;padding:12px 13px;gap:9px;justify-content:center; }
+  .emb-nav{ bottom:calc(12px + var(--barra-cookies, 0px));padding:12px 13px;gap:9px;justify-content:center; }
   .emb-nav-paso{ width:100%;text-align:center;font-size:10.5px; }
   .emb-nav-cta{ width:100%;padding:15px 16px;font-size:15px; }
   .emb-nav-hint{ padding:0 0 2px;text-align:center; }
+  .emb-nav-precio{ width:100%;text-align:center;font-size:12.5px; }
+  .emb-nav--hint{ justify-content:flex-start;padding-top:12px;margin-top:20px; }
+  .emb-nav--hint .emb-nav-paso{ width:auto;text-align:left; }
+  .emb-nav--hint .emb-nav-hint{ text-align:left; }
 }
 @media (prefers-reduced-motion:reduce){
   .emb-nav-cta{ transition:none; }

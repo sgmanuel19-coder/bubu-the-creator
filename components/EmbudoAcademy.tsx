@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 
 import LandingPortafolio from "@/components/LandingPortafolio";
 import { TALLER } from "@/lib/taller/content";
@@ -36,7 +35,6 @@ import { TALLER } from "@/lib/taller/content";
  * ilustraciones: el producto se demuestra mientras se explica.
  */
 
-const EASE = [0.16, 1, 0.3, 1] as const;
 const POSTER = "/images/portfolio/posters";
 
 /** Volumen y variedad de trabajo real, de un golpe. */
@@ -358,10 +356,13 @@ export default function EmbudoAcademy() {
 
   const esAlto = r1 === "equipo" || r3 === "alto";
 
-  const avanzar = () => {
-    setPaso((p) => Math.min(p + 1, PASOS - 1));
+  /* Cambiar de paso siempre deja al lector arriba del nuevo paso: si no,
+     al salir de un paso largo se aterriza a mitad del siguiente. */
+  const irA = (n: number) => {
+    setPaso(Math.min(Math.max(n, 0), PASOS - 1));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+  const avanzar = () => irA(paso + 1);
 
   const perfilTexto = [r1 && ETIQUETAS[r1], r2 && ETIQUETAS[r2], r3 && ETIQUETAS[r3]]
     .filter(Boolean)
@@ -411,26 +412,13 @@ export default function EmbudoAcademy() {
       </div>
 
       <div className="container-base emb-wrap">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={paso}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -18 }}
-            transition={{ duration: 0.45, ease: EASE }}
-          >
+        <div key={paso} className="emb-paso">
             {/* ── 0 · GANCHO: mosaico, VSL y credenciales ── */}
             {paso === 0 && (
               <div className="emb-hero">
                 <div className="emb-mosaico" aria-hidden>
                   {MOSAICO.map((p, i) => (
-                    <motion.span
-                      key={p}
-                      className="emb-mos-item"
-                      initial={{ opacity: 0, scale: 1.08 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 1.1, delay: 0.05 * i, ease: EASE }}
-                    >
+                    <span key={p} className="emb-mos-item">
                       <Image
                         src={`${POSTER}/${p}.jpg`}
                         alt=""
@@ -439,7 +427,7 @@ export default function EmbudoAcademy() {
                         sizes="(max-width: 900px) 24vw, 170px"
                         priority={i < 4}
                       />
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
 
@@ -636,22 +624,6 @@ export default function EmbudoAcademy() {
                   </p>
                 </div>
 
-                <span className="hm-eyebrow">Dudas frecuentes</span>
-                <div className="emb-faq">
-                  {gate.faq.map((f, i) => (
-                    <details
-                      key={f.q}
-                      open={faqAbierta === i}
-                      onToggle={(e) => {
-                        if ((e.currentTarget as HTMLDetailsElement).open) setFaqAbierta(i);
-                      }}
-                    >
-                      <summary>{f.q}</summary>
-                      <p>{f.a}</p>
-                    </details>
-                  ))}
-                </div>
-
                 <div className="emb-precio">
                   <span className="hm-eyebrow">Un solo precio</span>
                   <h2 className="emb-h2">{prod.precio} y tienes todo abierto.</h2>
@@ -690,6 +662,23 @@ export default function EmbudoAcademy() {
                     </a>
                   </div>
                 </div>
+
+                <span className="hm-eyebrow">Dudas frecuentes</span>
+                <div className="emb-faq">
+                  {gate.faq.map((f, i) => (
+                    <details
+                      key={f.q}
+                      open={faqAbierta === i}
+                      onToggle={(e) => {
+                        if ((e.currentTarget as HTMLDetailsElement).open) setFaqAbierta(i);
+                      }}
+                    >
+                      <summary>{f.q}</summary>
+                      <p>{f.a}</p>
+                    </details>
+                  ))}
+                </div>
+
 
                 {esAlto && (
                   <div className="emb-inco">
@@ -750,13 +739,12 @@ export default function EmbudoAcademy() {
                 </div>
               </div>
             )}
-          </motion.div>
-        </AnimatePresence>
+        </div>
 
         {/* Acción siempre visible: en pasos largos el botón quedaba
             enterrado al final del scroll. */}
         {NAV[paso] && (
-          <div className="emb-nav">
+          <div className={`emb-nav${"pregunta" in NAV[paso]! ? " emb-nav--hint" : ""}`}>
             <span className="emb-nav-paso">
               Paso {paso + 1} de {PASOS}
             </span>
@@ -770,9 +758,27 @@ export default function EmbudoAcademy() {
           </div>
         )}
 
+        {/* El cierre es el paso mas largo: el pago se queda pegado abajo
+            mientras se leen las dudas frecuentes. */}
+        {paso === PASOS - 1 && (
+          <div className="emb-nav emb-nav--pago">
+            <span className="emb-nav-precio">
+              <b>{prod.precio}</b> · acceso a todo · cancelas cuando quieras
+            </span>
+            <a
+              href={prod.hotmartUrl || waHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="emb-nav-cta"
+            >
+              Entrar ahora →
+            </a>
+          </div>
+        )}
+
         <div className="emb-pie">
           {paso > 0 && (
-            <button type="button" className="emb-atras" onClick={() => setPaso((p) => Math.max(0, p - 1))}>
+            <button type="button" className="emb-atras" onClick={() => irA(paso - 1)}>
               ← Atrás
             </button>
           )}
