@@ -6,7 +6,7 @@ import BandejaPago from "@/components/taller/BandejaPago";
 import DesbloquearBanner from "@/components/taller/DesbloquearBanner";
 import SeccionesRecurso, { IndiceSecciones } from "@/components/taller/SeccionesRecurso";
 import BotonLeido from "@/components/taller/BotonLeido";
-import TemarioCurso, { NavTemario, PuertaRuta } from "@/components/taller/TemarioCurso";
+import TemarioCurso, { NavTemario } from "@/components/taller/TemarioCurso";
 
 export default function RecursoDetalle({
   recurso,
@@ -79,27 +79,12 @@ export default function RecursoDetalle({
           índice de títulos (el server nunca manda el contenido real) */}
       {desbloqueado && recurso.secciones && recurso.secciones.length > 0 && (
         <>
-          {temario ? (
-            // Ruta guiada: si te saltaste un tema, el contenido espera
-            // detrás del aviso (con salida a "Leer igual").
-            <PuertaRuta temario={temario} actual={recurso.slug}>
-              <SeccionesRecurso
-                secciones={recurso.secciones}
-                slug={recurso.slug}
-                gratis={recurso.gratis}
-              />
-              <BotonLeido slug={recurso.slug} titulo={recurso.titulo} />
-            </PuertaRuta>
-          ) : (
-            <>
-              <SeccionesRecurso
-                secciones={recurso.secciones}
-                slug={recurso.slug}
-                gratis={recurso.gratis}
-              />
-              <BotonLeido slug={recurso.slug} titulo={recurso.titulo} />
-            </>
-          )}
+          <SeccionesRecurso
+            secciones={recurso.secciones}
+            slug={recurso.slug}
+            gratis={recurso.gratis}
+          />
+          <BotonLeido slug={recurso.slug} titulo={recurso.titulo} />
           {temario && <NavTemario temario={temario} actual={recurso.slug} />}
         </>
       )}
