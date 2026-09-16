@@ -1150,6 +1150,9 @@ body {
 @keyframes emb-aparece{ from{ opacity:0; } to{ opacity:1; } }
 @media (prefers-reduced-motion:reduce){
   .emb-paso,.emb-mos-item{ animation:none; }
+  .emb-cta,.emb-op{ transition:none; }
+  .emb-cta:hover{ transform:none; }
+  .emb-op:hover{ transform:none; }
 }
 
 /* Paso a dos columnas */
@@ -1175,6 +1178,9 @@ body {
 /* Botones */
 .emb-cta{ margin-top:8px;padding:16px 30px;border:0;border-radius:11px;background:#1A80FF;color:#fff;font-size:15.5px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;transition:opacity .2s ease,transform .2s ease; }
 .emb-cta:hover{ opacity:.92;transform:translateY(-1px); }
+.emb-cta:focus-visible,.emb-form-btn:focus-visible{ outline:2px solid var(--hm-cream);outline-offset:3px; }
+.emb-atras:focus-visible,.emb-todo:focus-visible,.emb-salida-link:focus-visible{ outline:2px solid rgba(26,128,255,.9);outline-offset:3px;border-radius:3px; }
+.emb-paso:focus{ outline:none; }
 .emb-cta--pago{ font-size:17px;padding:18px 34px; }
 
 /* Opciones: tarjetas, no radios */
@@ -1347,7 +1353,9 @@ a.emb-nav-cta{ display:inline-block;text-decoration:none;text-align:center; }
 
 @media (max-width:900px){
   .emb-hero{ grid-template-columns:1fr;gap:30px;min-height:0; }
-  .emb-hero-txt{ order:-1; }
+  /* En movil la prueba visual va primero: el parrafo habla de "esas piezas"
+     y el lector de pauta tiene que haberlas visto antes de leerlo. */
+  .emb-mosaico{ order:-1; }
   .emb-mosaico{ gap:7px; }
   .emb-split{ grid-template-columns:1fr;gap:26px;min-height:0; }
   .emb-split-img{ max-height:300px;aspect-ratio:16/10; }

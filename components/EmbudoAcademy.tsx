@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import LandingPortafolio from "@/components/LandingPortafolio";
@@ -335,6 +335,7 @@ const NAV: Record<number, { label: string } | { pregunta: true } | null> = {
 
 export default function EmbudoAcademy() {
   const [paso, setPaso] = useState(0);
+  const cajaPaso = useRef<HTMLDivElement>(null);
   const [r1, setR1] = useState("");
   const [r2, setR2] = useState("");
   const [r3, setR3] = useState("");
@@ -363,6 +364,14 @@ export default function EmbudoAcademy() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const avanzar = () => irA(paso + 1);
+
+  /* Al cambiar de paso el foco se queda donde estaba el boton que acaba de
+     desaparecer. Lo llevamos al paso nuevo para que el teclado y el lector
+     de pantalla sigan el recorrido. */
+  useEffect(() => {
+    if (paso === 0) return;
+    cajaPaso.current?.focus({ preventScroll: true });
+  }, [paso]);
 
   const perfilTexto = [r1 && ETIQUETAS[r1], r2 && ETIQUETAS[r2], r3 && ETIQUETAS[r3]]
     .filter(Boolean)
@@ -412,7 +421,7 @@ export default function EmbudoAcademy() {
       </div>
 
       <div className="container-base emb-wrap">
-        <div key={paso} className="emb-paso">
+        <div key={paso} ref={cajaPaso} tabIndex={-1} className="emb-paso">
             {/* ── 0 · GANCHO: mosaico, VSL y credenciales ── */}
             {paso === 0 && (
               <div className="emb-hero">
@@ -444,22 +453,28 @@ export default function EmbudoAcademy() {
                     <strong>antes</strong> de abrir cualquier herramienta.
                   </p>
 
-                  {/* El VSL: la pieza que más vende cuando esté grabado */}
-                  <div className="emb-vsl">
-                    {gate.vslYoutubeId ? (
+                  {/* El VSL: la pieza que más vende cuando esté grabado.
+                      Mientras no lo esté, el hueco solo se ve en desarrollo:
+                      en la landing de pauta no puede aparecer una caja vacía. */}
+                  {gate.vslYoutubeId ? (
+                    <div className="emb-vsl">
                       <iframe
                         src={`https://www.youtube-nocookie.com/embed/${gate.vslYoutubeId}`}
                         title="RESUELTO Academy — Masterclass de Creatividad Publicitaria IA"
                         allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
                         allowFullScreen
                       />
-                    ) : (
-                      <div className="emb-vsl-hueco">
-                        <strong>Aquí va el VSL</strong>
-                        <span>Pon el ID de YouTube en TALLER.gate.vslYoutubeId</span>
+                    </div>
+                  ) : (
+                    process.env.NODE_ENV !== "production" && (
+                      <div className="emb-vsl">
+                        <div className="emb-vsl-hueco">
+                          <strong>Aquí va el VSL</strong>
+                          <span>Pon el ID de YouTube en TALLER.gate.vslYoutubeId</span>
+                        </div>
                       </div>
-                    )}
-                  </div>
+                    )
+                  )}
 
                   <button type="button" className="emb-cta" onClick={avanzar}>
                     Empezar el diagnóstico →
