@@ -252,6 +252,10 @@ export default function LandingAcademy() {
             caro y lo único que la IA no hace por ti.
           </motion.p>
 
+          {/* Mientras el VSL no este grabado, el marcador solo se ve en
+              desarrollo: al visitante no puede salirle una caja vacia con
+              una nota interna. */}
+          {(vsl || process.env.NODE_ENV !== "production") && (
           <motion.div
             className="lp-vsl-wrap"
             initial={{ opacity: 0, y: 34 }}
@@ -291,6 +295,7 @@ export default function LandingAcademy() {
               )}
             </div>
           </motion.div>
+          )}
 
           <CtaBlock
             label="Quiero entrar — escribir por WhatsApp"
