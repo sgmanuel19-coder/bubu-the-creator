@@ -1266,6 +1266,15 @@ body {
 
 /* Las cinco partes del método */
 .emb-partes{ display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;width:100%;margin:4px 0 12px; }
+/* Son cinco y en tres columnas la ultima fila dejaba un hueco. Sobre 900 px
+   las dos ultimas ocupan media fila cada una: la rejilla cierra y ademas se
+   ven mas grandes Casos y Cobrar, que son las que mas venden. */
+@media (min-width:900px){
+  .emb-partes{ grid-template-columns:repeat(6,1fr); }
+  .emb-parte{ grid-column:span 2; }
+  .emb-parte:nth-child(4),.emb-parte:nth-child(5){ grid-column:span 3; }
+  .emb-parte:nth-child(4) figure,.emb-parte:nth-child(5) figure{ aspect-ratio:16/8; }
+}
 .emb-parte{ border:1px solid rgba(244,240,222,.10);border-radius:13px;overflow:hidden;background:rgba(244,240,222,.02);display:flex;flex-direction:column; }
 .emb-parte figure{ margin:0;aspect-ratio:16/10;overflow:hidden;background:rgba(244,240,222,.04); }
 .emb-parte figure img{ width:100%;height:100%;object-fit:cover;display:block; }
