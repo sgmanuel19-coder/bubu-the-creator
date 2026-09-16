@@ -7,7 +7,7 @@ import { SITE } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Empezar — RESUELTO Academy",
   description:
-    "Dos preguntas y te digo exactamente qué te falta para producir contenido publicitario que venda. El método de dirección creativa con IA de un publicista de TBWA y Fahrenheit DDB.",
+    "Tres preguntas y te digo exactamente qué te falta para producir contenido publicitario que venda. El método de dirección creativa con IA de un publicista de TBWA y Fahrenheit DDB.",
   alternates: { canonical: "https://www.resueltoagency.com/empezar" },
   // noindex a propósito, igual que /masterclass: las tres landings
   // (/taller, /masterclass, /empezar) venden lo mismo y si compiten en
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ya sabes generar. Te falta dirigir. — RESUELTO Academy",
     description:
-      "Dos preguntas, tu diagnóstico, y por dónde empezar. 30 segundos.",
+      "Tres preguntas, tu diagnóstico, y por dónde empezar. Un minuto.",
     url: "https://www.resueltoagency.com/empezar",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },

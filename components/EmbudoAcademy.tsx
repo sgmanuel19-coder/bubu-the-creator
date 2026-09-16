@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import LandingPortafolio from "@/components/LandingPortafolio";
+import { eventoMeta } from "@/lib/meta/evento";
 import { TALLER } from "@/lib/taller/content";
 
 /**
@@ -373,6 +374,15 @@ export default function EmbudoAcademy() {
     cajaPaso.current?.focus({ preventScroll: true });
   }, [paso]);
 
+  /* Llegar al diagnostico es haber contestado las tres preguntas: ese es el
+     lead calificado y es por lo que la pauta tiene que optimizar. */
+  const avisoDiagnostico = useRef(false);
+  useEffect(() => {
+    if (paso !== 6 || avisoDiagnostico.current) return;
+    avisoDiagnostico.current = true;
+    eventoMeta("CompleteRegistration", { contentName: "Diagnóstico del embudo" });
+  }, [paso]);
+
   const perfilTexto = [r1 && ETIQUETAS[r1], r2 && ETIQUETAS[r2], r3 && ETIQUETAS[r3]]
     .filter(Boolean)
     .join(" · ");
@@ -386,6 +396,19 @@ export default function EmbudoAcademy() {
   const waInco = `${whatsapp}?text=${encodeURIComponent(
     `Hola Manuel. Hice el diagnóstico (${diag?.perfil ?? "—"}) y me interesa el programa para mi equipo. Mi situación: ${perfilTexto}.`,
   )}`;
+
+  /* El clic al pago es el evento que mas vale: sin `value` Meta solo puede
+     optimizar por volumen de clics, no por retorno. */
+  function irAlPago() {
+    // Sin pasarela el boton lleva a WhatsApp, y ese clic ya lo cuenta como
+    // Lead el listener global del Pixel: no es un checkout.
+    if (!prod.hotmartUrl) return;
+    eventoMeta("InitiateCheckout", {
+      contentName: prod.nombre,
+      value: Number(prod.precio.replace(/[^\d.]/g, "")) || undefined,
+      currency: "USD",
+    });
+  }
 
   async function enviarCorreo(e: React.FormEvent) {
     e.preventDefault();
@@ -405,7 +428,10 @@ export default function EmbudoAcademy() {
         }),
       });
       const data = await res.json().catch(() => null);
-      if (data?.ok) setEnviado(true);
+      if (data?.ok) {
+        setEnviado(true);
+        eventoMeta("Lead", { contentName: "Correo del embudo" });
+      }
       else setError(data?.error || "No se pudo enviar. Escríbeme por WhatsApp.");
     } catch {
       setError("No se pudo enviar. Escríbeme por WhatsApp.");
@@ -664,6 +690,7 @@ export default function EmbudoAcademy() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="emb-cta emb-cta--pago"
+                        onClick={irAlPago}
                       >
                         Entrar ahora por {prod.precio}
                       </a>
@@ -785,8 +812,9 @@ export default function EmbudoAcademy() {
               target="_blank"
               rel="noopener noreferrer"
               className="emb-nav-cta"
+              onClick={irAlPago}
             >
-              Entrar ahora →
+              {prod.hotmartUrl ? "Entrar ahora →" : "Escríbeme para entrar →"}
             </a>
           </div>
         )}

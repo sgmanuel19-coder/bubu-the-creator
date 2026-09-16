@@ -32,6 +32,10 @@ type Body = {
   eventSourceUrl?: string;
   contentName?: string;
   contentCategory?: string;
+  /* Solo para los eventos de compra: sin valor, Meta no puede optimizar
+     por retorno, solo por volumen. */
+  value?: number;
+  currency?: string;
   fbp?: string;
   fbc?: string;
 };
@@ -56,7 +60,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, reason: "bad_json" }, { status: 400 });
   }
 
-  const { eventName, eventId, eventSourceUrl, contentName, contentCategory, fbp, fbc } = body;
+  const { eventName, eventId, eventSourceUrl, contentName, contentCategory, value, currency, fbp, fbc } =
+    body;
   if (!eventName || !eventId) {
     return NextResponse.json({ ok: false, reason: "missing_fields" }, { status: 400 });
   }
@@ -92,6 +97,10 @@ export async function POST(req: NextRequest) {
         custom_data: {
           ...(contentName ? { content_name: contentName } : {}),
           ...(contentCategory ? { content_category: contentCategory } : {}),
+          ...(typeof value === "number" && Number.isFinite(value) ? { value } : {}),
+          ...(currency && /^[A-Za-z]{3}$/.test(currency)
+            ? { currency: currency.toUpperCase() }
+            : {}),
         },
       },
     ],

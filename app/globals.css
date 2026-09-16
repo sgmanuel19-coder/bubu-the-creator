@@ -1267,7 +1267,7 @@ body {
 /* Las cinco partes del método */
 .emb-partes{ display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;width:100%;margin:4px 0 12px; }
 .emb-parte{ border:1px solid rgba(244,240,222,.10);border-radius:13px;overflow:hidden;background:rgba(244,240,222,.02);display:flex;flex-direction:column; }
-.emb-parte figure{ margin:0;aspect-ratio:16/10;overflow:hidden; }
+.emb-parte figure{ margin:0;aspect-ratio:16/10;overflow:hidden;background:rgba(244,240,222,.04); }
 .emb-parte figure img{ width:100%;height:100%;object-fit:cover;display:block; }
 .emb-parte-n{ font-size:11px;letter-spacing:.22em;color:rgba(26,128,255,.9);font-weight:700;padding:16px 17px 0; }
 .emb-parte h3{ font-size:17px;font-weight:700;color:var(--hm-cream);letter-spacing:-.015em;padding:7px 17px 0;margin:0; }
@@ -1277,7 +1277,7 @@ body {
 .emb-llevas{ display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;width:100%;margin:4px 0 12px; }
 .emb-lleva{ border:1px solid rgba(244,240,222,.10);border-radius:13px;overflow:hidden;background:rgba(244,240,222,.02);display:flex;flex-direction:column; }
 .emb-lleva.es-estrella{ border-color:rgba(26,128,255,.45);background:rgba(26,128,255,.07); }
-.emb-lleva figure{ margin:0;aspect-ratio:16/10;overflow:hidden; }
+.emb-lleva figure{ margin:0;aspect-ratio:16/10;overflow:hidden;background:rgba(244,240,222,.04); }
 .emb-lleva figure img{ width:100%;height:100%;object-fit:cover;display:block; }
 .emb-lleva h3{ font-size:15.5px;font-weight:700;color:var(--hm-cream);letter-spacing:-.01em;padding:15px 17px 0;margin:0; }
 .emb-lleva.es-estrella h3{ padding-top:4px; }
