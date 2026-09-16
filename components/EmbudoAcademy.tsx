@@ -665,6 +665,20 @@ export default function EmbudoAcademy() {
                   </p>
                 </div>
 
+                {/* Quien tiene equipo o cobra sobre $1,000 vale mucho mas por
+                    in-company que por la suscripcion: esa puerta va antes del
+                    precio, no enterrada detras de las dudas frecuentes. */}
+                {esAlto && (
+                  <div className="emb-inco">
+                    <p className="emb-inco-lbl">Por lo que me contaste, esto te puede servir más</p>
+                    <p className="emb-inco-tit">{inco.nombre}</p>
+                    <p className="emb-txt">{inco.nota}</p>
+                    <a href={waInco} target="_blank" rel="noopener noreferrer" className="emb-inco-cta">
+                      {inco.cta} →
+                    </a>
+                  </div>
+                )}
+
                 <div className="emb-precio">
                   <span className="hm-eyebrow">Un solo precio</span>
                   <h2 className="emb-h2">{prod.precio} y tienes todo abierto.</h2>
@@ -721,17 +735,6 @@ export default function EmbudoAcademy() {
                   ))}
                 </div>
 
-
-                {esAlto && (
-                  <div className="emb-inco">
-                    <p className="emb-inco-lbl">Por lo que me contaste, esto te puede servir más</p>
-                    <p className="emb-inco-tit">{inco.nombre}</p>
-                    <p className="emb-txt">{inco.nota}</p>
-                    <a href={waInco} target="_blank" rel="noopener noreferrer" className="emb-inco-cta">
-                      {inco.cta} →
-                    </a>
-                  </div>
-                )}
 
                 <div className="emb-salida">
                   {!verCorreo && !enviado && (

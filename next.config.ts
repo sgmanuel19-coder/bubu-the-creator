@@ -15,11 +15,16 @@ const csp = [
   `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${devEval} blob: https://connect.facebook.net https://va.vercel-scripts.com https://www.youtube.com https://www.googletagmanager.com https://www.google-analytics.com`,
   "worker-src 'self' blob:",
   // googletagmanager.com en frame-src: el <noscript> de GTM es un iframe.
-  "frame-src https://www.instagram.com https://www.youtube.com https://www.youtube-nocookie.com https://www.tiktok.com https://drive.google.com https://www.googletagmanager.com",
+  // www.facebook.com: el Pixel abre un iframe oculto contra ese host; sin el
+  // la consola se llena de violaciones de CSP en cada carga.
+  "frame-src https://www.instagram.com https://www.youtube.com https://www.youtube-nocookie.com https://www.tiktok.com https://drive.google.com https://www.googletagmanager.com https://www.facebook.com",
   "frame-ancestors 'self'",
   "object-src 'none'",
   "base-uri 'self'",
-  "form-action 'self'",
+  // El Pixel manda los eventos que no caben en una imagen como POST de
+  // formulario a facebook.com/tr/. Con form-action solo en 'self' esos
+  // eventos se bloqueaban: la pauta quedaba midiendo a medias.
+  "form-action 'self' https://www.facebook.com",
   "upgrade-insecure-requests",
 ].join('; ');
 
