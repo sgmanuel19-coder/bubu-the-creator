@@ -3,8 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-import LandingPortafolio from "@/components/LandingPortafolio";
+import dynamic from "next/dynamic";
+
 import { eventoMeta } from "@/lib/meta/evento";
+
+/* El portafolio vive en el paso 8 de 10 y arrastra framer-motion. Cargarlo
+   aparte deja mas ligera la primera pantalla, que es la que paga la pauta.
+   El hueco reservado evita que la barra de avance salte al montarse. */
+const LandingPortafolio = dynamic(() => import("@/components/LandingPortafolio"), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: 420 }} />,
+});
 import { TALLER } from "@/lib/taller/content";
 
 /**
