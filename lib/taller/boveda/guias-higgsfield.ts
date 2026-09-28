@@ -760,4 +760,183 @@ export const SECCIONES_HIGGSFIELD: Record<string, SeccionRecurso[]> = {
       ],
     },
   ],
+
+  // ── 9. LOCALIZACIÓN ───────────────────────────────────────────
+  "un-anuncio-cinco-idiomas": [
+    {
+      titulo: "Por qué esto es plata y no un truco",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "La pieza más cara de una campaña es la que ya está aprobada: costó brief, rondas de cambios y la firma del gerente. Cuando esa misma marca vende en otro país (o en la selva y en Lima, o a clientes que hablan quechua o portugués), lo normal es rehacerlo todo. No hace falta. Hoy tomas el anuncio aprobado y le cambias la voz, los labios y el encuadre, y el concepto no se toca.",
+        },
+        {
+          tipo: "parrafo",
+          texto:
+            "Traducir no es lo mismo que localizar. Traducir cambia las palabras. Localizar hace que el anuncio parezca hecho ahí: la voz suena natural, la boca calza con lo que se dice, el precio está en la moneda correcta y el llamado a la acción usa la expresión que la gente usa. Si falla una sola de esas cosas, el anuncio se nota «adaptado», y la gente lo huele en dos segundos.",
+        },
+        {
+          tipo: "lista",
+          items: [
+            "Marcas que venden en varios países con el mismo producto (el caso típico: un fabricante que entra a Perú, Chile y Colombia con la misma campaña).",
+            "Lanzamientos regionales donde la oferta o el CTA cambian por ciudad.",
+            "Clientes con audiencia bilingüe dentro del mismo país.",
+            "Cualquier campaña que corre a la vez en TikTok, Reels, feed y YouTube, que ya pide tres formatos aunque sea en un solo idioma.",
+          ],
+        },
+      ],
+    },
+    {
+      titulo: "Antes de empezar: lo que necesitas",
+      bloques: [
+        {
+          tipo: "lista",
+          items: [
+            "Una cuenta de Higgsfield con créditos (el cálculo de costo está más abajo). Lipsync Studio, Audio y Reframe están dentro de la misma plataforma.",
+            "El anuncio MAESTRO ya aprobado, exportado limpio: sin subtítulos quemados y sin texto en pantalla si se puede. Todo lo que está quemado en la imagen hay que rehacerlo a mano después.",
+            "El guion original en texto.",
+            "Una persona nativa (o que domine el idioma) que revise la traducción antes de publicar. Esto no es opcional.",
+            "El permiso por escrito si vas a clonar o recrear la voz de alguien real. Lo vemos en la última sección.",
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Regla de dirección creativa: si ya sabes desde el brief que la pieza se va a localizar, dilo en el concepto. Una apertura clara y el producto en mano funcionan en cualquier idioma. Un chiste que depende de un juego de palabras en español muere en la traducción, y ahí no hay herramienta que lo salve.",
+        },
+      ],
+    },
+    {
+      titulo: "El flujo, paso a paso",
+      bloques: [
+        {
+          tipo: "pasos",
+          items: [
+            {
+              titulo: "0 · El maestro",
+              detalle:
+                "Parte de un anuncio aprobado. Si todavía no existe, Marketing Studio de Higgsfield arma uno desde plantilla (tiene más de 1,500, de producto, UGC y cinematográficas). Pero lo ideal es que sea la pieza que ya dirigiste con tu Cerebro Creativo: el idioma se cambia al final y la idea se decide al principio.",
+            },
+            {
+              titulo: "1 · Adapta el guion, no lo traduzcas",
+              detalle:
+                "Traduce pensando en el TIEMPO, no palabra por palabra. El inglés suele salir más corto que el español; el alemán y el portugués, a veces más largos. Si la frase traducida no entra en los mismos segundos, el lipsync se rompe más adelante. Recorta hasta que quepa. Usa el prompt de abajo con Claude.",
+            },
+            {
+              titulo: "2 · La voz en el idioma nuevo",
+              detalle:
+                "En Higgsfield entra a Audio → Translate, sube el video y elige el idioma destino: te devuelve la pista traducida con voz nueva. Si ya tienes una locución grabada (o la hiciste en ElevenLabs con tu guion adaptado), súbela directo y sáltate la traducción automática. Yo prefiero lo segundo cuando la marca tiene un tono muy marcado, porque dirijo la entonación con la puntuación.",
+            },
+            {
+              titulo: "3 · Lipsync Studio",
+              detalle:
+                "Sube el video y la pista nueva. Lipsync Studio tiene siete modelos (Google Veo 3, Wan 2.5 Speak, Kling Avatars 2.0, Higgsfield Speak 2.0, Infinite Talk, Sync Lipsync 3 y Kling Lipsync) y soporta más de 18 idiomas. Empieza con uno y revisa. Si la boca se ve rara en planos cerrados, prueba otro modelo antes de tocar el guion. Cada modelo tiene su propio costo y resolución.",
+            },
+            {
+              titulo: "4 · Todo lo que el doblaje NO cambia",
+              detalle:
+                "Subtítulos, texto en pantalla, precio, moneda, fechas, CTA y letra chica legal: nada de eso se actualiza solo. Hazlo en CapCut Pro sobre la versión doblada. Pon subtítulos aunque el video esté doblado, porque la mayoría lo ve sin sonido.",
+            },
+            {
+              titulo: "5 · Reframe por plataforma",
+              detalle:
+                "Con el corte final de cada idioma, Reframe lo reencuadra: 9:16 para TikTok y Reels, 1:1 para feed, 16:9 para YouTube. Revisa cada versión: que el producto siga en cuadro, que los subtítulos no queden cortados y que nada importante caiga fuera del área segura.",
+            },
+          ],
+        },
+        {
+          tipo: "copiable",
+          etiqueta: "Prompt · adapta el guion a otro idioma sin romper el tiempo",
+          contenido:
+            "Vas a adaptar el guion de un anuncio de video a otro idioma. No es una traducción literal: tiene que sonar como lo diría un nativo y durar lo mismo.\n\nIDIOMA Y MERCADO DESTINO: [ej. portugués de Brasil]\nDURACIÓN DEL ANUNCIO: [ej. 15 segundos]\nMARCA Y TONO: [ej. marca de iluminación, tono técnico pero cercano]\nGUION ORIGINAL (con tiempos):\n[00:00-00:03] ...\n[00:03-00:08] ...\n[00:08-00:15] ...\n\n1. Adapta cada línea respetando su bloque de tiempo. Si una línea sale más larga, recórtala sin perder la idea.\n2. Cambia expresiones, moneda, unidades y el CTA a lo que se usa en ese mercado.\n3. Marca con [REVISAR] cualquier nombre de producto, cifra o término de marca que se deba pronunciar de una forma específica.\n4. Al final, lista todo lo que hay que cambiar en pantalla (textos, precios, letra chica) para esta versión.",
+        },
+      ],
+    },
+    {
+      titulo: "La matriz: 15 versiones no son 15 trabajos",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Cinco idiomas en tres formatos suena a quince anuncios. En la práctica es un maestro, cuatro doblajes y los reencuadres. Esto es lo que le explicas al cliente cuando te pide «una versión para cada país».",
+        },
+        {
+          tipo: "tabla",
+          columnas: ["Etapa", "Trabajo real", "Versiones acumuladas"],
+          filas: [
+            ["Anuncio maestro", "1 pieza", "1"],
+            ["Doblaje a 5 idiomas en total", "4 doblajes (el original ya es uno)", "5"],
+            ["Reencuadre a 3 formatos", "2 reencuadres por idioma", "15"],
+          ],
+        },
+        {
+          tipo: "tabla",
+          columnas: ["Paso (15 s, 720p)", "Créditos", "Costo aprox."],
+          filas: [
+            ["Marketing Studio (si creas el maestro ahí)", "90", "US$ 4.50"],
+            ["Audio: traducción + voz", "45", "US$ 2.25"],
+            ["Lipsync Studio (Veo 3)", "58", "US$ 2.90"],
+            ["Reframe", "70", "US$ 3.50"],
+            ["Total por versión", "263", "US$ 13.15"],
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Son precios que Higgsfield publicó en septiembre de 2026, calculados a unos US$ 0.05 por crédito. Tu costo real depende de tu plan. Úsalos para cotizar con margen, no como número exacto. Y fíjate en lo que eso significa: tu costo de herramienta es de 13 dólares, pero lo que cobras es tu criterio para que la versión funcione en ese mercado.",
+        },
+      ],
+    },
+    {
+      titulo: "Checklist antes de publicar (y qué hacer si falla)",
+      bloques: [
+        {
+          tipo: "lista",
+          items: [
+            "Un nativo leyó y escuchó la versión: suena natural, no a traductor.",
+            "Los labios calzan con el audio en TODO el clip, no solo al inicio.",
+            "La marca, los nombres y las cifras se pronuncian bien.",
+            "Moneda, precios, ofertas y CTA corresponden al mercado.",
+            "Subtítulos, logo y producto dentro del área segura en los tres formatos.",
+            "Los claims publicitarios y la letra chica cumplen las reglas locales.",
+          ],
+        },
+        {
+          tipo: "tabla",
+          columnas: ["Problema", "Causa probable", "Qué hacer"],
+          filas: [
+            ["La boca va adelantada o atrasada", "La línea traducida es más larga que el bloque original", "Vuelve al paso 1 y recorta el guion; no insistas regenerando"],
+            ["Se ve raro en primer plano", "El modelo de lipsync no se lleva con ese encuadre", "Prueba otro de los siete modelos antes de cambiar nada más"],
+            ["La marca suena mal pronunciada", "La voz automática no conoce el término", "Escríbelo fonéticamente en el guion o graba la locución aparte y súbela"],
+            ["Tras el Reframe se corta el producto", "El plano original estaba muy abierto o descentrado", "Ajusta el encuadre a mano o elige otro plano para ese formato"],
+            ["Se acaban los créditos a mitad del lote", "Regeneraste lipsync de más", "Aprueba UN idioma completo antes de lanzar los demás"],
+          ],
+        },
+      ],
+    },
+    {
+      titulo: "La parte legal que nadie lee (y que te puede costar el cliente)",
+      bloques: [
+        {
+          tipo: "parrafo",
+          texto:
+            "Si en el anuncio sale una persona real (el gerente, un vocero, un actor), cambiarle el idioma con IA es modificar su imagen y su voz. Necesitas su permiso explícito para versiones traducidas y modificadas con IA, y el contrato original casi nunca lo cubre. Pídelo por escrito ANTES de producir, no después.",
+        },
+        {
+          tipo: "lista",
+          items: [
+            "Consentimiento de la persona para clonar o recrear su voz.",
+            "El acuerdo con el actor o vocero cubre versiones traducidas y editadas con IA.",
+            "Derechos de imagen y de uso confirmados para cada país donde va a correr.",
+          ],
+        },
+        {
+          tipo: "nota",
+          texto:
+            "Si el vocero es un personaje creado con IA (ver «Personaje consistente» y «Clon y UGC» en esta bóveda), te ahorras la mitad de este problema. Es una de las razones por las que, en campañas multi-país, propongo un vocero de marca en vez de una cara real.",
+        },
+      ],
+    },
+  ],
 };

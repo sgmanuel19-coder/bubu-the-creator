@@ -1746,6 +1746,16 @@ const BOVEDA_HIGGSFIELD: RecursoBoveda[] = [
     disponible: true,
     tags: ["mcp", "claude", "higgsfield", "flujo"],
   },
+  {
+    slug: "un-anuncio-cinco-idiomas",
+    titulo: "Un anuncio, cinco idiomas · doblaje, lipsync y reencuadre sin volver a grabar",
+    descripcion:
+      "Tomas el anuncio que ya aprobó el cliente y lo sacas en otros idiomas y en todos los formatos: voz traducida, labios sincronizados y reencuadre por plataforma. Todo dentro de Higgsfield, por unos 13 dólares la versión.",
+    tipo: "guia",
+    nivel: "intermedio",
+    disponible: true,
+    tags: ["higgsfield", "lipsync", "localización", "doblaje", "reframe"],
+  },
 ];
 
 // ── PARTE 5 · COBRAR: los artículos de la parte comercial ───────
