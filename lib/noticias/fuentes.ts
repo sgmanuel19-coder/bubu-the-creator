@@ -483,17 +483,6 @@ export const FUENTES: Fuente[] = [
     peso: 6,
   },
   {
-    id: "venturebeat-ia",
-    nombre: "VentureBeat · AI",
-    corto: "VentureBeat",
-    url: "https://venturebeat.com/category/ai/feed/",
-    tipo: "ia",
-    idioma: "en",
-    sitio: "venturebeat.com",
-    seccionBase: "Herramientas",
-    peso: 7,
-  },
-  {
     id: "adweek",
     nombre: "Adweek",
     corto: "Adweek",
@@ -501,21 +490,6 @@ export const FUENTES: Fuente[] = [
     tipo: "publicidad",
     idioma: "en",
     sitio: "adweek.com",
-    seccionBase: "Negocio",
-    peso: 8,
-  },
-  {
-    // OJO: devuelve 403 desde algunas redes (igual que
-    // marketing4ecommerce, que sí funciona en el build de Vercel). Si se
-    // cae, el portal la ignora y sigue: es prensa publicitaria española
-    // fuerte y vale el intento.
-    id: "marketingdirecto",
-    nombre: "Marketing Directo",
-    corto: "Marketing Directo",
-    url: "https://www.marketingdirecto.com/feed",
-    tipo: "publicidad",
-    idioma: "es",
-    sitio: "marketingdirecto.com",
     seccionBase: "Negocio",
     peso: 8,
   },
