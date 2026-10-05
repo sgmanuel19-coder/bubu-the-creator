@@ -12,8 +12,10 @@ const navLinks = [
   { label: "Sobre nosotros", href: "/sobre-mi" },
   { label: "Portafolio", href: "/casos" },
   { label: "Servicios", href: "/servicios" },
-  // Academy apunta al portal de la masterclass (landing + plataforma).
-  { label: "Academy", href: "/taller" },
+  // Academy OCULTA temporalmente (2026-10, pedido de Manuel). La ruta /taller
+  // sigue viva a propósito: hay pauta de Meta activa y alumnos con acceso.
+  // Para reponerla, descomentar esta línea.
+  // { label: "Academy", href: "/taller" },
   // La noticIA: portal de noticias con cabecera propia (otra vertical), pero
   // con entrada desde el menú principal además del menú de la Academy.
   { label: "La noticIA", href: "/noticias" },

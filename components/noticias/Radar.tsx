@@ -76,12 +76,15 @@ export function Cabecera({ secciones }: { secciones: Seccion[] }) {
               <path d="m20 20-3.5-3.5" strokeLinecap="round" />
             </svg>
           </a>
+          {/* Enlace a Academy OCULTO temporalmente (2026-10). La ruta /taller
+              sigue viva; para reponerlo, descomentar este bloque.
           <a
             href="/taller"
             className="font-display text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand-blue transition-opacity hover:opacity-75"
           >
             Academy
           </a>
+          */}
         </div>
       </div>
 
@@ -512,19 +515,22 @@ export default function Radar({ portada }: { portada: Portada }) {
               </p>
             </div>
 
+            {/* Puente a Academy reemplazado por puente a Servicios mientras
+                Academy está oculta (2026-10). */}
             <div>
               <h3 className="font-display text-sm font-bold uppercase tracking-[0.2em] text-cream">
-                Aquí te enteras. Allá aprendes qué hacer
+                Aquí te enteras. Nosotros lo producimos
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                La Academy te enseña qué hacer con eso: el método de dirección creativa
-                que convierte una herramienta nueva en una campaña que se cobra.
+                Leer la herramienta nueva es la parte fácil. Convertirla en una pieza
+                que vende es oficio: eso es lo que hacemos todos los meses para marcas
+                de industria, energía y consumo.
               </p>
               <a
-                href="/taller"
+                href="/servicios"
                 className="mt-5 inline-flex items-center gap-2 rounded-lg border border-brand-blue/40 px-5 py-2.5 font-display text-xs font-semibold uppercase tracking-[0.16em] text-brand-blue transition-colors hover:bg-brand-blue/10"
               >
-                Ver la Academy <span aria-hidden>→</span>
+                Ver servicios <span aria-hidden>→</span>
               </a>
             </div>
           </div>

@@ -126,8 +126,9 @@ const METODO = [
 
 const PUERTAS = [
   { n: "01", href: "/casos", title: "Portafolio", sub: "El trabajo habla primero. Comerciales, contenido, diseño y todo lo producido — con IA y antes de ella.", video: "/videos/portafolio-hero-v2.mp4" },
-  { n: "02", href: "/servicios", title: "Servicios", sub: "Trece formas de trabajar juntos: producción IA, diseño, web, estrategia y automatización comercial." },
-  { n: "03", href: "/taller", title: "Academy", sub: "El mismo método que usamos con clientes, enseñado paso a paso. Empieza gratis en la bóveda." },
+  { n: "02", href: "/servicios", title: "Servicios", sub: "Seis formas de trabajar juntos: producción audiovisual IA, desarrollo web y SaaS, eventos B2B, capacitación y plataformas interactivas." },
+  // Puerta de Academy OCULTA temporalmente (2026-10). La ruta /taller sigue viva.
+  // { n: "03", href: "/taller", title: "Academy", sub: "El mismo método que usamos con clientes, enseñado paso a paso. Empieza gratis en la bóveda." },
 ];
 
 export default function Home() {

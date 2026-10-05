@@ -21,7 +21,7 @@ function precioLinea(s: Servicio): { texto: string; definido: boolean } {
 export function ServicioIcon({ id }: { id: string }) {
   const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   switch (id) {
-    case "contenido-ia": // stack de frames con play
+    case "produccion-audiovisual-ia": // claqueta de cine
       return (
         <svg viewBox="0 0 24 24" {...p}>
           <rect x="3" y="7" width="14" height="14" rx="2.5" />
@@ -29,12 +29,12 @@ export function ServicioIcon({ id }: { id: string }) {
           <path d="M8.5 11.5l4.5 2.5-4.5 2.5z" fill="currentColor" stroke="none" />
         </svg>
       );
-    case "comerciales-ia": // claqueta de cine
+    case "capacitacion-ia": // birrete con chispa
       return (
         <svg viewBox="0 0 24 24" {...p}>
-          <rect x="3" y="10" width="18" height="10" rx="2" />
-          <path d="M3.5 9.5l17-4.5 1 3.5-17.5 4.5z" />
-          <path d="M8 8.3l2.6 2.8M13 7l2.6 2.8" opacity=".6" />
+          <path d="M12 4.2 21.5 8.6 12 13 2.5 8.6z" />
+          <path d="M6.5 10.6v4.6c0 1.5 2.6 2.7 5.5 2.7s5.5-1.2 5.5-2.7v-4.6" opacity=".55" />
+          <path d="M19.4 14.6l.6 1.5 1.5.6-1.5.6-.6 1.5-.6-1.5-1.5-.6 1.5-.6z" fill="currentColor" stroke="none" />
         </svg>
       );
     case "paginas-web": // navegador con cursor
@@ -45,29 +45,7 @@ export function ServicioIcon({ id }: { id: string }) {
           <path d="M12.5 12l6 2.2-2.7 1 1.6 2.8-1.6.9-1.6-2.8-2 2z" fill="currentColor" stroke="none" opacity=".9" />
         </svg>
       );
-    case "packaging": // caja 3D
-      return (
-        <svg viewBox="0 0 24 24" {...p}>
-          <path d="M12 3l8 4.2v9.6L12 21l-8-4.2V7.2z" />
-          <path d="M12 3v9M4 7.2l8 4.8 8-4.8" opacity=".6" />
-        </svg>
-      );
-    case "diseno-ia-btl": // marco con destello
-      return (
-        <svg viewBox="0 0 24 24" {...p}>
-          <rect x="3.5" y="3.5" width="17" height="17" rx="2.5" />
-          <path d="M12 7.5l1.2 2.8 2.8 1.2-2.8 1.2L12 15.5l-1.2-2.8L8 11.5l2.8-1.2z" fill="currentColor" stroke="none" />
-          <path d="M17 16.5h.01M7 7h.01" opacity=".7" />
-        </svg>
-      );
-    case "chatbot-ia": // burbuja con chispa
-      return (
-        <svg viewBox="0 0 24 24" {...p}>
-          <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4H6.5A2.5 2.5 0 0 1 4 13.5z" />
-          <path d="M12 7l.9 2.1L15 10l-2.1.9L12 13l-.9-2.1L9 10l2.1-.9z" fill="currentColor" stroke="none" />
-        </svg>
-      );
-    case "base-de-datos": // cilindro DB
+    case "plataformas-saas": // cilindro de datos
       return (
         <svg viewBox="0 0 24 24" {...p}>
           <ellipse cx="12" cy="5.5" rx="7.5" ry="2.8" />
@@ -75,24 +53,7 @@ export function ServicioIcon({ id }: { id: string }) {
           <path d="M4.5 12c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8" opacity=".6" />
         </svg>
       );
-    case "email-marketing": // sobre con rayo
-      return (
-        <svg viewBox="0 0 24 24" {...p}>
-          <rect x="3" y="5" width="18" height="14" rx="2.5" />
-          <path d="M3.5 7l8.5 6 8.5-6" />
-          <path d="M13.2 10.5l-2.4 3.4h2l-1 2.6 2.8-3.6h-2z" fill="currentColor" stroke="none" opacity=".9" />
-        </svg>
-      );
-    case "estrategia-crecimiento": // curva ascendente con diana
-      return (
-        <svg viewBox="0 0 24 24" {...p}>
-          <path d="M3 18.5c3.5 0 4.5-4 7-7.5s4.5-4 7.5-4" />
-          <path d="M14.5 7h3.5v3.5" />
-          <circle cx="7.5" cy="16.5" r="1.6" fill="currentColor" stroke="none" opacity=".85" />
-          <path d="M3 21h18" opacity=".45" />
-        </svg>
-      );
-    case "campanas-integrales": // nodos irradiando desde un centro
+    case "plataformas-interactivas": // nodos irradiando desde un centro
       return (
         <svg viewBox="0 0 24 24" {...p}>
           <circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none" />
@@ -103,15 +64,7 @@ export function ServicioIcon({ id }: { id: string }) {
           <circle cx="7.6" cy="16.4" r="1.5" fill="currentColor" stroke="none" />
         </svg>
       );
-    case "consultoria-marketing": // brújula / dirección
-      return (
-        <svg viewBox="0 0 24 24" {...p}>
-          <circle cx="12" cy="12" r="8.6" />
-          <path d="M15.4 8.6l-2 5.4-5.4 2 2-5.4z" fill="currentColor" stroke="none" opacity=".9" />
-          <path d="M12 2.6v1.8M12 19.6v1.8M2.6 12h1.8M19.6 12h1.8" opacity=".5" />
-        </svg>
-      );
-    case "eventos-corporativos": // escenario con foco
+    case "eventos-b2b": // escenario con foco
       return (
         <svg viewBox="0 0 24 24" {...p}>
           <path d="M4 20h16" />
@@ -119,12 +72,6 @@ export function ServicioIcon({ id }: { id: string }) {
           <path d="M12 9.5V6" />
           <circle cx="12" cy="4.2" r="1.8" fill="currentColor" stroke="none" />
           <path d="M9 20v-4.5h6V20" opacity=".55" />
-        </svg>
-      );
-    case "produccion-musical": // onda de audio
-      return (
-        <svg viewBox="0 0 24 24" {...p}>
-          <path d="M3 12v0M6.2 8.6v6.8M9.4 5.4v13.2M12.6 9.4v5.2M15.8 6.6v10.8M19 10v4M21.8 11.4v1.2" />
         </svg>
       );
     default:
@@ -349,9 +296,9 @@ export default function Servicios() {
             Todo lo que tu marca<br /><span className="sv-grad">necesita para crecer.</span>
           </h1>
           <p className="sv-sub">
-            Estrategia, producción con IA, diseño, web y automatización comercial —
-            {" "}{SERVICIOS.length} servicios, un mismo estándar:{" "}
-            <strong>nivel de agencia global, velocidad de IA.</strong>
+            Producción audiovisual con IA, desarrollo web y software, eventos B2B,
+            capacitación y plataformas interactivas —{" "}{SERVICIOS.length} servicios,
+            un mismo estándar: <strong>nivel de agencia global, velocidad de IA.</strong>
           </p>
 
           <div className="sv-range">
@@ -361,15 +308,16 @@ export default function Servicios() {
               <div className="end"><b>+$10,000</b><span>Campañas completas y producción recurrente</span></div>
             </div>
             <p className="sv-range-note">
-              Mientras más complejo tu proyecto —más piezas, más comerciales, producción recurrente
-              todo el mes— más se acerca a <b>+$10,000</b>. Así se cotiza cada servicio de producción.
+              Rango de referencia de <b>producción audiovisual</b>: mientras más piezas,
+              más comerciales y más producción recurrente, más se acerca a <b>+$10,000</b>.
+              Desarrollo, eventos, capacitación y plataformas se cotizan por proyecto.
             </p>
           </div>
         </div>
       </header>
 
       {/* ── ACORDEÓN DE SERVICIOS ──
-          Se reparte en dos filas: 13 paneles en una sola cinta no dejarían
+          Se reparte en dos filas: los paneles en una sola cinta no dejarían
           espacio para que el activo se expanda. La fila que NO contiene el
           panel activo reparte su ancho en partes iguales (clase "idle"). */}
       <section className="container-base sv-grid-wrap">
