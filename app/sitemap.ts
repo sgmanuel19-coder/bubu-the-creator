@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { bovedaGlobal } from '@/lib/taller/boveda-server';
 import { SECCIONES } from '@/lib/noticias/fuentes';
 import { SITE } from '@/lib/constants';
+import { SERVICIOS } from '@/lib/servicios';
 
 const BASE = 'https://www.resueltoagency.com';
 
@@ -30,6 +31,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date('2026-08-26'),
     changeFrequency: 'monthly' as const,
     priority: 0.6,
+  }));
+
+  // ── Una página por servicio: oferta, portafolio y paquetes ──────────────
+  const servicios: MetadataRoute.Sitemap = SERVICIOS.map((sv) => ({
+    url: `${BASE}/servicios/${sv.id}`,
+    lastModified: new Date('2026-10-08'),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
   }));
 
   // ── Las guías GRATIS de la bóveda: la entrada SEO al embudo del taller ───
@@ -74,12 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...casos,
-    {
-      url: `${BASE}/produccion-ia`,
-      lastModified: new Date('2026-08-26'),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
+    ...servicios,
     {
       url: `${BASE}/sobre-mi`,
       lastModified: new Date('2026-06-11'),

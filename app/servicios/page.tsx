@@ -6,14 +6,14 @@ import type { Metadata } from "next";
 import UltimasNoticias from "@/components/noticias/UltimasNoticias";
 
 export const metadata: Metadata = {
-  title: `Servicios — ${SITE.brandName}`,
+  title: `Servicios de marketing y publicidad con IA en Lima — ${SITE.brandName}`,
   description:
-    "Producción con IA, diseño, web y automatización comercial: Contenido IA, Comerciales IA, páginas web, SEO/SEM y marketplace, packaging, diseño BTL, chatbot IA, base de datos y email marketing.",
+    "Google Ads, SEO, diseño de páginas web, tiendas virtuales, spots publicitarios con IA, eventos corporativos, videojuegos a medida y capacitación en IA para empresas en Lima.",
   alternates: { canonical: "https://www.resueltoagency.com/servicios" },
   openGraph: {
     title: `Servicios — ${SITE.brandName}`,
     description:
-      "Producción con IA, diseño, web y automatización comercial. Ocho servicios, un mismo estándar: nivel de agencia global, velocidad de IA.",
+      "Ocho servicios en tres áreas: marketing digital, publicidad con IA y eventos, y capacitación en IA.",
     url: "https://www.resueltoagency.com/servicios",
   },
 };

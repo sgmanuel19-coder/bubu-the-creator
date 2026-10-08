@@ -101,6 +101,10 @@ const nextConfig: NextConfig = {
     return [
       // La landing vieja de Academy fue reemplazada por el portal /taller.
       { source: "/academy", destination: "/taller", permanent: true },
+      // Propuesta del 8-oct, decisión D1: la landing de producción IA se
+      // une a la página del servicio. El archivo app/produccion-ia sigue en
+      // el repo para poder revertir quitando esta línea.
+      { source: "/produccion-ia", destination: "/servicios/spot-publicitario-ia", permanent: true },
     ];
   },
   async headers() {

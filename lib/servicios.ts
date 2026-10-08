@@ -1,37 +1,51 @@
 // ============================================================
-// SERVICIOS — DATA EDITABLE
-// Cada servicio es una tarjeta; al hacer clic se abre su detalle.
+// SERVICIOS — DATA EDITABLE (tarjetas de /servicios)
 //
-// Estructura de oferta de cada servicio (en este orden en el modal):
-//   problema  → la tensión real que vive el cliente hoy
-//   desc      → qué hacemos exactamente
-//   resultado → qué se lleva, en concreto
-//   incluye   → entregables
-//   proceso   → cómo trabajamos
-//   paraQuien → filtro honesto de a quién le sirve
-//   factores  → qué mueve la inversión (hace transparente el "a cotizar")
+// 2026-10-08: la cartera sigue la "Propuesta de rediseño web" revisada con
+// los socios (PDF del 8-oct): 8 servicios en 3 áreas, una página por
+// servicio en /servicios/[id]. Los ids son las URLs finales, elegidas por
+// palabra clave (doc 07 §0) — cambiar un id cambia una URL indexada.
 //
-// Para poner precio a un servicio, edita `precio`:
-//   precio: { desde: "$500", nota: "por proyecto" }
-// Si `precio` es null se muestra "Inversión a cotizar" (estado actual de todos).
+// Este archivo alimenta las tarjetas del índice. El contenido largo de cada
+// página (oferta, casos, paquetes, FAQ) vive en lib/servicios-detalle.ts.
 //
-// 2026-10: la cartera se redujo de 13 a 6 servicios para concentrar la oferta.
-// Los servicios retirados (packaging, BTL, chatbot, base de datos, email
-// marketing, estrategia, campañas integrales, consultoría, producción musical)
-// siguen en el historial de git si alguna vez hay que recuperarlos.
+// Precios: todos en null → "Inversión a cotizar" (decisión 2026-10).
 // ============================================================
+
+export type AreaId = 1 | 2 | 3;
+
+export const AREAS: Record<AreaId, { n: string; nombre: string; titulo: string; para: string }> = {
+  1: {
+    n: "01",
+    nombre: "Marketing digital y ventas online",
+    titulo: "Marketing digital en Lima: Google Ads, SEO, páginas web y tiendas virtuales",
+    para: "Para que te encuentren cuando buscan lo que vendes y cada visita termine en una venta o una conversación por WhatsApp.",
+  },
+  2: {
+    n: "02",
+    nombre: "Publicidad con IA y eventos",
+    titulo: "Publicidad con IA y eventos corporativos: spots, ferias y videojuegos a medida",
+    para: "Para que tu marca se vea a la altura de lo que cobras: en pantalla, en el stand y en lo que la gente juega y recuerda.",
+  },
+  3: {
+    n: "03",
+    nombre: "Capacitación en IA",
+    titulo: "Capacitación en IA para empresas",
+    para: "Para que tu equipo produzca con IA y con criterio, sin depender de un proveedor para cada pieza.",
+  },
+};
 
 export type Servicio = {
   n: string;
-  id: string;
-  categoria: "Producción IA" | "Desarrollo" | "Eventos" | "Formación";
+  id: string; // = slug de /servicios/[id]
+  area: AreaId;
   // Acento propio del servicio, en RGB suelto para componer rgba() en CSS.
   // Paleta curada: tonos medios (nada neón) que funcionan sobre el fondo oscuro.
   accentRgb: string;
-  title: string;
-  tagline: string; // frase corta de la tarjeta
+  title: string; // nombre corto: menú, tarjetas, migas de pan
+  tagline: string; // frase de la tarjeta
   problema: string; // la tensión que abre el detalle
-  desc: string; // párrafo de apertura del detalle
+  desc: string; // qué hacemos
   resultado: string[]; // qué se lleva el cliente, en concreto
   incluye: string[];
   proceso?: { paso: string; texto: string }[];
@@ -39,36 +53,177 @@ export type Servicio = {
   factores?: string[]; // qué mueve la inversión
   precio: { desde: string; hasta?: string; nota?: string } | null;
   // Herramientas reales con las que se ejecuta el servicio. No son
-  // entregables: es la cinta de "con qué está hecho" que corre en el detalle.
+  // entregables: es la cinta de "con qué está hecho".
   stack?: string[];
   tags: string[];
-  destacado?: boolean; // tarjeta grande en la grilla
 };
 
 export const SERVICIOS: Servicio[] = [
+  // ══════════════ ÁREA 01 · MARKETING DIGITAL Y VENTAS ONLINE ══════════════
   {
     n: "01",
-    id: "produccion-audiovisual-ia",
+    id: "google-ads",
+    area: 1,
     accentRgb: "26,128,255",
-    categoria: "Producción IA",
-    title: "Producción Audiovisual IA",
-    tagline: "Comerciales con acabado de cine y contenido mensual constante, sin set ni rodaje.",
+    title: "Google Ads",
+    tagline: "¿Inviertes en anuncios y no sabes qué clic se volvió venta? Medimos cada contacto hasta su origen.",
     problema:
-      "Necesitas dos cosas que no suelen convivir en un presupuesto: una pieza ancla con nivel de comercial de TV, y contenido suficiente para no desaparecer de las redes el resto del mes. Con producción tradicional el spot cuesta entre $10,000 y $100,000 y tarda meses, y el contenido mensual exige un equipo fijo que cuesta más de lo que devuelve.",
-    desc: "Producimos las dos cosas con el mismo criterio de dirección. El comercial se dirige plano por plano —guion, storyboard, shot list, consistencia de personaje— y el contenido mensual sale de esa misma línea visual, así que todo se reconoce como tu marca. La diferencia entre un video hecho con IA y un comercial es la dirección, y eso es lo que ponemos.",
+      "Pagas cada clic y a fin de mes no sabes cuáles terminaron en un cliente. Sin medición, cualquier ajuste a la campaña es a ciegas: subes el presupuesto en lo que no vende y apagas lo que sí.",
+    desc: "Armamos y gestionamos tus campañas de búsqueda y, según tu objetivo, de YouTube, Demand Gen y Performance Max. Empezamos por la medición: sin saber qué clic termina en un contacto, cualquier optimización es a ciegas. La cuenta queda a tu nombre, la pauta se paga directo a Google y tú ves el panel cuando quieras.",
     resultado: [
-      "Una pieza ancla lista para TV, YouTube, Meta y sala de ventas",
-      "El contenido del mes entregado antes de que empiece el mes",
-      "Una línea visual reconocible: identifican tu marca sin leer el nombre",
-      "Semanas de producción en lugar de meses, sin agenda de rodaje ni locación",
+      "Saber qué campaña trae clientes y cuál solo gasta",
+      "El presupuesto movido hacia lo que sí vende",
+      "Una cuenta a tu nombre, con su historial y su medición",
+      "Cada mes, la lectura y las decisiones por escrito",
     ],
     incluye: [
-      "Concepto, guion, storyboard y shot list del comercial",
+      "Medición de conversiones: clics a WhatsApp, llamadas y formularios",
+      "Campañas de búsqueda y, según el objetivo, YouTube, Demand Gen o Performance Max",
+      "Panel conectado a Google Ads y Google Analytics 4",
+      "Ciclo semanal sobre términos de búsqueda, pujas y presupuesto",
+      "Revisión mensual de la meta contigo",
+    ],
+    proceso: [
+      { paso: "Medición", texto: "Antes de gastar un sol: conversiones configuradas, meta acordada por escrito y una línea base para comparar." },
+      { paso: "Lanzamiento", texto: "Campañas, anuncios y página de destino en línea. Las dos primeras semanas revisamos gasto y anuncios todos los días." },
+      { paso: "Optimización", texto: "Ciclo semanal sobre términos de búsqueda, pujas y presupuesto, y revisión mensual de la meta contigo." },
+    ],
+    paraQuien:
+      "Empresas cuyo cliente busca en Google antes de comprar y que quieren saber, contacto por contacto, qué les devuelve cada sol invertido.",
+    factores: ["Inversión mensual en pauta", "Número de campañas", "Medición que hay que configurar", "Página de destino"],
+    precio: null,
+    stack: ["Google Ads", "Google Analytics 4", "Google Tag Manager", "Looker Studio"],
+    tags: ["Anuncios en Google", "Medido hasta WhatsApp", "Panel en vivo", "Cuenta a tu nombre"],
+  },
+  {
+    n: "02",
+    id: "posicionamiento-seo",
+    area: 1,
+    accentRgb: "0,169,196",
+    title: "Posicionamiento SEO",
+    tagline: "¿Tu competencia aparece en Google y tú no? Posicionamos las búsquedas que traen clientes.",
+    problema:
+      "Tu cliente busca exactamente lo que vendes y encuentra a tu competencia. Tu web existe, pero Google no la entiende o no la considera la mejor respuesta, y cada mes pierdes consultas que ni sabes que existieron.",
+    desc: "Empezamos por las búsquedas que hace tu cliente antes de comprar y por el estado técnico de tu web. Corregimos lo que impide que Google la entienda —velocidad, estructura, títulos, datos estructurados— y le damos a cada servicio o producto una página preparada para la búsqueda que le corresponde. Después medimos qué visitas desde Google terminan en un contacto, no solo cuántas llegan.",
+    resultado: [
+      "Visitas que llegan buscando lo que vendes, no tráfico de relleno",
+      "Una web que Google puede leer, sin errores técnicos que la frenen",
+      "Contenido que responde lo que tu cliente pregunta antes de comprar",
+      "Un canal que sigue trabajando aunque pauses la publicidad",
+    ],
+    incluye: [
+      "Auditoría técnica de tu web",
+      "Mapa de las búsquedas que traen clientes en tu sector",
+      "Correcciones técnicas: velocidad, estructura, títulos y datos estructurados",
+      "Páginas o contenidos que falten para cada búsqueda",
+      "Seguimiento mensual en Search Console y Analytics",
+    ],
+    proceso: [
+      { paso: "Diagnóstico", texto: "Auditoría técnica de tu web y mapa de las búsquedas que traen clientes en tu sector. Aquí se decide qué página trabaja cada búsqueda." },
+      { paso: "Optimización", texto: "Correcciones técnicas, títulos, estructura y datos estructurados, y las páginas o contenidos que falten." },
+      { paso: "Seguimiento", texto: "Medición mensual en Search Console y Analytics: qué búsquedas suben, qué visitas escriben y qué ajustamos." },
+    ],
+    paraQuien:
+      "Empresas con un mercado que busca en Google y que quieren depender menos de pagar cada visita.",
+    factores: ["Estado técnico de la web", "Número de páginas a trabajar", "Competencia del sector", "Ritmo de contenido nuevo"],
+    precio: null,
+    stack: ["Google Search Console", "Google Analytics 4", "Google Tag Manager", "Planificador de Palabras Clave"],
+    tags: ["SEO técnico", "Palabras clave", "Contenido", "Contactos medidos"],
+  },
+  {
+    n: "03",
+    id: "diseno-paginas-web",
+    area: 1,
+    accentRgb: "46,158,107",
+    title: "Diseño de páginas web",
+    tagline: "¿Tu web existe y nadie te escribe? Diseñamos páginas para vender, no folletos en línea.",
+    problema:
+      "Tu web se ve correcta y no trae a nadie. O trae visitas que se van sin escribir. Estás pagando por un folleto en línea mientras tu competencia se queda con las búsquedas que deberían ser tuyas.",
+    desc: "Diseñamos tu sitio con estándar visual de agencia y con un solo objetivo: que quien busca lo que ofreces te encuentre y te escriba. Una landing para una campaña o una web corporativa para tu empresa, con tus servicios, tus casos y tu contacto. La dejamos lista para posicionar desde el código y medida, para que sepas qué visita terminó en contacto.",
+    resultado: [
+      "Una web medida por los contactos que genera, no por cómo se ve",
+      "Cada visita con un camino claro a WhatsApp o formulario",
+      "Una web que se ve y se usa bien en el celular, donde te buscan",
+      "Textos y estructura pensados para tu cliente, no una plantilla rellenada",
+    ],
+    incluye: [
+      "Estrategia: objetivo del sitio, arquitectura de contenido y palabras clave",
+      "Diseño y desarrollo completo, adaptado a celular",
+      "SEO técnico y on-page desde el desarrollo",
+      "Medición de contactos configurada antes de publicar",
+      "Textos orientados a conversión y contacto directo por WhatsApp",
+    ],
+    proceso: [
+      { paso: "Estrategia", texto: "Objetivo del sitio, arquitectura de contenido y las palabras clave que traen clientes. Aquí se decide si necesitas una landing, una web corporativa o una tienda virtual." },
+      { paso: "Desarrollo", texto: "Construcción visual y técnica con el posicionamiento incorporado desde el código, no parchado después." },
+      { paso: "Lanzamiento", texto: "Publicación, medición de contactos y ajustes con datos reales durante las primeras semanas." },
+    ],
+    paraQuien:
+      "Empresas cuyo cliente busca en Google antes de comprar: servicios profesionales, B2B, industria, salud y educación.",
+    factores: ["Landing o web corporativa", "Número de secciones", "Integraciones", "Contenido que hay que producir"],
+    precio: null,
+    stack: ["Next.js", "Tailwind CSS", "Vercel", "Google Search Console", "Google Analytics 4"],
+    tags: ["Landing pages", "Webs corporativas", "SEO desde el código", "Contactos medidos"],
+  },
+  {
+    n: "04",
+    id: "tienda-virtual",
+    area: 1,
+    accentRgb: "90,190,190",
+    title: "Tienda virtual y ecommerce",
+    tagline: "¿Vendes por chat y quieres tu propia tienda virtual? Una página por producto, con cada pedido medido.",
+    problema:
+      "Vendes por WhatsApp e Instagram, y cada venta depende de que alguien conteste a tiempo y mande la foto correcta. No tienes dónde mostrar tu catálogo completo, Google no encuentra tus productos y no sabes qué consulta terminó en venta.",
+    desc: "Construimos tu tienda virtual con estándar visual de agencia: una ficha por producto con fotos, especificaciones y precio, filtros por categoría y la forma de cerrar la venta que le sirve a tu negocio. Si tu cliente compra solo y en volumen, carrito y pago en línea. Si necesita asesoría o el ticket es alto, un catálogo online con un botón para cotizar por WhatsApp con el producto ya elegido.",
+    resultado: [
+      "Una tienda que muestra y vende a cualquier hora",
+      "Menos tiempo de tu equipo respondiendo precios y fichas uno por uno",
+      "Un catálogo ordenado que el cliente recorre solo, desde el celular",
+      "La consulta por WhatsApp llega con el producto ya elegido",
+    ],
+    incluye: [
+      "Estructura del catálogo: categorías, filtros y datos de cada ficha",
+      "Fichas de producto con fotos, especificaciones y ficha técnica descargable",
+      "Carrito y pasarela de pago, si vendes en línea",
+      "Botón de cotización por WhatsApp con el producto preseleccionado",
+      "Medición de ventas y consultas",
+    ],
+    proceso: [
+      { paso: "Estructura", texto: "Ordenamos tus productos: categorías, filtros y qué datos lleva cada ficha. Aquí se decide si cobras en línea, cotizas por WhatsApp o ambas cosas." },
+      { paso: "Desarrollo", texto: "Fichas, carrito o botón de cotización construidos con el posicionamiento incorporado desde el código." },
+      { paso: "Lanzamiento", texto: "Publicación, medición de ventas y consultas, y ajustes con datos reales durante las primeras semanas." },
+    ],
+    paraQuien:
+      "Empresas que hoy venden por chat o redes y quieren su propia web para vender, con volumen o con ticket alto.",
+    factores: ["Número de productos", "Pago en línea o cotización", "Integraciones", "Contenido de producto"],
+    precio: null,
+    stack: ["Next.js", "Tailwind CSS", "Vercel", "Google Search Console", "Google Analytics 4"],
+    tags: ["Tienda virtual", "Pago en línea", "Catálogo con WhatsApp", "Una página por producto"],
+  },
+
+  // ══════════════ ÁREA 02 · PUBLICIDAD CON IA Y EVENTOS ══════════════
+  {
+    n: "05",
+    id: "spot-publicitario-ia",
+    area: 2,
+    accentRgb: "217,164,65",
+    title: "Spot publicitario con IA",
+    tagline: "¿Cómo destacar cuando vendes lo mismo que tus competidores? Con un spot que nadie más tiene.",
+    problema:
+      "Con producción tradicional un spot cuesta entre $10,000 y $100,000 y tarda meses: casting, locación, equipo y postproducción. Y cuando por fin sale, no hay presupuesto para el contenido que lo acompaña el resto del mes.",
+    desc: "Producimos el spot y el contenido del mes con el mismo criterio de dirección. El comercial se dirige plano por plano —guion, storyboard, shot list, consistencia de personaje— y el contenido mensual sale de esa misma línea visual, así que todo se reconoce como tu marca. La diferencia entre un video hecho con IA y un comercial es la dirección, y eso es lo que ponemos.",
+    resultado: [
+      "Lo que no se puede filmar, visto: procesos internos, escalas y lugares imposibles",
+      "Un comercial en semanas, sin rodaje, locación ni casting",
+      "El contenido del mes con la misma línea visual del spot",
+      "Una pieza que tu equipo comercial usa también en la sala de ventas",
+    ],
+    incluye: [
+      "Concepto, guion, storyboard y shot list",
       "Generación plano por plano con consistencia de rostro y movimiento",
-      "Paquete mensual de contenido: videos, carruseles e imágenes de marca",
-      "Edición, color grade, diseño sonoro, locución y música",
-      "Planificación de grilla con objetivo por pieza",
-      "Formatos y cortes listos para publicar en cada canal",
+      "Edición, color, diseño sonoro, locución y música",
+      "Contenido mensual: videos, carruseles e imágenes de marca",
+      "Formatos y cortes listos para cada canal",
     ],
     proceso: [
       { paso: "Dirección", texto: "Concepto, guion y definición del look. Nada se genera hasta que la pieza está resuelta en papel." },
@@ -76,212 +231,69 @@ export const SERVICIOS: Servicio[] = [
       { paso: "Acabado", texto: "Edición, color, sonido y exportación por formato. Se entrega el paquete completo, no piezas sueltas." },
     ],
     paraQuien:
-      "Marcas con un momento comercial concreto —lanzamiento, temporada alta, reposicionamiento— que además necesitan presencia sostenida sin montar un área interna de contenido.",
-    factores: [
-      "Duración de la pieza y número de planos",
-      "Personajes con consistencia visual y sincronía labial",
-      "Volumen de piezas mensuales",
-      "Locución profesional, música original y VFX de acabado",
-    ],
+      "Marcas con un momento comercial concreto —lanzamiento, temporada alta, reposicionamiento— que necesitan verse a la altura de lo que cobran.",
+    factores: ["Duración del spot", "Personajes y sincronía labial", "Volumen de contenido mensual", "Locución y música"],
     precio: null,
     stack: ["Higgsfield", "Kling 3.0", "Seedance 2.0", "Nano Banana Pro", "ElevenLabs", "HeyGen", "Suno", "CapCut Pro", "DaVinci Resolve"],
-    tags: ["Comerciales", "Contenido mensual", "Cinemática 4K", "Plano por plano"],
-    destacado: true,
-  },
-  {
-    n: "02",
-    id: "paginas-web",
-    accentRgb: "0,169,196",
-    categoria: "Desarrollo",
-    title: "Desarrollo Web, SEO y SEM",
-    tagline: "Una web que carga rápido, aparece en Google y termina en una conversación de venta.",
-    problema:
-      "O tu web existe y nadie llega, o llegan y no escriben. En ambos casos estás pagando hosting por un folleto: se ve bien, no vende, y cada mes tu competencia se queda con las búsquedas que deberían ser tuyas.",
-    desc: "Construimos el sitio con estándar visual de agencia, lo optimizamos para posicionar orgánicamente y activamos campañas de búsqueda pagada para que entre tráfico calificado desde la primera semana. El objetivo no es que la web se vea bien: es que quien ya está buscando lo que vendes te encuentre y te escriba.",
-    resultado: [
-      "Un sitio que carga en menos de dos segundos en celular",
-      "Presencia orgánica en las búsquedas que traen clientes, no visitas vacías",
-      "Tráfico calificado entrando desde Google Ads desde el primer mes",
-      "Reportes donde ves de dónde vino cada contacto",
-    ],
-    incluye: [
-      "Diseño y desarrollo completo, publicado en tu dominio",
-      "Adaptación total a celular y optimización de velocidad",
-      "SEO técnico y on-page, con investigación de palabras clave",
-      "Campañas en Google Ads con seguimiento de conversiones",
-      "Textos orientados a conversión y contacto directo por WhatsApp",
-      "Reportes mensuales de posicionamiento y rendimiento",
-    ],
-    proceso: [
-      { paso: "Estrategia", texto: "Objetivo del sitio, arquitectura de contenido e investigación de las palabras clave que traen clientes." },
-      { paso: "Desarrollo", texto: "Construcción visual y técnica con el posicionamiento incorporado desde el código, no parchado después." },
-      { paso: "Lanzamiento", texto: "Publicación, campañas activas, medición de conversiones y optimización mes a mes." },
-    ],
-    paraQuien:
-      "Negocios cuyos clientes buscan en Google antes de comprar: servicios profesionales, B2B, industria, salud, educación e inmobiliaria.",
-    factores: [
-      "Número de páginas y secciones",
-      "Catálogo o e-commerce vs. sitio institucional",
-      "Integraciones con CRM, pasarela de pago o reservas",
-      "Competencia del sector y alcance del trabajo de SEO",
-    ],
-    precio: null,
-    stack: ["Next.js", "Tailwind CSS", "Vercel", "Google Search Console", "Google Ads", "Google Analytics 4", "Mercado Libre", "Falabella Seller"],
-    tags: ["Landing pages", "Sitios corporativos", "SEO", "Google Ads"],
-  },
-  {
-    n: "03",
-    id: "plataformas-saas",
-    accentRgb: "46,158,107",
-    categoria: "Desarrollo",
-    // ⚠️ BORRADOR 2026-10: servicio nuevo sin documentación previa. El contenido
-    // de abajo es una propuesta a validar con Manuel, no una descripción
-    // verificada de lo que ya se entrega.
-    title: "Plataformas de Gestión SaaS",
-    tagline: "El sistema a medida que reemplaza el Excel, el WhatsApp y la cabeza de dos personas.",
-    problema:
-      "Tu operación corre en hojas de cálculo que solo entiende quien las armó, grupos de WhatsApp donde se pierde la información y procesos que viven en la memoria de un par de personas. Cada vez que alguien se va o el volumen sube, el sistema se rompe. Y el software genérico que probaste no se parece a cómo trabajas.",
-    desc: "Desarrollamos la plataforma que tu operación necesita: un sistema web propio, con los usuarios, permisos y flujos de tu negocio, al que tu equipo entra desde cualquier lugar. No adaptamos tu forma de trabajar a un software enlatado — construimos el software alrededor de cómo ya trabajas.",
-    resultado: [
-      "Una sola fuente de verdad en lugar de archivos sueltos y versiones duplicadas",
-      "Cada persona viendo exactamente lo que le corresponde, con su propio acceso",
-      "Reportes que se arman solos, sin que nadie consolide a mano",
-      "Un sistema que escala con el volumen en lugar de romperse con él",
-    ],
-    incluye: [
-      "Relevamiento de procesos y diseño funcional antes de programar",
-      "Plataforma web a medida con usuarios, roles y permisos",
-      "Panel de control con los indicadores de tu operación",
-      "Integración con las herramientas que ya usas",
-      "Capacitación al equipo y documentación de uso",
-      "Soporte y mejoras durante la puesta en marcha",
-    ],
-    proceso: [
-      { paso: "Relevamiento", texto: "Mapeamos cómo trabajas hoy, dónde se pierde información y qué tiene que resolver el sistema." },
-      { paso: "Construcción", texto: "Desarrollo por etapas, con entregas parciales que puedes usar antes de que esté todo terminado." },
-      { paso: "Puesta en marcha", texto: "Migración de datos, capacitación del equipo y ajustes con uso real durante las primeras semanas." },
-    ],
-    paraQuien:
-      "Empresas con una operación que ya no entra en Excel y procesos propios que ningún software de catálogo resuelve bien.",
-    factores: [
-      "Cantidad de módulos y complejidad de los flujos",
-      "Número de usuarios y niveles de permiso",
-      "Integraciones con sistemas existentes",
-      "Migración de datos históricos",
-    ],
-    precio: null,
-    stack: ["Next.js", "Supabase", "Vercel", "n8n", "Railway", "Notion"],
-    tags: ["Software a medida", "Panel de control", "Multiusuario", "Integraciones"],
-  },
-  {
-    n: "04",
-    id: "eventos-b2b",
-    accentRgb: "90,190,190",
-    categoria: "Eventos",
-    title: "Gestión de Eventos B2B",
-    tagline: "Del concepto al after movie: eventos corporativos que siguen rindiendo como contenido.",
-    problema:
-      "Invertiste meses y un presupuesto grande en un evento que duró unas horas. Al día siguiente queda una carpeta de fotos sin editar, ningún video que valga la pena publicar, y todo el impacto se evaporó con los que estuvieron ahí.",
-    desc: "Producimos eventos corporativos con mirada de marca: concepto, identidad visual, materiales, ambientación y la cobertura audiovisual completa. La diferencia es que el evento se piensa desde el inicio también como contenido, así que cuando termina te queda material para semanas de comunicación.",
-    resultado: [
-      "Un evento con identidad propia, no un salón con tu logo pegado",
-      "After movie y piezas para redes editadas y entregadas",
-      "Material suficiente para comunicar semanas después del evento",
-      "Un solo interlocutor para concepto, producción y registro",
-    ],
-    incluye: [
-      "Concepto e identidad visual del evento",
-      "Diseño de materiales, señalética y ambientación",
-      "Producción audiovisual previa: teasers e invitaciones",
-      "Cobertura del evento en foto y video",
-      "Edición de after movie y piezas verticales para redes",
-      "Coordinación con proveedores y locación",
-    ],
-    proceso: [
-      { paso: "Concepto", texto: "Definimos la idea, la identidad y la experiencia que va a vivir el asistente." },
-      { paso: "Producción", texto: "Materiales, ambientación, teasers y coordinación de proveedores antes del día del evento." },
-      { paso: "Cobertura", texto: "Registro audiovisual completo el día del evento y entrega de piezas editadas después." },
-    ],
-    paraQuien:
-      "Empresas con lanzamientos, convenciones, ferias o activaciones que quieren que el evento comunique más allá de los que asistieron.",
-    factores: [
-      "Escala del evento y número de asistentes",
-      "Alcance de la ambientación y materiales físicos",
-      "Tamaño del equipo de cobertura audiovisual",
-      "Cantidad de piezas editadas post-evento",
-    ],
-    precio: null,
-    stack: ["Notion", "CapCut Pro", "Adobe Premiere", "ElevenLabs"],
-    tags: ["Concepto", "Ambientación", "Cobertura", "After movie"],
-  },
-  {
-    n: "05",
-    id: "capacitacion-ia",
-    accentRgb: "217,164,65",
-    categoria: "Formación",
-    title: "Capacitación Empresarial en IA Generativa",
-    tagline: "Tu equipo de marketing produciendo con IA y criterio, en cuatro sesiones.",
-    problema:
-      "Tu equipo ya probó las herramientas de IA y los resultados salen genéricos: piezas que se notan hechas con IA y no se parecen a la marca. El problema no son las herramientas, es que nadie les enseñó el criterio que va antes de la herramienta. Y los cursos del mercado enseñan a usar software, no a dirigir.",
-    desc: "Programa in-company en vivo, personalizado a tu marca. No es un curso grabado ni una demo de herramientas: tu equipo trabaja sobre su propio negocio durante las sesiones y sale con el sistema construido y funcionando. Lo dicta quien produce todos los meses para clientes reales, no un instructor de catálogo.",
-    resultado: [
-      "El Cerebro Creativo IA de tu marca construido y funcionando",
-      "Una pieza real de tu marca producida durante la capacitación",
-      "La grilla de contenido de los siguientes 30 días, lista para ejecutar",
-      "Un equipo que produce con criterio propio, sin depender de proveedores para cada pieza",
-    ],
-    incluye: [
-      "4 sesiones en vivo de 3.5 horas, personalizadas a tu marca",
-      "Sesión 1 — Pensar: insight, concepto y estructuras narrativas",
-      "Sesión 2 — El sistema: construyen el Cerebro Creativo IA de la marca",
-      "Sesión 3 — Crear: producción de una pieza real con criterio de dirección",
-      "Sesión 4 — Operar: flujo de trabajo, control de calidad y grilla mensual",
-      "Plantillas del sistema y material de apoyo para el equipo",
-    ],
-    proceso: [
-      { paso: "Diagnóstico", texto: "Revisamos qué produce hoy el equipo, con qué herramientas y dónde se rompe el resultado." },
-      { paso: "Capacitación", texto: "Cuatro sesiones en vivo, cada una con bloque de contenido y bloque de trabajo aplicado a la marca." },
-      { paso: "Operación", texto: "El equipo arma su grilla del mes siguiente y queda con el flujo de trabajo definido." },
-    ],
-    paraQuien:
-      "Empresas con equipo de marketing propio que ya intenta producir con IA y necesita criterio y método, no más herramientas.",
-    factores: [
-      "Número de participantes",
-      "Modalidad presencial o remota",
-      "Nivel de personalización del contenido a la industria",
-      "Acompañamiento posterior a las sesiones",
-    ],
-    precio: null,
-    stack: ["Higgsfield", "Kling 3.0", "Nano Banana Pro", "ElevenLabs", "ChatGPT", "Claude", "Notion"],
-    tags: ["In-company", "4 sesiones en vivo", "Equipos de marketing", "Entregables reales"],
-    destacado: true,
+    tags: ["Spots con IA", "Contenido mensual", "Cinemática 4K", "Plano por plano"],
   },
   {
     n: "06",
-    id: "plataformas-interactivas",
-    accentRgb: "176,110,224",
-    categoria: "Desarrollo",
-    // ⚠️ BORRADOR 2026-10: servicio nuevo sin documentación previa. El contenido
-    // de abajo es una propuesta a validar con Manuel, no una descripción
-    // verificada de lo que ya se entrega.
-    title: "Plataformas Interactivas y Videojuegos",
-    tagline: "Experiencias jugables que convierten una activación o una capacitación en algo que la gente quiere hacer.",
+    id: "eventos-corporativos",
+    area: 2,
+    accentRgb: "224,112,92",
+    title: "Eventos corporativos y ferias",
+    tagline: "¿Tu stand deja de rendir cuando termina la feria? Cobertura, activación y contenido para semanas.",
     problema:
-      "En una feria la gente pasa de largo frente al stand, y en una capacitación interna el equipo abre el módulo, hace clic hasta el final y no retiene nada. El material está bien hecho, pero es pasivo: nadie participa porque nada le pide participar.",
-    desc: "Desarrollamos experiencias interactivas a medida —juegos de marca, dinámicas para stands, simuladores y capacitación gamificada— que funcionan en navegador, pantalla táctil o celular. La mecánica se diseña alrededor de tu objetivo: captar datos en una feria, enseñar un procedimiento o hacer que alguien entienda tu producto jugando.",
+      "Pagaste el stand, el montaje y tres días de feria. Al día siguiente queda una carpeta de fotos sin editar, ningún video que valga la pena publicar y todo el impacto se fue con los que pasaron por ahí.",
+    desc: "Cubrimos el evento de punta a punta: montaje, días de feria y desmontaje, con fotografía y video editado. Si lo necesitas, también armamos la activación de marca en el stand —barra, demostración en vivo del producto o un videojuego hecho a medida— coordinando a los proveedores. Todo se piensa desde el inicio como contenido, así que cuando la feria cierra te queda material para semanas de comunicación.",
     resultado: [
-      "Gente que se detiene, participa y deja sus datos sin que haya que perseguirla",
-      "Capacitaciones que el equipo termina porque quiere, no porque es obligatorio",
-      "Métricas reales de participación: quién jugó, cuánto duró, qué respondió",
-      "Una pieza reutilizable en varias ferias, campañas o sedes",
+      "Un stand que la gente recuerda, no un salón con tu logo pegado",
+      "Piezas editadas y entregadas, no una carpeta sin procesar",
+      "Material reutilizable para el equipo comercial",
+      "Contenido publicado mientras la feria todavía se recuerda",
     ],
     incluye: [
-      "Diseño de la mecánica según el objetivo comercial o formativo",
-      "Desarrollo de la experiencia para navegador, táctil o celular",
+      "Presencia en montaje y desmontaje",
+      "Cobertura de cada día de feria en foto y video",
+      "Videoreels editados para redes",
+      "Activación de marca en el stand, si el evento la pide",
+      "After movie y piezas post-evento",
+    ],
+    proceso: [
+      { paso: "Concepto", texto: "Definimos qué tiene que lograr el stand, qué se muestra, qué se juega y qué experiencia vive el visitante." },
+      { paso: "Montaje y feria", texto: "Cobertura desde el montaje hasta el último día, con la activación funcionando y el registro en marcha." },
+      { paso: "Contenido", texto: "Edición y entrega de las piezas, para publicar mientras el evento todavía se recuerda." },
+    ],
+    paraQuien:
+      "Empresas con ferias, lanzamientos o convenciones en agenda que quieren que el evento siga trabajando después.",
+    factores: ["Días de evento", "Bloques que se contratan", "Activación en el stand", "Piezas post-evento"],
+    precio: null,
+    stack: ["Notion", "CapCut Pro", "Adobe Premiere", "ElevenLabs"],
+    tags: ["Cobertura de eventos", "Activaciones de marca", "Juegos para el stand", "After movie"],
+  },
+  {
+    n: "07",
+    id: "videojuegos-a-medida",
+    area: 2,
+    accentRgb: "139,108,255",
+    title: "Videojuegos a medida",
+    tagline: "¿Y si tu cliente entendiera tu producto jugando? Juegos para tu stand, tu marca o tu equipo.",
+    problema:
+      "En la feria la gente pasa de largo frente al stand, y en la capacitación interna el equipo hace clic hasta el final sin retener nada. El material está bien hecho, pero nadie participa porque nada le pide participar.",
+    desc: "Desarrollamos experiencias interactivas a medida —juegos de marca, dinámicas para stands, simuladores y capacitación gamificada— que funcionan en navegador, pantalla táctil o celular. La mecánica se diseña alrededor de tu objetivo: captar datos en una feria, enseñar un procedimiento o hacer que alguien entienda tu producto jugando.",
+    resultado: [
+      "Gente que se detiene en tu stand y participa",
+      "Tu producto entendido sin leer un folleto",
+      "Datos de participación para medir el stand, no impresiones",
+      "Un motivo para que te recuerden después de la feria",
+    ],
+    incluye: [
+      "Diseño de la mecánica según tu objetivo",
+      "Desarrollo para pantalla táctil, navegador o celular",
       "Arte y animación con la identidad de tu marca",
-      "Captura de datos de participantes y panel de resultados",
-      "Montaje y soporte durante el evento o el lanzamiento interno",
-      "Ajustes y nuevas versiones para reutilizarla después",
+      "Pruebas con usuarios reales antes del lanzamiento",
+      "Montaje y soporte durante el evento",
     ],
     proceso: [
       { paso: "Mecánica", texto: "Definimos qué tiene que lograr la experiencia y qué dinámica lo consigue en el tiempo que la gente realmente dedica." },
@@ -289,20 +301,61 @@ export const SERVICIOS: Servicio[] = [
       { paso: "Operación", texto: "Montaje, soporte en vivo y entrega de los datos y métricas de participación." },
     ],
     paraQuien:
-      "Empresas con presencia en ferias y activaciones, o con capacitación interna que hoy nadie termina de leer.",
-    factores: [
-      "Complejidad de la mecánica y duración de la experiencia",
-      "Nivel de arte y animación requerido",
-      "Soporte en evento y número de sedes o fechas",
-      "Integración con CRM o base de datos de participantes",
-    ],
+      "Empresas con presencia en ferias y activaciones, o con capacitación interna que hoy nadie termina.",
+    factores: ["Complejidad de la mecánica", "Nivel de arte", "Soporte en evento", "Integraciones"],
     precio: null,
     stack: ["Next.js", "Three.js", "Supabase", "Vercel", "Nano Banana Pro", "Higgsfield"],
-    tags: ["Gamificación", "Ferias y activaciones", "Capacitación interna", "Captura de datos"],
+    tags: ["Juegos para el stand", "Activaciones de marca", "Táctil, web o celular", "Funciona sin internet"],
+  },
+
+  // ══════════════ ÁREA 03 · CAPACITACIÓN EN IA ══════════════
+  {
+    n: "08",
+    id: "capacitacion-ia",
+    area: 3,
+    accentRgb: "199,125,187",
+    title: "Capacitación en IA para empresas",
+    tagline: "¿Tu equipo prueba IA y todo sale genérico? En cuatro sesiones, con tu propia marca.",
+    problema:
+      "Tu equipo ya probó las herramientas de IA y lo que sale se nota hecho con IA y no se parece a tu marca. El problema no son las herramientas: nadie les enseñó el criterio que va antes de la herramienta, y los cursos del mercado enseñan a usar software, no a dirigir.",
+    desc: "Programa in-company en vivo, personalizado a tu marca. No es un curso grabado ni una demo de herramientas: tu equipo trabaja sobre su propio negocio durante las sesiones y sale con el sistema construido y funcionando. Lo dicta quien produce todos los meses para clientes reales, no un instructor de catálogo.",
+    resultado: [
+      "El Cerebro Creativo IA de tu marca construido y funcionando",
+      "Una pieza real de tu marca producida durante la capacitación",
+      "La grilla de contenido de los próximos 30 días, lista para ejecutar",
+      "Un equipo que produce con criterio propio",
+    ],
+    incluye: [
+      "4 sesiones en vivo de 3.5 horas, personalizadas a tu marca",
+      "Sesión 1 — Pensar: insight, concepto y estructuras narrativas",
+      "Sesión 2 — El sistema: el Cerebro Creativo IA de la marca",
+      "Sesión 3 — Crear: producción de una pieza real",
+      "Sesión 4 — Operar: flujo de trabajo, calidad y grilla mensual",
+    ],
+    proceso: [
+      { paso: "Diagnóstico", texto: "Revisamos qué produce hoy el equipo, con qué herramientas y dónde se rompe el resultado." },
+      { paso: "Capacitación", texto: "Cuatro sesiones en vivo, cada una con bloque de contenido y bloque de trabajo aplicado a la marca." },
+      { paso: "Operación", texto: "El equipo arma su grilla del mes siguiente y queda con el flujo de trabajo definido." },
+    ],
+    paraQuien:
+      "Equipos de marketing que ya intentan producir con IA y necesitan criterio y método, no más herramientas.",
+    factores: ["Número de participantes", "Modalidad", "Adaptación a tu industria", "Acompañamiento posterior"],
+    precio: null,
+    stack: ["Higgsfield", "Kling 3.0", "Nano Banana Pro", "ElevenLabs", "ChatGPT", "Claude", "Notion"],
+    tags: ["In-company", "4 sesiones en vivo", "Equipos de marketing", "Entregables reales"],
   },
 ];
 
 export const SERVICIOS_STACK = [
   "Higgsfield", "Kling 3.0", "Seedance 2.0", "ElevenLabs", "HeyGen", "Suno",
-  "Claude Code", "ChatGPT", "Premiere Pro", "DaVinci Resolve", "CapCut Pro",
+  "Google Ads", "Google Analytics 4", "Next.js", "Claude Code", "DaVinci Resolve", "CapCut Pro",
+];
+
+// "Según tu situación": empieza por el servicio que resuelve el cuello de
+// botella y sigue con el que suele venir después. Texto de la propuesta.
+export const SITUACIONES: { situacion: string; empieza: string; luego: string }[] = [
+  { situacion: "No te encuentran cuando buscan lo que ofreces", empieza: "google-ads", luego: "diseno-paginas-web" },
+  { situacion: "Vendes por chat y quieres vender en tu propia web", empieza: "tienda-virtual", luego: "posicionamiento-seo" },
+  { situacion: "Tu marca no se ve a la altura de lo que cobras", empieza: "spot-publicitario-ia", luego: "google-ads" },
+  { situacion: "Tienes una feria y tu stand pasa desapercibido", empieza: "eventos-corporativos", luego: "videojuegos-a-medida" },
 ];
