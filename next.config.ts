@@ -91,16 +91,10 @@ const nextConfig: NextConfig = {
       'date-fns',
     ],
   },
-  // Los PDFs de la Biblia viven fuera de /public (no deben ser accesibles
-  // por URL directa). Next no los "ve" porque nadie los importa, así que
-  // hay que incluirlos a mano en el bundle de la ruta de descarga.
-  outputFileTracingIncludes: {
-    '/api/taller/descarga/[...ruta]': ['./private/biblia/**'],
-  },
   async redirects() {
     return [
-      // La landing vieja de Academy fue reemplazada por el portal /taller.
-      { source: "/academy", destination: "/taller", permanent: true },
+      // La Academy vive en Skool desde 2026-10 (el portal /taller se eliminó).
+      { source: "/academy", destination: "https://www.skool.com/the-ai-creative-process-3410/about", permanent: true },
     ];
   },
   async headers() {

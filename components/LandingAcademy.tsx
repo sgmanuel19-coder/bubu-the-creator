@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import LandingPortafolio from "@/components/LandingPortafolio";
 import QuizDiagnostico from "@/components/QuizDiagnostico";
-import { NIVELES_VENTA, TALLER } from "@/lib/taller/content";
+import { NIVELES_VENTA, TALLER } from "@/lib/academy/content";
 
 // ============================================================
 // Landing de pauta de RESUELTO Academy.
@@ -272,7 +272,7 @@ export default function LandingAcademy() {
                 />
               ) : (
                 /* Marcador mientras el VSL no está grabado. Pon el ID en
-                   TALLER.gate.vslYoutubeId (lib/taller/content.ts) y este
+                   TALLER.gate.vslYoutubeId (lib/academy/content.ts) y este
                    recuadro se reemplaza solo por el video. */
                 <div
                   style={{

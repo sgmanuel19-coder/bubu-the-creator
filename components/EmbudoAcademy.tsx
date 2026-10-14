@@ -14,7 +14,7 @@ const LandingPortafolio = dynamic(() => import("@/components/LandingPortafolio")
   ssr: false,
   loading: () => <div style={{ minHeight: 420 }} />,
 });
-import { TALLER } from "@/lib/taller/content";
+import { TALLER } from "@/lib/academy/content";
 
 /**
  * EMBUDO DE LEADS CALIFICADOS — /empezar
@@ -424,7 +424,7 @@ export default function EmbudoAcademy() {
     setError("");
     setEnviando(true);
     try {
-      const res = await fetch("/api/taller/registro", {
+      const res = await fetch("/api/registro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-import { bovedaGlobal } from '@/lib/taller/boveda-server';
 import { SECCIONES } from '@/lib/noticias/fuentes';
 import { SITE } from '@/lib/constants';
 
@@ -12,13 +11,14 @@ const BASE = 'https://www.resueltoagency.com';
  *  - /energia            landing de cold email: se llega por link directo, no por búsqueda
  *  - /sistemas-ia        redirect 308 a /servicios
  *  - /ia-content-system  portal privado tras login
- *  - /taller/admin/*     administración
  *  - /noticias/buscar    página funcional, sin contenido propio
  *  - /noticias/baja      baja del newsletter
  *  - /trap-bot           honeypot
- *  - /masterclass        noindex a propósito (canibalizaría a /taller)
- *  - /taller/curso       noindex: página interna del portal
- *  - /taller/recursos    noindex: página interna del portal
+ *  - /masterclass        noindex a propósito (landing de pauta)
+ *  - /empezar            noindex a propósito (embudo de pauta)
+ *  - /appstudio          app (RESUELTO IA Studio), no contenido
+ *
+ * La Academy vive en Skool desde 2026-10: el portal /taller se eliminó.
  *
  * Pedir la indexación de una URL con noindex es una señal contradictoria:
  * Google la reporta como error y le baja la confianza a todo el sitemap.
@@ -31,16 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   }));
-
-  // ── Las guías GRATIS de la bóveda: la entrada SEO al embudo del taller ───
-  const guiasGratis: MetadataRoute.Sitemap = bovedaGlobal()
-    .filter((r) => r.gratis && r.disponible)
-    .map((r) => ({
-      url: `${BASE}/taller/recursos/${r.slug}`,
-      lastModified: new Date('2026-07-09'),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    }));
 
   // ── Las cinco secciones de La noticIA. Cada una ataca cola larga
   //    ("herramientas de IA", "IA en publicidad") que la portada no gana ────
@@ -86,15 +76,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.7,
     },
-
-    // ── Portal del taller (público con candado: la vista previa indexa) ────
-    {
-      url: `${BASE}/taller`,
-      lastModified: new Date('2026-07-09'),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    ...guiasGratis,
 
     // ── La noticIA: lo más fresco del sitio ───────────────────────────────
     {

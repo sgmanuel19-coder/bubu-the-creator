@@ -112,7 +112,7 @@ export async function POST(request: Request) {
     email,
     producto: producto || "no indicado",
     fecha: new Date().toISOString(),
-    origen: "resueltoagency.com/taller",
+    origen: "resueltoagency.com",
     ...(diagnostico ? { diagnostico } : {}),
     ...(respuestas ? { respuestas } : {}),
   };

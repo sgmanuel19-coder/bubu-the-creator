@@ -11,7 +11,7 @@ export default function StickyCTA() {
   // La landing pagada tiene un solo destino: no se le agregan CTAs que
   // compitan ni banners que tapen contenido.
   const excluded =
-    pathname.startsWith("/taller") ||
+    pathname.startsWith("/appstudio") ||
     pathname.startsWith("/ia-content-system") ||
     pathname.startsWith("/produccion-ia");
 

@@ -19,12 +19,6 @@ const ICS = "/ia-content-system";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // ----- PORTAL DEL TALLER -----
-  // Todo /taller/* es PÚBLICO (vista previa con candado). Cada página lee
-  // la sesión en el servidor y sólo muestra el contenido real (videos,
-  // recursos) si la cookie es válida. La protección vive en las páginas,
-  // no aquí, para dar la ilusión de ver toda la plataforma bloqueada.
-
   // ----- RESUELTO / IA CONTENT SYSTEM -----
   if (pathname.startsWith(ICS)) {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
