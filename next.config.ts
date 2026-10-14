@@ -91,6 +91,14 @@ const nextConfig: NextConfig = {
       'date-fns',
     ],
   },
+  // RESUELTO IA Studio (modo comunidad, claves de cada usuario) vive en su
+  // propio proyecto de Vercel con basePath /appstudio; aquí solo se reescribe.
+  async rewrites() {
+    return [
+      { source: "/appstudio", destination: "https://resuelto-appstudio.vercel.app/appstudio" },
+      { source: "/appstudio/:path*", destination: "https://resuelto-appstudio.vercel.app/appstudio/:path*" },
+    ];
+  },
   async redirects() {
     return [
       // La Academy vive en Skool desde 2026-10 (el portal /taller se eliminó).
