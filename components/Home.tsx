@@ -251,37 +251,94 @@ const CASOS_EXITO = [
   { slug: "hikaru", client: "Hikaru", title: "La primera luz", sub: "La iluminación japonesa llega a Perú." },
 ];
 
+// ratio = ancho/alto del archivo ya recortado. La altura se calcula por área
+// visual (no por alto fijo) para que un logo ancho no se vea más grande que
+// uno compacto; boost compensa trazos finos (win) o lemas pequeños (Wellmax).
 const CLIENTES = [
-  { name: "WIN Internet", src: "/images/clientes/win.png" },
-  { name: "Wellmax", src: "/images/clientes/wellmax.png" },
-  { name: "Hikaru", src: "/images/clientes/hikaru.png" },
-  { name: "Livoltek", src: "/images/clientes/livoltek.svg" },
-  { name: "ZLink", src: "/images/clientes/zlink.png" },
-  { name: "Acceso Smart Perú", src: "/images/clientes/acceso-smart.png" },
-  { name: "Grimm Store", src: "/images/clientes/grimm.png", color: true },
+  { name: "WIN Internet", src: "/images/clientes/win.png", ratio: 2.43, boost: 1.3 },
+  { name: "Wellmax", src: "/images/clientes/wellmax.png", ratio: 5.22, boost: 1.35 },
+  { name: "Hikaru", src: "/images/clientes/hikaru.png", ratio: 3.38 },
+  { name: "Livoltek", src: "/images/clientes/livoltek.svg", ratio: 5.88 },
+  { name: "ZLink", src: "/images/clientes/zlink.png", ratio: 3.57 },
+  { name: "Acceso Smart Perú", src: "/images/clientes/acceso-smart.png", ratio: 2.41, boost: 1.3 },
+  { name: "Grimm Store", src: "/images/clientes/grimm.png", ratio: 1.11 },
 ];
+const logoAlto = (l: { ratio: number; boost?: number }) =>
+  Math.min(54, Math.round(Math.sqrt(4800 / l.ratio) * (l.boost ?? 1)));
 
-function CasoCard({ c }: { c: (typeof CASOS_EXITO)[number] }) {
-  const [play, setPlay] = useState(false);
+// Carrusel curvo: los casos van comprimidos en una fila que se curva hacia
+// el espectador en los extremos; el que se señala (hover, foco o toque) se
+// abre y reproduce su video en silencio. "Con sonido" lo pasa a controles.
+function CasosReel() {
+  const [activo, setActivo] = useState(Math.floor(CASOS_EXITO.length / 2));
+  const [sonido, setSonido] = useState(false);
+
+  const espera = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const abrir = (i: number) => {
+    if (espera.current) clearTimeout(espera.current);
+    if (i === activo) return;
+    setActivo(i);
+    setSonido(false);
+  };
+  // Un instante de espera al pasar el mouse: el panel que se abre empuja a
+  // los demás, y sin esto un cursor quieto abriría el vecino en cadena.
+  const intencion = (i: number) => {
+    if (espera.current) clearTimeout(espera.current);
+    espera.current = setTimeout(() => abrir(i), 160);
+  };
+
   return (
-    <figure className="hm-caso">
-      <div className="hm-caso-media">
-        {play ? (
-          <video src={`/videos/casos/${c.slug}.mp4`} poster={`/videos/casos/${c.slug}.jpg`} controls autoPlay playsInline preload="auto" />
-        ) : (
-          <button type="button" onClick={() => setPlay(true)} aria-label={`Ver el caso ${c.client}: ${c.title}`}>
+    <div className="hm-reel">
+      {CASOS_EXITO.map((c, i) => {
+        const off = i - activo;
+        const on = off === 0;
+        const giro = Math.sign(off) * Math.min(Math.abs(off), 2) * -11;
+        return (
+          <article
+            key={c.slug}
+            className={`hm-reel-item${on ? " on" : ""}`}
+            style={{ "--giro": `${giro}deg` } as React.CSSProperties}
+            onMouseEnter={() => intencion(i)}
+            onMouseLeave={() => espera.current && clearTimeout(espera.current)}
+            onFocus={() => abrir(i)}
+            onClick={() => abrir(i)}
+            tabIndex={0}
+            aria-label={`${c.client}: ${c.title}`}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/videos/casos/${c.slug}.jpg`} alt={`${c.client} — ${c.title}`} loading="lazy" />
-            <span className="hm-caso-play" aria-hidden="true">▶</span>
-          </button>
-        )}
-      </div>
-      <figcaption>
-        <span className="hm-caso-client">{c.client}</span>
-        <strong>{c.title}</strong>
-        <em>{c.sub}</em>
-      </figcaption>
-    </figure>
+            <img src={`/videos/casos/${c.slug}.jpg`} alt="" loading="lazy" />
+            {on && (
+              <video
+                key={`${c.slug}-${sonido}`}
+                src={`/videos/casos/${c.slug}.mp4`}
+                poster={`/videos/casos/${c.slug}.jpg`}
+                autoPlay
+                muted={!sonido}
+                loop={!sonido}
+                controls={sonido}
+                playsInline
+              />
+            )}
+            <span className="hm-reel-tab" aria-hidden="true">{c.client}</span>
+            <div className="hm-reel-info">
+              <span className="hm-caso-client">{c.client}</span>
+              <strong>{c.title}</strong>
+              <em>{c.sub}</em>
+              {!sonido && (
+                <button
+                  type="button"
+                  className="hm-reel-play"
+                  onClick={(e) => { e.stopPropagation(); setActivo(i); setSonido(true); }}
+                >
+                  ▶ Ver el caso con sonido
+                </button>
+              )}
+            </div>
+          </article>
+        );
+      })}
+    </div>
   );
 }
 
@@ -458,13 +515,9 @@ export default function Home() {
               <LineReveal delay={0.12}><span className="hm-grad">Marcas que las dirigieron.</span></LineReveal>
             </h2>
           </div>
-          <p>Cada caso cuenta la idea, la ejecución y cómo se hizo. Dale play.</p>
+          <p>Cada caso cuenta la idea, la ejecución y cómo se hizo. Pasa por uno para abrirlo.</p>
         </div>
-        <div className="hm-casos">
-          {CASOS_EXITO.map((c) => (
-            <CasoCard key={c.slug} c={c} />
-          ))}
-        </div>
+        <CasosReel />
         <p className="hm-clientes-title">Nuestros clientes</p>
         <div className="hm-clientes" aria-label="Nuestros clientes">
           {CLIENTES.map((l, i) => (
@@ -478,7 +531,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: i * 0.09, ease: EASE }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={l.src} alt={l.name} loading="lazy" className={"color" in l ? "hm-cliente-color" : undefined} />
+              <img src={l.src} alt={l.name} loading="lazy" style={{ "--h": `${logoAlto(l)}px` } as React.CSSProperties} />
             </motion.span>
           ))}
         </div>

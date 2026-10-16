@@ -806,7 +806,11 @@ body {
 .sv .sv-eyebrow::before{ content:"";width:32px;height:1px;background:var(--sv-blue);opacity:.6; }
 
 /* HERO */
-.sv-hero{ position:relative;padding:150px 0 30px;overflow:hidden; }
+.sv-hero{ position:relative;padding:150px 0 30px;overflow:hidden;min-height:82vh;display:flex;align-items:flex-end; }
+.sv-hero > .container-base{ width:100%; }
+.sv-hero-video{ position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none; }
+.sv-hero-shade{ position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,12,8,.45) 0%,rgba(13,12,8,.55) 50%,rgba(13,12,8,.94) 90%,var(--bg) 100%);pointer-events:none; }
+@media (max-width:640px){ .sv-hero{ min-height:auto; padding-top:120px; } }
 .sv-glow{ position:absolute;top:-100px;right:-180px;width:640px;height:480px;border-radius:50%;background:radial-gradient(ellipse,rgba(26,128,255,.12) 0%,transparent 70%);filter:blur(70px);pointer-events:none; }
 .sv-h1{ font-size:clamp(2.6rem,6.5vw,5.2rem);font-weight:800;line-height:.98;letter-spacing:-.03em;margin:24px 0 0;text-wrap:balance;color:var(--sv-cream); }
 .sv-grad{ background:linear-gradient(100deg,var(--sv-blue) 0%,#7db6ff 55%,var(--sv-cream) 110%);-webkit-background-clip:text;background-clip:text;color:transparent; }
@@ -2860,9 +2864,9 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
 .hm-caso figcaption em{ font-style:normal;font-size:13px;color:var(--hm-muted);font-weight:300; }
 
 .hm-clientes{ display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px 48px;margin-top:56px;padding-top:40px;border-top:1px solid rgba(255,255,255,.07); }
-.hm-clientes img{ height:40px;width:auto;max-width:150px;object-fit:contain;filter:brightness(0) invert(1);opacity:.6;transition:opacity .25s; }
+.hm-clientes img{ height:var(--h,40px);width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.6;transition:opacity .25s; }
 .hm-clientes img:hover{ opacity:1; }
-@media (max-width:640px){ .hm-clientes{ gap:22px 32px; } .hm-clientes img{ height:32px;max-width:120px; } }
+@media (max-width:640px){ .hm-clientes{ gap:22px 32px; } .hm-clientes img{ height:calc(var(--h,40px) * .78); } }
 .hm-clientes img.hm-cliente-color{ filter:none;opacity:.85;border-radius:10px;height:44px;width:44px;max-width:none; }
 .hm-clientes img.hm-cliente-color:hover{ opacity:1; }
 .hm-clientes-title{ margin-top:56px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--hm-blue); }
@@ -2907,3 +2911,38 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
 .hm-dif-const{ display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:var(--hm-muted); }
 .hm-dif-const b{ display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;margin-right:8px;border-radius:50%;background:rgba(26,128,255,.2);color:var(--hm-blue);font-size:11px; }
 @media (prefers-reduced-motion:reduce){ .hm-ring,.hm-core{ animation:none; } }
+
+/* Casos de éxito: carrusel curvo que se abre al pasar (Home) */
+.hm-reel{ display:flex;gap:12px;height:clamp(380px,46vw,560px);margin-top:44px;perspective:1400px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
+.hm-reel-item{ position:relative;flex:1 1 0;min-width:0;border-radius:16px;overflow:hidden;cursor:pointer;background:#000;
+  border:1px solid rgba(255,255,255,.08);transform:rotateY(var(--giro,0deg)) scaleY(.86);transform-origin:center;
+  transition:flex-grow .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),border-color .4s;outline:none; }
+.hm-reel-item.on{ flex-grow:5.2;transform:none;border-color:rgba(26,128,255,.55);box-shadow:0 30px 80px -30px rgba(26,128,255,.45);cursor:default; }
+.hm-reel-item:focus-visible{ border-color:#1A80FF; }
+.hm-reel-item img,.hm-reel-item video{ position:absolute;inset:0;width:100%;height:100%;object-fit:cover; }
+.hm-reel-item img{ filter:grayscale(.6) brightness(.55);transition:filter .6s; }
+.hm-reel-item:hover img{ filter:grayscale(.2) brightness(.75); }
+.hm-reel-item.on img{ filter:none; }
+.hm-reel-item video{ z-index:1;animation:hm-fade .6s ease both; }
+.hm-reel-tab{ position:absolute;left:50%;bottom:22px;z-index:2;transform:translateX(-50%) rotate(180deg);writing-mode:vertical-rl;white-space:nowrap;
+  font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--hm-cream);transition:opacity .3s; }
+.hm-reel-item.on .hm-reel-tab{ opacity:0; }
+.hm-reel-info{ position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;flex-direction:column;gap:3px;padding:60px 26px 22px;
+  background:linear-gradient(180deg,transparent,rgba(13,12,8,.92));opacity:0;transform:translateY(12px);transition:opacity .4s,transform .4s;pointer-events:none; }
+.hm-reel-item.on .hm-reel-info{ opacity:1;transform:none;transition-delay:.35s;pointer-events:auto; }
+.hm-reel-item:has(video[controls]) .hm-reel-info{ opacity:0;pointer-events:none; }
+.hm-reel-info strong{ font-size:1.35rem;color:var(--hm-cream);font-weight:700; }
+.hm-reel-info em{ font-style:normal;font-size:13px;color:var(--hm-muted);font-weight:300; }
+.hm-reel-play{ align-self:flex-start;margin-top:12px;padding:9px 16px;border-radius:999px;border:0;background:#1A80FF;color:#fff;font-size:12px;font-weight:600;letter-spacing:.04em;cursor:pointer; }
+@media (max-width:720px){
+  .hm-reel{ flex-direction:column;height:auto;perspective:none;-webkit-mask-image:none;mask-image:none;gap:8px; }
+  .hm-reel-item{ flex:none;height:64px;transform:none; }
+  .hm-reel-item.on{ height:auto;aspect-ratio:4/3; }
+  .hm-reel-tab{ writing-mode:horizontal-tb;transform:none;left:18px;bottom:auto;top:50%;margin-top:-7px; }
+  .hm-reel-info{ padding:28px 14px 12px;gap:0; }
+  .hm-reel-info em,.hm-reel-info .hm-caso-client{ display:none; }
+  .hm-reel-info strong{ font-size:1rem; }
+  .hm-reel-play{ margin-top:8px;padding:7px 12px;font-size:11px; }
+}
+@media (prefers-reduced-motion:reduce){ .hm-reel-item{ transition:none; } }

@@ -166,6 +166,10 @@ export default function Servicios() {
     <div className="sv">
       {/* ── HERO ── */}
       <header className="sv-hero">
+        <video className="sv-hero-video" src="/videos/servicios-hero.mp4"
+          poster="/videos/servicios-hero.jpg"
+          autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
+        <div className="sv-hero-shade" />
         <div className="sv-glow" />
         <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
           <span className="sv-eyebrow">{SERVICIOS.length} servicios · 3 áreas</span>
