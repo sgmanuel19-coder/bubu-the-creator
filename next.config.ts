@@ -103,6 +103,10 @@ const nextConfig: NextConfig = {
     return [
       // La Academy vive en Skool desde 2026-10 (el portal /taller se eliminó).
       { source: "/academy", destination: "https://www.skool.com/the-ai-creative-process-3410/about", permanent: true },
+      // Propuesta del 8-oct, decisión D1: la landing de producción IA se
+      // une a la página del servicio. El archivo app/produccion-ia sigue en
+      // el repo para poder revertir quitando esta línea.
+      { source: "/produccion-ia", destination: "/servicios/spot-publicitario-ia", permanent: true },
     ];
   },
   async headers() {
