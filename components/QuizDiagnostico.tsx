@@ -172,7 +172,7 @@ export default function QuizDiagnostico({ whatsapp }: { whatsapp: string }) {
     setError("");
     setEnviando(true);
     try {
-      const res = await fetch("/api/taller/registro", {
+      const res = await fetch("/api/registro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

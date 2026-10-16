@@ -23,7 +23,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/trap-bot',
           '/ia-content-system',
-          '/taller/admin',
           '/noticias/baja',
           '/noticias/buscar',
           '/api/',

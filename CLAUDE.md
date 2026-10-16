@@ -10,36 +10,23 @@ GitHub: `sgmanuel19-coder/bubu-the-creator`.
 |---|---|---|
 | `/` + `/casos`, `/servicios`, `/sobre-mi`, `/academy` | Landing de Resuelto Agency | Producción |
 | `/sistemas-ia` | Redirect 308 → `/servicios` (landing absorbida por las tarjetas de automatización) | Redirect |
-| `/taller/*` | **RESUELTO Academy**: landing de venta + plataforma de cursos de la Masterclass de Creatividad Publicitaria IA | Producción |
+| `/appstudio/*` | **RESUELTO IA Studio** (modo comunidad, claves de cada usuario). Proyecto Vercel aparte `resuelto-appstudio` con `basePath: /appstudio`; aquí solo hay un `rewrites()` en `next.config.ts` | Producción |
+| `/empezar`, `/masterclass` | Embudos de pauta de la Academy (noindex). Datos en `lib/academy/content.ts`, leads en `/api/registro` | Producción |
 | `/ia-content-system/*` | Portal cliente-agencia (Supabase) | Deployado, Supabase caído |
 
-## RESUELTO Academy (`/taller`) — reglas críticas
+## RESUELTO Academy → Skool
 
-- **Todo el contenido editable vive en `lib/taller/content.ts`** (cursos,
-  módulos, lecciones con IDs de YouTube ocultos, recursos de la bóveda,
-  precios, FAQ, sesiones del calendario, novedades). Editar ahí + redeploy.
-- **Acceso**: contraseña compartida en env `TALLER_PASSWORD` (Vercel).
-  Cookie = SHA-256 (`lib/taller/auth.ts`). Todo `/taller/*` es PÚBLICO en
-  modo "vista previa con candado": cada página lee la sesión server-side
-  (`lib/taller/session.ts` → `estaDesbloqueado()`) y solo renderiza el
-  contenido real (iframes de video, links de descarga) si hay sesión.
-  **Nunca** filtrar contenido real al público.
-- **Nav del portal usa `<a>` (navegación real), NO `<Link>`**: el Router
-  Cache de Next cachea por ruta sin distinguir sesión y re-bloquea pestañas
-  a alumnos logueados. Bug ya resuelto — no reintroducir `<Link>` ahí.
-- **Copy de la landing**: sigue reglas de posicionamiento estrictas
-  (Obsidian → `RESUELTO CEREBRO MADRE/TALLERES/MASTERCLASS CREATIVIDAD
-  PUBLICITARIA IA/06 - Brief...`): liderar con estrategia/Cerebro Creativo
-  (nunca "aprende IA"), Biblia como bono estrella, ancla $2,000, GPTs son
-  "de mi proceso" (nunca "los creé"), urgencia solo real, CTA vivo →
-  WhatsApp / CTA grabado → Hotmart (`gate.productos.grabado.hotmartUrl`).
-- **Asistente Bubu**: 100% offline (`lib/taller/bubu.ts`); modo "ventas" en
-  `/taller` (no revela detalle de módulos) y modo "curso" adentro.
-- **Leads del registro**: `/api/taller/registro` → n8n (`TALLER_N8N_WEBHOOK`)
-  con respaldo a correo vía FormSubmit (`TALLER_LEADS_EMAIL`).
-- **Fase 2 (pendiente de claves de Supabase)**: plan completo en
-  `docs/superpowers/specs/2026-07-07-fase2-supabase-plan.md` + esquema en
-  `supabase/migrations/003_academy_schema.sql`.
+El portal `/taller` se eliminó el 2026-10-14: la Academy vive en Skool
+(https://www.skool.com/the-ai-creative-process-3410). `/academy` redirige ahí.
+No volver a crear rutas `/taller`.
+
+## RESUELTO IA Studio (`/appstudio`)
+
+- Código: copia de distribución `Documents/Codex/.../outputs/resuelto-studio-appstudio`
+  (generada con `npm run package:community` desde `ugc-avatar-studio`, más
+  `basePath`, rutas `/appstudio/...` en el cliente y `serverActions.allowedOrigins`).
+- Deploy: `vercel deploy --prod --yes` desde esa carpeta. Env: `NEXT_PUBLIC_STUDIO_MODE=community`,
+  `HF_API_BASE_URL`, `HF_COOKIE_SECRET` (sensible). Nunca `local` ni claves del dueño.
 
 ## Reglas del repo
 
@@ -51,13 +38,12 @@ GitHub: `sgmanuel19-coder/bubu-the-creator`.
 3. CSP en `next.config.ts`: si se embebe un origen nuevo en iframe,
    agregarlo a `frame-src`.
 4. Identidad visual del sitio: tokens en `app/globals.css` (`--bg` #0D0C08,
-   `--cream` #F4F0DE, azul `--green` #1A80FF, Inter). El portal usa
-   `.taller-root` (cursor normal).
+   `--cream` #F4F0DE, azul `--green` #1A80FF, Inter).
 5. Probar con `npm run build` antes de push (el push a main deploya solo).
 
 ## Env vars (Vercel)
 
-`TALLER_PASSWORD` (acceso alumnos) · `TALLER_N8N_WEBHOOK` (leads, opcional) ·
+`TALLER_N8N_WEBHOOK` (leads de /api/registro, opcional) ·
 `TALLER_LEADS_EMAIL` (respaldo leads, default sgmanuel19@gmail.com) ·
 `NEXT_PUBLIC_FACEBOOK_PIXEL_ID` · `NEXT_PUBLIC_SUPABASE_URL` +
 `NEXT_PUBLIC_SUPABASE_ANON_KEY` + `SUPABASE_SERVICE_ROLE_KEY` (ICS/Fase 2).

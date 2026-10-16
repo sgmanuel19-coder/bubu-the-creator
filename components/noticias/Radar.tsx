@@ -76,15 +76,6 @@ export function Cabecera({ secciones }: { secciones: Seccion[] }) {
               <path d="m20 20-3.5-3.5" strokeLinecap="round" />
             </svg>
           </a>
-          {/* Enlace a Academy OCULTO temporalmente (2026-10). La ruta /taller
-              sigue viva; para reponerlo, descomentar este bloque.
-          <a
-            href="/taller"
-            className="font-display text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand-blue transition-opacity hover:opacity-75"
-          >
-            Academy
-          </a>
-          */}
         </div>
       </div>
 
