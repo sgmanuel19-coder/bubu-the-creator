@@ -18,7 +18,14 @@ export default function Footer() {
               {SITE.brandName}
             </p>
             <p className="text-xs font-body text-muted/90">
-              {SITE.city} · {SITE.email}
+              {SITE.city} ·{" "}
+              <a href="mailto:roberth@resueltoagency.com" className="hover:text-cream/90 transition-colors">
+                roberth@resueltoagency.com
+              </a>{" "}
+              · {SITE.email}
+            </p>
+            <p className="mt-1 text-xs font-body text-muted/75">
+              RESUELTO SMART SOLUTIONS S.A.C. · RUC 20614688921
             </p>
           </div>
 
