@@ -10,6 +10,7 @@ import {
   useMotionValue,
 } from "framer-motion";
 import { SITE } from "@/lib/constants";
+import { AREAS, SERVICIOS, type AreaId } from "@/lib/servicios";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -118,6 +119,129 @@ const METODO = [
   { n: "II", title: "Generación", text: "Cada plano se genera y regenera decenas de veces hasta lograr consistencia, encuadre y movimiento de nivel cinematográfico." },
   { n: "III", title: "Acabado", text: "Edición, color grade, diseño sonoro y música. Lo que convierte generaciones sueltas en una pieza pulcra y coherente." },
 ];
+
+const AREA_ANILLOS: Record<AreaId, { inset: string; dur: string; dir: 1 | -1 }> = {
+  1: { inset: "0%", dur: "70s", dir: 1 },
+  2: { inset: "17%", dur: "52s", dir: -1 },
+  3: { inset: "34%", dur: "38s", dir: 1 },
+};
+
+const AREA_DIFERENCIA: Record<AreaId, string> = {
+  1: "Cada contacto se mide hasta su origen. Páginas que venden, no folletos en línea.",
+  2: "Un spot, un stand o un juego que nadie más tiene: la IA ejecuta, el criterio dirige.",
+  3: "Tu equipo aprende con tu propia marca, no con ejemplos genéricos.",
+};
+
+const CONSTANTES = [
+  { n: "1", t: "Criterio antes que herramienta" },
+  { n: "2", t: "Lo medimos y lo cerramos en precio" },
+  { n: "3", t: "Semanas, no meses" },
+];
+
+function DiferenciaServicios() {
+  const [activa, setActiva] = useState<AreaId>(1);
+  const [pausa, setPausa] = useState(false);
+
+  useEffect(() => {
+    if (pausa) return;
+    const id = setInterval(() => setActiva((a) => ((a % 3) + 1) as AreaId), 5200);
+    return () => clearInterval(id);
+  }, [pausa]);
+
+  const areas: AreaId[] = [1, 2, 3];
+
+  return (
+    <section className="container-base hm-section">
+      <div className="hm-section-head">
+        <div>
+          <span className="hm-eyebrow">Qué hacemos y en qué somos distintos</span>
+          <h2>
+            <LineReveal>Ocho servicios.</LineReveal>
+            <LineReveal delay={0.12}><span className="hm-grad">Un mismo criterio.</span></LineReveal>
+          </h2>
+        </div>
+        <p>
+          Cada servicio gira alrededor de lo mismo: una idea dirigida con criterio, medida y entregada
+          a precio cerrado. Toca un anillo para ver qué hay en cada uno.
+        </p>
+      </div>
+
+      <div
+        className="hm-dif"
+        onMouseEnter={() => setPausa(true)}
+        onMouseLeave={() => setPausa(false)}
+      >
+        <div className="hm-orbit" aria-hidden="true">
+          {areas.map((a) => {
+            const svs = SERVICIOS.filter((s) => s.area === a);
+            const r = AREA_ANILLOS[a];
+            return (
+              <button
+                key={a}
+                type="button"
+                tabIndex={-1}
+                className={`hm-ring${activa === a ? " on" : ""}`}
+                style={{ inset: r.inset, animationDuration: r.dur, animationDirection: r.dir === 1 ? "normal" : "reverse" }}
+                onClick={() => { setActiva(a); setPausa(true); }}
+              >
+                {svs.map((s, i) => {
+                  const ang = (i / svs.length) * Math.PI * 2 - Math.PI / 2 + a;
+                  return (
+                    <span
+                      key={s.id}
+                      className="hm-dot"
+                      style={{ left: `${50 + 50 * Math.cos(ang)}%`, top: `${50 + 50 * Math.sin(ang)}%` }}
+                    />
+                  );
+                })}
+              </button>
+            );
+          })}
+          <div className="hm-core">
+            <span>criterio</span>
+          </div>
+        </div>
+
+        <div className="hm-dif-panel">
+          <div className="hm-dif-tabs" role="tablist">
+            {areas.map((a) => (
+              <button
+                key={a}
+                type="button"
+                role="tab"
+                aria-selected={activa === a}
+                className={activa === a ? "on" : ""}
+                onClick={() => { setActiva(a); setPausa(true); }}
+              >
+                <i>{AREAS[a].n}</i>
+                {AREAS[a].nombre}
+              </button>
+            ))}
+          </div>
+
+          <div className="hm-dif-body" key={activa}>
+            <p className="hm-dif-dif">{AREA_DIFERENCIA[activa]}</p>
+            <ul>
+              {SERVICIOS.filter((s) => s.area === activa).map((s) => (
+                <li key={s.id}>
+                  <a href={`/servicios/${s.id}`}>
+                    {s.title} <i>→</i>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="hm-dif-const">
+            {CONSTANTES.map((c) => (
+              <span key={c.n}><b>{c.n}</b>{c.t}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 const CASOS_EXITO = [
   { slug: "win-huawei", client: "WIN × Huawei", title: "Naufragar", sub: "Un salvavidas naranja que es fibra óptica." },
@@ -321,42 +445,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── EL MÉTODO ── */}
-      <section className="container-base hm-section">
-        <div className="hm-section-head">
-          <div>
-            <span className="hm-eyebrow">Cómo pensamos cada pieza</span>
-            <h2>
-              <LineReveal>La IA genera.</LineReveal>
-              <LineReveal delay={0.12}><span className="hm-grad">El criterio dirige.</span></LineReveal>
-            </h2>
-          </div>
-          <p>
-            Toda pieza — un comercial, un empaque, una web — atraviesa las mismas tres capas.
-            La diferencia entre algo genérico y algo de marca vive en la primera.
-          </p>
-        </div>
-
-        <div className="hm-metodo" ref={metodoRef}>
-          <motion.span className="hm-metodo-line" style={{ scaleY: metodoLine }} aria-hidden="true" />
-          {METODO.map((m, i) => (
-            <motion.div
-              className="hm-acto"
-              key={m.n}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-70px" }}
-              transition={{ duration: 0.7, delay: i * 0.08, ease: EASE }}
-            >
-              <span className="hm-acto-n">{m.n}</span>
-              <div>
-                <h3>{m.title}</h3>
-                <p>{m.text}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* ── SERVICIOS: CÓMO NOS DIFERENCIAMOS ── */}
+      <DiferenciaServicios />
 
       {/* ── CASOS DE ÉXITO ── */}
       <section className="container-base hm-section">
