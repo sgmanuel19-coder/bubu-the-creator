@@ -113,11 +113,6 @@ const PRINCIPIOS = [
   { id: "respaldo", n: "04", title: "Respaldo real", text: "Marcas de consumo y de lanzamiento ya producen sus campañas con nosotros. Esto no es un experimento." },
 ];
 
-const ERAS = {
-  vieja: ["Meses de rodaje y coordinación", "Set, locación, cast y equipo técnico", "Cada cambio exige volver a grabar", "Presupuesto abierto que siempre crece"],
-  nueva: ["Semanas, de brief a entrega", "Dirección creativa + motores de IA", "Los cambios se regeneran en días", "Precio cerrado por proyecto, sin sorpresas"],
-};
-
 const METODO = [
   { n: "I", title: "Dirección y concepto", text: "Idea, guion, storyboard y definición del look. La visión que hace que la pieza se sienta de marca — no genérica. Esta capa es 100% humana." },
   { n: "II", title: "Generación", text: "Cada plano se genera y regenera decenas de veces hasta lograr consistencia, encuadre y movimiento de nivel cinematográfico." },
@@ -350,69 +345,6 @@ export default function Home() {
               </div>
             </motion.div>
           ))}
-        </div>
-      </section>
-
-      {/* ── VIEJA ERA vs NUEVA ERA ── */}
-      <section className="hm-eras">
-        <div className="container-base">
-          <span className="hm-eyebrow">El cambio de era</span>
-          <div className="hm-eras-grid">
-            <motion.div
-              className="hm-era hm-era-vieja"
-              initial={{ opacity: 0, x: -44 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8, ease: EASE }}
-            >
-              <span className="hm-era-label">La vieja era</span>
-              <ul>
-                {ERAS.vieja.map((item, i) => (
-                  <motion.li
-                    key={item}
-                    initial={{ opacity: 0, x: -14 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.25 + i * 0.09, ease: EASE }}
-                  >
-                    <i>✕</i><s>{item}</s>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.span
-              className="hm-eras-divider"
-              aria-hidden="true"
-              initial={{ scaleY: 0 }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 1, delay: 0.2, ease: EASE }}
-            />
-
-            <motion.div
-              className="hm-era hm-era-nueva"
-              initial={{ opacity: 0, x: 44 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8, delay: 0.12, ease: EASE }}
-            >
-              <span className="hm-era-label">La era Resuelto</span>
-              <ul>
-                {ERAS.nueva.map((item, i) => (
-                  <motion.li
-                    key={item}
-                    initial={{ opacity: 0, x: 14 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.35 + i * 0.09, ease: EASE }}
-                  >
-                    <i>✓</i>{item}
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
         </div>
       </section>
 
