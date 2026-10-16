@@ -2867,3 +2867,16 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
 .hm-clientes img.hm-cliente-color:hover{ opacity:1; }
 .hm-clientes-title{ margin-top:56px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--hm-blue); }
 .hm-clientes-title + .hm-clientes{ margin-top:24px;border-top:0;padding-top:0; }
+.hm-cliente{ display:inline-flex;align-items:center; }
+.hm-clientes img{ animation:hm-logo-glow 14s ease-in-out infinite;animation-delay:calc(var(--i,0) * 2s); }
+@keyframes hm-logo-glow{
+  0%,18%,100%{ opacity:.6;transform:scale(1);filter:brightness(0) invert(1); }
+  6%{ opacity:1;transform:scale(1.14);filter:brightness(0) invert(1) drop-shadow(0 0 14px rgba(26,128,255,.75)); }
+}
+.hm-clientes img.hm-cliente-color{ animation-name:hm-logo-glow-color; }
+@keyframes hm-logo-glow-color{
+  0%,18%,100%{ opacity:.85;transform:scale(1);filter:none; }
+  6%{ opacity:1;transform:scale(1.14);filter:drop-shadow(0 0 14px rgba(26,128,255,.75)); }
+}
+.hm-clientes img:hover{ opacity:1;transform:scale(1.12); }
+@media (prefers-reduced-motion:reduce){ .hm-clientes img{ animation:none; } }

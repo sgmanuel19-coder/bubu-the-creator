@@ -377,9 +377,19 @@ export default function Home() {
         </div>
         <p className="hm-clientes-title">Nuestros clientes</p>
         <div className="hm-clientes" aria-label="Nuestros clientes">
-          {CLIENTES.map((l) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={l.name} src={l.src} alt={l.name} loading="lazy" className={"color" in l ? "hm-cliente-color" : undefined} />
+          {CLIENTES.map((l, i) => (
+            <motion.span
+              key={l.name}
+              className="hm-cliente"
+              style={{ "--i": i } as React.CSSProperties}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6, delay: i * 0.09, ease: EASE }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={l.src} alt={l.name} loading="lazy" className={"color" in l ? "hm-cliente-color" : undefined} />
+            </motion.span>
           ))}
         </div>
       </section>
