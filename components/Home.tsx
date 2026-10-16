@@ -311,43 +311,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── LOS 4 PRINCIPIOS ── */}
-      <section className="container-base hm-section">
-        <div className="hm-section-head">
-          <div>
-            <span className="hm-eyebrow">Por qué existe Resuelto</span>
-            <h2>
-              <LineReveal>Cuatro cosas que la</LineReveal>
-              <LineReveal delay={0.1}>producción tradicional</LineReveal>
-              <LineReveal delay={0.2}>no puede darte.</LineReveal>
-            </h2>
-          </div>
-        </div>
-
-        <div className="hm-prin-grid">
-          {PRINCIPIOS.map((p, i) => (
-            <motion.div
-              className="hm-prin"
-              key={p.n}
-              initial={{ opacity: 0, y: 34, filter: "blur(8px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, margin: "-70px" }}
-              transition={{ duration: 0.75, delay: i * 0.1, ease: EASE }}
-            >
-              <div className="hm-prin-border" aria-hidden="true" />
-              <div className="hm-prin-inner">
-                <div className="hm-prin-top">
-                  <span className="hm-prin-icon"><PrincipioIcon id={p.id} /></span>
-                  <span className="n">{p.n}</span>
-                </div>
-                <h3>{p.title}</h3>
-                <p>{p.text}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
       {/* ── EL MÉTODO ── */}
       <section className="container-base hm-section">
         <div className="hm-section-head">
@@ -391,8 +354,8 @@ export default function Home() {
           <div>
             <span className="hm-eyebrow">Casos de éxito</span>
             <h2>
-              <LineReveal>Cinco marcas.</LineReveal>
-              <LineReveal delay={0.12}><span className="hm-grad">Cinco ideas dirigidas.</span></LineReveal>
+              <LineReveal>Ideas que se vieron.</LineReveal>
+              <LineReveal delay={0.12}><span className="hm-grad">Marcas que las dirigieron.</span></LineReveal>
             </h2>
           </div>
           <p>Cada caso cuenta la idea, la ejecución y cómo se hizo. Dale play.</p>
