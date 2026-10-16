@@ -127,6 +127,14 @@ const CASOS_EXITO = [
   { slug: "hikaru", client: "Hikaru", title: "La primera luz", sub: "La iluminación japonesa llega a Perú." },
 ];
 
+const CLIENTES = [
+  { name: "WIN Internet", src: "/images/clientes/win.png" },
+  { name: "Wellmax", src: "/images/clientes/wellmax.png" },
+  { name: "Hikaru", src: "/images/clientes/hikaru.png" },
+  { name: "Livoltek", src: "/images/clientes/livoltek.svg" },
+  { name: "ZLink", src: "/images/clientes/zlink.png" },
+];
+
 function CasoCard({ c }: { c: (typeof CASOS_EXITO)[number] }) {
   const [play, setPlay] = useState(false);
   return (
@@ -363,6 +371,12 @@ export default function Home() {
         <div className="hm-casos">
           {CASOS_EXITO.map((c) => (
             <CasoCard key={c.slug} c={c} />
+          ))}
+        </div>
+        <div className="hm-clientes" aria-label="Marcas con las que trabajamos">
+          {CLIENTES.map((l) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img key={l.name} src={l.src} alt={l.name} loading="lazy" />
           ))}
         </div>
       </section>
