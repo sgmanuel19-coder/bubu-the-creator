@@ -375,7 +375,8 @@ export default function Home() {
             <CasoCard key={c.slug} c={c} />
           ))}
         </div>
-        <div className="hm-clientes" aria-label="Marcas con las que trabajamos">
+        <p className="hm-clientes-title">Nuestros clientes</p>
+        <div className="hm-clientes" aria-label="Nuestros clientes">
           {CLIENTES.map((l) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img key={l.name} src={l.src} alt={l.name} loading="lazy" className={"color" in l ? "hm-cliente-color" : undefined} />
