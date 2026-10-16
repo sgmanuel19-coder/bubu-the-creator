@@ -114,7 +114,7 @@ const orgSchema = {
   },
   "description": "Agencia de creación de contenido con IA en Lima, Perú. Videos con nivel cinematográfico generados con IA y automatización inteligente para empresas B2B.",
   "foundingDate": "2023",
-  "email": "resueltoagency@gmail.com",
+  "email": "roberth@resueltoagency.com",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Lima",

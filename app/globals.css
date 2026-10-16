@@ -2846,3 +2846,15 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
   .mk-toast{ animation:none;opacity:1; }
   .mk-check{ animation:none;opacity:1;scale:1; }
 }
+
+/* Casos de éxito (Home) */
+.hm-casos{ display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;margin-top:40px; }
+.hm-caso{ margin:0;display:flex;flex-direction:column;gap:12px; }
+.hm-caso-media{ position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,.08); }
+.hm-caso-media button,.hm-caso-media video,.hm-caso-media img{ display:block;width:100%;height:100%;object-fit:cover;border:0;padding:0;cursor:pointer;background:none; }
+.hm-caso-play{ position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(26,128,255,.92);color:#fff;font-size:20px;padding-left:4px;transition:transform .25s; }
+.hm-caso-media button:hover .hm-caso-play{ transform:scale(1.1); }
+.hm-caso figcaption{ display:flex;flex-direction:column;gap:2px; }
+.hm-caso-client{ font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--hm-blue); }
+.hm-caso figcaption strong{ font-size:1.15rem;color:var(--hm-cream);font-weight:700; }
+.hm-caso figcaption em{ font-style:normal;font-size:13px;color:var(--hm-muted);font-weight:300; }

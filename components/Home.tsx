@@ -124,6 +124,38 @@ const METODO = [
   { n: "III", title: "Acabado", text: "Edición, color grade, diseño sonoro y música. Lo que convierte generaciones sueltas en una pieza pulcra y coherente." },
 ];
 
+const CASOS_EXITO = [
+  { slug: "win-huawei", client: "WIN × Huawei", title: "Naufragar", sub: "Un salvavidas naranja que es fibra óptica." },
+  { slug: "acceso-smart", client: "Acceso Smart Perú", title: "¡Ábreme!", sub: "El comercial IA completo y cómo se hizo." },
+  { slug: "zlink", client: "ZLink × ExpoAgua", title: "Medir lo invisible", sub: "Lo que el agua no deja ver, medido." },
+  { slug: "wellmax", client: "Wellmax", title: "Encender una idea", sub: "Una luz que se enciende y una grilla que vuelve encendida." },
+  { slug: "hikaru", client: "Hikaru", title: "La primera luz", sub: "La iluminación japonesa llega a Perú." },
+];
+
+function CasoCard({ c }: { c: (typeof CASOS_EXITO)[number] }) {
+  const [play, setPlay] = useState(false);
+  return (
+    <figure className="hm-caso">
+      <div className="hm-caso-media">
+        {play ? (
+          <video src={`/videos/casos/${c.slug}.mp4`} poster={`/videos/casos/${c.slug}.jpg`} controls autoPlay playsInline preload="auto" />
+        ) : (
+          <button type="button" onClick={() => setPlay(true)} aria-label={`Ver el caso ${c.client}: ${c.title}`}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`/videos/casos/${c.slug}.jpg`} alt={`${c.client} — ${c.title}`} loading="lazy" />
+            <span className="hm-caso-play" aria-hidden="true">▶</span>
+          </button>
+        )}
+      </div>
+      <figcaption>
+        <span className="hm-caso-client">{c.client}</span>
+        <strong>{c.title}</strong>
+        <em>{c.sub}</em>
+      </figcaption>
+    </figure>
+  );
+}
+
 const PUERTAS = [
   { n: "01", href: "/casos", title: "Portafolio", sub: "El trabajo habla primero. Comerciales, contenido, diseño y todo lo producido — con IA y antes de ella.", video: "/videos/portafolio-hero-v2.mp4" },
   { n: "02", href: "/servicios", title: "Servicios", sub: "Ocho servicios en tres áreas: marketing digital y ventas online, publicidad con IA y eventos, y capacitación en IA para tu equipo." },
@@ -417,6 +449,25 @@ export default function Home() {
                 <p>{m.text}</p>
               </div>
             </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CASOS DE ÉXITO ── */}
+      <section className="container-base hm-section">
+        <div className="hm-section-head">
+          <div>
+            <span className="hm-eyebrow">Casos de éxito</span>
+            <h2>
+              <LineReveal>Cinco marcas.</LineReveal>
+              <LineReveal delay={0.12}><span className="hm-grad">Cinco ideas dirigidas.</span></LineReveal>
+            </h2>
+          </div>
+          <p>Cada caso cuenta la idea, la ejecución y cómo se hizo. Dale play.</p>
+        </div>
+        <div className="hm-casos">
+          {CASOS_EXITO.map((c) => (
+            <CasoCard key={c.slug} c={c} />
           ))}
         </div>
       </section>

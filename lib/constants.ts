@@ -10,7 +10,7 @@ export const SITE = {
   professionalTitle: "Sistemas de Contenido IA · Founder, RESUELTO",
   title: "Sistemas de Contenido IA",
   city: "Lima, Perú",
-  email: "resueltoagency@gmail.com",
+  email: "roberth@resueltoagency.com",
   year: "2026",
 
   // ── Links ──────────────────────────────────────────────────

@@ -50,12 +50,14 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+        menuOpen
+          ? "bg-bg border-b border-neon-green/10"
+          : scrolled
           ? "bg-bg/88 backdrop-blur-xl border-b border-neon-green/10"
           : "bg-transparent"
       }`}
       style={{
-        transform: navVisible ? "translateY(0)" : "translateY(-100%)",
+        transform: navVisible || menuOpen ? "translateY(0)" : "translateY(-100%)",
         transition: "transform 0.35s cubic-bezier(0.21,0.47,0.32,0.98), background-color 0.5s, border-color 0.5s, backdrop-filter 0.5s",
       }}
     >
@@ -139,7 +141,7 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            className="md:hidden border-t border-neon-green/10 py-6 flex flex-col gap-4"
+            className="md:hidden border-t border-neon-green/10 py-6 flex flex-col gap-4 overflow-y-auto max-h-[calc(100dvh-4rem)]"
           >
             {navLinks.map((link) => (
               <Link
