@@ -2863,3 +2863,5 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
 .hm-clientes img{ height:34px;width:auto;max-width:140px;object-fit:contain;filter:brightness(0) invert(1);opacity:.6;transition:opacity .25s; }
 .hm-clientes img:hover{ opacity:1; }
 @media (max-width:640px){ .hm-clientes{ gap:22px 32px; } .hm-clientes img{ height:28px;max-width:110px; } }
+.hm-clientes img.hm-cliente-color{ filter:none;opacity:.85;border-radius:10px;height:44px;width:44px; }
+.hm-clientes img.hm-cliente-color:hover{ opacity:1; }

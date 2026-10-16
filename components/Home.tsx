@@ -133,6 +133,8 @@ const CLIENTES = [
   { name: "Hikaru", src: "/images/clientes/hikaru.png" },
   { name: "Livoltek", src: "/images/clientes/livoltek.svg" },
   { name: "ZLink", src: "/images/clientes/zlink.png" },
+  { name: "Acceso Smart Perú", src: "/images/clientes/acceso-smart.png" },
+  { name: "Grimm Store", src: "/images/clientes/grimm.png", color: true },
 ];
 
 function CasoCard({ c }: { c: (typeof CASOS_EXITO)[number] }) {
@@ -376,7 +378,7 @@ export default function Home() {
         <div className="hm-clientes" aria-label="Marcas con las que trabajamos">
           {CLIENTES.map((l) => (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={l.name} src={l.src} alt={l.name} loading="lazy" />
+            <img key={l.name} src={l.src} alt={l.name} loading="lazy" className={"color" in l ? "hm-cliente-color" : undefined} />
           ))}
         </div>
       </section>
