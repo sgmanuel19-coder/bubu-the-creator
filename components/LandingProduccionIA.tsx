@@ -247,7 +247,7 @@ export default function LandingProduccionIA() {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.9, delay: 0.45, ease: EASE }}
           >
-            Resuelto une <strong>5+ años de criterio en agencias globales</strong> con los
+            Resuelto une <strong>7+ años de criterio en agencias globales</strong> con los
             motores de generación más avanzados del mundo. El resultado: piezas de nivel
             televisión, entregadas en semanas, con precio cerrado.
           </motion.p>

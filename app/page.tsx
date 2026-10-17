@@ -12,7 +12,7 @@ const webPageSchema = {
   "@id": "https://www.resueltoagency.com/#webpage",
   "url": "https://www.resueltoagency.com",
   "name": "RESUELTO — Producción con IA, Diseño, Web y Automatización",
-  "description": "RESUELTO es una agencia de producción con IA en Lima, Perú: comerciales de nivel televisión, contenido de marca, páginas web, packaging, diseño y automatización comercial — dirigidos con 5+ años de criterio en agencias globales. Clientes activos: WIN Internet, Livoltek, Wellmax.",
+  "description": "RESUELTO es una agencia y consultora de publicidad impulsada con IA en Lima, Perú: spots y contenido de marca, eventos y ferias, páginas web, tiendas virtuales, Google Ads, SEO, videojuegos a medida y capacitación en IA — dirigidos con 7+ años de criterio en agencias globales. Clientes activos: WIN Internet, Livoltek, Wellmax.",
   "inLanguage": "es-PE",
   "dateModified": "2026-07-17",
   "isPartOf": { "@id": "https://www.resueltoagency.com/#website" },
@@ -21,7 +21,7 @@ const webPageSchema = {
 
 export const metadata: Metadata = {
   title: "RESUELTO — Producción con IA, Diseño, Web y Automatización · Perú",
-  description: "Comerciales de nivel televisión, contenido de marca, páginas web y automatización comercial — generados con IA, dirigidos con 5+ años de criterio real. Portafolio real, cotización cerrada, entrega en semanas.",
+  description: "Comerciales de nivel televisión, contenido de marca, páginas web y automatización comercial — generados con IA, dirigidos con 7+ años de criterio real. Portafolio real, cotización cerrada, entrega en semanas.",
   keywords: [
     "producción con IA",
     "comerciales con IA",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "RESUELTO — Producción con IA, Diseño, Web y Automatización",
-    description: "Comerciales de nivel televisión, contenido de marca, páginas web y automatización comercial — generados con IA, dirigidos con 5+ años de criterio real.",
+    description: "Comerciales de nivel televisión, contenido de marca, páginas web y automatización comercial — generados con IA, dirigidos con 7+ años de criterio real.",
     url: "https://www.resueltoagency.com",
   },
 };

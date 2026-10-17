@@ -739,7 +739,7 @@ export default function Portafolio() {
           </h1>
           <p className="pf-sub">
             Comerciales, video de producto, UGC y storytelling producidos con IA generativa —
-            sobre <strong>5+ años de ejecución real</strong> para las marcas más grandes del Perú.
+            sobre <strong>7+ años de ejecución real</strong> para las marcas más grandes del Perú.
           </p>
 
           {/* stats */}

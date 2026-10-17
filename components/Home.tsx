@@ -388,14 +388,13 @@ export default function Home() {
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
             />
-            <span className="hm-eyebrow-text">Agencia de producción con IA — Lima, Perú</span>
+            <span className="hm-eyebrow-text">Lima, Perú</span>
           </motion.div>
 
           <h1 className="hm-h1">
-            <LineReveal delay={0.25}>La producción</LineReveal>
-            <LineReveal delay={0.37}>publicitaria</LineReveal>
-            <LineReveal delay={0.49}>cambió de era.</LineReveal>
-            <LineReveal delay={0.64}><span className="hm-grad">Nosotros la dirigimos.</span></LineReveal>
+            <LineReveal delay={0.25}>Agencia y consultora</LineReveal>
+            <LineReveal delay={0.37}>de publicidad</LineReveal>
+            <LineReveal delay={0.52}><span className="hm-grad">impulsada con IA.</span></LineReveal>
           </h1>
 
           <motion.p
@@ -404,9 +403,10 @@ export default function Home() {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.9, delay: 0.95, ease: EASE }}
           >
-            Resuelto une <strong>5+ años de criterio en agencias globales</strong> con los motores de
-            generación más avanzados del mundo. El resultado: piezas de nivel televisión,
-            entregadas en semanas, con precio cerrado.
+            <strong>7+ años de criterio en agencias globales</strong>, con IA en todo lo que hacemos:
+            spots y contenido de marca, eventos y ferias, páginas web y tiendas virtuales, Google Ads
+            y SEO, videojuegos a medida y capacitación para tu equipo. Entregado en semanas, con
+            precio cerrado.
           </motion.p>
 
         </motion.div>

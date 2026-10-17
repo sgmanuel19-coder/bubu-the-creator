@@ -53,7 +53,7 @@ export default function Image() {
               maxWidth: 900,
             }}
           >
-            Estratega de contenido. +5 años con las marcas más exigentes del
+            Estratega de contenido. +7 años con las marcas más exigentes del
             Perú — de agencias top-tier a sistemas propios con IA.
           </div>
         </div>
