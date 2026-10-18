@@ -10,7 +10,7 @@ const LEGAL = {
   ruc: "20614688921",
   domicilio: "Lima, Perú",
   email: SITE.email,
-  actualizado: "15 de agosto de 2026",
+  actualizado: "18 de octubre de 2026",
 };
 
 type BlockProps = {
@@ -46,6 +46,79 @@ function LegalBlock({ title, children }: BlockProps) {
   );
 }
 
+/** Texto de la Política de Privacidad: se usa en el footer y en /privacidad. */
+export function PrivacidadContenido() {
+  return (
+    <>
+        <p>
+        <strong>{LEGAL.razonSocial}</strong> (RUC {LEGAL.ruc}), con domicilio en{" "}
+        {LEGAL.domicilio}, es responsable del tratamiento de los datos personales
+        recogidos a través de este sitio web, conforme a la Ley N.º 29733 — Ley de
+        Protección de Datos Personales del Perú y su Reglamento.
+      </p>
+
+      <p>
+        <strong>Qué datos recogemos.</strong> Solo los que nos entregas
+        voluntariamente al contactarnos o registrarte: nombre, correo electrónico,
+        número de teléfono/WhatsApp, empresa y el contenido de tu mensaje. De forma
+        automática registramos datos técnicos de navegación (dirección IP,
+        navegador, dispositivo, páginas visitadas) mediante herramientas de análisis
+        y publicidad.
+      </p>
+
+      <p>
+        <strong>Para qué los usamos.</strong> Para responder tus consultas, enviarte
+        propuestas comerciales, gestionar el acceso a nuestros programas de
+        formación, medir el rendimiento del sitio y de nuestras campañas
+        publicitarias, y —solo si lo autorizas— enviarte comunicaciones sobre
+        servicios y contenidos. No vendemos ni alquilamos tus datos a terceros.
+      </p>
+
+      <p>
+        <strong>Con quién los compartimos.</strong> Con proveedores que nos prestan
+        servicios y actúan como encargados de tratamiento, entre ellos: Vercel
+        (alojamiento), Meta Platforms (píxel de publicidad y WhatsApp), Google
+        (analítica y correo), Calendly (agendamiento), Hotmart (pagos de cursos),
+        Supabase y n8n (gestión de registros). Algunos de estos proveedores están
+        ubicados fuera del Perú, por lo que puede existir un flujo transfronterizo de
+        datos con las garantías que exige la normativa vigente.
+      </p>
+
+      <p>
+        <strong>Integración con LinkedIn.</strong> Usamos la API oficial de LinkedIn
+        únicamente para publicar contenidos propios (como el resumen diario de La
+        noticIA) en nuestra página de empresa, Resuelto Agency. Esa herramienta es
+        interna, solo la usan los administradores de nuestra página y no lee,
+        guarda ni muestra datos de miembros de LinkedIn (perfiles, comentarios o
+        mensajes). El token de acceso se guarda de forma privada en nuestros
+        equipos y puede revocarse en cualquier momento desde LinkedIn.
+      </p>
+
+      <p>
+        <strong>Cuánto tiempo los conservamos.</strong> Mientras dure la relación
+        comercial y, después, por el plazo necesario para atender obligaciones
+        legales, contables y tributarias. Si retiras tu consentimiento, eliminamos o
+        bloqueamos tus datos salvo que exista obligación legal de conservarlos.
+      </p>
+
+      <p>
+        <strong>Tus derechos (ARCO).</strong> Puedes acceder, rectificar, cancelar u
+        oponerte al tratamiento de tus datos, así como revocar tu consentimiento en
+        cualquier momento, escribiendo a{" "}
+        <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>. Responderemos en los
+        plazos que establece la ley. Si consideras que no atendimos tu solicitud,
+        puedes acudir a la Autoridad Nacional de Protección de Datos Personales del
+        Ministerio de Justicia y Derechos Humanos.
+      </p>
+
+      <p>
+        <strong>Menores de edad.</strong> Este sitio está dirigido a personas mayores
+        de 18 años. No recogemos datos de menores de forma consciente.
+      </p>
+    </>
+  );
+}
+
 export default function LegalNotice() {
   return (
     <div className="mt-10">
@@ -54,60 +127,9 @@ export default function LegalNotice() {
       </p>
 
       <LegalBlock title="Política de Privacidad">
+        <PrivacidadContenido />
         <p>
-          <strong>{LEGAL.razonSocial}</strong> (RUC {LEGAL.ruc}), con domicilio en{" "}
-          {LEGAL.domicilio}, es responsable del tratamiento de los datos personales
-          recogidos a través de este sitio web, conforme a la Ley N.º 29733 — Ley de
-          Protección de Datos Personales del Perú y su Reglamento.
-        </p>
-
-        <p>
-          <strong>Qué datos recogemos.</strong> Solo los que nos entregas
-          voluntariamente al contactarnos o registrarte: nombre, correo electrónico,
-          número de teléfono/WhatsApp, empresa y el contenido de tu mensaje. De forma
-          automática registramos datos técnicos de navegación (dirección IP,
-          navegador, dispositivo, páginas visitadas) mediante herramientas de análisis
-          y publicidad.
-        </p>
-
-        <p>
-          <strong>Para qué los usamos.</strong> Para responder tus consultas, enviarte
-          propuestas comerciales, gestionar el acceso a nuestros programas de
-          formación, medir el rendimiento del sitio y de nuestras campañas
-          publicitarias, y —solo si lo autorizas— enviarte comunicaciones sobre
-          servicios y contenidos. No vendemos ni alquilamos tus datos a terceros.
-        </p>
-
-        <p>
-          <strong>Con quién los compartimos.</strong> Con proveedores que nos prestan
-          servicios y actúan como encargados de tratamiento, entre ellos: Vercel
-          (alojamiento), Meta Platforms (píxel de publicidad y WhatsApp), Google
-          (analítica y correo), Calendly (agendamiento), Hotmart (pagos de cursos),
-          Supabase y n8n (gestión de registros). Algunos de estos proveedores están
-          ubicados fuera del Perú, por lo que puede existir un flujo transfronterizo de
-          datos con las garantías que exige la normativa vigente.
-        </p>
-
-        <p>
-          <strong>Cuánto tiempo los conservamos.</strong> Mientras dure la relación
-          comercial y, después, por el plazo necesario para atender obligaciones
-          legales, contables y tributarias. Si retiras tu consentimiento, eliminamos o
-          bloqueamos tus datos salvo que exista obligación legal de conservarlos.
-        </p>
-
-        <p>
-          <strong>Tus derechos (ARCO).</strong> Puedes acceder, rectificar, cancelar u
-          oponerte al tratamiento de tus datos, así como revocar tu consentimiento en
-          cualquier momento, escribiendo a{" "}
-          <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>. Responderemos en los
-          plazos que establece la ley. Si consideras que no atendimos tu solicitud,
-          puedes acudir a la Autoridad Nacional de Protección de Datos Personales del
-          Ministerio de Justicia y Derechos Humanos.
-        </p>
-
-        <p>
-          <strong>Menores de edad.</strong> Este sitio está dirigido a personas mayores
-          de 18 años. No recogemos datos de menores de forma consciente.
+          <a href="/privacidad">Ver la política completa en su propia página</a>
         </p>
       </LegalBlock>
 
