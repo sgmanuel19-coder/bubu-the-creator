@@ -568,7 +568,10 @@ export default function Radar({ portada }: { portada: Portada }) {
               {" "}· Lima, Perú
             </p>
             <p className="text-xs text-muted/70">
-              © {new Date().getFullYear()} · Los titulares y enlaces pertenecen a sus medios.
+              © {new Date().getFullYear()} · Los titulares y enlaces pertenecen a sus medios. ·{" "}
+              <a href="/privacidad" className="underline decoration-white/20 transition-colors hover:text-brand-blue">
+                Política de Privacidad
+              </a>
             </p>
           </div>
         </footer>

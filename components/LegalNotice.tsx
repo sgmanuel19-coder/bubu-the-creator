@@ -59,7 +59,8 @@ export function PrivacidadContenido() {
 
       <p>
         <strong>Qué datos recogemos.</strong> Solo los que nos entregas
-        voluntariamente al contactarnos o registrarte: nombre, correo electrónico,
+        voluntariamente al contactarnos, registrarte o suscribirte al boletín de La
+        noticIA (resueltoagency.com/noticias): nombre, correo electrónico,
         número de teléfono/WhatsApp, empresa y el contenido de tu mensaje. De forma
         automática registramos datos técnicos de navegación (dirección IP,
         navegador, dispositivo, páginas visitadas) mediante herramientas de análisis
