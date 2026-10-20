@@ -5,7 +5,7 @@ import { SITE } from "@/lib/constants";
  * Colapsado por defecto (<details> nativo) para no interferir con el diseño.
  * Editar los datos de la empresa en LEGAL.
  */
-const LEGAL = {
+export const LEGAL = {
   razonSocial: "RESUELTO SMART SOLUTIONS S.A.C.",
   ruc: "20614688921",
   domicilio: "Lima, Perú",

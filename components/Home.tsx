@@ -120,12 +120,6 @@ const METODO = [
   { n: "III", title: "Acabado", text: "Edición, color grade, diseño sonoro y música. Lo que convierte generaciones sueltas en una pieza pulcra y coherente." },
 ];
 
-const AREA_ANILLOS: Record<AreaId, { inset: string; dur: string; dir: 1 | -1 }> = {
-  1: { inset: "0%", dur: "70s", dir: 1 },
-  2: { inset: "17%", dur: "52s", dir: -1 },
-  3: { inset: "34%", dur: "38s", dir: 1 },
-};
-
 const AREA_DIFERENCIA: Record<AreaId, string> = {
   1: "Cada contacto se mide hasta su origen. Páginas que venden, no folletos en línea.",
   2: "Un spot, un stand o un juego que nadie más tiene: la IA ejecuta, el criterio dirige.",
@@ -138,16 +132,9 @@ const CONSTANTES = [
   { n: "3", t: "Semanas, no meses" },
 ];
 
+// Una sola línea —el criterio— atraviesa la sección y de ella cuelgan las
+// tres áreas. Todo a la vista, sin pestañas ni rotación automática.
 function DiferenciaServicios() {
-  const [activa, setActiva] = useState<AreaId>(1);
-  const [pausa, setPausa] = useState(false);
-
-  useEffect(() => {
-    if (pausa) return;
-    const id = setInterval(() => setActiva((a) => ((a % 3) + 1) as AreaId), 5200);
-    return () => clearInterval(id);
-  }, [pausa]);
-
   const areas: AreaId[] = [1, 2, 3];
 
   return (
@@ -161,82 +148,53 @@ function DiferenciaServicios() {
           </h2>
         </div>
         <p>
-          Cada servicio gira alrededor de lo mismo: una idea dirigida con criterio, medida y entregada
-          a precio cerrado. Toca un anillo para ver qué hay en cada uno.
+          Tres áreas, ocho servicios y una sola forma de trabajar: una idea dirigida con criterio,
+          medida y entregada a precio cerrado.
         </p>
       </div>
 
-      <div
-        className="hm-dif"
-        onMouseEnter={() => setPausa(true)}
-        onMouseLeave={() => setPausa(false)}
-      >
-        <div className="hm-orbit" aria-hidden="true">
-          {areas.map((a) => {
-            const svs = SERVICIOS.filter((s) => s.area === a);
-            const r = AREA_ANILLOS[a];
-            return (
-              <button
-                key={a}
-                type="button"
-                tabIndex={-1}
-                className={`hm-ring${activa === a ? " on" : ""}`}
-                style={{ inset: r.inset, animationDuration: r.dur, animationDirection: r.dir === 1 ? "normal" : "reverse" }}
-                onClick={() => { setActiva(a); setPausa(true); }}
-              >
-                {svs.map((s, i) => {
-                  const ang = (i / svs.length) * Math.PI * 2 - Math.PI / 2 + a;
-                  return (
-                    <span
-                      key={s.id}
-                      className="hm-dot"
-                      style={{ left: `${50 + 50 * Math.cos(ang)}%`, top: `${50 + 50 * Math.sin(ang)}%` }}
-                    />
-                  );
-                })}
-              </button>
-            );
-          })}
-          <div className="hm-core">
-            <span>criterio</span>
-          </div>
+      <div className="hm-dif">
+        <div className="hm-dif-eje">
+          <motion.span
+            className="hm-dif-linea"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 1.4, ease: EASE }}
+          />
+          <span className="hm-dif-eje-label">Criterio</span>
         </div>
 
-        <div className="hm-dif-panel">
-          <div className="hm-dif-tabs" role="tablist">
-            {areas.map((a) => (
-              <button
-                key={a}
-                type="button"
-                role="tab"
-                aria-selected={activa === a}
-                className={activa === a ? "on" : ""}
-                onClick={() => { setActiva(a); setPausa(true); }}
-              >
-                <i>{AREAS[a].n}</i>
-                {AREAS[a].nombre}
-              </button>
-            ))}
-          </div>
+        <div className="hm-dif-cols">
+          {areas.map((a, i) => (
+            <motion.div
+              key={a}
+              className="hm-dif-col"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, delay: 0.5 + i * 0.12, ease: EASE }}
+            >
+              <span className="hm-dif-n">{AREAS[a].n}</span>
+              <h3>{AREAS[a].nombre}</h3>
+              <p>{AREA_DIFERENCIA[a]}</p>
+              <ul>
+                {SERVICIOS.filter((s) => s.area === a).map((s) => (
+                  <li key={s.id}>
+                    <a href={`/servicios/${s.id}`}>
+                      {s.title} <i>→</i>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
 
-          <div className="hm-dif-body" key={activa}>
-            <p className="hm-dif-dif">{AREA_DIFERENCIA[activa]}</p>
-            <ul>
-              {SERVICIOS.filter((s) => s.area === activa).map((s) => (
-                <li key={s.id}>
-                  <a href={`/servicios/${s.id}`}>
-                    {s.title} <i>→</i>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="hm-dif-const">
-            {CONSTANTES.map((c) => (
-              <span key={c.n}><b>{c.n}</b>{c.t}</span>
-            ))}
-          </div>
+        <div className="hm-dif-const">
+          {CONSTANTES.map((c) => (
+            <span key={c.n}><b>{c.n}</b>{c.t}</span>
+          ))}
         </div>
       </div>
     </section>
@@ -266,78 +224,62 @@ const CLIENTES = [
 const logoAlto = (l: { ratio: number; boost?: number }) =>
   Math.min(54, Math.round(Math.sqrt(4800 / l.ratio) * (l.boost ?? 1)));
 
-// Carrusel curvo: los casos van comprimidos en una fila que se curva hacia
-// el espectador en los extremos; el que se señala (hover, foco o toque) se
-// abre y reproduce su video en silencio. "Con sonido" lo pasa a controles.
+// Un caso destacado a tamaño completo (4:3, como se produjeron) y la lista de
+// los demás al lado: nada se comprime. Elegir uno de la lista lo pasa al
+// destacado; "Con sonido" cambia el loop mudo por controles.
 function CasosReel() {
-  const [activo, setActivo] = useState(Math.floor(CASOS_EXITO.length / 2));
+  const [activo, setActivo] = useState(0);
   const [sonido, setSonido] = useState(false);
-
-  const espera = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const abrir = (i: number) => {
-    if (espera.current) clearTimeout(espera.current);
-    if (i === activo) return;
-    setActivo(i);
-    setSonido(false);
-  };
-  // Un instante de espera al pasar el mouse: el panel que se abre empuja a
-  // los demás, y sin esto un cursor quieto abriría el vecino en cadena.
-  const intencion = (i: number) => {
-    if (espera.current) clearTimeout(espera.current);
-    espera.current = setTimeout(() => abrir(i), 160);
-  };
+  const c = CASOS_EXITO[activo];
 
   return (
-    <div className="hm-reel">
-      {CASOS_EXITO.map((c, i) => {
-        const off = i - activo;
-        const on = off === 0;
-        const giro = Math.sign(off) * Math.min(Math.abs(off), 2) * -11;
-        return (
-          <article
-            key={c.slug}
-            className={`hm-reel-item${on ? " on" : ""}`}
-            style={{ "--giro": `${giro}deg` } as React.CSSProperties}
-            onMouseEnter={() => intencion(i)}
-            onMouseLeave={() => espera.current && clearTimeout(espera.current)}
-            onFocus={() => abrir(i)}
-            onClick={() => abrir(i)}
-            tabIndex={0}
-            aria-label={`${c.client}: ${c.title}`}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/videos/casos/${c.slug}.jpg`} alt="" loading="lazy" />
-            {on && (
-              <video
-                key={`${c.slug}-${sonido}`}
-                src={`/videos/casos/${c.slug}.mp4`}
-                poster={`/videos/casos/${c.slug}.jpg`}
-                autoPlay
-                muted={!sonido}
-                loop={!sonido}
-                controls={sonido}
-                playsInline
-              />
-            )}
-            <span className="hm-reel-tab" aria-hidden="true">{c.client}</span>
-            <div className="hm-reel-info">
-              <span className="hm-caso-client">{c.client}</span>
-              <strong>{c.title}</strong>
-              <em>{c.sub}</em>
-              {!sonido && (
-                <button
-                  type="button"
-                  className="hm-reel-play"
-                  onClick={(e) => { e.stopPropagation(); setActivo(i); setSonido(true); }}
-                >
-                  ▶ Ver el caso con sonido
-                </button>
-              )}
-            </div>
-          </article>
-        );
-      })}
+    <div className="hm-casos">
+      <div className="hm-casos-main">
+        <div className="hm-casos-media">
+          <video
+            key={`${c.slug}-${sonido}`}
+            src={`/videos/casos/${c.slug}.mp4`}
+            poster={`/videos/casos/${c.slug}.jpg`}
+            autoPlay
+            muted={!sonido}
+            loop={!sonido}
+            controls={sonido}
+            playsInline
+          />
+        </div>
+        <div className="hm-casos-info">
+          <div>
+            <span className="hm-caso-client">{c.client}</span>
+            <strong>{c.title}</strong>
+            <em>{c.sub}</em>
+          </div>
+          {!sonido && (
+            <button type="button" className="hm-reel-play" onClick={() => setSonido(true)}>
+              ▶ Ver con sonido
+            </button>
+          )}
+        </div>
+      </div>
+
+      <ol className="hm-casos-lista">
+        {CASOS_EXITO.map((x, i) => (
+          <li key={x.slug}>
+            <button
+              type="button"
+              className={i === activo ? "on" : ""}
+              aria-current={i === activo}
+              onClick={() => { setActivo(i); setSonido(false); }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`/videos/casos/${x.slug}.jpg`} alt="" loading="lazy" />
+              <span>
+                <small>{x.client}</small>
+                {x.title}
+              </span>
+            </button>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }
@@ -515,24 +457,16 @@ export default function Home() {
               <LineReveal delay={0.12}><span className="hm-grad">Marcas que las dirigieron.</span></LineReveal>
             </h2>
           </div>
-          <p>Cada caso cuenta la idea, la ejecución y cómo se hizo. Pasa por uno para abrirlo.</p>
+          <p>Cada caso cuenta la idea, la ejecución y cómo se hizo. Elige uno de la lista para verlo.</p>
         </div>
         <CasosReel />
         <p className="hm-clientes-title">Nuestros clientes</p>
         <div className="hm-clientes" aria-label="Nuestros clientes">
-          {CLIENTES.map((l, i) => (
-            <motion.span
-              key={l.name}
-              className="hm-cliente"
-              style={{ "--i": i } as React.CSSProperties}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.6, delay: i * 0.09, ease: EASE }}
-            >
+          {CLIENTES.map((l) => (
+            <span key={l.name} className="hm-cliente">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={l.src} alt={l.name} loading="lazy" style={{ "--h": `${logoAlto(l)}px` } as React.CSSProperties} />
-            </motion.span>
+            </span>
           ))}
         </div>
       </section>
