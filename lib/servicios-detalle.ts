@@ -99,6 +99,9 @@ export type DetalleServicio = {
   cierre: string; // pregunta de cierre antes del CTA final
   lidera: Lider[];
   mockup: Mockup;
+  // VSL del servicio (video de venta de ~3 min, voz + motion). Va entre el
+  // hero y el Acto I. Archivos en /videos/vsl y /images/vsl.
+  vsl?: { src: string; poster: string; titulo: string; duracion: string };
 
   // Acto I — la oferta
   oferta: string;
@@ -150,6 +153,7 @@ export const DETALLE: Record<string, DetalleServicio> = {
     cierre: "¿Inviertes en Google Ads y no sabes qué clic se volvió venta?",
     lidera: ["roberth"],
     mockup: { tipo: "ads" },
+    vsl: { src: "/videos/vsl/vsl-01-google-ads.mp4", poster: "/images/vsl/vsl-01-google-ads.jpg", titulo: "El rastro del sol", duracion: "2:55" },
     oferta: "Google Ads medido hasta el WhatsApp",
     promesa:
       "Que sepas, contacto por contacto, qué campaña lo trajo y cuánto costó — sin pagar a ciegas y sin perder el control de tu cuenta.",
@@ -318,6 +322,7 @@ export const DETALLE: Record<string, DetalleServicio> = {
     cierre: "¿Tu competencia aparece en Google y tú no?",
     lidera: ["roberth"],
     mockup: { tipo: "seo" },
+    vsl: { src: "/videos/vsl/vsl-02-posicionamiento-seo.mp4", poster: "/images/vsl/vsl-02-posicionamiento-seo.jpg", titulo: "El libro sin portada", duracion: "3:00" },
     oferta: "Posicionamiento para conseguir clientes, no solo visitas",
     promesa:
       "Que aparezcas en las búsquedas que hace tu cliente antes de comprar y que esas visitas terminen en contactos — sin depender de pagar cada clic.",
@@ -483,6 +488,7 @@ export const DETALLE: Record<string, DetalleServicio> = {
     cierre: "¿Tu web existe y nadie te escribe?",
     lidera: ["julio"],
     mockup: { tipo: "web" },
+    vsl: { src: "/videos/vsl/vsl-03-diseno-paginas-web.mp4", poster: "/images/vsl/vsl-03-diseno-paginas-web.jpg", titulo: "La puerta pintada", duracion: "2:52" },
     oferta: "Una página web para vender, no un folleto en línea",
     promesa:
       "Que quien busca lo que ofreces te encuentre, entienda qué haces en segundos y te escriba — sin pagar hosting por un folleto que nadie mide.",

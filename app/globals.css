@@ -2588,6 +2588,12 @@ body:has(.ics-root) .beams-bg{ display:none; }
 .sd-stack-mini{ display:flex;flex-wrap:wrap;gap:6px;margin-top:22px; }
 .sd-stack-mini i{ font-style:normal;font-family:var(--sd-mono);font-size:10.5px;letter-spacing:.05em;padding:6px 10px;border:1px solid var(--sd-line2);color:var(--sd-muted); }
 
+/* VSL del servicio: entre el hero y el Acto I */
+.sd-vsl{ padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(24px,4vw,48px); }
+.sd-vsl-head .sd-h3{ margin-bottom:24px; }
+.sd-vsl-frame{ position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--sd-line2);background:#0b0b09;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(var(--sd-a),.18); }
+.sd-vsl-frame video{ display:block;width:100%;height:100%;object-fit:cover; }
+
 .sd-promesa{ position:relative;padding:8px 0 8px 40px;border-left:2px solid rgb(var(--sd-a)); }
 .sd-promesa-nombre{ margin-bottom:16px;font-family:var(--sd-disp);font-weight:800;font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:-.035em;line-height:1.05;color:rgb(var(--sd-a));text-wrap:balance; }
 .sd-promesa-txt{ max-width:900px;font-family:var(--sd-disp);font-weight:500;font-size:clamp(1.15rem,2vw,1.6rem);line-height:1.42;letter-spacing:-.015em;color:var(--sd-cream); }

@@ -475,6 +475,26 @@ export default function ServicioDetalle({
         </div>
       </header>
 
+      {/* ══════════════ VSL — el servicio explicado en video ══════════════ */}
+      {d.vsl && (
+        <section className="sd-vsl container-base" aria-label={`Video: ${d.vsl.titulo}`}>
+          <div className="sd-vsl-head" data-reveal>
+            <span className="sd-label">El servicio en video · {d.vsl.duracion}</span>
+            <h2 className="sd-h3">Cómo lo hacemos, <em>explicado en video</em></h2>
+          </div>
+          <div className="sd-vsl-frame" data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
+            <video
+              src={d.vsl.src}
+              poster={d.vsl.poster}
+              controls
+              playsInline
+              preload="none"
+              onPlay={() => eventoMeta("ViewContent", { contentName: `${s.title} · VSL` })}
+            />
+          </div>
+        </section>
+      )}
+
       {/* ══════════════ ACTO I — LA OFERTA ══════════════ */}
       <section id="acto-1" className="sd-act container-base">
         <ActoHeader n="I" titulo="La oferta" kicker="Por qué esto vale más de lo que cuesta." />
