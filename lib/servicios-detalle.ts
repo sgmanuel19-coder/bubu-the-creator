@@ -667,7 +667,7 @@ export const DETALLE: Record<string, DetalleServicio> = {
     cierre: "¿Vendes por chat y quieres tu propia tienda virtual?",
     lidera: ["julio"],
     mockup: { tipo: "tienda" },
-    vsl: { src: "/videos/vsl/vsl-04-tienda-virtual.mp4", poster: "/images/vsl/vsl-04-tienda-virtual.jpg", titulo: "El turno de las 11 p. m.", duracion: "2:45" },
+    vsl: { src: "/videos/vsl/vsl-04-tienda-virtual-v2.mp4", poster: "/images/vsl/vsl-04-tienda-virtual-v2.jpg", titulo: "El turno de las 11 p. m.", duracion: "2:45" },
     oferta: "Una tienda virtual que vende a cualquier hora",
     promesa:
       "Que tu catálogo completo esté en línea, que Google encuentre tus productos y que cada pedido o consulta llegue con todo lo necesario para cerrar — sin depender de contestar a tiempo cada chat.",
