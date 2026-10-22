@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import { SITE } from "@/lib/constants";
 import { AREAS, SERVICIOS, type AreaId } from "@/lib/servicios";
+import { CLIENTES, logoAlto } from "@/lib/clientes";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -208,21 +209,6 @@ const CASOS_EXITO = [
   { slug: "wellmax", client: "Wellmax", title: "Encender una idea", sub: "Una luz que se enciende y una grilla que vuelve encendida." },
   { slug: "hikaru", client: "Hikaru", title: "La primera luz", sub: "La iluminación japonesa llega a Perú." },
 ];
-
-// ratio = ancho/alto del archivo ya recortado. La altura se calcula por área
-// visual (no por alto fijo) para que un logo ancho no se vea más grande que
-// uno compacto; boost compensa trazos finos (win) o lemas pequeños (Wellmax).
-const CLIENTES = [
-  { name: "WIN Internet", src: "/images/clientes/win.png", ratio: 2.43, boost: 1.3 },
-  { name: "Wellmax", src: "/images/clientes/wellmax.png", ratio: 5.22, boost: 1.35 },
-  { name: "Hikaru", src: "/images/clientes/hikaru.png", ratio: 3.38 },
-  { name: "Livoltek", src: "/images/clientes/livoltek.svg", ratio: 5.88 },
-  { name: "ZLink", src: "/images/clientes/zlink.png", ratio: 3.57 },
-  { name: "Acceso Smart Perú", src: "/images/clientes/acceso-smart.png", ratio: 2.41, boost: 1.3 },
-  { name: "Grimm Store", src: "/images/clientes/grimm.png", ratio: 1.11 },
-];
-const logoAlto = (l: { ratio: number; boost?: number }) =>
-  Math.min(54, Math.round(Math.sqrt(4800 / l.ratio) * (l.boost ?? 1)));
 
 // Un caso destacado a tamaño completo (4:3, como se produjeron) y la lista de
 // los demás al lado: nada se comprime. Elegir uno de la lista lo pasa al

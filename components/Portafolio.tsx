@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { SITE } from "@/lib/constants";
+import { CLIENTES, logoAlto } from "@/lib/clientes";
 import {
   CHAPTERS,
   TRADITIONAL_CHAPTERS,
@@ -27,7 +28,6 @@ const ROTATE_MS = 11000;
 
 const BLUE = "#1A80FF";
 
-const brands = SITE.authority.logos.map((l) => l.name);
 
 const PlayIcon = () => (
   <svg viewBox="0 0 24 24" style={{ width: 18, height: 18, fill: BLUE, marginLeft: 3 }}>
@@ -821,10 +821,14 @@ export default function Portafolio() {
             cream
           />
 
-          <div className="pf-ticker">
-            <div className="pf-ticker-inner">
-              {[...brands, ...brands].map((b, i) => <span key={i}>{b}</span>)}
-            </div>
+          {/* Los mismos logos reales del inicio (lib/clientes.ts). */}
+          <div className="hm-clientes pf-clientes" aria-label="Nuestros clientes">
+            {CLIENTES.map((l) => (
+              <span key={l.name} className="hm-cliente">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={l.src} alt={l.name} loading="lazy" style={{ "--h": `${logoAlto(l)}px` } as React.CSSProperties} />
+              </span>
+            ))}
           </div>
 
           <div className="pf-inds">

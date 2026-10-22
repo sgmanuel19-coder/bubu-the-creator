@@ -751,10 +751,8 @@ body {
 .pf-tabs-cream .pf-tab.on{ background:rgba(244,240,222,.1);border-color:rgba(244,240,222,.4);box-shadow:none; }
 .pf-tabs-cream .pf-tab .n{ color:var(--pf-cream-dim); }
 
-.pf-ticker{ margin-top:70px;border-top:1px solid rgba(244,240,222,.08);border-bottom:1px solid rgba(244,240,222,.08);padding:26px 0;overflow:hidden;white-space:nowrap; }
-.pf-ticker-inner{ display:inline-block;animation:pfTick 34s linear infinite; }
-.pf-ticker span{ font-size:1.35rem;font-weight:700;color:rgba(244,240,222,.28);margin:0 34px;letter-spacing:-.01em;transition:color .3s; }
-.pf-ticker span:hover{ color:rgba(244,240,222,.75); }
+/* Fila de logos reales: reusa .hm-clientes del inicio; aquí solo el aire. */
+.pf-clientes{ margin-top:70px; }
 @keyframes pfTick{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
 .pf-inds{ display:flex;flex-wrap:wrap;gap:10px;margin-top:34px; }
 .pf-inds i{ font-style:normal;font-size:11.5px;letter-spacing:.08em;padding:8px 16px;border-radius:99px;border:1px solid rgba(244,240,222,.14);color:var(--pf-cream-dim); }
@@ -796,7 +794,7 @@ body {
   .pf-stats{ grid-template-columns:1fr 1fr; }
   .pf-stats div{ padding:16px 14px; }
 }
-@media (prefers-reduced-motion:reduce){ .pf-ticker-inner{ animation:none; } .pf-marquee-inner{ animation:none; } }
+@media (prefers-reduced-motion:reduce){ .pf-marquee-inner{ animation:none; } }
 
 /* ============================================================
    SERVICIOS (/servicios) — estilos scoped bajo .sv
