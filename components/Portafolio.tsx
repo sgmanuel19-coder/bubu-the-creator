@@ -751,6 +751,20 @@ export default function Portafolio() {
         </div>
       </div>
 
+      {/* ── CLIENTES — los mismos logos reales del inicio (lib/clientes.ts),
+          antes de todo el trabajo ── */}
+      <div className="container-base pf-clientes-wrap">
+        <p className="pf-clientes-title">Nuestros clientes</p>
+        <div className="hm-clientes pf-clientes" aria-label="Nuestros clientes">
+          {CLIENTES.map((l) => (
+            <span key={l.name} className="hm-cliente">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={l.src} alt={l.name} style={{ "--h": `${logoAlto(l)}px` } as React.CSSProperties} />
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* ── GALERÍA — capítulos que pasan solos, todo reproduciéndose ── */}
       <section className="container-base pf-gallery" id="trabajo">
         <ChapterCarousel
@@ -821,15 +835,6 @@ export default function Portafolio() {
             cream
           />
 
-          {/* Los mismos logos reales del inicio (lib/clientes.ts). */}
-          <div className="hm-clientes pf-clientes" aria-label="Nuestros clientes">
-            {CLIENTES.map((l) => (
-              <span key={l.name} className="hm-cliente">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={l.src} alt={l.name} loading="lazy" style={{ "--h": `${logoAlto(l)}px` } as React.CSSProperties} />
-              </span>
-            ))}
-          </div>
 
           <div className="pf-inds">
             {SITE.proof.industries.map((ind) => (
