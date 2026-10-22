@@ -3,8 +3,6 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { SITE } from "@/lib/constants";
-import { ContainerStagger, ContainerAnimated } from "@/components/ui/animated-gallery";
-import { FlythroughIntro } from "@/components/ui/flythrough-intro";
 import {
   CHAPTERS,
   TRADITIONAL_CHAPTERS,
@@ -30,24 +28,6 @@ const ROTATE_MS = 11000;
 const BLUE = "#1A80FF";
 
 const brands = SITE.authority.logos.map((l) => l.name);
-
-/* Apertura 3D del portafolio. Solo pósters apaisados: los verticales, con
-   object-cover en un marco 16:9, se recortan por el medio y decapitan a la
-   persona. Tres columnas que se mueven a distinta velocidad. */
-/* Orden del vuelo: es el orden en que las piezas vienen desde el fondo, así
-   que arranca con lo más reconocible. Solo apaisadas — las verticales,
-   recortadas a 16:9, decapitan a la persona. */
-const VUELO_BASE = [
-  "comercial-04", "comercial-07", "comercial-09", "comercial-05",
-  "comercial-10", "comercial-11", "comercial-08", "producto-01",
-  "comercial-06", "avatar-07", "comercial-01", "avatar-03",
-  "trad-comerciales-01", "avatar-02", "trad-comerciales-02", "avatar-06",
-  "trad-comerciales-03", "trad-comerciales-04",
-];
-/* Se recorre el pool una vez y media: con 18 piezas el túnel se vaciaba
-   sobre el final del scroll. La segunda vuelta arranca desplazada para que
-   no se repita el mismo orden. */
-const VUELO_3D = [...VUELO_BASE, ...VUELO_BASE.slice(4), ...VUELO_BASE.slice(0, 4)];
 
 const PlayIcon = () => (
   <svg viewBox="0 0 24 24" style={{ width: 18, height: 18, fill: BLUE, marginLeft: 3 }}>
@@ -769,20 +749,6 @@ export default function Portafolio() {
             </span>
           ))}
         </div>
-      </div>
-
-      {/* ── INTRO EN VUELO — la cámara atraviesa el archivo ── */}
-      <div className="pf-fly-wrap">
-        <ContainerStagger className="pf-3d-intro container-base">
-          <ContainerAnimated>
-            <span className="pf-eyebrow">20+ marcas · 2000+ piezas</span>
-          </ContainerAnimated>
-          <ContainerAnimated>
-            <h2 className="pf-3d-title">Cinco años de producción,<br />en una sola pantalla.</h2>
-          </ContainerAnimated>
-        </ContainerStagger>
-
-        <FlythroughIntro piezas={VUELO_3D} className="pf-fly" />
       </div>
 
       {/* ── GALERÍA — capítulos que pasan solos, todo reproduciéndose ── */}
