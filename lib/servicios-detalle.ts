@@ -840,6 +840,7 @@ export const DETALLE: Record<string, DetalleServicio> = {
     cierre: "¿Vendes lo mismo que tu competencia y no se nota la diferencia?",
     lidera: ["manuel", "julio"],
     mockup: { tipo: "media", src: "/videos/comercial-04.mp4", poster: "/images/portfolio/posters/comercial-04.jpg", etiqueta: "Comercial IA · WIN Internet" },
+    vsl: { src: "/videos/vsl/vsl-05-spot-publicitario-ia.mp4", poster: "/images/vsl/vsl-05-spot-publicitario-ia.jpg", titulo: "El set vacío", duracion: "4:16" },
     oferta: "Spots dirigidos plano por plano, no generados al azar",
     promesa:
       "Que tu marca se vea a la altura de lo que cobras, con un spot que nadie más tiene y el contenido del mes con la misma línea visual — sin rodaje, sin locación y sin esperar meses.",
