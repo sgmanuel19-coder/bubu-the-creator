@@ -1013,6 +1013,7 @@ export const DETALLE: Record<string, DetalleServicio> = {
     cierre: "¿Tienes una feria o un evento corporativo en agenda?",
     lidera: ["roberth"],
     mockup: { tipo: "media", src: "/videos/trad-coberturas-02.mp4", poster: "/images/portfolio/posters/trad-coberturas-02.jpg", etiqueta: "Cobertura de evento" },
+    vsl: { src: "/videos/vsl/vsl-06-eventos-corporativos.mp4", poster: "/images/vsl/vsl-06-eventos-corporativos.jpg", titulo: "Los otros once meses", duracion: "3:34" },
     oferta: "Eventos corporativos pensados como contenido para semanas",
     promesa:
       "Que tu feria siga trabajando después de que se apagan las luces — sin coordinar cinco proveedores y sin quedarte con una carpeta de fotos sin editar.",
