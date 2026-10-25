@@ -1211,6 +1211,7 @@ export const DETALLE: Record<string, DetalleServicio> = {
     cierre: "¿Y si tu cliente entendiera tu producto jugando?",
     lidera: ["julio"],
     mockup: { tipo: "juego" },
+    vsl: { src: "/videos/vsl/vsl-07-videojuegos-a-medida.mp4", poster: "/images/vsl/vsl-07-videojuegos-a-medida.jpg", titulo: "Insert coin", duracion: "3:17" },
     oferta: "Juegos interactivos: gente que participa, no que mira",
     promesa:
       "Que la gente se detenga en tu stand, juegue y entienda tu producto sin leer un folleto — con una pieza que vuelves a usar en la siguiente feria.",
