@@ -1388,6 +1388,7 @@ export const DETALLE: Record<string, DetalleServicio> = {
     cierre: "¿Tu equipo prueba IA y todo sale genérico?",
     lidera: ["manuel", "julio"],
     mockup: { tipo: "programa" },
+    vsl: { src: "/videos/vsl/vsl-08-capacitacion-ia.mp4", poster: "/images/vsl/vsl-08-capacitacion-ia.jpg", titulo: "El mismo molde", duracion: "3:21" },
     oferta: "Tu equipo sale con el sistema funcionando",
     promesa:
       "Que tu equipo produzca con IA piezas que se parecen a tu marca — sin depender de un proveedor para cada pieza y sin un curso grabado que nadie termina.",
