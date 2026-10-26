@@ -197,15 +197,53 @@ function Media({ src, poster, etiqueta, onAbrir }: { src: string; poster: string
   );
 }
 
-export default function ServicioMockup({ m, onAbrirMedia }: { m: Mockup; onAbrirMedia?: () => void }) {
+// ── Reel de comerciales: corre solo en silencio, uno tras otro ──
+// Cada pieza conserva su formato (4:3 o 16:9) sobre su propio póster
+// desenfocado, así no se recorta nada. Tocar el video lo abre con sonido.
+type PiezaReel = { src: string; poster: string; etiqueta: string };
+
+function Reel({ piezas, onAbrir }: { piezas: PiezaReel[]; onAbrir?: (p: PiezaReel) => void }) {
+  const [i, setI] = useState(0);
+  const p = piezas[i];
+  return (
+    <div className="mk-win mk-media mk-reel">
+      <button type="button" className="mk-media-in" onClick={() => onAbrir?.(p)} aria-label={`Reproducir con sonido: ${p.etiqueta}`}>
+        <Image src={p.poster} alt="" fill priority={i === 0} sizes="560px" className="mk-reel-fondo" aria-hidden />
+        <video
+          key={p.src}
+          src={p.src}
+          poster={p.poster}
+          muted
+          autoPlay
+          playsInline
+          onEnded={() => setI((n) => (n + 1) % piezas.length)}
+        />
+        <span className="mk-media-play" aria-hidden><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor" /></svg></span>
+        <span className="mk-media-tag">{p.etiqueta}</span>
+      </button>
+      <ol className="mk-reel-lista">
+        {piezas.map((x, k) => (
+          <li key={x.src}>
+            <button type="button" className={k === i ? "on" : ""} aria-current={k === i} onClick={() => setI(k)}>
+              {x.etiqueta.split(" · ")[0]}
+            </button>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+export default function ServicioMockup({ m, onAbrirMedia }: { m: Mockup; onAbrirMedia?: (p: PiezaReel) => void }) {
   switch (m.tipo) {
+    case "reel": return <Reel piezas={m.piezas} onAbrir={onAbrirMedia} />;
     case "ads": return <Ads />;
     case "seo": return <Seo />;
     case "web": return <Web />;
     case "tienda": return <Tienda />;
     case "juego": return <Juego />;
     case "programa": return <Programa />;
-    case "media": return <Media src={m.src} poster={m.poster} etiqueta={m.etiqueta} onAbrir={onAbrirMedia} />;
+    case "media": return <Media src={m.src} poster={m.poster} etiqueta={m.etiqueta} onAbrir={onAbrirMedia && (() => onAbrirMedia(m))} />;
   }
 }
 

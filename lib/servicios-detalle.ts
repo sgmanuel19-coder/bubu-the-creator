@@ -49,7 +49,8 @@ export type Lider = "manuel" | "julio" | "roberth";
 // el rótulo "vista de ejemplo, no datos reales"; la de medio es pieza real.
 export type Mockup =
   | { tipo: "ads" | "seo" | "web" | "tienda" | "juego" | "programa" }
-  | { tipo: "media"; src: string; poster: string; etiqueta: string };
+  | { tipo: "media"; src: string; poster: string; etiqueta: string }
+  | { tipo: "reel"; piezas: { src: string; poster: string; etiqueta: string }[] };
 
 export type Destacado =
   | {
@@ -839,7 +840,16 @@ export const DETALLE: Record<string, DetalleServicio> = {
     pregunta: "¿Por qué un spot publicitario tradicional cuesta tanto y tarda meses?",
     cierre: "¿Vendes lo mismo que tu competencia y no se nota la diferencia?",
     lidera: ["manuel", "julio"],
-    mockup: { tipo: "media", src: "/videos/comercial-04.mp4", poster: "/images/portfolio/posters/comercial-04.jpg", etiqueta: "Comercial IA · WIN Internet" },
+    mockup: {
+      tipo: "reel",
+      piezas: [
+        { src: "/videos/comercial-12.mp4", poster: "/images/portfolio/posters/comercial-12.jpg", etiqueta: "WIN Internet" },
+        { src: "/videos/comercial-13.mp4", poster: "/images/portfolio/posters/comercial-13.jpg", etiqueta: "Pepsi" },
+        { src: "/videos/comercial-14.mp4", poster: "/images/portfolio/posters/comercial-14.jpg", etiqueta: "Lacoste" },
+        { src: "/videos/comercial-11.mp4", poster: "/images/portfolio/posters/comercial-11.jpg", etiqueta: "Red Wing" },
+        { src: "/videos/comercial-01.mp4", poster: "/images/portfolio/posters/comercial-01.jpg", etiqueta: "Smart System Perú" },
+      ],
+    },
     vsl: { src: "/videos/vsl/vsl-05-spot-publicitario-ia.mp4", poster: "/images/vsl/vsl-05-spot-publicitario-ia.jpg", titulo: "El set vacío", duracion: "4:16" },
     oferta: "Spots dirigidos plano por plano, no generados al azar",
     promesa:

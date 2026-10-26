@@ -2728,6 +2728,15 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
 /* Panel de Google Ads */
 .mk-kpis{ display:grid;grid-template-columns:1fr 1fr;gap:8px; }
 .mk-kpi{ padding:12px;border-radius:10px;border:1px solid rgba(244,240,222,.08); }
+/* Reel de comerciales (spot publicitario): cada pieza en su formato sobre su póster desenfocado */
+.mk-reel .mk-reel-fondo{ filter:blur(18px) brightness(.45);scale:1.15; }
+.mk-reel .mk-media-in video{ z-index:1;object-fit:contain; }
+.mk-reel .mk-media-play{ opacity:0;transition:opacity .3s,background-color .3s,scale .3s; }
+.mk-reel .mk-media-in:hover .mk-media-play{ opacity:1; }
+.mk-reel-lista{ display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:12px 14px 2px;list-style:none; }
+.mk-reel-lista button{ padding:6px 11px;border-radius:999px;border:1px solid rgba(244,240,222,.14);background:none;color:rgba(244,240,222,.6);font-family:var(--sd-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:color .25s,border-color .25s; }
+.mk-reel-lista button:hover{ color:var(--cream); }
+.mk-reel-lista button.on{ color:#fff;border-color:rgb(var(--sd-a)); }
 .mk-kpi i{ display:block;height:8px;border-radius:5px;background:linear-gradient(90deg,rgb(var(--sd-a)),rgba(var(--sd-a),.3)); }
 .mk-chart{ margin-top:10px;padding:12px;border-radius:10px;border:1px solid rgba(244,240,222,.08);color:rgb(var(--sd-a)); }
 .mk-chart svg{ display:block;width:100%;height:70px; }

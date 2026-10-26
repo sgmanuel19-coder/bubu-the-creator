@@ -376,7 +376,6 @@ export default function ServicioDetalle({
   const [verPend, setVerPend] = useState(false);
 
   const relacionados = d.relacionados.ids.map(porId).filter((x): x is Servicio => Boolean(x));
-  const media = d.mockup.tipo === "media" ? d.mockup : null;
   const largoH1 = `${d.h1} ${d.h1Acento}`.length;
 
   return (
@@ -456,7 +455,7 @@ export default function ServicioDetalle({
               <div className="sd-hero-mock">
                 <ServicioMockup
                   m={d.mockup}
-                  onAbrirMedia={media ? () => setAbierta({ tipo: "video", src: media.src, poster: media.poster, titulo: media.etiqueta, formato: "16/9" }) : undefined}
+                  onAbrirMedia={(p) => setAbierta({ tipo: "video", src: p.src, poster: p.poster, titulo: p.etiqueta, formato: "16/9" })}
                 />
               </div>
             </div>
