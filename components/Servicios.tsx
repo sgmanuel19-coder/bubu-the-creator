@@ -13,6 +13,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { SITE } from "@/lib/constants";
 import { AREAS, SERVICIOS, SERVICIOS_STACK, SITUACIONES, type AreaId, type Servicio } from "@/lib/servicios";
+import { eventoMeta } from "@/lib/meta/evento";
+
+/** VSL general: los ocho servicios y por cuál empezar */
+const VSL_GENERAL = { src: "/videos/vsl/vsl-09-servicios.mp4", poster: "/images/vsl/vsl-09-servicios.jpg", duracion: "11:00" };
 
 function precioLinea(s: Servicio): { texto: string; definido: boolean } {
   if (!s.precio) return { texto: "Inversión a cotizar", definido: false };
@@ -191,6 +195,22 @@ export default function Servicios() {
           </nav>
         </div>
       </header>
+
+      {/* ── VSL GENERAL: los ocho servicios explicados en un video ── */}
+      <section className="container-base sv-vsl" aria-label="Video: los ocho servicios de Resuelto">
+        <span className="sv-eyebrow">Los ocho servicios en video · {VSL_GENERAL.duracion}</span>
+        <h2>Qué hacemos y <span className="sv-grad">por cuál te conviene empezar</span></h2>
+        <div className="sv-vsl-frame">
+          <video
+            src={VSL_GENERAL.src}
+            poster={VSL_GENERAL.poster}
+            controls
+            playsInline
+            preload="none"
+            onPlay={() => eventoMeta("ViewContent", { contentName: "Servicios · VSL general" })}
+          />
+        </div>
+      </section>
 
       {/* ── LAS TRES ÁREAS ── */}
       {AREA_IDS.map((a) => {

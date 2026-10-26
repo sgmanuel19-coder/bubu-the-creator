@@ -892,6 +892,10 @@ a.sv-panel{ display:block;text-decoration:none;color:inherit; }
 .sv-area-n{ font-size:clamp(3.5rem,7vw,6rem);font-weight:900;line-height:.8;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.2px rgba(26,128,255,.55); }
 .sv-area-head h2{ margin-top:10px;font-size:clamp(1.4rem,2.4vw,2rem);font-weight:800;letter-spacing:-.025em;line-height:1.12;color:var(--sv-cream);text-wrap:balance; }
 .sv-area-head p{ font-size:15px;line-height:1.65;color:var(--sv-muted);font-weight:300; }
+.sv-vsl{ padding-top:clamp(56px,8vw,104px);padding-bottom:clamp(8px,2vw,24px); }
+.sv-vsl h2{ margin-top:14px;font-size:clamp(1.8rem,3.6vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;max-width:24ch;color:var(--sv-cream);text-wrap:balance; }
+.sv-vsl-frame{ position:relative;margin-top:32px;aspect-ratio:16/9;overflow:hidden;border-radius:18px;border:1px solid var(--sv-line);background:#0b0b09;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(26,128,255,.18); }
+.sv-vsl-frame video{ display:block;width:100%;height:100%;object-fit:cover; }
 .sv-sit{ padding-top:110px;padding-bottom:20px; }
 .sv-sit h2{ margin-top:14px;font-size:clamp(1.8rem,3.6vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;max-width:22ch;color:var(--sv-cream);text-wrap:balance; }
 .sv-sit-sub{ margin-top:16px;max-width:620px;font-size:15.5px;line-height:1.65;color:var(--sv-muted);font-weight:300; }
@@ -2724,10 +2728,6 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
 .mk-media-play svg{ width:20px;height:20px;margin-left:3px; }
 .mk-media-in:hover .mk-media-play{ background:rgb(var(--sd-a));scale:1.06; }
 .mk-media-tag{ position:absolute;left:14px;bottom:12px;z-index:2;font-family:var(--sd-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.85); }
-
-/* Panel de Google Ads */
-.mk-kpis{ display:grid;grid-template-columns:1fr 1fr;gap:8px; }
-.mk-kpi{ padding:12px;border-radius:10px;border:1px solid rgba(244,240,222,.08); }
 /* Reel de comerciales (spot publicitario): cada pieza en su formato sobre su póster desenfocado */
 .mk-reel .mk-reel-fondo{ filter:blur(18px) brightness(.45);scale:1.15; }
 .mk-reel .mk-media-in video{ z-index:1;object-fit:contain; }
@@ -2737,6 +2737,10 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
 .mk-reel-lista button{ padding:6px 11px;border-radius:999px;border:1px solid rgba(244,240,222,.14);background:none;color:rgba(244,240,222,.6);font-family:var(--sd-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:color .25s,border-color .25s; }
 .mk-reel-lista button:hover{ color:var(--cream); }
 .mk-reel-lista button.on{ color:#fff;border-color:rgb(var(--sd-a)); }
+
+/* Panel de Google Ads */
+.mk-kpis{ display:grid;grid-template-columns:1fr 1fr;gap:8px; }
+.mk-kpi{ padding:12px;border-radius:10px;border:1px solid rgba(244,240,222,.08); }
 .mk-kpi i{ display:block;height:8px;border-radius:5px;background:linear-gradient(90deg,rgb(var(--sd-a)),rgba(var(--sd-a),.3)); }
 .mk-chart{ margin-top:10px;padding:12px;border-radius:10px;border:1px solid rgba(244,240,222,.08);color:rgb(var(--sd-a)); }
 .mk-chart svg{ display:block;width:100%;height:70px; }
