@@ -32,7 +32,7 @@ const WA_MSG =
   "Hola, vi el video de la Masterclass de Creatividad Publicitaria IA y quiero saber cómo entrar.";
 
 function waLink(): string {
-  return `https://wa.me/51932844074?text=${encodeURIComponent(WA_MSG)}`;
+  return `https://wa.me/51936529753?text=${encodeURIComponent(WA_MSG)}`;
 }
 
 function CtaBlock({ label, sub }: { label: string; sub?: string }) {

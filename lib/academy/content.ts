@@ -2038,7 +2038,7 @@ export const BOVEDA_BASE: RecursoBoveda[] = [
 export const TALLER = {
   nombre: "Masterclass de Creatividad Publicitaria IA",
   marca: "RESUELTO Academy",
-  whatsapp: "https://wa.me/51932844074",
+  whatsapp: "https://wa.me/51936529753",
 
   // ── Asistente virtual (personaje pixel art, 100% offline) ──
   asistente: {
