@@ -125,7 +125,7 @@ const orgSchema = {
     "@type": "ContactPoint",
     "contactType": "customer service",
     "availableLanguage": "Spanish",
-    "url": "https://wa.me/51932844074",
+    "url": "https://wa.me/51936529753",
   },
   "sameAs": [
     "https://www.instagram.com/bubu_thecreator",
