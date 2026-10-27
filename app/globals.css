@@ -1048,7 +1048,8 @@ a.sv-panel{ display:block;text-decoration:none;color:inherit; }
 .hm-vsl-section{ padding-top:0;padding-bottom:4rem;text-align:center; }
 .hm-vsl-wrap{ max-width:900px;margin:0 auto; }
 .hm-vsl-frame{ position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 0 0 1px rgba(244,240,222,0.1),0 32px 80px rgba(0,0,0,0.5); }
-.hm-vsl-frame iframe{ position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px; }
+.hm-vsl-frame iframe,.hm-vsl-frame video{ position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px; }
+.hm-vsl-frame video{ object-fit:cover;background:#0b0b09; }
 .hm-vsl-section .hm-cta-row{ justify-content:center; }
 .hm-vsl-section .hm-cred{ justify-content:center; }
 .hm-vsl-section .hm-scrollcue{ margin:20px auto 0; }

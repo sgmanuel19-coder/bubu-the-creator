@@ -12,6 +12,7 @@ import {
 import { SITE } from "@/lib/constants";
 import { AREAS, SERVICIOS, type AreaId } from "@/lib/servicios";
 import { CLIENTES, logoAlto } from "@/lib/clientes";
+import { eventoMeta } from "@/lib/meta/evento";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -351,11 +352,15 @@ export default function Home() {
           className="hm-vsl-wrap"
         >
           <div className="hm-vsl-frame">
-            <iframe
-              src="https://www.youtube.com/embed/30bVmigalKQ?rel=0&modestbranding=1&cc_load_policy=0"
-              title="Resuelto — Video de presentación"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
+            {/* VSL general: los ocho servicios y por cuál empezar (la misma de /servicios) */}
+            <video
+              src="/videos/vsl/vsl-09-servicios.mp4"
+              poster="/images/vsl/vsl-09-servicios.jpg"
+              title="Resuelto — Los ocho servicios en video"
+              controls
+              playsInline
+              preload="none"
+              onPlay={() => eventoMeta("ViewContent", { contentName: "Inicio · VSL general" })}
             />
           </div>
         </motion.div>
