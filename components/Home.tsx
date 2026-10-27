@@ -376,7 +376,7 @@ export default function Home() {
             <a className="hm-btn" href="/casos">Ver el trabajo <i>→</i></a>
           </Magnetic>
           <Magnetic>
-            <a className="hm-btn-outline" href={waLink("Hola, vi su página web y quisiera agendar una llamada para cotizar mi proyecto.")} target="_blank" rel="noopener noreferrer">
+            <a className="hm-btn-outline" href={waLink("Hola, vi su página web y quisiera agendar una llamada para cotizar mi proyecto.")} data-loc="hero" target="_blank" rel="noopener noreferrer">
               Hablar por WhatsApp
             </a>
           </Magnetic>
@@ -519,7 +519,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.45, ease: EASE }}
           >
             <Magnetic>
-              <a className="hm-btn hm-btn-lg" href={waLink("Hola, vi su página web y quisiera agendar una llamada para cotizar mi proyecto.")} target="_blank" rel="noopener noreferrer">
+              <a className="hm-btn hm-btn-lg" href={waLink("Hola, vi su página web y quisiera agendar una llamada para cotizar mi proyecto.")} data-loc="cierre" target="_blank" rel="noopener noreferrer">
                 Hablemos por WhatsApp <i>→</i>
               </a>
             </Magnetic>

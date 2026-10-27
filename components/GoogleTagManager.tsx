@@ -3,9 +3,9 @@ import Script from "next/script";
 /**
  * Google Tag Manager — contenedor GTM-NSGQG23V.
  *
- * Desde GTM se dispara Google Analytics 4 (y cualquier otro tag futuro),
- * así que este es el único snippet que vive en el código: los tags se
- * gestionan en la interfaz de GTM, no aquí.
+ * El contenedor GTM está instalado para tags futuros. GA4 se carga por
+ * separado en GoogleAnalytics.tsx y el contenedor publicado está vacío;
+ * no añadir otra etiqueta GA4 aquí mientras siga activo el GA4 directo.
  *
  * ⚠️ La CSP de next.config.ts debe permitir www.googletagmanager.com en
  *    script-src (contenedor) y en frame-src (iframe del <noscript>).

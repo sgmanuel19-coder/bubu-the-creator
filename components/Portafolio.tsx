@@ -440,6 +440,7 @@ function EscalaExactitud() {
                 de dónde salió, sin tener que redactar nada. */}
             <a
               className="pf-scale-cta"
+              data-loc="portafolio"
               href={`${SITE.links.whatsapp}?text=${encodeURIComponent(
                 "Hola, vengo del portafolio y quiero cotizar un proyecto."
               )}`}
@@ -864,7 +865,7 @@ export default function Portafolio() {
         <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
           <h2>Tu marca puede<br />producir así.</h2>
           <p>Contenido, comerciales y video de producto con IA — con el criterio de años produciendo para marcas líderes.</p>
-          <a className="pf-btn" href={SITE.links.whatsapp} target="_blank" rel="noopener noreferrer">
+          <a className="pf-btn" href={SITE.links.whatsapp} data-loc="cierre" target="_blank" rel="noopener noreferrer">
             Hablemos por WhatsApp →
           </a>
         </div>

@@ -116,7 +116,7 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
           {/* CTA — oculto en modo minimal */}
           {!minimal && (
             <div className="hidden md:flex">
-              <a href={SITE.links.whatsapp} className="btn-glow text-sm py-2.5 px-6" target="_blank" rel="noopener noreferrer">
+              <a href={SITE.links.whatsapp} data-loc="header" className="btn-glow text-sm py-2.5 px-6" target="_blank" rel="noopener noreferrer">
                 Hablemos <span className="ml-1">→</span>
               </a>
             </div>
@@ -159,6 +159,7 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
             ))}
             <a
               href={SITE.links.whatsapp}
+              data-loc="header_mobile"
               onClick={() => setMenuOpen(false)}
               className="btn-glow mt-2 justify-center text-sm py-3 px-6"
               target="_blank"

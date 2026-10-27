@@ -166,6 +166,7 @@ export default function Nosotros() {
         <motion.a
           className="ns-cta-link"
           href={waLink("¡Hola! Tengo una idea y quiero conversarla con Resuelto.")}
+          data-loc="cierre"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, y: 14 }}
