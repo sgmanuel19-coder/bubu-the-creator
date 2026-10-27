@@ -5,6 +5,7 @@ import CursorTrail from "@/components/CursorTrail";
 import ScrollProgress from "@/components/ScrollProgress";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
 import FacebookPixel from "@/components/FacebookPixel";
+import WhatsAppMeasurement from "@/components/WhatsAppMeasurement";
 
 /**
  * UI global de la landing (cursor, progreso, cookies, píxel).
@@ -24,6 +25,7 @@ export default function LandingChrome() {
       <ScrollProgress />
       <CursorTrail />
       <CookieConsentBanner />
+      <WhatsAppMeasurement />
       {/* El píxel de Meta vivía solo en /sistemas-ia; al convertir esa ruta
           en redirect dejó de dispararse en TODO el sitio. Va aquí para que
           cubra la landing completa. Se auto-desactiva sin consentimiento de

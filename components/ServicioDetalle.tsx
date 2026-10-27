@@ -370,8 +370,6 @@ export default function ServicioDetalle({
     setNivel(n);
     document.getElementById("configurador")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  const contacto = (origen: string) => eventoMeta("Contact", { contentName: `${s.title} · ${origen}` });
-
   // Pendientes (solo revisión)
   const [verPend, setVerPend] = useState(false);
 
@@ -434,9 +432,10 @@ export default function ServicioDetalle({
                   <a
                     className="sv-btn sd-btn"
                     href={waLink(`Hola, quiero cotizar ${s.title}.`)}
+                    data-loc="hero"
+                    data-service={s.id}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => contacto("hero")}
                   >
                     Cotizar por WhatsApp →
                   </a>
@@ -765,9 +764,10 @@ export default function ServicioDetalle({
             <a
               className="sd-orden-btn"
               href={waLink(mensaje)}
+              data-loc="configurador"
+              data-service={s.id}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => contacto(`configurador · nivel ${nivel}`)}
             >
               Enviar orden por WhatsApp →
             </a>
@@ -785,9 +785,10 @@ export default function ServicioDetalle({
             <a
               className="sd-btn-ghost"
               href={waLink(`Hola, tengo una pregunta sobre ${s.title}.`)}
+              data-loc="faq"
+              data-service={s.id}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => contacto("faq")}
             >
               Preguntar por WhatsApp →
             </a>
@@ -842,9 +843,10 @@ export default function ServicioDetalle({
             <a
               className="sv-btn sd-btn"
               href={waLink(`Hola, quiero cotizar ${s.title}.`)}
+              data-loc="cierre"
+              data-service={s.id}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => contacto("cierre")}
             >
               Hablemos por WhatsApp →
             </a>

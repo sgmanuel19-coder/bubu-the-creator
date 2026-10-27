@@ -60,7 +60,14 @@ export default function FacebookPixel() {
       const enlace = el as HTMLAnchorElement | null;
       const href = enlace?.href;
       if (!href) return;
-      if (!href.includes('wa.me') && !href.includes('whatsapp.com')) return;
+      // Un enlace para compartir contenido no es un contacto comercial.
+      let destino: URL;
+      try {
+        destino = new URL(href);
+      } catch {
+        return;
+      }
+      if (destino.hostname !== 'wa.me' || destino.pathname !== '/51936529753') return;
 
       const eventId = `lead.${Date.now()}.${Math.random().toString(36).slice(2, 10)}`;
       // La ruta permite separar en Events Manager los leads que vienen de

@@ -298,7 +298,7 @@ export default function Servicios() {
         <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
           <h2>¿No sabes qué servicio necesitas?<br />Te ayudamos.</h2>
           <p>Cuéntanos qué vendes y a quién. Te respondemos en el día con una propuesta cerrada.</p>
-          <a className="sv-btn" href={SITE.links.whatsapp} target="_blank" rel="noopener noreferrer">
+          <a className="sv-btn" href={SITE.links.whatsapp} data-loc="cierre" target="_blank" rel="noopener noreferrer">
             Hablemos por WhatsApp →
           </a>
         </div>
