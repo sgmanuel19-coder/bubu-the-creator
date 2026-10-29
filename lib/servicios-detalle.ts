@@ -1109,7 +1109,7 @@ export const DETALLE: Record<string, DetalleServicio> = {
       {
         tipo: "pendiente", medio: "video", formato: "16/9",
         titulo: "After movie de feria",
-        detalle: "El evento completo en 60 a 90 segundos, horizontal. Ideal: Z-Link en Expo Agua 2026.",
+        detalle: "El evento completo en 60 a 90 segundos, horizontal.",
       },
       { tipo: "video", src: "/videos/trad-coberturas-02.mp4", poster: "/images/portfolio/posters/trad-coberturas-02.jpg", titulo: "Cobertura de evento", formato: "9/16" },
       { tipo: "video", src: "/videos/trad-coberturas-03.mp4", poster: "/images/portfolio/posters/trad-coberturas-03.jpg", titulo: "Cobertura de evento", formato: "9/16" },
@@ -1163,7 +1163,7 @@ export const DETALLE: Record<string, DetalleServicio> = {
         ],
       },
     ],
-    notaPaquetes: "Los tres bloques salen del acuerdo con Z-Link. Cada propuesta dice qué ejecuta nuestro equipo y qué un proveedor especializado.",
+    notaPaquetes: "Los tres bloques se arman a la medida de tu feria. Cada propuesta dice qué ejecuta nuestro equipo y qué un proveedor especializado.",
     variables: [
       { id: "dias", label: "Días de evento", opciones: ["1", "2 a 3", "Más de 3"] },
       { id: "bloques", label: "Bloques", multiple: true, opciones: ["Cobertura", "Activación del stand", "Contenido post-evento"] },
