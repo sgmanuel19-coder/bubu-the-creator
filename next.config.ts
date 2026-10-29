@@ -107,6 +107,9 @@ const nextConfig: NextConfig = {
       // une a la página del servicio. El archivo app/produccion-ia sigue en
       // el repo para poder revertir quitando esta línea.
       { source: "/produccion-ia", destination: "/servicios/spot-publicitario-ia", permanent: true },
+      // No hay página de contacto: el contacto es por WhatsApp desde cada servicio.
+      // Temporal (307) por si luego se crea /contacto.
+      { source: "/contacto", destination: "/servicios", permanent: false },
     ];
   },
   async headers() {
