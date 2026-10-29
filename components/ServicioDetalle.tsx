@@ -880,6 +880,19 @@ export default function ServicioDetalle({
         </div>
       )}
 
+      {/* ── WhatsApp flotante (solo móvil): la cabecera móvil esconde el CTA en el menú ── */}
+      <a
+        className="sd-wa-flot"
+        href={waLink(`Hola, quiero cotizar ${s.title}.`)}
+        data-loc="flotante"
+        data-service={s.id}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Cotizar por WhatsApp"
+      >
+        Cotizar por WhatsApp
+      </a>
+
       {/* ── Visor ── */}
       {abierta && abierta.tipo !== "pendiente" && (
         <div className="sd-lb" role="dialog" aria-modal="true" aria-label={abierta.titulo} onClick={() => setAbierta(null)}>

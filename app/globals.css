@@ -2204,7 +2204,7 @@ body:has(.ics-root) .beams-bg{ display:none; }
 .sd-scan::before{ content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(var(--sd-a),.9) 18%,#fff 50%,rgba(var(--sd-a),.9) 82%,transparent 100%);box-shadow:0 0 22px 3px rgba(var(--sd-a),.55);animation:sdScan 2s cubic-bezier(.65,0,.35,1) .25s both; }
 .sd-scan::after{ content:"";position:absolute;left:0;right:0;top:0;height:160px;translate:0 -100%;background:linear-gradient(transparent,rgba(var(--sd-a),.08));animation:sdScan 2s cubic-bezier(.65,0,.35,1) .25s both; }
 @keyframes sdScan{ 0%{ top:0;opacity:0 } 5%{ opacity:1 } 88%{ opacity:1 } 100%{ top:100%;opacity:0 } }
-.sd-hero-reveal{ flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:118px 0 54px;animation:sdReveal 2s cubic-bezier(.65,0,.35,1) .25s backwards; }
+.sd-hero-reveal{ flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:118px 0 54px;animation:sdReveal .7s cubic-bezier(.65,0,.35,1) backwards; }
 @keyframes sdReveal{ from{ clip-path:inset(0 0 100% 0) } to{ clip-path:inset(0 0 0 0) } }
 
 .sd-hero-in{ position:relative;width:100%; }
@@ -2423,7 +2423,7 @@ body:has(.ics-root) .beams-bg{ display:none; }
   .sd-gal{ --h:200px; }
 }
 @media (max-width:640px){
-  .sd-hero-reveal{ padding:120px 0 40px; }
+  .sd-hero-reveal{ padding:120px 0 40px;animation:none; }
   .sd-hero-meta{ margin-bottom:30px; }
   .sd-hero-acts{ grid-template-columns:1fr;margin-top:44px; }
   .sd-hero-acts li + li{ border-left:0;border-top:1px solid var(--sd-line2); }
@@ -2848,4 +2848,21 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
 @media (max-width:860px){
   .hm-casos{ grid-template-columns:1fr;gap:20px; }
   .hm-casos-info{ flex-direction:column;align-items:flex-start; }
+}
+
+/* ── WhatsApp flotante de las landings (solo móvil) ── */
+.sd-wa-flot{ display:none; }
+@media (max-width:767px){
+  .sd-wa-flot{ display:flex;align-items:center;justify-content:center;position:fixed;z-index:9998;left:16px;right:16px;bottom:calc(12px + var(--barra-cookies, 0px));height:50px;border-radius:12px;background:#1A80FF;color:#fff;font:600 15px/1 Inter,sans-serif;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.45); }
+  .sd .emb-nav{ bottom:calc(74px + var(--barra-cookies, 0px)); }
+  .sd{ padding-bottom:74px; }
+}
+
+/* ── Banner de cookies compacto en móvil: no debe tapar la primera pantalla ── */
+@media (max-width:640px){
+  .cookie-barra{ padding:10px 16px !important;gap:8px !important; }
+  .cookie-barra-txt{ font-size:.72rem !important; }
+  .cookie-barra-extra{ display:none; }
+  .cookie-barra-btns{ width:100%; }
+  .cookie-barra-btns button{ flex:1;padding:8px 10px !important; }
 }

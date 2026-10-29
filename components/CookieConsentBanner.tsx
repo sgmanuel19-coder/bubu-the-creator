@@ -46,6 +46,7 @@ export default function CookieConsentBanner() {
       ref={caja}
       role="dialog"
       aria-label="Preferencias de cookies"
+      className="cookie-barra"
       style={{
         position: 'fixed',
         bottom: 0,
@@ -64,6 +65,7 @@ export default function CookieConsentBanner() {
       }}
     >
       <p
+        className="cookie-barra-txt"
         style={{
           margin: 0,
           fontSize: '0.8rem',
@@ -75,11 +77,11 @@ export default function CookieConsentBanner() {
       >
         Usamos cookies de análisis y publicidad (Meta Pixel) para mejorar la
         experiencia y medir conversiones.{' '}
-        <span style={{ color: 'rgba(248,248,242,0.4)' }}>
+        <span className="cookie-barra-extra" style={{ color: 'rgba(248,248,242,0.4)' }}>
           El Pixel de Meta solo se activa si aceptas.
         </span>
       </p>
-      <div style={{ display: 'flex', gap: 10, flexShrink: 0 }}>
+      <div className="cookie-barra-btns" style={{ display: 'flex', gap: 10, flexShrink: 0 }}>
         <button
           onClick={() => respond('rejected')}
           style={{
