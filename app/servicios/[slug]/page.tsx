@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServicioDetalle from "@/components/ServicioDetalle";
 import { SERVICIOS } from "@/lib/servicios";
-import { DETALLE } from "@/lib/servicios-detalle";
+import { DETALLE, type DetalleServicio } from "@/lib/servicios-detalle";
 import { SITE } from "@/lib/constants";
 
 // Mono técnica de la capa de metadatos (folio, niveles, órdenes). Se carga
@@ -18,6 +18,22 @@ const mono = IBM_Plex_Mono({
 });
 
 const BASE = "https://www.resueltoagency.com";
+
+// En producción el componente esconde lo de revisión, pero todo lo que recibe
+// viaja igual en el payload de Next y se lee en el código fuente. Por eso se
+// filtra aquí, en el servidor: notas internas, casos y pasos sin autorización
+// y piezas pendientes no salen de producción.
+function paraPublico(d: DetalleServicio): DetalleServicio {
+  const destacado =
+    d.destacado?.tipo === "pasos" && d.destacado.requiereAutorizacion ? undefined : d.destacado;
+  return {
+    ...d,
+    pendientes: [],
+    casos: d.casos.filter((c) => !c.requiereAutorizacion),
+    portafolio: d.portafolio.filter((p) => p.tipo !== "pendiente"),
+    destacado,
+  };
+}
 
 export function generateStaticParams() {
   return SERVICIOS.filter((s) => DETALLE[s.id]).map((s) => ({ slug: s.id }));
@@ -42,8 +58,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ServicioPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const i = SERVICIOS.findIndex((x) => x.id === slug);
-  const d = DETALLE[slug];
-  if (i === -1 || !d) notFound();
+  const revision = process.env.VERCEL_ENV !== "production";
+  const base = DETALLE[slug];
+  if (i === -1 || !base) notFound();
+  const d = revision ? base : paraPublico(base);
 
   const s = SERVICIOS[i];
   const siguiente = SERVICIOS[(i + 1) % SERVICIOS.length];
@@ -91,7 +109,7 @@ export default async function ServicioPage({ params }: { params: Promise<{ slug:
         d={d}
         total={SERVICIOS.length}
         siguiente={siguiente}
-        revision={process.env.VERCEL_ENV !== "production"}
+        revision={revision}
       />
       <Footer />
     </main>
