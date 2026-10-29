@@ -25,13 +25,8 @@ export default function WhatsAppMeasurement() {
       if (url.hostname !== "wa.me" || url.pathname !== `/${RESUELTO_PHONE}`) return;
 
       // El clic describe una intención de contacto; no prueba que se envió el mensaje.
-      let consentAccepted = false;
-      try {
-        consentAccepted = localStorage.getItem("cookie-consent") === "accepted";
-      } catch {
-        return;
-      }
-      if (!consentAccepted) return;
+      // Se envía siempre: Consent Mode decide si va con cookies o como ping sin
+      // cookies (Google lo usa para modelar conversiones de quien no aceptó).
 
       const pagePath = window.location.pathname;
       const service = anchor.dataset.service || pagePath.match(/^\/servicios\/([^/]+)/)?.[1];
