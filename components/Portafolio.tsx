@@ -1,7 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import PortfolioGallery, { PortfolioPreview, usePageVisible } from "./PortfolioGallery";
+import galleryStyles from "./PortfolioGallery.module.css";
 import { SITE } from "@/lib/constants";
 import { CLIENTES, logoAlto } from "@/lib/clientes";
 import {
@@ -11,29 +13,16 @@ import {
   DESIGN_IMAGES,
   embedSrc,
   isVideoFile,
-  autoThumb,
-  previewSrc,
-  type Chapter,
   type Piece,
   type ImagePiece,
 } from "@/lib/portafolio";
 
-// sizes tuned a la grilla densa de 5/4/3/2 columnas (ver breakpoints en globals.css)
-const GRID_SIZES = "(max-width:560px) 50vw, (max-width:900px) 33vw, (max-width:1100px) 25vw, 20vw";
 const FILMSTRIP_SIZES = "(max-width:900px) 70vw, 420px";
 const DESIGN_SIZES = "(max-width:560px) 45vw, (max-width:900px) 30vw, 250px";
 
-// Cada capítulo se queda en pantalla este tiempo antes de pasar al siguiente.
-const ROTATE_MS = 11000;
 
 const BLUE = "#1A80FF";
 
-
-const PlayIcon = () => (
-  <svg viewBox="0 0 24 24" style={{ width: 18, height: 18, fill: BLUE, marginLeft: 3 }}>
-    <path d="M8 5v14l11-7z" />
-  </svg>
-);
 
 const ZoomIcon = () => (
   <svg viewBox="0 0 24 24" style={{ width: 18, height: 18, fill: "none", stroke: BLUE, strokeWidth: 2 }}>
@@ -41,21 +30,6 @@ const ZoomIcon = () => (
     <line x1="21" y1="21" x2="16.65" y2="16.65" />
   </svg>
 );
-
-// ── Modo liviano: sin autoplay si el usuario pidió menos movimiento o
-//    está ahorrando datos. Cae a la miniatura estática de siempre. ──
-function useLiteMode() {
-  const [lite, setLite] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    const read = () => setLite(mq.matches || conn?.saveData === true);
-    read();
-    mq.addEventListener("change", read);
-    return () => mq.removeEventListener("change", read);
-  }, []);
-  return lite;
-}
 
 // ── ¿El elemento está a la vista? Con esto solo se descargan y reproducen
 //    los clips que el visitante realmente tiene en pantalla. ──
@@ -75,196 +49,21 @@ function useInView<T extends HTMLElement>(threshold = 0.25) {
   return { ref, inView };
 }
 
-// ── Presupuesto de reproducción ────────────────────────────────────
-// Sin tope, una grilla de 5 columnas llega a decodificar 10-14 clips a la
-// vez y el scroll se traba en equipos de gama media. Solo corren los
-// primeros que entran en cuadro; los demás esperan turno mostrando su
-// póster, y toman el cupo apenas se libera uno.
-const MAX_CLIPS = 6;
-
-/* Dos presupuestos independientes: la intro 3D y la galería nunca comparten
-   pantalla, así que sumar sus cupos no aumenta cuántos clips se decodifican
-   a la vez. Con un cupo único, la intro dejaba la mitad de sus piezas
-   congeladas en el póster y se veía rota. */
-function crearPresupuesto(max: number) {
-  let active = 0;
-  const waiting = new Set<() => void>();
-  return {
-    acquire(grant: () => void) {
-      if (active < max) {
-        active++;
-        return true;
-      }
-      waiting.add(grant);
-      return false;
-    },
-    release(grant: () => void) {
-      // Si seguía en la cola nunca ocupó cupo: alcanza con sacarlo.
-      if (waiting.delete(grant)) return;
-      active--;
-      const next = waiting.values().next();
-      if (!next.done) {
-        waiting.delete(next.value);
-        active++;
-        next.value();
-      }
-    },
-  };
-}
-
-const clipBudget = crearPresupuesto(MAX_CLIPS);
-
-// ── Tarjeta de video: el clip corre solo, en silencio y en bucle (como un gif).
-//    Clic abre el master completo con audio y controles en el lightbox. ──
-function GalleryCard({
-  piece,
-  index,
-  onOpen,
-  iaBadge = true,
-  paused = false,
-}: {
-  piece: Piece;
-  index: number;
-  onOpen: (p: Piece) => void;
-  iaBadge?: boolean;
-  paused?: boolean;
-}) {
-  const thumb = autoThumb(piece);
-  const preview = previewSrc(piece);
-  const clickable = Boolean(piece.url);
-  const lite = useLiteMode();
-
-  const { ref, inView } = useInView<HTMLButtonElement>(0.2);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  // Una vez montado el <video> lo dejamos montado: al volver a scrollear
-  // el clip ya está en caché y arranca instantáneo.
-  const [mounted, setMounted] = useState(false);
-  const [playing, setPlaying] = useState(false);
-  const [seen, setSeen] = useState(false);
-
-  useEffect(() => {
-    if (inView) setSeen(true);
-  }, [inView]);
-
-  const wantPlay = inView && !lite && !paused && Boolean(preview);
-  const [granted, setGranted] = useState(false);
-
-  useEffect(() => {
-    if (!wantPlay) return;
-    const grant = () => setGranted(true);
-    if (clipBudget.acquire(grant)) setGranted(true);
-    return () => {
-      clipBudget.release(grant);
-      setGranted(false);
-    };
-  }, [wantPlay]);
-
-  const shouldPlay = wantPlay && granted;
-
-  useEffect(() => {
-    if (shouldPlay) setMounted(true);
-  }, [shouldPlay]);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (shouldPlay) {
-      v.play().catch(() => {});
-    } else {
-      v.pause();
-      setPlaying(false);
-    }
-  }, [shouldPlay, mounted]);
-
-  return (
-    <button
-      ref={ref}
-      type="button"
-      className={`pf-card${piece.wide ? " pf-card-wide" : ""}${clickable ? "" : " pf-card-empty"}${playing ? " pf-card-live" : ""}${seen ? " in" : ""}`}
-      style={{
-        gridColumn: piece.wide ? "span 2" : undefined,
-        aspectRatio: piece.wide ? "16/9" : "9/16",
-        animationDelay: `${(index % 5) * 0.05}s`,
-      }}
-      onClick={() => clickable && onOpen(piece)}
-      aria-label={clickable ? `Reproducir: ${piece.label} — ${piece.client}` : "Espacio disponible"}
-    >
-      {iaBadge && <span className="pf-ia">Hecho con IA</span>}
-      {thumb ? (
-        <Image src={thumb} alt={`${piece.label} — ${piece.client}`} fill sizes={GRID_SIZES}
-          style={{ objectFit: "cover" }} loading="lazy" />
-      ) : clickable ? (
-        <div className="pf-card-grad" />
-      ) : null}
-
-      {mounted && preview && (
-        <video
-          ref={videoRef}
-          className="pf-card-video"
-          src={preview}
-          muted
-          loop
-          playsInline
-          autoPlay
-          preload="none"
-          tabIndex={-1}
-          aria-hidden="true"
-          disablePictureInPicture
-          onPlaying={() => setPlaying(true)}
-        />
-      )}
-
-      <span className="pf-card-play"><PlayIcon /></span>
-      {clickable && <span className="pf-card-hint">Ver completo</span>}
-      <div className="pf-tag">
-        <b>{piece.label}</b>
-        <span>{piece.url ? piece.client : "+ agregar"}</span>
-      </div>
-    </button>
-  );
-}
-
-// ── Carrusel de diseño: dos líneas que corren en sentidos opuestos.
-//    Cada fila se triplica para que el bucle no deje hueco ni en monitores
-//    anchos (la animación recorre un tercio del track y vuelve a empezar,
-//    así que el corte nunca entra en pantalla). Pasar el mouse frena solo
-//    la fila que estás mirando, para poder hacer clic sin perseguir la pieza.
-function DesignMarquee({ images, onOpen }: { images: ImagePiece[]; onOpen: (p: ImagePiece) => void }) {
-  const half = Math.ceil(images.length / 2);
-  const rows = [images.slice(0, half), images.slice(half)];
-  // Fuera de cuadro las dos cintas se frenan: son 42 imágenes desplazándose
-  // y no tiene sentido pagar ese trabajo mientras nadie las mira.
-  const { ref, inView } = useInView<HTMLDivElement>(0);
-
-  return (
-    <div className={`pf-dstrip${inView ? "" : " paused"}`} ref={ref}>
-      {rows.map((row, r) => (
-        <div className="pf-dstrip-row" key={r}>
-          <div className={`pf-dstrip-track${r === 1 ? " rev" : ""}`}>
-            {[0, 1, 2].map((rep) =>
-              row.map((img, i) => (
-                <button
-                  type="button"
-                  className="pf-ds-item"
-                  key={`${r}-${rep}-${i}`}
-                  onClick={() => img.src && onOpen(img)}
-                  // Las copias 2 y 3 son decorativas: el lector de pantalla
-                  // solo debería encontrar cada pieza una vez.
-                  aria-hidden={rep > 0}
-                  tabIndex={rep > 0 ? -1 : undefined}
-                  aria-label={`Ver pieza de diseño ${i + 1}`}
-                >
-                  <Image src={img.src as string} alt={rep === 0 ? img.label : ""} fill
-                    sizes={DESIGN_SIZES} style={{ objectFit: "cover" }} loading="lazy" />
-                  <span className="pf-ds-zoom"><ZoomIcon /></span>
-                </button>
-              ))
-            )}
-          </div>
-        </div>
-      ))}
+// A fixed grid keeps each design still and avoids duplicating image requests.
+function DesignGrid({ images, onOpen }: { images: ImagePiece[]; onOpen: (p: ImagePiece) => void }) {
+  const [limit, setLimit] = useState(6);
+  return <div className="container-base">
+    <div className={galleryStyles.designGrid}>
+      {images.slice(0, limit).map((img, i) => <button type="button" key={img.src ?? i}
+        onClick={() => img.src && onOpen(img)} aria-label={`Ver pieza de diseño ${i + 1}`}>
+        <Image src={img.src as string} alt={img.label} fill sizes={DESIGN_SIZES} style={{objectFit:"contain"}} loading="lazy" />
+        <span aria-hidden="true"><ZoomIcon /></span>
+      </button>)}
     </div>
-  );
+    <div className={galleryStyles.more}><span>{Math.min(limit, images.length)} de {images.length} piezas</span>
+      {limit < images.length && <button type="button" onClick={() => setLimit(v => v + 6)}>Mostrar más +</button>}
+    </div>
+  </div>;
 }
 
 // ── Escala de precio: por qué dos piezas no cuestan igual. Va antes del
@@ -311,28 +110,13 @@ const ESCALA = [
 // desenfocada: se ve la pieza tal como se entregó y la tarjeta igual queda
 // pareja con las otras dos.
 function LevelClip({ src, poster, play }: { src: string; poster: string; play: boolean }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    if (play) setMounted(true);
-  }, [play]);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (play) v.play().catch(() => {});
-    else v.pause();
-  }, [play, mounted]);
-
+  const visible = usePageVisible();
   return (
     <div className="pf-lv-shot">
       <Image src={poster} alt="" fill sizes="(max-width:900px) 90vw, 420px"
         className="pf-lv-blur" aria-hidden="true" />
-      {mounted && (
-        <video ref={videoRef} className="pf-lv-clip" src={src} muted loop playsInline
-          autoPlay preload="none" tabIndex={-1} aria-hidden="true" disablePictureInPicture />
-      )}
+      <Image src={poster} alt="" fill sizes="(max-width:900px) 90vw, 420px" style={{objectFit:"contain"}} />
+      {play && visible && <PortfolioPreview src={src} className="pf-lv-clip" />}
     </div>
   );
 }
@@ -372,13 +156,13 @@ function LevelCard({
   );
 }
 
-function EscalaExactitud() {
+function EscalaExactitud({ paused }: { paused: boolean }) {
   // Retráctil y cerrada por arranque: quien viene a ver trabajo no se topa
   // con un bloque de precios, y quien se está preguntando cuánto sale lo
   // abre. Los clips solo se descargan cuando se abre.
   const { ref, inView } = useInView<HTMLElement>(0);
   const [open, setOpen] = useState(false);
-  const live = inView && open;
+  const live = inView && open && !paused;
 
   return (
     <section className={`container-base pf-scale${live ? " on" : ""}`} ref={ref}>
@@ -456,190 +240,6 @@ function EscalaExactitud() {
   );
 }
 
-// Agrupa las piezas por marca conservando el orden de aparición. Solo se
-// usa cuando el capítulo tiene más de una marca: si todas comparten cliente,
-// un encabezado repetido no aporta nada y se muestra la grilla de siempre.
-function agruparPorMarca(pieces: Piece[]) {
-  const orden: string[] = [];
-  const mapa = new Map<string, Piece[]>();
-  for (const p of pieces) {
-    if (!mapa.has(p.client)) {
-      mapa.set(p.client, []);
-      orden.push(p.client);
-    }
-    mapa.get(p.client)!.push(p);
-  }
-  return orden.map((marca) => ({ marca, piezas: mapa.get(marca)! }));
-}
-
-// ── Carrusel de capítulos: los grupos pasan solos, con barra de progreso.
-//    Se frena solo cuando el visitante pasa el mouse por la grilla, cuando
-//    la sección no está a la vista, con la pestaña en segundo plano o con
-//    el lightbox abierto — nunca se le mueve el piso al que está mirando. ──
-function ChapterCarousel({
-  chapters,
-  onOpen,
-  iaBadge = true,
-  cream = false,
-  paused = false,
-  eyebrow,
-  title,
-  showDesc = true,
-  intervalMs = ROTATE_MS,
-}: {
-  chapters: Chapter[];
-  onOpen: (p: Piece) => void;
-  iaBadge?: boolean;
-  cream?: boolean;
-  paused?: boolean;
-  eyebrow?: string;
-  title?: ReactNode;
-  showDesc?: boolean;
-  intervalMs?: number;
-}) {
-  const [idx, setIdx] = useState(0);
-  const [auto, setAuto] = useState(true);
-  const [hover, setHover] = useState(false);
-  const [tabVisible, setTabVisible] = useState(true);
-  const lite = useLiteMode();
-
-  // threshold 0: la grilla es mucho más alta que la ventana, así que un
-  // porcentaje del propio elemento nunca se alcanzaría en pantallas chicas.
-  const { ref: wrapRef, inView } = useInView<HTMLDivElement>(0);
-  const barRef = useRef<HTMLElement | null>(null);
-  const accRef = useRef(0);
-
-  const active = chapters[idx];
-  const running = auto && !hover && !paused && inView && tabVisible && !lite;
-
-  useEffect(() => {
-    const onVis = () => setTabVisible(!document.hidden);
-    document.addEventListener("visibilitychange", onVis);
-    return () => document.removeEventListener("visibilitychange", onVis);
-  }, []);
-
-  const go = useCallback((n: number) => {
-    accRef.current = 0;
-    setIdx(((n % chapters.length) + chapters.length) % chapters.length);
-  }, [chapters.length]);
-
-  // Progreso pintado con rAF directo sobre el DOM: la barra y el salto de
-  // capítulo comparten el mismo reloj, y no re-renderiza la grilla 60 veces
-  // por segundo con decenas de videos corriendo.
-  useEffect(() => {
-    if (barRef.current) barRef.current.style.transform = `scaleX(${accRef.current / intervalMs})`;
-    if (!running) return;
-    let raf = 0;
-    let last = performance.now();
-    const tick = (now: number) => {
-      accRef.current += now - last;
-      last = now;
-      const p = Math.min(accRef.current / intervalMs, 1);
-      if (barRef.current) barRef.current.style.transform = `scaleX(${p})`;
-      if (p >= 1) {
-        accRef.current = 0;
-        setIdx((i) => (i + 1) % chapters.length);
-        return;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [running, idx, intervalMs, chapters.length]);
-
-  const grupos = agruparPorMarca(active.pieces);
-
-  return (
-    <>
-      {eyebrow && (
-        <div className="pf-gal-head">
-          <div>
-            <span className={`pf-eyebrow${cream ? " pf-eyebrow-cream" : ""}`}>{eyebrow}</span>
-            {title && <h2>{title}</h2>}
-          </div>
-          {showDesc && <p className="pf-gal-desc" key={active.id}>{active.desc}</p>}
-        </div>
-      )}
-
-      <div
-        className="pf-carousel"
-        ref={wrapRef}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
-        <div className={`pf-tabs${cream ? " pf-tabs-cream" : ""}`} role="tablist" aria-label="Capítulos del portafolio">
-          {chapters.map((ch, i) => (
-            <button
-              key={ch.id}
-              role="tab"
-              aria-selected={idx === i}
-              className={`pf-tab${idx === i ? " on" : ""}`}
-              onClick={() => go(i)}
-            >
-              <span className="n">{ch.n}</span>
-              {ch.title}
-              {idx === i && (
-                <span className="pf-tab-prog" aria-hidden="true">
-                  <i ref={(el) => { barRef.current = el; }} />
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-
-        <div className="pf-carousel-ctl">
-          <span className="pf-cnum">
-            <b>{String(idx + 1).padStart(2, "0")}</b> / {String(chapters.length).padStart(2, "0")}
-          </span>
-          <span className="pf-cdots" aria-hidden="true">
-            {chapters.map((ch, i) => (
-              <i key={ch.id} className={idx === i ? "on" : undefined} />
-            ))}
-          </span>
-          <button className="pf-cbtn" onClick={() => go(idx - 1)} aria-label="Capítulo anterior">‹</button>
-          <button
-            className="pf-cbtn"
-            onClick={() => setAuto((a) => !a)}
-            aria-label={auto ? "Pausar el paso automático" : "Reanudar el paso automático"}
-          >
-            {auto ? "❚❚" : "▶"}
-          </button>
-          <button className="pf-cbtn" onClick={() => go(idx + 1)} aria-label="Capítulo siguiente">›</button>
-          <span className="pf-cmeta">{active.pieces.length} piezas</span>
-        </div>
-
-        {grupos.length > 1 ? (
-          <div className="pf-marcas" key={active.id}>
-            {grupos.map((g) => (
-              <section className="pf-marca" key={g.marca}>
-                <header className="pf-marca-head">
-                  <b>{g.marca}</b>
-                  <span>{g.piezas.length} {g.piezas.length === 1 ? "pieza" : "piezas"}</span>
-                </header>
-                {/* Tira compacta, no grilla: las tarjetas 16:9 en la grilla
-                    de 5 columnas ocupaban 2 columnas cada una y cada marca se
-                    comía una fila entera. Así los bloques fluyen al costado. */}
-                <div className="pf-marca-tiras">
-                  {g.piezas.map((p, i) => (
-                    <GalleryCard key={`${active.id}-${g.marca}-${i}`} piece={p} index={i}
-                      onOpen={onOpen} iaBadge={iaBadge} paused={paused} />
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
-        ) : (
-          <div className="pf-marca-tiras pf-tiras-solas" key={active.id}>
-            {active.pieces.map((p, i) => (
-              <GalleryCard key={`${active.id}-${i}`} piece={p} index={i} onOpen={onOpen} iaBadge={iaBadge} paused={paused} />
-            ))}
-          </div>
-        )}
-      </div>
-    </>
-  );
-}
-
 // ── Lightbox de video: reproduce la pieza en grande ──────────
 function Lightbox({ piece, onClose }: { piece: Piece; onClose: () => void }) {
   useEffect(() => {
@@ -707,11 +307,10 @@ export default function Portafolio() {
 
   return (
     <div className="pf">
-      {/* ── HERO — video de fondo con texto superpuesto ── */}
-      <header className="pf-hero pf-hero-video-mode">
-        <video className="pf-hero-video" src="/videos/portafolio-hero-v2.mp4"
-          poster="/images/portfolio/posters/portafolio-hero.jpg"
-          autoPlay muted loop playsInline preload="metadata" />
+      {/* ── HERO — portada estática y reel a demanda ── */}
+      <header className={`pf-hero pf-hero-video-mode ${galleryStyles.hero}`}>
+        <Image className="pf-hero-video" src="/images/portfolio/posters/portafolio-hero.jpg"
+          alt="" fill priority sizes="100vw" />
         <div className="pf-hero-shade" />
         <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
           <span className="pf-eyebrow">Portafolio — Resuelto Agency</span>
@@ -723,6 +322,10 @@ export default function Portafolio() {
             sobre <strong>7+ años de ejecución real</strong> para las marcas más grandes del Perú.
           </p>
 
+          <div className={galleryStyles.heroActions}>
+            <a href="#trabajo">Explorar el trabajo ↓</a>
+            <button type="button" onClick={() => setOpen({url:"/videos/portafolio-hero-v2.mp4",label:"Reel de RESUELTO",client:"RESUELTO Agency",wide:true})}>Ver reel ↗</button>
+          </div>
           {/* stats */}
           <div className="pf-stats">
             {[
@@ -736,21 +339,6 @@ export default function Portafolio() {
           </div>
         </div>
       </header>
-
-      {/* ── MARQUEE DE CATEGORÍAS ── */}
-      <div className="pf-marquee" aria-hidden="true">
-        <div className="pf-marquee-inner">
-          {[0, 1].map((rep) => (
-            <span key={rep}>
-              {CHAPTERS.map((ch) => (
-                <span className="pf-mq-item" key={`${rep}-${ch.id}`}>
-                  {ch.title} <i>●</i>
-                </span>
-              ))}
-            </span>
-          ))}
-        </div>
-      </div>
 
       {/* ── CLIENTES — los mismos logos reales del inicio (lib/clientes.ts),
           antes de todo el trabajo ── */}
@@ -766,18 +354,18 @@ export default function Portafolio() {
         </div>
       </div>
 
-      {/* ── GALERÍA — capítulos que pasan solos, todo reproduciéndose ── */}
+      {/* ── GALERÍA — categorías manuales y vistas previas a demanda ── */}
       <section className="container-base pf-gallery" id="trabajo">
-        <ChapterCarousel
+        <PortfolioGallery
           chapters={CHAPTERS}
           onOpen={setOpen}
           paused={anyOpen}
           eyebrow="El trabajo"
-          title={<>Piezas hechas<br />con IA.</>}
+          title={<>El trabajo, pieza a pieza.</>}
         />
       </section>
 
-      {/* ── DISEÑO GRÁFICO IA — doble carrusel a contramano ── */}
+      {/* ── DISEÑO GRÁFICO IA — grilla estable ── */}
       <section className="pf-gallery pf-design-sec">
         {/* Encabezado deliberadamente chico: el diseño gráfico acompaña, no
             compite con el video, que es lo que vende el portafolio. */}
@@ -788,8 +376,8 @@ export default function Portafolio() {
           </div>
         </div>
 
-        {/* A sangre: la línea cruza toda la pantalla, no la caja del texto. */}
-        <DesignMarquee images={DESIGN_IMAGES} onOpen={setOpenImage} />
+        {/* Cada diseño se muestra una sola vez, en una grilla estable. */}
+        <DesignGrid images={DESIGN_IMAGES} onOpen={setOpenImage} />
       </section>
 
       {/* Lightboxes */}
@@ -797,7 +385,7 @@ export default function Portafolio() {
       {openImage && <ImageLightbox piece={openImage} onClose={() => setOpenImage(null)} />}
 
       {/* ── CÓMO SE COTIZA — la escala de exactitud, justo antes del archivo ── */}
-      <EscalaExactitud />
+      <EscalaExactitud paused={anyOpen} />
 
       {/* ── ANTES DE LA IA — carrusel de casos + producción tradicional ── */}
       <section className="pf-archive">
@@ -809,10 +397,10 @@ export default function Portafolio() {
             retail premium, FMCG, banca y cine — dentro de agencias globales top-tier.
           </p>
 
-          {/* Carrusel animado — casos de éxito, clic para agrandar */}
-          <div className="pf-filmstrip pf-filmstrip-archive" aria-label="Casos de éxito — clic para agrandar">
-            <div className="pf-filmstrip-inner">
-              {[...CASE_IMAGES, ...CASE_IMAGES].map((img, i) => (
+          {/* Casos de éxito: desplazamiento manual, clic para agrandar. */}
+          <div className={`pf-filmstrip pf-filmstrip-archive ${galleryStyles.caseScroll}`} aria-label="Casos de éxito — clic para agrandar">
+            <div className={`pf-filmstrip-inner ${galleryStyles.caseStrip}`}>
+              {CASE_IMAGES.map((img, i) => (
                 <button
                   type="button"
                   className="pf-fs-item"
@@ -828,12 +416,10 @@ export default function Portafolio() {
             </div>
           </div>
 
-          <ChapterCarousel
+          <PortfolioGallery
             chapters={TRADITIONAL_CHAPTERS}
             onOpen={setOpen}
             paused={anyOpen}
-            iaBadge={false}
-            cream
           />
 
 
