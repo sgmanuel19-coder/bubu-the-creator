@@ -47,10 +47,13 @@ function LineReveal({ children, delay = 0 }: { children: React.ReactNode; delay?
 function Counter({ to, suffix = "", duration = 1.6 }: { to: number; suffix?: string; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const [val, setVal] = useState(0);
+  // Arranca en el valor final: el HTML del servidor (lo que lee Google)
+  // muestra la cifra real y no "0". La animación parte de 0 al entrar en vista.
+  const [val, setVal] = useState(to);
 
   useEffect(() => {
     if (!inView) return;
+    setVal(0);
     let raf: number;
     const start = performance.now();
     const tick = (now: number) => {
