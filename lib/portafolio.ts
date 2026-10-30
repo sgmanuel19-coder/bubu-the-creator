@@ -201,6 +201,7 @@ export const TRADITIONAL_CHAPTERS: Chapter[] = [
     title: "Coberturas",
     desc: "Cobertura de eventos y rodajes grabada y producida de forma tradicional.",
     pieces: [
+      { url: "/videos/cobertura-1002.mp4", label: "Cobertura de evento", client: "Resuelto Agency" },
       { url: "/videos/trad-coberturas-01.mp4", label: "Cobertura", client: "Resuelto Agency" },
       { url: "/videos/trad-coberturas-02.mp4", label: "Cobertura", client: "Resuelto Agency" },
       { url: "/videos/trad-coberturas-03.mp4", label: "Cobertura", client: "Resuelto Agency" },
