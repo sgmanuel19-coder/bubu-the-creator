@@ -36,9 +36,9 @@ const BASE_URL = "https://www.resueltoagency.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: `${SITE.brandName} — Creación de Contenido con IA`,
+  title: `${SITE.brandName} — Agencia de marketing y publicidad con IA en Lima`,
   description:
-    "Videos con nivel cinematográfico generados con IA para empresas B2B. El nivel de una producción tradicional de $5,000–$50,000, entregado en días a una fracción del costo.",
+    "Spots y contenido con IA, eventos y ferias, páginas web, tiendas virtuales, Google Ads y SEO para empresas en Lima. Precio cerrado y entrega en semanas.",
   keywords: [
     "creación de contenido con IA",
     "videos con IA para empresas",
@@ -54,8 +54,8 @@ export const metadata: Metadata = {
   authors: [{ name: SITE.visibleName }],
   creator: SITE.brandName,
   openGraph: {
-    title: `${SITE.brandName} — Creación de Contenido con IA`,
-    description: "El nivel de una producción de $5,000–$50,000. Entregado en días. A una fracción del costo.",
+    title: `${SITE.brandName} — Agencia de marketing y publicidad con IA en Lima`,
+    description: "Spots y contenido con IA, eventos y ferias, páginas web, tiendas virtuales, Google Ads y SEO para empresas en Lima. Precio cerrado y entrega en semanas.",
     url: BASE_URL,
     siteName: SITE.brandName,
     type: "website",
@@ -65,14 +65,14 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: `${SITE.brandName} — Creación de Contenido con IA`,
+        alt: `${SITE.brandName} — Agencia de marketing y publicidad con IA en Lima`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.brandName} — Creación de Contenido con IA`,
-    description: "El nivel de una producción de $5,000–$50,000. Entregado en días. A una fracción del costo.",
+    title: `${SITE.brandName} — Agencia de marketing y publicidad con IA en Lima`,
+    description: "Spots y contenido con IA, eventos y ferias, páginas web, tiendas virtuales, Google Ads y SEO para empresas en Lima. Precio cerrado y entrega en semanas.",
     images: ["/opengraph-image"],
   },
   verification: {
@@ -112,7 +112,7 @@ const orgSchema = {
     "width": 512,
     "height": 512,
   },
-  "description": "Agencia de creación de contenido con IA en Lima, Perú. Videos con nivel cinematográfico generados con IA y automatización inteligente para empresas B2B.",
+  "description": "Agencia de marketing y publicidad con IA en Lima, Perú: spots y contenido de marca, eventos y ferias, páginas web, tiendas virtuales, Google Ads, SEO, videojuegos a medida y capacitación en IA.",
   "foundingDate": "2023",
   "email": "roberth@resueltoagency.com",
   "address": {
@@ -150,7 +150,7 @@ const websiteSchema = {
   "@type": "WebSite",
   "@id": "https://www.resueltoagency.com/#website",
   "url": "https://www.resueltoagency.com",
-  "name": "RESUELTO — Creación de Contenido con IA",
+  "name": "RESUELTO",
   "inLanguage": "es-PE",
   "publisher": {
     "@id": "https://www.resueltoagency.com/#organization",
