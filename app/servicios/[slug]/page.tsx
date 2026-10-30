@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import ServicioDetalle from "@/components/ServicioDetalle";
 import { SERVICIOS } from "@/lib/servicios";
 import { DETALLE, type DetalleServicio } from "@/lib/servicios-detalle";
-import { SITE } from "@/lib/constants";
 
 // Mono técnica de la capa de metadatos (folio, niveles, órdenes). Se carga
 // solo en estas páginas: el resto del sitio no la paga.
@@ -45,13 +44,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const d = DETALLE[slug];
   if (!s || !d) return {};
   const url = `${BASE}/servicios/${s.id}`;
-  // El título sale del H1, escrito sobre la tabla de palabras clave (doc 07 §0).
+  // El título sale de tituloSeo (doc 12) o, si falta, del H1 (doc 07 §0).
   const titulo = `${d.h1} ${d.h1Acento}`.replace(/\s+/g, " ").trim();
+  const title = d.tituloSeo ?? titulo;
+  const description = d.descripcionSeo ?? d.bajada;
   return {
-    title: `${titulo} | ${SITE.brandName}`,
-    description: d.bajada,
+    title: { absolute: title },
+    description,
     alternates: { canonical: url },
-    openGraph: { title: titulo, description: d.bajada, url },
+    openGraph: { title, description, url },
   };
 }
 

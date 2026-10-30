@@ -96,6 +96,10 @@ export type DetalleServicio = {
   h1: string;
   h1Acento: string; // remate del H1, en el color del servicio
   bajada: string;
+  // <title> y meta description: ≤ 60 y ≤ 155 caracteres, sin la marca
+  // (doc 12 de SEO). Si faltan, se usan el H1 y la bajada.
+  tituloSeo?: string;
+  descripcionSeo?: string;
   pregunta: string; // el problema, como pregunta
   cierre: string; // pregunta de cierre antes del CTA final
   lidera: Lider[];
@@ -148,6 +152,9 @@ export const DETALLE: Record<string, DetalleServicio> = {
   "google-ads": {
     h1: "Agencia de Google Ads en Lima:",
     h1Acento: "anuncios en Google para empresas",
+    tituloSeo: "Agencia de Google Ads en Lima para empresas",
+    descripcionSeo:
+      "Campañas en Google medidas hasta el contacto por WhatsApp. La cuenta queda a tu nombre, la pauta va directo a Google y ves el panel cuando quieras.",
     bajada:
       "Campañas que aparecen cuando tu cliente busca lo que vendes, medidas hasta el contacto por WhatsApp. La cuenta queda a tu nombre, la pauta se paga directo a Google y el panel lo ves cuando quieras.",
     pregunta: "¿Por qué tus anuncios en Google traen clics y no ventas?",
@@ -317,6 +324,9 @@ export const DETALLE: Record<string, DetalleServicio> = {
     borrador: true,
     h1: "Agencia SEO en Lima:",
     h1Acento: "posicionamiento SEO para empresas",
+    tituloSeo: "Agencia SEO en Lima: posicionamiento para empresas",
+    descripcionSeo:
+      "Trabajamos las búsquedas que hace tu cliente antes de comprar y el estado técnico de tu web, para que Google te muestre y cada visita llegue al contacto.",
     bajada:
       "Trabajamos las búsquedas que hace tu cliente antes de comprar y el estado técnico de tu web, para que Google te muestre y cada visita tenga un camino al contacto.",
     pregunta: "¿Por qué tu empresa no aparece en Google cuando te buscan?",
@@ -483,6 +493,9 @@ export const DETALLE: Record<string, DetalleServicio> = {
   "diseno-paginas-web": {
     h1: "Diseño de páginas web",
     h1Acento: "en Lima para empresas",
+    tituloSeo: "Diseño de páginas web en Lima para empresas",
+    descripcionSeo:
+      "Landings y webs corporativas con estándar de agencia, listas para posicionar desde el código y medidas para saber qué visita termina en contacto.",
     bajada:
       "Landings y webs corporativas con estándar visual de agencia, listas para posicionar desde el código y medidas para que sepas qué visita terminó en contacto.",
     pregunta: "¿Por qué tu página web no te trae clientes?",
@@ -662,6 +675,9 @@ export const DETALLE: Record<string, DetalleServicio> = {
     borrador: true,
     h1: "Tienda virtual para tu empresa:",
     h1Acento: "ecommerce y catálogo online en Lima",
+    tituloSeo: "Tienda virtual, ecommerce y catálogo online en Lima",
+    descripcionSeo:
+      "Una ficha por producto, filtros por categoría y el cierre que le sirve a tu negocio: pago en línea o cotización por WhatsApp con el producto ya elegido.",
     bajada:
       "Una ficha por producto, filtros por categoría y la forma de cerrar la venta que le sirve a tu negocio: pago en línea o cotización por WhatsApp con el producto ya elegido.",
     pregunta: "¿Vendes por WhatsApp e Instagram y todavía no tienes tienda virtual?",
@@ -835,6 +851,9 @@ export const DETALLE: Record<string, DetalleServicio> = {
   "spot-publicitario-ia": {
     h1: "Spot publicitario con IA:",
     h1Acento: "productora audiovisual en Lima",
+    tituloSeo: "Spot publicitario con IA: productora audiovisual Lima",
+    descripcionSeo:
+      "Spots con acabado de cine y el contenido del mes que los acompaña, sin set ni rodaje. Dirigidos plano por plano y entregados en semanas.",
     bajada:
       "Spots con acabado de cine y el contenido del mes que los acompaña, sin set ni rodaje. Dirigidos plano por plano y entregados en semanas.",
     pregunta: "¿Por qué un spot publicitario tradicional cuesta tanto y tarda meses?",
@@ -1017,6 +1036,9 @@ export const DETALLE: Record<string, DetalleServicio> = {
   "eventos-corporativos": {
     h1: "Eventos corporativos y ferias en Lima:",
     h1Acento: "cobertura, activaciones de marca y juegos para tu stand",
+    tituloSeo: "Eventos corporativos y ferias en Lima: cobertura y stand",
+    descripcionSeo:
+      "Cubrimos la feria de punta a punta, armamos la activación de tu stand y lo convertimos en contenido para las semanas siguientes, con un solo interlocutor.",
     bajada:
       "Cubrimos la feria de punta a punta, armamos la activación de tu stand y convertimos todo en contenido para las semanas siguientes. Un solo interlocutor del montaje a la entrega.",
     pregunta: "¿Por qué tu stand deja de rendir cuando termina la feria?",
@@ -1215,6 +1237,9 @@ export const DETALLE: Record<string, DetalleServicio> = {
     borrador: true,
     h1: "Videojuegos a medida para eventos y ferias:",
     h1Acento: "juegos interactivos para activaciones de marca",
+    tituloSeo: "Videojuegos a medida para eventos y ferias",
+    descripcionSeo:
+      "Juegos para tu stand, simuladores y capacitación gamificada en pantalla táctil, navegador o celular. La mecánica se diseña alrededor de tu objetivo.",
     bajada:
       "Juegos para tu stand, simuladores y capacitación gamificada que funcionan en pantalla táctil, navegador o celular. La mecánica se diseña alrededor de tu objetivo.",
     pregunta: "¿Por qué la gente pasa de largo frente a tu stand?",
@@ -1392,6 +1417,9 @@ export const DETALLE: Record<string, DetalleServicio> = {
   "capacitacion-ia": {
     h1: "Capacitación en IA para empresas:",
     h1Acento: "in-company y en vivo",
+    tituloSeo: "Capacitación en IA para empresas: in-company y en vivo",
+    descripcionSeo:
+      "Cuatro sesiones en vivo sobre tu propia marca: tu equipo sale con su sistema de IA armado, una pieza terminada y la grilla del mes siguiente.",
     bajada:
       "Un programa de cuatro sesiones en vivo sobre tu propia marca. Tu equipo no sale con apuntes: sale con su sistema construido, una pieza terminada y la grilla del mes siguiente.",
     pregunta: "¿Por qué lo que tu equipo hace con IA sale genérico?",
