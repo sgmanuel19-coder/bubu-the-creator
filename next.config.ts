@@ -12,12 +12,17 @@ const csp = [
   // para marcar una lección como vista solo cuando de verdad se reprodujo.
   // www.googletagmanager.com: contenedor GTM-NSGQG23V, que a su vez carga
   // GA4 desde ese mismo host. www.google-analytics.com cubre el gtag directo.
-  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${devEval} blob: https://connect.facebook.net https://va.vercel-scripts.com https://www.youtube.com https://www.googletagmanager.com https://www.google-analytics.com`,
+  // googleads.g.doubleclick.net, www.googleadservices.com y www.google.com: la
+  // etiqueta de Google Ads (AW-) que va dentro de la etiqueta de Google; el
+  // diagnóstico de GA4 la marcaba bloqueada por esta CSP (30-oct-2026).
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${devEval} blob: https://connect.facebook.net https://va.vercel-scripts.com https://www.youtube.com https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.google.com`,
   "worker-src 'self' blob:",
   // googletagmanager.com en frame-src: el <noscript> de GTM es un iframe.
   // www.facebook.com: el Pixel abre un iframe oculto contra ese host; sin el
   // la consola se llena de violaciones de CSP en cada carga.
-  "frame-src https://www.instagram.com https://www.youtube.com https://www.youtube-nocookie.com https://www.tiktok.com https://drive.google.com https://www.googletagmanager.com https://www.facebook.com",
+  // td.doubleclick.net y bid.g.doubleclick.net: iframes de conversión y
+  // remarketing de Google Ads.
+  "frame-src https://www.instagram.com https://www.youtube.com https://www.youtube-nocookie.com https://www.tiktok.com https://drive.google.com https://www.googletagmanager.com https://www.facebook.com https://td.doubleclick.net https://bid.g.doubleclick.net",
   "frame-ancestors 'self'",
   "object-src 'none'",
   "base-uri 'self'",
