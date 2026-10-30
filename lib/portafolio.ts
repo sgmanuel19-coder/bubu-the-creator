@@ -43,19 +43,26 @@ export const CHAPTERS: Chapter[] = [
     title: "Comerciales IA",
     desc: "Spots y campañas generados con IA: nivel de producción cinematográfica sin rodaje ni set.",
     pieces: [
-      { url: "/videos/comercial-04.mp4", label: "Comercial IA", client: "WIN Internet", wide: true },
-      { url: "/videos/comercial-05.mp4", label: "Comercial IA", client: "WIN Internet", wide: true },
-      { url: "/videos/comercial-06.mp4", label: "Comercial IA", client: "WIN Internet", wide: true },
-      { url: "/videos/comercial-07.mp4", label: "Comercial IA", client: "WIN Internet", wide: true },
+      { url: "/videos/comercial-04.mp4", label: "Content · Fibrin", client: "WIN Internet · Content · Fibrin", wide: true },
+      { url: "/videos/comercial-05.mp4", label: "Content · Fibrin", client: "WIN Internet · Content · Fibrin", wide: true },
+      { url: "/videos/comercial-06.mp4", label: "Content · Fibrin", client: "WIN Internet · Content · Fibrin", wide: true },
+      { url: "/videos/comercial-07.mp4", label: "Content · Fibrin", client: "WIN Internet · Content · Fibrin", wide: true },
       // Vertical de origen; su póster ya viene compuesto a 16:9 con relleno
       // desenfocado, así la miniatura no recorta nada.
-      { url: "/videos/comercial-09.mp4", label: "Comercial IA", client: "WIN Internet", wide: true },
+      { url: "/videos/comercial-09.mp4", label: "Content · Fibrin", client: "WIN Internet · Content · Fibrin", wide: true },
+      { url: "/videos/win-fibrin-l1max.mp4", label: "Fibrin · Torneo Clausura L1MAX", client: "WIN Internet · Content · Fibrin" },
+      { url: "/videos/win-fibrin-0915.mp4", label: "Content · Fibrin", client: "WIN Internet · Content · Fibrin" },
+      { url: "/videos/win-fibrin-halloween.mp4", label: "Fibrin · Halloween", client: "WIN Internet · Content · Fibrin" },
+      { url: "/videos/win-huawei-naufrago.mp4", label: "Huawei × WIN · El náufrago", client: "WIN Internet · Comerciales de branding", wide: true },
+      { url: "/videos/win-huawei-branding.mp4", label: "Huawei × WIN · Cobranding", client: "WIN Internet · Comerciales de branding", wide: true },
       { url: "/videos/comercial-01.mp4", label: "Comercial IA", client: "Smart System Perú", wide: true },
       // 4:3 de origen, póster y clip compuestos a 16:9 con relleno desenfocado.
       { url: "/videos/comercial-11.mp4", label: "Comercial IA", client: "Red Wing", wide: true },
       // 08 también es 4:3 de origen, mismo tratamiento.
       { url: "/videos/comercial-08.mp4", label: "Comercial IA", client: "Call It Spring", wide: true },
       { url: "/videos/comercial-10.mp4", label: "Comercial IA", client: "Samsung", wide: true },
+      { url: "/videos/rolex-comercial.mp4", label: "Comercial IA · Rolex", client: "Rolex" },
+      { url: "/videos/lacoste-comercial.mp4", label: "Comercial IA · Lacoste", client: "Lacoste", wide: true },
     ],
   },
   {
@@ -93,6 +100,7 @@ export const CHAPTERS: Chapter[] = [
     title: "Content Storytelling IA",
     desc: "Narrativa de marca y b-rolls cinematográficos generados con IA que construyen percepción premium.",
     pieces: [
+      { url: "/videos/win-tesla-storytelling.mp4", label: "Storytelling IA · Tesla trend", client: "WIN Internet" },
       { url: "/videos/story-01.mp4", label: "Storytelling IA", client: "Resuelto Agency" },
       { url: "/videos/story-02.mp4", label: "Storytelling IA", client: "Resuelto Agency" },
       { url: "/videos/story-03.mp4", label: "Storytelling IA", client: "Resuelto Agency" },
@@ -115,6 +123,7 @@ export const CHAPTERS: Chapter[] = [
     title: "Avatar IA",
     desc: "Avatares generados con IA que presentan, explican y venden — una cara digital consistente para la marca, sin cámara ni actor.",
     pieces: [
+      { url: "/videos/avatar-1014.mp4", label: "Avatar IA", client: "Resuelto Agency", wide: true },
       { url: "/videos/avatar-01.mp4", label: "Avatar IA", client: "Resuelto Agency" },
       { url: "/videos/avatar-02.mp4", label: "Avatar IA", client: "Resuelto Agency", wide: true },
       { url: "/videos/avatar-03.mp4", label: "Avatar IA", client: "Resuelto Agency", wide: true },
