@@ -96,7 +96,7 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
 
           {/* Desktop nav — oculto en modo minimal */}
           {!minimal && (
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -115,7 +115,7 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
 
           {/* CTA — oculto en modo minimal */}
           {!minimal && (
-            <div className="hidden md:flex">
+            <div className="hidden lg:flex">
               <a href={SITE.links.whatsapp} data-loc="header" className="btn-glow text-sm py-2.5 px-6" target="_blank" rel="noopener noreferrer">
                 Hablemos <span className="ml-1">→</span>
               </a>
@@ -125,7 +125,7 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
           {/* Mobile hamburger — oculto en modo minimal */}
           {!minimal && (
             <button
-              className="md:hidden flex flex-col gap-1.5 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-green/50 rounded"
+              className="lg:hidden flex flex-col gap-1.5 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-green/50 rounded"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={menuOpen}
@@ -141,7 +141,7 @@ export default function Navbar({ minimal = false }: { minimal?: boolean }) {
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            className="md:hidden border-t border-neon-green/10 py-6 flex flex-col gap-4 overflow-y-auto max-h-[calc(100dvh-4rem)]"
+            className="lg:hidden border-t border-neon-green/10 py-6 flex flex-col gap-4 overflow-y-auto max-h-[calc(100dvh-4rem)]"
           >
             {navLinks.map((link) => (
               <Link

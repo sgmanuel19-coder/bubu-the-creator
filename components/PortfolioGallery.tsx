@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { autoThumb, previewSrc, type Chapter, type Piece } from "@/lib/portafolio";
+import { mixBrands } from "@/lib/portfolio-selection";
 import styles from "./PortfolioGallery.module.css";
 
 // One budget shared by the gallery, archive and pricing examples.
@@ -115,7 +116,7 @@ export default function PortfolioGallery({ chapters, onOpen, paused = false, eye
   eyebrow?: string; title?: ReactNode;
 }) {
   const [category, setCategory] = useState(0);
-  const [brand, setBrand] = useState(0);
+  const [brand, setBrand] = useState(-1);
   const [limit, setLimit] = useState(6);
   const [lite, setLite] = useState(false);
   const pageVisible = usePageVisible();
@@ -128,8 +129,8 @@ export default function PortfolioGallery({ chapters, onOpen, paused = false, eye
   }, []);
   const chapter = chapters[category];
   const brands = [...new Set(chapter.pieces.map(p => p.client))];
-  const selected = brands[brand] ?? brands[0];
-  const pieces = chapter.pieces.filter(p => p.client === selected);
+  const selected = brand < 0 ? null : brands[brand];
+  const pieces = selected ? chapter.pieces.filter(p => p.client === selected) : mixBrands(chapter.pieces);
   const selectBrand = (index: number) => { setBrand(index); setLimit(6); };
   return (
     <div className={styles.gallery} data-portfolio-gallery>
@@ -137,7 +138,7 @@ export default function PortfolioGallery({ chapters, onOpen, paused = false, eye
         <p>Explora por especialidad y por marca. Abre cada pieza para verla completa con sonido.</p></header>}
       <nav className={styles.categories} aria-label="Especialidades del portafolio">
         {chapters.map((c, i) => <button key={c.id} type="button" aria-pressed={category === i}
-          onClick={() => { setCategory(i); setBrand(0); setLimit(6); }}>
+          onClick={() => { setCategory(i); setBrand(-1); setLimit(6); }}>
           <span>{c.title}</span><small>{String(c.pieces.length).padStart(2, "0")}</small>
         </button>)}
       </nav>
@@ -145,19 +146,23 @@ export default function PortfolioGallery({ chapters, onOpen, paused = false, eye
         <aside className={styles.sidebar}>
           <span className={styles.eyebrow}>Cliente / proyecto</span>
           <div className={styles.brandButtons}>
+            <button type="button" aria-pressed={selected === null} onClick={() => selectBrand(-1)}>
+              <span>Todas las marcas</span><b>{chapter.pieces.length}</b>
+            </button>
             {brands.map((name, i) => <button type="button" key={name} aria-pressed={selected === name}
               onClick={() => selectBrand(i)}><span>{name.split(" · ")[0]}
                 {name.includes(" · ") && <small>{name.split(" · ").slice(1).join(" · ")}</small>}</span>
               <b>{chapter.pieces.filter(p => p.client === name).length}</b></button>)}
           </div>
           <label className={styles.mobileSelect}><span className={styles.srOnly}>Cliente o proyecto</span>
-            <select value={brands.indexOf(selected)} onChange={e => selectBrand(Number(e.target.value))}>
+            <select value={selected ? brands.indexOf(selected) : -1} onChange={e => selectBrand(Number(e.target.value))}>
+              <option value={-1}>Todas las marcas</option>
               {brands.map((name, i) => <option key={name} value={i}>{name}</option>)}
             </select>
           </label>
         </aside>
         <div className={styles.results}>
-          <header className={styles.groupHeader}><div><h3>{selected}</h3><p>{chapter.desc}</p></div>
+          <header className={styles.groupHeader}><div><h3>{selected ?? "Todas las marcas"}</h3><p>{chapter.desc}</p></div>
             <span>{String(pieces.length).padStart(2, "0")} piezas</span></header>
           <div className={styles.grid} key={`${chapter.id}-${selected}`}>
             {pieces.slice(0, limit).map(p => <GalleryCard key={p.url ?? p.label} piece={p} onOpen={onOpen}
