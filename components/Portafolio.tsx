@@ -180,10 +180,9 @@ function GalleryCard({
     <button
       ref={ref}
       type="button"
-      className={`pf-card${piece.wide ? " pf-card-wide" : ""}${clickable ? "" : " pf-card-empty"}${playing ? " pf-card-live" : ""}${seen ? " in" : ""}`}
+      className={`pf-card${clickable ? "" : " pf-card-empty"}${playing ? " pf-card-live" : ""}${seen ? " in" : ""}`}
       style={{
-        gridColumn: piece.wide ? "span 2" : undefined,
-        aspectRatio: piece.wide ? "16/9" : "9/16",
+        aspectRatio: "1/1",
         animationDelay: `${(index % 5) * 0.05}s`,
       }}
       onClick={() => clickable && onOpen(piece)}
@@ -616,9 +615,7 @@ function ChapterCarousel({
                   <b>{g.marca}</b>
                   <span>{g.piezas.length} {g.piezas.length === 1 ? "pieza" : "piezas"}</span>
                 </header>
-                {/* Tira compacta, no grilla: las tarjetas 16:9 en la grilla
-                    de 5 columnas ocupaban 2 columnas cada una y cada marca se
-                    comía una fila entera. Así los bloques fluyen al costado. */}
+                {/* Miniaturas del mismo tamaño; el formato original se conserva al abrir. */}
                 <div className="pf-marca-tiras">
                   {g.piezas.map((p, i) => (
                     <GalleryCard key={`${active.id}-${g.marca}-${i}`} piece={p} index={i}

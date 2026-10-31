@@ -2112,14 +2112,9 @@ body:has(.ics-root) .beams-bg{ display:none; }
 .pf-marca:first-child .pf-marca-head b{ color:#8fc0ff; }
 
 .pf-marca-tiras{ display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px;margin-top:14px; }
-/* Tamaño de tarjeta: la pieza tiene que verse, no ser una miniatura. El tope
-   de las 16:9 está calculado para que cinco entren en una fila del
-   contenedor — es lo que permite que una marca con 5 piezas no se parta. */
-.pf-marca-tiras .pf-card{ width:clamp(140px,15vw,168px);grid-column:auto !important; }
-/* 234px es el tope calculado para que CINCO 16:9 entren en una fila del
-   contenedor (5×234 + 4×10 de gap ≈ 1210). Con 296 la marca de 5 piezas se
-   partía 4+1 y se veía rota. */
-.pf-marca-tiras .pf-card-wide{ width:clamp(190px,18vw,234px); }
+/* Todas las miniaturas tienen el mismo ancho, sin depender del formato del video.
+   El tope permite cinco tarjetas por fila en el contenedor de escritorio. */
+.pf-marca-tiras .pf-card{ width:clamp(190px,18vw,234px);grid-column:auto !important; }
 .pf-tiras-solas{ margin-top:22px;animation:pfSlideIn .5s cubic-bezier(.22,.61,.36,1); }
 
 @media (max-width:700px){
@@ -2128,7 +2123,7 @@ body:has(.ics-root) .beams-bg{ display:none; }
   /* Dos por fila. El descuento tiene que cubrir el gap entero (10px) más un
      margen para el redondeo: con -4px daban 338 en un contenedor de 335 y por
      3px se iban a una sola por fila. */
-  .pf-marca-tiras .pf-card,.pf-marca-tiras .pf-card-wide{ width:calc(50% - 6px); }
+  .pf-marca-tiras .pf-card{ width:calc(50% - 6px); }
 }
 
 /* ── PORTAFOLIO — diseño gráfico en segundo plano ─────────────────── */
