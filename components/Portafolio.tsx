@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import PortfolioLibrary from "./PortfolioLibrary";
 import PortfolioGallery, { PortfolioPreview, usePageVisible } from "./PortfolioGallery";
 import galleryStyles from "./PortfolioGallery.module.css";
 import { SITE } from "@/lib/constants";
@@ -308,7 +307,38 @@ export default function Portafolio() {
 
   return (
     <div className="pf">
-      <PortfolioLibrary onOpen={setOpen} paused={anyOpen} />
+      {/* ── HERO — portada estática y reel a demanda ── */}
+      <header className={`pf-hero pf-hero-video-mode ${galleryStyles.hero}`}>
+        <Image className="pf-hero-video" src="/images/portfolio/posters/portafolio-hero.jpg"
+          alt="" fill priority sizes="100vw" />
+        <div className="pf-hero-shade" />
+        <div className="container-base" style={{ position: "relative", zIndex: 2 }}>
+          <span className="pf-eyebrow">Portafolio — Resuelto Agency</span>
+          <h1 className="pf-h1">
+            Portafolio<br /><span className="pf-ia-text">Creativo.</span>
+          </h1>
+          <p className="pf-sub">
+            Comerciales, video de producto, UGC y storytelling producidos con IA generativa —
+            sobre <strong>7+ años de ejecución real</strong> para las marcas más grandes del Perú.
+          </p>
+
+          <div className={galleryStyles.heroActions}>
+            <a href="#trabajo">Explorar el trabajo ↓</a>
+            <button type="button" onClick={() => setOpen({url:"/videos/portafolio-hero-v2.mp4",label:"Reel de RESUELTO",client:"RESUELTO Agency",wide:true})}>Ver reel ↗</button>
+          </div>
+          {/* stats */}
+          <div className="pf-stats">
+            {[
+              { v: "5M+", l: "vistas generadas" },
+              { v: "20+", l: "marcas trabajadas" },
+              { v: "2000+", l: "piezas producidas" },
+              { v: "5+", l: "años de experiencia" },
+            ].map((s) => (
+              <div key={s.l}><b>{s.v}</b><span>{s.l}</span></div>
+            ))}
+          </div>
+        </div>
+      </header>
 
       {/* ── CLIENTES — los mismos logos reales del inicio (lib/clientes.ts),
           antes de todo el trabajo ── */}
