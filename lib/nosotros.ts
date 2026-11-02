@@ -41,7 +41,7 @@ export const SOCIOS: Socio[] = [
     accentRgb: "219,92,140",
     photo: "/images/equipo/julio.jpg",
     bio: "Dirige el arte y la identidad visual de cada proyecto — de la exploración con IA al acabado final — y construye las automatizaciones que hacen que los sistemas de la agencia trabajen solos.",
-    marcas: "Grimm Store — la tienda digital de videojuegos MOBA y ARTS más grande del mercado peruano · Kalimbo · hoteles, restaurantes y marcas de todo rubro",
+    marcas: "Grimm Store — la tienda digital de videojuegos MMORPG más grande del mercado peruano · EKICORP (hoteles) · Livoltek · Hexing · ZLink · Kalimbo · restaurantes y marcas de todo rubro",
   },
   {
     n: "03",
