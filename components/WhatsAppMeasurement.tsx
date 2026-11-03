@@ -22,8 +22,7 @@ const RESUELTO_PHONE = "51936529753";
  * Medición y mensaje de todos los botones de WhatsApp del sitio.
  *
  * - `data-wa="cotizar"` marca los botones que piden precio o propuesta;
- *   el resto cuenta como consulta. `data-wa="seguimiento"` es el botón de
- *   /gracias-cotizacion: esa cotización ya se midió con generate_lead.
+ *   el resto cuenta como consulta.
  * - Cada clic agrega al mensaje el código del servicio ([SPOT-IA]) y, si
  *   la visita vino de una campaña, el de origen ([G-SPOT]).
  * - `whatsapp_click` se mantiene en todos los botones durante la
@@ -48,28 +47,23 @@ export default function WhatsAppMeasurement() {
       const pagePath = window.location.pathname;
       const servicio = servicioDeBoton(anchor.dataset.service, pagePath);
       const ubicacion = ubicacionBoton(anchor.dataset.loc);
-      const seguimiento = anchor.dataset.wa === "seguimiento";
       const tipo: TipoWhatsApp = anchor.dataset.wa === "cotizar" ? "cotizar" : "consulta";
 
       // Mensaje: el texto original del botón (se guarda la primera vez para
       // no repetir códigos si hacen clic dos veces) + los códigos.
       if (anchor.dataset.waBase === undefined) anchor.dataset.waBase = url.searchParams.get("text") ?? "";
-      if (!seguimiento) {
-        const base = anchor.dataset.waBase || mensajePorDefecto(tipo, servicio.label);
-        url.searchParams.set("text", `${base} ${codigosWhatsApp(servicio.codigo, servicio.corto)}`);
-        anchor.href = url.toString();
-      }
+      const base = anchor.dataset.waBase || mensajePorDefecto(tipo, servicio.label);
+      url.searchParams.set("text", `${base} ${codigosWhatsApp(servicio.codigo, servicio.corto)}`);
+      anchor.href = url.toString();
 
       // El clic describe una intención de contacto; no prueba que se envió el mensaje.
       // Se envía siempre: Consent Mode decide si va con cookies o como ping sin
       // cookies (Google lo usa para modelar conversiones de quien no aceptó).
-      if (!seguimiento) {
-        window.gtag?.("event", tipo === "cotizar" ? "cotizar_whatsapp" : "consulta_whatsapp", {
-          servicio: servicio.key,
-          ubicacion_boton: ubicacion,
-          transport_type: "beacon",
-        });
-      }
+      window.gtag?.("event", tipo === "cotizar" ? "cotizar_whatsapp" : "consulta_whatsapp", {
+        servicio: servicio.key,
+        ubicacion_boton: ubicacion,
+        transport_type: "beacon",
+      });
       window.gtag?.("event", "whatsapp_click", {
         page_path: pagePath,
         // Mismo valor que antes (id de la página) para no cortar la serie.
