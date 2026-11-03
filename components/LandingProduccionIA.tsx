@@ -41,7 +41,7 @@ function Counter({ to, suffix = "", duration = 1.6 }: { to: number; suffix?: str
 }
 
 /* ── Bloque CTA reutilizable ── */
-function CtaBlock({ label, sub }: { label: string; sub?: string }) {
+function CtaBlock({ label, sub, cotizar }: { label: string; sub?: string; cotizar?: boolean }) {
   return (
     <motion.div
       className="lp-cta-block"
@@ -50,7 +50,7 @@ function CtaBlock({ label, sub }: { label: string; sub?: string }) {
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.7, ease: EASE }}
     >
-      <a className="hm-btn hm-btn-lg" href={waLink()} target="_blank" rel="noopener noreferrer">
+      <a className="hm-btn hm-btn-lg" href={waLink()} data-wa={cotizar ? "cotizar" : undefined} target="_blank" rel="noopener noreferrer">
         {label} <i>→</i>
       </a>
       {sub && <p className="lp-cta-sub">{sub}</p>}
@@ -310,6 +310,7 @@ export default function LandingProduccionIA() {
       <div className="container-base">
         <CtaBlock
           label="Quiero producir así"
+          cotizar
           sub="Te respondemos con una propuesta cerrada el mismo día."
         />
       </div>
@@ -385,7 +386,7 @@ export default function LandingProduccionIA() {
           ))}
         </div>
 
-        <CtaBlock label="Quiero resultados así para mi empresa" />
+        <CtaBlock label="Quiero resultados así para mi empresa" cotizar />
       </section>
 
       {/* ── TESTIMONIOS ── */}

@@ -439,6 +439,7 @@ function EscalaExactitud() {
                 de dónde salió, sin tener que redactar nada. */}
             <a
               className="pf-scale-cta"
+              data-wa="cotizar"
               data-loc="portafolio"
               href={`${SITE.links.whatsapp}?text=${encodeURIComponent(
                 "Hola, vengo del portafolio y quiero cotizar un proyecto."

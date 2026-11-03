@@ -25,6 +25,7 @@ import { eventoMeta } from "@/lib/meta/evento";
 import { ServicioIcon } from "@/components/Servicios";
 import ServicioMockup, { PanelMockup } from "@/components/ServicioMockup";
 import { AREAS, SERVICIOS, type Servicio } from "@/lib/servicios";
+import { cotizarHref } from "@/lib/cotizacion";
 import {
   LIDERES,
   MOSTRAR_PENDIENTES,
@@ -429,15 +430,19 @@ export default function ServicioDetalle({
                   {s.tags.map((t) => <li key={t}>{t}</li>)}
                 </ul>
                 <div className="sd-hero-cta">
+                  <Link className="sv-btn sd-btn" href={cotizarHref(s.id)}>
+                    Cotizar →
+                  </Link>
                   <a
-                    className="sv-btn sd-btn"
+                    className="sd-btn-ghost"
                     href={waLink(`Hola, quiero cotizar ${s.title}.`)}
+                    data-wa="cotizar"
                     data-loc="hero"
                     data-service={s.id}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Cotizar por WhatsApp →
+                    Cotizar por WhatsApp
                   </a>
                   <a className="sd-btn-ghost" href="#acto-3">Ver paquetes</a>
                 </div>
@@ -764,6 +769,7 @@ export default function ServicioDetalle({
             <a
               className="sd-orden-btn"
               href={waLink(mensaje)}
+              data-wa="cotizar"
               data-loc="configurador"
               data-service={s.id}
               target="_blank"
@@ -771,7 +777,10 @@ export default function ServicioDetalle({
             >
               Enviar orden por WhatsApp →
             </a>
-            <p className="sd-orden-nota">Te respondemos en el día. Propuesta cerrada, sin compromiso.</p>
+            <p className="sd-orden-nota">
+              Te respondemos en el día. Propuesta cerrada, sin compromiso. ·{" "}
+              <Link href={cotizarHref(s.id)}>O pídela por formulario</Link>
+            </p>
             <span className="sd-barcode" aria-hidden />
           </aside>
         </div>
@@ -840,15 +849,18 @@ export default function ServicioDetalle({
         <div className="container-base" data-reveal>
           <p className="sd-cierre-q">{d.cierre}</p>
           <div className="sd-hero-cta">
+            <Link className="sv-btn sd-btn" href={cotizarHref(s.id)}>
+              Cotizar →
+            </Link>
             <a
-              className="sv-btn sd-btn"
-              href={waLink(`Hola, quiero cotizar ${s.title}.`)}
+              className="sd-btn-ghost"
+              href={waLink(`Hola, tengo una consulta sobre ${s.title}.`)}
               data-loc="cierre"
               data-service={s.id}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Hablemos por WhatsApp →
+              Hablemos por WhatsApp
             </a>
             <span className="sd-mono">Te respondemos en el día · propuesta cerrada</span>
           </div>
@@ -884,6 +896,7 @@ export default function ServicioDetalle({
       <a
         className="sd-wa-flot"
         href={waLink(`Hola, quiero cotizar ${s.title}.`)}
+        data-wa="cotizar"
         data-loc="flotante"
         data-service={s.id}
         target="_blank"

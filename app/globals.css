@@ -2386,6 +2386,7 @@ body:has(.ics-root) .beams-bg{ display:none; }
 .sd-orden-btn{ display:block;text-align:center;padding:16px 14px;background:var(--sd-ink);color:#F4F0DE;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:background .3s; }
 .sd-orden-btn:hover{ background:rgb(var(--sd-a)); }
 .sd-orden-nota{ margin:12px 0 16px;font-size:10.5px;letter-spacing:.04em;text-align:center;opacity:.6; }
+.sd-orden-nota a{ color:inherit;text-decoration:underline;text-underline-offset:3px; }
 .sd-barcode{ display:block;height:36px;opacity:.85;background:repeating-linear-gradient(90deg,var(--sd-ink) 0 2px,transparent 2px 4px,var(--sd-ink) 4px 5px,transparent 5px 8px,var(--sd-ink) 8px 11px,transparent 11px 13px,var(--sd-ink) 13px 14px,transparent 14px 17px); }
 
 
