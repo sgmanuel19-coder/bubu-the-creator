@@ -2,17 +2,18 @@ import { NextResponse } from "next/server";
 import { createSupabaseAdmin } from "@/lib/ics/supabase/admin";
 import { PLAZOS, presupuestoPor, servicioPor, telefonoValido } from "@/lib/cotizacion";
 
-// Pedidos del formulario /cotizar. Igual que el Libro de Reclamaciones:
-// se guardan en Supabase (tabla `cotizaciones`, migración 007) y se avisan
-// por correo con FormSubmit a Manuel, con copia a Roberth y al correo de
-// Resuelto. Si la tabla aún no existe, el correo basta para que ningún
-// pedido se pierda.
+// Pedidos del formulario /cotizar. Se guardan en Supabase (tabla
+// `cotizaciones`, migración 007) y se avisan por correo a Resuelto, Manuel y
+// Roberth. El correo sale por Resend si está RESEND_API_KEY (dominio
+// resueltoagency.com verificado en Resend); si no, por FormSubmit, que el
+// 3-nov-2026 estuvo caído. Con que funcione una de las dos vías (base o
+// correo), el pedido no se pierde.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// El destino principal es el que FormSubmit pide activar (resueltoagency@gmail.com,
-// activado el 3-nov-2026); las copias no necesitan activación.
+// Con FormSubmit, el destino principal es el que pide activar; las copias no.
 const DESTINO = process.env.COTIZACIONES_EMAIL || "resueltoagency@gmail.com";
 const COPIA = process.env.COTIZACIONES_CC ?? "sgmanuel19@gmail.com,roberth@resueltoagency.com";
+const RESEND_FROM = process.env.RESEND_FROM || "Cotizaciones Resuelto <cotizaciones@resueltoagency.com>";
 
 type Pedido = {
   servicio: string;
@@ -50,7 +51,66 @@ async function guardar(p: Pedido): Promise<string | null> {
   }
 }
 
+const escapar = (s: string) =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
 async function avisarPorCorreo(p: Pedido, etiquetas: Record<string, string>, codigo: string, fecha: string) {
+  return process.env.RESEND_API_KEY
+    ? avisarPorResend(p, etiquetas, codigo, fecha)
+    : avisarPorFormSubmit(p, etiquetas, codigo, fecha);
+}
+
+async function avisarPorResend(p: Pedido, etiquetas: Record<string, string>, codigo: string, fecha: string) {
+  const chat = `https://wa.me/${p.whatsapp.replace(/\D/g, "")}`;
+  const filas: [string, string][] = [
+    ["Pedido", codigo],
+    ["Fecha", fecha],
+    ["Servicio", etiquetas.servicio],
+    ["Presupuesto", etiquetas.rango],
+    ["Plazo", etiquetas.plazo],
+    ["Empresa", p.empresa],
+    ["Nombre", p.nombre],
+    ["WhatsApp", p.whatsapp],
+    ["Correo", p.email || "—"],
+    ["Comentario", p.comentario || "—"],
+    ["Origen", p.origen ? `${p.origen} · ${p.utm_source || "—"} · ${p.utm_campaign || "—"}` : "Directo / orgánico"],
+    ["Página", p.pagina || "—"],
+  ];
+  const html =
+    `<h2 style="font-family:Arial,sans-serif">Nueva cotización ${escapar(codigo)}</h2>` +
+    `<table style="font-family:Arial,sans-serif;border-collapse:collapse">` +
+    filas
+      .map(
+        ([k, v]) =>
+          `<tr><td style="padding:6px 12px;border:1px solid #ddd;font-weight:bold">${escapar(k)}</td>` +
+          `<td style="padding:6px 12px;border:1px solid #ddd">${escapar(v)}</td></tr>`,
+      )
+      .join("") +
+    `</table><p style="font-family:Arial,sans-serif"><a href="${chat}">Abrir el chat de WhatsApp</a></p>`;
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: RESEND_FROM,
+        to: [DESTINO, ...COPIA.split(",").map((x) => x.trim()).filter(Boolean)],
+        subject: `Cotización ${codigo} — ${etiquetas.servicio} · ${etiquetas.rango}`,
+        html,
+        text: filas.map(([k, v]) => `${k}: ${v}`).join("\n") + `\nAbrir chat: ${chat}`,
+        ...(p.email ? { reply_to: p.email } : {}),
+      }),
+      signal: AbortSignal.timeout(10_000),
+    });
+    if (!res.ok) console.error("[cotizaciones] resend —", res.status, await res.text().catch(() => ""));
+    return res.ok;
+  } catch (e) {
+    console.error("[cotizaciones] resend —", e);
+    return false;
+  }
+}
+
+async function avisarPorFormSubmit(p: Pedido, etiquetas: Record<string, string>, codigo: string, fecha: string) {
   try {
     const res = await fetch(`https://formsubmit.co/ajax/${DESTINO}`, {
       method: "POST",
