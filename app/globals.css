@@ -2846,14 +2846,6 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
   .hm-casos-info{ flex-direction:column;align-items:flex-start; }
 }
 
-/* ── WhatsApp flotante de las landings (solo móvil) ── */
-.sd-wa-flot{ display:none; }
-@media (max-width:767px){
-  .sd-wa-flot{ display:flex;align-items:center;justify-content:center;position:fixed;z-index:9998;left:16px;right:16px;bottom:calc(12px + var(--barra-cookies, 0px));height:50px;border-radius:12px;background:#1A80FF;color:#fff;font:600 15px/1 Inter,sans-serif;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.45); }
-  .sd .emb-nav{ bottom:calc(74px + var(--barra-cookies, 0px)); }
-  .sd{ padding-bottom:74px; }
-}
-
 /* ── Banner de cookies compacto en móvil: no debe tapar la primera pantalla ── */
 @media (max-width:640px){
   .cookie-barra{ padding:10px 16px !important;gap:8px !important; }

@@ -433,17 +433,6 @@ export default function ServicioDetalle({
                   <Link className="sv-btn sd-btn" href={cotizarHref(s.id)}>
                     Cotizar →
                   </Link>
-                  <a
-                    className="sd-btn-ghost"
-                    href={waLink(`Hola, quiero cotizar ${s.title}.`)}
-                    data-wa="cotizar"
-                    data-loc="hero"
-                    data-service={s.id}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Cotizar por WhatsApp
-                  </a>
                   <a className="sd-btn-ghost" href="#acto-3">Ver paquetes</a>
                 </div>
                 <div className="sd-lidera">
@@ -891,20 +880,6 @@ export default function ServicioDetalle({
           )}
         </div>
       )}
-
-      {/* ── WhatsApp flotante (solo móvil): la cabecera móvil esconde el CTA en el menú ── */}
-      <a
-        className="sd-wa-flot"
-        href={waLink(`Hola, quiero cotizar ${s.title}.`)}
-        data-wa="cotizar"
-        data-loc="flotante"
-        data-service={s.id}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Cotizar por WhatsApp"
-      >
-        Cotizar por WhatsApp
-      </a>
 
       {/* ── Visor ── */}
       {abierta && abierta.tipo !== "pendiente" && (
