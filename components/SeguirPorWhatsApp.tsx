@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { SITE } from "@/lib/constants";
-import { PLAZOS, codigosWhatsApp, servicioPor, tramosDe } from "@/lib/cotizacion";
+import { PLAZOS, codigosWhatsApp, presupuestoPor, servicioPor } from "@/lib/cotizacion";
 
 // Botón de /gracias-cotizacion. Abre WhatsApp con el resumen del pedido
 // (servicio, rango, plazo y códigos). Va con data-wa="seguimiento": el
@@ -12,7 +12,7 @@ type Props = { servicio?: string; rango?: string; plazo?: string; pedido?: strin
 
 export default function SeguirPorWhatsApp({ servicio, rango, plazo, pedido }: Props) {
   const s = servicioPor(servicio);
-  const tramo = s ? tramosDe(s.key).find((t) => t.id === rango) : undefined;
+  const tramo = presupuestoPor(rango);
   const p = PLAZOS.find((x) => x.id === plazo);
 
   const resumen = [

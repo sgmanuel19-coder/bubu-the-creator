@@ -60,26 +60,26 @@ export const cotizarHref = (pagina: string) => {
   return s ? `/cotizar?servicio=${s.slug}` : "/cotizar";
 };
 
-// ── Rango de presupuesto ─────────────────────────────────────
-// 4 tramos por servicio + «Aún no lo sé» (lead tibio). LOS MONTOS LOS
-// DEFINE MANUEL: no inventar cifras. `valor` (PEN) es opcional y va como
-// `value` del evento generate_lead para que Google distinga leads.
-export type Tramo = { id: string; label: string; valor?: number };
+// ── Presupuesto aproximado ───────────────────────────────────
+// Barra en dólares: arranca en USD 1,500 y llega a «Más de USD 100,000»
+// (decisión de Manuel, 3-nov-2026). Los pasos crecen con el monto para que
+// la barra se pueda usar en el celular. «Aún no lo sé» = lead tibio.
+const PASOS_USD = [
+  1500, 2000, 2500, 3000, 4000, 5000, 6000, 7500, 10000, 12500, 15000, 20000,
+  25000, 30000, 40000, 50000, 60000, 75000, 100000,
+];
 
-export const TRAMOS: Record<ServicioKey, Tramo[]> = {
-  spot_ia: [],
-  paginas_web: [],
-  eventos: [],
-  ecommerce: [],
-  videojuegos: [],
-  google_ads: [],
-  seo: [],
-  capacitacion_ia: [],
-};
+export type Presupuesto = { id: string; label: string };
 
-export const NO_SE: Tramo = { id: "no_se", label: "Aún no lo sé" };
+export const PRESUPUESTOS: Presupuesto[] = [
+  ...PASOS_USD.map((n) => ({ id: String(n), label: `USD ${n.toLocaleString("en-US")}` })),
+  { id: "100000+", label: "Más de USD 100,000" },
+];
 
-export const tramosDe = (key: ServicioKey): Tramo[] => [...TRAMOS[key], NO_SE];
+export const NO_SE: Presupuesto = { id: "no_se", label: "Aún no lo sé" };
+
+export const presupuestoPor = (id: string | null | undefined): Presupuesto | undefined =>
+  id === NO_SE.id ? NO_SE : PRESUPUESTOS.find((p) => p.id === id);
 
 export const PLAZOS = [
   { id: "este_mes", label: "Este mes" },
@@ -88,18 +88,39 @@ export const PLAZOS = [
 ] as const;
 
 // ── Teléfono ─────────────────────────────────────────────────
-// Perú por defecto (móvil de 9 dígitos que empieza en 9). Colombia queda
-// como opción porque una de las campañas corre allá.
+// Perú por defecto (móvil de 9 dígitos que empieza en 9). Cada país valida
+// su formato de celular; «Otro país» pide el número con su código.
 export const PAISES = [
-  { id: "51", label: "Perú +51", re: /^9\d{8}$/, ejemplo: "987 654 321" },
-  { id: "57", label: "Colombia +57", re: /^3\d{9}$/, ejemplo: "301 234 5678" },
+  { id: "pe", cod: "51", label: "Perú", re: /^9\d{8}$/, ejemplo: "987 654 321" },
+  { id: "co", cod: "57", label: "Colombia", re: /^3\d{9}$/, ejemplo: "301 234 5678" },
+  { id: "cl", cod: "56", label: "Chile", re: /^9\d{8}$/, ejemplo: "9 1234 5678" },
+  { id: "mx", cod: "52", label: "México", re: /^\d{10}$/, ejemplo: "55 1234 5678" },
+  { id: "ec", cod: "593", label: "Ecuador", re: /^9\d{8}$/, ejemplo: "99 123 4567" },
+  { id: "ar", cod: "54", label: "Argentina", re: /^9?\d{10}$/, ejemplo: "11 2345 6789" },
+  { id: "bo", cod: "591", label: "Bolivia", re: /^[67]\d{7}$/, ejemplo: "7123 4567" },
+  { id: "ve", cod: "58", label: "Venezuela", re: /^4\d{9}$/, ejemplo: "412 123 4567" },
+  { id: "pa", cod: "507", label: "Panamá", re: /^6\d{7}$/, ejemplo: "6123 4567" },
+  { id: "cr", cod: "506", label: "Costa Rica", re: /^[5-8]\d{7}$/, ejemplo: "8123 4567" },
+  { id: "gt", cod: "502", label: "Guatemala", re: /^\d{8}$/, ejemplo: "5123 4567" },
+  { id: "do", cod: "1", label: "Rep. Dominicana", re: /^8[024]9\d{7}$/, ejemplo: "809 123 4567" },
+  { id: "uy", cod: "598", label: "Uruguay", re: /^9\d{7}$/, ejemplo: "94 123 456" },
+  { id: "py", cod: "595", label: "Paraguay", re: /^9\d{8}$/, ejemplo: "981 123 456" },
+  { id: "us", cod: "1", label: "EE. UU.", re: /^\d{10}$/, ejemplo: "305 123 4567" },
+  { id: "es", cod: "34", label: "España", re: /^[67]\d{8}$/, ejemplo: "612 345 678" },
+  { id: "otro", cod: "", label: "Otro país", re: /^\d{8,15}$/, ejemplo: "Código de país + número" },
 ] as const;
 
+/** Número en formato internacional (+51987654321) o null si no es válido. */
 export function telefonoValido(pais: string, numero: string): string | null {
   const p = PAISES.find((x) => x.id === pais);
-  const digitos = numero.replace(/\D/g, "").replace(new RegExp(`^${pais}`), "");
-  if (!p || !p.re.test(digitos)) return null;
-  return `+${pais}${digitos}`;
+  if (!p) return null;
+  let digitos = numero.replace(/\D/g, "");
+  // Si la persona escribió el código de país, se quita.
+  if (p.cod && digitos.startsWith(p.cod) && p.re.test(digitos.slice(p.cod.length))) {
+    digitos = digitos.slice(p.cod.length);
+  }
+  if (!p.re.test(digitos)) return null;
+  return `+${p.cod}${digitos}`;
 }
 
 // ── WhatsApp: tipo de botón, servicio y códigos ──────────────

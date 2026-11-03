@@ -1,15 +1,16 @@
 import { NextResponse } from "next/server";
 import { createSupabaseAdmin } from "@/lib/ics/supabase/admin";
-import { PLAZOS, servicioPor, telefonoValido, tramosDe } from "@/lib/cotizacion";
+import { PLAZOS, presupuestoPor, servicioPor, telefonoValido } from "@/lib/cotizacion";
 
 // Pedidos del formulario /cotizar. Igual que el Libro de Reclamaciones:
 // se guardan en Supabase (tabla `cotizaciones`, migración 007) y se avisan
-// por correo con FormSubmit a Manuel, con copia a Roberth. Si la tabla aún
-// no existe, el correo basta para que ningún pedido se pierda.
+// por correo con FormSubmit a Manuel, con copia a Roberth y al correo de
+// Resuelto. Si la tabla aún no existe, el correo basta para que ningún
+// pedido se pierda.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const DESTINO = process.env.COTIZACIONES_EMAIL || process.env.TALLER_LEADS_EMAIL || "sgmanuel19@gmail.com";
-const COPIA = process.env.COTIZACIONES_CC ?? "roberth@resueltoagency.com";
+const DESTINO = process.env.COTIZACIONES_EMAIL || "sgmanuel19@gmail.com";
+const COPIA = process.env.COTIZACIONES_CC ?? "roberth@resueltoagency.com,resueltoagency@gmail.com";
 
 type Pedido = {
   servicio: string;
@@ -102,9 +103,9 @@ export async function POST(request: Request) {
   if (txt(body.web, 200)) return NextResponse.json({ ok: true, codigo: "—" });
 
   const servicio = servicioPor(txt(body.servicio, 40));
-  const rango = servicio ? tramosDe(servicio.key).find((t) => t.id === txt(body.rango_presupuesto, 20)) : undefined;
+  const rango = presupuestoPor(txt(body.rango_presupuesto, 20));
   const plazo = PLAZOS.find((x) => x.id === txt(body.plazo, 20));
-  const whatsapp = telefonoValido(txt(body.pais, 4), txt(body.whatsapp, 30));
+  const whatsapp = telefonoValido(txt(body.pais, 8), txt(body.whatsapp, 30));
   const email = txt(body.email, 160);
 
   if (!servicio || !rango || !plazo) {

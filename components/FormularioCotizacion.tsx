@@ -3,18 +3,21 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
+  NO_SE,
   PAISES,
   PLAZOS,
+  PRESUPUESTOS,
   SERVICIOS_COTIZAR,
   leerOrigen,
   servicioPor,
   telefonoValido,
-  tramosDe,
 } from "@/lib/cotizacion";
 
 // Formulario de /cotizar: 8 campos (servicio, presupuesto, plazo, empresa,
 // nombre, WhatsApp, correo y comentario). Al enviarse dispara generate_lead
 // con servicio, rango y plazo; nunca nombre, teléfono ni correo.
+// El presupuesto es una barra en USD: hay que moverla o marcar «Aún no lo
+// sé», para que nadie quede en el mínimo solo por no tocarla.
 
 const campo =
   "w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-cream placeholder:text-muted/50 " +
@@ -28,29 +31,32 @@ const opcion =
 export default function FormularioCotizacion({ inicial }: { inicial?: string }) {
   const router = useRouter();
   const [servicio, setServicio] = useState(servicioPor(inicial)?.slug ?? "");
-  const [rango, setRango] = useState("");
+  const [paso, setPaso] = useState(0);
+  const [tocado, setTocado] = useState(false);
+  const [noSe, setNoSe] = useState(false);
   const [pais, setPais] = useState<string>(PAISES[0].id);
   const [error, setError] = useState<string | null>(null);
   const [enviando, setEnviando] = useState(false);
 
   const s = servicioPor(servicio);
-  const tramos = s ? tramosDe(s.key) : [];
-  const ejemplo = PAISES.find((p) => p.id === pais)?.ejemplo;
+  const presupuesto = noSe ? NO_SE : PRESUPUESTOS[paso];
+  const p = PAISES.find((x) => x.id === pais) ?? PAISES[0];
 
   async function enviar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const datos = Object.fromEntries(new FormData(e.currentTarget).entries()) as Record<string, string>;
 
     if (!s) return setError("Elige el servicio que quieres cotizar.");
-    if (!datos.rango_presupuesto) return setError("Elige un rango de presupuesto.");
+    if (!tocado && !noSe) return setError("Mueve la barra hasta tu presupuesto o marca «Aún no lo sé».");
     if (!datos.plazo) return setError("Cuéntanos para cuándo lo necesitas.");
     if (!telefonoValido(pais, datos.whatsapp || "")) {
       return setError(
-        pais === "51"
-          ? "Revisa tu WhatsApp: debe ser un celular peruano de 9 dígitos que empieza en 9."
-          : "Revisa tu WhatsApp: debe ser un celular de Colombia de 10 dígitos que empieza en 3.",
+        p.id === "otro"
+          ? "Revisa tu WhatsApp: escribe el código de país y el número, solo dígitos."
+          : `Revisa tu WhatsApp: no parece un celular de ${p.label} (ejemplo: ${p.ejemplo}).`,
       );
     }
+    datos.rango_presupuesto = presupuesto.id;
 
     setError(null);
     setEnviando(true);
@@ -77,12 +83,10 @@ export default function FormularioCotizacion({ inicial }: { inicial?: string }) 
         return;
       }
 
-      const tramo = tramos.find((t) => t.id === datos.rango_presupuesto);
       window.gtag?.("event", "generate_lead", {
         servicio: s.key,
-        rango_presupuesto: tramo?.label ?? datos.rango_presupuesto,
+        rango_presupuesto: presupuesto.label,
         plazo: datos.plazo,
-        ...(tramo?.valor ? { value: tramo.valor, currency: "PEN" } : {}),
         transport_type: "beacon",
       });
 
@@ -111,10 +115,7 @@ export default function FormularioCotizacion({ inicial }: { inicial?: string }) 
           name="servicio"
           required
           value={servicio}
-          onChange={(e) => {
-            setServicio(e.target.value);
-            setRango("");
-          }}
+          onChange={(e) => setServicio(e.target.value)}
           className={campo}
         >
           <option value="" disabled>Elige un servicio</option>
@@ -124,27 +125,42 @@ export default function FormularioCotizacion({ inicial }: { inicial?: string }) 
         </select>
       </div>
 
-      {s && (
-        <fieldset>
-          <legend className={etiqueta}>Presupuesto aproximado</legend>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {tramos.map((t) => (
-              <label key={t.id} className={opcion}>
-                <input
-                  type="radio"
-                  name="rango_presupuesto"
-                  value={t.id}
-                  required
-                  checked={rango === t.id}
-                  onChange={() => setRango(t.id)}
-                  className="sr-only"
-                />
-                {t.label}
-              </label>
-            ))}
+      <div>
+        <label htmlFor="cz-presupuesto" className={etiqueta}>Presupuesto aproximado</label>
+        <div className={`rounded-lg border border-white/10 bg-white/[0.03] px-4 py-4 ${noSe ? "opacity-50" : ""}`}>
+          <p className="font-display text-2xl text-cream" aria-live="polite">
+            {noSe ? "Aún no lo sé" : tocado ? presupuesto.label : "Mueve la barra"}
+          </p>
+          <input
+            id="cz-presupuesto"
+            type="range"
+            min={0}
+            max={PRESUPUESTOS.length - 1}
+            step={1}
+            value={paso}
+            disabled={noSe}
+            aria-valuetext={presupuesto.label}
+            onChange={(e) => {
+              setPaso(Number(e.target.value));
+              setTocado(true);
+            }}
+            className="mt-4 h-2 w-full cursor-pointer accent-[#1A80FF] disabled:cursor-not-allowed"
+          />
+          <div className="mt-2 flex justify-between text-xs text-muted/80">
+            <span>USD 1,500</span>
+            <span>Más de USD 100,000</span>
           </div>
-        </fieldset>
-      )}
+        </div>
+        <label className="mt-3 inline-flex cursor-pointer items-center gap-2 text-sm text-muted">
+          <input
+            type="checkbox"
+            checked={noSe}
+            onChange={(e) => setNoSe(e.target.checked)}
+            className="h-4 w-4 accent-[#1A80FF]"
+          />
+          Aún no lo sé
+        </label>
+      </div>
 
       <fieldset>
         <legend className={etiqueta}>¿Para cuándo?</legend>
@@ -169,15 +185,17 @@ export default function FormularioCotizacion({ inicial }: { inicial?: string }) 
         </div>
         <div>
           <label htmlFor="cz-whatsapp" className={etiqueta}>WhatsApp</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2">
             <select
               aria-label="País"
               value={pais}
               onChange={(e) => setPais(e.target.value)}
-              className={`${campo} w-auto shrink-0 pr-2`}
+              className={campo}
             >
-              {PAISES.map((p) => (
-                <option key={p.id} value={p.id} className="bg-[#0D0C08]">+{p.id}</option>
+              {PAISES.map((x) => (
+                <option key={x.id} value={x.id} className="bg-[#0D0C08]">
+                  {x.cod ? `${x.label} +${x.cod}` : x.label}
+                </option>
               ))}
             </select>
             <input
@@ -188,7 +206,7 @@ export default function FormularioCotizacion({ inicial }: { inicial?: string }) 
               required
               maxLength={20}
               autoComplete="tel-national"
-              placeholder={ejemplo}
+              placeholder={p.ejemplo}
               className={campo}
             />
           </div>
