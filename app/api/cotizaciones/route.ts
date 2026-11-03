@@ -9,8 +9,10 @@ import { PLAZOS, presupuestoPor, servicioPor, telefonoValido } from "@/lib/cotiz
 // pedido se pierda.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const DESTINO = process.env.COTIZACIONES_EMAIL || "sgmanuel19@gmail.com";
-const COPIA = process.env.COTIZACIONES_CC ?? "roberth@resueltoagency.com,resueltoagency@gmail.com";
+// El destino principal es el que FormSubmit pide activar (resueltoagency@gmail.com,
+// activado el 3-nov-2026); las copias no necesitan activación.
+const DESTINO = process.env.COTIZACIONES_EMAIL || "resueltoagency@gmail.com";
+const COPIA = process.env.COTIZACIONES_CC ?? "sgmanuel19@gmail.com,roberth@resueltoagency.com";
 
 type Pedido = {
   servicio: string;
