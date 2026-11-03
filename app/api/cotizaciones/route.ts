@@ -51,6 +51,31 @@ async function guardar(p: Pedido): Promise<string | null> {
   }
 }
 
+const etiquetas = (servicio: string, rango: string, plazo: string) => ({ servicio, rango, plazo });
+
+const BUCKET = "cotizaciones";
+
+async function respaldar(p: Pedido, e: Record<string, string>, codigo: string, fecha: string): Promise<boolean> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return false;
+  try {
+    const supabase = createSupabaseAdmin();
+    const archivo = `${codigo}-${Math.random().toString(36).slice(2, 8)}.json`;
+    const contenido = JSON.stringify({ codigo, fecha, ...p, etiquetas: e }, null, 2);
+    const subir = () =>
+      supabase.storage.from(BUCKET).upload(archivo, contenido, { contentType: "application/json" });
+    let { error } = await subir();
+    if (error && /bucket not found/i.test(error.message)) {
+      await supabase.storage.createBucket(BUCKET, { public: false });
+      ({ error } = await subir());
+    }
+    if (error) console.error("[cotizaciones] storage —", error.message);
+    return !error;
+  } catch (err) {
+    console.error("[cotizaciones] storage —", err);
+    return false;
+  }
+}
+
 const escapar = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -206,13 +231,11 @@ export async function POST(request: Request) {
   const codigo =
     guardado ?? `W${ahora.toLocaleString("sv-SE", { timeZone: "America/Lima" }).replace(/\D/g, "").slice(2, 14)}`;
 
-  const avisado = await avisarPorCorreo(
-    p,
-    { servicio: servicio.label, rango: rango.label, plazo: plazo.label },
-    codigo,
-    fecha,
-  );
-  if (!guardado && !avisado) {
+  const avisado = await avisarPorCorreo(p, etiquetas(servicio.label, rango.label, plazo.label), codigo, fecha);
+  // Último respaldo: sin tabla y sin correo, el pedido queda como archivo
+  // en Supabase Storage (bucket privado `cotizaciones`).
+  const respaldado = !guardado && !avisado && (await respaldar(p, etiquetas(servicio.label, rango.label, plazo.label), codigo, fecha));
+  if (!guardado && !avisado && !respaldado) {
     return NextResponse.json(
       { ok: false, error: "No pudimos enviar tu pedido. Inténtalo de nuevo o escríbenos por WhatsApp." },
       { status: 502 },
