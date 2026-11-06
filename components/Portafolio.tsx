@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
+import CasosReel from "@/components/CasosReel";
 import { SITE } from "@/lib/constants";
 import { CLIENTES, logoAlto } from "@/lib/clientes";
 import {
@@ -763,6 +764,21 @@ export default function Portafolio() {
           ))}
         </div>
       </div>
+
+      {/* ── CASOS DE ÉXITO — los mismos casos y reproductor del inicio ── */}
+      <section className="hm container-base pf-gallery" id="casos-de-exito" aria-labelledby="casos-de-exito-title">
+        <div className="hm-section-head">
+          <div>
+            <span className="hm-eyebrow">Casos de éxito</span>
+            <h2 id="casos-de-exito-title">
+              Ideas que se vieron.<br />
+              <span className="hm-grad">Marcas que las dirigieron.</span>
+            </h2>
+          </div>
+          <p>Cada caso cuenta la idea, la ejecución y cómo se hizo. Elige uno de la lista para verlo.</p>
+        </div>
+        <CasosReel />
+      </section>
 
       {/* ── GALERÍA — capítulos que pasan solos, todo reproduciéndose ── */}
       <section className="container-base pf-gallery" id="trabajo">
