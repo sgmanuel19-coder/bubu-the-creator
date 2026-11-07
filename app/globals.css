@@ -48,21 +48,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Hide default cursor on desktop (solo landing — el panel ICS usa cursor normal) */
-@media (hover: hover) and (pointer: fine) {
-  * { cursor: none !important; }
-  input, textarea { cursor: text !important; }
-  .ics-root, .ics-root *, .taller-root, .taller-root *,
-  .noticias-root, .noticias-root * { cursor: auto !important; }
-  .ics-root button, .ics-root a, .ics-root select,
-  .ics-root [role="button"], .ics-root label,
-  .taller-root button, .taller-root a, .taller-root select,
-  .taller-root [role="button"], .taller-root label,
-  .noticias-root button, .noticias-root a, .noticias-root select,
-  .noticias-root [role="button"], .noticias-root label { cursor: pointer !important; }
-  .ics-root input, .ics-root textarea,
-  .taller-root input, .taller-root textarea { cursor: text !important; }
-}
 
 /* ── Asistente Bubu (portal del taller) ── */
 @keyframes bubuFlota {

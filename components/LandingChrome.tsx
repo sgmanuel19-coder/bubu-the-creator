@@ -1,14 +1,14 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import CursorTrail from "@/components/CursorTrail";
 import ScrollProgress from "@/components/ScrollProgress";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
 import FacebookPixel from "@/components/FacebookPixel";
 import WhatsAppMeasurement from "@/components/WhatsAppMeasurement";
 
 /**
- * UI global de la landing (cursor, progreso, cookies, píxel).
+ * UI global de la landing (progreso, cookies, píxel). El cursor es el
+ * nativo del sistema: el cursor con logo (CursorTrail) se retiró..
  * No se renderiza dentro de RESUELTO / IA CONTENT SYSTEM.
  *
  * La barra flotante de CTA (StickyCTA) se retiró: se renderizaba desde
@@ -23,7 +23,6 @@ export default function LandingChrome() {
   return (
     <>
       <ScrollProgress />
-      <CursorTrail />
       <CookieConsentBanner />
       <WhatsAppMeasurement />
       {/* El píxel de Meta vivía solo en /sistemas-ia; al convertir esa ruta
