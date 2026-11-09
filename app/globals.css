@@ -2759,7 +2759,7 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
 .hm-caso figcaption em{ font-style:normal;font-size:13px;color:var(--hm-muted);font-weight:300; }
 
 /* Clientes: una fila de celdas iguales, logos centrados, sin animación */
-.hm-clientes{ display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:center;margin-top:56px;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07); }
+.hm-clientes{ display:grid;grid-template-columns:repeat(8,minmax(0,1fr));align-items:center;margin-top:56px;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07); }
 .hm-cliente{ display:flex;align-items:center;justify-content:center;height:112px;padding:0 14px;border-left:1px solid rgba(255,255,255,.07); }
 .hm-cliente:first-child{ border-left:0; }
 .hm-clientes img{ height:var(--h,40px);max-height:46px;width:auto;max-width:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:.55;transition:opacity .25s; }

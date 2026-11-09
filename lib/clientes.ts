@@ -12,6 +12,7 @@ export const CLIENTES = [
   { name: "ZLink", src: "/images/clientes/zlink.png", ratio: 3.57 },
   { name: "Acceso Smart Perú", src: "/images/clientes/acceso-smart.png", ratio: 2.41, boost: 1.3 },
   { name: "Grimm Store", src: "/images/clientes/grimm.png", ratio: 1.11 },
+  { name: "ANANSI", src: "/images/clientes/anansi.png", ratio: 5.58 },
 ];
 
 export const logoAlto = (l: { ratio: number; boost?: number }) =>
