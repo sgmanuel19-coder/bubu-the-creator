@@ -29,15 +29,35 @@ type Pedido = {
   utm_campaign: string | null;
   gclid: boolean;
   pagina: string | null;
+  /** ID del clic de Google (gclid/gbraid/wbraid): para subir el lead a Ads como conversión offline. */
+  click_id: string | null;
+  click_tipo: string | null;
+  utm_term: string | null;
+  landing: string | null;
 };
 
+// Columnas de la migración 008. Si aún no se corrió, el insert se reintenta
+// sin ellas: el pedido nunca se pierde por una columna nueva (el ID del clic
+// igual llega en el correo).
+const COLUMNAS_008 = ["click_id", "click_tipo", "utm_term", "landing"] as const;
+
 const txt = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+
+/** «G · google · campaña» con el ID del clic, para el correo. */
+const origenTexto = (p: Pedido) =>
+  p.origen ? `${p.origen} · ${p.utm_source || "—"} · ${p.utm_campaign || "—"}` : "Directo / orgánico";
 
 async function guardar(p: Pedido): Promise<string | null> {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return null;
   try {
     const supabase = createSupabaseAdmin();
-    const { data, error } = await supabase.from("cotizaciones").insert(p).select("id").single();
+    let { data, error } = await supabase.from("cotizaciones").insert(p).select("id").single();
+    if (error && COLUMNAS_008.some((c) => error?.message?.includes(c))) {
+      console.error("[cotizaciones] falta la migración 008, se guarda sin el ID del clic —", error.message);
+      const base: Record<string, unknown> = { ...p };
+      COLUMNAS_008.forEach((c) => delete base[c]);
+      ({ data, error } = await supabase.from("cotizaciones").insert(base).select("id").single());
+    }
     if (error || !data) {
       console.error("[cotizaciones] insert —", error?.message);
       return null;
@@ -98,7 +118,10 @@ async function avisarPorResend(p: Pedido, etiquetas: Record<string, string>, cod
     ["WhatsApp", p.whatsapp],
     ["Correo", p.email || "—"],
     ["Comentario", p.comentario || "—"],
-    ["Origen", p.origen ? `${p.origen} · ${p.utm_source || "—"} · ${p.utm_campaign || "—"}` : "Directo / orgánico"],
+    ["Origen", origenTexto(p)],
+    ["Término (utm_term)", p.utm_term || "—"],
+    ["Aterrizó en", p.landing || "—"],
+    ["ID de clic de Google", p.click_id ? `${p.click_tipo || "gclid"}: ${p.click_id}` : "—"],
     ["Página", p.pagina || "—"],
   ];
   const html =
@@ -163,7 +186,10 @@ async function avisarPorFormSubmit(p: Pedido, etiquetas: Record<string, string>,
         "Abrir chat": `https://wa.me/${p.whatsapp.replace(/\D/g, "")}`,
         Correo: p.email || "—",
         Comentario: p.comentario || "—",
-        Origen: p.origen ? `${p.origen} · ${p.utm_source || "—"} · ${p.utm_campaign || "—"}` : "Directo / orgánico",
+        Origen: origenTexto(p),
+        "Término (utm_term)": p.utm_term || "—",
+        "Aterrizó en": p.landing || "—",
+        "ID de clic de Google": p.click_id ? `${p.click_tipo || "gclid"}: ${p.click_id}` : "—",
         Página: p.pagina || "—",
       }),
       signal: AbortSignal.timeout(10_000),
@@ -219,6 +245,10 @@ export async function POST(request: Request) {
     utm_campaign: txt(body.utm_campaign, 80) || null,
     gclid: body.gclid === true,
     pagina: txt(body.pagina, 200) || null,
+    click_id: txt(body.click_id, 200).replace(/[^\w-]/g, "") || null,
+    click_tipo: ["gclid", "gbraid", "wbraid"].includes(txt(body.click_tipo, 8)) ? txt(body.click_tipo, 8) : null,
+    utm_term: txt(body.utm_term, 80) || null,
+    landing: txt(body.landing, 200) || null,
   };
   if (!p.empresa || !p.nombre) {
     return NextResponse.json({ ok: false, error: "Completa tu nombre y tu empresa o marca." }, { status: 400 });

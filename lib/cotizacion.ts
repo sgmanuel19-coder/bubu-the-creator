@@ -153,13 +153,31 @@ export function ubicacionBoton(dataLoc: string | undefined): string {
 
 // ── Origen de la visita (utm_campaign / gclid) ───────────────
 // Se guarda en sessionStorage al llegar, porque la persona navega antes
-// de escribir. Solo se guarda una letra de origen y la campaña.
+// de escribir. Se guarda la letra de origen, la campaña y el ID del clic
+// de Google (gclid, gbraid o wbraid): con ese ID el pedido se puede subir
+// a Google Ads como conversión offline aunque la persona no acepte cookies
+// (10-nov-2026: GA4 veía 14 de ~85 clics pagados). El ID es un código
+// técnico del anuncio, no un dato personal.
 const ORIGEN_KEY = "rs-origen";
-type Origen = { letra: string; source: string; campaign: string; gclid: boolean };
+type Origen = {
+  letra: string;
+  source: string;
+  campaign: string;
+  gclid: boolean;
+  /** Valor del ID de clic de Google, si lo hubo. */
+  clickId?: string;
+  /** gclid | gbraid | wbraid */
+  clickTipo?: string;
+  term?: string;
+  /** Página donde aterrizó desde el anuncio. */
+  landing?: string;
+};
 
-export function registrarOrigen(search: string) {
+export function registrarOrigen(search: string, pathname = "") {
   const p = new URLSearchParams(search);
-  const gclid = !!(p.get("gclid") || p.get("gbraid") || p.get("wbraid"));
+  const clickTipo = (["gclid", "gbraid", "wbraid"] as const).find((k) => p.get(k));
+  const clickId = clickTipo ? (p.get(clickTipo) || "").slice(0, 200) : "";
+  const gclid = !!clickId;
   const campaign = (p.get("utm_campaign") || "").slice(0, 80);
   if (!gclid && !campaign) return;
   const source = (p.get("utm_source") || "").toLowerCase().slice(0, 40);
@@ -168,15 +186,35 @@ export function registrarOrigen(search: string) {
     : /facebook|instagram|meta|^fb|^ig/.test(source) ? "M"
     : /tiktok/.test(source) ? "T"
     : "C";
+  const origen: Origen = {
+    letra,
+    source,
+    campaign,
+    gclid,
+    clickId: clickId || undefined,
+    clickTipo: clickTipo || undefined,
+    term: (p.get("utm_term") || "").slice(0, 80) || undefined,
+    landing: pathname.slice(0, 200) || undefined,
+  };
   try {
-    sessionStorage.setItem(ORIGEN_KEY, JSON.stringify({ letra, source, campaign, gclid } satisfies Origen));
+    sessionStorage.setItem(ORIGEN_KEY, JSON.stringify(origen));
+    // Copia de 90 días: si vuelve otro día por su cuenta y cotiza, el clic
+    // del anuncio sigue siendo el origen (ventana de conversión de Ads).
+    localStorage.setItem(ORIGEN_KEY, JSON.stringify({ ...origen, ts: Date.now() }));
   } catch {}
 }
+
+const NOVENTA_DIAS = 90 * 24 * 60 * 60 * 1000;
 
 export function leerOrigen(): Origen | null {
   try {
     const raw = sessionStorage.getItem(ORIGEN_KEY);
-    return raw ? (JSON.parse(raw) as Origen) : null;
+    if (raw) return JSON.parse(raw) as Origen;
+    const guardado = localStorage.getItem(ORIGEN_KEY);
+    if (!guardado) return null;
+    const o = JSON.parse(guardado) as Origen & { ts?: number };
+    if (!o.ts || Date.now() - o.ts > NOVENTA_DIAS) return null;
+    return o;
   } catch {
     return null;
   }

@@ -30,7 +30,7 @@ const RESUELTO_PHONE = "51936529753";
  */
 export default function WhatsAppMeasurement() {
   useEffect(() => {
-    registrarOrigen(window.location.search);
+    registrarOrigen(window.location.search, window.location.pathname);
 
     const onClick = (event: MouseEvent) => {
       const anchor = (event.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;

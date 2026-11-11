@@ -73,6 +73,10 @@ export default function FormularioCotizacion({ inicial }: { inicial?: string }) 
           utm_source: origen?.source,
           utm_campaign: origen?.campaign,
           gclid: origen?.gclid ?? false,
+          click_id: origen?.clickId,
+          click_tipo: origen?.clickTipo,
+          utm_term: origen?.term,
+          landing: origen?.landing,
           pagina: document.referrer ? new URL(document.referrer).pathname : undefined,
         }),
       });
