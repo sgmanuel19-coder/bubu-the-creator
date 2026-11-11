@@ -146,13 +146,20 @@ export default function LegalNotice() {
             consentimiento.
           </li>
           <li>
-            <strong>Analíticas.</strong> Nos permiten entender cómo se usa el sitio de
-            forma agregada para mejorarlo.
+            <strong>Analíticas.</strong> Google Analytics, para entender cómo se usa el
+            sitio de forma agregada y mejorarlo. Están activas desde tu primera
+            visita; si eliges «Solo necesarias» en el banner, se desactivan.
           </li>
           <li>
-            <strong>Publicitarias.</strong> Píxel de Meta (Facebook e Instagram), usado
-            para medir conversiones y mostrar anuncios relevantes.{" "}
-            <strong>Solo se activa si aceptas</strong> en el banner de cookies.
+            <strong>Publicitarias.</strong> Google Ads y Píxel de Meta (Facebook e
+            Instagram), usados para medir conversiones y mostrar anuncios relevantes.{" "}
+            <strong>Solo se activan si aceptas</strong> en el banner de cookies.
+          </li>
+          <li>
+            <strong>Origen de la visita.</strong> Si llegas desde un anuncio, guardamos
+            en tu navegador el código técnico del clic (por ejemplo, el gclid de
+            Google) y la campaña, y los enviamos junto con tu pedido de cotización
+            para saber qué anuncio lo generó. No incluye datos personales.
           </li>
         </ul>
         <p>
