@@ -75,10 +75,11 @@ export default function CookieConsentBanner() {
           lineHeight: 1.5,
         }}
       >
-        Usamos cookies de análisis y publicidad (Meta Pixel) para mejorar la
-        experiencia y medir conversiones.{' '}
+        Usamos cookies de análisis para medir las visitas y mejorar la
+        experiencia.{' '}
         <span className="cookie-barra-extra" style={{ color: 'rgba(248,248,242,0.4)' }}>
-          El Pixel de Meta solo se activa si aceptas.
+          Las de publicidad (Google Ads y Meta) solo se activan si aceptas.
+          «Solo necesarias» apaga también las de análisis.
         </span>
       </p>
       <div className="cookie-barra-btns" style={{ display: 'flex', gap: 10, flexShrink: 0 }}>
