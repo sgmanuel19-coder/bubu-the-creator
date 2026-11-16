@@ -2758,25 +2758,20 @@ a.sd-caso:hover .sd-caso-img img{ transform:scale(1.04); }
 .hm-caso figcaption strong{ font-size:1.15rem;color:var(--hm-cream);font-weight:700; }
 .hm-caso figcaption em{ font-style:normal;font-size:13px;color:var(--hm-muted);font-weight:300; }
 
-/* Clientes: una fila de celdas iguales, logos centrados, sin animación */
-.hm-clientes{ display:grid;grid-template-columns:repeat(8,minmax(0,1fr));align-items:center;margin-top:56px;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07); }
-.hm-cliente{ display:flex;align-items:center;justify-content:center;height:112px;padding:0 14px;border-left:1px solid rgba(255,255,255,.07); }
-.hm-cliente:first-child{ border-left:0; }
+/* Clientes: celdas iguales en filas centradas (5 por fila en escritorio,
+   así 9 logos quedan 5 + 4 y la fila corta va al centro), sin animación */
+.hm-clientes{ display:flex;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:56px;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07); }
+.hm-cliente{ flex:0 0 20%;display:flex;align-items:center;justify-content:center;height:112px;padding:0 14px; }
 .hm-clientes img{ height:var(--h,40px);max-height:46px;width:auto;max-width:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:.55;transition:opacity .25s; }
 .hm-cliente:hover img{ opacity:.95; }
 .hm-clientes-title{ margin-top:72px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--hm-blue); }
 .hm-clientes-title + .hm-clientes{ margin-top:24px; }
 @media (max-width:900px){
-  .hm-clientes{ grid-template-columns:repeat(4,minmax(0,1fr)); }
-  .hm-cliente{ height:92px;border-left:0;border-top:1px solid rgba(255,255,255,.07); }
-  .hm-cliente:nth-child(-n+4){ border-top:0; }
+  .hm-cliente{ flex-basis:33.333%;height:92px; }
   .hm-clientes img{ max-height:38px; }
 }
 @media (max-width:520px){
-  .hm-clientes{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .hm-cliente:nth-child(-n+4){ border-top:1px solid rgba(255,255,255,.07); }
-  .hm-cliente:nth-child(-n+2){ border-top:0; }
-  .hm-cliente:last-child:nth-child(odd){ grid-column:1 / -1; }
+  .hm-cliente{ flex-basis:50%; }
   .hm-clientes img{ max-height:34px; }
 }
 

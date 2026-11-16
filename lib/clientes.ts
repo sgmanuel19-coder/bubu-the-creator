@@ -10,6 +10,7 @@ export const CLIENTES = [
   { name: "Hikaru", src: "/images/clientes/hikaru.png", ratio: 3.38 },
   { name: "Livoltek", src: "/images/clientes/livoltek.svg", ratio: 5.88 },
   { name: "ZLink", src: "/images/clientes/zlink.png", ratio: 3.57 },
+  { name: "Hexing Group", src: "/images/clientes/hexing.png", ratio: 5.51 },
   { name: "Acceso Smart Perú", src: "/images/clientes/acceso-smart.png", ratio: 2.41, boost: 1.3 },
   { name: "Grimm Store", src: "/images/clientes/grimm.png", ratio: 1.11 },
   { name: "ANANSI", src: "/images/clientes/anansi.png", ratio: 5.58 },
